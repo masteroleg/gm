@@ -1,2 +1,6 @@
 # gm
-GenuIm landing page
+Genu.Im landing page
+Test of creation github
+  - pages
+  - actions
+  - CI/CD
