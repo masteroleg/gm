@@ -1,4 +1,4 @@
-/* Grid */
+/*-- Grid --*/
 
 .grid::before {
   --grid-sides: 16px;
