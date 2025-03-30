@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth antialiased" data-theme="auto">
+<html lang="en" class="h-full">
 
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>genu.im — Trust through transparency</title>
 
-	<!-- Tailwind via CDN -->
-	<script src="https://cdn.tailwindcss.com"></script>
+	<!-- Tailwind CSS -->
+	<script src="https://cdn.tailwindcss.com?plugins=typography"></script>
 	<script>
 		tailwind.config = {
 			darkMode: 'class',
@@ -18,156 +18,160 @@
 					},
 					colors: {
 						brand: '#00A95C',
-						light: '#F7FCF9',
-						dark: '#0D0D0D',
+						lightBg: '#f5f5f7',
+						darkBg: '#0e0e0f',
+						textDark: '#0D0D0D',
+						textLight: '#FAFAFA',
+					},
+					keyframes: {
+						fadeInUp: {
+							'0%': { opacity: '0', transform: 'translateY(20px)' },
+							'100%': { opacity: '1', transform: 'translateY(0)' },
+						},
+						pulseQR: {
+							'0%, 100%': { transform: 'scale(1)' },
+							'50%': { transform: 'scale(1.05)' },
+						},
+					},
+					animation: {
+						fadeInUp: 'fadeInUp 1s ease-out',
+						pulseQR: 'pulseQR 2s infinite ease-in-out',
 					},
 				},
 			},
 		};
 	</script>
 
-	<!-- Font -->
+	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-
-	<!-- Favicons -->
-	<link rel="icon" href="favicon/favicon.ico" />
-	<link rel="apple-touch-icon" href="favicon/apple-touch-icon.png" />
-	<link rel="manifest" href="favicon/site.webmanifest" />
+	<style>
+		body {
+			font-family: 'Inter', sans-serif;
+		}
+	</style>
 
 	<!-- OG Tags -->
-	<meta property="og:title" content="genu.im — Trust through transparency" />
+	<meta property="og:title" content="genu.im — Trust built through transparency" />
 	<meta property="og:description" content="Consumer loyalty through enhanced transparency." />
 	<meta property="og:image" content="https://raw.githubusercontent.com/masteroleg/gm/main/img/og-image-genuim.png" />
 	<meta property="og:url" content="https://genu.im" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="theme-color" content="#00A95C" />
 
-	<style>
-		body {
-			font-family: 'Inter', sans-serif;
-			background: radial-gradient(circle at center, #f0fdf4 0%, #ffffff 100%);
-		}
-
-		.dark body {
-			background: radial-gradient(circle at center, #0b0f0e, #000000);
-		}
-
-		.fade-in {
-			animation: fadeIn 0.6s ease-out both;
-		}
-
-		@keyframes fadeIn {
-			from {
-				opacity: 0;
-				transform: translateY(10px);
-			}
-
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
-
-		.qr:hover {
-			transform: scale(1.05);
-			transition: transform 0.3s ease;
-		}
-	</style>
+	<!-- Favicons -->
+	<link rel="icon" href="/favicon/favicon.ico" />
+	<link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
 </head>
 
-<body class="text-gray-900 dark:text-white min-h-screen flex flex-col items-center justify-between px-6 py-8 md:py-12">
+<body class="bg-lightBg text-textDark dark:bg-darkBg dark:text-textLight transition-colors duration-500">
+	<div class="max-w-7xl mx-auto px-6 py-6 min-h-screen flex flex-col justify-between animate-fadeInUp">
+		<!-- Header -->
+		<header class="flex justify-between items-center">
+			<img src="/img/logo-01_black.svg" class="h-10 dark:hidden" alt="Genuim Logo" />
+			<img src="/img/logo-02_white.svg" class="h-10 hidden dark:block" alt="Genuim Logo Dark" />
 
-	<!-- Header -->
-	<header class="w-full flex justify-between items-center max-w-6xl mx-auto mb-12">
-		<img src="img/logo-01_black.svg" class="h-10 dark:invert" alt="genu.im logo" />
+			<div class="flex gap-2 items-center">
+				<!-- Language toggle -->
+				<button id="langToggle" class="px-2 py-0.5 rounded-md text-sm border hover:border-brand transition">
+					EN
+				</button>
 
-		<div class="flex gap-4 items-center text-sm">
-			<button id="langToggle"
-				class="px-2 py-1 border rounded hover:bg-gray-100 dark:hover:bg-gray-800">EN</button>
-			<label class="relative inline-flex items-center cursor-pointer">
-				<input type="checkbox" id="themeToggle" class="sr-only peer">
-				<div
-					class="w-11 h-6 bg-gray-200 peer-focus:outline-none dark:bg-gray-700 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:after:bg-gray-300">
-				</div>
-			</label>
-		</div>
-	</header>
+				<!-- Theme toggle -->
+				<label class="relative inline-flex items-center cursor-pointer">
+					<input type="checkbox" id="themeToggle" class="sr-only peer" />
+					<div
+						class="w-9 h-5 bg-gray-300 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:bg-brand transition-all">
+					</div>
+					<div
+						class="absolute left-1 top-1 w-3 h-3 bg-white rounded-full transition peer-checked:translate-x-4">
+					</div>
+				</label>
+			</div>
+		</header>
 
-	<!-- Main -->
-	<main class="flex flex-col md:flex-row justify-between items-center max-w-6xl w-full fade-in">
-		<!-- Text -->
-		<div class="text-center md:text-left space-y-4 max-w-xl">
-			<h1 id="mainHeadline" class="text-3xl md:text-5xl font-bold leading-tight"></h1>
-			<p id="subHeadline" class="text-brand text-lg md:text-xl font-medium"></p>
-		</div>
+		<!-- Main -->
+		<main
+			class="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-10 mt-10 md:mt-20">
+			<!-- Text -->
+			<div class="max-w-xl">
+				<h1 class="text-3xl md:text-5xl font-bold leading-tight">
+					<span id="headline-bold" class="text-black dark:text-white">Trust built</span>
+					<span class="text-brand"> through transparency.</span>
+				</h1>
+				<p id="subline" class="mt-4 text-brand text-base md:text-lg">
+					Consumer loyalty through enhanced transparency
+				</p>
+			</div>
 
-		<!-- QR -->
-		<div class="mt-10 md:mt-0 text-center">
-			<img src="img/QR-pitch.svg" alt="QR code" class="w-40 h-40 mx-auto qr dark:invert" />
-			<p id="qrText" class="text-xs mt-2 uppercase text-gray-500 tracking-wide"></p>
-		</div>
-	</main>
+			<!-- QR -->
+			<div class="flex flex-col items-center">
+				<img src="/img/QR-pitch.svg" alt="QR Code"
+					class="w-40 h-40 md:w-48 md:h-48 hover:animate-pulseQR transition-transform duration-300 dark:invert" />
+				<p id="qr-caption" class="mt-2 text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+					Scan to verify
+				</p>
+			</div>
+		</main>
 
-	<!-- Footer -->
-	<footer class="text-sm text-gray-400 mt-12 fade-in text-center max-w-xl">
-		<p id="tagline" class="italic"></p>
-	</footer>
+		<!-- Footer -->
+		<footer class="mt-12 text-center text-sm text-gray-500 dark:text-gray-400 italic">
+			<span id="footer">Not fake. Not “maybe”. Just <span
+					class="not-italic font-semibold text-black dark:text-white">genu.im</span>.</span>
+		</footer>
+	</div>
 
+	<!-- Scripts -->
 	<script>
-		const content = {
-			en: {
-				mainHeadline: 'Trust built <span class="text-brand">through transparency.</span>',
-				subHeadline: 'Consumer loyalty through enhanced transparency',
-				qrText: 'Scan to verify',
-				tagline: 'Not fake. Not “maybe”. Just <span class="not-italic font-semibold text-white dark:text-white">genu.im</span>.',
-				label: 'EN'
-			},
-			ua: {
-				mainHeadline: 'Прозорість формує <span class="text-brand">довіру.</span>',
-				subHeadline: 'Лояльність споживачів через повну прозорість',
-				qrText: 'Скануйте, щоб перевірити',
-				tagline: 'Не фейк. Не “можливо”. Просто <span class="not-italic font-semibold text-white dark:text-white">genu.im</span>.',
-				label: 'UA'
-			}
-		};
-
-		const langToggle = document.getElementById('langToggle');
+		// THEME TOGGLE
 		const themeToggle = document.getElementById('themeToggle');
-		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-		function applyTheme(isDark) {
-			document.documentElement.classList.toggle('dark', isDark);
+		if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+			document.documentElement.classList.add('dark');
+			themeToggle.checked = true;
 		}
-
-		function setLanguage(lang) {
-			const c = content[lang];
-			document.getElementById('mainHeadline').innerHTML = c.mainHeadline;
-			document.getElementById('subHeadline').textContent = c.subHeadline;
-			document.getElementById('qrText').textContent = c.qrText;
-			document.getElementById('tagline').innerHTML = c.tagline;
-			langToggle.textContent = c.label;
-		}
-
-		// Theme toggle
-		themeToggle.checked = prefersDark;
-		applyTheme(prefersDark);
-		themeToggle.addEventListener('change', () => applyTheme(themeToggle.checked));
-
-		// Language toggle
-		let currentLang = 'en';
-		langToggle.addEventListener('click', () => {
-			currentLang = currentLang === 'en' ? 'ua' : 'en';
-			setLanguage(currentLang);
+		themeToggle.addEventListener('change', () => {
+			document.documentElement.classList.toggle('dark');
+			localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 		});
 
-		// Auto detect by IP
+		// LANGUAGE TOGGLE
+		const langToggle = document.getElementById('langToggle');
+		const langTexts = {
+			en: {
+				headlineBold: 'Trust built',
+				subline: 'Consumer loyalty through enhanced transparency',
+				qr: 'Scan to verify',
+				footer: 'Not fake. Not “maybe”. Just <span class="not-italic font-semibold text-black dark:text-white">genu.im</span>.',
+			},
+			ua: {
+				headlineBold: 'Прозорість формує',
+				subline: 'Лояльність споживачів через повну прозорість',
+				qr: 'Скануйте, щоб перевірити',
+				footer: 'Не фейк. Не “можливо”. Просто <span class="not-italic font-semibold text-black dark:text-white">genu.im</span>.',
+			},
+		};
+
+		function switchLang(lang) {
+			const t = langTexts[lang];
+			document.getElementById('headline-bold').textContent = t.headlineBold;
+			document.getElementById('subline').textContent = t.subline;
+			document.getElementById('qr-caption').textContent = t.qr;
+			document.getElementById('footer').innerHTML = t.footer;
+			langToggle.textContent = lang.toUpperCase();
+		}
+
+		langToggle.addEventListener('click', () => {
+			const current = langToggle.textContent.trim().toLowerCase();
+			const nextLang = current === 'en' ? 'ua' : 'en';
+			switchLang(nextLang);
+		});
+
+		// GEOLOCATION LANG
 		fetch('https://ipapi.co/json/')
 			.then(res => res.json())
 			.then(data => {
-				if (data.country !== 'US') currentLang = 'ua';
-				setLanguage(currentLang);
+				if (data.country !== 'US') switchLang('ua');
 			})
-			.catch(() => setLanguage(currentLang)); // fallback
+			.catch(() => switchLang('ua'));
 	</script>
 </body>
 
