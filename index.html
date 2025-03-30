@@ -1,28 +1,105 @@
 <!DOCTYPE html>
-<html lang="ru">
-  <head>
-	  <meta charset="utf-8" />
-	  <title>GenuIm</title>
-	  <meta name="viewport" content="width=device-width, initial-scale=1" />
-	  <link rel="stylesheet" href="./css/grid.css"/>
-	  
-	  <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-	  <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-	  <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-	  <link rel="manifest" href="./favicon/site.webmanifest">
-	  <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5"> 
-	  
-	  <link rel="shortcut icon" href="./favicon/favicon.ico" type="image/x-icon">
-	  <link rel="icon" href="./favicon/favicon.ico" type="image/x-icon">
-  </head>
-  <body class="grid">
-    <h1>
-	    <!--<href="https://github.com/pepelsbey/playground/blob/master/21/README.md">-->
-	    Разметка страницы</h1>
-  </body>
+<html lang="en" class="h-full">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>genu.im — Trust through transparency</title>
+
+	<!-- Tailwind -->
+	<script src="https://cdn.tailwindcss.com"></script>
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+	<!-- Meta Tags -->
+	<meta property="og:title" content="genu.im — Trust built through transparency" />
+	<meta property="og:description" content="Consumer loyalty through enhanced transparency." />
+	<meta property="og:image" content="https://raw.githubusercontent.com/masteroleg/gm/main/img/og-image-genuim.png" />
+	<meta property="og:url" content="https://genu.im" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="theme-color" content="#00A95C" />
+	<link rel="icon" href="https://raw.githubusercontent.com/masteroleg/gm/main/img/favicon.png" type="image/png" />
+
+	<!-- Tailwind config -->
+	<script>
+		tailwind.config = {
+			darkMode: 'media',
+			theme: {
+				extend: {
+					fontFamily: {
+						inter: ['Inter', 'sans-serif'],
+					},
+					colors: {
+						brand: '#00A95C',
+						textGray: '#414042',
+					},
+					keyframes: {
+						fadeInUp: {
+							'0%': { opacity: 0, transform: 'translateY(8px)' },
+							'100%': { opacity: 1, transform: 'translateY(0)' },
+						},
+					},
+					animation: {
+						fadeInUp: 'fadeInUp 0.8s ease-out forwards',
+					},
+				},
+			},
+		};
+	</script>
+
+	<style>
+		body {
+			font-family: 'Inter', sans-serif;
+		}
+	</style>
+</head>
+
+<body class="bg-white dark:bg-black text-black dark:text-white font-inter flex flex-col min-h-screen overflow-hidden">
+
+	<div class="max-w-6xl mx-auto w-full px-6 md:px-10 py-10 flex flex-col justify-between h-full">
+
+		<!-- Header -->
+		<header class="flex items-start animate-fadeInUp">
+			<img src="https://raw.githubusercontent.com/masteroleg/gm/main/img/logo-01_black.svg" alt="Genuim logo"
+				class="h-[60px] dark:hidden" />
+			<img src="https://raw.githubusercontent.com/masteroleg/gm/main/img/logo-02_white.svg" alt="Genuim logo dark"
+				class="h-[60px] hidden dark:block" />
+		</header>
+
+		<!-- Main -->
+		<main
+			class="flex flex-col md:flex-row justify-between items-center md:items-start mt-20 md:mt-32 gap-14 animate-fadeInUp text-center md:text-left">
+
+			<!-- Text -->
+			<div class="max-w-xl">
+				<h1 class="text-[30px] md:text-[48px] font-semibold leading-snug tracking-tight">
+					Trust built <span class="text-brand font-extrabold">through transparency.</span>
+				</h1>
+				<p class="mt-4 text-lg font-medium text-brand leading-snug">
+					Consumer loyalty through enhanced transparency
+				</p>
+			</div>
+
+			<!-- QR -->
+			<div class="flex flex-col items-center gap-3">
+				<img src="https://raw.githubusercontent.com/masteroleg/gm/main/img/QR-pitch.svg" alt="QR Code"
+					class="w-[140px] h-[140px] transition-transform duration-300 hover:scale-105 dark:invert" />
+				<p class="text-xs text-textGray dark:text-gray-400 uppercase tracking-wider opacity-70">
+					Scan to verify
+				</p>
+			</div>
+		</main>
+
+		<!-- Footer -->
+		<footer class="mt-20 text-center text-sm text-textGray dark:text-gray-400 animate-fadeInUp">
+			<p class="italic">
+				Not fake. Not maybe. Just <span
+					class="not-italic font-semibold text-black dark:text-white">genu.im</span>.
+			</p>
+		</footer>
+
+	</div>
+</body>
+
 </html>
-
-
-
-
-<!--TODO https://github.com/pepelsbey/playground/blob/master/21/README.md -->
