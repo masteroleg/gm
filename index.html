@@ -6,22 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>genu.im — Trust through transparency</title>
 
-	<!-- Tailwind -->
+	<!-- TailwindCSS -->
 	<script src="https://cdn.tailwindcss.com"></script>
 
-	<!-- Google Fonts -->
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-
-	<!-- Meta Tags -->
-	<meta property="og:title" content="genu.im — Trust built through transparency" />
-	<meta property="og:description" content="Consumer loyalty through enhanced transparency." />
-	<meta property="og:image" content="https://raw.githubusercontent.com/masteroleg/gm/main/img/og-image-genuim.png" />
-	<meta property="og:url" content="https://genu.im" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="theme-color" content="#00A95C" />
-	<link rel="icon" href="https://raw.githubusercontent.com/masteroleg/gm/main/img/favicon.png" type="image/png" />
-
-	<!-- Tailwind config -->
+	<!-- Tailwind Config -->
 	<script>
 		tailwind.config = {
 			darkMode: 'media',
@@ -32,44 +20,69 @@
 					},
 					colors: {
 						brand: '#00A95C',
-						textGray: '#414042',
-					},
-					keyframes: {
-						fadeInUp: {
-							'0%': { opacity: 0, transform: 'translateY(8px)' },
-							'100%': { opacity: 1, transform: 'translateY(0)' },
-						},
+						darkBg: '#0D0D0D',
+						lightBg: '#FFFFFF',
 					},
 					animation: {
 						fadeInUp: 'fadeInUp 0.8s ease-out forwards',
+					},
+					keyframes: {
+						fadeInUp: {
+							'0%': { opacity: '0', transform: 'translateY(8px)' },
+							'100%': { opacity: '1', transform: 'translateY(0)' },
+						},
 					},
 				},
 			},
 		};
 	</script>
 
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+	<!-- Open Graph -->
+	<meta property="og:title" content="genu.im — Trust built through transparency" />
+	<meta property="og:description" content="Consumer loyalty through enhanced transparency." />
+	<meta property="og:image" content="https://raw.githubusercontent.com/masteroleg/gm/main/img/og-image-genuim.png" />
+	<meta property="og:url" content="https://genu.im" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="theme-color" content="#00A95C" />
+	<link rel="icon" href="https://raw.githubusercontent.com/masteroleg/gm/main/img/favicon.png" type="image/png" />
+
 	<style>
 		body {
 			font-family: 'Inter', sans-serif;
 		}
+
+		.glow-light {
+			background: radial-gradient(ellipse at center, rgba(0, 169, 92, 0.08) 0%, transparent 80%);
+		}
+
+		.glow-dark {
+			background: radial-gradient(ellipse at center, rgba(0, 169, 92, 0.15) 0%, transparent 80%);
+		}
 	</style>
 </head>
 
-<body class="bg-white dark:bg-black text-black dark:text-white font-inter flex flex-col min-h-screen overflow-hidden">
+<body class="h-full bg-lightBg dark:bg-darkBg text-[#1A1A1A] dark:text-white overflow-hidden relative">
 
-	<div class="max-w-6xl mx-auto w-full px-6 md:px-10 py-10 flex flex-col justify-between h-full">
+	<!-- Background Glow -->
+	<div class="absolute inset-0 z-0 pointer-events-none">
+		<div class="w-full h-full glow-light dark:glow-dark"></div>
+	</div>
 
-		<!-- Header -->
-		<header class="flex items-start animate-fadeInUp">
-			<img src="https://raw.githubusercontent.com/masteroleg/gm/main/img/logo-01_black.svg" alt="Genuim logo"
-				class="h-[60px] dark:hidden" />
-			<img src="https://raw.githubusercontent.com/masteroleg/gm/main/img/logo-02_white.svg" alt="Genuim logo dark"
-				class="h-[60px] hidden dark:block" />
+	<!-- Page Content -->
+	<div class="relative z-10 flex flex-col justify-between min-h-screen max-w-7xl mx-auto px-6 md:px-12 py-10">
+
+		<!-- Logo -->
+		<header class="flex justify-start items-center">
+			<img src="https://raw.githubusercontent.com/masteroleg/gm/main/img/logo-01_black.svg" alt="Genuim Logo"
+				class="h-[56px] dark:invert" />
 		</header>
 
 		<!-- Main -->
 		<main
-			class="flex flex-col md:flex-row justify-between items-center md:items-start mt-20 md:mt-32 gap-14 animate-fadeInUp text-center md:text-left">
+			class="flex flex-col md:flex-row justify-between items-center gap-12 mt-20 md:mt-32 text-center md:text-left animate-fadeInUp">
 
 			<!-- Text -->
 			<div class="max-w-xl">
@@ -82,21 +95,19 @@
 			</div>
 
 			<!-- QR -->
-			<div class="flex flex-col items-center gap-3">
+			<div class="flex flex-col items-center gap-2">
 				<img src="https://raw.githubusercontent.com/masteroleg/gm/main/img/QR-pitch.svg" alt="QR Code"
-					class="w-[140px] h-[140px] transition-transform duration-300 hover:scale-105 dark:invert" />
-				<p class="text-xs text-textGray dark:text-gray-400 uppercase tracking-wider opacity-70">
+					class="w-[160px] h-[160px] transition-transform duration-300 hover:scale-105 dark:invert" />
+				<p class="text-xs uppercase tracking-widest opacity-60 text-[#6B7280] dark:text-gray-300">
 					Scan to verify
 				</p>
 			</div>
 		</main>
 
 		<!-- Footer -->
-		<footer class="mt-20 text-center text-sm text-textGray dark:text-gray-400 animate-fadeInUp">
-			<p class="italic">
-				Not fake. Not maybe. Just <span
-					class="not-italic font-semibold text-black dark:text-white">genu.im</span>.
-			</p>
+		<footer class="mt-20 text-center text-sm text-gray-500 dark:text-gray-400 animate-fadeInUp">
+			<p class="italic">Not fake. Not maybe. Just <span
+					class="not-italic font-semibold text-black dark:text-white">genu.im</span>.</p>
 		</footer>
 
 	</div>
