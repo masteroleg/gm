@@ -1,0 +1,23 @@
+{
+  "name": "gm",
+  "version": "1.0.0",
+  "description": "This is the pre-launch landing page for [genu.im](https://genu.im), a verification and transparency tool that builds consumer trust.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masteroleg/gm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/masteroleg/gm/issues"
+  },
+  "homepage": "https://github.com/masteroleg/gm#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.18"
+  }
+}
