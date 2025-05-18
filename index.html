@@ -76,8 +76,15 @@
 		</header>
 
 		<!-- TODO remove me, just for testing -->
-		<nav class="mt-4">
-			<a href="/perevir-produkt/" class="main-nav__link" id="nav-perevir-produkt">Перевір продукт</a>
+		<!-- TODO: Navigation Menu -->
+		<nav id="mainNav"
+			class="fixed inset-0 z-50 bg-white dark:bg-[#181818] flex-col items-center justify-center hidden md:flex md:static md:bg-transparent md:dark:bg-transparent md:flex-row md:gap-6 mt-4">
+			<a href="/perevir-produkt/" class="main-nav__link py-4 text-lg font-semibold hover:underline"
+				id="nav-perevir-produkt">
+				Перевір продукт
+			</a>
+			<!-- Добавьте сюда другие ссылки, если появятся -->
+			<button id="closeMenu" class="absolute top-5 right-5 md:hidden" aria-label="Close Menu">&times;</button>
 		</nav>
 
 		<!-- Main Content -->
@@ -104,6 +111,8 @@
 				Not fake. Not <span class="italic">“maybe”</span>. Just <span
 					class="not-italic font-semibold">genu.im</span>.
 			</p>
+			<a href="/perevir-produkt/" class="main-nav__link" id="footer-perevir-produkt">
+				Перевір продукт </a>
 		</footer>
 	</div>
 
@@ -168,6 +177,18 @@
 			themeToggle.checked = true;
 		}
 	</script>
+
+	<script>
+		// TODO: Открытие мобильного меню
+		document.getElementById('burgerBtn').addEventListener('click', function () {
+			document.getElementById('mainNav').classList.remove('hidden');
+		});
+		// Закрытие меню
+		document.getElementById('closeMenu').addEventListener('click', function () {
+			document.getElementById('mainNav').classList.add('hidden');
+		});
+	</script>
+
 </body>
 
 </html>
