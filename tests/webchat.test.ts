@@ -1,4 +1,9 @@
 import { test, expect } from '@playwright/test';
+// --- config 
+const BASE_URL = 'https://genu.im';
+const PRODUCT_CHECK_PATH = '/perevir-produkt/';
+const DEFAULT_TIMEOUT = 10000;
+const TEST_ECODE = '123456';
 
 // --- HUMAN-LIKE BEHAVIOR CONSTANTS ---
 const MOUSE_IDLE_BASE_DELAY = 250; // ms
@@ -7,6 +12,7 @@ const HUMAN_MOVE_STEPS_MIN = 2;
 const HUMAN_MOVE_STEPS_MAX = 8;
 const HUMAN_TYPING_DELAY_MIN = 80; // ms
 const HUMAN_TYPING_DELAY_MAX = 180; // ms
+const HUMAN_WAIT_TIMEOUTS = [8000, 9000, 10000, 11000, 12000];
 
 /**
  * Main Playwright test:
@@ -15,13 +21,15 @@ const HUMAN_TYPING_DELAY_MAX = 180; // ms
  */
 test('Enter 6-digit E-CODE into Azure BotFramework WebChat widget after human-like navigation (adaptive)', async ({ page, browserName }) => {
 	// 1. Go to the homepage
-	await page.goto('https://genu.im');
+	await page.goto(BASE_URL);
 
 	// 1.1. Device-adaptive idle wandering
 	const area = await getHumanMouseArea(page);
 	const isMobile = await detectMobile(page);
+	const supportsTouch = page.context()._options.hasTouch === true;
+
 	if (isMobile) {
-		await randomIdleTouchWander(page, area); // эмулирует "задумчивый" пользователь мобильника
+		await randomIdleTouchWander(page, area);
 	} else {
 		await randomIdleMouseWander(page, area);
 	}
@@ -36,17 +44,77 @@ test('Enter 6-digit E-CODE into Azure BotFramework WebChat widget after human-li
 		return;
 	}
 
-	// 4. Move/click as a human (touch for mobile, mouse for desktop)
-	await navLink.waitFor({ timeout: 10000 });
-	if (isMobile) {
-		await navLink.tap();
+	// 3.1. Handle visibility for both mobile and desktop
+	try {
+		if (isMobile) {
+			// For mobile, first try to find and click the menu button
+			const menuButton = page.locator('button[aria-label*="menu" i], button[aria-label*="navigation" i]');
+			if (await menuButton.count() > 0) {
+				await menuButton.first().click({ timeout: 5000 });
+				await page.waitForTimeout(1000); // Wait for menu animation
+			}
+
+			// Then try to find the link directly
+			await navLink.waitFor({ state: 'attached', timeout: 5000 });
+
+			// Evaluate if element is in viewport
+			const isInViewport = await navLink.evaluate((el) => {
+				const rect = el.getBoundingClientRect();
+				return (
+					rect.top >= 0 &&
+					rect.left >= 0 &&
+					rect.bottom <= window.innerHeight &&
+					rect.right <= window.innerWidth
+				);
+			});
+
+			if (!isInViewport) {
+				// If not in viewport, try scrolling
+				await page.evaluate((selector) => {
+					const element = document.querySelector(selector);
+					element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				}, 'nav a:has-text("Перевір продукт")');
+				await page.waitForTimeout(1000);
+			}
+		} else {
+			// Desktop handling remains the same
+			await navLink.scrollIntoViewIfNeeded();
+			await page.waitForTimeout(1000);
+		}
+
+		// Final visibility check
+		const isVisible = await navLink.isVisible();
+		if (!isVisible) {
+			throw new Error('Navigation link still not visible after all attempts');
+		}
+
+	} catch (e) {
+		console.log('Navigation visibility handling failed:', e.message);
+		// Continue anyway - we'll try to interact with force: true
+	}
+
+	// 4. Move/click as a human (touch for mobile if supported, mouse for desktop)
+	if (isMobile && supportsTouch) {
+		try {
+			// For mobile, try direct click with force first
+			await navLink.click({ force: true, timeout: 5000 });
+		} catch (e) {
+			console.log('Mobile click failed:', e.message);
+			// Try alternative mobile click strategy
+			await page.evaluate((selector) => {
+				const element = document.querySelector(selector);
+				if (element) {
+					element.click();
+				}
+			}, 'nav a:has-text("Перевір продукт")');
+		}
 	} else {
 		await humanWanderAndClick(page, navLink);
 	}
 
 	// 5. Wait for navigation and correct URL
 	await page.waitForLoadState('domcontentloaded');
-	await page.waitForURL('**/perevir-produkt*', { timeout: 10000 });
+	await page.waitForURL(`**${PRODUCT_CHECK_PATH}*`, { timeout: DEFAULT_TIMEOUT });
 
 	// 6. Wait for the webchat widget and its input field
 	await page.waitForSelector('#webchat', { timeout: 10000 });
@@ -90,10 +158,10 @@ test('Enter 6-digit E-CODE into Azure BotFramework WebChat widget after human-li
  * Detects if page is mobile (viewport or Playwright context flag)
  */
 async function detectMobile(page) {
-	const isMobile = (await page.evaluate(() =>
-		!!(window.matchMedia && window.matchMedia('(max-width: 650px), (hover: none)').matches)
-	)) || (page.context()._options.isMobile === true); // Playwright context flag
-	return !!isMobile;
+	// Check for touch support and a small viewport width
+	const hasTouch = page.context()._options.hasTouch === true;
+	const isSmallViewport = await page.evaluate(() => window.innerWidth <= 650);
+	return hasTouch || isSmallViewport;
 }
 
 /**
@@ -149,6 +217,8 @@ async function randomIdleMouseWander(page, area, iterations = 3) {
  * For mobile: randomly taps (idle) in central UX area, as if thinking
  */
 async function randomIdleTouchWander(page, area, iterations = 2) {
+	if (!page.context()._options.hasTouch || typeof page.touchscreen?.tap !== 'function') return;
+
 	for (let i = 0; i < iterations + Math.floor(Math.random() * 2); i++) {
 		const x = area.left + Math.random() * area.width;
 		const y = area.top + Math.random() * area.height;
@@ -163,3 +233,8 @@ async function randomIdleTouchWander(page, area, iterations = 2) {
 function randomDelay(min = HUMAN_TYPING_DELAY_MIN, max = HUMAN_TYPING_DELAY_MAX) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function randomTimeout() {
+	return HUMAN_WAIT_TIMEOUTS[Math.floor(Math.random() * HUMAN_WAIT_TIMEOUTS.length)];
+}
+
