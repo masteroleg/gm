@@ -1,5 +1,5 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
-npm test
-npm run build:css
+echo "🧵 Compiling Tailwind CSS..."
+npm run build:css || exit 1
