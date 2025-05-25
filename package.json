@@ -3,9 +3,31 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
-		"start": "serve ."
+		"start": "serve .",
+		"build:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify",
+		"dev": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch",
+		"prepare": "husky install"
 	},
 	"devDependencies": {
-		"serve": "^14.2.1"
+		"serve": "^14.2.1",
+		"tailwindcss": "^4.1.7",
+		"husky": "^8.0.0"
+	},
+	"description": "This is the pre-launch landing page for [genu.im](https://genu.im), a verification and transparency tool that builds consumer trust.",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/masteroleg/gm.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"bugs": {
+		"url": "https://github.com/masteroleg/gm/issues"
+	},
+	"homepage": "https://github.com/masteroleg/gm#readme",
+	"dependencies": {
+		"@tailwindcss/cli": "^4.1.7"
 	}
 }

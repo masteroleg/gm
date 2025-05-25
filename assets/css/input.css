@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --color-brand: #00A95C;
+  --color-brand-900: #01874A;
+  --color-brand-100: #E6FFF2;
+  --brand-shadow: 0 2px 8px 0 rgba(0, 169, 92, 0.08);
+}
+
+@utilities {
+  .text-brand {
+    color: var(--color-brand);
+  }
+  .bg-brand {
+    background-color: var(--color-brand);
+  }
+  .shadow-brand {
+    box-shadow: var(--brand-shadow);
+  }
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+}

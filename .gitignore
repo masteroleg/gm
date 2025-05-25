@@ -1,8 +1,16 @@
-
-# Playwright
+# 📦 Node.js
 node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-.env
+
+# 🏗️ Tailwind output
+assets/css/output.css
+
+# 📝 Logs, temp, misc
+*.log
+*.tmp
+
+# ⚙️ VS Code settings
+.vscode/
+gm.tree
+
+# 🙈 System
+Thumbs.db
