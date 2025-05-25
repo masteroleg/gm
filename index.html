@@ -56,13 +56,17 @@
 
 			<!-- Lang + Theme Toggles -->
 			<div class="flex items-center gap-3">
-				<button id="langToggle" class="rounded px-2 py-0.5 text-sm font-medium uppercase">
+				<button id="langToggle" type="button" class="rounded px-2 py-0.5 text-sm font-medium uppercase">
 					<span id="langLabel">EN</span>
 				</button>
 
 				<label class="relative inline-flex items-center cursor-pointer">
-					<input type="checkbox" id="themeToggle" class="sr-only peer" title="Toggle dark mode"
-						aria-label="Toggle dark mode">
+					<button id="themeToggle" type="button"
+						class="w-10 h-10 rounded-full flex items-center justify-center text-xl hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+						aria-label="Toggle theme" title="Toggle dark mode">
+						<span id="iconSun" class="block dark:hidden">🌞</span>
+						<span id="iconMoon" class="hidden dark:block">🌙</span>
+					</button>
 					<div
 						class="w-10 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all">
 					</div>
@@ -70,7 +74,7 @@
 			</div>
 
 			<!-- Burger (mobile) -->
-			<button id="burgerBtn" class="md:hidden flex items-center p-2 ml-2" aria-label="Open Menu">
+			<button id="burgerBtn" type="button" class="md:hidden flex items-center p-2 ml-2" aria-label="Open Menu">
 				<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
 					stroke-linecap="round" stroke-linejoin="round">
 					<line x1="3" y1="6" x2="21" y2="6" />
