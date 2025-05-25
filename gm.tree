@@ -1,0 +1,79 @@
+Folder PATH listing for volume D
+Volume serial number is 88D8-CE1A
+D:.
+|   gm.tree
+|   
++---playwright
+|   |   .env
+|   |   package.json
+|   |   playwright.config-backup0.js
+|   |   playwright.config-backup1.js
+|   |   playwright.config.js
+|   |   proxies.txt
+|   |   
+|   +---config
+|   |       deviceDistribution.js
+|   |       
+|   +---documentation
+|   |       01.requirements-playwright-docker.md
+|   |       02.plan-of implementation.v5.md
+|   |       
+|   +---playwright-report
+|   |       index.html
+|   |       
+|   +---test-results
+|   |       .last-run.json
+|   |       
+|   +---tests
+|   |   +---examples
+|   |   |       demo-todo-app.spec.js
+|   |   |       example.spec.js
+|   |   |       webchat.test.ts
+|   |   |       
+|   |   \---proxy
+|   |           proxy_dataimpulse_simple.spec.js
+|   |           
+|   \---utils
+|       |   stealth.js
+|       |   userAgentSpreadEmulation.js
+|       |   viewDevices.js
+|       |   
+|       +---helpers
+|       |       helpers.js
+|       |       
+|       \---proxy
+|               proxyUtils.js
+|               
+\---site
+    |   .gitignore
+    |   .hintrc
+    |   CNAME
+    |   index.html
+    |   package.json
+    |   README.md
+    |   
+    +---assets
+    |   +---css
+    |   +---favicon
+    |   |       android-chrome-192x192.png
+    |   |       android-chrome-512x512.png
+    |   |       apple-touch-icon.png
+    |   |       browserconfig.xml
+    |   |       favicon-16x16.png
+    |   |       favicon-32x32.png
+    |   |       favicon.ico
+    |   |       mstile-150x150.png
+    |   |       safari-pinned-tab.svg
+    |   |       site.webmanifest
+    |   |       
+    |   +---img
+    |   |       logo-01_black.svg
+    |   |       logo-02_white.svg
+    |   |       QR-pitch.svg
+    |   |       
+    |   \---pitch
+    |           Genu.im.pdf
+    |           
+    \---perevir-produkt
+            index.html
+            
