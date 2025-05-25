@@ -1,9 +1,6 @@
 # 📦 Node.js
 node_modules/
 
-# 🏗️ Tailwind output
-assets/css/output.css
-
 # 📝 Logs, temp, misc
 *.log
 *.tmp
