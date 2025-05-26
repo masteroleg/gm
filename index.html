@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
+<script>/* Prevent FOUC: set theme as early as possible */
+try {
+  const theme = localStorage.getItem('theme');
+  if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+  }
+  
+  // Also set language as early as possible
+  const lang = localStorage.getItem('lang');
+  if (lang && (lang === 'en' || lang === 'uk')) {
+    document.documentElement.lang = lang;
+  }
+} catch (e) { /* silent fail */ }
+</script>
 
 <head>
 	<meta charset="UTF-8" />
@@ -19,7 +33,7 @@
 	</script>
 
 	<!-- Favicon -->
-	<link rel="manifest" href="assets/favicon/site.webmanifest" />
+	<link rel="alternate" hreflang="uk" href="https://apteka-sadivnyka.ua/perevir-produkt/" />
 	<link rel="icon" href="assets/favicon/favicon.ico" />
 	<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
 	<link rel="icon" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
@@ -56,12 +70,11 @@
 
 			<!-- Lang + Theme Toggles -->
 			<div class="flex items-center gap-3">
-				<button id="langToggle" type="button" class="rounded px-2 py-0.5 text-sm font-medium uppercase">
+				<button id="langToggle" type="button" class="rounded px-2 py-0.5 text-sm font-medium uppercase" aria-label="Switch language" tabindex="0" aria-controls="langLabel">
 					<span id="langLabel">EN</span>
 				</button>
-
-				<label for="themeToggle" class="relative inline-flex items-center cursor-pointer">
-					<input type="checkbox" id="themeToggle" class="sr-only" />
+				<label for="themeToggle" class="relative inline-flex items-center cursor-pointer" aria-label="Toggle dark mode" tabindex="0">
+					<input type="checkbox" id="themeToggle" class="sr-only" aria-checked="false" role="switch" />
 					<div
 						class="w-14 h-8 bg-gray-300 dark:bg-gray-600 rounded-full peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:bg-green-500 transition-colors duration-300">
 					</div>
@@ -70,7 +83,9 @@
 						🌞
 					</span>
 					<span
-						class="absolute right-1 top-1 w-6 h-6 text-gray-700 dark:text-yellow-300 hidden peer-checked:flex">🌙</span>
+						class="absolute right-1 top-1 w-6 h-6 text-gray-700 dark:text-yellow-300 hidden peer-checked:flex">
+						🌙
+					</span>
 				</label>
 			</div>
 
@@ -89,8 +104,8 @@
 		<nav id="mainNav"
 			class="fixed inset-0 z-50 bg-white dark:bg-[#181818] flex-col items-center justify-center hidden md:flex md:static md:bg-transparent md:dark:bg-transparent md:flex-row md:gap-6 mt-4">
 			<a href="perevir-produkt/" class="main-nav__link py-4 text-lg font-semibold hover:underline"
-				id="nav-perevir-produkt">
-				Перевір продукт
+				id="navPerevirProdukt">
+				<!-- Текст подставляется через JS -->
 			</a>
 			<button id="closeMenu" class="absolute top-5 right-5 md:hidden" aria-label="Close Menu">&times;</button>
 		</nav>
@@ -98,31 +113,27 @@
 		<!-- Main -->
 		<main class="flex flex-col md:flex-row items-center justify-between mt-20 gap-12 text-center md:text-left">
 			<div class="max-w-xl">
-				<h1 id="heroText" class="text-3xl md:text-5xl font-bold leading-tight">
-					Trust built <span class="text-brand font-extrabold">through transparency.</span>
-				</h1>
-				<p id="heroSub" class="mt-4 text-lg text-brand">Consumer loyalty through enhanced transparency</p>
+				<h1 id="heroText" class="text-3xl md:text-5xl font-bold leading-tight"></h1>
+				<p id="heroSub" class="mt-4 text-lg text-brand"></p>
+				<p id="qrLabel" class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400"></p>
+				<p id="tagline" class="italic"></p>
 			</div>
 			<div class="flex flex-col items-center gap-2">
 				<img src="assets/img/QR-pitch.svg" alt="QR Code" class="w-40 h-40 dark:invert" />
-				<p id="qrLabel" class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">SCAN TO VERIFY
-				</p>
 			</div>
 		</main>
 
 		<!-- Footer -->
 		<footer class="mt-16 text-center text-sm text-gray-600 dark:text-gray-400">
-			<p id="tagline" class="italic">
-				Not fake. Not <span class="italic">“maybe”</span>. Just <span
-					class="not-italic font-semibold">genu.im</span>.
-			</p>
-			<a href="perevir-produkt/" class="main-nav__link" id="footer-perevir-produkt">Перевір продукт</a>
+			<p id="taglineFooter" class="italic"></p>
+			<a href="perevir-produkt/" class="main-nav__link" id="footerPerevirProdukt"></a>
+			<link rel="alternate" hreflang="ru" href="https://apteka-sadivnyka.ua/ru/perevir-produkt/" />
 		</footer>
 	</div>
 
 	<!-- JS -->
-	<script src="assets/js/lang-theme.js"></script>
-	<script src="assets/js/menu.js"></script>
+	<script src="assets/js/lang-theme.js" defer></script>
+	<script src="assets/js/menu.js" defer></script>
 </body>
 
 </html>
