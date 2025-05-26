@@ -60,16 +60,17 @@
 					<span id="langLabel">EN</span>
 				</button>
 
-				<label class="relative inline-flex items-center cursor-pointer">
-					<button id="themeToggle" type="button"
-						class="w-10 h-10 rounded-full flex items-center justify-center text-xl hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-						aria-label="Toggle theme" title="Toggle dark mode">
-						<span id="iconSun" class="block dark:hidden">🌞</span>
-						<span id="iconMoon" class="hidden dark:block">🌙</span>
-					</button>
+				<label for="themeToggle" class="relative inline-flex items-center cursor-pointer">
+					<input type="checkbox" id="themeToggle" class="sr-only" />
 					<div
-						class="w-10 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all">
+						class="w-14 h-8 bg-gray-300 dark:bg-gray-600 rounded-full peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 peer-checked:bg-green-500 transition-colors duration-300">
 					</div>
+					<span
+						class="absolute left-1 top-1 w-6 h-6 bg-white rounded-full shadow-md transform peer-checked:translate-x-6 transition-transform duration-300 flex items-center justify-center text-yellow-400 text-lg">
+						🌞
+					</span>
+					<span
+						class="absolute right-1 top-1 w-6 h-6 text-gray-700 dark:text-yellow-300 hidden peer-checked:flex">🌙</span>
 				</label>
 			</div>
 

@@ -1,8 +1,7 @@
-// --- Theme toggle ---
 const themeToggle = document.getElementById("themeToggle");
 const html = document.documentElement;
 
-// Сначала применяем сохранённую тему или системную
+// Инициализация состояния чекбокса
 const savedTheme = localStorage.getItem("theme");
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
@@ -14,10 +13,9 @@ if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
 	themeToggle.checked = false;
 }
 
-// Обработчик переключателя
+// Обработчик изменения чекбокса
 themeToggle.addEventListener("change", () => {
-	const isDark = themeToggle.checked;
-	if (isDark) {
+	if (themeToggle.checked) {
 		html.classList.add("dark");
 		localStorage.setItem("theme", "dark");
 	} else {
