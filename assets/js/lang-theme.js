@@ -1,10 +1,14 @@
 // Fault-tolerant theme and language toggle
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM fully loaded - initializing theme and language toggles');
   const html = document.documentElement;
   
   // ========== THEME TOGGLE ==========
   const themeToggle = document.getElementById("themeToggle");
   if (themeToggle) {
+    // Add a class to the body to indicate JS is loaded
+    document.body.classList.add('js-loaded');
+    
     function setAriaChecked(state) {
       try {
         themeToggle.setAttribute('aria-checked', state ? 'true' : 'false');
@@ -35,14 +39,19 @@
           try { localStorage.setItem("theme", "dark"); } catch {}
           themeToggle.checked = true;
           setAriaChecked(true);
+          document.body.classList.add('theme-dark');
+          document.body.classList.remove('theme-light');
         } else {
           html.classList.remove("dark");
           try { localStorage.setItem("theme", "light"); } catch {}
           themeToggle.checked = false;
           setAriaChecked(false);
+          document.body.classList.add('theme-light');
+          document.body.classList.remove('theme-dark');
         }
+        console.log('Theme applied:', isDark ? 'dark' : 'light');
       } catch (e) {
-        console.warn('Failed to apply theme:', e);
+        console.error('Failed to apply theme:', e);
       }
     }
 
@@ -53,9 +62,23 @@
     }
     applyTheme(isDark);
 
+    // Handle both change and click events for maximum compatibility
     themeToggle.addEventListener("change", function() {
       applyTheme(themeToggle.checked);
     });
+    
+    // Add click handler for the label to ensure it works on all devices
+    const themeLabel = themeToggle.closest('label');
+    if (themeLabel) {
+      themeLabel.addEventListener("click", function(e) {
+        // Prevent default only if clicking directly on the label (not the input)
+        if (e.target !== themeToggle) {
+          e.preventDefault();
+          themeToggle.checked = !themeToggle.checked;
+          applyTheme(themeToggle.checked);
+        }
+      });
+    }
 
     // Accessibility: Keyboard support
     themeToggle.addEventListener('keydown', function(e) {
@@ -90,6 +113,7 @@
         tagline: 'Not fake. Not "maybe". Just genu.im.',
         navPerevirProdukt: 'Check product',
         footerPerevirProdukt: 'Check product',
+        taglineFooter: 'Not fake. Not "maybe". Just genu.im.',
       },
       uk: {
         heroText: 'Довіра, створена через прозорість.',
@@ -98,6 +122,7 @@
         tagline: 'Не фейк. Не «можливо». Просто genu.im.',
         navPerevirProdukt: 'Перевір продукт',
         footerPerevirProdukt: 'Перевір продукт',
+        taglineFooter: 'Не фейк. Не «можливо». Просто genu.im.',
       }
     };
 
@@ -124,12 +149,14 @@
         // Ensure we have a valid language or fall back to English
         const validLang = translations[lang] ? lang : 'en';
         const texts = translations[validLang];
+        console.log(`Applying language: ${validLang}`);
         
         // Apply translations to all elements
         for (const id in texts) {
           const el = document.getElementById(id);
           if (el) {
             el.textContent = texts[id];
+            console.log(`Applied translation for ${id}: ${texts[id]}`);
           } else {
             console.warn(`Element not found for translation key: ${id}`);
           }
@@ -178,8 +205,11 @@
       }
     });
 
-    // Initialize language on page load
-    let initialLang = getSavedLang();
-    applyLang(initialLang);
+    // Initialize language
+    setTimeout(function() {
+      let initialLang = getSavedLang();
+      console.log('Initial language:', initialLang);
+      applyLang(initialLang);
+    }, 100);
   }
-})();
+});
