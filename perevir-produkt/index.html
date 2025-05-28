@@ -164,7 +164,7 @@
 											const res = await fetch(
 												"https://4ecd-185-242-21-191.ngrok-free.app/api/webchat/token",
 												{
-													method: "POST", headers: { "x-page-path": window.location.href }
+													headers: { "x-page-path": window.location.href }
 												}
 											);
 											console.log(res);
