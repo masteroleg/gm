@@ -1,77 +1,50 @@
-// Fault-tolerant language toggle
-(function() {
-  const langToggle = document.getElementById('langToggle');
-  const langLabel = document.getElementById('langLabel');
-  if (!langToggle || !langLabel) return; // Elements not present
+const translations = {
+	en: {
+		"hero.title": 'Trust built through transparency.',
+		"hero.subtitle": 'Consumer loyalty through enhanced transparency',
+		"hero.qr": 'SCAN TO VERIFY',
+		"hero.tagline": 'Not fake. Not “maybe”. Just genu.im.',
+		"footer.tagline": 'Building trust through clarity',
+		"nav.perevirProduct": 'Check product',
+		"footer.perevirProduct": 'Check product',
+	},
+	uk: {
+		"hero.title": 'Довіра, створена через прозорість.',
+		"hero.subtitle": 'Лояльність споживачів через підвищену прозорість',
+		"hero.qr": 'СКАНУВАТИ ДЛЯ ПЕРЕВІРКИ',
+		"hero.tagline": 'Не фейк. Не «можливо». Просто genu.im.',
+		"footer.tagline": 'Створення довіри через прозорість',
+		"nav.perevirProduct": 'Перевір продукт',
+		"footer.perevirProduct": 'Перевір продукт',
+	}
+};
 
-  const translations = {
-    en: {
-      heroText: 'Trust built through transparency.',
-      heroSub: 'Consumer loyalty through enhanced transparency',
-      qrLabel: 'SCAN TO VERIFY',
-      tagline: 'Not fake. Not “maybe”. Just genu.im.',
-      navPerevirProdukt: 'Check product',
-      footerPerevirProdukt: 'Check product',
-    },
-    uk: {
-      heroText: 'Довіра, створена через прозорість.',
-      heroSub: 'Лояльність споживачів через підвищену прозорість',
-      qrLabel: 'СКАНУВАТИ ДЛЯ ПЕРЕВІРКИ',
-      tagline: 'Не фейк. Не «можливо». Просто genu.im.',
-      navPerevirProdukt: 'Перевір продукт',
-      footerPerevirProdukt: 'Перевір продукт',
-    }
-  };
+function setLang(lang) {
+	document.documentElement.lang = lang;
+	localStorage.setItem("lang", lang);
 
-  function getSavedLang() {
-    try {
-      const saved = localStorage.getItem('lang');
-      if (saved && translations[saved]) return saved;
-    } catch {}
-    return 'en';
-  }
-  function setSavedLang(lang) {
-    try { localStorage.setItem('lang', lang); } catch {}
-  }
+	document.querySelectorAll("[data-i18n]").forEach(el => {
+		const key = el.getAttribute("data-i18n");
+		if (translations[lang] && translations[lang][key]) {
+			el.textContent = translations[lang][key];
+		}
+	});
 
-  function applyLang(lang) {
-    const texts = translations[lang] || translations.en;
-    for (const id in texts) {
-      const el = document.getElementById(id);
-      if (el) {
-        el.textContent = texts[id];
-      } else {
-        if (lang !== 'en') console.warn(`Missing element for translation key: ${id}`);
-      }
-    }
-    try {
-      document.documentElement.lang = lang;
-    } catch {}
-    updateLangLabel(lang);
-  }
+	const label = document.getElementById("langLabel");
+	if (label) label.textContent = lang.toUpperCase();
+}
 
-  function updateLangLabel(lang) {
-    try {
-      langLabel.textContent = lang.toUpperCase();
-    } catch {}
-  }
+// При загрузке страницы
+document.addEventListener("DOMContentLoaded", () => {
+	const savedLang = localStorage.getItem("lang") || "uk";
+	setLang(savedLang);
 
-  langToggle.addEventListener('click', function() {
-    const current = getSavedLang();
-    const newLang = current === 'en' ? 'uk' : 'en';
-    setSavedLang(newLang);
-    applyLang(newLang);
-  });
-
-  // Accessibility: Keyboard support
-  langToggle.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      langToggle.click();
-    }
-  });
-
-  // Initial load
-  let initialLang = getSavedLang();
-  applyLang(initialLang);
-})();
+	const toggle = document.getElementById("langToggle");
+	if (toggle) {
+		toggle.addEventListener("click", () => {
+			const current = document.documentElement.lang;
+			const next = current === "uk" ? "en" : "uk";
+			setLang(next);
+		});
+	}
+});

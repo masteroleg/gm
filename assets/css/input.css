@@ -1,12 +1,22 @@
 @import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
-  --font-sans: 'Inter', sans-serif;
-  --color-brand: #00A95C;
-  --color-brand-900: #01874A;
-  --color-brand-100: #E6FFF2;
-  --brand-shadow: 0 2px 8px 0 rgba(0, 169, 92, 0.08);
+
+    --font-sans: "Inter", sans-serif;
+    --color-brand: #00a95c;
+    --color-brand-900: #01874a;
+    --color-brand-100: #e6fff2;
+    --brand-shadow: 0 2px 8px 0 rgba(0, 169, 92, 0.08);
+  }
+
+  @dark {
+    --color-brand: #00ffaa;
+    --color-brand-900: #00cc88;
+    --color-brand-100: #003322;
+    --brand-shadow: 0 2px 12px 0 rgba(0, 255, 170, 0.2);
 }
+
 
 @utilities {
   .text-brand {
