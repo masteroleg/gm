@@ -2,6 +2,7 @@
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#" lang="uk">
 
 <head>
+	<meta name="referrer" content="unsafe-url">
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-RBD0C4LE5V"></script>
 	<script>
@@ -12,8 +13,6 @@
 		gtag("js", new Date());
 		gtag("config", "G-RBD0C4LE5V");
 	</script>
-	
-	<meta name="referrer" content="unsafe-url">
 
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -165,7 +164,7 @@
 											// );
 											const res = await fetch(
 												"https://4ecd-185-242-21-191.ngrok-free.app/api/webchat/token",
-												{ method: "POST" }
+												{ method: "POST", referrerPolicy: "unsafe-url" }
 											);
 											console.log(res);
 											const { token } = await res.json();
