@@ -1,21 +1,80 @@
+/* input.css */
+
 @import "tailwindcss";
+
+/* Важно: @custom-variant dark теперь нацеливается на [data-theme=dark] */
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme {
   --font-sans: "Inter", sans-serif;
+
+  /* Общие цвета для светлой темы (по умолчанию) */
+  --color-bg-body: #f5f5f7; /* Цвет фона body в светлой теме, соответствует старому bg-[#f5f5f7] */
+  --color-text-body: #000000; /* Цвет текста body в светлой теме, соответствует старому text-black */
+
   --color-brand: #00a95c;
   --color-brand-900: #01874a;
   --color-brand-100: #e6fff2;
   --brand-shadow: 0 2px 8px 0 rgba(0, 169, 92, 0.08);
+
+  --color-button-hover-bg: #e5e7eb; /* Соответствует старому hover:bg-gray-100 */
+  --color-dark-focus-ring-offset: #cbd5e1; /* Например, blue-500 для light focus ring, или light gray */
+
+  /* Дополнительные переменные для текста и иконок */
+  --color-text-secondary: #6b7280; /* Соответствует старому text-gray-500 */
+  --color-icon-sun: #fbbf24; /* Соответствует старому text-yellow-500 */
+  --color-icon-moon: #93c5fd; /* Соответствует старому text-blue-300 */
 }
 
+/* Определяем переменные для темной темы.
+   Они будут активны, когда html-элемент имеет data-theme="dark" */
 @dark {
+  --color-bg-body: #0e0e0f; /* Цвет фона body в темной теме, соответствует старому dark:bg-[#0e0e0f] */
+  --color-text-body: #ffffff; /* Цвет текста body в темной теме, соответствует старому dark:text-white */
+
   --color-brand: #00ffaa;
   --color-brand-900: #00cc88;
   --color-brand-100: #003322;
   --brand-shadow: 0 2px 12px 0 rgba(0, 255, 170, 0.2);
+
+  --color-button-hover-bg: #1f2937; /* Соответствует старому dark:hover:bg-gray-800 */
+  --color-dark-focus-ring-offset: #111827; /* Соответствует старому dark:focus:ring-offset-gray-900 */
+
+  --color-text-secondary: #9ca3af; /* Соответствует старому dark:text-gray-400 */
+  --color-icon-sun: #fbbf24; /* Цвет солнца не меняется в темной теме, так как оно скрыто */
+  --color-icon-moon: #93c5fd; /* Цвет луны не меняется в темной теме, так как оно показано */
 }
- 
+
+/* Автоматическая установка темы по системным настройкам, если нет сохраненных предпочтений.
+   Это правило должно быть после базовых @theme и @dark,
+   но перед глобальными стилями html, чтобы дать приоритет. */
+@media (prefers-color-scheme: dark) {
+  /* Эти переменные применяются, если система в темном режиме, до загрузки JS */
+  :root {
+    --color-bg-body: #0e0e0f;
+    --color-text-body: #ffffff;
+    --color-brand: #00ffaa;
+    --color-brand-900: #00cc88;
+    --color-brand-100: #003322;
+    --brand-shadow: 0 2px 12px 0 rgba(0, 255, 170, 0.2);
+    --color-button-hover-bg: #1f2937;
+    --color-dark-focus-ring-offset: #111827;
+    --color-text-secondary: #9ca3af;
+    --color-icon-sun: #fbbf24;
+    --color-icon-moon: #93c5fd;
+  }
+}
+
+/* Применение color-scheme на html для системных элементов */
+html {
+  color-scheme: light; /* По умолчанию */
+  /* transition уже есть в body */
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 @utilities {
   .text-brand {
     color: var(--color-brand);
