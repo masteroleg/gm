@@ -9,9 +9,13 @@
 		"prepare": "husky install"
 	},
 	"devDependencies": {
+		"autoprefixer": "^10.4.21",
+		"husky": "^8.0.0",
+		"postcss": "^8.5.3",
+		"postcss-cli": "^11.0.1",
 		"serve": "^14.2.1",
 		"tailwindcss": "^4.1.7",
-		"husky": "^8.0.0"
+		"tailwindcss-theme-variants": "^2.0.0-beta.0"
 	},
 	"description": "This is the pre-launch landing page for [genu.im](https://genu.im), a verification and transparency tool that builds consumer trust.",
 	"main": "index.js",

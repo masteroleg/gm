@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#" lang="uk">
-
+<html lang="uk-UA">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="uk-UA">
 <head>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-RBD0C4LE5V"></script>
@@ -18,18 +18,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Перевір продукт - Аптека садівника | Інтернет-магазин</title>
 	<meta name="robots" content="all" />
-	<link rel="canonical" href="https://apteka-sadivnyka.ua/perevir-produkt/" />
-	<link rel="alternate" hreflang="uk" href="https://apteka-sadivnyka.ua/perevir-produkt/" />
-	<link rel="alternate" hreflang="ru" href="https://apteka-sadivnyka.ua/ru/perevir-produkt/" />
-	<meta property="og:locale" content="ua_UA" />
-	<meta property="og:site_name" content="Аптека садівника | Інтернет-магазин" />
-	<meta property="og:title" content="Перевір продукт" />
-	<meta property="og:url" content="https://apteka-sadivnyka.ua/perevir-produkt/" />
-	<meta property="og:description" content="" />
-	<meta property="og:image" content="https://apteka-sadivnyka.ua/content/images/33/antikhrushch-64571147125822.png" />
-	<meta property="og:type" content="article" />
-	<link href="/assets/cache/horoshop_default_body.css?1654520671" type="text/css" rel="stylesheet" />
-	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon" />
+
 	<script src="https://unpkg.com/rxjs@7.8.1/dist/bundles/rxjs.umd.min.js"></script>
 	<script crossorigin="anonymous" src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
 </head>
@@ -100,60 +89,7 @@
                       ">
 										&nbsp;
 									</div>
-									<!-- Заглушка вместо живого чата -->
-									<!-- <script>
-										(function () {
-											// Используем заглушку токена и эмулируем соединение
-											const store = window.WebChat.createStore({}, ({ dispatch }) => next => action => {
-												if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
-													dispatch({
-														type: 'WEB_CHAT/SEND_EVENT',
-														payload: {
-															name: 'webchat/join',
-															value: { language: window.navigator.language }
-														}
-													});
-												}
-												return next(action);
-											});
 
-											const styleOptions = {
-												botAvatarImage: '/upload/medialibrary/388/38855f5864bbe1bbea519bf728ceb5e7.png',
-												botAvatarInitials: '',
-												userAvatarImage: '',
-												userAvatarInitials: 'Ви',
-												hideUploadButton: true
-											};
-
-											// Эмуляция DirectLine
-											const { BehaviorSubject, Subject, of } = rxjs;
-											const directLine = {
-												connectionStatus$: new BehaviorSubject(2), // CONNECTED
-												activity$: new Subject(),
-												postActivity: activity => {
-													// Мокаем ответ бота: через 1с появится сообщение
-													setTimeout(() => {
-														directLine.activity$.next({
-															type: 'message',
-															text: 'Це демо-віджет. Справжня перевірка наразі недоступна.',
-															from: { id: 'bot' },
-															id: Math.random().toString().slice(2)
-														});
-													}, 1000);
-													return of({ id: 'mocked-id' });
-												}
-											};
-
-											window.WebChat.renderWebChat({
-												directLine,
-												styleOptions,
-												store,
-												locale: 'uk-UA'
-											}, document.getElementById('webchat'));
-
-											document.querySelector('#webchat > *')?.focus();
-										})();
-									</script> -->
 									<!-- TODO: ORIGINAL -->
 									<script>
 										(async function () {
