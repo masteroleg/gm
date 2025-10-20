@@ -21,7 +21,7 @@ The primary goal of introducing testing infrastructure and adding unit tests for
 The new test file introduces two unit tests for the mobile menu toggle functionality.
 
 **Code Snippet:**
-\`\`\`javascript
+```javascript
 describe('Menu Toggle', () => {
   beforeEach(() => {
     // Set up the DOM structure before requiring the script
@@ -64,7 +64,7 @@ describe('Menu Toggle', () => {
     expect(mainNav.classList.contains('hidden')).toBe(true);
   });
 });
-\`\`\`
+```
 
 | Aspect | Assessment | Feedback |
 | :--- | :--- | :--- |
