@@ -18,7 +18,7 @@ async function testThemeToggle() {
     
     // Test 1: Load page with cleared storage (light theme)
     console.log('Test 1: Loading page in light mode...');
-    await page.goto('https://genu.im', { waitUntil: 'networkidle0' });
+    await page.goto('http://localhost:3000', { waitUntil: 'networkidle0' });
     
     // Clear storage and reload
     await page.evaluate(() => {

@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('genu.im E2E Tests', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://genu.im/');
+    await page.goto('/');
     await page.waitForLoadState('networkidle');
   });
 

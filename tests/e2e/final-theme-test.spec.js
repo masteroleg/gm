@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test('theme toggle works on production', async ({ page }) => {
   // Clear browser cache
-  await page.goto('https://genu.im/?nocache=' + Date.now());
+  await page.goto('/?nocache=' + Date.now());
   await page.waitForLoadState('networkidle');
   
   console.log('=== Testing Theme on Production ===');

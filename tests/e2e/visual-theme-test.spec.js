@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 test('visual theme toggle test with screenshots', async ({ page }) => {
-  await page.goto('https://genu.im/');
+  await page.goto('/');
   await page.waitForLoadState('networkidle');
   
   console.log('=== Visual Theme Test ===');
@@ -61,7 +61,7 @@ test('visual theme toggle test with screenshots', async ({ page }) => {
 });
 
 test('debug theme toggle click', async ({ page }) => {
-  await page.goto('https://genu.im/');
+  await page.goto('/');
   await page.waitForLoadState('networkidle');
   
   console.log('=== Debug Theme Toggle ===');

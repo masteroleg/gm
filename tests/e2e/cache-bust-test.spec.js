@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test('test theme with cache busting', async ({ page }) => {
   // Go to site with cache busting
-  await page.goto('https://genu.im/?v=' + Date.now());
+  await page.goto('/?v=' + Date.now());
   await page.waitForLoadState('networkidle');
   
   console.log('=== Testing with cache bust ===');
