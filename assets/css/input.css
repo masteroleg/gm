@@ -41,6 +41,7 @@
   --color-accent-gold: #c9a227;
   --color-accent-warm: #d4a574;
   --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-text-secondary: #8a847d;
   color-scheme: light;
 }
 
@@ -78,6 +79,7 @@
   --color-accent-gold: #ffd54f;
   --color-accent-warm: #ffab91;
   --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-text-secondary: #7a7a72;
   color-scheme: dark;
 }
 
