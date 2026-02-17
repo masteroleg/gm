@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - patch/cls-skeleton-production
+  pull_request:
+    branches:
+      - main
+      - patch/cls-skeleton-production
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Tailwind CSS
+        run: npm run build:css
+
+      - name: Start static server
+        run: |
+          nohup npm start > /tmp/server.log 2>&1 &
+          echo $! > /tmp/server.pid
+
+      - name: Wait for server to be ready
+        run: |
+          for i in {1..60}; do
+            if curl -sSf http://localhost:3000/ >/dev/null; then
+              echo "Server started"; exit 0
+            fi
+            sleep 1
+          done
+          echo "Server did not start in time"; exit 1
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium
+
+      - name: Run e2e tests
+        env:
+          BASE_URL: http://localhost:3000
+          CI: true
+        run: |
+          npm run test:e2e
+
+      - name: Stop server
+        if: always()
+        run: |
+          if [ -f /tmp/server.pid ]; then
+            kill -9 $(cat /tmp/server.pid) || true
+          fi
