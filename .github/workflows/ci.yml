@@ -44,11 +44,12 @@ jobs:
           echo "Server did not start in time"; exit 1
 
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install chromium
 
       - name: Run e2e tests
         env:
           BASE_URL: http://localhost:3000
+          CI: true
         run: |
           npm run test:e2e
 
