@@ -2,6 +2,8 @@
 
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: "Inter", sans-serif;
   --font-display: "Sora", sans-serif;
@@ -59,7 +61,7 @@
 /* ============================================
    PREMIUM DARK THEME - "Midnight Sapphire"
    ============================================ */
-.dark {
+:root.dark {
   /* Глубокий сине-фиолетовый градиент (как Linear) */
   --color-bg-body: linear-gradient(165deg, 
     #0f0f1a 0%, 
@@ -295,7 +297,7 @@ body::before {
   filter: drop-shadow(0 4px 20px rgba(13, 138, 79, 0.15));
 }
 
-.dark .qr-glow {
+:root.dark .qr-glow {
   filter: drop-shadow(0 4px 20px rgba(0, 230, 118, 0.2));
 }
 
@@ -330,6 +332,6 @@ body::before {
   box-shadow: 0 12px 32px rgba(13, 138, 79, 0.25);
 }
 
-.dark .cta-button:hover {
+:root.dark .cta-button:hover {
   box-shadow: 0 12px 32px rgba(0, 230, 118, 0.35);
 }
