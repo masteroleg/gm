@@ -32,6 +32,11 @@ function setLang(lang) {
 
 	const label = document.getElementById("langLabel");
 	if (label) label.textContent = lang.toUpperCase();
+
+	const toggle = document.getElementById("langToggle");
+	if (toggle) {
+		toggle.setAttribute("aria-label", `Language: ${lang.toUpperCase()}. Click to switch.`);
+	}
 }
 
 // При загрузке страницы
