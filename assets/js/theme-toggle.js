@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	if (!themeToggle) return;
 
-	function setTheme(isDark) {
+ function setTheme(isDark) {
 		try {
 			const theme = isDark ? 'dark' : 'light';
 			
@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			} else {
 				html.classList.remove('dark');
 			}
+
+			// Persist theme in data-theme attribute for tests and CSS hooks
+			html.setAttribute('data-theme', theme);
 
 			themeToggle.setAttribute('aria-pressed', isDark);
 			themeToggle.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} mode (currently ${theme} mode)`);

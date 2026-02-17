@@ -6,6 +6,7 @@ export default defineConfig({
   use: {
     headless: true,
     baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    viewport: { width: 1280, height: 800 },
   },
   projects: [
     { name: 'Chromium', use: { browserName: 'chromium' } },
