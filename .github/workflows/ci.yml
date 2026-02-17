@@ -44,7 +44,7 @@ jobs:
           echo "Server did not start in time"; exit 1
 
       - name: Install Playwright browsers
-        run: npx playwright install
+        run: npx playwright install --with-deps
 
       - name: Run e2e tests
         env:
