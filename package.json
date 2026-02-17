@@ -3,11 +3,12 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
-		"start": "serve .",
-		"build:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify --content ./**/*.html",
-		"dev": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch",
-		"prepare": "husky install",
-		"test": "jest"
+    "start": "serve .",
+    "build:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify --content ./**/*.html",
+    "dev": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch",
+    "prepare": "husky install",
+    "test": "jest",
+    "test:e2e": "playwright test"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.58.2",
@@ -17,6 +18,7 @@
 		"jest-environment-jsdom": "^30.2.0",
 		"postcss": "^8.5.3",
 		"postcss-cli": "^11.0.1",
+		"puppeteer": "^24.37.3",
 		"serve": "^14.2.1",
 		"tailwindcss": "^4.1.7",
 		"tailwindcss-theme-variants": "^2.0.0-beta.0"

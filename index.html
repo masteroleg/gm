@@ -27,9 +27,12 @@
 	<link rel="icon" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
 	<link rel="icon" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
 
-	<link href="assets/css/output.css?v=9" rel="stylesheet" />
+<link rel="preload" href="assets/css/output.css?v=9" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="assets/css/output.css?v=9"></noscript>
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+<link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
 
-	<script defer src="https://www.googletagmanager.com/gtag/js?id=G-RBD0C4LE5V"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RBD0C4LE5V"></script>
 	<script defer>
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
@@ -42,8 +45,8 @@
 <body class="bg-[var(--color-bg-body)] text-[var(--color-text-body)] font-sans transition-all duration-500">
 	<div class="max-w-6xl mx-auto px-6 py-8 min-h-screen flex flex-col justify-between">
 		<header class="flex justify-between items-center">
-			<img src="assets/img/logo-01_black.svg" alt="Genu.im Logo" width="116" height="40" class="h-10 dark:hidden" />
-			<img src="assets/img/logo-02_white.svg" alt="genu.im logo dark" width="116" height="40" class="h-10 hidden dark:block" />
+            <img src="assets/img/logo-01_black.svg" alt="Genu.im Logo" width="116" height="40" class="h-10 dark:hidden" loading="eager" />
+            <img src="assets/img/logo-02_white.svg" alt="genu.im logo dark" width="116" height="40" class="h-10 hidden dark:block" loading="eager" />
 
 			<div class="flex items-center gap-3">
 				<button id="langToggle" type="button" class="rounded px-2 py-0.5 text-sm font-medium uppercase"
@@ -138,7 +141,7 @@
 			
 			<div class="flex flex-col items-center gap-3">
 				<div class="qr-glow bg-white dark:bg-[#181818] p-4 rounded-2xl shadow-card">
-					<img src="assets/img/QR-pitch.svg" alt="QR Code" width="144" height="144" class="w-36 h-36 dark:invert" fetchpriority="high" />
+                    <img src="assets/img/QR-pitch.svg" alt="QR Code" width="144" height="144" class="w-36 h-36 dark:invert" fetchpriority="high" loading="eager" />
 				</div>
 				<p data-i18n="hero.qr" class="text-xs uppercase tracking-widest text-[var(--color-text-muted)] font-medium">
 					Scan to verify
