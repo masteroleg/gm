@@ -36,8 +36,11 @@ function setLang(lang) {
 
 // При загрузке страницы
 document.addEventListener("DOMContentLoaded", () => {
-	const savedLang = localStorage.getItem("lang") || "uk";
-	setLang(savedLang);
+	// Use saved lang, or current HTML lang, or default to 'en'
+	const savedLang = localStorage.getItem("lang");
+	const currentLang = document.documentElement.lang || "en";
+	const langToSet = savedLang || currentLang;
+	setLang(langToSet);
 
 	const toggle = document.getElementById("langToggle");
 	if (toggle) {

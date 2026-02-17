@@ -36,5 +36,9 @@
 	"homepage": "https://github.com/masteroleg/gm#readme",
 	"dependencies": {
 		"@tailwindcss/cli": "^4.1.7"
+	},
+	"jest": {
+		"testEnvironment": "jsdom",
+		"setupFiles": ["<rootDir>/tests/setup.js"]
 	}
 }
