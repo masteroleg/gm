@@ -78,14 +78,7 @@
 								clip-rule="evenodd" />
 						</svg>
                 </div>
-                <!-- Skeleton overlay to reserve space for hero content while loads -->
-                <div id="heroSkeletonOverlay" aria-hidden="true" style="position:absolute; inset:0; background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 50%, #e5e7eb 100%); background-size: 200% 100%; animation: skeletonPulse 1.6s infinite; z-index:50; opacity:0.95; pointer-events:none;"></div>
-                <style>
-                    @keyframes skeletonPulse {
-                        0% { background-position: -200% 0; }
-                        100% { background-position: 200% 0; }
-                    }
-                </style>
+                (skeleton overlay removed from header)
 				</button>
 			</div>
 
@@ -150,9 +143,17 @@
 							<span class="text-sm font-medium">Transparent</span>
 						</div>
 					</div>
-				</div>
-			</div>
-			
+                </div>
+            </div>
+            
+            <!-- Skeleton overlay to reserve hero area space during load (overlay over hero content only) -->
+            <div id="heroSkeletonOverlay" aria-hidden="true" style="position:absolute; inset:0; background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 50%, #e5e7eb 100%); background-size: 200% 100%; animation: skeletonPulse 1.6s infinite; z-index:50; opacity:0.95; pointer-events:none;"></div>
+            <style>
+                @keyframes skeletonPulse {
+                    0% { background-position: -200% 0; }
+                    100% { background-position: 200% 0; }
+                }
+            </style>
 			<div class="flex flex-col items-center gap-3">
 				<div class="qr-glow bg-white dark:bg-[#181818] p-4 rounded-2xl shadow-card">
                     <img src="assets/img/QR-pitch.svg" alt="QR Code" width="144" height="144" class="w-36 h-36 dark:invert" fetchpriority="high" loading="eager" />
