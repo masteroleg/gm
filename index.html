@@ -79,7 +79,7 @@
 						</svg>
                 </div>
                 <!-- Skeleton overlay to reserve space for hero content while loads -->
-                <div id="heroSkeletonOverlay" aria-hidden="true" style="position:absolute; inset:0; background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 50%, #e5e7eb 100%); background-size: 200% 100%; animation: skeletonPulse 1.6s infinite; z-index:50; opacity:0.95;"></div>
+                <div id="heroSkeletonOverlay" aria-hidden="true" style="position:absolute; inset:0; background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 50%, #e5e7eb 100%); background-size: 200% 100%; animation: skeletonPulse 1.6s infinite; z-index:50; opacity:0.95; pointer-events:none;"></div>
                 <style>
                     @keyframes skeletonPulse {
                         0% { background-position: -200% 0; }
@@ -173,6 +173,13 @@
 	<script src="assets/js/theme-toggle.js" defer></script>
 	<script src="assets/js/lang-toggle.js" defer></script>
 	<script src="assets/js/menu.js" defer></script>
+<script>
+  // Hide hero skeleton once the page has fully loaded to reveal real content
+  window.addEventListener('load', () => {
+    const el = document.getElementById('heroSkeletonOverlay');
+    if (el) { el.style.display = 'none'; }
+  });
+</script>
 </body>
 
 </html>

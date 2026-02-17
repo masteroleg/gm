@@ -3,10 +3,10 @@
 ```yaml
 - generic [ref=e2]:
   - banner [ref=e3]:
-    - img "genu.im logo dark" [ref=e4]
+    - img "Genu.im Logo" [ref=e4]
     - generic [ref=e5]:
       - 'button "Language: EN. Click to switch." [ref=e6]': EN
-      - button "Switch to light mode (currently dark mode)" [pressed] [ref=e7]:
+      - button "Switch to dark mode (currently light mode)" [ref=e7]:
         - generic [ref=e8]:
           - img [ref=e9]
           - img [ref=e11]
@@ -16,7 +16,7 @@
       - heading "Trust built through transparency." [level=1] [ref=e18]
       - paragraph [ref=e19]: Consumer loyalty through enhanced transparency
       - paragraph [ref=e20]: Not fake. Not “maybe”. Just genu.im.
-      - link "Verify Product" [ref=e21] [cursor=pointer]:
+      - link "Verify Product" [ref=e21]:
         - /url: "#verify"
         - img [ref=e22]
         - generic [ref=e24]: Verify Product

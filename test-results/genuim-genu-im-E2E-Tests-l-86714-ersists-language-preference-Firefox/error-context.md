@@ -3,10 +3,10 @@
 ```yaml
 - generic [ref=e2]:
   - banner [ref=e3]:
-    - img "genu.im logo dark" [ref=e4]
+    - img "Genu.im Logo" [ref=e4]
     - generic [ref=e5]:
       - 'button "Language: EN. Click to switch." [ref=e6]': EN
-      - button "Switch to light mode (currently dark mode)" [pressed] [ref=e7]:
+      - button "Switch to dark mode (currently light mode)" [ref=e7]:
         - generic [ref=e8]:
           - img [ref=e9]
           - img [ref=e11]
