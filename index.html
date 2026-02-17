@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
 <script>/* Prevent FOUC: set theme as early as possible */
-	try {
-		const theme = localStorage.getItem('theme');
-		if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-			document.documentElement.classList.add('dark');
-		}
+		try {
+			const theme = localStorage.getItem('theme');
+			if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+				document.documentElement.classList.add('dark');
+			}
 
-		const lang = localStorage.getItem('lang');
-		if (lang && (lang === 'en' || lang === 'uk')) {
-			document.documentElement.lang = lang;
-		}
-	} catch (e) { /* silent fail */ }
-</script>
+			const lang = localStorage.getItem('lang');
+			if (lang && (lang === 'en' || lang === 'uk')) {
+				document.documentElement.lang = lang;
+			}
+		} catch (e) { /* silent fail */ }
+	</script>
 
 <head>
 	<meta charset="UTF-8" />
@@ -22,25 +22,20 @@
 	<title>genu.im — Trust through transparency</title>
 	<meta name="description" content="genu.im - Verify product authenticity through transparency. Build consumer trust with real-time verification and transparent supply chain tracking." />
 
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-RBD0C4LE5V"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
-		gtag('js', new Date());
-		gtag('config', 'G-RBD0C4LE5V');
-	</script>
-
-	<!-- <link rel="alternate" hreflang="uk" href="https://apteka-sadivnyka.ua/perevir-product/" /> -->
 	<link rel="icon" href="assets/favicon/favicon.ico" />
 	<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
 	<link rel="icon" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
 	<link rel="icon" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
 
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sora:wght@700;800&display=swap" rel="stylesheet" />
+	<link href="assets/css/output.css?v=9" rel="stylesheet" />
 
-	<link href="assets/css/output.css?v=8" rel="stylesheet" />
+	<script defer src="https://www.googletagmanager.com/gtag/js?id=G-RBD0C4LE5V"></script>
+	<script defer>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-RBD0C4LE5V');
+	</script>
 
 </head>
 
