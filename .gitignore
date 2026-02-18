@@ -18,3 +18,10 @@ assets/css/output.css
 # Backup files
 __index.html
 *.backup
+
+# Claude Code local state
+.claude/settings.local.json
+.claude/worktrees/
+
+# OpenCode local state
+.opencode/config.json

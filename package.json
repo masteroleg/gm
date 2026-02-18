@@ -6,7 +6,7 @@
     "start": "serve .",
     "build:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify --content ./**/*.html",
     "dev": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch",
-    "prepare": "husky install",
+    "prepare": "husky",
     "test": "jest",
     "test:e2e": "playwright test --config=playwright.config.ts"
 	},
