@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx @kayvan/markdown-tree-parser:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh secret:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh api:*)",
+      "Bash(powershell -Command \"Remove-Item ''.github/workflows/deploy.yml'' -ErrorAction SilentlyContinue; Remove-Item ''_headers'' -ErrorAction SilentlyContinue; Write-Host ''done''\")",
+      "Bash(powershell -Command:*)",
+      "Bash(BASE_URL=http://localhost:3000 npx playwright test:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}

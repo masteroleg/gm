@@ -1,0 +1,30 @@
+# Party Mode Workflow
+
+## Table of Contents
+
+- [Party Mode Workflow](#table-of-contents)
+  - [name: party-mode
+description: Orchestrates group discussions between all installed BMAD agents, enabling natural multi-agent conversations](#name-party-mode-description-orchestrates-group-discussions-between-all-installed-bmad-agents-enabling-natural-multi-agent-conversations)
+  - [WORKFLOW ARCHITECTURE](./workflow-architecture.md)
+  - [INITIALIZATION](./initialization.md)
+    - [Configuration Loading](./initialization.md#configuration-loading)
+    - [Paths](./initialization.md#paths)
+  - [AGENT MANIFEST PROCESSING](./agent-manifest-processing.md)
+    - [Agent Data Extraction](./agent-manifest-processing.md#agent-data-extraction)
+    - [Agent Roster Building](./agent-manifest-processing.md#agent-roster-building)
+  - [EXECUTION](./execution.md)
+    - [Party Mode Activation](./execution.md#party-mode-activation)
+    - [Agent Selection Intelligence](./execution.md#agent-selection-intelligence)
+    - [Conversation Orchestration](./execution.md#conversation-orchestration)
+  - [WORKFLOW STATES](./workflow-states.md)
+    - [Frontmatter Tracking](./workflow-states.md#frontmatter-tracking)
+  - [ROLE-PLAYING GUIDELINES](./role-playing-guidelines.md)
+    - [Character Consistency](./role-playing-guidelines.md#character-consistency)
+    - [Conversation Flow](./role-playing-guidelines.md#conversation-flow)
+  - [QUESTION HANDLING PROTOCOL](./question-handling-protocol.md)
+    - [Direct Questions to User](./question-handling-protocol.md#direct-questions-to-user)
+    - [Inter-Agent Questions](./question-handling-protocol.md#inter-agent-questions)
+  - [EXIT CONDITIONS](./exit-conditions.md)
+    - [Automatic Triggers](./exit-conditions.md#automatic-triggers)
+    - [Graceful Conclusion](./exit-conditions.md#graceful-conclusion)
+  - [MODERATION NOTES](./moderation-notes.md)
