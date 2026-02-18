@@ -75,6 +75,18 @@ test.describe('genu.im E2E Tests', () => {
     await expect(page.locator('footer')).toBeVisible();
   });
 
+  test('CSS is loaded and applied', async ({ page }) => {
+    // CSS custom property only exists if output.css loaded
+    const bgColor = await page.evaluate(() =>
+      getComputedStyle(document.documentElement).getPropertyValue('--color-bg-body').trim()
+    );
+    expect(bgColor).toBeTruthy();
+
+    // dark:hidden only works if Tailwind CSS loaded — light logo visible, dark logo hidden
+    await expect(page.locator('img[alt="Genu.im Logo"]')).toBeVisible();
+    await expect(page.locator('img[alt="genu.im logo dark"]')).toBeHidden();
+  });
+
   test('localStorage persists theme preference', async ({ page }) => {
     const themeToggle = page.locator('#themeToggle');
     const html = page.locator('html');
