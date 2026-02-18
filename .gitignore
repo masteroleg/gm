@@ -12,9 +12,6 @@ gm.tree
 # 🙈 System
 Thumbs.db
 
-# Generated CSS
-assets/css/output.css
-
 # Backup files
 __index.html
 *.backup
