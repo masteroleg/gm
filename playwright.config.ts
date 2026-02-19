@@ -13,7 +13,7 @@ export default defineConfig({
     : 'list',
   use: {
     headless: true,
-    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    baseURL: process.env.BASE_URL || 'https://genu.im',
     viewport: { width: 1280, height: 800 },
     actionTimeout: 10_000,
     navigationTimeout: 30_000,
