@@ -4,7 +4,35 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Static landing page for [genu.im](https://genu.im) — a verification and transparency tool. Pure HTML/CSS/JS, no framework, no backend.
+Website for [genu.im](https://genu.im) — a product authenticity verification and transparency platform. Two client sources: (1) regulatory-driven (eAkciz mandate via xtrace.gov.ua) and (2) voluntary brand protection. Pure HTML/CSS/JS, no framework. Backend: existing TraceAvit Azure API (closed by auth).
+
+### Product vision (from PRD work, 2026-02-19)
+
+Three epics, one platform:
+
+| Epic | Scope | URL | Stack |
+|------|-------|-----|-------|
+| **1. Landing** | Main page — unified trust narrative for all audiences | `genu.im/` | Static HTML+Tailwind |
+| **2. Verification** | Product passports by vertical + future API verification | `genu.im/v/{code}` | Static HTML+JS+JSON |
+| **3. B2B Portal** | Client dashboard, codes, production, 10+ screens | `genu.im/portal/` | SPA, MSAL.js Azure AD |
+
+**Key decisions:**
+- `/v/genuim` — predefined code: platform showcase (the "product" = genu.im itself)
+- `/v/genuim-alco`, `/v/genuim-tobacco` etc. — vertical-specific passports (same template, different theme+content via JSON + CSS vars)
+- Real code verification (`/v/XXXXXX`) — Phase 2 when API opens for consumer access
+- `SUSPICIOUS_CHECK_THRESHOLD = 5` — configurable constant for nbChecks warning
+- Actions: P=Надруковано, V=Перевірено системою, C=Перевірено покупцем, W=Списано
+- Ukrainian first, English second
+- Visual language: "Quiet Strength" — Diia-principle (works instantly, respects user's time), champagne+green, zero drama
+- Epics 1+2: GitHub Pages. Epic 3: migrate to Azure Static Web Apps
+- Epic 3 framework choice deferred to Architecture Doc
+
+**Three audiences, three emotional triggers:**
+- CEO/Owner → Fear (fines, counterfeits)
+- Marketing → Opportunity (scan analytics, ROI)
+- Consumer → Safety ("is it real? is it safe?")
+
+**Competitor insight:** Sytecs (sytecs.com.ua) + xtrace.com.ua — no consumer-facing verification. Their xtrace.com.ua mimics gov site. genu.im positions through transparency, not mimicry.
 
 ## Commands
 
@@ -54,6 +82,10 @@ npx playwright test -g "theme toggle"
 **i18n:** `lang-toggle.js` holds an embedded translation object for EN/UK. Elements with `data-i18n` attributes get their text replaced on language switch. Language and theme selections are persisted in `localStorage`.
 
 **CSS build:** Tailwind CSS v4 via `@tailwindcss/cli`. Source is `assets/css/input.css`; output is `assets/css/output.css`. The stylesheet is linked as a blocking `<link>` (not preloaded) to prevent CLS.
+
+**CRITICAL — `assets/css/output.css` must stay committed in git.** GitHub Pages deploys static files directly from the repo with no build step. Removing this file from git tracking (e.g. `git rm --cached`) will break the live site — all styling disappears. The file must not be added to `.gitignore`. The E2E test `CSS is loaded and applied` detects this regression via a CSS custom property check.
+
+**Husky hooks:** Both `.husky/pre-commit` and `.husky/pre-push` run `npm run build:css`, keeping `output.css` in sync. Use `--no-verify` only as a last resort.
 
 **Mobile menu:** Nav menu has `hidden` class by default. `menu.js` removes/adds it on burger/close button clicks.
 
