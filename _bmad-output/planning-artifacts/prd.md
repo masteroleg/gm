@@ -1,5 +1,5 @@
 ---
-stepsCompleted: [step-01-init, step-02-discovery, step-02b-vision, step-02c-executive-summary, step-03-success]
+stepsCompleted: [step-01-init, step-02-discovery, step-02b-vision, step-02c-executive-summary, step-03-success, step-04-journeys]
 inputDocuments:
   - "_bmad-output/planning-artifacts/product-brief-gm-2026-02-18.md"
 briefCount: 1
@@ -181,4 +181,284 @@ classification:
   - URL-структура `genu.im/portal/*`
 - Реальна верифікація з даними виробництва (родословна продукту: завод, лінія, дата, партія, timeline дій)
 - Consumer data loop: сканування → аналітика для бренду → ROI
+
+## User Journeys (MVP0)
+
+### MVP0 Scope Definition
+
+**MVP0 = Design Milestone (Landing only)**
+
+| Feature | Status |
+|---------|--------|
+| Landing page (all sections) | ✅ Visual + content |
+| Hero CTA | ⚠️ Placeholder (non-functional) |
+| Form "Перевірте бренд" | ⚠️ Placeholder (non-functional) |
+| `/v/` verification pages | ❌ Post MVP0 |
+| Demo verification | ❌ Post MVP0 |
+
+**Success Criteria:** Design approved by stakeholder, NOT user conversion.
+
+---
+
+### Flow 1: Design Review Flow (P1)
+
+**Owner:** GenuIm  
+**Trigger:** Deploy completed  
+**Duration:** 15-30 min
+
+```
+Step 1: Open landing on desktop
+        → Load time < 2 sec ✓
+        → Hero visible without scroll ✓
+
+Step 2: Check Hero section
+        → Headline "Ви впевнені?" ✓
+        → CTA button visible ✓
+        → Dark mode toggle works ✓
+
+Step 3: Scroll through sections
+        → Як це працює: 3 steps ✓
+        → Три треки: 3 cards ✓
+        → Сигнали: 3-4 rows ✓
+        → Розслідування: 2 cards ✓
+        → Контакти: phone + Telegram ✓
+
+Step 4: Toggle dark mode
+        → All sections readable ✓
+        → Contrast WCAG AA ✓
+
+Step 5: Toggle language (UK/EN)
+        → Text switches ✓
+        → Layout not broken ✓
+
+Step 6: Test responsive
+        → Mobile (375px): Hero visible ✓
+        → Tablet (768px): Layout adapts ✓
+        → Desktop (1024px+): Full layout ✓
+
+Step 7: Footer check
+        → Phone clickable (tel:) ✓
+        → Telegram link works ✓
+
+DECISION: [Approve] [Request changes: ___]
+```
+
+---
+
+### Flow 2: Content Review Flow (P1)
+
+**Owner:** GenuIm  
+**Trigger:** Design review approved  
+**Duration:** 30-60 min
+
+```
+Section-by-section content validation:
+
+Hero:
+□ Заголовок: "Ви впевнені?"
+□ Підзаголовок: matches UX doc
+□ CTA: "Подивитись як це працює" (placeholder)
+
+Як це працює:
+□ Step 1: "Виробник маркує" + icon
+□ Step 2: "Покупець сканує" + icon
+□ Step 3: "Отримує підтвердження" + icon
+
+Три треки:
+□ Card 1: Захист бренду + copy
+□ Card 2: Аналітика + copy
+□ Card 3: Довіра споживача + copy
+
+Сигнали:
+□ 3-4 placeholder rows
+□ Format consistent
+
+Розслідування:
+□ Card 1: placeholder title + summary
+□ Card 2: placeholder title + summary
+
+Форма (placeholder):
+□ Visual structure present
+□ Fields: назва, телефон, вертикаль
+
+Контакти:
+□ Phone number
+□ Telegram link
+
+DECISION: [Approve] [Request changes: ___]
+```
+
+---
+
+### Flow 3: Developer Handoff Flow (P2)
+
+**Owner:** Sally → Amelia  
+**Trigger:** Content approved  
+**Duration:** Dev kickoff
+
+```
+Deliverables for Amelia:
+
+□ index.html
+  - Semantic HTML5 structure
+  - data-i18n attributes on all text
+  - Tailwind classes applied
+
+□ tailwind.config.js
+  - Custom colors (champagne, green)
+  - Dark mode: class strategy
+  - Responsive breakpoints
+
+□ assets/
+  - img/: all images optimized
+  - favicon/: all sizes
+  - css/input.css: Tailwind source
+
+□ i18n/
+  - uk.json: Ukrainian strings
+  - en.json: English strings
+
+□ JS modules (minimal):
+  - theme-toggle.js
+  - lang-toggle.js
+
+Acceptance Criteria:
+□ `npm run dev` starts local server
+□ `npm run build` produces minified CSS
+□ All sections render correctly
+□ Dark mode persists in localStorage
+□ Language persists in localStorage
+
+HANDOFF: [Complete] [Missing items: ___]
+```
+
+---
+
+### Flow 4: QA Validation Flow (P2)
+
+**Owner:** Quinn + Murat (TEA)  
+**Trigger:** Build ready  
+**Duration:** Automated (CI/CD)
+
+```
+AUTOMATED GATES (Playwright + Lighthouse CI):
+
+□ Lighthouse Performance: ≥95
+□ Lighthouse Accessibility: ≥90
+□ Lighthouse Best Practices: ≥95
+□ Lighthouse SEO: ≥90
+
+□ Playwright E2E:
+  □ landing-hero-visible.spec.ts
+    - Hero + CTA visible on 375×667
+    - Hero + CTA visible on 768×1024
+    - Hero + CTA visible on 1920×1080
+
+  □ landing-dark-mode.spec.ts
+    - Toggle switches theme
+    - Theme persists on refresh
+    - All text readable in dark mode
+
+  □ landing-i18n.spec.ts
+    - UK language default
+    - EN toggle switches text
+    - Language persists on refresh
+    - No layout breaks on language switch
+
+  □ landing-links.spec.ts
+    - Phone link triggers tel:
+    - Telegram link opens correct URL
+
+  □ landing-responsive.spec.ts
+    - 375px: mobile layout
+    - 768px: tablet layout
+    - 1024px+: desktop layout
+
+□ Visual Regression (Playwright):
+  □ hero-light.snap.png
+  □ hero-dark.snap.png
+  □ sections-light.snap.png
+  □ sections-dark.snap.png
+  □ mobile-viewport.snap.png
+
+□ Accessibility (axe-core):
+  □ No critical violations
+  □ No serious violations
+  □ Keyboard navigation complete
+  □ ARIA labels present
+
+CI/CD GATE:
+┌─────────────────────────────────────┐
+│  All tests pass → Deploy allowed    │
+│  Any test fail → Block deploy       │
+└─────────────────────────────────────┘
+
+MANUAL CHECKS (only if automated unclear):
+
+□ Content accuracy (matches UX doc)
+□ Visual design fidelity (colors, spacing)
+□ Copy review (typos, tone)
+
+VALIDATION: 
+[✅ All automated gates pass] 
+[❌ Failures: ___ → Fix → Re-run]
+```
+
+---
+
+### Flow 5: Stakeholder Preview Flow (P3)
+
+**Owner:** GenuIm  
+**Trigger:** QA validated  
+**Duration:** Variable
+
+```
+External stakeholder review (if applicable):
+
+Step 1: Share preview URL
+        → GitHub Pages deploy link
+        → Password protection (optional)
+
+Step 2: Stakeholder reviews
+        → Device: [desktop/tablet/mobile]
+        → Browser: [Chrome/Safari/Firefox]
+        → Language: [UK/EN]
+
+Step 3: Collect feedback
+        → What works
+        → What needs change
+        → Priority of changes
+
+Step 4: Decision
+        → [Approve] → Ready for public
+        → [Changes needed] → Iterate
+        → [Block] → Major revision
+
+STAKEHOLDER SIGN-OFF: [Approved by: ___] [Date: ___]
+```
+
+---
+
+### Journey Requirements Summary
+
+| Flow | Primary Check | Pass Criteria |
+|------|---------------|---------------|
+| Design Review | Visual alignment with UX doc | All sections present, responsive, themes work |
+| Content Review | Text accuracy | Matches PRD + UX doc |
+| Developer Handoff | Deliverables complete | Amelia has all specs |
+| QA Validation | Quality gates | Lighthouse ≥95, all automated tests pass |
+| Stakeholder Preview | External approval | Sign-off received |
+
+---
+
+### Post-MVP0 Journeys (Future)
+
+**MVP1 will add:**
+- Consumer verification journeys (scan QR → verdict)
+- Sales demo journeys (QR on business card)
+- Form submission journey (working form)
+
+**MVP2 will add:**
+- B2B portal journeys (CTO, Line Operator)
+- Dashboard management journeys
 

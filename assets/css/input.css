@@ -2,6 +2,14 @@
 
 @import "tailwindcss";
 
+/* Content sources - only HTML files */
+@source "../**/*.html";
+@source not "../_rag-output";
+@source not "../.claude-sessions";
+@source not "../_bmad-output";
+@source not "../_bmad";
+@source not "../_archive";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
