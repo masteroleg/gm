@@ -25,6 +25,7 @@ __index.html
 
 # BMAD / RAG memory (not for Tailwind scanning)
 _rag-output/
+_rag-storage/
 .claude-sessions/
 _bmad-output/
 _bmad/
