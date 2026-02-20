@@ -282,15 +282,6 @@ function processSessions() {
 		fs.mkdirSync(outputPath, { recursive: true });
 	}
 	
-	// Create topic subdirectories (including 'general')
-	const allTopics = [...Object.keys(topicPatterns), 'general'];
-	for (const topic of allTopics) {
-		const topicDir = path.join(outputPath, topic);
-		if (!fs.existsSync(topicDir)) {
-			fs.mkdirSync(topicDir, { recursive: true });
-		}
-	}
-	
 	// Get all JSONL files
 	const files = fs.readdirSync(sourcePath)
 		.filter(f => f.endsWith('.jsonl'));
@@ -327,37 +318,10 @@ function processSessions() {
 			
 			const markdown = generateMarkdown(sessionId, messages, topics, file);
 			
-			// Determine output path
-			const primaryTopic = topics[0] || 'general';
-			const outputFileName = `${sessionId.substring(0, 8)}-${primaryTopic}.md`;
-			
-			// If multi-topic, put in root with cross-references
-			if (topics.length > 1) {
-				const outputPathFile = path.join(outputPath, outputFileName);
-				fs.writeFileSync(outputPathFile, markdown);
-				
-				// Create symlinks/references in topic folders
-				for (const topic of topics) {
-					const refPath = path.join(outputPath, topic, outputFileName);
-					const relativeRef = path.relative(path.join(outputPath, topic), outputPathFile);
-					
-					// Create a reference file instead of symlink (cross-platform)
-					const refContent = `---
-session_id: ${sessionId}
-reference: true
-topics: [${topics.map(t => `"${t}"`).join(', ')}]
----
-
-> This session is also relevant to **${topic}**.
-> 
-> Full content: [../${outputFileName}](${relativeRef})
-`;
-					fs.writeFileSync(refPath, refContent);
-				}
-			} else {
-				const outputPathFile = path.join(outputPath, primaryTopic, outputFileName);
-				fs.writeFileSync(outputPathFile, markdown);
-			}
+			// Output to root only - no subdirectories
+			const outputFileName = `${sessionId}.md`;
+			const outputPathFile = path.join(outputPath, outputFileName);
+			fs.writeFileSync(outputPathFile, markdown);
 			
 			// Update stats
 			stats.processed++;
@@ -365,10 +329,10 @@ topics: [${topics.map(t => `"${t}"`).join(', ')}]
 				stats.byTopic[topic] = (stats.byTopic[topic] || 0) + 1;
 			}
 			
-			console.log(`  ✓ ${messages.length} messages → ${topics.join(', ')}`);
+			console.log(`  [OK] ${messages.length} messages -> ${topics.join(', ')}`);
 			
 		} catch (err) {
-			console.error(`  ✗ Error: ${err.message}`);
+			console.error(`  [ERR] Error: ${err.message}`);
 		}
 	}
 	
