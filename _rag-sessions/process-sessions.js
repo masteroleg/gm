@@ -146,32 +146,36 @@ function extractMessages(lines) {
 }
 
 /**
- * Extract text content from message
+ * Extract text content from message - only actual conversation, skip tools
  */
 function extractContent(content) {
+	// If content is array, process each part
+	if (Array.isArray(content)) {
+		const parts = [];
+		
+		for (const part of content) {
+			// Only include actual text responses (not tool calls/results)
+			if (part.type === 'text' && part.text && part.text.length > 20) {
+				// Skip command wrappers
+				let text = part.text
+					.replace(/<command-message>.*?<\/command-message>/gs, '')
+					.replace(/<command-name>.*?<\/command-name>/gs, '')
+					.trim();
+				if (text) parts.push(text);
+			}
+			// Skip tool_use and tool_result - they are metadata, not conversation
+		}
+		
+		return parts.join('\n\n');
+	}
+	
+	// If content is string
 	if (typeof content === 'string') {
-		// Clean up command markers
 		return content
 			.replace(/<command-message>.*?<\/command-message>/gs, '')
 			.replace(/<command-name>.*?<\/command-name>/gs, '')
 			.replace(/<local-command-.*?>/gs, '')
 			.replace(/<agent-activation.*?<\/agent-activation>/gs, '')
-			.trim();
-	}
-	
-	if (Array.isArray(content)) {
-		return content
-			.map(c => {
-				if (c.type === 'text') return c.text;
-				if (c.type === 'tool_result') return `[Tool Result: ${c.content?.substring(0, 200)}...]`;
-				if (c.type === 'tool_use') return `[Tool: ${c.name}]`;
-				return '';
-			})
-			.filter(Boolean)
-			.join('\n')
-			.replace(/<command-message>.*?<\/command-message>/gs, '')
-			.replace(/<command-name>.*?<\/command-name>/gs, '')
-			.replace(/You must fully embody this agent's persona.*?<\/agent-activation>/gs, '')
 			.trim();
 	}
 	
@@ -199,9 +203,6 @@ function formatTime(isoString) {
  */
 function generateMarkdown(sessionId, messages, topics, sourceFile) {
 	const date = messages[0]?.timestamp ? formatDate(messages[0].timestamp) : 'Unknown';
-	const title = topics.length > 0 
-		? `${topics.map(t => topicPatterns[t]?.description || t).join(' + ')}`
-		: 'General Session';
 	
 	let md = `---
 session_id: ${sessionId}
@@ -212,11 +213,10 @@ message_count: ${messages.length}
 language: ru
 ---
 
-# ${title}
+# Session ${sessionId.substring(0, 8)}
 
-**Session:** \`${sessionId.substring(0, 8)}...\`  
 **Date:** ${date}  
-**Topics:** ${topics.join(', ') || 'General'}
+**Messages:** ${messages.length}
 
 ---
 
