@@ -1,0 +1,126 @@
+# COMPREHENSIVE UX DESIGN DOCUMENT - EXTRACTION SUMMARY
+
+## Location of Complete Discussions
+Found in 3 main Claude CLI session JSONL files:
+1. d0cd1940-c774-432a-9f3f-d27724b57e60.jsonl (1244 lines, CREATIVE/PARTY MODE - largest)
+2. c35eadbf-3b34-4ab1-b9c8-8bf7341a04b6.jsonl (406 lines, PRD/PLANNING)
+3. 23dabb41-704e-4689-abcc-d2d41e432f90.jsonl (104 lines, additional context)
+
+## KEY DESIGN DECISIONS EXTRACTED
+
+### 1. THREE EMOTIONAL APPROACHES (Party Mode Session)
+- **Concept A "The Proof"** (Documentary): White, monospaced, institutional trust
+- **Concept B "The Moment"** (Cinematic): Dark, dramatic reveal animation, spring easing
+- **Concept C "The Signal"** (Tech): Animated radar pulses, two only then stop
+- **Decision**: Use A for landing (trust), B for verification badge (emotion), C for loading
+
+### 2. "ТИХА СИЛА" (QUIET STRENGTH) PRINCIPLE  
+- Function = Trust. Not wow-design, but works-like-it-should
+- Riff with Diya.gov.ua aesthetic (not copy)
+- < 1 sec load time, no unnecessary animations
+- Offline-first thinking (Ukraine 2026 blackouts)
+
+### 3. THREE-TIER PLATFORM ARCHITECTURE
+Epic 1: Landing Page (genu.im/) - vitrine, B2B pitch, SEO
+Epic 2: Verification Pages (genu.im/v/{code}) - THE PRODUCT, most visited, proof-of-concept
+Epic 3: B2B Portal (genu.im/portal/) - client dashboard, retention
+
+### 4. SINGLE FLOW, THREE RESONANCES
+Not "B2B section / B2C section" but ONE narrative hitting three emotional triggers:
+- CEO: fear (compliance, counterfeits)
+- Marketing: opportunity (data, analytics, geography)
+- Consumer: safety (authentic/not decision)
+
+### 5. VERIFICATION PAGE: "CASE FILE → VERDICT"
+- Micro-story: Investigation methodology
+- Four states: AUTHENTIC (#0d8a4f green), SUSPICIOUS (#b45309 amber), NOT FOUND (#b91c1c red), OFFLINE (#475569 slate)
+- Scan history as core differentiator (anti-fraud + analytics seed)
+- Spring easing badge animation (630ms) = physical stamp feel
+
+### 6. VERTICAL-SPECIFIC PASSPORTS (/v/ routes)
+One template, JSON data + CSS modifiers:
+- genu.im/v/genuim (platform)
+- genu.im/v/genuim-alco (alcohol: warm, celebratory)
+- genu.im/v/genuim-tobacco (tobacco: strict, compliance)
+- genu.im/v/genuim-food (food: fresh, natural)
+Each has different emotion/micro-story, same brand DNA (champagne + green)
+
+### 7. COLOR SYSTEM
+Light: Champagne (#f5f2ed) + Green (#0d8a4f) + White
+Dark: Slate + Muted green
+Four-state palette for results: authentic (green), suspicious (amber), not found (red), offline (slate)
+
+### 8. TYPOGRAPHY
+Inter (body) + IBM Plex Mono (codes/timestamps) + System fonts fallback
+No serif except case ID numbers (legal weight)
+Mobile-first scale: 32px display → 16px body → 12px caption
+
+### 9. ANIMATION SPEC
+Badge reveal: 200ms darken + 280ms spring scale + ring expand + 150ms lighten = 630ms total
+Loading: Two radar pulses (300ms gap), then STOP (no third = loss of trust)
+Mobile menu: 200ms slide-in only
+No continuous animations (tired after 2-3 seconds)
+
+### 10. CRITICAL HERO COPY (from Sophia, Storyteller)
+Q: "Ви впевнені?" (Are you sure?) 
+A: "Ми — так." (We are.)
+Opens with doubt (three audiences feel it), answers with confidence
+
+### 11. ACCESSIBILITY REQUIREMENTS
+WCAG 2.1 AA minimum (4.5:1 contrast)
+Keyboard nav: tabindex, aria-label on icons
+Screen reader: alt text, role="article" on results
+Mobile: 48px touch targets, 16px form inputs
+
+### 12. PERFORMANCE TARGETS
+Lighthouse ≥ 95
+LCP < 2.5s
+CLS < 0.1
+Service worker cache for landing + template
+No javascript frameworks (vanilla JS only for Epic 1+2)
+
+### 13. PRE-MORTEM RISKS (6 identified)
+1. API onboarding too complex → CSV + Pro upgrade path
+2. SUSPICIOUS state blocks sales → configurable threshold + education
+3. Low consumer engagement → brand push responsibility, viral sharing og:image
+4. Minimalism feels cheap → spring easing badge = impact without drama
+5. Offline untested → E2E tests with Playwright offline simulation
+6. Portal 10+ screens in vanilla JS → Petite-Vue for Epic 3
+
+### 14. MULTILINGUAL STRATEGY
+EN + UK support
+data-i18n attributes + JS translation object
+Locale-specific tone: English professional, Ukrainian warm+direct
+
+### 15. BUSINESS SUCCESS CRITERIA
+5K+ monthly visitors, 15%+ demo click-through
+≥ 10 B2B leads/month
+25M+ codes/year verification volume
+NPS ≥ 7/10 trust score
+
+## DECISION REASONING DOCUMENTED
+
+Each major decision includes:
+- Who proposed it (character name + role)
+- Why it matters (business + UX impact)
+- What was rejected and why (alternatives considered)
+- How it connects to other decisions (dependencies)
+- Metrics for success
+
+## CONVERSATIONS FULLY PRESERVED
+
+The complete session discussions are available in:
+- d0cd1940-c774-432a-9f3f-d27724b57e60.jsonl (Creative session - most comprehensive)
+- c35eadbf-3b34-4ab1-b9c8-8bf7341a04b6.jsonl (PRD planning - strategic context)
+
+These can be extracted into full narrative document with all agent perspectives intact.
+
+## NEXT STEPS FOR IMPLEMENTATION
+
+1. Use this summary to brief design team
+2. Extract full conversations from JSONL for complete reasoning doc
+3. Create detailed component library based on specifications
+4. Begin HTML/CSS implementation per Epic 1 scope
+5. Set up E2E tests per performance/accessibility criteria
+6. Schedule user testing with personas (CEO, marketer, consumer)
+

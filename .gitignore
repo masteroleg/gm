@@ -22,4 +22,10 @@ __index.html
 
 # OpenCode local state
 .opencode/config.json
-.claude-sessions.zip
+
+# BMAD / RAG memory (not for Tailwind scanning)
+_rag-storage/
+.claude-sessions/
+_bmad-output/
+_bmad/
+_archive/
