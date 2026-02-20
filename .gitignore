@@ -24,7 +24,6 @@ __index.html
 .opencode/config.json
 
 # BMAD / RAG memory (not for Tailwind scanning)
-_rag-output/
 _rag-storage/
 .claude-sessions/
 _bmad-output/

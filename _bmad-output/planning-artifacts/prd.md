@@ -1,5 +1,5 @@
 ---
-stepsCompleted: [step-01-init, step-02-discovery, step-02b-vision, step-02c-executive-summary, step-03-success, step-04-journeys, step-05-domain-skipped, step-06-innovation-skipped]
+stepsCompleted: [step-01-init, step-02-discovery, step-02b-vision, step-02c-executive-summary, step-03-success, step-04-journeys, step-05-domain-skipped, step-06-innovation-skipped, step-07-project-type]
 inputDocuments:
   - "_bmad-output/planning-artifacts/product-brief-gm-2026-02-18.md"
 briefCount: 1
@@ -461,4 +461,106 @@ STAKEHOLDER SIGN-OFF: [Approved by: ___] [Date: ___]
 **MVP2 will add:**
 - B2B portal journeys (CTO, Line Operator)
 - Dashboard management journeys
+
+---
+
+## Web Application Specific Requirements
+
+### Browser Matrix
+
+| Browser | Minimum Version | Notes |
+|---------|-----------------|-------|
+| Chrome | Last 2 versions | Primary desktop browser |
+| Safari | Last 2 versions (iOS 15+) | Primary mobile browser |
+| Firefox | Last 2 versions | Secondary desktop |
+| Edge | Last 2 versions | Enterprise users |
+| IE11 | ❌ Not supported | Tailwind CSS v4 incompatible |
+
+**Rationale:** Modern browser features (CSS custom properties, ES6+) required for Tailwind CSS v4 and dark mode functionality.
+
+---
+
+### Responsive Design
+
+**Breakpoints:**
+
+| Breakpoint | Width | Target |
+|------------|-------|--------|
+| `sm` | 375px | Mobile (iPhone SE baseline) |
+| `md` | 768px | Tablet |
+| `lg` | 1024px | Desktop |
+| `xl` | 1280px | Large desktop |
+
+**Requirements:**
+- Mobile-first approach (base styles for 375px)
+- Hero + CTA visible without scroll on 375×667 (iPhone SE)
+- All text readable without zoom on mobile
+- Touch targets ≥44px on mobile
+- No horizontal overflow on any breakpoint
+
+---
+
+### Performance Targets
+
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+| Lighthouse Performance | ≥95 | CI/CD gate |
+| Lighthouse Accessibility | ≥90 | CI/CD gate |
+| Lighthouse Best Practices | ≥95 | CI/CD gate |
+| Lighthouse SEO | ≥90 | CI/CD gate |
+| LCP (Largest Contentful Paint) | <2.5s | Field + Lab |
+| FID (First Input Delay) | <100ms | Field |
+| CLS (Cumulative Layout Shift) | <0.1 | Field + Lab |
+| Page Load | <1s | Static HTML |
+
+---
+
+### SEO Strategy
+
+**On-Page SEO:**
+
+| Element | Implementation |
+|---------|----------------|
+| Title tag | Unique per page, UK/EN variants |
+| Meta description | 150-160 chars, compelling |
+| H1-H6 hierarchy | Single H1, logical structure |
+| Alt text | All images |
+| Canonical URLs | Self-referencing |
+
+**Technical SEO:**
+
+| Element | Implementation |
+|---------|----------------|
+| robots.txt | Allow all, sitemap reference |
+| sitemap.xml | Generated at build |
+| JSON-LD | Organization schema |
+| Open Graph | Title, description, image |
+| Twitter Cards | Summary large image |
+
+**International SEO:**
+
+| Element | Implementation |
+|---------|----------------|
+| hreflang tags | UK/EN variants |
+| lang attribute | html lang="uk" / "en" |
+
+---
+
+### Accessibility Level
+
+**Target:** WCAG 2.1 AA
+
+| Requirement | Implementation |
+|-------------|----------------|
+| Color contrast | ≥4.5:1 for text, ≥3:1 for large text |
+| Keyboard navigation | All interactive elements focusable |
+| Focus indicators | Visible focus rings |
+| Screen reader | ARIA labels, semantic HTML |
+| Skip links | Skip to main content |
+| Reduced motion | Respect prefers-reduced-motion |
+
+**Testing:**
+- axe-core automated tests (CI/CD)
+- Keyboard navigation manual test
+- Screen reader test (VoiceOver/NVDA)
 
