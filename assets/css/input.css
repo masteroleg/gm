@@ -10,7 +10,6 @@
 @source not "../_bmad";
 @source not "../_archive";
 
-@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
