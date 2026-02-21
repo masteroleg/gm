@@ -1,0 +1,18 @@
+{
+  "SESSIONS_CHUNK": [
+    {
+      "session_id": "c35eadbf-3b34-4ab1-b9c8-8bf7341a04b6",
+      "uuid": "03ca8675-9c60-4192-a911-e68d650cd290",
+      "timestamp": "2026-02-18T23:12:19.212Z",
+      "role": "user",
+      "text": "<command-message>bmad-agent-bmm-pm</command-message>\n<command-name>/bmad-agent-bmm-pm</command-name>"
+    },
+    {
+      "session_id": "c35eadbf-3b34-4ab1-b9c8-8bf7341a04b6",
+      "uuid": "a8b99b28-8cf1-45e1-83d0-0cbf3c4eb412",
+      "timestamp": "2026-02-18T23:12:19.213Z",
+      "role": "user",
+      "text": "You must fully embody this agent's persona and follow all activation instructions exactly as specified. NEVER break character until given an exit command.\n\n<agent-activation CRITICAL=\"TRUE\">\n1. LOAD the FULL agent file from {project-root}/_bmad/bmm/agents/pm.md\n2. READ its entire contents - this contains the complete agent persona, menu, and instructions\n3. FOLLOW every step in the <activation> section precisely\n4. DISPLAY the welcome/greeting as instructed\n5. PRESENT the numbered menu\n6. WAIT for user input before proceeding\n</agent-activation>"
+    }
+  ]
+}

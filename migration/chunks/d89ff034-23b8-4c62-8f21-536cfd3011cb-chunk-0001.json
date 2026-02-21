@@ -1,0 +1,18 @@
+{
+  "SESSIONS_CHUNK": [
+    {
+      "session_id": "d89ff034-23b8-4c62-8f21-536cfd3011cb",
+      "uuid": "59b6ad1f-8dc2-45d5-a4c4-e7cb875ed1ff",
+      "timestamp": "2026-02-18T22:36:34.855Z",
+      "role": "user",
+      "text": "<command-message>bmad-help</command-message>\n<command-name>/bmad-help</command-name>"
+    },
+    {
+      "session_id": "d89ff034-23b8-4c62-8f21-536cfd3011cb",
+      "uuid": "0bdc11cd-f80e-4260-b898-859d866aec5c",
+      "timestamp": "2026-02-18T22:36:34.855Z",
+      "role": "user",
+      "text": "# help\n\nRead the entire task file at: {project-root}/_bmad/core/tasks/help.md\n\nFollow all instructions in the task file exactly as written."
+    }
+  ]
+}

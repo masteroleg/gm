@@ -1,0 +1,23 @@
+[
+  {
+    "session_id": "bf9bbefa-aeb5-46aa-856e-2b24c02a80b3",
+    "uuid": "63391109-2191-42f6-8efc-eb5cd70777f4",
+    "timestamp": "2026-02-19T14:22:01.451Z",
+    "role": "user",
+    "text": "<command-message>bmad-help</command-message>\n<command-name>/bmad-help</command-name>"
+  },
+  {
+    "session_id": "bf9bbefa-aeb5-46aa-856e-2b24c02a80b3",
+    "uuid": "53808991-2a3c-43c0-a27c-a6ce7a5a1fcb",
+    "timestamp": "2026-02-19T14:22:01.451Z",
+    "role": "user",
+    "text": "# help\n\nRead the entire task file at: {project-root}/_bmad/core/tasks/help.md\n\nFollow all instructions in the task file exactly as written."
+  },
+  {
+    "session_id": "bf9bbefa-aeb5-46aa-856e-2b24c02a80b3",
+    "uuid": "ce4abc76-9048-4c4a-b5ab-cca6ec820441",
+    "timestamp": "2026-02-19T14:22:02.093Z",
+    "role": "assistant",
+    "text": "You've hit your limit · resets 7pm (Europe/Kiev)"
+  }
+]
