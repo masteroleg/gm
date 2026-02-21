@@ -29,3 +29,7 @@ _rag-storage/
 _bmad-output/
 _bmad/
 _archive/
+
+#
+migration/raw/
+migration/transcripts/

@@ -1,0 +1,53 @@
+{
+  "SESSIONS_CHUNK": [
+    {
+      "session_id": "c35eadbf-3b34-4ab1-b9c8-8bf7341a04b6",
+      "uuid": "57ae3bf3-b6f9-45b7-a7da-d5b9257cdedd",
+      "timestamp": "2026-02-19T13:14:24.021Z",
+      "role": "assistant",
+      "text": "**Крок 2c з 13 — Executive Summary**\n\nСинтезую всё, что мы наработали за три круга Party Mode, конкурентный анализ и vision discovery. Вот драфт:\n\n---\n\n## Executive Summary\n\n**genu.im** — платформа верифікації автентичності продуктів, побудована над українською державною системою еАкциз (xtrace.gov.ua). Проєкт gm — це вебсайт платформи: лендінг, система верифікаційних паспортів продуктів та B2B-портал для клієнтів.\n\nСайт вирішує три задачі одночасно: переконує B2B-клієнтів (виробників) підключитися до платформи, демонструє споживачам як працює верифікація, та надає існуючим клієнтам робочий інструмент управління маркуванням.\n\n**Цільові аудиторії та їхні емоційні тригери:**\n- **CEO/власник виробництва** — страх: штраф за невідповідність еАкциз, контрафакт на ринку\n- **Маркетолог бренду** — можливість: аналітика сканувань, ROI промо-кампаній\n- **Споживач** — безпека: \"чи не підробка? чи не отруюся?\"\n\n**Три епіки:**\n\n| Епік | Scope | URL |\n|------|-------|-----|\n| **1. Лендінг** | Головна сторінка — єдиний narrative довіри для всіх аудиторій | `genu.im/` |\n| **2. Верифікація** | Паспорти продуктів за вертикалями + майбутня API-верифікація реальних кодів | `genu.im/v/{code}` |\n| **3. B2B-портал** | Кабінет клієнта: дашборд, коди, виробництво, 10+ екранів, MSAL.js Azure AD | `genu.im/portal/` |\n\n**Контекст:** Україна 2026, четвертий рік війни. Суррогатний алкоголь вбиває людей. Довіра — не маркетинговий термін, а питання безпеки. Дизайн сайту побудований на принципі \"тиха сила\": Дія-естетика, швидкість, ясність, нуль драми.\n\n**Існуючий backend:** TraceAvit Azure API (`/api/Code/{code}`) вже повертає дані продукту: партія, лінія, дата виробництва, історія дій (P/V/C/W). API закритий авторизацією; consumer-доступ — Фаза 2.\n\n**Технічний стек:** HTML/CSS/JS без фреймворку (Епіки 1-2), Tailwind CSS v4, GitHub Pages. Міграція на Azure Static Web Apps при Епіку 3.\n\n### What Makes This Special\n\n**Демо-верифікація як продукт.** `genu.im/v/genuim` — предвизначений код, де \"продукт\" = сама платформа. Споживач бачить той самий UX, який отримає бренд для свого товару. У конкурента (Сайтекс) навіть демо відсутнє — їхній xtrace.com.ua це чисто B2B-портал за логіном.\n\n**Вертикальні паспорти.** Один шаблон, різне оформлення: `genuim-alco` (теплий бурштин, свято), `genuim-tobacco` (стриманий, compliance). JSON з даними + 3-4 CSS-змінних = нова вертикаль без коду. Sales-інструмент: продажник надсилає посилання CEO заводу, той бачить \"ось що побачить ваш покупець\".\n\n**Позиціонування через прозорість.** Конкурент мімікрує під державний сайт (xtrace.com.ua ≈ xtrace.gov.ua). genu.im йде іншим шляхом — власний бренд, відкритість, \"справжнє\". В контексті України 2026, де довіра = дефіцит, це сильніша позиція.\n\n**Архітектура для зростання.** Статичні паспорти зараз → API-верифікація потім. Один `if` у коді: JSON або fetch. Перехід без рефакторингу.\n\n## Project Classification\n\n| Параметр | Значення |\n|----------|---------|\n| **Тип проєкту** | Web application (статичний сайт + SPA-портал) |\n| **Домен** | General з regtech-контекстом (еАкциз, державний мандат) |\n| **Складність** | Medium — UX для трьох аудиторій, вертикальні теми, B2B-портал 10+ екранів |\n| **Контекст** | Brownfield — MVP працював для Укравіт, сайт-заглушка існує |\n| **Мова інтерфейсу** | Українська першою, English — для міжнародної аудиторії |\n| **Візуальна мова** | \"Тиха сила\": champagne + зелений, Дія-естетика, zero drama |\n\n---\n\nGenuIm, ось Executive Summary. Переглянь — що змінити, додати, прибрати?\n\n**[A]** Advanced Elicitation — поглибити\n**[P]** Party Mode — обговорити з командою\n**[C]** Continue — зберігаємо в PRD, переходимо до Success Criteria (Крок 3 з 13)"
+    },
+    {
+      "session_id": "c35eadbf-3b34-4ab1-b9c8-8bf7341a04b6",
+      "uuid": "53e422f7-34b5-456c-852a-2d5e4bfa0f7f",
+      "timestamp": "2026-02-19T13:16:57.495Z",
+      "role": "user",
+      "text": "побудована над українською державною системою еАкциз (xtrace.gov.ua) - это оин из источников. для тех, кого заставили.  есть те, кт сам хочет! Обновляй важными договренностями, инсайтами и ходом обсуждения сопровождающие дркументы - CLAUDE.md и что там еше нужно обновлять. чтобы держать полный контекст. а то т забываешь многое!"
+    },
+    {
+      "session_id": "c35eadbf-3b34-4ab1-b9c8-8bf7341a04b6",
+      "uuid": "694f4d7f-37ba-4932-8fe2-e3eb595c0628",
+      "timestamp": "2026-02-19T13:17:06.056Z",
+      "role": "assistant",
+      "text": "Справедливо на оба пункта! Укравіт же пришёл добровольно — brand protection, не compliance. Сначала обновлю контекстные документы, потом поправлю Executive Summary."
+    },
+    {
+      "session_id": "c35eadbf-3b34-4ab1-b9c8-8bf7341a04b6",
+      "uuid": "1c3ecdd0-9c2d-4011-a336-c107feb2a7ab",
+      "timestamp": "2026-02-19T13:17:07.017Z",
+      "role": "user",
+      "text": "1→# CLAUDE.md\n     2→\n     3→This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.\n     4→\n     5→## Project\n     6→\n     7→Static landing page for [genu.im](https://genu.im) — a verification and transparency tool. Pure HTML/CSS/JS, no framework, no backend.\n     8→\n     9→## Commands\n    10→\n    11→```bash\n    12→# Develop\n    13→npm run dev          # Watch Tailwind CSS changes (runs tailwindcss --watch)\n    14→npm start            # Serve site locally at http://localhost:3000\n    15→\n    16→# Build\n    17→npm run build:css    # Compile & minify Tailwind CSS (input.css → output.css)\n    18→\n    19→# Test\n    20→npm test             # Jest unit tests\n    21→npm run test:e2e     # Playwright E2E tests (requires local server running first)\n    22→\n    23→# E2E with local server in one step\n    24→npm start &          # Start server in background, then:\n    25→BASE_URL=http://localhost:3000 npx playwright test\n    26→\n    27→# Run a single Playwright test file\n    28→npx playwright test tests/e2e/genuim.spec.js\n    29→npx playwright test tests/e2e/genuim.spec.js --project=chromium\n    30→\n    31→# Run a specific test by name\n    32→npx playwright test -g \"theme toggle\"\n    33→```\n    34→\n    35→## Architecture\n    36→\n    37→### File layout\n    38→\n    39→- `index.html` — single-page HTML, all content lives here\n    40→- `assets/css/input.css` — Tailwind v4 source with full custom theme variables\n    41→- `assets/css/output.css` — compiled CSS (do not edit directly, generated by build)\n    42→- `assets/js/theme-toggle.js` — dark/light mode logic\n    43→- `assets/js/lang-toggle.js` — EN/UK i18n switcher\n    44→- `assets/js/menu.js` — mobile burger menu open/close\n    45→- `tests/e2e/` — Playwright specs\n    46→- `tests/` — Jest unit tests + manual browser console tests\n    47→\n    48→### Key design decisions\n    49→\n    50→**FOUC prevention:** An inline `<script>` in `<head>` runs before DOM render, setting the `.dark` class and `data-theme` attribute on `<html>` from localStorage (or system preference). Any theme-related JS changes must consider this early script.\n    51→\n    52→**Theme system:** Tailwind v4 custom CSS variables define two palettes — \"Champagne & Ivory\" (light) and \"Midnight Sapphire\" (dark). The `.dark` class on `<html>` switches between them. `data-theme` attribute mirrors the active theme for Playwright selectors.\n    53→\n    54→**i18n:** `lang-toggle.js` holds an embedded translation object for EN/UK. Elements with `data-i18n` attributes get their text replaced on language switch. Language and theme selections are persisted in `localStorage`.\n    55→\n    56→**CSS build:** Tailwind CSS v4 via `@tailwindcss/cli`. Source is `assets/css/input.css`; output is `assets/css/output.css`. The stylesheet is linked as a blocking `<link>` (not preloaded) to prevent CLS.\n    57→\n    58→**CRITICAL — `assets/css/output.css` must stay committed in git.** GitHub Pages deploys static files directly from the repo with no build step. Removing this file from git tracking (e.g. `git rm --cached`) will break the live site — all styling disappears. The file must not be added to `.gitignore`. The E2E test `CSS is loaded and applied` detects this regression via a CSS custom property check.\n    59→\n    60→**Husky hooks:** Both `.husky/pre-commit` and `.husky/pre-push` run `npm run build:css`, keeping `output.css` in sync. Use `--no-verify` only as a last resort.\n    61→\n    62→**Mobile menu:** Nav menu has `hidden` class by default. `menu.js` removes/adds it on burger/close button clicks.\n    63→\n    64→### Testing notes\n    65→\n    66→- E2E tests in `tests/e2e/genuim.spec.js` cover theme toggle, language toggle, mobile menu, localStorage persistence, and required elements.\n    67→- CI runs Chromium only (`--project=chromium`). Local dev runs Chromium + Firefox + WebKit.\n    68→- Playwright `baseURL` defaults to `http://localhost:3000`; override with `BASE_URL` env var.\n    69→- Jest unit tests use `jsdom` environment; `tests/setup.js` mocks `localStorage` and `window.matchMedia`.\n    70→"
+    },
+    {
+      "session_id": "c35eadbf-3b34-4ab1-b9c8-8bf7341a04b6",
+      "uuid": "8d705ff4-fea0-4a7d-851a-14d18a16e997",
+      "timestamp": "2026-02-19T13:17:11.354Z",
+      "role": "user",
+      "text": "1→# Project: genu.im (D:\\w\\genu.im\\gm)\n     2→\n     3→## CRITICAL: assets/css/output.css\n     4→**НЕ ТРОГАТЬ.** Файл должен быть закоммичен в git.\n     5→\n     6→- GitHub Pages деплоит статику напрямую из репо — без build step\n     7→- Если убрать из tracking (`git rm --cached`) — сайт ломается (голый HTML без стилей)\n     8→- Файл НЕ должен быть в .gitignore\n     9→- E2E тест `CSS is loaded and applied` защищает от этой регрессии\n    10→"
+    },
+    {
+      "session_id": "c35eadbf-3b34-4ab1-b9c8-8bf7341a04b6",
+      "uuid": "d8a484c0-8bc1-4fa2-96cf-85a121bf2265",
+      "timestamp": "2026-02-19T13:17:28.275Z",
+      "role": "user",
+      "text": "The file D:\\w\\genu.im\\gm\\CLAUDE.md has been updated successfully."
+    },
+    {
+      "session_id": "c35eadbf-3b34-4ab1-b9c8-8bf7341a04b6",
+      "uuid": "0374920b-c2ae-4ea9-bcd7-e35126482330",
+      "timestamp": "2026-02-19T13:17:46.227Z",
+      "role": "user",
+      "text": "The file C:\\Users\\fix\\.claude\\projects\\D--w-genu-im-gm\\memory\\MEMORY.md has been updated successfully."
+    }
+  ]
+}
