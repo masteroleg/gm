@@ -204,7 +204,7 @@ body::before {
 /* ============================================
    UTILITIES
    ============================================ */
-@utilities {
+@layer utilities {
   .text-brand {
     color: var(--color-brand);
   }
