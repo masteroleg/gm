@@ -1,4 +1,32 @@
-Главная идея:
+Главная идея (обновлено):
+
+- Канонический пайплайн для перманентной памяти BMAD = **детерминированная миграция JSONL → фрагменты** + **каноническая команда BMAD `/index-docs` для индексов**.
+- Мы НЕ полагаемся на LLM в миграции (воспроизводимость/безопасность перезапуска).
+
+## Канонично (Shipping-ready)
+
+1) Миграция JSONL → fragments (детерминированно):
+
+```bash
+python scripts/migrate_sessions.py --dry-run
+python scripts/migrate_sessions.py --force --report --archive-inputs
+```
+
+2) Индексация (только BMAD):
+
+- `/index-docs _bmad-output/knowledge/`
+- `/index-docs _bmad-output/knowledge/fragments/`
+- `/index-docs _bmad-output/planning-artifacts/`
+- `/index-docs _bmad-output/solutioning/adrs/`
+
+## Legacy (не рекомендуется)
+
+Ниже оставлены старые инструкции, которые опираются на OpenCode CLI + LLM-дельты.
+Они не являются источником истины и сейчас в этом репозитории показали 100% провалов на чанках.
+
+---
+
+Главная идея (legacy):
 
 - чанки уже готовы (`migration/chunks/*.json`)
 - мы запускаем **один скрипт** , который:
