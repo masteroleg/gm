@@ -256,22 +256,58 @@ def choose_tags(text: str) -> list[str]:
 
 
 def extract_references(text: str) -> list[str]:
-    # Only relative-ish paths and filenames; skip file:/// and absolute paths.
+    # Enhanced reference extraction: filter out repo-local/system paths and normalize to ./rel paths
     refs: list[str] = []
     for m in re.finditer(
-        r"([_A-Za-z0-9][\w./\\-]+\.(md|js|mjs|py|json|yml|yaml|html|css))", text
+        r"([_A-Za-z0-9][\\w./\\-]+\\.(md|js|mjs|py|json|yml|yaml|html|css))", text
     ):
         p = m.group(1)
         p = p.replace("\\", "/")
-        lp = p.lower()
-        if lp.startswith("file:"):
+        if p.startswith("Users/"):
             continue
-        if re.match(r"^[a-zA-Z]:/", p):
+        if "genu.im" in p or "w/genu.im/gm" in p:
             continue
         if p.startswith("/"):
             continue
+        lp = p.lower()
+        if lp.startswith("file:"):
+            continue
+        if re.match(r"^[a-z]:/", p):
+            continue
+        if "//" in p:
+            continue
+        if not (p.startswith("./") or p.startswith("../")):
+            p = "./" + p
+        if p not in refs:
+            refs.append(p)
+    return refs
+
+
+def extract_references2(text: str) -> list[str]:
+    # Enhanced reference extraction: filter out repo-local/system paths and normalize to ./rel paths
+    refs: list[str] = []
+    for m in re.finditer(
+        r"([_A-Za-z0-9][\\w./\\-]+\\.(md|js|mjs|py|json|yml|yaml|html|css))",
+        text,
+    ):
+        p = m.group(1)
+        p = p.replace("\\", "/")
+        # Ignore repo-local users/hosts
+        if p.startswith("Users/"):
+            continue
+        if "genu.im" in p or "w/genu.im/gm" in p:
+            continue
+        if p.startswith("/"):
+            continue
+        lp = p.lower()
+        if lp.startswith("file:"):
+            continue
+        if re.match(r"^[a-z]:/", p):
+            continue
         if "://" in p:
             continue
+        if not (p.startswith("./") or p.startswith("../")):
+            p = "./" + p
         if p not in refs:
             refs.append(p)
     return refs
@@ -728,7 +764,7 @@ def main() -> int:
         decisions = extract_decision_lines(all_text)
         tasks = extract_task_lines(all_text)
         open_questions = extract_questions(all_text)
-        references = extract_references(all_text)
+        references = extract_references2(all_text)
         if source_file_rel not in references:
             references.insert(0, source_file_rel)
 
@@ -811,14 +847,20 @@ def main() -> int:
     if args.report:
         report_path = write_root / "knowledge" / "migration-report.md"
         ensure_dir(report_path.parent, args.dry_run)
+        # Relative path reporting for cleaner diffs
+        relative_sessions_dir = str(sessions_dir.relative_to(repo_root)).replace(
+            "\\", "/"
+        )
+        relative_out_root = str(out_root.relative_to(repo_root)).replace("\\", "/")
+        relative_write_root = str(write_root.relative_to(repo_root)).replace("\\", "/")
         report_lines = [
             AUTO_MARKER,
             "# Migration Report",
             "",
             f"- run_at: {utc_now_iso()}",
-            f"- sessions_dir: {str(sessions_dir).replace('\\\\', '/')}",
-            f"- out_root: {str(out_root).replace('\\\\', '/')}",
-            f"- write_root: {str(write_root).replace('\\\\', '/')}",
+            f"- sessions_dir: {relative_sessions_dir}",
+            f"- out_root: {relative_out_root}",
+            f"- write_root: {relative_write_root}",
             "",
             "## Counters",
             "",
