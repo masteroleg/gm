@@ -74,7 +74,7 @@ I help you generate tests quickly using standard test framework patterns.
 
 **Need more advanced testing?**
 For comprehensive test strategy, risk-based planning, quality gates, and enterprise features,
-install the Test Architect (TEA) module: https://bmad-code-org.github.io/bmad-method-test-architecture-enterprise/
+ install the Test Architect (TEA) module: [TEA URL sanitized]
 
 Ready to generate some tests? Just say `QA` or `bmad-bmm-qa-automate`!
 
