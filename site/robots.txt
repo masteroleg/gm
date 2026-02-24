@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /_bmad-output/
+Sitemap: sitemap.xml
