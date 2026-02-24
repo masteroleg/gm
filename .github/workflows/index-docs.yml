@@ -1,0 +1,46 @@
+name: Index Docs
+
+on:
+  push:
+    paths:
+      - "_bmad-output/**"
+      - "repo-index.md"
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  index-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Run index docs script
+        run: python scripts/index_docs.py
+      - name: Commit and push changes (auto-branch)
+        id: commit_changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            BRANCH="index-docs-auto-${{ github.run_id }}"
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git checkout -b "$BRANCH"
+            git add -A
+            git commit -m "ci(index-docs): auto-update indexes"
+            git push -u origin "$BRANCH"
+            echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+          else
+            echo "branch=" >> $GITHUB_OUTPUT
+          fi
+      - name: Create Pull Request
+        if: ${{ steps.commit_changes.outputs.branch != '' }}
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          head: ${{ steps.commit_changes.outputs.branch }}
+          title: "Auto-update directory indexes"
+          body: "This PR contains automatically generated index updates for _bmad-output and repo-root."
