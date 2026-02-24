@@ -20,6 +20,10 @@ jobs:
           python-version: '3.x'
       - name: Run index docs script
         run: python scripts/index_docs.py
+      - name: Install pytest
+        run: python -m pip install pytest
+      - name: Run index docs test (pytest)
+        run: pytest -q tests/index_docs_test.py
       - name: Commit and push changes (auto-branch)
         id: commit_changes
         run: |

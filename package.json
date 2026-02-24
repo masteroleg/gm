@@ -2,10 +2,10 @@
 	"name": "genuim-site",
 	"version": "1.0.0",
 	"private": true,
-	"scripts": {
-		"start": "serve .",
-		"build:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --minify",
-		"dev": "tailwindcss -i ./assets/css/input.css -o ./assets/css/output.css --watch",
+  "scripts": {
+    "start": "serve site",
+    "build:css": "tailwindcss -i ./site/assets/css/input.css -o ./site/assets/css/output.css --minify",
+    "dev": "tailwindcss -i ./site/assets/css/input.css -o ./site/assets/css/output.css --watch",
 		"migrate:bmad-memory": "python scripts/migrate_sessions.py",
 		"prepare": "husky",
 		"test": "jest",
