@@ -2,11 +2,24 @@ name: Index Docs
 
 on:
   push:
+    branches: [ main ]
     paths:
       - "_bmad-output/**"
       - "repo-index.md"
+      - "scripts/index_docs.py"
+      - "tests/index_docs_test.py"
   pull_request:
+    branches: [ main ]
     types: [opened, synchronize, reopened]
+    paths:
+      - "_bmad-output/**"
+      - "repo-index.md"
+      - "scripts/index_docs.py"
+      - "tests/index_docs_test.py"
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   index-docs:
@@ -14,16 +27,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
+
       - name: Run index docs script
         run: python scripts/index_docs.py
+
       - name: Install pytest
         run: python -m pip install pytest
+
       - name: Run index docs test (pytest)
         run: pytest -q tests/index_docs_test.py
+
       - name: Commit and push changes (auto-branch)
         id: commit_changes
         run: |
@@ -39,12 +57,14 @@ jobs:
           else
             echo "branch=" >> $GITHUB_OUTPUT
           fi
-      - name: Create Pull Request
+
+      - name: Create Pull Request (gh)
         if: ${{ steps.commit_changes.outputs.branch != '' }}
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
-          head: ${{ steps.commit_changes.outputs.branch }}
-          title: "Auto-update directory indexes"
-          body: "This PR contains automatically generated index updates for _bmad-output and repo-root."
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr create `
+            --base main `
+            --head "${{ steps.commit_changes.outputs.branch }}" `
+            --title "Auto-update directory indexes" `
+            --body "This PR contains automatically generated index updates for _bmad-output and repo-root."
