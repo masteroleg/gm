@@ -1,2 +1,5 @@
 #!/bin/sh
-npm run build:css
+git diff --quiet site/assets/css/output.css || {
+  echo "output.css изменён, но не закоммичен. Сделай commit."
+  exit 1
+}

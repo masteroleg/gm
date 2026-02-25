@@ -1,3 +1,6 @@
 #!/bin/sh
-echo "Pre-commit skipped in test environment. Run 'npm run build:css' locally to update output.css before commit."
-exit 0
+npm run build:css
+git diff --quiet site/assets/css/output.css || {
+  echo "output.css обновлён — добавьте его в коммит"
+  exit 1
+}
