@@ -63,9 +63,17 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          BRANCH="${{ steps.commit_changes.outputs.branch }}"
+          # если PR уже существует — не падаем
+          PR_NUMBER=$(gh pr list --base main --head "$BRANCH" --json number -q ".[0].number" 2>/dev/null || true)
+          if [ -n "$PR_NUMBER" ]; then
+            echo "PR already exists: #$PR_NUMBER"
+            exit 0
+          fi
           gh pr create \
             --base main \
-            --head "${{ steps.commit_changes.outputs.branch }}" \
+            --head "$BRANCH" \
             --title "Auto-update directory indexes" \
             --body "This PR contains automatically generated index updates for _bmad-output and repo-root."
+
 
