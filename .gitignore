@@ -31,5 +31,4 @@ _archive/
 #
 migration/raw/
 migration/transcripts/
-assets/css/output.css
-assets/css/output.css
+# (site/ output.css is committed as part of site publishing strategy)
