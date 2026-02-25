@@ -25,3 +25,4 @@ jobs:
 
       - name: Run audit for absolute paths in MD files
         run: python scripts/ci_no_absolute_paths_in_md.py
+
