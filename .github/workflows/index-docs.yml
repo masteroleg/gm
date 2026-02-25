@@ -63,8 +63,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh pr create `
-            --base main `
-            --head "${{ steps.commit_changes.outputs.branch }}" `
-            --title "Auto-update directory indexes" `
+          gh pr create \
+            --base main \
+            --head "${{ steps.commit_changes.outputs.branch }}" \
+            --title "Auto-update directory indexes" \
             --body "This PR contains automatically generated index updates for _bmad-output and repo-root."
+
