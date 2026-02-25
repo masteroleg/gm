@@ -1,21 +1,27 @@
 name: CI No Absolute Paths in MD
+
 on:
   push:
     branches: [ main ]
+    paths:
+      - "**/*.md"
+      - "scripts/ci_no_absolute_paths_in_md.py"
   pull_request:
     branches: [ main ]
+    paths:
+      - "**/*.md"
+      - "scripts/ci_no_absolute_paths_in_md.py"
+
 jobs:
   no_absolute_paths_md:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
+
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
-      - name: Install dependencies
-        run: |
-          python -V
+          python-version: "3.x"
+
       - name: Run audit for absolute paths in MD files
-        run: |
-          python scripts/ci_no_absolute_paths_in_md.py
+        run: python scripts/ci_no_absolute_paths_in_md.py
