@@ -8,6 +8,14 @@ on:
     branches:
       - main
 
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -18,14 +26,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '20.x'
-          cache: 'npm'
+          node-version: "20.x"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
 
       - name: Build Tailwind CSS
-        run: npm run build:css
+        run: npm run build:css && git diff --exit-code site/assets/css/output.css
 
       - name: Cache Playwright browsers
         uses: actions/cache@v5
@@ -77,5 +85,9 @@ jobs:
         if: always()
         run: |
           if [ -f /tmp/server.pid ]; then
-            kill -9 $(cat /tmp/server.pid) || true
+            PID=$(cat /tmp/server.pid)
+            kill $PID || true
+            sleep 2
+            kill -9 $PID || true
           fi
+
