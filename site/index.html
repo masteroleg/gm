@@ -61,7 +61,7 @@
 			<!-- Lang + Theme Toggles -->
 			<div class="flex items-center gap-3">
 				<!-- Language Toggle -->
-            <button id="langToggle" class="rounded px-2 py-0.5 text-sm font-medium uppercase" type="button">
+				<button id="langToggle" class="rounded px-2 py-0.5 text-sm font-medium uppercase" type="button">
 					<span id="langLabel">EN</span>
 				</button>
 
@@ -75,9 +75,9 @@
 			</div>
 
 			<!-- TODO: Burger icon (мобильная версия) -->
-            <button id="burgerBtn" class="md:hidden flex items-center p-2 ml-2" aria-label="Open Menu" type="button">
+			<button id="burgerBtn" class="md:hidden flex items-center p-2 ml-2" aria-label="Open Menu" type="button">
 				<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-					stroke-linecap="round" stroke-linejoin="round">
+					stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<line x1="3" y1="6" x2="21" y2="6" />
 					<line x1="3" y1="12" x2="21" y2="12" />
 					<line x1="3" y1="18" x2="21" y2="18" />
@@ -85,7 +85,6 @@
 			</button>
 		</header>
 
-		<!-- TODO remove me, just for testing -->
 		<!-- TODO: Navigation Menu -->
 		<nav id="mainNav"
 			class="fixed inset-0 z-50 bg-white dark:bg-[#181818] flex-col items-center justify-center hidden md:flex md:static md:bg-transparent md:dark:bg-transparent md:flex-row md:gap-6 mt-4">
@@ -94,7 +93,8 @@
 				Перевір продукт
 			</a>
 			<!-- Добавьте сюда другие ссылки, если появятся -->
-            <button id="closeMenu" class="absolute top-5 right-5 md:hidden" aria-label="Close Menu" type="button">&times;</button>
+			<button id="closeMenu" class="absolute top-5 right-5 md:hidden" aria-label="Close Menu"
+				type="button">&times;</button>
 		</nav>
 
 		<!-- Main Content -->
@@ -190,11 +190,11 @@
 
 	<script>
 		// TODO: Открытие мобильного меню
-		document.getElementById('burgerBtn').addEventListener('click', function () {
+		document.getElementById('burgerBtn').addEventListener('click', () => {
 			document.getElementById('mainNav').classList.remove('hidden');
 		});
 		// Закрытие меню
-		document.getElementById('closeMenu').addEventListener('click', function () {
+		document.getElementById('closeMenu').addEventListener('click', () => {
 			document.getElementById('mainNav').classList.add('hidden');
 		});
 	</script>
