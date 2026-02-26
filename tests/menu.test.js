@@ -9,7 +9,7 @@ describe('Menu Toggle', () => {
     // Since the script runs immediately, we require it here after DOM setup
     // We use jest.resetModules() to ensure a fresh load of the module for each test
     jest.resetModules();
-    require('../assets/js/menu');
+    require('../site/assets/js/menu');
   });
 
   test('should open the menu when the burger button is clicked', () => {
