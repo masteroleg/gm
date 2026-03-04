@@ -20,14 +20,14 @@ export default defineConfig({
 	// ✅ Playwright сам стартует сервер и ждёт готовности без “тупых 60 секунд”
 	webServer: {
 		command: 'npm start',
-		url: 'http://127.0.0.1:3000',
+		url: 'http://localhost:3000',
 		timeout: 30_000,
 		reuseExistingServer: !isCI,
 	},
 
 	use: {
-		baseURL: 'http://127.0.0.1:3000',
-		headless: true,
+		baseURL: 'http://localhost:3000',
+		headless: !!process.env.CI,  // в CI headless, локально headed (UI дружит)
 
 		// ✅ фиксируем тему, чтобы тесты не зависели от “prefers-color-scheme” CI/ОС
 		colorScheme: 'light',
