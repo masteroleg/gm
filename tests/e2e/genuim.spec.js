@@ -2,7 +2,8 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('genu.im E2E Tests', () => {
 	test.beforeEach(async ({ page }) => {
-		await page.goto('/');
+		// await page.goto('/');
+		await page.goto(new URL('/', baseURL ?? 'http://localhost:3000').toString());
 		await page.waitForLoadState('domcontentloaded');
 	});
 

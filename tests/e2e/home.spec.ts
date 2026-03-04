@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-test("GM landing page loads and shows hero CTA", async ({ page }) => {
-	await page.goto("/");
+test("GM landing page loads and shows hero CTA", async ({ page, baseURL }) => {
+	// await page.goto("/");
+	await page.goto(new URL("/", baseURL ?? "http://localhost:3000").toString());
 	await page.waitForLoadState("domcontentloaded");
 	await expect(page).toHaveTitle(/genu\.im/i);
 
