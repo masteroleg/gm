@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit MD files for absolute filesystem paths and file:// references.
+r"""Audit MD files for absolute paths and file:// references.
 
 Exits with code 0 if no violations, 1 if violations found.
 Prints a short list of violating files and lines.
@@ -8,9 +8,10 @@ Rules:
 - FAIL on:
   - Windows absolute paths: C:\path
   - Windows absolute paths with forward slashes: C:/path
-  - file:// URIs
+  - file:// URIs (when used as a link, not as an example in backticks)
 - DO NOT fail on:
-  - http:// or https:// URLs (including http://localhost:3000)
+  - http:// or https:// URLs (including localhost)
+  - mentions inside markdown code spans: `file:///...`
 """
 
 import re
@@ -18,20 +19,24 @@ import sys
 from pathlib import Path
 
 
+def strip_code_spans(line: str) -> str:
+    """Remove inline code spans `...` to avoid false positives in docs."""
+    return re.sub(r"`[^`]*`", "", line)
+
+
 def main() -> int:
     repo = Path(__file__).resolve().parents[1]
     md_files = sorted(repo.rglob("*.md"))
     violations = []  # (path, line_no, line)
 
-    # C:\path (and similar)
-    pat_windows_backslash = re.compile(r"\b[A-Za-z]:\\")
-    # C:/path (IMPORTANT: avoid matching https:// which contains s:/)
-    pat_windows_slash = re.compile(r"\b[A-Za-z]:/(?=/)")
+    # C:\path
+    pat_win_backslash = re.compile(r"\b[A-Za-z]:\\")
+    # C:/path (avoid matching https:// which contains s:/)
+    pat_win_slash = re.compile(r"\b[A-Za-z]:/(?=/)")
     # file://...
     pat_fileuri = re.compile(r"\bfile://", re.IGNORECASE)
 
     for md in md_files:
-        # Skip common external/vendor directories to avoid false positives on non-repo docs
         if any(
             part in ("node_modules", "opencode", "vendor", "third_party", "external")
             for part in md.parts
@@ -40,23 +45,38 @@ def main() -> int:
 
         try:
             with md.open("r", encoding="utf-8") as f:
-                for i, line in enumerate(f, start=1):
-                    # Allow normal web URLs explicitly (paranoia / readability)
-                    # (Not strictly necessary with the fixed regex, but keeps intent clear.)
-                    if "http://" in line or "https://" in line:
-                        # still fail if file:// is present
-                        if pat_fileuri.search(line):
-                            violations.append((md.relative_to(repo), i, line.rstrip("\n")))
+                in_fenced = False
+                for i, raw in enumerate(f, start=1):
+                    line = raw.rstrip("\n")
+
+                    # Ignore fenced code blocks
+                    if line.strip().startswith("```"):
+                        in_fenced = not in_fenced
+                        continue
+                    if in_fenced:
+                        continue
+
+                    # Ignore inline code spans like `file:///...`
+                    scan = strip_code_spans(line)
+
+                    # Allow normal web URLs explicitly
+                    if "http://" in scan or "https://" in scan:
+                        # still scan for real Windows paths (rare but possible in same line)
+                        if pat_win_backslash.search(scan) or pat_win_slash.search(scan):
+                            violations.append((md.relative_to(repo), i, line))
+                        # do NOT flag file:// if it's part of an http(s) URL (it won't be)
+                        # and we already removed inline code spans
+                        if pat_fileuri.search(scan):
+                            violations.append((md.relative_to(repo), i, line))
                         continue
 
                     if (
-                        pat_windows_backslash.search(line)
-                        or pat_windows_slash.search(line)
-                        or pat_fileuri.search(line)
+                        pat_win_backslash.search(scan)
+                        or pat_win_slash.search(scan)
+                        or pat_fileuri.search(scan)
                     ):
-                        violations.append((md.relative_to(repo), i, line.rstrip("\n")))
+                        violations.append((md.relative_to(repo), i, line))
         except Exception:
-            # If a file can't be read for some reason, skip it but log later
             continue
 
     if violations:
