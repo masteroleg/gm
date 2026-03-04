@@ -78,19 +78,32 @@ test.describe('genu.im E2E Tests', () => {
 	});
 
 	test('CSS is loaded and applied', async ({ page }) => {
-		// Самая стабильная проверка “CSS подключён” — наличие кастомной переменной из output.css
-		const bgColor = await page.evaluate(() =>
+		// CSS custom property exists => stylesheet applied
+		const bgVar = await page.evaluate(() =>
 			getComputedStyle(document.documentElement)
 				.getPropertyValue('--color-bg-body')
 				.trim()
 		);
-		expect(bgColor).toBeTruthy();
+		expect(bgVar).toBeTruthy();
 
-		// И ещё: хотя бы один из логотипов должен быть виден (без assumptions про dark/light)
 		const lightLogo = page.locator('img[alt="Genu.im Logo"]');
 		const darkLogo = page.locator('img[alt="genu.im logo dark"]');
 
-		await expect(lightLogo.or(darkLogo)).toBeVisible();
+		// Both images exist in DOM
+		await expect(lightLogo).toHaveCount(1);
+		await expect(darkLogo).toHaveCount(1);
+
+		// Exactly one should be visible at a time.
+		// If page is in dark mode => dark logo visible, light hidden; otherwise наоборот.
+		const isDark = await page.locator('html').evaluate(el => el.classList.contains('dark'));
+
+		if (isDark) {
+			await expect(darkLogo).toBeVisible();
+			await expect(lightLogo).toBeHidden();
+		} else {
+			await expect(lightLogo).toBeVisible();
+			await expect(darkLogo).toBeHidden();
+		}
 	});
 
 	test('localStorage persists theme preference', async ({ page }) => {
