@@ -1,6 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
 const isCI = process.env.CI === 'true';
+const mobileSpec = /genuim\.mobile\.spec\.ts/;
+
 
 export default defineConfig({
 	testDir: './tests/e2e',
@@ -19,15 +21,15 @@ export default defineConfig({
 
 	// ✅ Playwright сам стартует сервер и ждёт готовности без “тупых 60 секунд”
 	webServer: {
-		command: 'npm start',
+		command: 'npm run start:e2e',
 		url: 'http://localhost:3000',
-		timeout: 30_000,
-		reuseExistingServer: !isCI,
+		reuseExistingServer: false,
+		timeout: 120_000,
 	},
 
 	use: {
 		baseURL: 'http://localhost:3000',
-		headless: !!process.env.CI,  // в CI headless, локально headed (UI дружит)
+		headless: process.env.HEADED ? false : true,  // в CI headless, локально headed (UI дружит)
 
 		// ✅ фиксируем тему, чтобы тесты не зависели от “prefers-color-scheme” CI/ОС
 		colorScheme: 'light',
@@ -44,12 +46,15 @@ export default defineConfig({
 	// ✅ Ровно то, что объясняет твою разницу: CI = 1 проект, локально = много
 	projects: isCI
 		? [
-			{ name: 'Chromium', use: { browserName: 'chromium' } },
+			{ name: 'Chromium', use: { browserName: 'chromium' }, testIgnore: mobileSpec },
 		]
 		: [
-			{ name: 'Chromium', use: { browserName: 'chromium' } },
-			{ name: 'Firefox', use: { browserName: 'firefox' } },
-			{ name: 'WebKit', use: { browserName: 'webkit' } },
-			{ name: 'Mobile Chrome', use: { ...devices['Pixel 5'] } },
+			{ name: 'Chromium', use: { browserName: 'chromium' }, },
+			{ name: 'Firefox', use: { browserName: 'firefox' }, },
+			{ name: 'WebKit', use: { browserName: 'webkit' }, },
+
+			{ name: 'Mobile Chrome', use: { ...devices['Pixel 5'] } }, // mobile spec тут будет выполняться
+			{ name: 'Mobile Safari', use: { ...devices['iPhone 13'] } },
+
 		],
 });
