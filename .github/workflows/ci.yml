@@ -2,11 +2,9 @@ name: CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 defaults:
   run:
@@ -42,7 +40,8 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
-      - name: Install Playwright browsers
+      # В CI сейчас логично гонять только Chromium (как у тебя и было)
+      - name: Install Playwright browsers (Chromium)
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install chromium --with-deps
 
@@ -50,24 +49,8 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
-      - name: Start static server
-        run: |
-          nohup npm start > /tmp/server.log 2>&1 &
-          echo $! > /tmp/server.pid
-
-      - name: Wait for server to be ready
-        run: |
-          for i in {1..60}; do
-            if curl -sSf http://localhost:3000/ >/dev/null; then
-              echo "Server started"; exit 0
-            fi
-            sleep 1
-          done
-          echo "Server did not start in time"; exit 1
-
       - name: Run e2e tests
         env:
-          BASE_URL: http://localhost:3000
           CI: true
         run: npm run test:e2e
 
@@ -80,16 +63,3 @@ jobs:
             playwright-report/
             test-results/
           retention-days: 7
-
-      - name: Stop server
-        if: always()
-        run: |
-          if [ -f /tmp/server.pid ]; then
-            PID=$(cat /tmp/server.pid)
-            kill $PID || true
-            sleep 2
-            kill -9 $PID || true
-          fi
-
-
-

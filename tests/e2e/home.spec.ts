@@ -1,20 +1,18 @@
-// biome-ignore assist/source/organizeImports: <explanation>
-import { test, expect } from '@playwright/test';
+import { expect, test } from "@playwright/test";
 
-test('GM landing page loads and shows hero CTA', async ({ page }) => {
-	await page.goto('/');
-	await page.waitForLoadState('domcontentloaded');
+test("GM landing page loads and shows hero CTA", async ({ page }) => {
+	await page.goto("/");
+	await page.waitForLoadState("domcontentloaded");
 	await expect(page).toHaveTitle(/genu\.im/i);
 
-	// Prefer stable, user-facing selectors over internal i18n attributes.
-	// CTA text on genu.im is "Verify Product" (button in hero area).
-	const cta = page.getByRole('button', { name: /verify product/i });
+	// CTA лучше проверять по роли/тексту, а не по внутренним i18n-атрибутам
+	const ctaButton = page.getByRole("button", { name: /verify product/i });
+	const ctaLink = page.getByRole("link", { name: /verify product/i });
 
-	// If the CTA is a link instead of a button, fall back to role=link.
-	if (await cta.count()) {
-		await expect(cta.first()).toBeVisible();
+	if (await ctaButton.count()) {
+		await expect(ctaButton.first()).toBeVisible();
 	} else {
-		await expect(page.getByRole('link', { name: /verify product/i }).first()).toBeVisible();
+		await expect(ctaLink.first()).toBeVisible();
 	}
 
 	await expect(page.locator('[data-i18n="hero.title"]')).toBeVisible();

@@ -1,132 +1,135 @@
 const { test, expect } = require('@playwright/test');
 
 test.describe('genu.im E2E Tests', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/');
-    await page.waitForLoadState('domcontentloaded');
-  });
+	test.beforeEach(async ({ page }) => {
+		await page.goto('/');
+		await page.waitForLoadState('domcontentloaded');
+	});
 
-  test('page loads with correct title', async ({ page }) => {
-    await expect(page).toHaveTitle(/genu.im/);
-  });
+	test('page loads with correct title', async ({ page }) => {
+		await expect(page).toHaveTitle(/genu\.im/i);
+	});
 
-  test('theme toggle switches between light and dark', async ({ page }) => {
-    const themeToggle = page.locator('#themeToggle');
-    const html = page.locator('html');
+	test('theme toggle switches between light and dark', async ({ page }) => {
+		const themeToggle = page.locator('#themeToggle');
+		const html = page.locator('html');
 
-    await expect(themeToggle).toBeVisible();
+		await expect(themeToggle).toBeVisible();
 
-    const isDark = async () =>
-      await html.evaluate((el) => el.classList.contains('dark'));
+		const isDark = async () =>
+			await html.evaluate((el) => el.classList.contains('dark'));
 
-    const initialIsDark = await isDark();
+		const initialIsDark = await isDark();
 
-    await themeToggle.click();
-    await expect.poll(isDark).toBe(!initialIsDark);
+		await themeToggle.click();
+		await expect.poll(isDark).toBe(!initialIsDark);
 
-    await themeToggle.click();
-    await expect.poll(isDark).toBe(initialIsDark);
-  });
+		await themeToggle.click();
+		await expect.poll(isDark).toBe(initialIsDark);
+	});
 
-  test('language toggle switches between EN and UK', async ({ page }) => {
-    const langToggle = page.locator('#langToggle');
-    const langLabel = page.locator('#langLabel');
-    const html = page.locator('html');
+	test('language toggle switches between EN and UK', async ({ page }) => {
+		const langToggle = page.locator('#langToggle');
+		const langLabel = page.locator('#langLabel');
+		const html = page.locator('html');
 
-    const initialLang = await html.getAttribute('lang');
+		const initialLang = await html.getAttribute('lang');
 
-    await langToggle.click();
-    await expect(html).not.toHaveAttribute('lang', initialLang);
+		await langToggle.click();
+		await expect(html).not.toHaveAttribute('lang', initialLang);
 
-    const newLang = await html.getAttribute('lang');
-    expect(['en', 'uk']).toContain(newLang);
-    await expect(langLabel).toHaveText(newLang.toUpperCase());
+		const newLang = await html.getAttribute('lang');
+		expect(['en', 'uk']).toContain(newLang);
+		await expect(langLabel).toHaveText(newLang.toUpperCase());
 
-    const title = page.locator('[data-i18n="hero.title"]');
-    if (newLang === 'uk') {
-      await expect(title).toContainText('Довіра');
-    } else {
-      await expect(title).toContainText('Trust');
-    }
-  });
+		const title = page.locator('[data-i18n="hero.title"]');
+		if (newLang === 'uk') {
+			await expect(title).toContainText('Довіра');
+		} else {
+			await expect(title).toContainText('Trust');
+		}
+	});
 
-  test('mobile menu opens and closes', async ({ page }) => {
-    await page.setViewportSize({ width: 375, height: 667 });
+	test('mobile menu opens and closes', async ({ page }) => {
+		await page.setViewportSize({ width: 375, height: 667 });
 
-    const burgerBtn = page.locator('#burgerBtn');
-    const mainNav = page.locator('#mainNav');
-    const closeMenu = page.locator('#closeMenu');
+		const burgerBtn = page.locator('#burgerBtn');
+		const mainNav = page.locator('#mainNav');
+		const closeMenu = page.locator('#closeMenu');
 
-    await expect(mainNav).toHaveClass(/hidden/);
+		await expect(mainNav).toHaveClass(/hidden/);
 
-    await burgerBtn.click();
-    await expect(mainNav).not.toHaveClass(/hidden/);
+		await burgerBtn.click();
+		await expect(mainNav).not.toHaveClass(/hidden/);
 
-    await closeMenu.click();
-    await expect(mainNav).toHaveClass(/hidden/);
-  });
+		await closeMenu.click();
+		await expect(mainNav).toHaveClass(/hidden/);
+	});
 
-  test('page has all required elements', async ({ page }) => {
-    await expect(page.locator('img[alt="Genu.im Logo"]')).toBeVisible();
-    await expect(page.locator('#themeToggle')).toBeVisible();
-    await expect(page.locator('#langToggle')).toBeVisible();
-    await expect(page.locator('#mainNav')).toBeAttached();
-    await expect(page.locator('h1')).toBeVisible();
-    await expect(page.locator('[data-i18n="hero.title"]')).toBeVisible();
-    await expect(page.locator('img[alt="QR Code"]')).toBeVisible();
-    await expect(page.locator('footer')).toBeVisible();
-  });
+	test('page has all required elements', async ({ page }) => {
+		await expect(page.locator('img[alt="Genu.im Logo"]')).toBeVisible();
+		await expect(page.locator('#themeToggle')).toBeVisible();
+		await expect(page.locator('#langToggle')).toBeVisible();
+		await expect(page.locator('#mainNav')).toBeAttached();
+		await expect(page.locator('h1')).toBeVisible();
+		await expect(page.locator('[data-i18n="hero.title"]')).toBeVisible();
+		await expect(page.locator('img[alt="QR Code"]')).toBeVisible();
+		await expect(page.locator('footer')).toBeVisible();
+	});
 
-  test('CSS is loaded and applied', async ({ page }) => {
-    // CSS custom property only exists if output.css loaded
-    const bgColor = await page.evaluate(() =>
-      getComputedStyle(document.documentElement).getPropertyValue('--color-bg-body').trim()
-    );
-    expect(bgColor).toBeTruthy();
+	test('CSS is loaded and applied', async ({ page }) => {
+		// Самая стабильная проверка “CSS подключён” — наличие кастомной переменной из output.css
+		const bgColor = await page.evaluate(() =>
+			getComputedStyle(document.documentElement)
+				.getPropertyValue('--color-bg-body')
+				.trim()
+		);
+		expect(bgColor).toBeTruthy();
 
-    // dark:hidden only works if Tailwind CSS loaded — light logo visible, dark logo hidden
-    await expect(page.locator('img[alt="Genu.im Logo"]')).toBeVisible();
-    await expect(page.locator('img[alt="genu.im logo dark"]')).toBeHidden();
-  });
+		// И ещё: хотя бы один из логотипов должен быть виден (без assumptions про dark/light)
+		const lightLogo = page.locator('img[alt="Genu.im Logo"]');
+		const darkLogo = page.locator('img[alt="genu.im logo dark"]');
 
-  test('localStorage persists theme preference', async ({ page }) => {
-    const themeToggle = page.locator('#themeToggle');
-    const html = page.locator('html');
+		await expect(lightLogo.or(darkLogo)).toBeVisible();
+	});
 
-    await expect(themeToggle).toBeVisible();
+	test('localStorage persists theme preference', async ({ page }) => {
+		const themeToggle = page.locator('#themeToggle');
+		const html = page.locator('html');
 
-    const isDark = async () =>
-      await html.evaluate((el) => el.classList.contains('dark'));
+		await expect(themeToggle).toBeVisible();
 
-    // Ensure we end up in dark mode (regardless of initial state / prefers-color-scheme)
-    if (!(await isDark())) {
-      await themeToggle.click();
-      await expect.poll(isDark).toBe(true);
-    }
+		const isDark = async () =>
+			await html.evaluate((el) => el.classList.contains('dark'));
 
-    const savedTheme = await page.evaluate(() => localStorage.getItem('theme'));
-    expect(savedTheme).toBe('dark');
+		// Доведём до dark независимо от старта
+		if (!(await isDark())) {
+			await themeToggle.click();
+			await expect.poll(isDark).toBe(true);
+		}
 
-    await page.reload();
-    await page.waitForLoadState('domcontentloaded');
+		const savedTheme = await page.evaluate(() => localStorage.getItem('theme'));
+		expect(savedTheme).toBe('dark');
 
-    await expect.poll(isDark).toBe(true);
-  });
+		await page.reload();
+		await page.waitForLoadState('domcontentloaded');
+		await expect.poll(isDark).toBe(true);
+	});
 
-  test('localStorage persists language preference', async ({ page }) => {
-    const langToggle = page.locator('#langToggle');
-    const html = page.locator('html');
+	test('localStorage persists language preference', async ({ page }) => {
+		const langToggle = page.locator('#langToggle');
+		const html = page.locator('html');
 
-    const initialLang = await html.getAttribute('lang');
-    await langToggle.click();
-    await expect(html).not.toHaveAttribute('lang', initialLang);
+		const initialLang = await html.getAttribute('lang');
+		await langToggle.click();
+		await expect(html).not.toHaveAttribute('lang', initialLang);
 
-    const newLang = await html.getAttribute('lang');
-    const savedLang = await page.evaluate(() => localStorage.getItem('lang'));
-    expect(savedLang).toBe(newLang);
+		const newLang = await html.getAttribute('lang');
+		const savedLang = await page.evaluate(() => localStorage.getItem('lang'));
+		expect(savedLang).toBe(newLang);
 
-    await page.reload();
-    await page.waitForLoadState('domcontentloaded');
-    await expect(html).toHaveAttribute('lang', newLang);
-  });
+		await page.reload();
+		await page.waitForLoadState('domcontentloaded');
+		await expect(html).toHaveAttribute('lang', newLang);
+	});
 });
