@@ -32,3 +32,8 @@ _archive/
 migration/raw/
 migration/transcripts/
 # (site/ output.css is committed as part of site publishing strategy)
+test-results/genuim-genu-im-E2E-Tests-l-c4fd7-e-persists-theme-preference-Chromium/trace.zip
+test-results/genuim-genu-im-E2E-Tests-l-c4fd7-e-persists-theme-preference-WebKit/trace.zip
+test-results/genuim-genu-im-E2E-Tests-l-c4fd7-e-persists-theme-preference-Mobile-Chrome/trace.zip
+test-results/genuim-genu-im-E2E-Tests-l-c4fd7-e-persists-theme-preference-Firefox/trace.zip
+test-results/genuim-genu-im-E2E-Tests-t-c56f4-ches-between-light-and-dark-Chromium/trace.zip

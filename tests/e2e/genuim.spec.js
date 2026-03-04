@@ -14,16 +14,18 @@ test.describe('genu.im E2E Tests', () => {
     const themeToggle = page.locator('#themeToggle');
     const html = page.locator('html');
 
-    const initialTheme = await html.getAttribute('data-theme');
+    await expect(themeToggle).toBeVisible();
+
+    const isDark = async () =>
+      await html.evaluate((el) => el.classList.contains('dark'));
+
+    const initialIsDark = await isDark();
 
     await themeToggle.click();
-    await expect(html).not.toHaveAttribute('data-theme', initialTheme);
-
-    const newTheme = await html.getAttribute('data-theme');
-    expect(['light', 'dark']).toContain(newTheme);
+    await expect.poll(isDark).toBe(!initialIsDark);
 
     await themeToggle.click();
-    await expect(html).toHaveAttribute('data-theme', initialTheme);
+    await expect.poll(isDark).toBe(initialIsDark);
   });
 
   test('language toggle switches between EN and UK', async ({ page }) => {
@@ -91,15 +93,24 @@ test.describe('genu.im E2E Tests', () => {
     const themeToggle = page.locator('#themeToggle');
     const html = page.locator('html');
 
-    await themeToggle.click();
-    await expect(html).toHaveAttribute('data-theme', 'dark');
+    await expect(themeToggle).toBeVisible();
+
+    const isDark = async () =>
+      await html.evaluate((el) => el.classList.contains('dark'));
+
+    // Ensure we end up in dark mode (regardless of initial state / prefers-color-scheme)
+    if (!(await isDark())) {
+      await themeToggle.click();
+      await expect.poll(isDark).toBe(true);
+    }
 
     const savedTheme = await page.evaluate(() => localStorage.getItem('theme'));
     expect(savedTheme).toBe('dark');
 
     await page.reload();
     await page.waitForLoadState('domcontentloaded');
-    await expect(html).toHaveAttribute('data-theme', 'dark');
+
+    await expect.poll(isDark).toBe(true);
   });
 
   test('localStorage persists language preference', async ({ page }) => {
