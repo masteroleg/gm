@@ -23,6 +23,13 @@ fi
 
 OUT=$(opencode run -m opencode/minimax-m2.5-free --format default --command "You are a git commit message assistant.\n\nRules:\n- Output must be plain text and contain: subject line + blank line + body.\n- Subject: English Conventional Commits, max 72 chars, no trailing period.\n- Body: Russian, explain what/why briefly, 1-5 short lines.\n- Do not include markdown, code fences, or lists.\n- Do not mention 'AI' or models.\n\nContext: staged diff follows.\n\n$DIFF")
 
+# If opencode is not on PATH (common in GUI git integrations), try known install path.
+if [ -z "$OUT" ]; then
+	if [ -x "/d/app/opencode/opencode.exe" ]; then
+		OUT=$(/d/app/opencode/opencode.exe run -m opencode/minimax-m2.5-free --format default --command "You are a git commit message assistant.\n\nRules:\n- Output must be plain text and contain: subject line + blank line + body.\n- Subject: English Conventional Commits, max 72 chars, no trailing period.\n- Body: Russian, explain what/why briefly, 1-5 short lines.\n- Do not include markdown, code fences, or lists.\n- Do not mention 'AI' or models.\n\nContext: staged diff follows.\n\n$DIFF")
+	fi
+fi
+
 # If generation failed for any reason, do nothing.
 if [ -z "$OUT" ]; then
 	exit 0
