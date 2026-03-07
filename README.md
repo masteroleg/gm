@@ -103,7 +103,7 @@ git push origin HEAD:main
 
 Источник: `opencode run -m opencode/minimax-m2.5-free` + staged diff (`git diff --cached`).
 
-## Где смотреть подробности
+## Где смотреть подробности 
 
 - Публикуемый сайт и "человеческий" flow: `site/README.md`
 - Техническая схема CI/CD: `docs/ci.md`
