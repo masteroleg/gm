@@ -21,21 +21,34 @@ npm run build:css
 npm run start
 ```
 
-Make changes, then push as usual:
+Use one permanent working branch so VS Code Sync works normally while `main` stays protected:
 
 ```bash
-git push origin main
+git switch -C work
+git push -u origin work
+```
+
+After that, day-to-day flow is:
+
+```bash
+git push
+```
+
+When CI on `work` is green, promote the exact same commit to production:
+
+```bash
+npm run promote:main
 ```
 
 Expected behavior:
 
 - If local checks fail, the push is rejected locally and GitHub deploy never starts
-- If local checks pass but GitHub CI fails, `deploy-pages` does not run
-- Only a fully green CI run can deploy production content to GitHub Pages
+- If local checks pass but GitHub CI fails on `work`, `main` is unchanged and `deploy-pages` does not run
+- Only a fully green CI run can move the same commit into `main` and deploy production content to GitHub Pages
 
 ## Failure handling
 
-- `pre-push` failure: fix the local error and push again
+- `pre-push` failure: fix the local error and push `work` again
 - `quick-checks` failure: fix lint, typecheck, Jest, or CSS drift
 - `e2e` failure: inspect the failed matrix job and downloaded Playwright artifact if present
-- `required-checks` failure: treat as deploy blocked; fix upstream failed jobs first
+- `required-checks` failure: treat as deploy blocked; fix upstream failed jobs on `work` first

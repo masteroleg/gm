@@ -50,6 +50,33 @@ Recommended settings for `main`:
 4. Enable `Require linear history`
 5. Enable `Do not allow bypassing the above settings` if you want a hard gate
 
+## Simplest Solo Flow
+
+Keep one permanent branch, `work`, as the branch you use in VS Code.
+
+Initial setup:
+
+```bash
+git switch -C work
+git push -u origin work
+```
+
+Daily flow:
+
+```bash
+git push
+```
+
+That keeps normal VS Code Sync working against `origin/work`.
+
+When CI on `work` is green, promote the exact SHA to protected `main`:
+
+```bash
+npm run promote:main
+```
+
+This keeps `main` protected, avoids PR overhead, and still blocks deploy unless the exact commit has already passed CI.
+
 ## Useful Commands
 
 ```bash

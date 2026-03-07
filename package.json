@@ -9,6 +9,7 @@
 		"dev": "tailwindcss -i ./site/assets/css/input.css -o ./site/assets/css/output.css --watch",
 		"lint": "biome check package.json biome.json tsconfig.json playwright.config.ts tests site/assets/js .vscode/settings.json",
 		"format": "biome format --write package.json biome.json tsconfig.json playwright.config.ts tests site/assets/js .vscode/settings.json",
+		"promote:main": "git push origin HEAD:main",
 		"typecheck": "tsc --noEmit",
 		"migrate:bmad-memory": "python scripts/migrate_sessions.py",
 		"prepare": "husky",
