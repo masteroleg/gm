@@ -17,6 +17,7 @@ Thumbs.db
 # Backup files
 __index.html
 *.backup
+*.bak
 
 # Claude Code local state
 .claude/settings.local.json
