@@ -1,5 +1,11 @@
 #!/bin/sh
+npm run lint || exit 1
+npm run typecheck || exit 1
+npm run build:css || exit 1
+
 git diff --quiet site/assets/css/output.css || {
-  echo "output.css изменён, но не закоммичен. Сделай commit."
-  exit 1
+	echo "output.css обновлен локально. Добавь файл в commit перед push."
+	exit 1
 }
+
+npm run test:smoke || exit 1

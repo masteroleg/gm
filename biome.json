@@ -1,11 +1,12 @@
 {
 	"files": {
-		"ignore": [
-			"node_modules/**",
-			"test-results/**",
-			"playwright-report/**",
-			"_bmad-output/**",
-			"site/assets/css/output.css"
+		"includes": [
+			"**",
+			"!node_modules",
+			"!test-results",
+			"!playwright-report",
+			"!_bmad-output",
+			"!site/assets/css/output.css"
 		]
 	},
 	"formatter": {
