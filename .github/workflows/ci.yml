@@ -76,6 +76,7 @@ jobs:
           - mobile-safari
     env:
       CI: true
+      HOME: /root
       PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
       PW_PROJECT: ${{ matrix.project }}
     steps:

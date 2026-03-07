@@ -7,6 +7,8 @@ node_modules/
 
 # ⚙️ VS Code settings
 .vscode/
+!.vscode/
+!.vscode/settings.json
 gm.tree
 
 # 🙈 System
