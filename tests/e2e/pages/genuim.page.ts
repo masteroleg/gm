@@ -1,4 +1,4 @@
-import { expect, type Locator, type Page } from '@playwright/test';
+import { expect, type Locator, type Page } from "@playwright/test";
 
 export class GenuimPage {
 	readonly page: Page;
@@ -23,17 +23,17 @@ export class GenuimPage {
 	constructor(page: Page) {
 		this.page = page;
 
-		this.html = page.locator('html');
-		this.themeToggle = page.locator('#themeToggle');
-		this.langToggle = page.locator('#langToggle');
-		this.langLabel = page.locator('#langLabel');
+		this.html = page.locator("html");
+		this.themeToggle = page.locator("#themeToggle");
+		this.langToggle = page.locator("#langToggle");
+		this.langLabel = page.locator("#langLabel");
 
-		this.burgerBtn = page.locator('#burgerBtn');
-		this.mainNav = page.locator('#mainNav');
-		this.closeMenu = page.locator('#closeMenu');
+		this.burgerBtn = page.locator("#burgerBtn");
+		this.mainNav = page.locator("#mainNav");
+		this.closeMenu = page.locator("#closeMenu");
 
 		this.heroTitle = page.locator('[data-i18n="hero.title"]');
-		this.footer = page.locator('footer');
+		this.footer = page.locator("footer");
 
 		this.lightLogo = page.locator('img[alt="Genu.im Logo"]');
 		this.darkLogo = page.locator('img[alt="genu.im logo dark"]');
@@ -44,12 +44,12 @@ export class GenuimPage {
 
 	async gotoHome() {
 		// Идиоматично: baseURL берётся из playwright.config.ts
-		await this.page.goto('/');
-		await this.page.waitForLoadState('domcontentloaded');
+		await this.page.goto("/");
+		await this.page.waitForLoadState("domcontentloaded");
 	}
 
 	async isDark(): Promise<boolean> {
-		return this.html.evaluate((el) => el.classList.contains('dark'));
+		return this.html.evaluate((el) => el.classList.contains("dark"));
 	}
 
 	async expectLogosPresent() {
@@ -77,30 +77,37 @@ export class GenuimPage {
 	async toggleLanguageAndWait() {
 		await expect(this.langToggle).toBeVisible();
 
-		const initial = await this.html.getAttribute('lang');
+		const initial = await this.html.getAttribute("lang");
 		await this.langToggle.click();
-		await expect(this.html).not.toHaveAttribute('lang', initial ?? '');
+		await expect(this.html).not.toHaveAttribute("lang", initial ?? "");
 	}
 
-	async currentLang(): Promise<'en' | 'uk'> {
-		const lang = (await this.html.getAttribute('lang')) ?? 'en';
-		if (lang !== 'en' && lang !== 'uk') throw new Error(`Unexpected lang="${lang}"`);
+	async currentLang(): Promise<"en" | "uk"> {
+		const lang = (await this.html.getAttribute("lang")) ?? "en";
+		if (lang !== "en" && lang !== "uk")
+			throw new Error(`Unexpected lang="${lang}"`);
 		return lang;
 	}
 
 	async clearPrefsStorage() {
 		await this.page.addInitScript(() => {
-			localStorage.removeItem('theme');
-			localStorage.removeItem('lang');
+			localStorage.removeItem("theme");
+			localStorage.removeItem("lang");
 		});
 	}
 
 	async expectCssLoaded() {
-		const bgVar = await this.page.evaluate(() =>
-			getComputedStyle(document.documentElement)
-				.getPropertyValue('--color-bg-body')
-				.trim()
-		);
-		expect(bgVar).toBeTruthy();
+		const styles = await this.page.evaluate(() => {
+			const htmlStyles = getComputedStyle(document.documentElement);
+			const bodyStyles = getComputedStyle(document.body);
+
+			return {
+				surfaceToken: htmlStyles.getPropertyValue("--color-surface").trim(),
+				backgroundImage: bodyStyles.backgroundImage,
+			};
+		});
+
+		expect(styles.surfaceToken).toBeTruthy();
+		expect(styles.backgroundImage).not.toBe("none");
 	}
 }

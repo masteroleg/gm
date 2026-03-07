@@ -1,9 +1,8 @@
 // --- Mobile menu open/close ---
-document.getElementById('burgerBtn').addEventListener('click', function () {
-	document.getElementById('mainNav').classList.remove('hidden');
+document.getElementById("burgerBtn").addEventListener("click", () => {
+	document.getElementById("mainNav").classList.remove("hidden");
 });
 // Закрытие меню
-document.getElementById('closeMenu').addEventListener('click', function () {
-	document.getElementById('mainNav').classList.add('hidden');
+document.getElementById("closeMenu").addEventListener("click", () => {
+	document.getElementById("mainNav").classList.add("hidden");
 });
-  
