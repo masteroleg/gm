@@ -101,7 +101,18 @@ git push origin HEAD:main
 - subject line: English Conventional Commits
 - body: короткое объяснение на русском
 
-Источник: `opencode run -m opencode/minimax-m2.5-free` + staged diff (`git diff --cached`).
+Источник: `scripts/generate-commit-msg.cjs`.
+
+Логика такая:
+
+- список предпочтительных моделей хранится в `commit-message.config.json`
+- затем скрипт проверяет, какие модели реально доступны через `opencode models`
+- используется первая подходящая модель из массива
+- если нужная модель исчезла из бесплатного списка, достаточно обновить массив в `commit-message.config.json`
+- если staged diff слишком большой, скрипт сознательно переключается на локальный fallback по лимиту `maxPromptChars`
+- если `opencode` не дал результата, включается локальный fallback, чтобы commit из VS Code не ломался
+
+Это решение сделано так, чтобы не зависеть от одной жестко прошитой модели и при этом не терять рабочий сценарий при смене бесплатных моделей.
 
 ## Где смотреть подробности 
 

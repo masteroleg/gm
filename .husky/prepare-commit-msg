@@ -13,39 +13,12 @@ if [ -s "$MSG_FILE" ] && grep -Eq '^[[:space:]]*[^#[:space:]].*' "$MSG_FILE"; th
 	exit 0
 fi
 
-# Generate a Conventional Commit subject (EN) + body (RU).
-# Output format is plain text. Subject must be a single line.
-DIFF=$(git diff --cached)
-
-if [ -z "$DIFF" ]; then
+if command -v node >/dev/null 2>&1; then
+	node scripts/generate-commit-msg.cjs "$MSG_FILE"
 	exit 0
 fi
 
-PROMPT="You are a git commit message assistant.
-
-Rules:
-- Output must be plain text and contain: subject line + blank line + body.
-- Subject: English Conventional Commits, max 72 chars, no trailing period.
-- Body: Russian, explain what/why briefly, 1-5 short lines.
-- Do not include markdown, code fences, or lists.
-- Do not mention AI or models.
-
-Context: staged diff follows.
-
-$DIFF"
-
-OUT=$(opencode run "$PROMPT" -m opencode/minimax-m2.5-free)
-
-# If opencode is not on PATH (common in GUI git integrations), try known install path.
-if [ -z "$OUT" ]; then
-	if [ -x "/d/app/opencode/opencode.exe" ]; then
-		OUT=$(/d/app/opencode/opencode.exe run "$PROMPT" -m opencode/minimax-m2.5-free)
-	fi
-fi
-
-# If generation failed for any reason, do nothing.
-if [ -z "$OUT" ]; then
+if command -v node.exe >/dev/null 2>&1; then
+	node.exe scripts/generate-commit-msg.cjs "$MSG_FILE"
 	exit 0
 fi
-
-printf "%s\n" "$OUT" > "$MSG_FILE"
