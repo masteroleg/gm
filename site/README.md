@@ -1,19 +1,50 @@
-# Site publishing directory (site/)
+# Публикуемый сайт (`site/`)
 
-This repository uses a conservative migration strategy: the static site content that is published to GitHub Pages lives under the site/ directory. The root of the repository contains BMAD configuration and artifacts (docs/). All CSS is built via Tailwind in CI and the resulting output.css is committed under site/assets/css/output.css.
+В этой папке лежит статический сайт, который публикуется на GitHub Pages. Корень репозитория используется не только для сайта, но и для BMAD-конфигурации, служебных документов и артефактов. Поэтому важно явно зафиксировать, как именно устроены проверки и деплой, чтобы через полгода можно было быстро восстановить полную картину.
 
-- CI builds CSS for site/ and verifies output.css is up to date
-- GitHub Pages publishes the content of site/ (gh-pages workflow publishes site/ root)
-- Local development uses: npm ci, npm run build:css, npm run start (serve site/)
+## Что здесь публикуется
 
-## Safe delivery flow
+- GitHub Pages выкладывает содержимое папки `site/`
+- CSS собирается из `site/assets/css/input.css` в `site/assets/css/output.css`
+- `site/assets/css/output.css` хранится в git и обязан быть актуальным, потому что в production нет отдельного шага сборки
 
-- Local `git push` is blocked by `.husky/pre-push` if `npm run lint`, `npm run typecheck`, `npm run build:css`, committed CSS verification, or `npm run test:smoke` fails
-- GitHub Actions runs `quick-checks` first, then full Playwright matrix: `chromium`, `firefox`, `webkit`, `mobile-chrome`, `mobile-safari`
-- `deploy-pages` runs only after successful CI jobs and successful `required-checks`
-- Branch protection on `main` requires `required-checks`
+## Зачем мы меняли процесс
 
-## Normal workflow
+Раньше была опасная ситуация: деплой мог происходить независимо от полного CI-прогона. Это означало риск выкатить сломанный `main` в production.
+
+Что сделано теперь:
+
+- локально перед `git push` запускается быстрый защитный gate
+- в GitHub Actions сначала идет `quick-checks`, потом полный Playwright matrix
+- деплой запускается только после успешного CI
+- ветка `main` защищена required check `required-checks`
+
+Идея простая: если код не проходит локально или не проходит в GitHub, production не обновляется.
+
+## Как теперь работать каждый день
+
+Чтобы VS Code Sync работал нормально и без лишней ручной возни, используется одна постоянная рабочая ветка `work`.
+
+Почему именно так:
+
+- прямой push в защищенную `main` теперь специально запрещен
+- GitHub должен сначала увидеть commit, прогнать CI и только потом разрешить продвинуть тот же SHA в `main`
+- одна постоянная ветка `work` дает самый простой и предсказуемый flow без PR
+
+### Первичная настройка
+
+Делается один раз:
+
+```bash
+git switch -C work
+git push -u origin work
+```
+
+После этого в VS Code можно работать как обычно в ветке `work` и использовать обычный Sync.
+
+### Обычный ежедневный flow
+
+Локальный запуск сайта:
 
 ```bash
 npm ci
@@ -21,34 +52,93 @@ npm run build:css
 npm run start
 ```
 
-Use one permanent working branch so VS Code Sync works normally while `main` stays protected:
-
-```bash
-git switch -C work
-git push -u origin work
-```
-
-After that, day-to-day flow is:
+Обычная отправка изменений из `work`:
 
 ```bash
 git push
 ```
 
-When CI on `work` is green, promote the exact same commit to production:
+Когда CI на `work` зеленый, тот же самый commit продвигается в `main`:
 
 ```bash
 npm run promote:main
 ```
 
-Expected behavior:
+Скрипт `promote:main` делает простую вещь: отправляет текущий `HEAD` в `main` только после того, как этот commit уже существует на GitHub и смог пройти проверки.
 
-- If local checks fail, the push is rejected locally and GitHub deploy never starts
-- If local checks pass but GitHub CI fails on `work`, `main` is unchanged and `deploy-pages` does not run
-- Only a fully green CI run can move the same commit into `main` and deploy production content to GitHub Pages
+## Что проверяется локально и зачем
 
-## Failure handling
+Перед каждым `git push` срабатывает `.husky/pre-push`.
 
-- `pre-push` failure: fix the local error and push `work` again
-- `quick-checks` failure: fix lint, typecheck, Jest, or CSS drift
-- `e2e` failure: inspect the failed matrix job and downloaded Playwright artifact if present
-- `required-checks` failure: treat as deploy blocked; fix upstream failed jobs on `work` first
+Он запускает:
+
+1. `npm run lint` - базовая проверка качества и единообразия кода
+2. `npm run typecheck` - защита от ошибок в TypeScript-конфигурации и типах
+3. `npm run build:css` - проверка, что Tailwind собирается без проблем
+4. проверку `site/assets/css/output.css` - защита от ситуации, когда CSS пересобрался, но не был закоммичен
+5. `npm run test:smoke` - быстрые E2E-проверки критического пути сайта
+
+Если любой шаг падает, push не уходит на GitHub.
+
+## Что проверяется в GitHub и зачем
+
+После push в `work` или `main` GitHub Actions запускает workflow `CI`.
+
+Сначала идет `quick-checks`:
+
+- install dependencies
+- lint
+- typecheck
+- Jest
+- build CSS
+- verify committed CSS
+
+Потом идет полный Playwright matrix:
+
+- `chromium`
+- `firefox`
+- `webkit`
+- `mobile-chrome`
+- `mobile-safari`
+
+После этого выполняется `required-checks` - агрегирующий check, который branch protection использует как единый сигнал "можно ли двигать main дальше".
+
+И только потом запускается `deploy-pages`.
+
+## Что происходит при ошибках
+
+### Если ошибка локально
+
+- push блокируется до отправки на GitHub
+- CI не запускается
+- production не трогается
+
+### Если локально все прошло, но ошибка в GitHub CI
+
+- `main` не обновляется
+- `deploy-pages` не запускается
+- production не трогается
+
+### Если все зеленое
+
+- commit успешно проходит CI
+- commit можно продвинуть из `work` в `main`
+- после этого GitHub Pages получает обновление
+
+## Почему это решение считается максимально простым и надежным
+
+- одна рабочая ветка `work`
+- обычный VS Code Sync работает без экзотики
+- `main` остается защищенной
+- деплой возможен только для уже проверенного SHA
+- не нужен PR-процесс, если работаешь solo
+
+## Если через полгода нужно быстро вспомнить картину
+
+Смотри в таком порядке:
+
+1. `site/README.md` - зачем нужен текущий flow и как им пользоваться
+2. `docs/ci.md` - более техническая схема CI/CD
+3. `.husky/pre-push` - что реально блокирует push локально
+4. `.github/workflows/ci.yml` - что реально происходит в GitHub
+5. `package.json` - команды `test:smoke`, `test:e2e:ci`, `promote:main`

@@ -1,83 +1,119 @@
-# CI and Deploy Guide
+# CI и деплой: техническая схема
 
-## Overview
+Этот документ нужен как техническое дополнение к `site/README.md`. В `README` описан понятный пользовательский flow, а здесь зафиксировано, как это реализовано в репозитории.
 
-- Local gate runs before `git push` via `.husky/pre-push`
-- GitHub Actions runs quick checks, then full Playwright matrix, then deploys Pages only after success
-- Stable required check to use in branch protection: `required-checks`
+## Краткая цель
 
-## Local Gate
+Нужно было добиться трех вещей одновременно:
 
-`pre-push` runs these commands in order:
+1. Простая ежедневная работа из VS Code
+2. Защита production от неуспешных локальных и CI-сборок
+3. Отсутствие лишней бюрократии вроде обязательных PR для solo-режима
+
+Итоговое решение:
+
+- работа ведется в постоянной ветке `work`
+- `main` остается защищенной
+- локальный `pre-push` не дает отправить очевидно плохой commit
+- GitHub CI не дает продвинуть commit в `main`, пока он не зеленый
+- deploy идет только из `main` и только после успешного CI
+
+## Локальный gate
+
+`.husky/pre-push` запускает:
 
 1. `npm run lint`
 2. `npm run typecheck`
 3. `npm run build:css`
-4. verify `site/assets/css/output.css` is committed
+4. проверку актуальности `site/assets/css/output.css`
 5. `npm run test:smoke`
 
-Smoke uses Playwright tag filtering with `@smoke` and runs only `chromium` locally for speed.
+`test:smoke` использует Playwright-тег `@smoke` и локально гоняется только на `chromium`, чтобы gate оставался быстрым.
 
-## CI Workflow
+## GitHub Actions workflow
 
-Workflow path: `.github/workflows/ci.yml`
+Основной workflow: `.github/workflows/ci.yml`
 
-Jobs:
+### `quick-checks`
 
-- `quick-checks` - install, lint, typecheck, Jest, build CSS, upload Pages artifact on `main`
-- `e2e` - full Playwright matrix in official Playwright Docker image:
-  - `chromium`
-  - `firefox`
-  - `webkit`
-  - `mobile-chrome`
-  - `mobile-safari`
-- `deploy-pages` - runs only on push to `main` and only after `quick-checks` and `e2e`
-- `required-checks` - aggregator job for GitHub branch protection
+- `npm ci`
+- `npm run lint`
+- `npm run typecheck`
+- `npm test`
+- `npm run build:css`
+- `git diff --exit-code -- site/assets/css/output.css`
+- upload Pages artifact
 
-## Deploy Model
+### `e2e`
 
-- Deploy uses the artifact produced earlier in the same workflow
-- Deploy does not rerun `npm ci` or `npm run build:css`
-- Pages concurrency is limited so a newer deploy cancels an older one
+Полный Playwright matrix в официальном контейнере Playwright:
 
-## Branch Protection
+- `chromium`
+- `firefox`
+- `webkit`
+- `mobile-chrome`
+- `mobile-safari`
 
-Recommended settings for `main`:
+### `required-checks`
 
-1. Enable `Require status checks to pass before merging`
-2. Mark `required-checks` as required
-3. Keep `Require a pull request before merging` disabled if you stay in solo no-PR mode
-4. Enable `Require linear history`
-5. Enable `Do not allow bypassing the above settings` if you want a hard gate
+Это агрегирующий check для branch protection. Он должен быть зеленым, чтобы GitHub считал commit годным для продвижения в `main`.
 
-## Simplest Solo Flow
+### `deploy-pages`
 
-Keep one permanent branch, `work`, as the branch you use in VS Code.
+- выполняется только после успеха `quick-checks` и `e2e`
+- использует уже подготовленный artifact
+- не делает повторный `npm ci` или повторную сборку сайта
 
-Initial setup:
+## Branch protection на `main`
+
+Зафиксированная схема:
+
+1. Включен `Require status checks to pass before merging`
+2. Required check: `required-checks`
+3. `Require a pull request before merging` выключен
+4. `Require linear history` включен
+5. `Do not allow bypassing the above settings` включен
+
+## Самый простой solo-flow
+
+### Один раз
 
 ```bash
 git switch -C work
 git push -u origin work
 ```
 
-Daily flow:
+### Каждый день
+
+Работаешь в `work` и используешь обычный Sync в VS Code.
+
+CLI-эквивалент:
 
 ```bash
 git push
 ```
 
-That keeps normal VS Code Sync working against `origin/work`.
+### Когда CI на `work` зеленый
 
-When CI on `work` is green, promote the exact SHA to protected `main`:
+Продвижение того же SHA в `main`:
 
 ```bash
 npm run promote:main
 ```
 
-This keeps `main` protected, avoids PR overhead, and still blocks deploy unless the exact commit has already passed CI.
+Скрипт выполняет:
 
-## Useful Commands
+```bash
+git push origin HEAD:main
+```
+
+## Почему прямой push в `main` больше не работает
+
+Потому что теперь `main` защищена required check-ом. GitHub не принимает новый commit в `main`, если для него еще не существует успешного `required-checks`.
+
+Поэтому commit сначала живет в `work`, проходит CI, и только потом тот же SHA продвигается в `main`.
+
+## Полезные команды
 
 ```bash
 npm run lint
@@ -85,4 +121,5 @@ npm run typecheck
 npm run test:smoke
 npm run test:e2e -- --project=firefox
 npm run test:ci
+npm run promote:main
 ```
