@@ -13,6 +13,7 @@ export class GenuimPage {
 	readonly mainNav: Locator;
 	readonly closeMenu: Locator;
 
+	readonly heroEyebrow: Locator;
 	readonly heroTitle: Locator;
 	readonly footer: Locator;
 
@@ -32,11 +33,12 @@ export class GenuimPage {
 		this.mainNav = page.locator("#mainNav");
 		this.closeMenu = page.locator("#closeMenu");
 
-		this.heroTitle = page.locator('[data-i18n="hero.title"]');
+		this.heroEyebrow = page.locator('[data-i18n="hero.eyebrow"]');
+		this.heroTitle = page.locator(".hero-title");
 		this.footer = page.locator("footer");
 
-		this.lightLogo = page.locator('img[alt="Genu.im Logo"]');
-		this.darkLogo = page.locator('img[alt="genu.im logo dark"]');
+		this.lightLogo = page.locator(".logo-image--light");
+		this.darkLogo = page.locator(".logo-image--dark");
 
 		// устойчиво: по src из логов
 		this.qrImage = page.locator('img[src*="QR-pitch"]').first();

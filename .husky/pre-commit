@@ -1,6 +1,3 @@
 #!/bin/sh
 npm run build:css
-git diff --quiet site/assets/css/output.css || {
-  echo "output.css обновлён — добавьте его в коммит"
-  exit 1
-}
+git add site/assets/css/output.css

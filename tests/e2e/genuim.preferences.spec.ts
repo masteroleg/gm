@@ -44,13 +44,13 @@ test.describe("genu.im — preferences", () => {
 		await app.toggleLanguageAndWait();
 
 		const lang = await app.currentLang();
-		await expect(app.langLabel).toHaveText(lang.toUpperCase());
-		await expect(app.heroTitle).toBeVisible();
+		await expect(app.langLabel).toHaveText(lang === "uk" ? "UA" : "EN");
+		await expect(app.heroEyebrow).toBeVisible();
 
 		if (lang === "uk") {
-			await expect(app.heroTitle).toContainText("Довіра");
+			await expect(app.heroEyebrow).toContainText("Довіра");
 		} else {
-			await expect(app.heroTitle).toContainText("Trust");
+			await expect(app.heroEyebrow).toContainText("Trust");
 		}
 	});
 

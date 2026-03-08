@@ -3,30 +3,33 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="msapplication-TileColor" content="#00A95C" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="#00A95C" />
-	<title>genu.im — Trust through transparency</title>
-	<meta name="description" content="genu.im - Verify product authenticity through transparency. Build consumer trust with real-time verification and transparent supply chain tracking." />
+	<title>genu.im — Trust built through transparency</title>
+	<meta name="description" content="genu.im helps brands and regulated producers turn product codes into checkable records. Real-time verification, transparent product data, no app required." />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Onest:wght@500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+	<noscript>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Onest:wght@500;600;700;800&display=swap" />
+	</noscript>
 
 	<link rel="icon" href="assets/favicon/favicon.ico" />
 	<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
 	<link rel="icon" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
 	<link rel="icon" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
 
-	<link href="assets/css/output.css?v=9" rel="stylesheet" />
+	<link href="assets/css/output.css?v=16" rel="stylesheet" />
 
-	<script>/* Prevent FOUC: set theme as early as possible */
+	<script>/* Prevent FOUC */
 		try {
 			const theme = localStorage.getItem('theme');
 			if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
 				document.documentElement.classList.add('dark');
 			}
-
 			const lang = localStorage.getItem('lang');
 			if (lang && (lang === 'en' || lang === 'uk')) {
 				document.documentElement.lang = lang;
 			}
-		} catch (e) { /* silent fail */ }
+		} catch (e) {}
 	</script>
 
 	<script defer src="https://www.googletagmanager.com/gtag/js?id=G-RBD0C4LE5V"></script>
@@ -36,126 +39,473 @@
 		gtag('js', new Date());
 		gtag('config', 'G-RBD0C4LE5V');
 	</script>
-
 </head>
 
-<body class="bg-[var(--color-bg-body)] text-[var(--color-text-body)] font-sans transition-all duration-500">
-	<div class="max-w-6xl mx-auto px-6 py-8 min-h-screen flex flex-col justify-between">
-		<header class="flex justify-between items-center">
-			<img src="assets/img/logo-01_black.svg" alt="Genu.im Logo" width="116" height="40" class="h-10 dark:hidden" />
-			<img src="assets/img/logo-02_white.svg" alt="genu.im logo dark" width="116" height="40" class="h-10 hidden dark:block" />
+<body class="site-body">
+	<div class="page-shell">
+		<div class="ambient-orb ambient-orb--left" aria-hidden="true"></div>
+		<div class="ambient-orb ambient-orb--right" aria-hidden="true"></div>
+		<div class="content-shell shell-frame shell-frame--page">
 
-			<div class="flex items-center gap-3">
-				<button id="langToggle" type="button" class="rounded px-2 py-0.5 text-sm font-medium uppercase"
-					aria-label="Language: EN. Click to switch." tabindex="0" aria-controls="langLabel">
-					<span id="langLabel">EN</span>
-				</button>
-				<button id="themeToggle" type="button"
-					class="p-2 rounded-full hover:bg-[var(--color-button-hover-bg)] transition-colors duration-200 focus:outline-none focus:ring-blue-500 focus:ring-offset-[var(--color-dark-focus-ring-offset)]"
-					title="Switch between dark and light mode"
-					aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite"
-					aria-pressed="false">
-					<div class="relative w-6 h-6">
-						<svg class="absolute inset-0 w-6 h-6 text-[var(--color-icon-sun)] dark:opacity-0 dark:scale-50 transition-all duration-300 drop-shadow-[0_0_2px_rgba(251,191,36,0.5)]"
-							fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-							aria-hidden="true">
-							<path stroke-linecap="round" stroke-linejoin="round"
-								d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-						</svg>
-						<svg class="absolute inset-0 w-6 h-6 text-[var(--color-icon-moon)] opacity-0 dark:opacity-100 scale-50 dark:scale-100 transition-all duration-300 drop-shadow-[0_0_2px_rgba(147,197,253,0.5)]"
-							viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-							<path fill-rule="evenodd"
-								d="M21.752 15.002A9.72 9.72 0 0118 15.75 9.75 9.75 0 018.25 6c0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25 9.75 9.75 0 0012.75 21a9.753 9.753 0 009.002-5.998z"
-								clip-rule="evenodd" />
-						</svg>
+			<header class="site-header">
+				<a href="./" class="logo-lockup" aria-label="genu.im home">
+					<img src="assets/img/logo-01_black.svg" alt="genu.im" width="116" height="40" class="logo-image logo-image--light" />
+					<img src="assets/img/logo-02_white.svg" alt="genu.im" width="116" height="40" class="logo-image logo-image--dark" />
+				</a>
+
+				<div class="header-controls">
+					<nav id="mainNav" class="site-nav fixed inset-0 z-50 hidden md:flex md:static md:inset-auto md:z-auto">
+						<a href="#use-cases" class="site-nav__link" data-i18n="nav.useCases">Use cases</a>
+						<a href="#how-it-works" class="site-nav__link" data-i18n="nav.howItWorks">How it works</a>
+						<button id="closeMenu" class="site-nav__close absolute top-5 right-5 md:hidden" aria-label="Close Menu">&times;</button>
+					</nav>
+
+					<div class="utility-strip">
+						<button id="langToggle" type="button" class="control-chip" aria-label="Language: EN. Click to switch." tabindex="0">
+							<span id="langLabel">EN</span>
+						</button>
+						<span class="utility-strip__divider" aria-hidden="true"></span>
+						<button id="themeToggle" type="button" class="control-icon"
+							aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false">
+							<div class="theme-toggle__glyph">
+								<svg class="theme-toggle__icon theme-toggle__icon--sun" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+								</svg>
+								<svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+									<path fill-rule="evenodd" d="M21.752 15.002A9.72 9.72 0 0118 15.75 9.75 9.75 0 018.25 6c0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25 9.75 9.75 0 0012.75 21a9.753 9.753 0 009.002-5.998z" clip-rule="evenodd" />
+								</svg>
+							</div>
+						</button>
 					</div>
-				</button>
-			</div>
 
-			<button id="burgerBtn" type="button" class="md:hidden flex items-center p-2 ml-2" aria-label="Open Menu">
-				<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-					stroke-linecap="round" stroke-linejoin="round">
-					<line x1="3" y1="6" x2="21" y2="6" />
-					<line x1="3" y1="12" x2="21" y2="12" />
-					<line x1="3" y1="18" x2="21" y2="18" />
-				</svg>
-			</button>
-		</header>
-
-		<nav id="mainNav"
-			class="fixed inset-0 z-50 bg-white dark:bg-[#181818] flex-col items-center justify-center hidden md:flex md:static md:bg-transparent md:dark:bg-transparent md:flex-row md:gap-6 mt-4">
-			<!-- <a href="perevir-product/" class="main-nav__link py-4 text-lg font-semibold hover:underline"
-				id="navPerevirProduct" data-i18n="nav.perevirProduct" aria-label="Check product">
-				Check product
-			</a> -->
-			<button id="closeMenu" class="absolute top-5 right-5 md:hidden" aria-label="Close Menu">&times;</button>
-		</nav>
-
-		<main class="flex flex-col lg:flex-row items-center justify-between mt-12 lg:mt-20 gap-8 lg:gap-12">
-			<div class="flex gap-4 w-full max-w-2xl">
-				<div class="accent-line hidden sm:block"></div>
-				<div class="hero-card flex-1">
-					<h1 data-i18n="hero.title" class="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
-						Trust built through transparency.
-					</h1>
-					<p data-i18n="hero.subtitle" class="mt-4 text-lg text-brand font-medium">
-						Consumer loyalty through enhanced transparency
-					</p>
-					<p data-i18n="hero.tagline" class="mt-2 text-base text-[var(--color-text-muted)] italic">
-						Not fake. Not "maybe". Just genu.im.
-					</p>
-					
-					<a href="#verify" class="cta-button mt-8">
-						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+					<button id="burgerBtn" type="button" class="control-icon burger-button md:hidden" aria-label="Open Menu">
+						<svg class="burger-button__icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<line x1="3" y1="6" x2="21" y2="6" />
+							<line x1="3" y1="12" x2="21" y2="12" />
+							<line x1="3" y1="18" x2="21" y2="18" />
 						</svg>
-						<span>Verify Product</span>
-					</a>
-					
-					<div class="flex flex-wrap gap-6 mt-8 pt-6 border-t border-[var(--color-border-subtle)]">
-						<div class="feature-item">
-							<svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-							</svg>
-							<span class="text-sm font-medium">Verified</span>
+					</button>
+				</div>
+			</header>
+
+			<main class="site-main site-main--stacked">
+				<section class="hero-section reveal-panel">
+					<div class="hero-card">
+						<div class="hero-copy">
+							<p class="hero-eyebrow">
+								<span class="eyebrow-dot" aria-hidden="true"></span>
+								<span data-i18n="hero.eyebrow">Trust through transparency</span>
+							</p>
+
+							<h1 class="hero-title">
+								<span class="hero-title__line" data-i18n="hero.titleLine1">Make each product</span>
+								<span class="hero-title__line" data-i18n="hero.titleLine2">instantly</span>
+								<span class="hero-title__line hero-title__line--accent" data-i18n="hero.titleLine3">checkable.</span>
+							</h1>
+
+							<p data-i18n="hero.description" class="hero-description">genu.im turns product codes into trusted digital touchpoints.</p>
+
+							<p data-i18n="hero.strategic" class="hero-strategic">Others promise. We prove.</p>
+
+							<p data-i18n="hero.meta" class="hero-meta">Brand protection. eAktsyz. Product trust.</p>
+
+							<div class="hero-actions">
+								<a href="#final-cta" class="cta-button">
+									<svg class="cta-button__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+									</svg>
+									<span data-i18n="hero.ctaPrimary">Talk to us</span>
+								</a>
+								<a href="#how-it-works" class="cta-link" data-i18n="hero.ctaSecondary">See it in action</a>
+							</div>
+
+							<div class="hero-proof-strip">
+								<div class="hero-proof-stat">
+									<span class="hero-proof-stat__value" data-i18n="hero.proofValue">25M+</span>
+									<span class="hero-proof-stat__label" data-i18n="hero.proofLabel">product-scale deployment in Ukraine</span>
+								</div>
+							<p class="hero-proof-note" data-i18n-aria-label="hero.proofNoteAria" aria-label="NDA case. Scale in plain sight.">
+								<span class="hero-proof-note__line" data-i18n="hero.proofNoteLine1">NDA case.</span>
+								<span class="hero-proof-note__line" data-i18n="hero.proofNoteLine2">Scale in plain sight.</span>
+							</p>
+							</div>
+
+							<div class="hero-signals">
+								<div class="signal-pill">
+									<svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+									</svg>
+									<span data-i18n="hero.signalVerified">Verified record</span>
+								</div>
+								<div class="signal-pill">
+									<svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+									</svg>
+									<span data-i18n="hero.signalRealtime">Real-time check</span>
+								</div>
+								<div class="signal-pill">
+									<svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+									</svg>
+									<span data-i18n="hero.signalTransparent">No app required</span>
+								</div>
+							</div>
 						</div>
-						<div class="feature-item">
-							<svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-							</svg>
-							<span class="text-sm font-medium">Real-time</span>
-						</div>
-						<div class="feature-item">
-							<svg class="feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-							</svg>
-							<span class="text-sm font-medium">Transparent</span>
+
+						<div class="hero-visual" aria-label="Verification preview">
+							<div class="flow-card flow-card--preview">
+								<p class="flow-card__eyebrow">
+									<span class="vcard__dot" aria-hidden="true"></span>
+									<span data-i18n="hero.previewEyebrow">Verification preview</span>
+								</p>
+
+							<div class="hero-visual-status" aria-hidden="true">
+								<span class="hero-visual-badge" data-i18n="hero.visualBadge1">LIVE RECORD</span>
+								<span class="hero-visual-badge" data-i18n="hero.visualBadge2">UNIT LEVEL</span>
+							</div>
+
+								<div class="flow-step">
+									<div class="flow-step__icon flow-step__icon--brand">
+										<svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+										</svg>
+									</div>
+									<div class="flow-step__body">
+										<span class="flow-step__label" data-i18n="hero.previewStep1Label">Record</span>
+										<span class="flow-step__desc" data-i18n="hero.previewStep1Desc">Code linked to verified data.</span>
+									</div>
+									<div class="flow-step__qr" aria-hidden="true">
+										<img src="assets/img/QR-pitch.svg" alt="" width="52" height="52" class="flow-qr dark:invert" />
+									</div>
+								</div>
+
+								<div class="flow-step">
+									<div class="flow-step__icon flow-step__icon--scan">
+										<svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+										</svg>
+									</div>
+									<div class="flow-step__body">
+									<span class="flow-step__label" data-i18n="hero.previewStep2Label">Scan</span>
+									<span class="flow-step__desc" data-i18n="hero.previewStep2Desc">Any phone. Seconds, not steps.</span>
+								</div>
+								<div class="flow-step__badge flow-step__badge--text" aria-hidden="true">
+									<span data-i18n="hero.previewBadgeNoApp">Без застосунку</span>
+								</div>
+								</div>
+
+								<div class="flow-step flow-step--result">
+									<div class="flow-step__icon flow-step__icon--verified">
+										<svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+										</svg>
+									</div>
+									<div class="flow-step__body">
+										<span class="flow-step__label" data-i18n="hero.previewStep3Label">Proof</span>
+										<span class="flow-step__desc" data-i18n="hero.previewStep3Desc">Clear result from a real record.</span>
+									</div>
+									<div class="flow-step__timing" aria-hidden="true">
+										<span data-i18n="hero.previewStat2Value">3 sec</span>
+									</div>
+								</div>
+
+							<div class="hero-visual-metrics" aria-hidden="true">
+								<div class="hero-metric-card">
+									<span class="hero-metric-card__value" data-i18n="hero.metric1Value">25M+</span>
+									<span class="hero-metric-card__label" data-i18n="hero.metric1Label">marked products</span>
+								</div>
+							</div>
+
 						</div>
 					</div>
-				</div>
-			</div>
-			
-			<div class="flex flex-col items-center gap-3">
-				<div class="qr-glow bg-white dark:bg-[#181818] p-4 rounded-2xl shadow-card">
-					<img src="assets/img/QR-pitch.svg" alt="QR Code" width="144" height="144" class="w-36 h-36 dark:invert" fetchpriority="high" />
-				</div>
-				<p data-i18n="hero.qr" class="text-xs uppercase tracking-widest text-[var(--color-text-muted)] font-medium">
-					Scan to verify
-				</p>
-			</div>
-		</main>
+					</div>
+				</section>
 
-		<footer class="mt-16 text-center text-sm text-[var(--color-text-secondary)]">
-			<p data-i18n="footer.tagline" class="italic">Building trust through clarity</p>
-			<!-- <a href="perevir-product/" class="main-nav__link" id="footerPerevirProduct" aria-label="Check product"
-				title="Check product"></a> -->
+				<section id="use-cases" class="content-section content-section--plain">
+					<div class="section-heading section-heading--lead">
+						<p class="section-eyebrow" data-i18n="useCases.eyebrow">Use cases</p>
+						<h2 class="section-title" data-i18n="useCases.title">Built for two high-stakes brand jobs.</h2>
+						<p class="section-intro" data-i18n="useCases.intro">Protect the product. Then add value to the scan.</p>
+					</div>
 
-		</footer>
+					<div class="use-case-grid">
+						<article class="content-card content-card--regulated">
+							<span class="content-card__mark" data-i18n="useCases.regulated.mark">E-AKTSYZ</span>
+							<p class="content-card__eyebrow" data-i18n="useCases.regulated.eyebrow">Required marking, made useful</p>
+							<h3 class="content-card__title" data-i18n="useCases.regulated.title">Turn required marking into brand value.</h3>
+							<p class="content-card__body" data-i18n="useCases.regulated.body">When marking is mandatory, the code should still work for the brand.</p>
+							<div class="content-card__visual" aria-hidden="true">
+								<div class="content-card__visual-row">
+									<span class="content-card__visual-label" data-i18n="useCases.regulated.visual1Label">On the line</span>
+									<span class="content-card__visual-value" data-i18n="useCases.regulated.visual1Value">Apply + serialize at unit level</span>
+								</div>
+								<div class="content-card__visual-row">
+									<span class="content-card__visual-label" data-i18n="useCases.regulated.visual2Label">State check</span>
+									<span class="content-card__visual-value" data-i18n="useCases.regulated.visual2Value">Verification continues in Diia</span>
+								</div>
+								<div class="content-card__visual-row content-card__visual-row--accent">
+									<span class="content-card__visual-label" data-i18n="useCases.regulated.visual3Label">Brand layer</span>
+									<span class="content-card__visual-value" data-i18n="useCases.regulated.visual3Value">Mandatory code, useful afterward</span>
+								</div>
+							</div>
+							<div class="content-card__support">
+								<div class="content-card__rail" aria-hidden="true">
+									<span class="content-card__rail-item" data-i18n="useCases.regulated.rail1">ON LINE</span>
+									<span class="content-card__rail-item" data-i18n="useCases.regulated.rail2">DIIA FLOW</span>
+									<span class="content-card__rail-item content-card__rail-item--accent" data-i18n="useCases.regulated.rail3">BRAND LAYER</span>
+								</div>
+								<div class="content-card__notes">
+									<p class="content-card__note" data-i18n="useCases.regulated.bullet1">Apply and serialize on the line</p>
+									<p class="content-card__note" data-i18n="useCases.regulated.bullet2">Support state verification through Diia</p>
+									<p class="content-card__note" data-i18n="useCases.regulated.bullet3">Add branded experiences after the required check</p>
+								</div>
+								<div class="content-card__footer" aria-hidden="true">
+									<span class="content-card__footer-label" data-i18n="useCases.regulated.footerLabel">Outcome</span>
+									<span class="content-card__footer-value" data-i18n="useCases.regulated.footerValue">Mandatory code, useful brand moment.</span>
+								</div>
+							</div>
+						</article>
+
+						<article class="content-card content-card--brand">
+							<span class="content-card__mark" data-i18n="useCases.brand.mark">ANTI-FAKE</span>
+							<p class="content-card__eyebrow" data-i18n="useCases.brand.eyebrow">Brand protection</p>
+							<h3 class="content-card__title" data-i18n="useCases.brand.title">Protect trust at product level.</h3>
+							<p class="content-card__body" data-i18n="useCases.brand.body">Give every unit a checkable identity where trust is won or lost.</p>
+							<div class="content-card__visual" aria-hidden="true">
+								<div class="content-card__visual-row">
+									<span class="content-card__visual-label" data-i18n="useCases.brand.visual1Label">Serialized unit</span>
+									<span class="content-card__visual-value" data-i18n="useCases.brand.visual1Value">1 product = 1 record</span>
+								</div>
+								<div class="content-card__visual-row">
+									<span class="content-card__visual-label" data-i18n="useCases.brand.visual2Label">Scan moment</span>
+									<span class="content-card__visual-value" data-i18n="useCases.brand.visual2Value">Buyer. Partner. Inspector.</span>
+								</div>
+								<div class="content-card__visual-row content-card__visual-row--accent">
+									<span class="content-card__visual-label" data-i18n="useCases.brand.visual3Label">Result</span>
+									<span class="content-card__visual-value" data-i18n="useCases.brand.visual3Value">Clear proof instead of doubt</span>
+								</div>
+							</div>
+							<div class="content-card__support">
+								<div class="content-card__rail" aria-hidden="true">
+									<span class="content-card__rail-item" data-i18n="useCases.brand.rail1">SERIALIZED</span>
+									<span class="content-card__rail-item" data-i18n="useCases.brand.rail2">CHECKABLE</span>
+									<span class="content-card__rail-item content-card__rail-item--accent" data-i18n="useCases.brand.rail3">BRAND SAFE</span>
+								</div>
+								<div class="content-card__notes">
+									<p class="content-card__note" data-i18n="useCases.brand.bullet1">Serialized identity per product</p>
+									<p class="content-card__note" data-i18n="useCases.brand.bullet2">Fast checks for buyers and partners</p>
+									<p class="content-card__note" data-i18n="useCases.brand.bullet3">A stronger post-scan trust moment</p>
+								</div>
+								<div class="content-card__footer" aria-hidden="true">
+									<span class="content-card__footer-label" data-i18n="useCases.brand.footerLabel">Outcome</span>
+									<span class="content-card__footer-value" data-i18n="useCases.brand.footerValue">Trust travels with the product.</span>
+								</div>
+							</div>
+						</article>
+					</div>
+				</section>
+
+				<section id="how-it-works" class="content-section content-section--split">
+					<div class="section-heading section-heading--spread">
+						<p class="section-eyebrow" data-i18n="howItWorks.eyebrow">How it works</p>
+						<h2 class="section-title" data-i18n="howItWorks.title">From code to proof.</h2>
+						<p class="section-intro" data-i18n="howItWorks.intro">Simple on pack. Structured behind the line.</p>
+					</div>
+
+					<div class="steps-grid">
+						<article class="step-card">
+							<span class="step-card__kicker" data-i18n="howItWorks.step1.kicker">Record</span>
+							<span class="step-card__index">01</span>
+							<h3 class="step-card__title" data-i18n="howItWorks.step1.title">Code on product</h3>
+							<p class="step-card__body" data-i18n="howItWorks.step1.body">Each product leaves the line with a linked digital record.</p>
+							<div class="step-card__visual" aria-hidden="true">
+								<span class="step-card__visual-node"></span>
+								<span class="step-card__visual-line"></span>
+								<span class="step-card__visual-node step-card__visual-node--accent"></span>
+								<span class="step-card__visual-line step-card__visual-line--short"></span>
+								<span class="step-card__visual-chip"></span>
+							</div>
+						</article>
+						<article class="step-card">
+							<span class="step-card__kicker" data-i18n="howItWorks.step2.kicker">Scan</span>
+							<span class="step-card__index">02</span>
+							<h3 class="step-card__title" data-i18n="howItWorks.step2.title">Scan at point of check</h3>
+							<p class="step-card__body" data-i18n="howItWorks.step2.body">A buyer or inspector scans with any phone. No app required.</p>
+							<div class="step-card__visual" aria-hidden="true">
+								<span class="step-card__visual-node"></span>
+								<span class="step-card__visual-line"></span>
+								<span class="step-card__visual-node step-card__visual-node--accent"></span>
+								<span class="step-card__visual-line step-card__visual-line--short"></span>
+								<span class="step-card__visual-chip"></span>
+							</div>
+						</article>
+						<article class="step-card step-card--proof">
+							<span class="step-card__kicker" data-i18n="howItWorks.step3.kicker">Proof</span>
+							<span class="step-card__index">03</span>
+							<h3 class="step-card__title" data-i18n="howItWorks.step3.title">Verified result</h3>
+							<p class="step-card__body" data-i18n="howItWorks.step3.body">The scan opens the right result - proof, product detail, or branded follow-up.</p>
+							<div class="step-card__visual" aria-hidden="true">
+								<span class="step-card__visual-node"></span>
+								<span class="step-card__visual-line"></span>
+								<span class="step-card__visual-node step-card__visual-node--accent"></span>
+								<span class="step-card__visual-line step-card__visual-line--short"></span>
+								<span class="step-card__visual-chip"></span>
+							</div>
+						</article>
+					</div>
+				</section>
+
+				<section class="content-section content-section--dark">
+					<div class="section-heading section-heading--spread">
+						<p class="section-eyebrow" data-i18n="why.eyebrow">Why genu.im</p>
+						<h2 class="section-title" data-i18n="why.title">More than a code on pack.</h2>
+						<p class="section-intro" data-i18n="why.intro">A code is not proof by itself.</p>
+					</div>
+
+					<div class="reasons-grid">
+						<article class="reason-card">
+							<span class="reason-card__mark">01</span>
+							<h3 class="reason-card__title" data-i18n="why.point1.title">Checkable record</h3>
+							<p class="reason-card__body" data-i18n="why.point1.body">Each code is tied to product-level data, not a generic landing page.</p>
+							<div class="reason-card__visual" aria-hidden="true">
+								<span class="reason-card__visual-line reason-card__visual-line--strong"></span>
+								<span class="reason-card__visual-line"></span>
+								<span class="reason-card__visual-line reason-card__visual-line--short"></span>
+								<span class="reason-card__visual-dot"></span>
+							</div>
+						</article>
+						<article class="reason-card">
+							<span class="reason-card__mark">02</span>
+							<h3 class="reason-card__title" data-i18n="why.point2.title">Real verification</h3>
+							<p class="reason-card__body" data-i18n="why.point2.body">The scan can support a real check when trust matters most.</p>
+							<div class="reason-card__visual" aria-hidden="true">
+								<span class="reason-card__visual-line reason-card__visual-line--strong"></span>
+								<span class="reason-card__visual-line"></span>
+								<span class="reason-card__visual-line reason-card__visual-line--short"></span>
+								<span class="reason-card__visual-dot"></span>
+							</div>
+						</article>
+						<article class="reason-card">
+							<span class="reason-card__mark">03</span>
+							<h3 class="reason-card__title" data-i18n="why.point3.title">Product-level trust</h3>
+							<p class="reason-card__body" data-i18n="why.point3.body">The same code can support trust now and richer brand moments later.</p>
+							<div class="reason-card__visual" aria-hidden="true">
+								<span class="reason-card__visual-line reason-card__visual-line--strong"></span>
+								<span class="reason-card__visual-line"></span>
+								<span class="reason-card__visual-line reason-card__visual-line--short"></span>
+								<span class="reason-card__visual-dot"></span>
+							</div>
+						</article>
+					</div>
+				</section>
+
+				<section class="content-section content-section--proof">
+					<div class="section-heading section-heading--spread">
+						<p class="section-eyebrow" data-i18n="proof.eyebrow">Proof at scale</p>
+						<h2 class="section-title" data-i18n="proof.title">Already working at real scale.</h2>
+					<p class="section-intro" data-i18n="proof.intro">Live proof, not concept slides.</p>
+					</div>
+
+					<div class="proof-grid">
+						<div class="proof-feature">
+							<span class="proof-feature__eyebrow" data-i18n="proof.feature.eyebrow">NDA case</span>
+							<span class="proof-feature__value" data-i18n="proof.feature.value">25M+</span>
+							<h3 class="proof-feature__title" data-i18n="proof.feature.title">Used on millions of marked products in Ukraine</h3>
+							<p class="proof-feature__body" data-i18n="proof.feature.body">At the scale of a company shaping Ukraine's crop-protection market.</p>
+							<div class="proof-feature__chips" aria-hidden="true">
+								<span class="proof-feature__chip" data-i18n="proof.feature.chip1">ON LINE</span>
+								<span class="proof-feature__chip" data-i18n="proof.feature.chip2">AT SCALE</span>
+								<span class="proof-feature__chip proof-feature__chip--accent" data-i18n="proof.feature.chip3">REAL FLOW</span>
+							</div>
+							<div class="proof-feature__band" aria-hidden="true">
+								<div class="proof-feature__band-item">
+									<span class="proof-feature__band-label" data-i18n="proof.feature.band1Label">Footprint</span>
+									<span class="proof-feature__band-value" data-i18n="proof.feature.band1Value">Ukraine</span>
+								</div>
+								<div class="proof-feature__band-item">
+									<span class="proof-feature__band-label" data-i18n="proof.feature.band2Label">Mode</span>
+									<span class="proof-feature__band-value" data-i18n="proof.feature.band2Value">Live operations</span>
+								</div>
+							</div>
+						</div>
+						<div class="proof-card proof-card--check">
+							<span class="proof-card__mark" data-i18n="proof.point1.mark">CHECK</span>
+							<div class="proof-card__visual" aria-hidden="true">
+								<span class="proof-card__visual-node proof-card__visual-node--accent"></span>
+								<span class="proof-card__visual-line"></span>
+								<span class="proof-card__visual-line proof-card__visual-line--short"></span>
+								<span class="proof-card__visual-pill"></span>
+							</div>
+							<h3 class="proof-card__title" data-i18n="proof.point1.title">Real-time verification</h3>
+							<p class="proof-card__body" data-i18n="proof.point1.body">Real product data can support the scan in the moment that matters.</p>
+							<p class="proof-card__meta" data-i18n="proof.point1.meta">Real record at scan time</p>
+						</div>
+						<div class="proof-card proof-card--access">
+							<span class="proof-card__mark" data-i18n="proof.point2.mark">ACCESS</span>
+							<div class="proof-card__visual" aria-hidden="true">
+								<span class="proof-card__visual-node"></span>
+								<span class="proof-card__visual-line"></span>
+								<span class="proof-card__visual-line proof-card__visual-line--short"></span>
+								<span class="proof-card__visual-pill proof-card__visual-pill--soft"></span>
+							</div>
+							<h3 class="proof-card__title" data-i18n="proof.point2.title">No app required</h3>
+							<p class="proof-card__body" data-i18n="proof.point2.body">Nothing extra to install. The code works with the phone already in hand.</p>
+							<p class="proof-card__meta" data-i18n="proof.point2.meta">Lower friction, faster trust</p>
+						</div>
+						<div class="proof-card proof-card--future">
+							<span class="proof-card__mark" data-i18n="proof.point3.mark">FUTURE</span>
+							<div class="proof-card__visual" aria-hidden="true">
+								<span class="proof-card__visual-node"></span>
+								<span class="proof-card__visual-line"></span>
+								<span class="proof-card__visual-line proof-card__visual-line--short"></span>
+								<span class="proof-card__visual-pill proof-card__visual-pill--warm"></span>
+							</div>
+							<h3 class="proof-card__title" data-i18n="proof.point3.title">Product-level record</h3>
+							<p class="proof-card__body" data-i18n="proof.point3.body">The same infrastructure can later support richer product and campaign experiences.</p>
+							<p class="proof-card__meta" data-i18n="proof.point3.meta">One code, more outcomes</p>
+						</div>
+					</div>
+				</section>
+
+				<section id="final-cta" class="content-section final-cta">
+					<p class="section-eyebrow" data-i18n="finalCta.eyebrow">Ready</p>
+					<h2 class="section-title" data-i18n="finalCta.title">Make mandatory codes do more.</h2>
+					<p class="section-intro" data-i18n="finalCta.body">Let's shape the trust flow behind your product codes.</p>
+					<div class="final-cta__panel" aria-hidden="true">
+						<div class="final-cta__panel-row">
+							<span class="final-cta__panel-label" data-i18n="finalCta.panel1Label">Input</span>
+							<span class="final-cta__panel-value" data-i18n="finalCta.panel1Value">Required or brand-owned code</span>
+						</div>
+						<div class="final-cta__panel-row">
+							<span class="final-cta__panel-label" data-i18n="finalCta.panel2Label">Flow</span>
+							<span class="final-cta__panel-value" data-i18n="finalCta.panel2Value">Proof, product detail, next action</span>
+						</div>
+					</div>
+					<div class="final-cta__chips" aria-hidden="true">
+						<span class="final-cta__chip" data-i18n="finalCta.chip1">PRODUCT CODE</span>
+						<span class="final-cta__chip" data-i18n="finalCta.chip2">TRUST FLOW</span>
+						<span class="final-cta__chip final-cta__chip--accent" data-i18n="finalCta.chip3">BRAND VALUE</span>
+					</div>
+					<div class="hero-actions hero-actions--centered">
+						<a href="mailto:hello@genu.im" class="cta-button">
+							<svg class="cta-button__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21.75 8.25v7.5a2.25 2.25 0 01-2.25 2.25h-15A2.25 2.25 0 012.25 15.75v-7.5m19.5 0A2.25 2.25 0 0019.5 6h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 10.409A2.25 2.25 0 012.25 8.493V8.25" />
+							</svg>
+							<span data-i18n="finalCta.primary">Talk to us</span>
+						</a>
+						<a href="#how-it-works" class="cta-link" data-i18n="finalCta.secondary">See it in action</a>
+					</div>
+				</section>
+			</main>
+
+			<footer class="site-footer">
+				<p data-i18n="footer.tagline" class="footer-tagline">Trust built through transparency</p>
+			</footer>
+		</div>
 	</div>
 	<script src="assets/js/theme-toggle.js" defer></script>
 	<script src="assets/js/lang-toggle.js" defer></script>
 	<script src="assets/js/menu.js" defer></script>
 </body>
-
 </html>
