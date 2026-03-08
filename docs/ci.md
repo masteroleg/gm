@@ -38,6 +38,7 @@
 Используются два отдельных workflow:
 
 - `.github/workflows/ci.yml` - только для сайта и его тестовой инфраструктуры
+- `.github/workflows/full-regression.yml` - полный cross-browser regression для PR/manual/nightly
 - `.github/workflows/infra.yml` - только для CI/hook-инфраструктуры
 
 `docs/BMAD only` изменения не запускают ни один из них.
@@ -79,7 +80,7 @@
 
 ### `Site CI -> full-e2e`
 
-Полный Playwright matrix сохраняется для более дорогих прогонов:
+Полный Playwright matrix вынесен в отдельный workflow `.github/workflows/full-regression.yml` для более дорогих прогонов:
 
 - `pull_request` в `main`
 - `workflow_dispatch`
@@ -137,7 +138,7 @@ git push
 3. если push касается только docs/BMAD, GitHub site-инфраструктура вообще не стартует
 4. если изменились только `.github/workflows/**`, `.husky/**`, `scripts/has-site-impact.sh`, запускается только `Infra Checks`
 5. если site-impacting файлы есть, обычный `push` запускает `Site CI` с `quick-checks` и быстрым `smoke-e2e`
-6. полный `full-e2e` остается для `pull_request`, ручного запуска и nightly
+6. полный `full-e2e` идет отдельным workflow для `pull_request`, ручного запуска и nightly
 7. если менялся сам сайт и push-flow зеленый, push автоматически деплоится в GitHub Pages
 
 ## Полезные команды
