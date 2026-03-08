@@ -13,10 +13,9 @@
 Итоговое решение:
 
 - работа ведется в постоянной ветке `work`
-- `main` остается защищенной
 - локальный `pre-push` не дает отправить очевидно плохой commit
-- GitHub CI не дает продвинуть commit в `main`, пока он не зеленый
-- deploy идет только из `main` и только после успешного CI
+- GitHub CI проверяет каждый push в `work`
+- deploy идет прямо из `work`, но только после успешного CI
 
 ## Локальный gate
 
@@ -24,11 +23,11 @@
 
 1. `npm run lint`
 2. `npm run typecheck`
-3. `npm run build:css`
-4. проверку актуальности `site/assets/css/output.css`
-5. `npm run test:smoke`
+3. `npm run test:smoke`
 
 `test:smoke` использует Playwright-тег `@smoke` и локально гоняется только на `chromium`, чтобы gate оставался быстрым.
+
+`site/assets/css/output.css` теперь обновляется на этапе `pre-commit`, поэтому `Sync` больше не должен ломаться из-за повторной локальной пересборки CSS.
 
 ## GitHub Actions workflow
 
@@ -60,19 +59,9 @@
 
 ### `deploy-pages`
 
-- выполняется только после успеха `quick-checks` и `e2e`
+- выполняется только после успеха `quick-checks` и `e2e` на `work`
 - использует уже подготовленный artifact
 - не делает повторный `npm ci` или повторную сборку сайта
-
-## Branch protection на `main`
-
-Зафиксированная схема:
-
-1. Включен `Require status checks to pass before merging`
-2. Required check: `required-checks`
-3. `Require a pull request before merging` выключен
-4. `Require linear history` включен
-5. `Do not allow bypassing the above settings` включен
 
 ## Самый простой solo-flow
 
@@ -93,25 +82,12 @@ CLI-эквивалент:
 git push
 ```
 
-### Когда CI на `work` зеленый
+### Что происходит после Sync
 
-Продвижение того же SHA в `main`:
-
-```bash
-npm run promote:main
-```
-
-Скрипт выполняет:
-
-```bash
-git push origin HEAD:main
-```
-
-## Почему прямой push в `main` больше не работает
-
-Потому что теперь `main` защищена required check-ом. GitHub не принимает новый commit в `main`, если для него еще не существует успешного `required-checks`.
-
-Поэтому commit сначала живет в `work`, проходит CI, и только потом тот же SHA продвигается в `main`.
+1. `pre-push` делает локальные проверки
+2. если все ок, VS Code отправляет push в `work`
+3. GitHub Actions запускает `quick-checks` и полный `e2e`
+4. если CI зеленый, тот же push автоматически деплоится в GitHub Pages
 
 ## Полезные команды
 
@@ -121,5 +97,4 @@ npm run typecheck
 npm run test:smoke
 npm run test:e2e -- --project=firefox
 npm run test:ci
-npm run promote:main
 ```
