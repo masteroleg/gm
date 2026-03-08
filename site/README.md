@@ -97,6 +97,12 @@ git push
 - `.github/workflows/ci.yml`
 - `.husky/**`
 
+Дальше workflow сам различает тип изменения:
+
+- docs/BMAD-only -> вообще не стартует
+- infra-only (`.github/workflows/ci.yml`, `.husky/**`) -> делает только легкие `infra-checks`
+- site/test changes -> запускает полный сайтовый CI
+
 Сначала идет `quick-checks`:
 
 - install dependencies

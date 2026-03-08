@@ -49,6 +49,12 @@ Workflow вообще не стартует для BMAD- и docs-only измен
 - `.github/workflows/ci.yml`
 - `.husky/**`
 
+Но внутри workflow есть 3 режима:
+
+- `docs/BMAD only` -> workflow не стартует вообще
+- `infra only` (`.github/workflows/ci.yml`, `.husky/**`) -> запускаются только легкие `infra-checks`, без Playwright и без deploy
+- `site/test changes` -> запускаются `quick-checks` и полный `e2e`
+
 ### `quick-checks`
 
 - `npm ci`
@@ -104,8 +110,9 @@ git push
 1. `pre-push` делает локальные проверки
 2. если все ок, VS Code отправляет push в `work`
 3. если в push нет site-impacting файлов, GitHub site-CI вообще не запускается
-4. если site-impacting файлы есть, GitHub Actions запускает `quick-checks` и полный `e2e`
-5. если менялся сам сайт и CI зеленый, push автоматически деплоится в GitHub Pages
+4. если изменились только `.github/workflows/ci.yml` или `.husky/**`, GitHub проверяет только shell/infra-сценарии
+5. если site-impacting файлы есть, GitHub Actions запускает `quick-checks` и полный `e2e`
+6. если менялся сам сайт и CI зеленый, push автоматически деплоится в GitHub Pages
 
 ## Полезные команды
 

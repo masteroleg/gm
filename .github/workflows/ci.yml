@@ -42,7 +42,9 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       site: ${{ steps.filter.outputs.site }}
-      checks: ${{ steps.filter.outputs.checks }}
+      test_scope: ${{ steps.filter.outputs.test_scope }}
+      infra: ${{ steps.filter.outputs.infra }}
+      any: ${{ steps.filter.outputs.any }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -54,10 +56,7 @@ jobs:
         uses: dorny/paths-filter@v3
         with:
           filters: |
-            site:
-              - 'site/index.html'
-              - 'site/assets/**'
-            checks:
+            any:
               - 'site/index.html'
               - 'site/assets/**'
               - 'tests/**'
@@ -67,11 +66,25 @@ jobs:
               - 'tsconfig.json'
               - '.github/workflows/ci.yml'
               - '.husky/**'
+            site:
+              - 'site/index.html'
+              - 'site/assets/**'
+            test_scope:
+              - 'site/index.html'
+              - 'site/assets/**'
+              - 'tests/**'
+              - 'playwright.config.ts'
+              - 'package.json'
+              - 'package-lock.json'
+              - 'tsconfig.json'
+            infra:
+              - '.github/workflows/ci.yml'
+              - '.husky/**'
 
   quick-checks:
     name: quick-checks
     needs: changes
-    if: needs.changes.outputs.checks == 'true'
+    if: needs.changes.outputs.test_scope == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -114,7 +127,7 @@ jobs:
     needs:
       - changes
       - quick-checks
-    if: needs.changes.outputs.checks == 'true'
+    if: needs.changes.outputs.test_scope == 'true'
     timeout-minutes: 20
     container:
       image: mcr.microsoft.com/playwright:v1.58.2-noble
@@ -161,6 +174,24 @@ jobs:
             test-results/
           retention-days: 30
 
+  infra-checks:
+    name: infra-checks
+    needs: changes
+    if: needs.changes.outputs.infra == 'true' && needs.changes.outputs.test_scope != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Validate husky scripts
+        run: |
+          bash -n .husky/pre-commit
+          bash -n .husky/pre-push
+          if [ -f .husky/prepare-commit-msg ]; then bash -n .husky/prepare-commit-msg; fi
+
+      - name: Validate site impact helper
+        run: bash -n scripts/has-site-impact.sh
+
   deploy:
     name: deploy-pages
     if: github.event_name == 'push' && github.ref == 'refs/heads/work' && needs.changes.outputs.site == 'true'
@@ -191,16 +222,29 @@ jobs:
       - changes
       - quick-checks
       - e2e
+      - infra-checks
     runs-on: ubuntu-latest
     steps:
       - name: Enforce required checks
         env:
-          CHECKS_TRIGGERED: ${{ needs.changes.outputs.checks }}
+          ANY_TRIGGERED: ${{ needs.changes.outputs.any }}
+          TEST_SCOPE_TRIGGERED: ${{ needs.changes.outputs.test_scope }}
+          INFRA_RESULT: ${{ needs.infra-checks.result }}
           QUICK_CHECKS_RESULT: ${{ needs.quick-checks.result }}
           E2E_RESULT: ${{ needs.e2e.result }}
         run: |
-          if [[ "$CHECKS_TRIGGERED" != "true" ]]; then
-            echo "No site-impacting changes detected."
+          if [[ "$ANY_TRIGGERED" != "true" ]]; then
+            echo "No site-impacting or CI-impacting changes detected."
+            exit 0
+          fi
+
+          if [[ "$TEST_SCOPE_TRIGGERED" != "true" ]]; then
+            if [[ "$INFRA_RESULT" != "success" ]]; then
+              echo "infra-checks failed: $INFRA_RESULT"
+              exit 1
+            fi
+
+            echo "Infra-only changes validated."
             exit 0
           fi
 
