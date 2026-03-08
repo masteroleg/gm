@@ -9,7 +9,14 @@ const os = require("node:os");
 const path = require("node:path");
 
 const CONFIG_PATH = path.join(process.cwd(), "commit-message.config.json");
+const SESSION_CACHE_PATH = path.join(
+	process.cwd(),
+	".git",
+	"opencode-commit-session",
+);
 const ANSI_PATTERN = new RegExp(`${String.fromCharCode(27)}\\[[0-9;]*m`, "g");
+const SESSION_ID_PATTERN = /^ses_[A-Za-z0-9]+$/;
+const COMMIT_SESSION_TITLE_PATTERN = /^Git commit message/i;
 
 const runGit = (args) => execFileSync("git", args, { encoding: "utf8" }).trim();
 
@@ -142,6 +149,27 @@ const runCommand = (command, args, env = process.env) => {
 	};
 };
 
+const readCachedSessionId = () => {
+	if (!existsSync(SESSION_CACHE_PATH)) return "";
+
+	try {
+		const value = readFileSync(SESSION_CACHE_PATH, "utf8").trim();
+		return SESSION_ID_PATTERN.test(value) ? value : "";
+	} catch {
+		return "";
+	}
+};
+
+const writeCachedSessionId = (sessionID) => {
+	if (!SESSION_ID_PATTERN.test(sessionID)) return;
+
+	try {
+		writeFileSync(SESSION_CACHE_PATH, `${sessionID}\n`, "utf8");
+	} catch {
+		// ignore cache write failures
+	}
+};
+
 const runWindowsPowerShell = (binary, script, env = process.env) =>
 	runCommand(
 		"powershell.exe",
@@ -155,6 +183,43 @@ const runWindowsPowerShell = (binary, script, env = process.env) =>
 		],
 		env,
 	);
+
+const getSessionList = (binary) => {
+	if (!binary) return [];
+
+	const result =
+		process.platform === "win32"
+			? runWindowsPowerShell(binary, "& '__BINARY__' session list")
+			: runCommand(binary, ["session", "list"]);
+
+	if (!result.ok) return [];
+
+	return stripAnsi(result.stdout)
+		.split(/\r?\n/)
+		.map((line) => line.trimEnd())
+		.filter((line) => SESSION_ID_PATTERN.test(line.split(/\s+/)[0] || ""))
+		.map((line) => {
+			const match = line.match(/^(ses_[A-Za-z0-9]+)\s+(.+?)\s{2,}.+$/);
+			if (!match) return null;
+			return { id: match[1], title: match[2].trim() };
+		})
+		.filter(Boolean);
+};
+
+const resolveCommitSessionId = (binary) => {
+	const cached = readCachedSessionId();
+	if (cached) return cached;
+
+	const sessions = getSessionList(binary);
+	const existing = sessions.find((session) =>
+		COMMIT_SESSION_TITLE_PATTERN.test(session.title),
+	);
+
+	if (!existing) return "";
+
+	writeCachedSessionId(existing.id);
+	return existing.id;
+};
 
 const getAvailableModels = (binary) => {
 	if (!binary) return [];
@@ -179,7 +244,7 @@ const selectModel = (availableModels, candidates) => {
 	return "";
 };
 
-const runOpencodeWindows = (binary, model, prompt) => {
+const runOpencodeWindows = (binary, model, prompt, sessionID) => {
 	const promptFile = path.join(
 		os.tmpdir(),
 		`opencode-commit-${process.pid}-${Date.now()}.txt`,
@@ -188,11 +253,12 @@ const runOpencodeWindows = (binary, model, prompt) => {
 
 	const result = runWindowsPowerShell(
 		binary,
-		"& '__BINARY__' run (Get-Content -Raw $env:OPENCODE_PROMPT_FILE) -m $env:OPENCODE_MODEL",
+		"& '__BINARY__' run (Get-Content -Raw $env:OPENCODE_PROMPT_FILE) -m $env:OPENCODE_MODEL -s $env:OPENCODE_SESSION_ID",
 		{
 			...process.env,
 			OPENCODE_PROMPT_FILE: promptFile,
 			OPENCODE_MODEL: model,
+			OPENCODE_SESSION_ID: sessionID,
 		},
 	);
 
@@ -205,8 +271,15 @@ const runOpencodeWindows = (binary, model, prompt) => {
 	return result.ok ? extractMessage(`${result.stdout}\n${result.stderr}`) : "";
 };
 
-const runOpencodePosix = (binary, model, prompt) => {
-	const result = runCommand(binary, ["run", prompt, "-m", model]);
+const runOpencodePosix = (binary, model, prompt, sessionID) => {
+	const result = runCommand(binary, [
+		"run",
+		prompt,
+		"-m",
+		model,
+		"-s",
+		sessionID,
+	]);
 	return result.ok ? extractMessage(`${result.stdout}\n${result.stderr}`) : "";
 };
 
@@ -220,12 +293,13 @@ const runOpencode = (prompt) => {
 	const availableModels = getAvailableModels(binary);
 	const candidates = resolveModelCandidates(config);
 	const selectedModel = selectModel(availableModels, candidates);
+	const sessionID = resolveCommitSessionId(binary);
 
-	if (!selectedModel) return "";
+	if (!selectedModel || !sessionID) return "";
 
 	if (process.platform === "win32")
-		return runOpencodeWindows(binary, selectedModel, prompt);
-	return runOpencodePosix(binary, selectedModel, prompt);
+		return runOpencodeWindows(binary, selectedModel, prompt, sessionID);
+	return runOpencodePosix(binary, selectedModel, prompt, sessionID);
 };
 
 const detectType = (files) => {
