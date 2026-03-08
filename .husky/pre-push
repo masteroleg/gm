@@ -1,4 +1,17 @@
 #!/bin/sh
+
+if git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' >/dev/null 2>&1; then
+	if ! sh scripts/has-site-impact.sh --range '@{upstream}...HEAD'; then
+		echo 'No site-impacting changes detected; skipping local push checks.'
+		exit 0
+	fi
+else
+	if ! git diff-tree --no-commit-id --name-only -r HEAD | sh scripts/has-site-impact.sh --stdin; then
+		echo 'No site-impacting changes detected; skipping local push checks.'
+		exit 0
+	fi
+fi
+
 npm run lint || exit 1
 npm run typecheck || exit 1
 npm run test:smoke || exit 1

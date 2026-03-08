@@ -1,3 +1,6 @@
 #!/bin/sh
-npm run build:css
-git add site/assets/css/output.css
+
+if git diff --cached --name-only | grep -Eq '^site/assets/css/input\.css$'; then
+	npm run build:css || exit 1
+	git add site/assets/css/output.css
+fi

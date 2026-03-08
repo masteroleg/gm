@@ -13,13 +13,17 @@
 Итоговое решение:
 
 - работа ведется в постоянной ветке `work`
-- локальный `pre-push` не дает отправить очевидно плохой commit
-- GitHub CI проверяет каждый push в `work`
-- deploy идет прямо из `work`, но только после успешного CI
+- локальный `pre-push` не дает отправить очевидно плохой commit, когда изменения реально влияют на сайт
+- GitHub CI проверяет только site-impacting push в `work`
+- deploy идет прямо из `work`, но только если менялся публикуемый сайт и CI успешен
 
 ## Локальный gate
 
-`.husky/pre-push` запускает:
+`.husky/pre-push` сначала смотрит diff между `HEAD` и upstream-веткой.
+
+Если изменений сайта нет, hook пишет `No site-impacting changes detected; skipping local push checks.` и сразу пропускает push.
+
+Если изменения сайта есть, запускаются:
 
 1. `npm run lint`
 2. `npm run typecheck`
@@ -27,11 +31,23 @@
 
 `test:smoke` использует Playwright-тег `@smoke` и локально гоняется только на `chromium`, чтобы gate оставался быстрым.
 
-`site/assets/css/output.css` теперь обновляется на этапе `pre-commit`, поэтому `Sync` больше не должен ломаться из-за повторной локальной пересборки CSS.
+`site/assets/css/output.css` теперь обновляется на этапе `pre-commit`, но только если staged-изменения затронули `site/assets/css/input.css`.
 
 ## GitHub Actions workflow
 
 Основной workflow: `.github/workflows/ci.yml`
+
+Workflow вообще не стартует для BMAD- и docs-only изменений. Он слушает только такие пути:
+
+- `site/index.html`
+- `site/assets/**`
+- `tests/**`
+- `playwright.config.ts`
+- `package.json`
+- `package-lock.json`
+- `tsconfig.json`
+- `.github/workflows/ci.yml`
+- `.husky/**`
 
 ### `quick-checks`
 
@@ -60,6 +76,7 @@
 ### `deploy-pages`
 
 - выполняется только после успеха `quick-checks` и `e2e` на `work`
+- запускается только если менялся публикуемый сайт: `site/index.html` или `site/assets/**`
 - использует уже подготовленный artifact
 - не делает повторный `npm ci` или повторную сборку сайта
 
@@ -86,8 +103,9 @@ git push
 
 1. `pre-push` делает локальные проверки
 2. если все ок, VS Code отправляет push в `work`
-3. GitHub Actions запускает `quick-checks` и полный `e2e`
-4. если CI зеленый, тот же push автоматически деплоится в GitHub Pages
+3. если в push нет site-impacting файлов, GitHub site-CI вообще не запускается
+4. если site-impacting файлы есть, GitHub Actions запускает `quick-checks` и полный `e2e`
+5. если менялся сам сайт и CI зеленый, push автоматически деплоится в GitHub Pages
 
 ## Полезные команды
 
