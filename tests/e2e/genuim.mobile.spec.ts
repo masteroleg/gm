@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { GenuimPage } from "./pages/genuim.page";
 
-test("genu.im — mobile menu opens and closes", async ({ page }) => {
+test("@smoke genu.im — mobile menu opens and closes", async ({ page }) => {
 	await page.setViewportSize({ width: 375, height: 667 });
 	const app = new GenuimPage(page);
 	await app.gotoHome();

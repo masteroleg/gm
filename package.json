@@ -16,6 +16,7 @@
 		"test": "jest",
 		"test:ci": "npm run lint && npm run typecheck && npm test && npm run test:e2e:ci",
 		"test:smoke": "playwright test --config=playwright.config.ts --project=chromium --grep @smoke",
+		"test:smoke:mobile": "playwright test --config=playwright.config.ts --project=mobile-chrome --grep @smoke",
 		"test:smoke:all": "playwright test --config=playwright.config.ts --grep @smoke",
 		"test:e2e": "playwright test --config=playwright.config.ts",
 		"test:e2e:ci": "playwright test --config=playwright.config.ts",

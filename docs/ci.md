@@ -68,9 +68,24 @@
 - `git diff --exit-code -- site/assets/css/output.css`
 - upload Pages artifact
 
-### `Site CI -> e2e`
+### `Site CI -> smoke-e2e`
 
-Полный Playwright matrix в официальном контейнере Playwright:
+Для обычного `push` в `work` запускается быстрый smoke-набор в официальном контейнере Playwright:
+
+- `chromium`
+- `mobile-chrome`
+
+Это дает быстрый desktop + mobile сигнал перед deploy.
+
+### `Site CI -> full-e2e`
+
+Полный Playwright matrix сохраняется для более дорогих прогонов:
+
+- `pull_request` в `main`
+- `workflow_dispatch`
+- nightly `schedule`
+
+Матрица:
 
 - `chromium`
 - `firefox`
@@ -84,7 +99,7 @@
 
 ### `Site CI -> deploy-pages`
 
-- выполняется только после успеха `quick-checks` и `e2e` на `work`
+- выполняется только после успеха `quick-checks` и `smoke-e2e` на `work`
 - запускается только если менялся публикуемый сайт: `site/index.html` или `site/assets/**`
 - использует уже подготовленный artifact
 - не делает повторный `npm ci` или повторную сборку сайта
@@ -121,8 +136,9 @@ git push
 2. если все ок, VS Code отправляет push в `work`
 3. если push касается только docs/BMAD, GitHub site-инфраструктура вообще не стартует
 4. если изменились только `.github/workflows/**`, `.husky/**`, `scripts/has-site-impact.sh`, запускается только `Infra Checks`
-5. если site-impacting файлы есть, запускается `Site CI` с `quick-checks` и полным `e2e`
-6. если менялся сам сайт и `Site CI` зеленый, push автоматически деплоится в GitHub Pages
+5. если site-impacting файлы есть, обычный `push` запускает `Site CI` с `quick-checks` и быстрым `smoke-e2e`
+6. полный `full-e2e` остается для `pull_request`, ручного запуска и nightly
+7. если менялся сам сайт и push-flow зеленый, push автоматически деплоится в GitHub Pages
 
 ## Полезные команды
 
