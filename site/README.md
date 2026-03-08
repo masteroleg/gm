@@ -15,7 +15,7 @@
 Что сделано теперь:
 
 - локально перед `git push` запускается быстрый защитный gate только для site-impacting изменений
-- в GitHub Actions сначала идет `quick-checks`, потом полный Playwright matrix, но только когда изменение относится к сайту или test/CI-инфраструктуре сайта
+- в GitHub Actions сайтовые изменения и infra-изменения разделены по разным workflow
 - деплой запускается только после успешного CI на `work` и только когда меняется сам публикуемый сайт
 
 Идея простая: если код не проходит локально или не проходит в GitHub, production не обновляется.
@@ -61,9 +61,10 @@ git push
 
 1. локальный `pre-push` прогоняет быстрые проверки
 2. commit уходит в `work`
-3. если push касается только BMAD/документов, сайтовый CI пропускается
-4. если push влияет на сайт или его тестовую инфраструктуру, GitHub Actions запускает полный CI
-5. если меняется сам сайт и CI зеленый, GitHub Pages получает новый сайт автоматически
+3. если push касается только BMAD/документов, GitHub workflow для сайта не стартует
+4. если push влияет на сайт, запускается `Site CI`
+5. если push влияет только на `.github/workflows/**`, `.husky/**` или `scripts/has-site-impact.sh`, запускается только `Infra Checks`
+6. если меняется сам сайт и `Site CI` зеленый, GitHub Pages получает новый сайт автоматически
 
 ## Что проверяется локально и зачем
 
@@ -83,9 +84,9 @@ git push
 
 ## Что проверяется в GitHub и зачем
 
-После push в `work` GitHub Actions запускает workflow `CI`.
+После push в `work` GitHub Actions запускает один из двух workflow.
 
-Но только если changed files входят в один из путей:
+`Site CI` стартует только если changed files входят в один из путей:
 
 - `site/index.html`
 - `site/assets/**`
@@ -94,14 +95,14 @@ git push
 - `package.json`
 - `package-lock.json`
 - `tsconfig.json`
-- `.github/workflows/ci.yml`
+
+`Infra Checks` стартует только для:
+
+- `.github/workflows/**`
 - `.husky/**`
+- `scripts/has-site-impact.sh`
 
-Дальше workflow сам различает тип изменения:
-
-- docs/BMAD-only -> вообще не стартует
-- infra-only (`.github/workflows/ci.yml`, `.husky/**`) -> делает только легкие `infra-checks`
-- site/test changes -> запускает полный сайтовый CI
+docs/BMAD-only изменения не стартуют ни один из этих workflow.
 
 Сначала идет `quick-checks`:
 

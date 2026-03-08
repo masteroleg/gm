@@ -33,11 +33,16 @@
 
 `site/assets/css/output.css` теперь обновляется на этапе `pre-commit`, но только если staged-изменения затронули `site/assets/css/input.css`.
 
-## GitHub Actions workflow
+## GitHub Actions workflows
 
-Основной workflow: `.github/workflows/ci.yml`
+Используются два отдельных workflow:
 
-Workflow вообще не стартует для BMAD- и docs-only изменений. Он слушает только такие пути:
+- `.github/workflows/ci.yml` - только для сайта и его тестовой инфраструктуры
+- `.github/workflows/infra.yml` - только для CI/hook-инфраструктуры
+
+`docs/BMAD only` изменения не запускают ни один из них.
+
+`Site CI` слушает только такие пути:
 
 - `site/index.html`
 - `site/assets/**`
@@ -46,16 +51,14 @@ Workflow вообще не стартует для BMAD- и docs-only измен
 - `package.json`
 - `package-lock.json`
 - `tsconfig.json`
-- `.github/workflows/ci.yml`
+
+`Infra Checks` слушает только такие пути:
+
+- `.github/workflows/**`
 - `.husky/**`
+- `scripts/has-site-impact.sh`
 
-Но внутри workflow есть 3 режима:
-
-- `docs/BMAD only` -> workflow не стартует вообще
-- `infra only` (`.github/workflows/ci.yml`, `.husky/**`) -> запускаются только легкие `infra-checks`, без Playwright и без deploy
-- `site/test changes` -> запускаются `quick-checks` и полный `e2e`
-
-### `quick-checks`
+### `Site CI -> quick-checks`
 
 - `npm ci`
 - `npm run lint`
@@ -65,7 +68,7 @@ Workflow вообще не стартует для BMAD- и docs-only измен
 - `git diff --exit-code -- site/assets/css/output.css`
 - upload Pages artifact
 
-### `e2e`
+### `Site CI -> e2e`
 
 Полный Playwright matrix в официальном контейнере Playwright:
 
@@ -75,16 +78,23 @@ Workflow вообще не стартует для BMAD- и docs-only измен
 - `mobile-chrome`
 - `mobile-safari`
 
-### `required-checks`
+### `Site CI -> required-checks`
 
 Это агрегирующий check для branch protection. Он должен быть зеленым, чтобы GitHub считал commit годным для продвижения в `main`.
 
-### `deploy-pages`
+### `Site CI -> deploy-pages`
 
 - выполняется только после успеха `quick-checks` и `e2e` на `work`
 - запускается только если менялся публикуемый сайт: `site/index.html` или `site/assets/**`
 - использует уже подготовленный artifact
 - не делает повторный `npm ci` или повторную сборку сайта
+
+### `Infra Checks -> infra-checks`
+
+- запускается только для `.github/workflows/**`, `.husky/**`, `scripts/has-site-impact.sh`
+- проверяет shell syntax локальных hook-скриптов и helper-скрипта
+- не запускает Playwright
+- не делает deploy
 
 ## Самый простой solo-flow
 
@@ -109,10 +119,10 @@ git push
 
 1. `pre-push` делает локальные проверки
 2. если все ок, VS Code отправляет push в `work`
-3. если в push нет site-impacting файлов, GitHub site-CI вообще не запускается
-4. если изменились только `.github/workflows/ci.yml` или `.husky/**`, GitHub проверяет только shell/infra-сценарии
-5. если site-impacting файлы есть, GitHub Actions запускает `quick-checks` и полный `e2e`
-6. если менялся сам сайт и CI зеленый, push автоматически деплоится в GitHub Pages
+3. если push касается только docs/BMAD, GitHub site-инфраструктура вообще не стартует
+4. если изменились только `.github/workflows/**`, `.husky/**`, `scripts/has-site-impact.sh`, запускается только `Infra Checks`
+5. если site-impacting файлы есть, запускается `Site CI` с `quick-checks` и полным `e2e`
+6. если менялся сам сайт и `Site CI` зеленый, push автоматически деплоится в GitHub Pages
 
 ## Полезные команды
 

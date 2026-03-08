@@ -1,0 +1,42 @@
+name: Infra Checks
+
+on:
+  push:
+    branches:
+      - work
+    paths:
+      - '.github/workflows/**'
+      - '.husky/**'
+      - 'scripts/has-site-impact.sh'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/**'
+      - '.husky/**'
+      - 'scripts/has-site-impact.sh'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: infra-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  infra-checks:
+    name: infra-checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Validate husky scripts
+        run: |
+          bash -n .husky/pre-commit
+          bash -n .husky/pre-push
+          if [ -f .husky/prepare-commit-msg ]; then bash -n .husky/prepare-commit-msg; fi
+
+      - name: Validate site impact helper
+        run: bash -n scripts/has-site-impact.sh
