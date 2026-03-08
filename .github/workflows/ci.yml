@@ -3,7 +3,7 @@ name: Site CI
 on:
   push:
     branches:
-      - work
+      - main
     paths:
       - 'site/index.html'
       - 'site/assets/**'
@@ -55,7 +55,7 @@ jobs:
         run: git diff --exit-code -- site/assets/css/output.css
 
       - name: Upload Pages artifact
-        if: github.event_name == 'push' && github.ref == 'refs/heads/work'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v4
         with:
           path: ./site
@@ -110,7 +110,7 @@ jobs:
 
   deploy:
     name: deploy-pages
-    if: github.event_name == 'push' && github.ref == 'refs/heads/work'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs:
       - quick-checks
       - smoke-e2e

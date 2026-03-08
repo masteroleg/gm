@@ -12,10 +12,10 @@
 
 Итоговое решение:
 
-- работа ведется в постоянной ветке `work`
+- ежедневная работа идет прямо в `main`
 - локальный `pre-push` не дает отправить очевидно плохой commit, когда изменения реально влияют на сайт
-- GitHub CI проверяет только site-impacting push в `work`
-- deploy идет прямо из `work`, но только если менялся публикуемый сайт и CI успешен
+- GitHub CI проверяет только site-impacting push в `main`
+- deploy идет из `main`, но только если менялся публикуемый сайт и CI успешен
 
 ## Локальный gate
 
@@ -58,6 +58,7 @@
 - `.github/workflows/**`
 - `.husky/**`
 - `scripts/has-site-impact.sh`
+- `scripts/generate-commit-msg.cjs`
 
 ### `Site CI -> quick-checks`
 
@@ -71,7 +72,7 @@
 
 ### `Site CI -> smoke-e2e`
 
-Для обычного `push` в `work` запускается быстрый smoke-набор в официальном контейнере Playwright:
+Для обычного `push` в `main` запускается быстрый smoke-набор в официальном контейнере Playwright:
 
 - `chromium`
 - `mobile-chrome`
@@ -100,7 +101,7 @@
 
 ### `Site CI -> deploy-pages`
 
-- выполняется только после успеха `quick-checks` и `smoke-e2e` на `work`
+- выполняется только после успеха `quick-checks` и `smoke-e2e` на `main`
 - запускается только если менялся публикуемый сайт: `site/index.html` или `site/assets/**`
 - использует уже подготовленный artifact
 - не делает повторный `npm ci` или повторную сборку сайта
@@ -114,16 +115,9 @@
 
 ## Самый простой solo-flow
 
-### Один раз
-
-```bash
-git switch -C work
-git push -u origin work
-```
-
 ### Каждый день
 
-Работаешь в `work` и используешь обычный Sync в VS Code.
+Работаешь в `main` и используешь обычный Sync в VS Code.
 
 CLI-эквивалент:
 
@@ -134,9 +128,9 @@ git push
 ### Что происходит после Sync
 
 1. `pre-push` делает локальные проверки
-2. если все ок, VS Code отправляет push в `work`
+2. если все ок, VS Code отправляет push в `main`
 3. если push касается только docs/BMAD, GitHub site-инфраструктура вообще не стартует
-4. если изменились только `.github/workflows/**`, `.husky/**`, `scripts/has-site-impact.sh`, запускается только `Infra Checks`
+4. если изменились только `.github/workflows/**`, `.husky/**`, `scripts/has-site-impact.sh` или `scripts/generate-commit-msg.cjs`, запускается только `Infra Checks`
 5. если site-impacting файлы есть, обычный `push` запускает `Site CI` с `quick-checks` и быстрым `smoke-e2e`
 6. полный `full-e2e` идет отдельным workflow для `pull_request`, ручного запуска и nightly
 7. если менялся сам сайт и push-flow зеленый, push автоматически деплоится в GitHub Pages

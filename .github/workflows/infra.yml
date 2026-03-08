@@ -3,11 +3,12 @@ name: Infra Checks
 on:
   push:
     branches:
-      - work
+      - main
     paths:
       - '.github/workflows/**'
       - '.husky/**'
       - 'scripts/has-site-impact.sh'
+      - 'scripts/generate-commit-msg.cjs'
   pull_request:
     branches:
       - main
@@ -15,6 +16,7 @@ on:
       - '.github/workflows/**'
       - '.husky/**'
       - 'scripts/has-site-impact.sh'
+      - 'scripts/generate-commit-msg.cjs'
   workflow_dispatch:
 
 permissions:
