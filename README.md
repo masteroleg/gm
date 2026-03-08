@@ -54,12 +54,10 @@ Pipeline:
 
 В GitHub включено:
 
-- Require status checks
-- Required check: `required-checks`
 - Linear history
 - Bypass запрещен
 
-Важно: если branch protection требует зеленый `required-checks`, прямой push в `main` должен быть согласован с этой настройкой. В текущем solo-flow `main` используется как единственная рабочая ветка.
+В текущем solo-flow `main` используется как единственная рабочая ветка, а контроль качества обеспечивается локальными hooks и GitHub Actions после push.
 
 ## Самый простой workflow (solo, без PR)
 

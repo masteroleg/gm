@@ -97,7 +97,7 @@
 
 ### `Site CI -> required-checks`
 
-Это агрегирующий check для branch protection. Он должен быть зеленым, чтобы GitHub считал commit годным для продвижения в `main`.
+Это агрегирующий статус site-pipeline. Он показывает общий результат `quick-checks` и `smoke-e2e`.
 
 ### `Site CI -> deploy-pages`
 
