@@ -11,7 +11,7 @@ def test_index_docs_runs_and_outputs():
     # Run the index docs script
     run_script()
     # Assert that output files exist and contain Directory Index header
-    base = Path(__file__).resolve().parents[2]  # repo root/tests -> go up
+    base = Path(__file__).resolve().parents[1]  # repo root/tests -> go up
     idx1 = base / "_bmad-output/index.md"
     idx2 = base / "repo-index.md"
     assert idx1.exists(), f"Missing {idx1}"
