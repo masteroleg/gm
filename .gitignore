@@ -36,3 +36,5 @@ migration/raw/
 migration/transcripts/
 # (site/ output.css is committed as part of site publishing strategy)
 test-results/
+lighthouse-report/
+.lighthouse-tmp/

@@ -141,3 +141,9 @@ npm run test:e2e
 - `docs/lighthouse.md` - как проверять
 - `docs/lighthouse.md` - на что смотреть в первую очередь
 - `docs/lighthouse.md` - как повышать оценки без деградации UX
+
+Быстрый automation flow:
+
+```bash
+npm run lighthouse
+```

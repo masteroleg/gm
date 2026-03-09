@@ -34,19 +34,53 @@
 
 ## Как запускать локально
 
-1. Подними сайт локально:
+Быстрый automated flow:
 
 ```bash
-npm ci
-npm run build:css
-npm run start
+npm run lighthouse
 ```
 
-2. Открой `http://localhost:3000`
-3. Запусти Lighthouse в Chrome DevTools
-4. Проверяй минимум mobile viewport, затем desktop
+Отдельные режимы:
 
-Если хочется повторяемости, всегда проверяй один и тот же URL и в тех же условиях после hard reload.
+```bash
+npm run lighthouse:mobile
+npm run lighthouse:desktop
+npm run lighthouse:ci
+```
+
+Что делает automation script:
+
+- поднимает локальный `http-server`
+- ждет доступности `http://localhost:3000`
+- запускает Lighthouse для mobile и/или desktop
+- сохраняет JSON-отчеты в `lighthouse-report/`
+- в обычном локальном режиме печатает scores и сохраняет отчеты
+- в strict-режиме валит команду, если score ниже threshold values
+
+Базовые thresholds по умолчанию:
+
+- Performance: `95`
+- Accessibility: `95`
+- Best Practices: `95`
+- SEO: `95`
+
+Strict-режим уже зашит в:
+
+```bash
+npm run lighthouse:ci
+```
+
+Если нужен более строгий режим под цель `100/100/100/100`, можно передать env vars:
+
+```bash
+LIGHTHOUSE_MIN_PERFORMANCE=100 \
+LIGHTHOUSE_MIN_ACCESSIBILITY=100 \
+LIGHTHOUSE_MIN_BEST_PRACTICES=100 \
+LIGHTHOUSE_MIN_SEO=100 \
+npm run lighthouse:ci
+```
+
+Дополнительно можно по-прежнему открыть страницу в Chrome DevTools и посмотреть HTML/UI issues вручную, но для repeatable local check лучше использовать именно automation flow.
 
 ## На что смотреть в первую очередь
 
