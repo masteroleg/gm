@@ -1,5 +1,12 @@
 const translations = {
 	en: {
+		"controls.lang.toggle": "Language: EN. Click to switch.",
+		"controls.menu.open": "Open menu",
+		"controls.menu.close": "Close menu",
+		"controls.theme.switchToDark": "Switch to dark mode",
+		"controls.theme.switchToLight": "Switch to light mode",
+		"controls.theme.titleToDark": "Switch to dark mode",
+		"controls.theme.titleToLight": "Switch to light mode",
 		"nav.useCases": "Use cases",
 		"nav.howItWorks": "How it works",
 		"hero.eyebrow": "Trust through transparency",
@@ -152,6 +159,13 @@ const translations = {
 		"footer.tagline": "Trust built through transparency",
 	},
 	uk: {
+		"controls.lang.toggle": "Мова: UA. Натисніть, щоб перемкнути.",
+		"controls.menu.open": "Відкрити меню",
+		"controls.menu.close": "Закрити меню",
+		"controls.theme.switchToDark": "Увімкнути темну тему",
+		"controls.theme.switchToLight": "Увімкнути світлу тему",
+		"controls.theme.titleToDark": "Увімкнути темну тему",
+		"controls.theme.titleToLight": "Увімкнути світлу тему",
 		"nav.useCases": "Сценарії",
 		"nav.howItWorks": "Як це працює",
 		"hero.eyebrow": "Довіра через прозорість",
@@ -309,29 +323,66 @@ const translations = {
 	},
 };
 
-function setLang(lang) {
-	document.documentElement.lang = lang;
+const LANG_STORAGE_KEY = "lang";
 
+const isSupportedLang = (lang) => lang === "en" || lang === "uk";
+
+const getTranslation = (lang, key) => {
+	const safeLang = isSupportedLang(lang) ? lang : "en";
+	return translations[safeLang]?.[key] || translations.en?.[key] || "";
+};
+
+const readStoredLang = () => {
 	try {
-		localStorage.setItem("lang", lang);
+		const savedLang = localStorage.getItem(LANG_STORAGE_KEY);
+		return isSupportedLang(savedLang) ? savedLang : null;
+	} catch (error) {
+		console.warn("Unable to read language preference", error);
+		return null;
+	}
+};
+
+const writeStoredLang = (lang) => {
+	try {
+		if (isSupportedLang(lang)) {
+			localStorage.setItem(LANG_STORAGE_KEY, lang);
+		} else {
+			localStorage.removeItem(LANG_STORAGE_KEY);
+		}
 	} catch (error) {
 		console.warn("Unable to save language preference", error);
 	}
+};
 
+const applyTextTranslations = (lang) => {
 	document.querySelectorAll("[data-i18n]").forEach((element) => {
 		const key = element.getAttribute("data-i18n");
-		if (translations[lang]?.[key]) {
-			element.textContent = translations[lang][key];
+		if (!key) {
+			return;
+		}
+
+		const translation = getTranslation(lang, key);
+		if (translation) {
+			element.textContent = translation;
 		}
 	});
+};
 
+const applyAriaTranslations = (lang) => {
 	document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
 		const key = element.getAttribute("data-i18n-aria-label");
-		if (translations[lang]?.[key]) {
-			element.setAttribute("aria-label", translations[lang][key]);
+		if (!key) {
+			return;
+		}
+
+		const translation = getTranslation(lang, key);
+		if (translation) {
+			element.setAttribute("aria-label", translation);
 		}
 	});
+};
 
+const syncLangToggle = (lang) => {
 	const label = document.getElementById("langLabel");
 	if (label) {
 		label.textContent = lang === "uk" ? "UA" : "EN";
@@ -339,29 +390,75 @@ function setLang(lang) {
 
 	const toggle = document.getElementById("langToggle");
 	if (toggle) {
-		toggle.setAttribute(
-			"aria-label",
-			`Language: ${lang === "uk" ? "UA" : "EN"}. Click to switch.`,
-		);
+		const ariaLabel = getTranslation(lang, "controls.lang.toggle");
+		toggle.setAttribute("aria-label", ariaLabel);
+		toggle.setAttribute("title", ariaLabel);
 	}
-}
+};
 
-let savedLang = null;
+const createI18nApi = () => ({
+	getLang: () => {
+		const currentLang = document.documentElement.lang || "en";
+		return isSupportedLang(currentLang) ? currentLang : "en";
+	},
+	t: (key, lang = document.documentElement.lang || "en") =>
+		getTranslation(lang, key),
+});
 
-try {
-	savedLang = localStorage.getItem("lang");
-} catch (error) {
-	console.warn("Unable to read language preference", error);
-}
+const setLang = (lang, options = {}) => {
+	const { persist = true } = options;
+	const nextLang = isSupportedLang(lang) ? lang : "en";
 
-const currentLang = document.documentElement.lang || "en";
-setLang(savedLang || currentLang);
+	document.documentElement.lang = nextLang;
+	window.gmSiteI18n = createI18nApi();
 
-const toggle = document.getElementById("langToggle");
-if (toggle) {
+	if (persist) {
+		writeStoredLang(nextLang);
+	}
+
+	applyTextTranslations(nextLang);
+	applyAriaTranslations(nextLang);
+	syncLangToggle(nextLang);
+
+	document.dispatchEvent(
+		new CustomEvent("gm:lang-change", {
+			detail: { lang: nextLang },
+		}),
+	);
+	return nextLang;
+};
+
+const initLangToggle = () => {
+	window.gmSiteI18n = createI18nApi();
+
+	const savedLang = readStoredLang();
+	const currentLang = document.documentElement.lang || "en";
+	setLang(savedLang || currentLang, { persist: Boolean(savedLang) });
+
+	const toggle = document.getElementById("langToggle");
+	if (!toggle) {
+		return;
+	}
+
 	toggle.addEventListener("click", () => {
-		const current = document.documentElement.lang;
-		const next = current === "uk" ? "en" : "uk";
-		setLang(next);
+		const nextLang = document.documentElement.lang === "uk" ? "en" : "uk";
+		setLang(nextLang);
 	});
+};
+
+initLangToggle();
+
+if (typeof module !== "undefined") {
+	module.exports = {
+		applyAriaTranslations,
+		applyTextTranslations,
+		getTranslation,
+		initLangToggle,
+		isSupportedLang,
+		readStoredLang,
+		setLang,
+		syncLangToggle,
+		translations,
+		writeStoredLang,
+	};
 }

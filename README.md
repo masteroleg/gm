@@ -111,3 +111,33 @@ npm test
 npm run test:smoke
 npm run test:e2e
 ```
+
+## Политика покрытия frontend-контроллеров
+
+Для `site/assets/js/**` базовым стандартом считается не просто наличие smoke-проверки, а достаточная ширина покрытия по слоям.
+
+- каждый новый контроллер обязан иметь unit-тесты на основные state transitions
+- если контроллер меняет `aria-*`, это должно проверяться тестами явно
+- если контроллер использует storage, нужны тесты и на нормальный путь, и на fallback при ошибках storage
+- если контроллер может исполняться при неполной разметке, нужен test на fail-soft поведение
+- preference, navigation, accessibility и initial-render логика не может оставаться только под smoke-покрытием
+- при росте сайта тесты добавляются по контроллерам и critical flows, а не одним большим catch-all spec
+
+Практический принцип такой: logic/state/a11y покрываются в Jest, а reload persistence, CSS delivery, mobile behavior и browser truth подтверждаются в Playwright.
+
+## Lighthouse: регулярная проверка качества
+
+Для пользовательских изменений сайта рекомендуется регулярно прогонять Lighthouse и стремиться к `100/100/100/100` по:
+
+- Performance
+- Accessibility
+- Best Practices
+- SEO
+
+Минимум: не опускаться ниже текущих project constraints из `_bmad-output/project-context.md`.
+
+Подробная памятка:
+
+- `docs/lighthouse.md` - как проверять
+- `docs/lighthouse.md` - на что смотреть в первую очередь
+- `docs/lighthouse.md` - как повышать оценки без деградации UX

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en" class="h-full" data-theme="light" data-theme-preference="system">
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,13 +21,20 @@
 
 	<script>/* Prevent FOUC */
 		try {
-			const theme = localStorage.getItem('theme');
-			if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-				document.documentElement.classList.add('dark');
-			}
-			const lang = localStorage.getItem('lang');
-			if (lang && (lang === 'en' || lang === 'uk')) {
-				document.documentElement.lang = lang;
+			const html = document.documentElement;
+			const storedTheme = localStorage.getItem('theme');
+			const themePreference = storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : 'system';
+			const resolvedTheme = themePreference === 'dark' || (themePreference === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+				? 'dark'
+				: 'light';
+
+			html.classList.toggle('dark', resolvedTheme === 'dark');
+			html.setAttribute('data-theme', resolvedTheme);
+			html.setAttribute('data-theme-preference', themePreference);
+
+			const storedLang = localStorage.getItem('lang');
+			if (storedLang === 'en' || storedLang === 'uk') {
+				html.lang = storedLang;
 			}
 		} catch (e) {}
 	</script>
@@ -57,7 +64,7 @@
 					<nav id="mainNav" class="site-nav fixed inset-0 z-50 hidden md:flex md:static md:inset-auto md:z-auto">
 						<a href="#use-cases" class="site-nav__link" data-i18n="nav.useCases">Use cases</a>
 						<a href="#how-it-works" class="site-nav__link" data-i18n="nav.howItWorks">How it works</a>
-						<button id="closeMenu" class="site-nav__close absolute top-5 right-5 md:hidden" aria-label="Close Menu">&times;</button>
+						<button id="closeMenu" class="site-nav__close absolute top-5 right-5 md:hidden" aria-label="Close menu">&times;</button>
 					</nav>
 
 					<div class="utility-strip">
@@ -78,7 +85,7 @@
 						</button>
 					</div>
 
-					<button id="burgerBtn" type="button" class="control-icon burger-button md:hidden" aria-label="Open Menu">
+					<button id="burgerBtn" type="button" class="control-icon burger-button md:hidden" aria-controls="mainNav" aria-expanded="false" aria-label="Open menu">
 						<svg class="burger-button__icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 							<line x1="3" y1="6" x2="21" y2="6" />
 							<line x1="3" y1="12" x2="21" y2="12" />
@@ -191,7 +198,7 @@
 									<span class="flow-step__desc" data-i18n="hero.previewStep2Desc">Any phone. Seconds, not steps.</span>
 								</div>
 								<div class="flow-step__badge flow-step__badge--text" aria-hidden="true">
-									<span data-i18n="hero.previewBadgeNoApp">Без застосунку</span>
+									<span data-i18n="hero.previewBadgeNoApp">No app</span>
 								</div>
 								</div>
 
@@ -504,8 +511,8 @@
 			</footer>
 		</div>
 	</div>
-	<script src="assets/js/theme-toggle.js" defer></script>
 	<script src="assets/js/lang-toggle.js" defer></script>
+	<script src="assets/js/theme-toggle.js" defer></script>
 	<script src="assets/js/menu.js" defer></script>
 </body>
 </html>

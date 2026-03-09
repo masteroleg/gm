@@ -7,8 +7,11 @@ test("@smoke genu.im — mobile menu opens and closes", async ({ page }) => {
 	await app.gotoHome();
 
 	await expect(app.mainNav).toHaveClass(/hidden/);
+	await expect(app.burgerBtn).toHaveAttribute("aria-expanded", "false");
 	await app.burgerBtn.click();
 	await expect(app.mainNav).not.toHaveClass(/hidden/);
+	await expect(app.burgerBtn).toHaveAttribute("aria-expanded", "true");
 	await app.closeMenu.click();
 	await expect(app.mainNav).toHaveClass(/hidden/);
+	await expect(app.burgerBtn).toHaveAttribute("aria-expanded", "false");
 });

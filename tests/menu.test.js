@@ -1,43 +1,80 @@
-describe("Menu Toggle", () => {
-	beforeEach(() => {
-		// Set up the DOM structure before requiring the script
-		document.body.innerHTML = `
-      <div id="mainNav" class="hidden"></div>
-      <button id="burgerBtn"></button>
-      <button id="closeMenu"></button>
-    `;
-		// Since the script runs immediately, we require it here after DOM setup
-		// We use jest.resetModules() to ensure a fresh load of the module for each test
+describe("menu controller", () => {
+	const loadScripts = () => {
 		jest.resetModules();
-		require("../site/assets/js/menu");
+		const langModule = require("../site/assets/js/lang-toggle");
+		const menuModule = require("../site/assets/js/menu");
+		return { langModule, menuModule };
+	};
+
+	beforeEach(() => {
+		document.documentElement.lang = "en";
+		localStorage.clear();
 	});
 
-	test("should open the menu when the burger button is clicked", () => {
+	test("opens and closes the mobile menu while syncing aria-expanded", () => {
+		document.body.innerHTML = `
+			<nav id="mainNav" class="hidden"></nav>
+			<button id="burgerBtn" aria-expanded="false"></button>
+			<button id="closeMenu"></button>
+		`;
+
+		loadScripts();
+
 		const mainNav = document.getElementById("mainNav");
 		const burgerBtn = document.getElementById("burgerBtn");
+		const closeMenu = document.getElementById("closeMenu");
 
-		// Initially, the menu should be hidden
 		expect(mainNav.classList.contains("hidden")).toBe(true);
+		expect(burgerBtn.getAttribute("aria-expanded")).toBe("false");
 
-		// Simulate a click on the burger button
 		burgerBtn.click();
 
-		// After the click, the menu should be visible (class 'hidden' removed)
 		expect(mainNav.classList.contains("hidden")).toBe(false);
+		expect(burgerBtn.getAttribute("aria-expanded")).toBe("true");
+		expect(burgerBtn.getAttribute("aria-label")).toBe("Close menu");
+		expect(closeMenu.getAttribute("aria-label")).toBe("Close menu");
+
+		closeMenu.click();
+
+		expect(mainNav.classList.contains("hidden")).toBe(true);
+		expect(burgerBtn.getAttribute("aria-expanded")).toBe("false");
+		expect(burgerBtn.getAttribute("aria-label")).toBe("Open menu");
 	});
 
-	test("should close the menu when the close button is clicked", () => {
-		const mainNav = document.getElementById("mainNav");
-		const closeBtn = document.getElementById("closeMenu"); // Corrected ID
+	test("updates menu labels when language changes", () => {
+		document.body.innerHTML = `
+			<nav id="mainNav" class="hidden"></nav>
+			<button id="burgerBtn" aria-expanded="false"></button>
+			<button id="closeMenu"></button>
+		`;
 
-		// First, open the menu
-		mainNav.classList.remove("hidden");
-		expect(mainNav.classList.contains("hidden")).toBe(false);
+		const { langModule, menuModule } = loadScripts();
 
-		// Simulate a click on the close button
-		closeBtn.click();
+		langModule.setLang("uk", { persist: false });
 
-		// After the click, the menu should be hidden (class 'hidden' added)
-		expect(mainNav.classList.contains("hidden")).toBe(true);
+		const burgerBtn = document.getElementById("burgerBtn");
+		const closeMenu = document.getElementById("closeMenu");
+
+		expect(burgerBtn.getAttribute("aria-label")).toBe("Відкрити меню");
+		expect(closeMenu.getAttribute("aria-label")).toBe("Закрити меню");
+
+		menuModule.syncMenuState(
+			{
+				burgerBtn,
+				closeMenu,
+				mainNav: document.getElementById("mainNav"),
+			},
+			true,
+		);
+
+		expect(burgerBtn.getAttribute("aria-label")).toBe("Закрити меню");
+	});
+
+	test("fails soft when required nodes are absent", () => {
+		document.body.innerHTML = `<button id="burgerBtn"></button>`;
+
+		expect(() => {
+			loadScripts();
+		}).not.toThrow();
 	});
 });

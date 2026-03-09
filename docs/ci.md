@@ -146,3 +146,39 @@ npm run test:smoke
 npm run test:e2e -- --project=firefox
 npm run test:ci
 ```
+
+## Recommended verification ladder
+
+Для site-impacting изменений полезно держать такую лестницу локальной уверенности:
+
+1. `npm run lint`
+2. `npm run typecheck`
+3. `npm test`
+4. `npm run test:smoke`
+5. `npm run test:e2e` или выборочный browser project, если менялись persistence/mobile/render-sensitive зоны
+
+Особенно поднимать проверку до browser-level нужно, когда меняются:
+
+- theme/lang persistence
+- initial render behavior в `<head>`
+- mobile navigation
+- CSS delivery и visual states
+- accessibility state transitions
+
+Smoke нужен как быстрый survival-signal, но он не заменяет controller-level unit coverage и не считается достаточным regression-depth для preference/a11y/init-render логики.
+
+## Lighthouse recommendation
+
+Lighthouse не встроен в текущий CI как обязательный gate, но рекомендуется как регулярная ручная quality-проверка для user-facing изменений.
+
+Целевой ориентир:
+
+- `100/100/100/100`, когда это достижимо без искусственных компромиссов
+
+Практический baseline:
+
+- не допускать просадки относительно project constraints по Performance/Accessibility
+- отдельно проверять mobile viewport
+- прогонять Lighthouse после изменений в layout, hero/media, navigation, theme/lang, accessibility и first-paint behavior
+
+Подробный чек-лист и стратегия повышения оценок: `docs/lighthouse.md`.
