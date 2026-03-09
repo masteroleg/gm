@@ -91,15 +91,19 @@ const waitForUrl = (url, timeoutMs = 30_000) =>
 const loadLighthouseModules = async () => {
 	const lighthouseModule = await import("lighthouse");
 	const chromeLauncherModule = await import("chrome-launcher");
+	const desktopConfigModule = await import(
+		"lighthouse/core/config/desktop-config.js"
+	);
 
 	return {
+		desktopConfig: desktopConfigModule.default,
 		lighthouse: lighthouseModule.default,
 		launch: chromeLauncherModule.launch,
 	};
 };
 
 const runLighthousePreset = async (preset, modules) => {
-	const { lighthouse, launch } = modules;
+	const { desktopConfig, lighthouse, launch } = modules;
 	const reportPath = path.join(OUTPUT_DIR, `lighthouse-${preset}.json`);
 	const chromeProfileDir = path.join(TEMP_DIR, `chrome-profile-${preset}`);
 
@@ -111,23 +115,16 @@ const runLighthousePreset = async (preset, modules) => {
 	});
 
 	try {
-		const runnerResult = await lighthouse(targetUrl, {
-			port: chrome.port,
-			output: "json",
-			logLevel: "error",
-			onlyCategories: DEFAULT_CATEGORIES,
-			emulatedFormFactor: preset === "desktop" ? "desktop" : "mobile",
-			screenEmulation:
-				preset === "desktop"
-					? {
-							disabled: false,
-							mobile: false,
-							width: 1350,
-							height: 940,
-							deviceScaleFactor: 1,
-						}
-					: undefined,
-		});
+		const runnerResult = await lighthouse(
+			targetUrl,
+			{
+				port: chrome.port,
+				output: "json",
+				logLevel: "error",
+				onlyCategories: DEFAULT_CATEGORIES,
+			},
+			preset === "desktop" ? desktopConfig : undefined,
+		);
 
 		fs.writeFileSync(reportPath, runnerResult.report, "utf8");
 

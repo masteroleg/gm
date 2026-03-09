@@ -5,12 +5,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>genu.im — Trust built through transparency</title>
 	<meta name="description" content="genu.im helps brands and regulated producers turn product codes into checkable records. Real-time verification, transparent product data, no app required." />
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Onest:wght@500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-	<noscript>
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Onest:wght@500;600;700;800&display=swap" />
-	</noscript>
+	<link rel="canonical" href="https://genu.im/" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="genu.im — Trust built through transparency" />
+	<meta property="og:description" content="genu.im helps brands and regulated producers turn product codes into checkable records. Real-time verification, transparent product data, no app required." />
+	<meta property="og:url" content="https://genu.im/" />
+	<meta property="og:site_name" content="genu.im" />
+	<meta property="og:locale" content="en_US" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="genu.im — Trust built through transparency" />
+	<meta name="twitter:description" content="genu.im helps brands and regulated producers turn product codes into checkable records. Real-time verification, transparent product data, no app required." />
 
 	<link rel="icon" href="assets/favicon/favicon.ico" />
 	<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
@@ -39,12 +43,26 @@
 		} catch (e) {}
 	</script>
 
-	<script defer src="https://www.googletagmanager.com/gtag/js?id=G-RBD0C4LE5V"></script>
 	<script defer>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'G-RBD0C4LE5V');
+		if (location.hostname === 'genu.im' || location.hostname === 'www.genu.im') {
+			const loadAnalytics = () => {
+				const script = document.createElement('script');
+				script.src = 'https://www.googletagmanager.com/gtag/js?id=G-RBD0C4LE5V';
+				script.async = true;
+				document.head.appendChild(script);
+
+				window.dataLayer = window.dataLayer || [];
+				window.gtag = function gtag(){dataLayer.push(arguments);};
+				window.gtag('js', new Date());
+				window.gtag('config', 'G-RBD0C4LE5V');
+			};
+
+			if ('requestIdleCallback' in window) {
+				window.requestIdleCallback(loadAnalytics, { timeout: 4000 });
+			} else {
+				window.addEventListener('load', loadAnalytics, { once: true });
+			}
+		}
 	</script>
 </head>
 

@@ -3,9 +3,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Golos Text", sans-serif;
-  --font-display: "Onest", sans-serif;
-  --font-mono: "Golos Text", monospace;
+  --font-sans: "Aptos", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Bahnschrift", "Aptos Display", "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-mono: "Consolas", "SFMono-Regular", "Liberation Mono", monospace;
 
   /* Light palette */
   --color-surface: oklch(0.976 0.008 93);
@@ -488,7 +488,6 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		animation: var(--animate-rise);
 	}
 
 	/* ── Hero Card: 2-column ── */
