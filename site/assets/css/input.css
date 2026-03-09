@@ -1209,6 +1209,12 @@
 		-webkit-backdrop-filter: var(--blur-panel);
 	}
 
+	.site-main > .content-section,
+	.site-footer {
+		content-visibility: auto;
+		contain-intrinsic-size: 1px 960px;
+	}
+
 	.content-section--proof {
 		background: linear-gradient(
 			180deg,
@@ -2841,6 +2847,16 @@
 
 	/* ── ≤ 767px: mobile ── */
 	@media (max-width: 767px) {
+		body {
+			background-attachment: scroll;
+		}
+
+		body::before,
+		body::after,
+		.ambient-orb {
+			display: none;
+		}
+
 		.site-nav {
 			display: none;
 			flex-direction: column;
@@ -2870,6 +2886,12 @@
 
 		.hero-card {
 			border-radius: 1.85rem;
+			box-shadow: none;
+		}
+
+		.hero-card::before,
+		.hero-card::after {
+			display: none;
 		}
 
 		.content-section {
@@ -2931,10 +2953,14 @@
 
 		.hero-visual {
 			padding: var(--space-lg);
+			box-shadow: none;
 		}
 
 		.flow-card--preview {
 			padding: var(--space-sm);
+			backdrop-filter: none;
+			-webkit-backdrop-filter: none;
+			box-shadow: none;
 		}
 
 		.hero-visual-status,
