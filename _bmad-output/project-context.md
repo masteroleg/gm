@@ -5,7 +5,7 @@ date: '2026-03-09'
 sections_completed: ['technology_stack', 'language_rules', 'framework_rules', 'testing_rules', 'quality_rules', 'workflow_rules', 'anti_patterns']
 existing_patterns_found: 17
 status: 'complete'
-rule_count: 184
+rule_count: 195
 optimized_for_llm: true
 ---
 
@@ -24,9 +24,10 @@ _This file contains critical rules and patterns that AI agents must follow when 
 | Tailwind CSS | ^4.2.1 | Styling with CSS-first Tailwind v4 config |
 | Jest | ^30.2.0 | Unit testing with JSDOM |
 | Playwright | ^1.58.2 | E2E, smoke, mobile, and regression testing |
-| Biome | ^2.4.5 | Linting and formatting |
+| Biome | ^2.4.6 | Linting and formatting |
 | TypeScript | ^5.9.3 | Type-checking for tooling and tests |
 | Husky | ^9.1.7 | Local git hooks |
+| Lighthouse | ^13.0.3 | Performance, accessibility, best-practices, and SEO audits |
 | http-server | ^14.1.1 | Static local dev/E2E server |
 
 ### Critical Version Notes
@@ -34,8 +35,9 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Tailwind is v4 and must use `@import "tailwindcss"`; never use legacy `@tailwind` directives.
 - Tailwind customization is CSS-first via `@theme`, `@custom-variant`, and design tokens in `site/assets/css/input.css`.
 - Jest is configured inline in `package.json`, not in a separate config file.
-- TypeScript runs with `strict: true` for configured TS tooling/test files.
+- TypeScript runs with `strict: true` for configured TS tooling and Playwright test files.
 - Playwright uses one shared config with desktop and mobile projects from `playwright.config.ts`.
+- Lighthouse is part of the local quality toolchain and is used to validate user-facing regressions for both mobile and desktop.
 
 ### Architecture Context
 
@@ -106,9 +108,11 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Translate accessibility text too: `aria-label`, stateful labels, and any UI copy changed by controllers must come from the translation source.
 - HTML fallback copy must stay aligned with the default language/render path to avoid mismatched first paint.
 
-**Module / Test Compatibility:**
+**Module / Tooling Compatibility:**
 - Keep browser scripts compatible with Jest-based loading patterns used in `tests/*.test.js`.
 - When a script executes on require/import, tests should use `jest.resetModules()` before loading it.
+- Commit-message automation in `scripts/generate-commit-msg.cjs` must degrade safely to local fallback behavior if OpenCode session reuse or model lookup fails; commit creation must not break.
+- Helper scripts used by hooks/CI should stay shell-safe and deterministic; do not make local commit/push flow depend on network-only behavior.
 - Prefer exportable helpers for non-trivial logic where that improves unit test coverage without changing runtime behavior.
 
 **Code Style:**
@@ -163,6 +167,13 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Use `page.locator()` for element selection
 - Extend the existing page-object pattern in `tests/e2e/pages/`
 - Requires local server: `npm start` before `npm run test:e2e`
+- Playwright config intentionally separates desktop and mobile projects and allows project filtering via `PW_PROJECT`
+
+**Smoke vs Full Regression:**
+- `@smoke` means fast critical-path coverage suitable for local pre-push and push CI
+- Every new critical user flow should add at least one `@smoke` test when practical
+- Push CI runs smoke coverage only; full cross-browser regression is reserved for PR/manual/nightly workflows
+- Do not put every browser assertion into smoke scope; keep smoke lean and focused on survival-critical paths
 
 **Test Boundaries:**
 - Jest: DOM logic, class toggles, aria attributes, state changes, translation updates, missing-DOM guards, and storage failure handling
@@ -183,6 +194,11 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Prefer unit tests for logic density and E2E tests for integration confidence; do not push all coverage upward into slower browser suites
 - New persisted preference flows should usually have both Jest coverage for logic and Playwright coverage for reload persistence
 - When a controller contract changes, update markup, tests, and related docs together
+
+**Lighthouse Validation:**
+- Lighthouse is part of the quality-validation layer for user-facing changes, especially layout, hero/media, navigation, theme/lang bootstrap, and accessibility state changes
+- Use `npm run lighthouse`, `npm run lighthouse:mobile`, `npm run lighthouse:desktop`, or `npm run lighthouse:ci` depending on scope
+- Treat accepted Lighthouse baseline regressions as implementation issues to fix before push when reproducible locally
 
 **TDD Approach:**
 - New features: write test first, then code
@@ -208,6 +224,15 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Decorative SVGs must use `aria-hidden="true"`
 - Critical images: `loading="eager"`; below-fold images: `loading="lazy"`
 - Indent HTML with tabs
+
+**Project Structure Rules:**
+- Treat `site/` as the only published application surface; do not place production site code in the repository root.
+- Keep HTML entry points in `site/` and related static routes under their own subdirectories inside `site/`.
+- Keep browser controllers in `site/assets/js/`, styles in `site/assets/css/`, and static assets in the corresponding `site/assets/*` folders.
+- Treat `site/assets/css/input.css` as the source stylesheet and `site/assets/css/output.css` as the committed production artifact.
+- Keep unit tests in `tests/`, browser specs in `tests/e2e/`, and shared Playwright page objects in `tests/e2e/pages/`.
+- Put repository automation and quality scripts in `scripts/`; do not mix them into `site/assets/js/`.
+- Treat `_bmad/`, `_bmad-output/`, and most of `docs/` as project-system/documentation zones, not as the published site.
 
 **Tailwind CSS v4 Contract:**
 - Use `@import "tailwindcss"` (NOT legacy `@tailwind` directives)
@@ -258,10 +283,12 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - If controller contracts or project rules changed, update related docs as part of done
 
 **Git Workflow:**
-- Husky runs `npm run build:css` on pre-commit automatically
+- Daily work happens directly on `main`; do not use `work` as the normal delivery branch anymore.
+- Husky runs `npm run build:css` on pre-commit automatically when `site/assets/css/input.css` changes.
 - `output.css` IS committed (required for GitHub Pages deployment)
 - Commit message: Conventional format (`feat:`, `fix:`, `docs:`)
 - Husky v9 format: `#!/bin/sh` without `_/husky.sh` bootstrap
+- Commit-message automation in `.husky/prepare-commit-msg` is allowed, but commit creation must still succeed if AI generation falls back to local logic.
 
 **Deployment Context:**
 - Current delivery target is static HTML on GitHub Pages
@@ -275,7 +302,21 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Use `npm test` for controller/unit validation
 - Use smoke/E2E runs when changes affect persisted preferences, initial render behavior, mobile navigation, CSS delivery, accessibility state transitions, or browser behavior
 - Use `npm run test:ci` when full local confidence is needed across lint, typecheck, unit, and browser coverage
-- Prefer a verification ladder of lint -> typecheck -> unit -> browser tests as change impact increases
+- Prefer a verification ladder of lint -> typecheck -> unit -> browser tests -> Lighthouse as change impact increases
+
+**CI / Deploy Flow:**
+- Normal developer flow is `Commit -> Sync -> push to main -> GitHub CI -> deploy`.
+- `Site CI` runs only for site-impacting changes.
+- `Infra Checks` runs only for workflow/hook/helper-script changes.
+- `docs/BMAD-only` changes should not trigger site CI or deploy.
+- `deploy-pages` runs only from `main` and only after successful site pipeline checks.
+
+**Release / Versioning Rules:**
+- Use git tags and GitHub Releases to mark meaningful public site versions.
+- `1.0` is the first compact published version of the site before the large landing-page redesign.
+- `2.0` is the current large landing-page version.
+- Treat major site milestones as releases; do not create a release for every small fix.
+- Future version numbering principles should evolve from these anchored release points rather than from arbitrary commit counts.
 
 **Change Management:**
 - When changing controller contracts, update markup, tests, and docs together
@@ -290,6 +331,12 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Accessing `localStorage` without try/catch (throws in private browsing)
 - Adding server-side code, authentication, or backend-managed state before the architecture explicitly changes
 - Using `#00A95C` brand color (outdated — use `#0d8a4f` light / `#00e676` dark)
+
+**Workflow / Release Mistakes:**
+- Do not reintroduce `work` as the normal delivery branch; the active solo flow is `main`-only.
+- Do not make `prepare-commit-msg` or commit creation depend on mandatory network/AI availability.
+- Do not broaden site CI triggers to BMAD/docs-only changes without a clear reason.
+- Do not create GitHub Releases for every small fix; reserve releases for meaningful site milestones.
 
 **Accessibility Requirements (WCAG 2.1 AA):**
 - All decorative SVGs: `aria-hidden="true"`
