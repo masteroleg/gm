@@ -4,7 +4,8 @@ import subprocess
 
 
 def run_script():
-    subprocess.run(["python", "scripts/index_docs.py"], check=True)
+    repo_root = Path(__file__).resolve().parents[1]
+    subprocess.run(["python", "scripts/index_docs.py"], check=True, cwd=repo_root)
 
 
 def test_index_docs_runs_and_outputs():
