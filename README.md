@@ -125,6 +125,15 @@ npm run test:e2e
 
 Практический принцип такой: logic/state/a11y покрываются в Jest, а reload persistence, CSS delivery, mobile behavior и browser truth подтверждаются в Playwright.
 
+Browser-level growth policy:
+
+- при добавлении нового persisted preference flow нужен минимум один browser test на reload persistence
+- при изменении mobile navigation нужен browser test на state + accessibility behavior
+- при изменении initial render (`<head>`, theme/lang bootstrap, CSS delivery) нужен browser-level regression check
+- при росте сайта e2e/spec coverage расширяется по critical flows и page objects, а не только путем наращивания одного smoke spec
+
+Если нужен формальный BMAD-style review без story-файла, используй процесс из `docs/bmad-review-without-story.md`.
+
 ## Lighthouse: регулярная проверка качества
 
 Для пользовательских изменений сайта рекомендуется регулярно прогонять Lighthouse и стремиться к `100/100/100/100` по:
@@ -135,6 +144,13 @@ npm run test:e2e
 - SEO
 
 Минимум: не опускаться ниже текущих project constraints из `_bmad-output/project-context.md`.
+
+Текущий accepted baseline для сайта:
+
+- mobile: `98 / 100 / 100 / 100`
+- desktop: `100 / 100 / 100 / 100`
+
+Это считается приемлемым рабочим baseline; mobile `100` остается stretch-goal, а не blocker, пока нет regressions ниже этого уровня.
 
 Подробная памятка:
 
