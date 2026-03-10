@@ -2,9 +2,6 @@ Directory Index: repo-root
 
 ---
 ## Files
-### _archive/
-- **[index.md](_archive/migration/index.md)** - Migration Directory Index
-- **[migration.md](_archive/migration/migration.md)** - Главная идея (обновлено):
 ### _bmad-output/
 - **[design-thinking-2026-02-23.md](_bmad-output/design-thinking-2026-02-23.md)** - Design Thinking Session: gm
 - **[index.md](_bmad-output/implementation-artifacts/index.md)** - Directory Index
@@ -50,7 +47,6 @@ Directory Index: repo-root
 ---
 ### _archive/
 Archived legacy materials and migration inputs.
-- **[/_archive/migration](./_archive/migration/)**
 - **[/_archive/perevir-product](./_archive/perevir-product/)**
 
 Last updated: 2026-03-10
