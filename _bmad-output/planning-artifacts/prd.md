@@ -1,4 +1,10 @@
 ---
+workflowType: prd
+workflow: edit
+project_name: gm
+user_name: GenuIm
+date: 2026-02-23
+lastEdited: 2026-03-10
 stepsCompleted:
   - step-01-init
   - step-02-discovery
@@ -12,578 +18,586 @@ stepsCompleted:
   - step-09-functional
   - step-10-nonfunctional
   - step-11-polish
+  - step-e-01-discovery
+  - step-e-02-review
+  - step-e-03-edit
 inputDocuments:
   - _bmad-output/planning-artifacts/product-brief-gm-2026-02-23.md
   - _bmad-output/project-context.md
   - _bmad-output/design-thinking-2026-02-23.md
   - _bmad-output/problem-solution-2026-02-23.md
+  - _bmad-output/planning-artifacts/validation-report-2026-03-09.md
+  - docs/genu-im-homepage-master-plan.md
   - AGENTS.md
   - CLAUDE.md
-documentCounts:
-  briefCount: 1
-  researchCount: 0
-  brainstormingCount: 2
-  projectDocsCount: 3
 classification:
   projectType: web_app
   domain: general
   complexity: low-medium
   projectContext: brownfield
-visionInsights:
-  positioning:
-    coreMove: "Лендинг не просит верить: он ведет в действие 'посмотреть пример проверки' (в /v/genuim), где доверие формируется через опыт проверки, а не через слова."
-    noCertShield: "Важно явно снять ожидание сертификации: 'Это не сертификат и не экспертная оценка. Это результат проверки по коду из системы маркировки.'"
-  differentiators:
-    - "Proof-first: /v/genuim как главный путь доверия (опыт проверки), а не 'картинка-превью' на лендинге."
-    - "Минимум техно-терминов на первом экране; смысл через действия и ясные обещания."
-    - "Масштаб как доказательство надежности: 25M+ только вместе с 'что именно считаем' и 'почему это важно'."
-  messagingHardening:
-    avoidTerms:
-      - "протокол"
-      - "статусы"
-      - "события"
-      - "паспорт"
-    landingFocus:
-      - "что делаем: маркировка кодом + проверка по коду"
-      - "как доверять: primary CTA 'Посмотреть пример проверки' → /v/genuim"
-      - "почему это не фейк: масштаб + фактичность + четкие ограничения"
-  seoExpansion (epic2a):
-    principle: "Не 'блог ради блога', а раздел доверия/знаний; сейчас только предусмотреть место, навигацию и URL-структуру."
-    contentPillars:
-      - "Как читать проверку по коду (для закупки/партнера)"
-      - "Вопросы закупки (FAQ чеклистом)"
-      - "eAkciz: что меняется для производителя (спокойно, без мимикрии)"
-      - "Чеклисты внедрения маркировки на линии без остановок"
-firstPrinciples:
-  trustModel:
-    - "Доверие в B2B = проверяемость + ясные границы ответственности + отсутствие пафоса."
-    - "Лендинг не обязан 'доказать'; он обязан привести в действие проверки и вернуть к CTA."
-    - "Числа/факты работают только в рамке смысла: что считаем и почему это важно."
-  minimumConvincingSet:
-    landing:
-      primaryCTA: "Посмотреть пример проверки"  # ведет на /v/genuim
-      whatItIs: "Маркировка уникальным кодом + проверка подлинности по коду."
-      boundary: "Не сертификат и не экспертиза — результат проверки по коду из системы маркировки."
-      proofScalePattern: "25M+ (только с уточнением метрики и смыслом 'масштаб работы контура')"
-    epic2aSeo:
-      principle: "Контент усиливает проверяемость (как читать проверку, вопросы закупки), а не 'новости ради новостей'."
-feynmanLanguage:
-  goldenRules:
-    - "Запрещаем техно-лексику в hero; говорим простыми словами: код → проверка."
-    - "Всегда держим границу: не сертификат/не экспертиза, а факт по коду из системы маркировки."
-    - "Доверие через действие: 'посмотреть пример проверки' ведет на /v/genuim."
-  plainExplanation:
-    - "На продукт наносится уникальный код."
-    - "Мы помогаем надежно нанести этот код на производстве."
-    - "По коду можно открыть страницу и увидеть результат проверки подлинности."
-    - "Это не сертификат качества и не экспертиза — это результат проверки по коду из системы маркировки."
-eakcizMessaging:
-  audience: "Производители/комплаенс, готовящиеся к eAkciz (без заявлений 'официально' или 'сертифицировано')."
-  messageGoals:
-    - "Снять страх 'штрафы/остановка линии/хаос в данных' через тон 'без сюрпризов'."
-    - "Обещать только проверяемое: прозрачность, учет, факт по коду, масштаб, дисциплина процесса."
-  landingBlocks:
-    - "eAkciz-ready контур маркировки: спокойно, предсказуемо, без сюрпризов."
-    - "Проверяемость по коду: партнер/закупка видит результат по ссылке, без ручных объяснений."
-    - "Масштаб: 25M+ (с обязательным уточнением, что именно считается) как сигнал устойчивости процесса."
-  disclaimers:
-    - "Не заменяет сертификацию/экспертизу; показывает факт проверки по коду из системы маркировки."
-sharkTankHardening:
-  skepticAttacks:
-    - "Путают с сертификацией: где границы ответственности?"
-    - "25M+ без определения метрики выглядит как 'магическое число'."
-    - "Почему верить 'результату проверки', если это ваш сайт?"
-    - "Чем отличаетесь от принтеров/подрядчиков/порталов?"
-    - "eAkciz-аудитория хочет официальности; вы не гос." 
-    - "SEO-блог ради трафика не усиливает доверие."
-  requiredReinforcements:
-    boundaryLine: "Не сертификат и не экспертиза — результат проверки по коду из системы маркировки."
-    proofAction: "Primary CTA на лендинге: 'Посмотреть пример проверки' → /v/genuim (доверие через опыт)."
-    scaleRule: "25M+ всегда с определением 'что именно считаем' + фразой 'почему это важно' (масштаб/устойчивость)."
-    differentiation: "Отличие: отвечаем за контур 'код нанесен → по коду можно проверить', а не за отдельное устройство/подрядчика."
-    eakcizTone: "Без 'официально': 'без сюрпризов', предсказуемость, учет, проверяемость по коду + дисклеймер."
-    seoRule: "Epic 2a = база доверия (как читать проверку, вопросы закупки, eAkciz, чеклисты внедрения), не новости ради новостей."
-workflowType: prd
-project_name: gm
-user_name: GenuIm
-date: 2026-02-23
+editHistory:
+  - date: 2026-03-10
+    changes: Reworked the PRD for full homepage transformation with measurable requirements, restored traceability, implementation-agnostic core sections, and appendix-based technical notes.
 ---
 
 # Product Requirements Document - gm
 
-**Author:** GenuIm
-**Date:** 2026-02-23
+**Author:** GenuIm  
+**Original Date:** 2026-02-23  
+**Last Edited:** 2026-03-10
 
 ## Executive Summary
 
-genu.im — витрина контура genu.mark: маркировка уникальным кодом + прозрачность/проверяемость по коду для производителей в Украине. Цель MVP (Epic 1) — за один экран дать ясный ответ “что это / почему это надежно / что делать дальше” и привести пользователя в действие “посмотреть пример”: основной CTA на лендинге ведет на `/v/genuim`, где доверие формируется через опыт просмотра результата (а не через обещания на лендинге).
+`genu.im` is the public proof-first surface for `genu.mark`: it helps manufacturers and partners understand marking, public proof, and next-step contact without asking them to trust slogans first. Phase 1 must transform the homepage into a compact sequence that explains the category, shows why the product is more than a generic QR landing page, leads into a verification example, separates two business branches, and supports contact conversion.
 
-Продуктовая позиция строится на проверяемости и честных границах ответственности: genu.im не является сертификационным центром и не выдает экспертных заключений; система показывает данные/результат по коду только в пределах контура genu.mark (нет данных → нет утверждений). Масштаб используется как сигнал устойчивости контура (25M+ — только с явным определением, что именно считается, и объяснением “почему это важно” для надежности).
+The trust model is explicit. `genu.im` does not act as certification, expert assessment, or a state service. Official consumer checking for `еАкциз` belongs to `Дія`. `genu.im` explains and demonstrates what `genu.mark` can prove for products inside its own contour: marked-product proof, public transparency facts, and a clear no-data boundary when public proof is unavailable.
 
-Для eAkciz важно разделение ролей: официальный consumer-check живет в Diia, а genu.im не имитирует и не подменяет государственный сервис. Для производителей genu.mark закрывает производственный контур маркировки и данных, а поверх обязательного кода дает “страницу прозрачности бренда” (факты/документы/sustainability) — только если код в genu.mark.
+Phase 1 is a build-now web delivery slice, not a full product platform. It ships the homepage, a canonical verification example at `/v/genuim`, a paste-first demo input page at `/v/`, one neutral no-data proof state, request capture, trust-floor destinations, and measurement-ready proof-path attribution. Live lookup, private B2B workflows, and richer knowledge-base/analytics capabilities remain staged for later phases.
 
-В Phase 1 в рамках этого PRD реализуем “сверстанные моки” ключевых путей `/v/`, `/v/genuim`, `/v/{code}` (с состояниями `in_genu_mark`/`not_in_genu_mark`) для пресейла и проверки концепта. Реальный lookup через API — Phase 3.
+### What Makes This Product Different
 
-Для органического роста предусмотрено расширение Epic 2a: раздел “база доверия/знаний” с заранее заложенной структурой навигации и URL, ориентированный на high-intent запросы ICP (АЕД/УГІ/API/економічний оператор; DataMatrix на линии; внедрение маркировки).
-
-### What Makes This Special
-
-- Доверие строится через действие: лендинг не просит “поверить”, а ведет в “посмотреть пример проверки” (`/v/genuim`), где пользователь сам оценивает результат проверки.
-- Минимум техно-терминов в первом экране; понятная модель “код → проверка”, с обязательным “не сертификат/не экспертиза” щитом против неверных ожиданий.
-- Дифференциация без vendor-парада: ответственность за контур “код нанесен → по коду можно проверить”, а не за отдельное устройство/подрядчика.
-- Epic 2a заложен как “база доверия”, усиливающая проверяемость и продажи, а не как “блог ради трафика”.
+- Trust is built through action: the homepage leads to a verification example instead of relying on claims alone.
+- The product clearly separates the official `Дія` path from the `genu.mark` manufacturer/brand proof layer.
+- A neutral no-data state is treated as a credibility feature, not hidden as a failure.
+- The same marked-product story can speak to two audiences early, then split into deeper paths later:
+  - `еАкциз`-ready operations
+  - responsible manufacturers and brand transparency
 
 ## Project Classification
 
-Project Type: web_app  
-Domain: general (B2B marketing/позиционирование вокруг маркировки+проверки по коду)  
-Complexity: low-medium  
-Project Context: brownfield
+Project Type: `web_app`  
+Domain: `general`  
+Complexity: `low-medium`  
+Project Context: `brownfield`
 
 ## Success Criteria
 
 ### User Success
 
-- B2B посетитель (COO/Compliance/Engineer/Marketing) за 10 секунд первого экрана может своими словами ответить: “что это”, “почему доверять”, “что сделать дальше”.
-- Пользователь понимает границы: genu.im не является сертификацией/экспертизой; система показывает результат проверки по коду из контура маркировки.
-- Доверие формируется действием: пользователь нажимает “Посмотреть пример проверки” → `/v/genuim`, понимает “что подтверждается”, и возвращается к запросу демо/контакту без ручных объяснений.
-- Пользователь различает две мотивации (eAkciz-ready vs voluntary brand protection) и видит следующий шаг для каждого.
+- **SC1:** In a 10-second first-screen review, at least 70% of ICP respondents can explain what `genu.im` is, why it is trustworthy, and what action to take next.
+- **SC2:** In moderated review, at least 70% of ICP respondents correctly distinguish the roles of `Дія` and `genu.mark` without confusing `genu.im` with a state or certification service.
+- **SC3:** Users who open the canonical verification example can correctly identify what is being shown, what is not being claimed, and what the next CTA is.
+- **SC4:** Users can identify the relevant branch for their situation (`еАкциз` operations or manufacturer/brand proof) and reach a matching CTA without ambiguity.
 
 ### Business Success
 
-- Рост qualified demo requests от производителей (baseline → +X% за 3 месяца).
-- 1–3 пилотных запроса по eAkciz-ветке в первые 3 месяца после релиза витрины.
-- Proof-first работает как продажный touchpoint: измеряемая цепочка `landing → /v/genuim → return → CTA`.
-- Epic 2a (SEO) приводит качественный вход: органика, которая доходит до `/v/genuim` и возвращается к CTA (а не “трафик ради трафика”).
+- **SC5:** Every submitted qualified request captures scenario, company type, business context, and source path.
+- **SC6:** Within 2 weeks of release, the team can review a measurable proof-first path from homepage entry to proof example to request submission.
+- **SC7:** Within 2 weeks of release, the team has a baseline for qualified requests, proof-example visits, and proof-to-request conversion to support later product target setting.
 
-**Definitions**
+### Technical and Quality Success
 
-- **Qualified demo request**: валидный контакт + компания-производитель (или интегратор/IT у производителя) + выбран режим (eAkciz/voluntary) + краткое описание контекста (линия/объем/сроки).
-- **Baseline**: фиксируем за 1–2 недели на текущей версии (или первые 1–2 недели после релиза как стартовую точку, если “до” измерений нет).
+- **SC8:** Phase 1 public pages meet the agreed performance gates in this PRD.
+- **SC9:** Phase 1 key flows meet the agreed accessibility gates in this PRD.
+- **SC10:** Language and theme controls remain stable across supported browsers and reloads on Phase 1 public pages.
+- **SC11:** Trust-floor destinations are live, reachable, and clearly non-empty.
+- **SC12:** Homepage IA reserves a future knowledge-base surface without requiring a navigation rewrite later.
+- **SC13:** No-data proof states and consumer-intent intercept content pass copy review for honesty, neutrality, and no false state mimicry.
+- **SC14:** Source-tagged proof-path measurement is available for release review, even if deeper automated analytics are deferred.
 
-### Technical Success
+### Measurement Notes
 
-- Performance/Trust gates: выполнены Performance NFRs (Lighthouse Performance >= 97 и Core Web Vitals targets).
-- Accessibility gate: выполнены Accessibility NFRs (WCAG 2.1 AA и Lighthouse Accessibility >= 97).
-- i18n и хранение предпочтений: UK first, EN second; переключатели и тексты работают стабильно.
-- Измеримость proof-first как часть MVP: аналитические события для CTA/веток/возврата (см. ниже).
-- Архитектурная готовность к Epic 2a: предусмотрены место в навигации и URL-структура под “базу доверия/знаний” без ломки IA.
-
-### Measurable Outcomes
-
-- ≥70% респондентов ICP после 10 секунд первого экрана корректно отвечают на 3 вопроса: (1) что это, (2) почему доверять, (3) что делать дальше.
-- CTR на “Посмотреть пример проверки” (`/v/genuim`) и доля возврата на CTA после `/v/genuim` (целевые значения задаем после baseline).
-- Конверсия landing → demo (CR %) выше baseline (целевое значение задаем после baseline).
-
-**Analytics Events (Phase 2, planned)**
-
-- `cta_view_example` (клик “Посмотреть пример проверки”)
-- `cta_request_demo` (клик/submit запроса демо)
-- `return_from_verification` (возврат на лендинг после `/v/genuim`)
-- `mode_eakciz_select` / `mode_voluntary_select` (выбор ветки)
+- Release acceptance uses the criteria above.
+- Growth targets that depend on new baseline data are tracked in `Appendix B - Open Decisions` and are not release blockers for Phase 1.
 
 ## Product Scope & Phased Development
 
-### Phase 1 (MVP): Experience MVP (static MPA + mocks)
+### Phase 1 (MVP): Build-Now Homepage Transformation
 
-- Витрина/лендинг (Epic 1) как главный фокус: proof-first, две ветки eAkciz/voluntary с четкими выгодами и CTA; явное разделение ролей (Diia = официальный минимум; genu.mark = прозрачность бренда только для наших кодов).
-- Primary CTA “посмотреть пример” → `/v/genuim` (mock).
-- `/v/` paste-first (mock): ввод/вставка DataMatrix + “вставить пример кода” для демонстрации.
-- `/v/{code}` (mock) состояния:
+Phase 1 includes only the public surfaces and measurement needed to ship the new proof-first homepage and its immediate proof paths:
 
-  - `in_genu_mark`: карточка прозрачности с разделением источников (`source`) и evidence для sustainability.
-  - `not_in_genu_mark`: нейтрально “нет данных” + “официальная проверка в Diia” + “что могло бы быть” + CTA “включить genu.mark”.
+- Homepage with this ordered experience:
+  - category framing
+  - bridge section explaining why this is not just a QR landing page
+  - mandatory verification example entry point
+  - branch split for `еАкциз` and responsible manufacturers
+  - explicit CTA layer
+  - trust floor
+- Canonical verification example at `/v/genuim`
+- Paste-first demo input page at `/v/` with an example-code action
+- One neutral no-data proof state for products without public proof in `genu.im`
+- Persistent demo-mode labeling on all non-live proof surfaces
+- Qualified request form with scenario and source-path capture
+- Trust-floor destinations for About, Contact, Proof & Cases, Privacy, Terms, FAQ, and external company presence
+- Navigation and IA reservation for future knowledge-base growth
+- Measurement-ready proof-path attribution sufficient to review Phase 1 funnel behavior
+- SEO foundation for homepage, proof example, trust surfaces, and one consumer-intent intercept path
 
-- Честное обозначение “демонстрация интерфейса” на моках проверки (чтобы не выглядело как фейк).
-- Форма запроса (demo/request) с минимальной квалификацией: контакт + сценарий + контекст.
-- SEO фундамент: meta title/description, OG/Twitter, canonical, hreflang UK/EN, JSON-LD, sitemap.xml, robots.txt.
-- Quality gates: WCAG 2.1 AA + Lighthouse Performance/Accessibility >= 97.
+### Phase 1 Out of Scope
 
-### Phase 2 (Growth): Epic 2a Knowledge Base + Analytics
-### BMAD Official Status Handling (Phases 1–3)
-- Official BMAD approach uses bmad-help as the single source of status for Phases 1–3.
-- Phase 1–3: Use the bmad-help workflow to determine the next required steps and progress state.
-- Phase 4: Use sprint-status.yaml to record sprint progress and readiness.
-- No separate prd-status.yaml is part of the official BMAD schema.
-- PRD status is tracked via frontmatter stepsCompleted and the produced artifacts.
+- Live production lookup against real product data
+- Full private B2B portal or investigation workflow
+- Full knowledge-base rollout beyond IA reservation and placeholder-ready destinations
+- Arbitrary-code public deep-link behavior for every possible input unless approved later
+- Full Safari and iOS Safari support
+- Public claims that depend on unapproved proof metrics or undefined scale framing
 
-- Knowledge base IA/URL: `/knowledge/` + шаблон страницы (оглавление, “для кого”, FAQ, CTA).
-- Стартовые страницы (по SEO Priority Matrix):
+### Phase 2: Growth and Content Expansion
 
-  - АЕД: что это + типовые ошибки + чеклист
-  - УГІ: зачем + типовые ошибки
-  - DataMatrix на линии: чеклист внедрения/печати
-  - Экономічний оператор: “что подготовить” (без имитации гос-портала)
-  - Прозрачность бренда поверх кода: правила source/visibility/evidence/sustainability
+- Knowledge-base rollout aligned to high-intent clusters
+- Deeper funnel analytics and reporting automation
+- Expanded public proof content and proof/case surfaces
+- Optional expansion of approved shareable proof states
 
-- Контентные правила: “нет данных → нет утверждений”, sustainability только с evidence, запрет “официально/сертифицировано”.
-- Analytics: события (CTA, выбор сценария, lookup outcomes, upsell CTA) и отчеты/воронки.
+### Phase 3: Live Proof and Private Layer
 
-### Phase 3 (Expansion): Real Lookup + B2B Private Layer
-
-- Интеграция с вашим API для реального lookup (`/v/` и `/v/{code}`).
-- B2B private слой (если нужно): задания/результаты/расследования под auth + audit/RBAC.
-- iOS Safari/Safari поддержка (вместе с Epic 3+).
-
-### Out of Scope (this PRD)
-
-- Epic 3: B2B портал (отдельный PRD).
-
-### Risk Mitigation (MVP)
-
-- Consumer-трафик “проверить акцизную марку онлайн” → перехватывающая страница → Diia + B2B CTA.
-- DataMatrix friction → deep-link + paste-first UX.
-- Репутация/greenwashing → sustainability только с evidence.
+- Live lookup against production data for approved use cases
+- Abuse controls for real public lookup
+- Private B2B access for deeper operational workflows
+- Additional browser/platform support as approved
 
 ## User Journeys
 
-### Journey 1 — Партнер по оборудованию (Domino/Markem-Imaje тип): “продает маркировку, усиливает сделку контуром”
+### Journey 1 - Equipment or integration partner
 
-Opening Scene: Партнер продает оборудование/интеграцию для маркировки. Его задача — продать маркировку как устойчивый контур (а не как “принтер”).
+- **Trigger:** Partner needs a proof surface that strengthens a marking or implementation sale.
+- **Needs:** Clear role separation, operational confidence, proof example, and a shareable next step.
+- **Success Outcome:** Partner shares the public proof/demo surface and uses it as a presales asset that leads to a qualified request.
 
-Rising Action: Он отправляет витрину genu.im как опору для продаж и “поддержки позиции”: две ветки (eAkciz / voluntary), тон “без сюрпризов”, ясные границы (не сертификация).
+### Journey 2 - Manufacturer preparing for `еАкциз`
 
-Climax: Клиент понимает разделение ролей: официальная consumer-проверка eAkciz — в Diia; genu.mark/genu.im — надежное нанесение кода на линии + дисциплина производственных данных/отчетности. Для voluntary клиентов поверх кода появляется “страница прозрачности бренда” (данные от производителя), которой нет в гос-проверке.
+- **Trigger:** Operations or compliance stakeholder wants a low-surprise marking path.
+- **Needs:** Clear division between `Дія` and `genu.mark`, confidence in proof/readiness language, and a request path with operational context.
+- **Success Outcome:** Stakeholder understands the contour, does not confuse the product with state checking, and requests a relevant conversation.
 
-Resolution: Клиент оставляет qualified запрос на демо/внедрение (режим + контекст линии/сроки). Партнер использует “что теряют без genu.mark” как аргумент в сделке.
+### Journey 3 - Responsible manufacturer or brand owner
 
-### Journey 2 — Производитель eAkciz (COO/Compliance): “минимум риска, максимум предсказуемости”
+- **Trigger:** Brand team wants product-level trust and public transparency beyond the state minimum.
+- **Needs:** A clear example of what a proof page can show and what it cannot claim.
+- **Success Outcome:** User sees the verification example, understands the value of public proof, and requests a relevant next step.
 
-Opening Scene: Производитель готовится к eAkciz и боится остановки линии, хаоса в данных и штрафных рисков.
+### Journey 4 - Skeptical procurement, audit, or partner visitor
 
-Rising Action: Он читает лендинг и ищет: (1) кто за что отвечает, (2) что делает контур маркировки на линии, (3) какие данные/отчеты доступны для контроля и расследований.
+- **Trigger:** Visitor sees or receives a no-data proof state and expects either overclaiming or an empty marketing page.
+- **Needs:** Neutral messaging, explicit honesty, and a useful next step.
+- **Success Outcome:** Visitor understands that no public proof is available in `genu.im`, sees what could exist inside the `genu.mark` contour, and either exits cleanly or converts to a lead.
 
-Climax: Он получает ясность: потребительская eAkciz-проверка — в Diia; при этом genu.im может давать B2B-проверку/поиск кода по производственным данным (операционный контроль, расследования, сверка отчетности). Никаких обещаний “официальной сертификации”.
+### Journey 5 - Consumer-intent search visitor
 
-Resolution: Он запрашивает демо, подключает инженера/IT, и оценивает “без сюрпризов” по процессу и данным.
+- **Trigger:** Visitor arrives through a consumer-style query about checking marked products.
+- **Needs:** Immediate redirection to the correct official path and a non-confusing separation between consumer checking and B2B value.
+- **Success Outcome:** Visitor is directed to `Дія` for official consumer checking and can still discover a separate B2B CTA if relevant.
 
-### Journey 3 — Производитель/импортер voluntary (бренд/маркетинг): “прозрачность как коммуникация”
+### Cross-Journey Enablement
 
-Opening Scene: Бренду нужна пересылаемая коммуникация доверия, которой нет в гос-проверке: что за продукт, кем/когда сделан, происхождение, инструкции, sustainability-факты.
+These capabilities support all journeys rather than one branch only:
 
-Rising Action: Он читает витрину, понимает модель “код → прозрачность”, и видит, что это не заменяет государственную проверку, а добавляет слой прозрачности от бренда.
-
-Climax: Он открывает `/v/genuim` как пример “страницы прозрачности бренда” (данные предоставлены производителем; без слов “сертифицировано/официально”).
-
-Resolution: Он возвращается и запрашивает демо на voluntary, чтобы получить “карточку прозрачности” как маркетинговый/партнерский артефакт.
-
-### Journey 4 — Скептик (закупка/аудит/партнер): “код не в genu.mark” (edge case + upsell)
-
-Opening Scene: Пользователь попадает на `/v/{code}` с кодом, который не принадлежит контуру genu.mark (или по нему нет данных бренда в genu.im).
-
-Rising Action: Он ожидает либо “самозванство под гос”, либо пустую маркетинговую страницу.
-
-Climax: Страница отвечает нейтрально и полезно:
-
-- По этому коду нет данных прозрачности бренда в genu.im
-- Официальная eAkciz-проверка — в Diia
-- Что могло бы быть здесь, если код нанесен в genu.mark (перечень фактических блоков: партия/дата/производитель/импортер/документы/инструкции/sustainability)
-- CTA: включить прозрачность по коду (genu.mark)
-
-Resolution: Скептик либо уходит, либо становится лидом (просит включить “такие же данные” для своего продукта).
-
-### Journey Requirements Summary
-
-- Разделение ролей обязано быть явным: Diia = официальная eAkciz-проверка; genu.im = прозрачность бренда и/или B2B-контроль по производственным данным (не сертификация).
-- “Прозрачность бренда” доступна только если код в контуре genu.mark (или бренд предоставил данные в контур): иначе `/v/{code}` показывает нейтральное “данных нет” + upsell.
-- `/v/{code}` должен поддерживать состояния: `in_genu_mark` (есть данные бренда/контур) и `not_in_genu_mark` (витрина потери).
-- Sustainability-контент допускается только как факты с источниками/документами, иначе риск greenwashing.
-- **Техническая задача (для последующей реализации):** DataMatrix содержит только символы и не несет URL. Требуется UX и техническое решение для “проверки/поиска по коду”:
-
-  - Вариант A: страница ввода/вставки кода (`/v/`), которая вызывает API по введенному DataMatrix
-  - Вариант B: deep-link через query param (код в URL через `encodeURIComponent` или безопасное кодирование), чтобы партнер мог переслать ссылку
-  - Вариант C: web-сканер DataMatrix в браузере (если технически оправдано)
-
-  Нужно выбрать вариант(ы), описать ограничения, и зафиксировать подход в Domain Requirements.
+- language and theme stability
+- accessibility and responsive behavior
+- trust-floor destinations
+- request source capture and proof-path measurement
+- honest demo labeling and no-data boundaries
 
 ## Domain-Specific Requirements
 
-### Compliance & Regulatory
+### Trust and Compliance Boundaries
 
-- Разделение ролей обязано быть явным: официальная consumer-проверка eAkciz — в Diia; genu.im не является гос-проверкой, сертификацией или экспертизой.
-- Обязательный дисклеймер на страницах результата/прозрачности: “не сертификат/не экспертиза”; публичные данные трактуются как “данные бренда” и/или “данные из контура маркировки genu.mark”.
-- Политика “нет данных → нет утверждений”: если код не в контуре genu.mark, genu.im не делает выводов о подлинности и не “знает” ничего про этот DataMatrix, кроме того, что он не найден в нашем контуре.
-- Sustainability-контент допускается только как проверяемые факты с источником/документом (иначе риск greenwashing и репутационные потери).
+- `Дія` is the official consumer-check path for `еАкциз`; `genu.im` must never imitate, replace, or visually mimic a state service.
+- `genu.im` is not certification, expert assessment, or legal confirmation of product legitimacy.
+- Public proof on `genu.im` is limited to what can be shown honestly from the `genu.mark` contour and approved brand-provided facts.
+- If no public proof data exists, the product must show a neutral no-data state and must not assert authenticity, legality, or state approval.
+- Sustainability or similar trust claims can appear only when supporting evidence is available.
 
-### Technical Constraints
+### Public Proof Rules
 
-- **Доменное правило данных:** API/lookup работает только для продукции, промаркированной в контуре genu.mark. Для сторонней маркировки система возвращает состояние `not_in_genu_mark`/`not_found`.
-- **DataMatrix не содержит URL:** нужен UX “проверка/поиск по коду” через (1) ввод/вставку кода, и/или (2) deep-link (код в URL как параметр) для пересылки.
-- **Deep-link допустим**: ссылка содержит DataMatrix как параметр (через безопасное кодирование). Это снижает трение (не нужно “вставлять код”), повышает shareability партнеров и позволяет измерять воронку.
-- **Public API** логичен для “карточки прозрачности”, но должен быть ограничен до публичных полей и поддерживать только состояния `in_genu_mark` и `not_in_genu_mark`.
-- **Private API** (если/когда нужно): производственные задания/результаты, расследования, сверка отчетности — только под авторизацией + аудит + RBAC.
+- Phase 1 public proof surfaces are examples and demo flows, not live production verification.
+- Public proof content must expose source category for every displayed fact.
+- Empty proof sections remain hidden.
+- Public proof content must not expose personal data.
+- No-data states must remain useful, factual, and clearly separate from official state checking.
 
-### Integration Requirements
+### Lookup and Path Defaults
 
-- API lookup по коду: `code → данные` (единственная точка правды для кодов genu.mark).
-- Источники данных “прозрачности”: ERP/MES/производственные системы клиента (по соглашению), а также контур genu.mark (как источник факта маркировки).
-- В UX/копирайте запрещена имитация/подмена Diia; любые упоминания Diia — как внешнего официального канала.
-
-### Risk Mitigations
-
-- Риск путаницы с сертификацией: явные границы ответственности + запрет на “официальные” формулировки.
-- Риск “магических цифр”: 25M+ только с определением метрики и смыслом (“что считаем” и “почему это важно”).
-- Риск фрикции DataMatrix: paste-first UX + deep-link как основной путь пересылки/пресейла.
-- Риск “код не наш”: состояние `not_in_genu_mark` оформляется нейтрально (нет данных) и используется как upsell “что вы теряете без genu.mark”.
+- Phase 1 default proof path is the canonical example route `/v/genuim` plus the paste-first demo input page `/v/`.
+- Phase 1 does not require arbitrary dynamic public proof pages for every possible code.
+- Live lookup is a later-phase capability and must not be implied by Phase 1 copy.
 
 ## Innovation & Novel Patterns
 
-### Innovation in One Screen (for Marketing / Partners / Skeptics)
-
-- **eAkciz minimum (official):** consumer-check живет в Diia.
-- **Brand maximum (differentiator):** если код нанесен в **genu.mark**, этот же обязательный DataMatrix становится “страницей прозрачности бренда” (факты/документы/происхождение/sustainability) — то, чего нет в гос-проверке.
-- **Trust boundary:** если код **не** из genu.mark, genu.im **ничего не утверждает** и показывает `not_in_genu_mark` (нет данных → нет заявлений), плюс “что вы теряете” и CTA подключиться.
-
-### Detected Innovation Areas (Product/UX)
-
-1) **State minimum → Brand maximum**
-
-- Превращаем обязательную маркировку (cost center) в актив доверия и продаж (value center) для бренда.
-
-2) **Proof-first без дополнительного QR**
-
-- DataMatrix не несет URL, поэтому shareability делаем deep-link’ом (URL содержит код параметром) + paste-first fallback.
-- `/v/{code}` — ключевой touchpoint, включая “витрину потери” для `not_in_genu_mark`.
-
-### Extensible Transparency Payload (Engineering-Grade Requirements)
-
-#### Data Model (MUST)
-
-- Payload хранится только для кодов **в контуре genu.mark**.
-- Каждое поле MUST:
-
-  - `source`: `genu_mark` | `brand` | `document`
-  - `visibility`: `public` | `partner_only` | `internal`
-  - `data_type`: `text` | `number` | `date` | `url` | `file` | `list` | `json`
-  - `evidence` (optional; MUST for sustainability)
-
-- Каждая секция SHOULD: `title`, `order`, `last_updated_at`, `language` (для i18n).
-
-#### Default Public Skeleton (SHOULD, если передано/доступно)
-
-- Партия + дата производства/розлива
-- Производитель и/или импортер (юридически корректное имя)
-
-#### Extensible Sections (MUST: только если переданы)
-
-- Документы/ссылки (декларации/инструкции/PDF/первоисточники)
-- Sustainability: только факты + MUST `evidence` (иначе секция скрывается)
-- Любые доп. поля бренда, если проходят safety rules
-
-#### Content & Safety Rules (MUST)
-
-- Запрет “сертификации/официальности”: нельзя “официально”, “сертифицировано”, “подтверждено государством” без основания.
-- Запрет PII: персональные данные отклоняются или принудительно `internal`.
-- Политика честности: “нет данных → нет утверждений”; отсутствие секции не компенсируется маркетинговыми текстами.
-- UI MUST различать источники:
-
-  - “Подтверждено контуром genu.mark” (source=genu_mark)
-  - “Предоставлено брендом” (source=brand) + evidence (если есть)
-
-#### Rendering & States (MUST)
-
-- `/v/{code}` MUST:
-
-  - `in_genu_mark`: показывает карточку прозрачности (public) + опционально private детали под auth
-  - `not_in_genu_mark`: нейтральное “нет данных в genu.mark” + “официальная проверка eAkciz — в Diia” + “что могло бы быть” + CTA “включить прозрачность (genu.mark)”
-
-- Секции без данных MUST быть скрыты (без пустых заглушек).
-- Каждое поле/секция MUST показывать `source` и `evidence` (если есть).
-
-### Validation Approach (Mocks, Epic 2b)
-
-- Макеты: лендинг + `/v/genuim` + `/v/{code}` (`in_genu_mark` / `not_in_genu_mark`).
-- Проверка на ICP: люди должны корректно разделять Diia (официальный минимум) vs genu.mark (прозрачность бренда), и понимать “данные только если код наш”.
-
-### Risk Mitigation
-
-- Greenwashing: sustainability только с evidence; иначе скрывать
-- DataMatrix friction: deep-link + paste-first UX
-- Репутационный риск: жесткое `not_in_genu_mark` + нейтральный тон + upsell без обвинений
+- **Proof-first homepage:** The homepage earns trust by leading users into proof, not by stacking claims.
+- **Two-fish capture model:** The public site catches two audiences early, then separates them into clearer branches later.
+- **State layer vs brand/manufacturer layer:** The product respects the official `Дія` path while demonstrating the additional value of manufacturer-controlled public proof.
+- **Honest no-data state:** Lack of public proof becomes an explicit and credible boundary instead of a disguised failure.
+- **Sequential persuasion model:** Hook -> Clarify -> Differentiate -> Prove -> Branch -> Convert -> Trust.
 
 ## web_app Specific Requirements
 
 ### Project-Type Overview
 
-- MVP витрина = статический MPA (GitHub Pages). SSR не используется на MVP (нет серверного рантайма; рост сложности/риска не оправдан).
-- Основные маршруты: `/` (витрина), `/v/` (paste-first ввод DataMatrix), `/v/{code}` (deep-link), резерв под Epic 2a: `/knowledge/…`.
-
-### Technical Architecture Considerations
-
-- Стек: static HTML + JS (defer) + Tailwind v4, i18n (UK first, EN second).
-- Real-time: не требуется.
-- `/v/{code}` MUST: состояния `in_genu_mark` и `not_in_genu_mark` (см. Innovation/Domain rules).
-- Deep-link: допустим; код передается параметром и кодируется безопасно.
+- Phase 1 is a public web experience with a homepage, proof example, demo input, no-data example state, and trust-floor destinations.
+- The product must remain understandable without requiring account creation, scanner hardware, or private access.
 
 ### browser_matrix
 
-- Must support (MVP): Chrome / Edge / Firefox.
-- iOS Safari + Safari (macOS): вне MVP (Epic 3+). Risk noted: часть пересылок в мессенджерах будет открываться на iPhone; MVP должен иметь paste-first UX и максимально “простую” страницу lookup без хрупких зависимостей.
+- Supported in Phase 1: current stable Chrome, Edge, and Firefox.
+- Unsupported browsers must fail gracefully without hiding core comprehension, contact paths, or proof/example entry points.
+- Full Safari and iOS Safari support is deferred.
+
+### responsive_design
+
+- Key Phase 1 flows must remain usable at 360px, 768px, and 1280px widths.
+- First-screen clarity, primary CTA visibility, request form usability, and trust-floor access must remain intact at those widths.
+- No key Phase 1 page may require horizontal scrolling to complete its primary task.
 
 ### performance_targets
 
-- LCP < 2.5s; CLS < 0.1 (MUST).
-- Lighthouse Performance ≥ 97 (MUST).
-- Lighthouse Accessibility ≥ 97 + WCAG 2.1 AA (MUST).
+- Key Phase 1 pages must satisfy the performance targets defined in `NFR1`-`NFR4`.
+- Performance validation is a release gate, not a stretch goal.
 
-### seo_strategy (Research-Based, B2B-lead intent)
+### accessibility_level
 
-Цель SEO: лиды от экономических операторов/партнеров (производитель/импортер/интегратор/оборудование), а не consumer-трафик.
+- Phase 1 key flows must satisfy WCAG 2.1 AA expectations.
+- Accessibility is evaluated on the homepage, canonical proof example, demo input, request form, and trust-floor navigation.
+- Accessibility validation is a release gate, not a later polish task.
 
-**Observed query language (Google suggest + xtrace terms):**
+### seo_strategy
 
-- eAkciz: “еАкциз”, “електронна акцизна марка”, “економічні оператори”, “DataMatrix”, “АЕД”, “УГІ”, “кабінет”, “реєстрація”, “API”, “Postman”
-- Production: “маркування DataMatrix”, “друк DataMatrix”, “печать datamatrix”, “внедрение маркировки datamatrix”
-- Consumer: “перевірити акцизну марку”, “перевірити … онлайн”, “перевірити … дія” (высокий спрос, но не наша primary цель)
-
-**SEO Scope Rule (MUST):**
-
-- Не позиционируемся как consumer-сервис “проверить акцизную марку онлайн”.
-- Вместо этого создаем 1 “перехватывающую” страницу для consumer-intent, которая:
-
-  - честно направляет к Diia как к официальному consumer-check
-  - объясняет B2B ценность: маркировка/данные/без сюрпризов/прозрачность бренда (только для genu.mark)
-  - ведет в B2B CTA
-
-**Priority keyword clusters (MVP/Epic 2a):**
-
-1) B2B eAkciz high-intent:
-
-- “економічний оператор еАкциз”
-- “реєстрація еАкциз”
-- “кабінет еАкциз”
-- “акцизний електронний документ АЕД”
-- “унікальний груповий ідентифікатор УГІ”
-- “еАкциз API” / “Postman еАкциз”
-
-2) Production/integration:
-
-- “маркування алкоголю еАкциз”
-- “маркування тютюну еАкциз”
-- “маркування DataMatrix”
-- “друк DataMatrix”
-- “печать datamatrix”
-- “внедрение маркировки datamatrix”
-
-**SEO Priority Matrix (decision rule):**
-
-- Primary pillars: (A) АЕД/УГІ/API/економічний оператор, (B) маркировка алкоголя/тютюна eAkciz, (C) DataMatrix на линии/внедрение.
-- Consumer-проверка: только “перехват” → Diia + B2B CTA.
-- Метрика успеха SEO: не трафик, а доля органики, которая доходит до B2B CTA (и/или до `/v/` paste-first / demo request).
-
-**Epic 2a (knowledge base) MUST map to clusters:**
-
-- АЕД: что это, типовые ошибки, чеклисты
-- УГІ: зачем, типовые ошибки
-- DataMatrix на линии: чеклист внедрения
-- Экономический оператор: ориентиры “что подготовить” (без имитации гос-портала)
-- Прозрачность бренда поверх кода: правила источников/доказательств/sustainability
-
-### Security / Abuse constraints (web_app + public lookup)
-
-- Public lookup по коду MUST иметь защиту от злоупотреблений: rate limiting, anti-enumeration, кеширование, и быстрый “not_in_genu_mark” ответ без утечек.
-
-
+- SEO targets B2B intent first: `еАкциз` readiness, marking operations, DataMatrix implementation, and trust/proof education.
+- Consumer-intent search is handled through a dedicated intercept path that points official checking to `Дія` and keeps B2B messaging separate.
+- Phase 1 ships SEO-ready IA and trust-floor destinations; deep knowledge content is staged for later phases unless explicitly approved.
 
 ## Functional Requirements
 
-### Навигация, язык, тема
+### Language and Theme Foundations
 
-- FR1 [P1]: Посетитель может переключать язык (UK/EN) на ключевых страницах витрины.
-- FR2 [P1]: Система может сохранять выбранный язык и применять его при последующих посещениях.
-- FR3 [P1]: Посетитель может переключать тему (светлая/темная) на ключевых страницах витрины.
-- FR4 [P1]: Система может сохранять выбранную тему и применять ее при последующих посещениях.
+- **FR1:** Users can switch the public site between UK and EN.
+  - **Scope/Context:** Homepage, proof example, demo input, and trust-floor destinations.
+  - **Acceptance/Verification:** The selected language updates visible UI copy on supported Phase 1 surfaces.
 
-### Витрина и ветки сценариев (eAkciz / voluntary)
+- **FR2:** The system can persist the selected language for returning visits on supported browsers.
+  - **Scope/Context:** Phase 1 public pages.
+  - **Acceptance/Verification:** After reload or navigation, the previously selected language remains active unless storage is unavailable.
 
-- FR5 [P1]: Посетитель может выбрать/переключить сценарий “eAkciz” или “voluntary” и увидеть соответствующие сообщения.
-- FR6 [P1]: Посетитель может увидеть явное разделение ролей: официальный consumer-check (Diia) vs возможности genu.mark/genu.im (без заявлений сертификации/гос-статуса).
-- FR7 [P1]: Посетитель может перейти по основному CTA к демонстрации опыта проверки/прозрачности (`/v/genuim`).
+- **FR3:** Users can switch the public site between light and dark theme.
+  - **Scope/Context:** Homepage, proof example, demo input, and trust-floor destinations.
+  - **Acceptance/Verification:** The selected theme updates visible UI state on supported Phase 1 surfaces.
 
-### Демонстрация проверки и ввод DataMatrix (mock-first)
+- **FR4:** The system can persist the selected theme for returning visits on supported browsers.
+  - **Scope/Context:** Phase 1 public pages.
+  - **Acceptance/Verification:** After reload or navigation, the previously selected theme remains active unless storage is unavailable.
 
-- FR8 [P1]: Посетитель может открыть страницу ввода кода (`/v/`) и отправить значение DataMatrix для получения результата (в demo/mock режиме).
-- FR9 [P1]: Посетитель может подставить “пример кода” для демонстрации без ручного набора/сканера.
-- FR10 [P1]: Посетитель может открыть страницу результата по пересылаемой ссылке (deep-link), представляющей конкретный код.
-- FR11 [P1]: Система может явно сообщить, что интерфейс проверки работает в демонстрационном режиме (без интеграции с API) там, где это применимо.
+### Homepage Narrative and Branches
 
-### Состояния результата и trust boundary (только genu.mark)
+- **FR5:** Visitors can identify from the homepage that `genu.im` is a proof-first surface for marked products rather than a generic QR landing page.
+  - **Scope/Context:** Homepage hero and bridge content.
+  - **Acceptance/Verification:** The homepage contains category framing and a bridge section before the proof example entry point.
 
-- FR12 [P1]: Система может отобразить состояние результата `in_genu_mark` для демонстрации “код в контуре genu.mark”.
-- FR13 [P1]: Система может отобразить состояние результата `not_in_genu_mark` как нейтральное “нет данных в genu.mark” без утверждений о подлинности/легальности.
-- FR14 [P1]: Система может показать в `not_in_genu_mark` “что могло бы быть” (перечень доступных секций прозрачности) и CTA “включить genu.mark”.
+- **FR6:** Visitors can see explicit role separation between official consumer checking in `Дія` and manufacturer/brand proof in `genu.mark`.
+  - **Scope/Context:** Homepage branch messaging, proof example, no-data state, and intercept path.
+  - **Acceptance/Verification:** Each relevant public surface includes clear copy that distinguishes the two roles without state mimicry.
 
-### Карточка прозрачности (public) + источники/доказательства
+- **FR7:** Visitors can open the canonical verification example from the primary homepage CTA.
+  - **Scope/Context:** Homepage hero and first proof CTA.
+  - **Acceptance/Verification:** The primary proof CTA routes to `/v/genuim`.
 
-- FR15 [P1]: Посетитель может просмотреть публичную “карточку прозрачности” для `in_genu_mark`.
-- FR16 [P1]: Система может разделять отображаемые данные по источнику: подтверждено контуром genu.mark vs предоставлено брендом vs документ/ссылка.
-- FR17 [P1]: Система может отображать секции/поля прозрачности только при наличии данных (нет данных → секция отсутствует).
-- FR18 [P1]: Система может отображать `evidence` (ссылку/документ) для данных, где оно предоставлено.
-- FR19 [P1]: Система может скрывать sustainability-секцию, если отсутствует требуемое доказательство (`evidence`).
-- FR20 [P2]: Бренд/система может хранить и отображать расширяемые поля прозрачности (Extensible Transparency Payload) с `source/visibility/data_type/evidence`.
+- **FR8:** Visitors can identify two distinct homepage paths: `еАкциз` readiness and responsible-manufacturer proof.
+  - **Scope/Context:** Homepage branch section.
+  - **Acceptance/Verification:** The homepage exposes two differentiated branch entry points with branch-specific next-step CTAs.
 
-### Перехват consumer-intent (SEO клапан)
+- **FR9:** Visitors can reach trust-floor destinations from the public site.
+  - **Scope/Context:** Homepage navigation and footer.
+  - **Acceptance/Verification:** About, Contact, Proof & Cases, Privacy, Terms, and FAQ are visible and resolvable from the public site.
 
-- FR21 [P1]: Посетитель, пришедший по intent “проверить акцизную марку онлайн”, может открыть перехватывающую страницу, которая направляет к Diia как к официальному consumer-check.
-- FR22 [P1]: На перехватывающей странице посетитель может увидеть B2B CTA (внедрение маркировки/данных/прозрачности genu.mark) без имитации гос-сервиса.
+### Proof Example and Demo Input
 
-### Лидогенерация и партнерский пресейл
+- **FR10:** Visitors can open `/v/genuim` and view a canonical valid proof example.
+  - **Scope/Context:** Primary proof page.
+  - **Acceptance/Verification:** The page displays a valid proof state, source-labeled facts, and a next-step CTA.
 
-- FR23 [P1]: Посетитель может отправить запрос (demo/request) с минимально достаточной квалификацией: контакт + сценарий + контекст.
-- FR24 [P1]: Система может классифицировать входящий запрос по сценарию (eAkciz / voluntary / партнер по оборудованию).
-- FR25 [P1]: Партнер по оборудованию может использовать витрину и deep-link результаты как пресейл-артефакт (пересылка ссылок).
+- **FR11:** Visitors can open `/v/` and submit a pasted code or use an example-code action to view a demo result.
+  - **Scope/Context:** Phase 1 demo input page.
+  - **Acceptance/Verification:** The page accepts paste-first input and offers an example-code action without requiring a scanner.
 
-### Knowledge Base (Epic 2a)
+- **FR12:** The system can display a persistent demo-mode notice on every non-live verification surface.
+  - **Scope/Context:** `/v/`, `/v/genuim`, and any Phase 1 no-data example.
+  - **Acceptance/Verification:** A visible notice above the result or input area states that the flow is a demo/example, not a live production lookup.
 
-- FR26 [P2]: Посетитель может просматривать базу знаний по приоритетным кластерам (АЕД/УГІ/API/економічний оператор; маркировка алкоголя/тютюна; DataMatrix на линии).
-- FR27 [P2]: Посетитель может открыть статью базы знаний и перейти к следующему шагу (CTA к запросу демо/контакта).
-- FR28 [P2]: Система может поддерживать двуязычность (UK/EN) для базы знаний.
+- **FR13:** The system can present a valid-state example for a product inside the `genu.mark` public proof contour.
+  - **Scope/Context:** Canonical proof example.
+  - **Acceptance/Verification:** The result page shows an approved proof state and public facts allowed by policy.
 
-### Аналитика и наблюдаемость
+- **FR14:** The system can present a neutral no-data state for products without public proof in `genu.im`.
+  - **Scope/Context:** Phase 1 no-data example.
+  - **Acceptance/Verification:** The page states that no public proof data is available in `genu.im` and makes no authenticity or legality claims.
 
-- FR29 [P2]: Команда продукта может собирать события воронки витрины и демо (CTA, выбор сценария, просмотры примера, отправка формы).
-- FR30 [P2]: Команда продукта может собирать события lookup и исходов (`in_genu_mark`/`not_in_genu_mark`) и взаимодействий с upsell CTA.
-- FR31 [P2]: Команда продукта может формировать отчеты/воронки `landing → example → (return) → demo` и `not_in_genu_mark → enable`.
+- **FR15:** The system can explain what public proof could appear in the no-data state and offer a next-step CTA.
+  - **Scope/Context:** Phase 1 no-data example.
+  - **Acceptance/Verification:** The page includes a factual list of potential proof blocks and a business CTA.
 
-### Ограничение злоупотреблений (public lookup)
+- **FR16:** The system can hide empty proof sections instead of rendering placeholder content.
+  - **Scope/Context:** Valid-state proof example.
+  - **Acceptance/Verification:** No empty section appears on a public proof page.
 
-- FR32 [P3]: Система может ограничивать/блокировать аномальную активность запросов по коду (rate limiting / anti-enumeration) при включении реального API lookup.
+- **FR17:** The system can label each displayed public proof fact by source category.
+  - **Scope/Context:** Valid-state proof example and future live proof surfaces.
+  - **Acceptance/Verification:** Each displayed fact indicates whether it comes from `genu.mark`, the brand, or a supporting document.
+
+- **FR18:** The system can show supporting evidence links or documents when they exist for a displayed public claim.
+  - **Scope/Context:** Valid-state proof example and future live proof surfaces.
+  - **Acceptance/Verification:** Evidence is visible and clickable wherever evidence is provided.
+
+- **FR19:** The system can suppress sustainability content when required evidence is missing.
+  - **Scope/Context:** Public proof surfaces.
+  - **Acceptance/Verification:** No sustainability claim renders without evidence.
+
+- **FR20:** Authorized content owners can extend the public proof surface with approved additional field categories without changing the public page contract.
+  - **Scope/Context:** Future-ready public proof content.
+  - **Acceptance/Verification:** Appendix A defines at least text, date, link, and document field categories that render under the existing source/evidence rules.
+
+### SEO Intercept and Lead Capture
+
+- **FR21:** Consumer-intent visitors can open a dedicated intercept page that points them to `Дія` for official consumer checking.
+  - **Scope/Context:** Consumer-intent search path.
+  - **Acceptance/Verification:** The intercept page explicitly names `Дія` as the official consumer-check path and does not mimic a state interface.
+
+- **FR22:** Consumer-intent visitors can also see a separate B2B CTA for marking, proof, or transparency services.
+  - **Scope/Context:** Consumer-intent intercept page.
+  - **Acceptance/Verification:** The B2B CTA is visibly separate from the `Дія` action and uses non-governmental language.
+
+- **FR23:** Visitors can submit a qualified request with contact data, scenario, and business context.
+  - **Scope/Context:** Public request form.
+  - **Acceptance/Verification:** Submission requires contact, scenario, company type, and short context before completion.
+
+- **FR24:** The system can attach scenario and source-path metadata to each qualified request.
+  - **Scope/Context:** Public request handling.
+  - **Acceptance/Verification:** Each submitted request includes scenario and source-path metadata in the receiving record or notification.
+
+- **FR25:** Partners can share a stable public proof or demo link without requiring login.
+  - **Scope/Context:** Canonical proof example and any approved Phase 1 demo state.
+  - **Acceptance/Verification:** The shared link opens the same public state and preserves its intended CTA destination.
+
+### Knowledge Base and Trust Surface
+
+- **FR26:** Visitors can open trust-floor destinations for About, Contact, Proof & Cases, Privacy, Terms, and FAQ from the public site.
+  - **Scope/Context:** Homepage and public proof surfaces.
+  - **Acceptance/Verification:** Each destination resolves successfully and contains non-empty starter content or approved placeholder content.
+
+- **FR27:** Visitors can see reserved navigation and IA for the future knowledge base without requiring Phase 1 full content rollout.
+  - **Scope/Context:** Homepage navigation, footer, and trust-floor references.
+  - **Acceptance/Verification:** Public IA shows where the knowledge base will live or exposes an approved placeholder destination.
+
+- **FR28:** When Phase 2 knowledge content is enabled, visitors can open a knowledge entry and continue to a relevant CTA.
+  - **Scope/Context:** Phase 2 knowledge-base rollout.
+  - **Acceptance/Verification:** Knowledge entries support bilingual readiness and next-step CTA placement.
+
+### Measurement and Enablement
+
+- **FR29:** The product team can distinguish visits that move from the homepage into the proof example path.
+  - **Scope/Context:** Phase 1 proof-first funnel review.
+  - **Acceptance/Verification:** A dedicated proof-entry path or equivalent source tagging allows homepage-to-proof traffic review.
+
+- **FR30:** The product team can distinguish qualified requests by scenario and entry source.
+  - **Scope/Context:** Request review and basic reporting.
+  - **Acceptance/Verification:** Request records can be filtered by scenario and source path.
+
+- **FR31:** The product team can review a proof-first funnel consisting of homepage, proof example, and request steps.
+  - **Scope/Context:** Phase 1 release review and Phase 2 reporting expansion.
+  - **Acceptance/Verification:** Phase 1 provides a reviewable source-tagged funnel; deeper automated reporting may be added later.
+
+### Abuse Control
+
+- **FR32:** When live public lookup is enabled in Phase 3, the system can protect the public proof endpoint from repeated enumeration-style use.
+  - **Scope/Context:** Future live public lookup only.
+  - **Acceptance/Verification:** Before Phase 3 release, implementation notes define request threshold, neutral blocked response, and review procedure.
 
 ## Non-Functional Requirements
 
 ### Performance
 
-- NFR1: Lighthouse Performance >= 97 на mobile и desktop для ключевых страниц (`/`, `/v/`, `/v/genuim`, `/v/{code}` в mock режиме).
-- NFR2: Core Web Vitals (75p): LCP < 2.5s, CLS < 0.1, INP < 200ms на mobile и desktop для ключевых страниц.
-- NFR3: Страница не зависит от тяжелых библиотек; JS ограничен минимально необходимым для i18n/theme/menu/lookup mock и не должен доминировать над критическим контентом.
-- NFR4: Любые изображения/медиа оптимизированы; layout стабилен (без скачков при загрузке), чтобы не подрывать доверие в “первом экране”.
+- **NFR1:** Key Phase 1 pages shall achieve Lighthouse Performance >= 97 on mobile and desktop in the agreed release validation run.
+  - **Scope/Context:** `/`, `/v/`, `/v/genuim`, no-data example, and trust-floor destinations.
+  - **Verification Signal:** Lighthouse results captured during release validation.
 
-### Accessibility
+- **NFR2:** Key Phase 1 pages shall meet `LCP < 2.5s`, `CLS < 0.1`, and `INP < 200ms` at the release validation stage.
+  - **Scope/Context:** Same key public pages as `NFR1`.
+  - **Verification Signal:** Lighthouse or agreed pre-release performance proxy recorded in release validation.
 
-- NFR5: WCAG 2.1 AA MUST.
-- NFR6: Lighthouse Accessibility >= 97 MUST.
-- NFR7: Полная клавиатурная доступность ключевых flows (переключатели, форма, `/v/` ввод, CTA), видимый focus и корректные aria-атрибуты.
+- **NFR3:** Deferred client-side code for Phase 1 public pages shall stay within a lightweight delivery budget and shall not dominate first-screen rendering.
+  - **Scope/Context:** Homepage and proof surfaces.
+  - **Verification Signal:** Build/network review confirms total deferred client-side payload stays within the agreed lightweight budget for release review.
 
-### SEO & Indexability
+- **NFR4:** Above-the-fold media and layout containers shall reserve space so no key Phase 1 page exceeds `CLS 0.1`.
+  - **Scope/Context:** Homepage, proof example, demo input, and trust-floor destinations.
+  - **Verification Signal:** Lighthouse CLS check plus slow-load manual review.
 
-- NFR8: Все индексируемые страницы имеют корректные meta title/description, canonical, hreflang UK/EN, OG/Twitter, JSON-LD, sitemap.xml и robots.txt.
-- NFR9: Consumer-intent “проверить акцизную марку онлайн” обрабатывается перехватывающей страницей, которая направляет к Diia как к официальному consumer-check и дает B2B CTA без гос-мимикрии.
+### Accessibility and Language Integrity
 
-### Security / Abuse (Public Lookup readiness)
+- **NFR5:** Key Phase 1 flows shall conform to WCAG 2.1 AA.
+  - **Scope/Context:** Homepage, canonical proof example, demo input, request form, and trust-floor navigation.
+  - **Verification Signal:** Accessibility review checklist plus release validation approval.
 
-- NFR10: Реальный public lookup (Phase 3) защищен rate limiting; система деградирует нейтрально при превышении лимитов и не раскрывает лишнего в ответах.
-- NFR11: Ввод кода валидируется/нормализуется; логирование и аналитика не должны утекать код/PII в сторонние системы.
-- NFR12: HTTPS only; базовые security headers включены для статики.
+- **NFR6:** Key Phase 1 flows shall achieve Lighthouse Accessibility >= 97.
+  - **Scope/Context:** Same key flows as `NFR5`.
+  - **Verification Signal:** Lighthouse Accessibility results captured during release validation.
 
-### Privacy
+- **NFR7:** All key Phase 1 controls shall be keyboard accessible, visibly focusable, and screen-reader labeled.
+  - **Scope/Context:** Navigation, branch selection, CTA buttons, proof-example entry, demo input, request form, and footer links.
+  - **Verification Signal:** Manual keyboard walkthrough passes without blocked tasks.
 
-- NFR13: Analytics события (Phase 2) не содержат PII; лид-форма собирает минимум данных.
+- **NFR8:** Language, theme, proof-state labels, and no-data messaging shall remain consistent across UK and EN public pages.
+  - **Scope/Context:** Homepage, proof example, demo input, intercept page, and trust-floor destinations.
+  - **Verification Signal:** Cross-language copy review confirms no mixed-language UI fragments inside a single language version.
 
-### Compatibility
+### SEO and Content Integrity
 
-- NFR14: Must-support: Chrome/Edge/Firefox. Неподдерживаемые браузеры деградируют предсказуемо (нет сломанного UX на ключевых страницах).
+- **NFR9:** Every indexable Phase 1 page shall include unique title, description, canonical, hreflang, OG/Twitter metadata, and structured search metadata.
+  - **Scope/Context:** Homepage, proof example, intercept path, and trust-floor destinations intended for indexing.
+  - **Verification Signal:** Markup review passes for each indexed page.
 
-### Hosting / Delivery (Future migration)
+- **NFR10:** Consumer-intent public pages shall direct official checking to `Дія` and shall contain zero claims of official state status for `genu.im`.
+  - **Scope/Context:** Intercept path and any proof pages referencing official checking.
+  - **Verification Signal:** Copy review confirms compliance before release.
 
-- NFR15: Доставка контента через edge с HTTP/3 между пользователем и edge обязательна; HTTP/3 доступен на Cloudflare Free и включается как настройка протокола (user <-> Cloudflare). https://developers.cloudflare.com/speed/optimization/protocol/http3/
-- NFR16: Целевая платформа для статической витрины должна иметь бесплатный уровень и достаточные лимиты; Cloudflare Pages Free: 500 builds/month, unlimited static requests/bandwidth, лимиты файлов/размера учитывать. https://pages.cloudflare.com/#pricing https://developers.cloudflare.com/pages/platform/limits/
+- **NFR11:** Public proof pages shall never present unsupported claims; if no public proof exists, they shall fall back to the neutral no-data state.
+  - **Scope/Context:** Canonical proof example, no-data example, and later live proof pages.
+  - **Verification Signal:** State review confirms that unsupported proof content is absent.
+
+### Privacy and Security
+
+- **NFR12:** Public request capture shall collect only the minimum business-contact data needed to qualify a request.
+  - **Scope/Context:** Phase 1 request form.
+  - **Verification Signal:** Form-field review confirms no unnecessary personal fields are required.
+
+- **NFR13:** Public measurement and reporting shall exclude full raw codes and personal data from public analytics outputs.
+  - **Scope/Context:** Phase 1 source tagging and later analytics expansion.
+  - **Verification Signal:** Measurement-field review confirms public analytics outputs exclude raw codes and PII.
+
+- **NFR14:** Public pages shall be served over HTTPS and expose a baseline security posture appropriate for a static public site.
+  - **Scope/Context:** All public Phase 1 pages.
+  - **Verification Signal:** Deployed response review confirms HTTPS and baseline static-site security posture.
+
+### Compatibility and Responsive Quality
+
+- **NFR15:** Phase 1 public flows shall work on current stable Chrome, Edge, and Firefox, and unsupported browsers shall fail gracefully without blocking core comprehension or contact.
+  - **Scope/Context:** Homepage, proof example, demo input, request form, and trust-floor destinations.
+  - **Verification Signal:** Manual browser smoke run passes on supported browsers and confirms graceful degradation elsewhere.
+
+- **NFR16:** Phase 1 public flows shall remain usable at 360px, 768px, and 1280px widths without horizontal scrolling on key content or hidden primary CTAs.
+  - **Scope/Context:** Homepage, proof example, demo input, request form, and trust-floor destinations.
+  - **Verification Signal:** Responsive smoke review passes at each required width.
+
+## Appendix A - Implementation Notes
+
+This appendix preserves technical detail without turning the PRD core into a solution-design document.
+
+### A1. Phase 1 Default Path Decisions
+
+- Recommended Phase 1 default proof surfaces:
+  - homepage
+  - canonical proof example at `/v/genuim`
+  - paste-first demo input at `/v/`
+  - one approved no-data example state
+- Recommended Phase 1 default for public deep-linking: keep stable shareable links for canonical or approved demo states only; do not require arbitrary encoded-code public links yet.
+
+### A2. Public Proof Content Contract
+
+- Public proof content should distinguish source category.
+- Sustainability content requires evidence.
+- Public proof field categories supported in later implementation should include at least:
+  - text
+  - date
+  - link
+  - document
+- Internal schema, storage model, or API design belongs in architecture and technical design artifacts.
+
+### A3. Measurement Notes
+
+- Recommended Phase 1 default: review proof-path behavior through source-tagged page paths and request metadata.
+- Richer event taxonomy and automated funnel reporting can expand in Phase 2.
+
+### A4. Architecture Boundary Notes
+
+- Current public delivery is a static site.
+- Exact stack, hosting vendor, protocol choice, route implementation details, and interface design belong in architecture and implementation notes, not the PRD core.
+
+## Appendix B - Open Decisions
+
+These decisions should not block the PRD edit pass. Each item includes a recommended Phase 1 default.
+
+1. **Growth targets after baseline**
+   - **Open Question:** What exact uplift targets should the team set for qualified requests, proof-entry CTR, and proof-to-request conversion?
+   - **Recommended Phase 1 Default:** Establish baseline within 2 weeks of release and do not make uplift targets a release gate.
+
+2. **Public DataMatrix access model beyond the canonical example**
+   - **Open Question:** Should Phase 1 support arbitrary-code public deep-links, paste-first only, or both?
+   - **Recommended Phase 1 Default:** Ship canonical proof example plus paste-first demo input; defer arbitrary-code public deep-linking.
+
+3. **`25M+` proof claim framing**
+   - **Open Question:** What exact unit is being counted, and is that claim approved for public homepage use?
+   - **Recommended Phase 1 Default:** Do not use the claim until the counted unit and framing are approved.
+
+4. **Analytics depth in Phase 1**
+   - **Open Question:** Is lightweight source-tagged review sufficient, or must Phase 1 ship deeper automated event instrumentation?
+   - **Recommended Phase 1 Default:** Require source-path and request-source visibility in Phase 1; defer richer event automation to Phase 2.
+
+5. **Knowledge-base rollout depth in Phase 1**
+   - **Open Question:** Does Phase 1 include only IA and trust-floor placeholders, or also one live starter article?
+   - **Recommended Phase 1 Default:** Ship IA reservation and placeholder-ready destinations only unless a starter article is explicitly approved.
+
+## Appendix C - Traceability Mapping
+
+### Functional Requirements Mapping
+
+| Requirement | Supports Success Criteria | Supports Journeys |
+|-------------|---------------------------|-------------------|
+| FR1 | SC10 | J1, J2, J3, J4, J5 |
+| FR2 | SC10 | J1, J2, J3, J4, J5 |
+| FR3 | SC10 | J1, J2, J3, J4, J5 |
+| FR4 | SC10 | J1, J2, J3, J4, J5 |
+| FR5 | SC1 | J1, J2, J3 |
+| FR6 | SC2, SC13 | J1, J2, J3, J4, J5 |
+| FR7 | SC3, SC14 | J1, J2, J3 |
+| FR8 | SC4 | J1, J2, J3 |
+| FR9 | SC3 | J1, J2, J3 |
+| FR10 | SC3, SC14 | J1, J3 |
+| FR11 | SC3, SC13 | J1, J2, J3, J4 |
+| FR12 | SC3 | J1, J2, J3 |
+| FR13 | SC2, SC13 | J4 |
+| FR14 | SC4 | J4 |
+| FR15 | SC4 | J4 |
+| FR16 | SC3, SC13 | J1, J2, J3 |
+| FR17 | SC3 | J1, J2, J3 |
+| FR18 | SC3, SC13 | J1, J2, J3 |
+| FR19 | SC3, SC13 | J3 |
+| FR20 | SC12 | J3 |
+| FR21 | SC2, SC13 | J5 |
+| FR22 | SC4 | J5 |
+| FR23 | SC5 | J1, J2, J3, J4, J5 |
+| FR24 | SC5, SC6 | J1, J2, J3, J4, J5 |
+| FR25 | SC5 | J1 |
+| FR26 | SC11 | J1, J2, J3, J4, J5 |
+| FR27 | SC12 | J1, J2, J3, J5 |
+| FR28 | SC12 | J1, J2, J3, J5 |
+| FR29 | SC6, SC14 | J1, J2, J3 |
+| FR30 | SC5, SC6 | J1, J2, J3, J4, J5 |
+| FR31 | SC6, SC14 | J1, J2, J3 |
+| FR32 | SC13 | J4 |
+
+### Non-Functional Requirements Mapping
+
+| Requirement | Supports Success Criteria | Supports Journeys |
+|-------------|---------------------------|-------------------|
+| NFR1 | SC8 | J1, J2, J3, J4, J5 |
+| NFR2 | SC8 | J1, J2, J3, J4, J5 |
+| NFR3 | SC8 | J1, J2, J3, J4, J5 |
+| NFR4 | SC8 | J1, J2, J3, J4, J5 |
+| NFR5 | SC9 | J1, J2, J3, J4, J5 |
+| NFR6 | SC9 | J1, J2, J3, J4, J5 |
+| NFR7 | SC9 | J1, J2, J3, J4, J5 |
+| NFR8 | SC10, SC13 | J1, J2, J3, J4, J5 |
+| NFR9 | SC11 | J1, J2, J3, J5 |
+| NFR10 | SC2, SC13 | J4, J5 |
+| NFR11 | SC2, SC13 | J1, J2, J3, J4 |
+| NFR12 | SC5 | J1, J2, J3, J4, J5 |
+| NFR13 | SC6, SC14 | J1, J2, J3, J4, J5 |
+| NFR14 | SC11 | J1, J2, J3, J4, J5 |
+| NFR15 | SC10 | J1, J2, J3, J4, J5 |
+| NFR16 | SC10 | J1, J2, J3, J4, J5 |
+
+## Appendix D - Assumptions Used in This Edit Pass
+
+- Phase 1 should remain a compact public-site slice and should not be forced to absorb live lookup, full analytics automation, or a private B2B layer.
+- The safest default for unresolved lookup behavior is canonical proof example plus paste-first demo input, not arbitrary dynamic public deep-linking.
+- Growth targets that require new baseline data are valid product questions, but they should not block a clean Phase 1 PRD.
+- Trust-floor placeholder destinations are better than missing destinations, provided they are honest, reachable, and clearly branded as company-controlled pages.
+- The PRD core should describe product capability and acceptance, while route mechanics, stack/hosting choices, and payload/interface detail should live in appendices or later architecture artifacts.

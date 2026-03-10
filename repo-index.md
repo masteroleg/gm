@@ -2,6 +2,9 @@ Directory Index: repo-root
 
 ---
 ## Files
+### _archive/
+- **[index.md](_archive/migration/index.md)** - Migration Directory Index
+- **[migration.md](_archive/migration/migration.md)** - Главная идея (обновлено):
 ### _bmad-output/
 - **[design-thinking-2026-02-23.md](_bmad-output/design-thinking-2026-02-23.md)** - Design Thinking Session: gm
 - **[index.md](_bmad-output/implementation-artifacts/index.md)** - Directory Index
@@ -34,6 +37,8 @@ Directory Index: repo-root
 - **[prd.md](_bmad-output/planning-artifacts/prd.md)** - ---
 - **[product-brief-gm-2026-02-23.md](_bmad-output/planning-artifacts/product-brief-gm-2026-02-23.md)** - ---
 - **[product-brief-gm-2026-03-05.md](_bmad-output/planning-artifacts/product-brief-gm-2026-03-05.md)** - ---
+- **[validation-report-2026-03-09.md](_bmad-output/planning-artifacts/validation-report-2026-03-09.md)** - ---
+- **[validation-report-2026-03-10.md](_bmad-output/planning-artifacts/validation-report-2026-03-10.md)** - ---
 - **[problem-solution-2026-02-23.md](_bmad-output/problem-solution-2026-02-23.md)** - Problem Solving Session: Уникальный B2B-лендинг genu.im, который конвертит и запоминается
 - **[project-context.md](_bmad-output/project-context.md)** - ---
 - **[ADR-001-output-css-tracking.md](_bmad-output/solutioning/adrs/ADR-001-output-css-tracking.md)** - ---
@@ -45,6 +50,7 @@ Directory Index: repo-root
 ---
 ### _archive/
 Archived legacy materials and migration inputs.
+- **[/_archive/migration](./_archive/migration/)**
 - **[/_archive/perevir-product](./_archive/perevir-product/)**
 
 Last updated: 2026-03-10
