@@ -1,246 +1,257 @@
----
-title: Delivr Documentation Index
-date: 2026-03-04
-layout: default
-description: Index of Delivr Markdown pages for automated import
----
+# Directory Index: docs/delivr
 
-# Delivr Documentation Index
+## Files
 
-- [10 Best Practices To Consider When Designing QR Codes for Digital Out-of-Home Creative.](./pages/10-best-practices-to-consider-when-designing-qr-codes-for-digital-out-of-home-creative.md)
-- [A Practical Guide to Spotting Fake QR Codes and Staying Safe.](./pages/a-practical-guide-to-spotting-fake-qr-codes-and-staying-safe.md)
-- [Accessibility Statement](./pages/accessibility-statement.md)
-- [The smart link layer that thinks.](./pages/acuity-intelligent-link-management.md)
-- [Sell at your storefront, whether you're open or closed.](./pages/always-open-by-delivr.md)
-- [Anti-Bribery and Anti-Corruption Policy](./pages/anti-bribery-and-anti-corruption-policy.md)
-- [Are custom plans available?](./pages/are-custom-plans-available.md)
-- [Are GS1 Digital Link and Smart, Connected Packaging the same thing?](./pages/are-gs1-digital-link-and-smart-connected-packaging-the-same-thing.md)
-- [Are GS1 Digital Link and SmartLabel the same thing?](./pages/are-gs1-digital-link-and-smartlabel-the-same-thing.md)
-- [Are QR codes standardized?](./pages/are-qr-codes-standardized.md)
-- [Are the stats for my short URL private?](./pages/are-the-stats-for-my-short-url-private.md)
-- [Are your QR codes ad-free?](./pages/are-your-qr-codes-ad-free.md)
-- [Asset Intelligence Powered by Dynamic QR Infrastructure](./pages/asset-intelligence-powered-by-dynamic-qr-infrastructure.md)
-- [Attractive and Effective QR Codes: Design Tips and Inspiration](./pages/attractive-and-effective-qr-codes-design-tips-and-inspiration.md)
-- [Best Practices for Designing Digital Out-Of-Home (DOOH) Creative.](./pages/best-practices-for-designing-digital-out-of-home-dooh-creative.md)
-- [Best Practices for High-Performing Mobile Pages](./pages/best-practices-for-high-performing-mobile-pages.md)
-- [Bridging the gap for inclusive experiences.](./pages/bridging-the-gap-for-inclusive-experiences.md)
-- [Build, Shorten, and Create QR Codes with Google UTM Parameters](./pages/build-shorten-and-create-qr-codes-with-google-utm-parameters.md)
-- [California Consumer Privacy Act (CCPA) Notice](./pages/california-consumer-privacy-act-ccpa-notice.md)
-- [California Online Privacy Protection Act (CalOPPA) Notice](./pages/california-online-privacy-protection-act-caloppa-notice.md)
-- [Can a campaign and QR code be transferred from one account to another?](./pages/can-a-campaign-and-qr-code-be-transferred-from-one-account-to-another.md)
-- [Can I add a QR code to my account that I created somewhere else?](./pages/can-i-add-a-qr-code-to-my-account-that-i-created-somewhere-else.md)
-- [Can I brand Delivr to my own service?](./pages/can-i-brand-delivr-to-my-own-service.md)
-- [Can I change my plan later on?](./pages/can-i-change-my-plan-later-on.md)
-- [Can I create more than one QR code with the same destination URL?](./pages/can-i-create-more-than-one-qr-code-with-the-same-destination-url.md)
-- [Can I get analytics from Delivr for a QR code that I created somewhere else?](./pages/can-i-get-analytics-from-you-for-a-qr-code-that-i-created-somewhere-else.md)
-- [Can I get precise location information?](./pages/can-i-get-precise-location-information.md)
-- [Can I reactivate an expired short URL?](./pages/can-i-reactivate-an-expired-short-url.md)
-- [Can I use my domain at Delivr?](./pages/can-i-use-my-domain-at-delivr.md)
-- [Can I use my own domain for the Short URLs that are generated in my account?](./pages/can-i-use-my-own-domain-for-the-short-urls-that-are-generated-in-my-account.md)
-- [What are the commercial use guidelines for the various plans you offer?](./pages/can-i-use-your-services-commercially.md)
-- [Can you explain what a GTIN Digital Link is?](./pages/can-you-explain-what-a-gtin-digital-link-is.md)
-- [Choosing and upgrading to a subscription plan.](./pages/choosing-and-upgrading-to-a-subscription-plan.md)
-- [QR Codes for Point-of-Sale Displays.](./pages/codes-for-point-of-sale-displays.md)
-- [Common uses of QR codes.](./pages/common-uses-of-qr-codes.md)
-- [We are Delivr.](./pages/company-overview-hello-we-are-delivr.md)
-- [Once upon a connection.](./pages/connecting-worlds-safely-and-securely.md)
-- [Cookie Notice](./pages/cookie-notice.md)
-- [Copyright Notice](./pages/copyright-notice.md)
-- [The foundation of connected campaigns.](./pages/core-dynamic-qr-code-generator.md)
-- [The human spark behind every story, connecting people and brands.](./pages/curiosity-where-every-connection-begins.md)
-- [Launch fast-loading landing pages built on QR infrastructure.](./pages/custom-website-development-launch-a-fast-loading-website-that-delights-visitors-persuades-prospects-and-wins-customers.md)
-- [Connecting people everywhere to the brands they love.](./pages/customers.md)
-- [Customizing the design of a dynamic QR code.](./pages/customizing-the-design-of-a-dynamic-qr-code.md)
-- [Data Policy](./pages/data-policy.md)
-- [Delivr makes it easy to Deliver!](./pages/delivr-makes-it-easy-to-deliver.md)
-- [Privacy isn’t a feature — it’s the foundation.](./pages/delivrs-approach-to-data-privacy.md)
-- [Let’s Build a Greener Future](./pages/delivrs-commitment-to-a-greener-and-more-sustainable-future.md)
-- [Upgrade your advertising with dynamic QR codes.](./pages/digital-out-of-home-dooh.md)
-- [Discover the Power of Serialized QR Codes in Transforming Your Email and Direct Mail Campaigns.](./pages/discover-the-power-of-serialized-qr-codes-in-transforming-your-email-and-direct-mail-campaigns.md)
-- [DMCA Copyright Policy](./pages/dmca-copyright-policy.md)
-- [Do I need to enter my credit card details to sign up?](./pages/do-i-need-to-enter-my-credit-card-details-to-sign-up.md)
-- [Do you accept payments via Purchase Order (PO) or Invoice?](./pages/do-you-accept-payments-via-purchase-order-po-or-invoice.md)
-- [Do you offer any discounted plans?](./pages/do-you-offer-any-discounted-plans.md)
-- [Do you offer white-label version of Delivr?](./pages/do-you-offer-white-label-version-of-delivr.md)
-- [Does Delivr provide an API?](./pages/does-delivr-provide-an-api.md)
-- [Does the color of the QR code affect it's reliability?](./pages/does-the-color-of-the-qr-code-affect-its-reliability.md)
-- [Does the Short URL have an expiration date?](./pages/does-the-short-url-have-an-expiration-date.md)
-- [Dynamic QR Codes & Redirects](./pages/dynamic-qr-codes-redirects.md)
-- [Engage and Inform Consumers with Smart Connected Packaging](./pages/engage-and-inform-consumers-with-smart-connected-packaging.md)
-- [Example of a GS1 Digital Link.](./pages/example-of-a-gs1-digital-link.md)
-- [Fair Use Policy](./pages/fair-use-policy.md)
-- [Documentation](./pages/faq-list.md)
-- [Google Translate Disclaimer](./pages/google-translate-disclaimer.md)
-- [GS1 Digital Link for a better consumer experience.](./pages/gs1-digital-link-for-a-better-consumer-experience.md)
-- [GS1 Digital Link for a more straightforward supply chain.](./pages/gs1-digital-link-for-a-more-straightforward-supply-chain.md)
-- [GS1 Digital Link teaches QR codes a new trick, several in fact.](./pages/gs1-digital-link-qr-code-generator.md)
-- [Guide to using the QR Code Designer](./pages/guide-to-using-the-qr-code-designer.md)
-- [Location Reporting Accuracy Explained](./pages/how-accurate-is-location-reporting.md)
-- [How can I manage the short URLs that I create?](./pages/how-can-i-manage-the-short-urls-that-i-create.md)
-- [How can I quickly find a specific campaign on my dashboard?](./pages/how-can-i-quickly-find-a-specific-campaign-on-my-dashboard.md)
-- [How can QR codes combined with the power of GS1 Digital Link unlock new possibilities?](./pages/how-can-qr-codes-combined-with-the-power-of-gs1-digital-link-unlock-new-possibilities.md)
-- [How can you know from where a visitor is opening a Short URL?](./pages/how-can-you-know-from-where-a-visitor-is-opening-a-short-url.md)
-- [How does Delivr determine location?](./pages/how-does-delivr-determine-location.md)
-- [How many campaigns and QR codes can I create?](./pages/how-many-campaigns-and-qr-codes-can-i-create.md)
-- [How many QR codes can I create with Delivr's QR code generator?](./pages/how-many-qr-codes-can-i-create-with-delivrs-qr-code-generator.md)
-- [How to add Application URLs to your Campaign.](./pages/how-to-add-application-urls-to-your-campaign.md)
-- [How to add Geotargeting URLs to your campaign.](./pages/how-to-add-geotargeting-urls-to-your-campaign.md)
-- [How to add Language URLs to your campaign.](./pages/how-to-add-language-urls-to-your-campaign.md)
-- [How to add the location of your media with Places.](./pages/how-to-add-the-location-of-your-media-with-places.md)
-- [How to archive and delete a campaign.](./pages/how-to-archive-and-delete-a-campaign.md)
-- [How to build and use campaign parameters (UTMs).](./pages/how-to-build-and-use-campaign-parameters-utms.md)
-- [How to change your password while Signed In.](./pages/how-to-change-your-password-while-signed-in.md)
-- [How to close an account.](./pages/how-to-close-an-account.md)
-- [How to create a form.](./pages/how-to-create-a-form.md)
-- [How to create a page of links with a profile.](./pages/how-to-create-a-page-of-links-with-a-profile.md)
-- [How to create a static QR code.](./pages/how-to-create-a-static-qr-code.md)
-- [How to create a URL-based Campaign with dynamic QR Code.](./pages/how-to-create-a-url-basedcampaign-with-dynamic-qr-code.md)
-- [How to create and edit a page.](./pages/how-to-create-and-edit-a-page.md)
-- [How to create and edit a profile.](./pages/how-to-create-and-edit-a-profile.md)
-- [How to create and manage a GS1 Digital Link QR code.](./pages/how-to-create-and-manage-a-gs1-digital-link-qr-code.md)
-- [How to create multiple dynamic campaigns.](./pages/how-to-create-multiple-dynamic-campaigns.md)
-- [How to create multiple static QR codes.](./pages/how-to-create-multiple-static-qr-codes.md)
-- [How to download a QR code.](./pages/how-to-download-a-qr-code.md)
-- [How to edit a dynamic QR code.](./pages/how-to-edit-a-dynamic-qr-code.md)
-- [How to make it easier to connect with Deep Links and QR Codes.](./pages/how-to-make-it-easier-to-connect-with-deep-links-and-qr-codes.md)
-- [How to manage and organize campaigns.](./pages/how-to-manage-and-organize-campaigns.md)
-- [How to open an account.](./pages/how-to-open-an-account.md)
-- [Recover an account username.](./pages/how-to-recover-an-account-username.md)
-- [How to restore an archived campaign.](./pages/how-to-restore-an-archived-campaign.md)
-- [How to search for a campaign.](./pages/how-to-search-for-a-campaign.md)
-- [How to track a QR code.](./pages/how-to-track-a-qr-code.md)
-- [In a world obsessed with data, we chose privacy.](./pages/hush-privacy-first-zero-knowledge.md)
-- [I changed my campaigns Destination URL but when scanned it still brings me to the old destination. Why?](./pages/i-changed-my-campaigns-destination-url-but-when-scanned-it-still-brings-me-to-the-old-destination-why.md)
-- [If your Delivr Account is disabled, locked, or not active.](./pages/if-your-delivr-account-is-disabled-locked-or-not-active.md)
-- [I’m near my plan’s campaign limit; what can I do?](./pages/im-near-my-plans-campaign-limit-what-can-i-do.md)
-- [Uniquely identify everything that matters.](./pages/imprint-super-simple-serialization.md)
-- [In addition to a GTIN and a website address, are there other types of information that can be incorporated into the Digital Link?](./pages/in-addition-to-a-gtin-and-a-website-address-are-there-other-types-of-information-that-can-be-incorporated-into-the-digital-link.md)
-- [Is a license required to create QR codes?](./pages/is-a-license-required-to-create-qr-codes.md)
-- [Is Delivr free?](./pages/is-delivr-free.md)
-- [Is the Delivr service available in my language?](./pages/is-the-delivr-service-available-in-my-language.md)
-- [Is the GS1 Digital Link QR code replacing UPC barcodes?](./pages/is-the-gs1-digital-link-qr-code-replacing-upc-barcodes.md)
-- [Is the Short URL generated by Delivr's URL Shortener case sensitive?](./pages/is-the-short-url-generated-by-delivrs-url-shortener-case-sensitive.md)
-- [Is there a setup fee?](./pages/is-there-a-setup-fee.md)
-- [Is there a specific type of barcode required for use with GS1 Digital Link?](./pages/is-there-a-specific-type-of-barcode-required-for-use-with-gs1-digital-link.md)
-- [One source of truth for connected experiences.](./pages/kit-brand-system.md)
-- [Legal](./pages/legal.md)
-- [Logo Usage Notice](./pages/logo-usage-notice.md)
-- [Modern Slavery Statement](./pages/modern-slavery-statement.md)
-- [My QR code when scanned does not resolve to the the URL I entered for that QR code.](./pages/my-qr-code-when-scanned-does-not-resolve-to-the-the-url-i-entered-for-that-qr-code.md)
-- [Build mobile-first experiences for your connected brand.](./pages/nest-mobile-experiences.md)
-- [New & Events](./pages/new-events.md)
-- [Coordinate campaigns. Unite your teams.](./pages/orchestra-campaign-team-management.md)
-- [Plans & Pricing Guide](./pages/plans.md)
-- [Privacy Notice](./pages/privacy-notice.md)
-- [QR Code Generator with Dynamic QR Codes](./pages/qr-code-generator.md)
-- [A simple way to scan QR codes from any mobile page.](./pages/qr-code-reader-qr-code-scanner-by-delivr.md)
-- [QR Code Size Guidelines by Viewing Distance: How Big Should Your QR Code Be?](./pages/qr-code-size-guidelines-by-viewing-distance-how-big-should-your-qr-code-be.md)
-- [QR Codes for Automotive Dealerships.](./pages/qr-codes-for-automotive-dealerships.md)
-- [QR Codes for Banners.](./pages/qr-codes-for-banners.md)
-- [QR Codes for Books & Educational Materials.](./pages/qr-codes-for-books-and-educational-materials.md)
-- [QR Codes for Bottles & Cans.](./pages/qr-codes-for-bottles-cans.md)
-- [QR Codes for Brands.](./pages/qr-codes-for-brands.md)
-- [QR Codes for Brochures.](./pages/qr-codes-for-brochures.md)
-- [QR Codes for Construction Companies, Architects & Equipment and Material Manufacturers.](./pages/qr-codes-for-construction-companies-architects-equipment-and-material-manufacturers.md)
-- [QR Codes for Consumer Packaged Goods.](./pages/qr-codes-for-consumer-packaged-goods.md)
-- [QR Codes for Display Windows.](./pages/qr-codes-for-display-windows.md)
-- [QR Codes for Educational Institutions.](./pages/qr-codes-for-educational-institutions.md)
-- [QR Codes for Entertainment Companies.](./pages/qr-codes-for-entertainment-companies.md)
-- [QR Codes for Flyers.](./pages/qr-codes-for-flyers.md)
-- [QR Codes for Food & Product Packaging.](./pages/qr-codes-for-food-product-packaging.md)
-- [QR Codes for Government.](./pages/qr-codes-for-government.md)
-- [QR Codes for Healthcare, Doctors & Dentists.](./pages/qr-codes-for-healthcare-doctors-dentists.md)
-- [QR Codes for Hotels, Tourism, and the Hospitality industry.](./pages/qr-codes-for-hotels-tourism-and-the-hospitality-industry.md)
-- [QR Codes for Immersive Experiences.](./pages/qr-codes-for-immersive-experiences.md)
-- [QR Codes for Labels & Stickers.](./pages/qr-codes-for-labels-stickers.md)
-- [QR Codes for Media Companies & Publishers.](./pages/qr-codes-for-media-companies-publishers.md)
-- [QR Codes for Pharmaceutical Companies.](./pages/qr-codes-for-pharmaceutical-companies.md)
-- [QR Codes for Posters.](./pages/qr-codes-for-posters.md)
-- [QR Codes for Products.](./pages/qr-codes-for-products.md)
-- [QR Codes for Reducing Surface Contact and Disease Spread in Healthcare.](./pages/qr-codes-for-reducing-surface-contact-and-disease-spread-in-healthcare.md)
-- [QR Codes for Restaurants.](./pages/qr-codes-for-restaurants.md)
-- [QR Codes for Retail, Beauty & Fashion.](./pages/qr-codes-for-retail-beauty-fashion.md)
-- [QR Codes for Software & Game Developers.](./pages/qr-codes-for-software-game-developers.md)
-- [QR Codes for Store Windows.](./pages/qr-codes-for-store-windows.md)
-- [QR Codes for Storefronts.](./pages/qr-codes-for-storefronts.md)
-- [QR Codes for Sweepstakes & Giveaways.](./pages/qr-codes-for-sweepstakes-giveaways.md)
-- [QR Codes for Websites.](./pages/qr-codes-for-websites.md)
-- [Custom design tools for perfectly branded QR codes.](./pages/qr-studio-custom-code-design.md)
-- [Reset your password.](./pages/reset-your-password.md)
-- [One code. Endless possibilities.](./pages/ring-gs1-compliant-digital-link.md)
-- [In today’s world, security is essential.](./pages/security-and-qr-codes.md)
-- [Service Level Agreement (SLA)](./pages/service-level-agreement-sla.md)
-- [signup.md](./pages/signup.md)
-- [Sorry, the page you're looking for could not be found.](./pages/sitemap-404.md)
-- [Site Map](./pages/sitemap.md)
-- [Where touchpoints grow intomoments that matter.](./pages/solutions-overview.md)
-- [Submit a support request.](./pages/submit-a-support-request.md)
-- [Give everything a unique identity.](./pages/super-simple-serialization.md)
-- [Making a positive impact on the planet, one QR code scan at a time.](./pages/sustainability-and-qr-codes-making-a-positive-impact-on-the-planet-one-qr-code-scan-at-a-time.md)
-- [Team Collaboration Guide.](./pages/team-collaboration-guide.md)
-- [Tell me more about Delivr's QR code generator?](./pages/tell-me-more-about-delivrs-qr-code-generator.md)
-- [Tell me more about QR codes® and the QR Code Generator by Delivr.](./pages/tell-me-more-about-qr-codes-and-the-qr-code-generator-by-delivr.md)
-- [The case against retargeting in a privacy-first world.](./pages/the-case-against-retargeting-in-a-privacy-first-world.md)
-- [Infrastructure for connected brands and experiences.](./pages/the-delivr-difference-for-global-brands-trusted-scalable-private.md)
-- [Infrastructure for the Connected World](./pages/the-delivr-engagement-suite-with-dynamic-qr-code-generator.md)
-- [Where every experience feels human.](./pages/the-human-first-product-path.md)
-- [How wonderful thingsstarted.](./pages/the-story-of-delivr.md)
-- [Top 10 QR Code Design Best Practices for Maximum Scannability & Engagement.](./pages/top-10-qr-code-design-best-practices-for-maximum-scannability-engagement.md)
-- [Keep consumers safe, engaged, and informed.](./pages/touchless-marketing-solutions.md)
-- [Trademark Notice](./pages/trademark-usage-notice.md)
-- [TrueMrk Brand Protection: Consumer Engagement](./pages/truemrk-brand-protection-consumer-engagement.md)
-- [Types of account users & roles.](./pages/types-of-account-users-roles.md)
-- [Types of campaigns and mobile experiences.](./pages/types-of-campaigns-and-mobile-experiences.md)
-- [Types of QR codes & barcodes.](./pages/types-of-qr-codes-barcodes.md)
-- [Understanding & Implementing Super Simple Serialization.](./pages/understanding-implementing-super-simple-serialization.md)
-- [Understanding QR codes, technology, and trust with Delivr.](./pages/understanding-qr-codes-technology-and-trust-with-delivr.md)
-- [Understanding the Brand Kit.](./pages/understanding-the-brand-kit.md)
-- [Understanding the campaign report.](./pages/understanding-the-campaign-report.md)
-- [Understanding your account dashboard.](./pages/understanding-your-account-dashboard.md)
-- [Understanding your security settings.](./pages/understanding-your-security-settings.md)
-- [Deliver connected, measurable experiences to TV audiences.](./pages/unleash-the-power-of-shoppable-tv-with-broadcast-qr.md)
-- [URL Shortener with Link Management](./pages/url-shortener.md)
-- [QR Codes for Billboards, OOH & DOOH.](./pages/uses-of-qr-codes-for-billboards-ooh-dooh.md)
-- [QR Codes for Public Spaces.](./pages/uses-of-qr-codes-for-public-spaces.md)
-- [One code, many industries.](./pages/uses-of-qr-codes.md)
-- [Protecting what matters in a connected world.](./pages/vault-trust-center.md)
-- [Videos](./pages/video.md)
-- [Vulnerability Disclosure Policy](./pages/vulnerability-disclosure-policy.md)
-- [Where curiosity unlocksanswers.](./pages/welcome-to-the-delivr-learning-center.md)
-- [What are modules, and how do you use them?](./pages/what-are-modules-and-how-do-you-use-them.md)
-- [What are my payment options?](./pages/what-are-my-payment-options.md)
-- [What are response rate, mobile, desktop, location by IP and location by GPS in a report?](./pages/what-are-response-rate-mobile-desktop-location-by-ip-and-location-by-gps-in-a-report.md)
-- [What are the best business uses of QR codes?](./pages/what-are-the-best-business-uses-of-qr-codes.md)
-- [What are total views, QR scans, NFC taps and short URL clicks?](./pages/what-are-total-views-qr-scans-nfc-taps-and-short-url-clicks.md)
-- [What are Workspaces, and how do you use them?](./pages/what-are-workspaces-and-how-do-you-use-them.md)
-- [What content can be shown via QR codes?](./pages/what-content-can-be-shown-via-qr-codes.md)
-- [What formats of QR codes are supported?](./pages/what-formats-of-qr-codes-are-supported.md)
-- [What is a Campaign ID?](./pages/what-is-a-campaign-id.md)
-- [What Is a Campaign?](./pages/what-is-a-campaign.md)
-- [What is a Destination URL?](./pages/what-is-a-destination-url.md)
-- [What is a QR code generator?](./pages/what-is-a-qr-code-generator.md)
-- [What is a QR code?](./pages/what-is-a-qr-code.md)
-- [What is a Resolver?](./pages/what-is-a-resolver.md)
-- [What is a URL shortener?](./pages/what-is-a-url-shortener.md)
-- [What is a URL?](./pages/what-is-a-url.md)
-- [What is an Experience URL?](./pages/what-is-an-experience-url.md)
-- [What is an NFC tag?](./pages/what-is-an-nfc-tag.md)
-- [What is Delivr?](./pages/what-is-delivr.md)
-- [What is GS1's role in the GS1 Digital Link?](./pages/what-is-gs1s-role-in-the-gs1-digital-link.md)
-- [What is SQRC?](./pages/what-is-sqrc.md)
-- [What is the difference between a static and dynamic QR code?](./pages/what-is-the-difference-between-a-static-and-dynamic-qr-code.md)
-- [What is the difference between vector and raster formats when downloading and using QR codes?](./pages/what-is-the-difference-between-vector-and-raster-formats-when-downloading-and-using-qr-codes.md)
-- [What is the GS1 Digital Link?](./pages/what-is-the-gs1-digital-link.md)
-- [What is URL shortening?](./pages/what-is-url-shortening.md)
-- [What level of QR code designing is possible?](./pages/what-level-of-qr-code-designing-is-possible.md)
-- [What reports are available when a Short URL is clicked?](./pages/what-reports-are-available-when-a-short-url-is-clicked.md)
-- [What's the monthly subscription fee for?](./pages/whats-the-monthly-subscription-fee-for.md)
-- [What's with the white border around the QR code?](./pages/whats-with-the-white-border-around-the-qr-code.md)
-- [When will GS1 Digital Link replace UPC at point-of-sale?](./pages/when-will-gs1-digital-link-replace-upc-at-point-of-sale.md)
-- [Where can I get a copy of my invoice?](./pages/where-can-i-get-a-copy-of-my-invoice.md)
-- [Who invented the QR code?](./pages/who-invented-the-qr-code.md)
-- [Why do I see ads wrapped around my destination page after scanning a QR code?](./pages/why-do-i-see-ads-wrapped-around-my-destination-page-after-scanning-a-qr-code.md)
-- [Why GS1 Digital Link?](./pages/why-gs1-digital-link.md)
-- [Will my QR codes ever expire?](./pages/will-my-qr-codes-ever-expire.md)
-- [Wonderful things start here.](./pages/wonderful-things-start-here.md)
-- [Every scan sparks stories and actionable insights.](./pages/worldview-advanced-analytics.md)
+- **[frontmatter.yaml](./frontmatter.yaml)** - Aggregated front matter for 237 pages
+- **[index.json](./index.json)** - Search/index metadata for 237 docs
+- **[manifest.json](./manifest.json)** - Canonical manifest for Delivr pages
+- **[README.md](./README.md)** - What I recommend next for reliability and completeness
+
+## Subdirectories
+
+### pages/
+- **[10-best-practices-to-consider-when-designing-qr-codes-for-digital-out-of-home-creative.md](./pages/10-best-practices-to-consider-when-designing-qr-codes-for-digital-out-of-home-creative.md)** - 10 Best Practices To Consider When Designing QR Codes for
+- **[a-practical-guide-to-spotting-fake-qr-codes-and-staying-safe.md](./pages/a-practical-guide-to-spotting-fake-qr-codes-and-staying-safe.md)** - A Practical Guide to Spotting Fake QR Codes and Staying
+- **[accessibility-statement.md](./pages/accessibility-statement.md)** - Accessibility Statement
+- **[acuity-intelligent-link-management.md](./pages/acuity-intelligent-link-management.md)** - The smart link layer that thinks
+- **[always-open-by-delivr.md](./pages/always-open-by-delivr.md)** - Sell at your storefront, whether you're open or closed
+- **[anti-bribery-and-anti-corruption-policy.md](./pages/anti-bribery-and-anti-corruption-policy.md)** - Anti-Bribery and Anti-Corruption Policy
+- **[are-custom-plans-available.md](./pages/are-custom-plans-available.md)** - Are custom plans available?
+- **[are-gs1-digital-link-and-smart-connected-packaging-the-same-thing.md](./pages/are-gs1-digital-link-and-smart-connected-packaging-the-same-thing.md)** - Are GS1 Digital Link and Smart, Connected Packaging the same
+- **[are-gs1-digital-link-and-smartlabel-the-same-thing.md](./pages/are-gs1-digital-link-and-smartlabel-the-same-thing.md)** - Are GS1 Digital Link and SmartLabel the same thing?
+- **[are-qr-codes-standardized.md](./pages/are-qr-codes-standardized.md)** - Are QR codes standardized?
+- **[are-the-stats-for-my-short-url-private.md](./pages/are-the-stats-for-my-short-url-private.md)** - Are the stats for my short URL private?
+- **[are-your-qr-codes-ad-free.md](./pages/are-your-qr-codes-ad-free.md)** - Are your QR codes ad-free?
+- **[asset-intelligence-powered-by-dynamic-qr-infrastructure.md](./pages/asset-intelligence-powered-by-dynamic-qr-infrastructure.md)** - Asset Intelligence Powered by Dynamic QR Infrastructure
+- **[attractive-and-effective-qr-codes-design-tips-and-inspiration.md](./pages/attractive-and-effective-qr-codes-design-tips-and-inspiration.md)** - Attractive and Effective QR Codes: Design Tips and Inspiration
+- **[best-practices-for-designing-digital-out-of-home-dooh-creative.md](./pages/best-practices-for-designing-digital-out-of-home-dooh-creative.md)** - Best Practices for Designing Digital Out-Of-Home DOOH Creative
+- **[best-practices-for-high-performing-mobile-pages.md](./pages/best-practices-for-high-performing-mobile-pages.md)** - Best Practices for High-Performing Mobile Pages
+- **[bridging-the-gap-for-inclusive-experiences.md](./pages/bridging-the-gap-for-inclusive-experiences.md)** - Bridging the gap for inclusive experiences
+- **[build-shorten-and-create-qr-codes-with-google-utm-parameters.md](./pages/build-shorten-and-create-qr-codes-with-google-utm-parameters.md)** - Build, Shorten, and Create QR Codes with Google UTM Parameters
+- **[california-consumer-privacy-act-ccpa-notice.md](./pages/california-consumer-privacy-act-ccpa-notice.md)** - California Consumer Privacy Act CCPA Notice
+- **[california-online-privacy-protection-act-caloppa-notice.md](./pages/california-online-privacy-protection-act-caloppa-notice.md)** - California Online Privacy Protection Act CalOPPA Notice
+- **[can-a-campaign-and-qr-code-be-transferred-from-one-account-to-another.md](./pages/can-a-campaign-and-qr-code-be-transferred-from-one-account-to-another.md)** - Can a campaign and QR code be transferred from one
+- **[can-i-add-a-qr-code-to-my-account-that-i-created-somewhere-else.md](./pages/can-i-add-a-qr-code-to-my-account-that-i-created-somewhere-else.md)** - Can I add a QR code to my account that
+- **[can-i-brand-delivr-to-my-own-service.md](./pages/can-i-brand-delivr-to-my-own-service.md)** - Can I brand Delivr to my own service?
+- **[can-i-change-my-plan-later-on.md](./pages/can-i-change-my-plan-later-on.md)** - Can I change my plan later on?
+- **[can-i-create-more-than-one-qr-code-with-the-same-destination-url.md](./pages/can-i-create-more-than-one-qr-code-with-the-same-destination-url.md)** - Can I create more than one QR code with the
+- **[can-i-get-analytics-from-you-for-a-qr-code-that-i-created-somewhere-else.md](./pages/can-i-get-analytics-from-you-for-a-qr-code-that-i-created-somewhere-else.md)** - Can I get analytics from Delivr for a QR code
+- **[can-i-get-precise-location-information.md](./pages/can-i-get-precise-location-information.md)** - Can I get precise location information?
+- **[can-i-reactivate-an-expired-short-url.md](./pages/can-i-reactivate-an-expired-short-url.md)** - Can I reactivate an expired short URL?
+- **[can-i-use-my-domain-at-delivr.md](./pages/can-i-use-my-domain-at-delivr.md)** - Can I use my domain at Delivr?
+- **[can-i-use-my-own-domain-for-the-short-urls-that-are-generated-in-my-account.md](./pages/can-i-use-my-own-domain-for-the-short-urls-that-are-generated-in-my-account.md)** - Can I use my own domain for the Short URLs
+- **[can-i-use-your-services-commercially.md](./pages/can-i-use-your-services-commercially.md)** - What are the commercial use guidelines for the various plans
+- **[can-you-explain-what-a-gtin-digital-link-is.md](./pages/can-you-explain-what-a-gtin-digital-link-is.md)** - Can you explain what a GTIN Digital Link is?
+- **[choosing-and-upgrading-to-a-subscription-plan.md](./pages/choosing-and-upgrading-to-a-subscription-plan.md)** - Choosing and upgrading to a subscription plan
+- **[codes-for-point-of-sale-displays.md](./pages/codes-for-point-of-sale-displays.md)** - QR Codes for Point-of-Sale Displays
+- **[common-uses-of-qr-codes.md](./pages/common-uses-of-qr-codes.md)** - Common uses of QR codes
+- **[company-overview-hello-we-are-delivr.md](./pages/company-overview-hello-we-are-delivr.md)** - We are Delivr
+- **[connecting-worlds-safely-and-securely.md](./pages/connecting-worlds-safely-and-securely.md)** - Once upon a connection
+- **[cookie-notice.md](./pages/cookie-notice.md)** - Cookie Notice
+- **[copyright-notice.md](./pages/copyright-notice.md)** - Copyright Notice
+- **[core-dynamic-qr-code-generator.md](./pages/core-dynamic-qr-code-generator.md)** - The foundation of connected campaigns
+- **[curiosity-where-every-connection-begins.md](./pages/curiosity-where-every-connection-begins.md)** - The human spark behind every story, connecting people and brands
+- **[custom-website-development-launch-a-fast-loading-website-that-delights-visitors-persuades-prospects-and-wins-customers.md](./pages/custom-website-development-launch-a-fast-loading-website-that-delights-visitors-persuades-prospects-and-wins-customers.md)** - Launch fast-loading landing pages built on QR infrastructure
+- **[customers.md](./pages/customers.md)** - Connecting people everywhere to the brands they love
+- **[customizing-the-design-of-a-dynamic-qr-code.md](./pages/customizing-the-design-of-a-dynamic-qr-code.md)** - Customizing the design of a dynamic QR code
+- **[data-policy.md](./pages/data-policy.md)** - Data Policy
+- **[delivr-makes-it-easy-to-deliver.md](./pages/delivr-makes-it-easy-to-deliver.md)** - Delivr makes it easy to Deliver!
+- **[delivrs-approach-to-data-privacy.md](./pages/delivrs-approach-to-data-privacy.md)** - Privacy isn’t a feature — it’s the foundation
+- **[delivrs-commitment-to-a-greener-and-more-sustainable-future.md](./pages/delivrs-commitment-to-a-greener-and-more-sustainable-future.md)** - Let’s Build a Greener Future
+- **[digital-out-of-home-dooh.md](./pages/digital-out-of-home-dooh.md)** - Upgrade your advertising with dynamic QR codes
+- **[discover-the-power-of-serialized-qr-codes-in-transforming-your-email-and-direct-mail-campaigns.md](./pages/discover-the-power-of-serialized-qr-codes-in-transforming-your-email-and-direct-mail-campaigns.md)** - Discover the Power of Serialized QR Codes in Transforming Your
+- **[dmca-copyright-policy.md](./pages/dmca-copyright-policy.md)** - DMCA Copyright Policy
+- **[do-i-need-to-enter-my-credit-card-details-to-sign-up.md](./pages/do-i-need-to-enter-my-credit-card-details-to-sign-up.md)** - Do I need to enter my credit card details to
+- **[do-you-accept-payments-via-purchase-order-po-or-invoice.md](./pages/do-you-accept-payments-via-purchase-order-po-or-invoice.md)** - Do you accept payments via Purchase Order PO or Invoice?
+- **[do-you-offer-any-discounted-plans.md](./pages/do-you-offer-any-discounted-plans.md)** - Do you offer any discounted plans?
+- **[do-you-offer-white-label-version-of-delivr.md](./pages/do-you-offer-white-label-version-of-delivr.md)** - Do you offer white-label version of Delivr?
+- **[does-delivr-provide-an-api.md](./pages/does-delivr-provide-an-api.md)** - Does Delivr provide an API?
+- **[does-the-color-of-the-qr-code-affect-its-reliability.md](./pages/does-the-color-of-the-qr-code-affect-its-reliability.md)** - Does the color of the QR code affect it's reliability?
+- **[does-the-short-url-have-an-expiration-date.md](./pages/does-the-short-url-have-an-expiration-date.md)** - Does the Short URL have an expiration date?
+- **[dynamic-qr-codes-redirects.md](./pages/dynamic-qr-codes-redirects.md)** - Dynamic QR Codes & Redirects
+- **[engage-and-inform-consumers-with-smart-connected-packaging.md](./pages/engage-and-inform-consumers-with-smart-connected-packaging.md)** - Engage and Inform Consumers with Smart Connected Packaging
+- **[example-of-a-gs1-digital-link.md](./pages/example-of-a-gs1-digital-link.md)** - Example of a GS1 Digital Link
+- **[fair-use-policy.md](./pages/fair-use-policy.md)** - Fair Use Policy
+- **[faq-list.md](./pages/faq-list.md)** - Documentation
+- **[google-translate-disclaimer.md](./pages/google-translate-disclaimer.md)** - Google Translate Disclaimer
+- **[gs1-digital-link-for-a-better-consumer-experience.md](./pages/gs1-digital-link-for-a-better-consumer-experience.md)** - GS1 Digital Link for a better consumer experience
+- **[gs1-digital-link-for-a-more-straightforward-supply-chain.md](./pages/gs1-digital-link-for-a-more-straightforward-supply-chain.md)** - GS1 Digital Link for a more straightforward supply chain
+- **[gs1-digital-link-qr-code-generator.md](./pages/gs1-digital-link-qr-code-generator.md)** - GS1 Digital Link teaches QR codes a new trick, several
+- **[guide-to-using-the-qr-code-designer.md](./pages/guide-to-using-the-qr-code-designer.md)** - Guide to using the QR Code Designer
+- **[how-accurate-is-location-reporting.md](./pages/how-accurate-is-location-reporting.md)** - Location Reporting Accuracy Explained
+- **[how-can-i-manage-the-short-urls-that-i-create.md](./pages/how-can-i-manage-the-short-urls-that-i-create.md)** - How can I manage the short URLs that I create?
+- **[how-can-i-quickly-find-a-specific-campaign-on-my-dashboard.md](./pages/how-can-i-quickly-find-a-specific-campaign-on-my-dashboard.md)** - How can I quickly find a specific campaign on my
+- **[how-can-qr-codes-combined-with-the-power-of-gs1-digital-link-unlock-new-possibilities.md](./pages/how-can-qr-codes-combined-with-the-power-of-gs1-digital-link-unlock-new-possibilities.md)** - How can QR codes combined with the power of GS1
+- **[how-can-you-know-from-where-a-visitor-is-opening-a-short-url.md](./pages/how-can-you-know-from-where-a-visitor-is-opening-a-short-url.md)** - How can you know from where a visitor is opening
+- **[how-does-delivr-determine-location.md](./pages/how-does-delivr-determine-location.md)** - How does Delivr determine location?
+- **[how-many-campaigns-and-qr-codes-can-i-create.md](./pages/how-many-campaigns-and-qr-codes-can-i-create.md)** - How many campaigns and QR codes can I create?
+- **[how-many-qr-codes-can-i-create-with-delivrs-qr-code-generator.md](./pages/how-many-qr-codes-can-i-create-with-delivrs-qr-code-generator.md)** - How many QR codes can I create with Delivr's QR
+- **[how-to-add-application-urls-to-your-campaign.md](./pages/how-to-add-application-urls-to-your-campaign.md)** - How to add Application URLs to your Campaign
+- **[how-to-add-geotargeting-urls-to-your-campaign.md](./pages/how-to-add-geotargeting-urls-to-your-campaign.md)** - How to add Geotargeting URLs to your campaign
+- **[how-to-add-language-urls-to-your-campaign.md](./pages/how-to-add-language-urls-to-your-campaign.md)** - How to add Language URLs to your campaign
+- **[how-to-add-the-location-of-your-media-with-places.md](./pages/how-to-add-the-location-of-your-media-with-places.md)** - How to add the location of your media with Places
+- **[how-to-archive-and-delete-a-campaign.md](./pages/how-to-archive-and-delete-a-campaign.md)** - How to archive and delete a campaign
+- **[how-to-build-and-use-campaign-parameters-utms.md](./pages/how-to-build-and-use-campaign-parameters-utms.md)** - How to build and use campaign parameters UTMs
+- **[how-to-change-your-password-while-signed-in.md](./pages/how-to-change-your-password-while-signed-in.md)** - How to change your password while Signed In
+- **[how-to-close-an-account.md](./pages/how-to-close-an-account.md)** - How to close an account
+- **[how-to-create-a-form.md](./pages/how-to-create-a-form.md)** - How to create a form
+- **[how-to-create-a-page-of-links-with-a-profile.md](./pages/how-to-create-a-page-of-links-with-a-profile.md)** - How to create a page of links with a profile
+- **[how-to-create-a-static-qr-code.md](./pages/how-to-create-a-static-qr-code.md)** - How to create a static QR code
+- **[how-to-create-a-url-basedcampaign-with-dynamic-qr-code.md](./pages/how-to-create-a-url-basedcampaign-with-dynamic-qr-code.md)** - How to create a URL-based Campaign with dynamic QR Code
+- **[how-to-create-and-edit-a-page.md](./pages/how-to-create-and-edit-a-page.md)** - How to create and edit a page
+- **[how-to-create-and-edit-a-profile.md](./pages/how-to-create-and-edit-a-profile.md)** - How to create and edit a profile
+- **[how-to-create-and-manage-a-gs1-digital-link-qr-code.md](./pages/how-to-create-and-manage-a-gs1-digital-link-qr-code.md)** - How to create and manage a GS1 Digital Link QR
+- **[how-to-create-multiple-dynamic-campaigns.md](./pages/how-to-create-multiple-dynamic-campaigns.md)** - How to create multiple dynamic campaigns
+- **[how-to-create-multiple-static-qr-codes.md](./pages/how-to-create-multiple-static-qr-codes.md)** - How to create multiple static QR codes
+- **[how-to-download-a-qr-code.md](./pages/how-to-download-a-qr-code.md)** - How to download a QR code
+- **[how-to-edit-a-dynamic-qr-code.md](./pages/how-to-edit-a-dynamic-qr-code.md)** - How to edit a dynamic QR code
+- **[how-to-make-it-easier-to-connect-with-deep-links-and-qr-codes.md](./pages/how-to-make-it-easier-to-connect-with-deep-links-and-qr-codes.md)** - How to make it easier to connect with Deep Links
+- **[how-to-manage-and-organize-campaigns.md](./pages/how-to-manage-and-organize-campaigns.md)** - How to manage and organize campaigns
+- **[how-to-open-an-account.md](./pages/how-to-open-an-account.md)** - How to open an account
+- **[how-to-recover-an-account-username.md](./pages/how-to-recover-an-account-username.md)** - Recover an account username
+- **[how-to-restore-an-archived-campaign.md](./pages/how-to-restore-an-archived-campaign.md)** - How to restore an archived campaign
+- **[how-to-search-for-a-campaign.md](./pages/how-to-search-for-a-campaign.md)** - How to search for a campaign
+- **[how-to-track-a-qr-code.md](./pages/how-to-track-a-qr-code.md)** - How to track a QR code
+- **[hush-privacy-first-zero-knowledge.md](./pages/hush-privacy-first-zero-knowledge.md)** - In a world obsessed with data, we chose privacy
+- **[i-changed-my-campaigns-destination-url-but-when-scanned-it-still-brings-me-to-the-old-destination-why.md](./pages/i-changed-my-campaigns-destination-url-but-when-scanned-it-still-brings-me-to-the-old-destination-why.md)** - I changed my campaigns Destination URL but when scanned it
+- **[if-your-delivr-account-is-disabled-locked-or-not-active.md](./pages/if-your-delivr-account-is-disabled-locked-or-not-active.md)** - If your Delivr Account is disabled, locked, or not active
+- **[im-near-my-plans-campaign-limit-what-can-i-do.md](./pages/im-near-my-plans-campaign-limit-what-can-i-do.md)** - I’m near my plan’s campaign limit; what can I do?
+- **[imprint-super-simple-serialization.md](./pages/imprint-super-simple-serialization.md)** - Uniquely identify everything that matters
+- **[in-addition-to-a-gtin-and-a-website-address-are-there-other-types-of-information-that-can-be-incorporated-into-the-digital-link.md](./pages/in-addition-to-a-gtin-and-a-website-address-are-there-other-types-of-information-that-can-be-incorporated-into-the-digital-link.md)** - In addition to a GTIN and a website address, are
+- **[is-a-license-required-to-create-qr-codes.md](./pages/is-a-license-required-to-create-qr-codes.md)** - Is a license required to create QR codes?
+- **[is-delivr-free.md](./pages/is-delivr-free.md)** - Is Delivr free?
+- **[is-the-delivr-service-available-in-my-language.md](./pages/is-the-delivr-service-available-in-my-language.md)** - Is the Delivr service available in my language?
+- **[is-the-gs1-digital-link-qr-code-replacing-upc-barcodes.md](./pages/is-the-gs1-digital-link-qr-code-replacing-upc-barcodes.md)** - Is the GS1 Digital Link QR code replacing UPC barcodes?
+- **[is-the-short-url-generated-by-delivrs-url-shortener-case-sensitive.md](./pages/is-the-short-url-generated-by-delivrs-url-shortener-case-sensitive.md)** - Is the Short URL generated by Delivr's URL Shortener case
+- **[is-there-a-setup-fee.md](./pages/is-there-a-setup-fee.md)** - Is there a setup fee?
+- **[is-there-a-specific-type-of-barcode-required-for-use-with-gs1-digital-link.md](./pages/is-there-a-specific-type-of-barcode-required-for-use-with-gs1-digital-link.md)** - Is there a specific type of barcode required for use
+- **[kit-brand-system.md](./pages/kit-brand-system.md)** - One source of truth for connected experiences
+- **[legal.md](./pages/legal.md)** - Legal
+- **[logo-usage-notice.md](./pages/logo-usage-notice.md)** - Logo Usage Notice
+- **[modern-slavery-statement.md](./pages/modern-slavery-statement.md)** - Modern Slavery Statement
+- **[my-qr-code-when-scanned-does-not-resolve-to-the-the-url-i-entered-for-that-qr-code.md](./pages/my-qr-code-when-scanned-does-not-resolve-to-the-the-url-i-entered-for-that-qr-code.md)** - My QR code when scanned does not resolve to the
+- **[nest-mobile-experiences.md](./pages/nest-mobile-experiences.md)** - Build mobile-first experiences for your connected brand
+- **[new-events.md](./pages/new-events.md)** - New & Events
+- **[orchestra-campaign-team-management.md](./pages/orchestra-campaign-team-management.md)** - Coordinate campaigns. Unite your teams
+- **[plans.md](./pages/plans.md)** - Plans & Pricing Guide
+- **[privacy-notice.md](./pages/privacy-notice.md)** - Privacy Notice
+- **[qr-code-generator.md](./pages/qr-code-generator.md)** - QR Code Generator with Dynamic QR Codes
+- **[qr-code-reader-qr-code-scanner-by-delivr.md](./pages/qr-code-reader-qr-code-scanner-by-delivr.md)** - A simple way to scan QR codes from any mobile
+- **[qr-code-size-guidelines-by-viewing-distance-how-big-should-your-qr-code-be.md](./pages/qr-code-size-guidelines-by-viewing-distance-how-big-should-your-qr-code-be.md)** - QR Code Size Guidelines by Viewing Distance: How Big Should
+- **[qr-codes-for-automotive-dealerships.md](./pages/qr-codes-for-automotive-dealerships.md)** - QR Codes for Automotive Dealerships
+- **[qr-codes-for-banners.md](./pages/qr-codes-for-banners.md)** - QR Codes for Banners
+- **[qr-codes-for-books-and-educational-materials.md](./pages/qr-codes-for-books-and-educational-materials.md)** - QR Codes for Books & Educational Materials
+- **[qr-codes-for-bottles-cans.md](./pages/qr-codes-for-bottles-cans.md)** - QR Codes for Bottles & Cans
+- **[qr-codes-for-brands.md](./pages/qr-codes-for-brands.md)** - QR Codes for Brands
+- **[qr-codes-for-brochures.md](./pages/qr-codes-for-brochures.md)** - QR Codes for Brochures
+- **[qr-codes-for-construction-companies-architects-equipment-and-material-manufacturers.md](./pages/qr-codes-for-construction-companies-architects-equipment-and-material-manufacturers.md)** - QR Codes for Construction Companies, Architects & Equipment and Material
+- **[qr-codes-for-consumer-packaged-goods.md](./pages/qr-codes-for-consumer-packaged-goods.md)** - QR Codes for Consumer Packaged Goods
+- **[qr-codes-for-display-windows.md](./pages/qr-codes-for-display-windows.md)** - QR Codes for Display Windows
+- **[qr-codes-for-educational-institutions.md](./pages/qr-codes-for-educational-institutions.md)** - QR Codes for Educational Institutions
+- **[qr-codes-for-entertainment-companies.md](./pages/qr-codes-for-entertainment-companies.md)** - QR Codes for Entertainment Companies
+- **[qr-codes-for-flyers.md](./pages/qr-codes-for-flyers.md)** - QR Codes for Flyers
+- **[qr-codes-for-food-product-packaging.md](./pages/qr-codes-for-food-product-packaging.md)** - QR Codes for Food & Product Packaging
+- **[qr-codes-for-government.md](./pages/qr-codes-for-government.md)** - QR Codes for Government
+- **[qr-codes-for-healthcare-doctors-dentists.md](./pages/qr-codes-for-healthcare-doctors-dentists.md)** - QR Codes for Healthcare, Doctors & Dentists
+- **[qr-codes-for-hotels-tourism-and-the-hospitality-industry.md](./pages/qr-codes-for-hotels-tourism-and-the-hospitality-industry.md)** - QR Codes for Hotels, Tourism, and the Hospitality industry
+- **[qr-codes-for-immersive-experiences.md](./pages/qr-codes-for-immersive-experiences.md)** - QR Codes for Immersive Experiences
+- **[qr-codes-for-labels-stickers.md](./pages/qr-codes-for-labels-stickers.md)** - QR Codes for Labels & Stickers
+- **[qr-codes-for-media-companies-publishers.md](./pages/qr-codes-for-media-companies-publishers.md)** - QR Codes for Media Companies & Publishers
+- **[qr-codes-for-pharmaceutical-companies.md](./pages/qr-codes-for-pharmaceutical-companies.md)** - QR Codes for Pharmaceutical Companies
+- **[qr-codes-for-posters.md](./pages/qr-codes-for-posters.md)** - QR Codes for Posters
+- **[qr-codes-for-products.md](./pages/qr-codes-for-products.md)** - QR Codes for Products
+- **[qr-codes-for-reducing-surface-contact-and-disease-spread-in-healthcare.md](./pages/qr-codes-for-reducing-surface-contact-and-disease-spread-in-healthcare.md)** - QR Codes for Reducing Surface Contact and Disease Spread in
+- **[qr-codes-for-restaurants.md](./pages/qr-codes-for-restaurants.md)** - QR Codes for Restaurants
+- **[qr-codes-for-retail-beauty-fashion.md](./pages/qr-codes-for-retail-beauty-fashion.md)** - QR Codes for Retail, Beauty & Fashion
+- **[qr-codes-for-software-game-developers.md](./pages/qr-codes-for-software-game-developers.md)** - QR Codes for Software & Game Developers
+- **[qr-codes-for-store-windows.md](./pages/qr-codes-for-store-windows.md)** - QR Codes for Store Windows
+- **[qr-codes-for-storefronts.md](./pages/qr-codes-for-storefronts.md)** - QR Codes for Storefronts
+- **[qr-codes-for-sweepstakes-giveaways.md](./pages/qr-codes-for-sweepstakes-giveaways.md)** - QR Codes for Sweepstakes & Giveaways
+- **[qr-codes-for-websites.md](./pages/qr-codes-for-websites.md)** - QR Codes for Websites
+- **[qr-studio-custom-code-design.md](./pages/qr-studio-custom-code-design.md)** - Custom design tools for perfectly branded QR codes
+- **[reset-your-password.md](./pages/reset-your-password.md)** - Reset your password
+- **[ring-gs1-compliant-digital-link.md](./pages/ring-gs1-compliant-digital-link.md)** - One code. Endless possibilities
+- **[security-and-qr-codes.md](./pages/security-and-qr-codes.md)** - In today’s world, security is essential
+- **[service-level-agreement-sla.md](./pages/service-level-agreement-sla.md)** - Service Level Agreement SLA
+- **[signup.md](./pages/signup.md)** - signup.md
+- **[sitemap-404.md](./pages/sitemap-404.md)** - Sorry, the page you're looking for could not be found
+- **[sitemap.md](./pages/sitemap.md)** - Site Map
+- **[solutions-overview.md](./pages/solutions-overview.md)** - Where touchpoints grow intomoments that matter
+- **[submit-a-support-request.md](./pages/submit-a-support-request.md)** - Submit a support request
+- **[super-simple-serialization.md](./pages/super-simple-serialization.md)** - Give everything a unique identity
+- **[sustainability-and-qr-codes-making-a-positive-impact-on-the-planet-one-qr-code-scan-at-a-time.md](./pages/sustainability-and-qr-codes-making-a-positive-impact-on-the-planet-one-qr-code-scan-at-a-time.md)** - Making a positive impact on the planet, one QR code
+- **[team-collaboration-guide.md](./pages/team-collaboration-guide.md)** - Team Collaboration Guide
+- **[tell-me-more-about-delivrs-qr-code-generator.md](./pages/tell-me-more-about-delivrs-qr-code-generator.md)** - Tell me more about Delivr's QR code generator?
+- **[tell-me-more-about-qr-codes-and-the-qr-code-generator-by-delivr.md](./pages/tell-me-more-about-qr-codes-and-the-qr-code-generator-by-delivr.md)** - Tell me more about QR codes® and the QR Code
+- **[the-case-against-retargeting-in-a-privacy-first-world.md](./pages/the-case-against-retargeting-in-a-privacy-first-world.md)** - The case against retargeting in a privacy-first world
+- **[the-delivr-difference-for-global-brands-trusted-scalable-private.md](./pages/the-delivr-difference-for-global-brands-trusted-scalable-private.md)** - Infrastructure for connected brands and experiences
+- **[the-delivr-engagement-suite-with-dynamic-qr-code-generator.md](./pages/the-delivr-engagement-suite-with-dynamic-qr-code-generator.md)** - Infrastructure for the Connected World
+- **[the-human-first-product-path.md](./pages/the-human-first-product-path.md)** - Where every experience feels human
+- **[the-story-of-delivr.md](./pages/the-story-of-delivr.md)** - How wonderful thingsstarted
+- **[top-10-qr-code-design-best-practices-for-maximum-scannability-engagement.md](./pages/top-10-qr-code-design-best-practices-for-maximum-scannability-engagement.md)** - Top 10 QR Code Design Best Practices for Maximum Scannability
+- **[touchless-marketing-solutions.md](./pages/touchless-marketing-solutions.md)** - Keep consumers safe, engaged, and informed
+- **[trademark-usage-notice.md](./pages/trademark-usage-notice.md)** - Trademark Notice
+- **[truemrk-brand-protection-consumer-engagement.md](./pages/truemrk-brand-protection-consumer-engagement.md)** - TrueMrk Brand Protection: Consumer Engagement
+- **[types-of-account-users-roles.md](./pages/types-of-account-users-roles.md)** - Types of account users & roles
+- **[types-of-campaigns-and-mobile-experiences.md](./pages/types-of-campaigns-and-mobile-experiences.md)** - Types of campaigns and mobile experiences
+- **[types-of-qr-codes-barcodes.md](./pages/types-of-qr-codes-barcodes.md)** - Types of QR codes & barcodes
+- **[understanding-implementing-super-simple-serialization.md](./pages/understanding-implementing-super-simple-serialization.md)** - Understanding & Implementing Super Simple Serialization
+- **[understanding-qr-codes-technology-and-trust-with-delivr.md](./pages/understanding-qr-codes-technology-and-trust-with-delivr.md)** - Understanding QR codes, technology, and trust with Delivr
+- **[understanding-the-brand-kit.md](./pages/understanding-the-brand-kit.md)** - Understanding the Brand Kit
+- **[understanding-the-campaign-report.md](./pages/understanding-the-campaign-report.md)** - Understanding the campaign report
+- **[understanding-your-account-dashboard.md](./pages/understanding-your-account-dashboard.md)** - Understanding your account dashboard
+- **[understanding-your-security-settings.md](./pages/understanding-your-security-settings.md)** - Understanding your security settings
+- **[unleash-the-power-of-shoppable-tv-with-broadcast-qr.md](./pages/unleash-the-power-of-shoppable-tv-with-broadcast-qr.md)** - Deliver connected, measurable experiences to TV audiences
+- **[url-shortener.md](./pages/url-shortener.md)** - URL Shortener with Link Management
+- **[uses-of-qr-codes-for-billboards-ooh-dooh.md](./pages/uses-of-qr-codes-for-billboards-ooh-dooh.md)** - QR Codes for Billboards, OOH & DOOH
+- **[uses-of-qr-codes-for-public-spaces.md](./pages/uses-of-qr-codes-for-public-spaces.md)** - QR Codes for Public Spaces
+- **[uses-of-qr-codes.md](./pages/uses-of-qr-codes.md)** - One code, many industries
+- **[vault-trust-center.md](./pages/vault-trust-center.md)** - Protecting what matters in a connected world
+- **[video.md](./pages/video.md)** - Videos
+- **[vulnerability-disclosure-policy.md](./pages/vulnerability-disclosure-policy.md)** - Vulnerability Disclosure Policy
+- **[welcome-to-the-delivr-learning-center.md](./pages/welcome-to-the-delivr-learning-center.md)** - Where curiosity unlocksanswers
+- **[what-are-modules-and-how-do-you-use-them.md](./pages/what-are-modules-and-how-do-you-use-them.md)** - What are modules, and how do you use them?
+- **[what-are-my-payment-options.md](./pages/what-are-my-payment-options.md)** - What are my payment options?
+- **[what-are-response-rate-mobile-desktop-location-by-ip-and-location-by-gps-in-a-report.md](./pages/what-are-response-rate-mobile-desktop-location-by-ip-and-location-by-gps-in-a-report.md)** - What are response rate, mobile, desktop, location by IP and
+- **[what-are-the-best-business-uses-of-qr-codes.md](./pages/what-are-the-best-business-uses-of-qr-codes.md)** - What are the best business uses of QR codes?
+- **[what-are-total-views-qr-scans-nfc-taps-and-short-url-clicks.md](./pages/what-are-total-views-qr-scans-nfc-taps-and-short-url-clicks.md)** - What are total views, QR scans, NFC taps and short
+- **[what-are-workspaces-and-how-do-you-use-them.md](./pages/what-are-workspaces-and-how-do-you-use-them.md)** - What are Workspaces, and how do you use them?
+- **[what-content-can-be-shown-via-qr-codes.md](./pages/what-content-can-be-shown-via-qr-codes.md)** - What content can be shown via QR codes?
+- **[what-formats-of-qr-codes-are-supported.md](./pages/what-formats-of-qr-codes-are-supported.md)** - What formats of QR codes are supported?
+- **[what-is-a-campaign-id.md](./pages/what-is-a-campaign-id.md)** - What is a Campaign ID?
+- **[what-is-a-campaign.md](./pages/what-is-a-campaign.md)** - What Is a Campaign?
+- **[what-is-a-destination-url.md](./pages/what-is-a-destination-url.md)** - What is a Destination URL?
+- **[what-is-a-qr-code-generator.md](./pages/what-is-a-qr-code-generator.md)** - What is a QR code generator?
+- **[what-is-a-qr-code.md](./pages/what-is-a-qr-code.md)** - What is a QR code?
+- **[what-is-a-resolver.md](./pages/what-is-a-resolver.md)** - What is a Resolver?
+- **[what-is-a-url-shortener.md](./pages/what-is-a-url-shortener.md)** - What is a URL shortener?
+- **[what-is-a-url.md](./pages/what-is-a-url.md)** - What is a URL?
+- **[what-is-an-experience-url.md](./pages/what-is-an-experience-url.md)** - What is an Experience URL?
+- **[what-is-an-nfc-tag.md](./pages/what-is-an-nfc-tag.md)** - What is an NFC tag?
+- **[what-is-delivr.md](./pages/what-is-delivr.md)** - What is Delivr?
+- **[what-is-gs1s-role-in-the-gs1-digital-link.md](./pages/what-is-gs1s-role-in-the-gs1-digital-link.md)** - What is GS1's role in the GS1 Digital Link?
+- **[what-is-sqrc.md](./pages/what-is-sqrc.md)** - What is SQRC?
+- **[what-is-the-difference-between-a-static-and-dynamic-qr-code.md](./pages/what-is-the-difference-between-a-static-and-dynamic-qr-code.md)** - What is the difference between a static and dynamic QR
+- **[what-is-the-difference-between-vector-and-raster-formats-when-downloading-and-using-qr-codes.md](./pages/what-is-the-difference-between-vector-and-raster-formats-when-downloading-and-using-qr-codes.md)** - What is the difference between vector and raster formats when
+- **[what-is-the-gs1-digital-link.md](./pages/what-is-the-gs1-digital-link.md)** - What is the GS1 Digital Link?
+- **[what-is-url-shortening.md](./pages/what-is-url-shortening.md)** - What is URL shortening?
+- **[what-level-of-qr-code-designing-is-possible.md](./pages/what-level-of-qr-code-designing-is-possible.md)** - What level of QR code designing is possible?
+- **[what-reports-are-available-when-a-short-url-is-clicked.md](./pages/what-reports-are-available-when-a-short-url-is-clicked.md)** - What reports are available when a Short URL is clicked?
+- **[whats-the-monthly-subscription-fee-for.md](./pages/whats-the-monthly-subscription-fee-for.md)** - What's the monthly subscription fee for?
+- **[whats-with-the-white-border-around-the-qr-code.md](./pages/whats-with-the-white-border-around-the-qr-code.md)** - What's with the white border around the QR code?
+- **[when-will-gs1-digital-link-replace-upc-at-point-of-sale.md](./pages/when-will-gs1-digital-link-replace-upc-at-point-of-sale.md)** - When will GS1 Digital Link replace UPC at point-of-sale?
+- **[where-can-i-get-a-copy-of-my-invoice.md](./pages/where-can-i-get-a-copy-of-my-invoice.md)** - Where can I get a copy of my invoice?
+- **[who-invented-the-qr-code.md](./pages/who-invented-the-qr-code.md)** - Who invented the QR code?
+- **[why-do-i-see-ads-wrapped-around-my-destination-page-after-scanning-a-qr-code.md](./pages/why-do-i-see-ads-wrapped-around-my-destination-page-after-scanning-a-qr-code.md)** - Why do I see ads wrapped around my destination page
+- **[why-gs1-digital-link.md](./pages/why-gs1-digital-link.md)** - Why GS1 Digital Link?
+- **[will-my-qr-codes-ever-expire.md](./pages/will-my-qr-codes-ever-expire.md)** - Will my QR codes ever expire?
+- **[wonderful-things-start-here.md](./pages/wonderful-things-start-here.md)** - Wonderful things start here
+- **[worldview-advanced-analytics.md](./pages/worldview-advanced-analytics.md)** - Every scan sparks stories and actionable insights
+
+### tools/
+- **[fill-delivr-second-pass.js](./tools/fill-delivr-second-pass.js)** - Second pass: fetch content for skeleton pages and fill bodies
+- **[generate_pages_from_documents_index.js](./tools/generate_pages_from_documents_index.js)** - JavaScript utility script
+- **[generate_search_index.js](./tools/generate_search_index.js)** - Generate a search index JSON tailored for a doc-site search
+- **[rebuild_manifest_from_pages.js](./tools/rebuild_manifest_from_pages.js)** - Rebuild docs/delivr artifacts from existing Markdown pages in docs/delivr/pages
+- **[update_frontmatter.js](./tools/update_frontmatter.js)** - Update front matter on existing Delivr page markdowns to include
+- **[verify-consistency.js](./tools/verify-consistency.js)** - Verifies consistency between manifest.json and generated Markdown pages

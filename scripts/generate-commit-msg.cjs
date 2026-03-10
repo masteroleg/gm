@@ -340,6 +340,78 @@ const detectScope = (files) => {
 	return "";
 };
 
+const categorizeFiles = (files) => {
+	const categories = {
+		bmad: [],
+		tests: [],
+		ci: [],
+		docs: [],
+		site: [],
+		config: [],
+		other: [],
+	};
+
+	for (const file of files) {
+		if (file.startsWith("_bmad")) categories.bmad.push(file);
+		else if (file.startsWith("tests/")) categories.tests.push(file);
+		else if (file.startsWith(".github/workflows/")) categories.ci.push(file);
+		else if (file.startsWith("docs/") || /^README/i.test(file))
+			categories.docs.push(file);
+		else if (file.startsWith("site/")) categories.site.push(file);
+		else if (
+			file.startsWith(".husky/") ||
+			file.startsWith(".vscode/") ||
+			[".gitignore", "tsconfig.json", "biome.json"].includes(file)
+		)
+			categories.config.push(file);
+		else categories.other.push(file);
+	}
+
+	return categories;
+};
+
+const buildCategoryDescription = (categories) => {
+	const descriptions = [];
+
+	if (categories.bmad.length) {
+		descriptions.push(
+			`BMAD artifacts: ${categories.bmad.length} file${categories.bmad.length > 1 ? "s" : ""}`,
+		);
+	}
+	if (categories.tests.length) {
+		descriptions.push(
+			`tests: ${categories.tests.length} file${categories.tests.length > 1 ? "s" : ""}`,
+		);
+	}
+	if (categories.ci.length) {
+		descriptions.push(
+			`CI/CD workflows: ${categories.ci.length} file${categories.ci.length > 1 ? "s" : ""}`,
+		);
+	}
+	if (categories.docs.length) {
+		descriptions.push(
+			`documentation: ${categories.docs.length} file${categories.docs.length > 1 ? "s" : ""}`,
+		);
+	}
+	if (categories.site.length) {
+		descriptions.push(
+			`site: ${categories.site.length} file${categories.site.length > 1 ? "s" : ""}`,
+		);
+	}
+	if (categories.config.length) {
+		descriptions.push(
+			`config: ${categories.config.length} file${categories.config.length > 1 ? "s" : ""}`,
+		);
+	}
+	if (categories.other.length) {
+		descriptions.push(
+			`other: ${categories.other.length} file${categories.other.length > 1 ? "s" : ""}`,
+		);
+	}
+
+	return descriptions;
+};
+
 const summarize = (files, stat, type) => {
 	const fileCount = files.length;
 	const hasReadme = files.some(
@@ -387,12 +459,25 @@ const summarize = (files, stat, type) => {
 		};
 	}
 
+	// Multi-file case: analyze and describe what was actually changed
+	const categories = categorizeFiles(files);
+	const descriptions = buildCategoryDescription(categories);
+	const categoryList = descriptions.join(", ");
+
 	const scope = detectScope(files);
 	const prefix = scope ? `${type}(${scope})` : type;
-	const target = fileCount === 1 ? files[0] : `${fileCount} files`;
+
+	if (fileCount <= 3) {
+		// For small commits, be more specific
+		return {
+			subject: `${prefix}: update ${files.map((f) => f.split("/").pop()).join(", ")}`,
+			body: `Изменены следующие компоненты: ${categoryList}.`,
+		};
+	}
+
 	return {
-		subject: `${prefix}: update project files`,
-		body: `Обновлены ${target} и зафиксированы связанные изменения по текущей задаче.`,
+		subject: `${prefix}: sync project state after updates`,
+		body: `Обновлены файлы проекта (${fileCount} total): ${categoryList}.`,
 	};
 };
 
@@ -403,10 +488,38 @@ const buildMessage = (files, stat) => {
 };
 
 if (process.argv.includes("--self-test")) {
-	const message = buildMessage(
-		["README.md"],
-		" README.md | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
-	);
+	const testName = process.argv[3] || "readme";
+
+	const tests = {
+		readme: {
+			files: ["README.md"],
+			stat: " README.md | 2 +-\n 1 file changed, 1 insertion(+), 1 deletion(-)",
+		},
+		multi: {
+			files: [
+				"_bmad-output/planning-artifacts/prd.md",
+				"_bmad-output/planning-artifacts/architecture.md",
+				"CLAUDE.md",
+				"docs/genu-im-homepage-master-plan.md",
+				"site/assets/css/output.css",
+				"site/index.html",
+				".vscode/settings.json",
+				"playwright.config.ts",
+				"package.json",
+				"_bmad-output/index.md",
+				"_bmad-output/planning-artifacts/validation-report-2026-03-10.md",
+				"repo-index.md",
+			],
+			stat: " 12 files changed, 4433 insertions(+), 60 deletions(-)",
+		},
+		three: {
+			files: [".husky/pre-commit", ".husky/prepare-commit-msg", "README.md"],
+			stat: " 3 files changed, 5 insertions(+), 2 deletions(-)",
+		},
+	};
+
+	const test = tests[testName] || tests.readme;
+	const message = buildMessage(test.files, test.stat);
 	process.stdout.write(message);
 	process.exit(0);
 }
