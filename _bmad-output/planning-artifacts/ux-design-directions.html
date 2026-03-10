@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>genu.im — UX Design Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-light: #0d8a4f;
+  --green-dark: #00e676;
+  --amber-light: #c97a0a;
+  --amber-dark: #ffb340;
+  --forest-base: #0c1410;
+  --forest-card: #121f17;
+  --forest-raised: #1a2e20;
+  --forest-border: #2d4a35;
+  --warm-base: #f7f6f2;
+  --warm-card: #ffffff;
+  --warm-subtle: #f0efe9;
+  --warm-border: #e5e3db;
+  font-family: 'Manrope', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { background: #111; color: #fff; }
+
+/* ── SHOWCASE NAV ── */
+.showcase-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0 24px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+}
+.showcase-nav a {
+  text-decoration: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.showcase-nav a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+.showcase-nav .badge {
+  font-size: 10px;
+  background: var(--green-light);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 4px;
+}
+.dir-label {
+  position: absolute;
+  top: 16px; left: 16px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.4);
+  z-index: 10;
+}
+
+/* ── SHARED NAV COMPONENT ── */
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 64px;
+}
+.site-nav .logo {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.site-nav .logo span { color: var(--green-dark); }
+.site-nav .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.site-nav .nav-links a {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+.site-nav .nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.lang-btn {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* ── VERIFICATION WIDGET ── */
+.vw {
+  border-radius: 16px;
+  padding: 20px;
+  width: 320px;
+  flex-shrink: 0;
+}
+.vw-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.vw-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.vw-badges {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.vw-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+.vw-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.vw-step-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+.vw-step-label { font-size: 13px; font-weight: 600; }
+.vw-step-desc { font-size: 11px; opacity: 0.6; }
+.vw-step-tag {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 5px;
+  letter-spacing: 0.04em;
+}
+.vw-stat {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.vw-stat-num {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.vw-stat-label { font-size: 11px; opacity: 0.6; }
+
+/* ── CTA BUTTONS ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+.btn-primary-green {
+  background: var(--green-light);
+  color: #fff;
+}
+.btn-primary-green:hover { background: #0a7340; transform: translateY(-1px); }
+.btn-ghost-dark {
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.btn-ghost-dark:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.btn-ghost-light {
+  background: transparent;
+  color: rgba(0,0,0,0.5);
+  border: 1px solid rgba(0,0,0,0.12);
+}
+.btn-ghost-light:hover { background: rgba(0,0,0,0.04); color: rgba(0,0,0,0.8); }
+
+/* ═══════════════════════════════════════════════
+   DIRECTION 1: DARK FOREST
+   Deep dark green, ambient glow, premium confidence
+   ═══════════════════════════════════════════════ */
+.d1 {
+  background: var(--forest-base);
+  color: #e8f0ea;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding-top: 52px;
+}
+.d1::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -60px;
+  width: 600px; height: 600px;
+  background: radial-gradient(ellipse, rgba(13,138,79,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.d1 .site-nav { border-bottom: 1px solid var(--forest-border); }
+.d1 .site-nav .logo { color: #e8f0ea; }
+.d1 .site-nav .nav-links a { color: rgba(232,240,234,0.55); }
+.d1 .site-nav .nav-links a:hover { color: #e8f0ea; }
+.d1 .lang-btn { border-color: var(--forest-border); color: rgba(232,240,234,0.6); background: transparent; }
+.d1 .hero {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 48px;
+  align-items: center;
+  padding: 72px 40px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.d1 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green-dark);
+  margin-bottom: 24px;
+}
+.d1 .eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--green-dark);
+  border-radius: 50%;
+  display: block;
+}
+.d1 h1 {
+  font-size: 58px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #f0f5f1;
+  margin-bottom: 20px;
+}
+.d1 h1 em { color: var(--green-dark); font-style: normal; }
+.d1 .subhead {
+  font-size: 17px;
+  font-weight: 400;
+  color: rgba(232,240,234,0.6);
+  line-height: 1.6;
+  max-width: 440px;
+  margin-bottom: 16px;
+}
+.d1 .proof-line {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(232,240,234,0.85);
+  border-left: 3px solid var(--green-dark);
+  padding-left: 14px;
+  margin-bottom: 32px;
+}
+.d1 .cta-group { display: flex; gap: 12px; align-items: center; margin-bottom: 40px; }
+.d1 .stats-row { display: flex; gap: 32px; }
+.d1 .stat-item .num {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--amber-dark);
+}
+.d1 .stat-item .lbl {
+  font-size: 12px;
+  color: rgba(232,240,234,0.45);
+}
+.d1 .vw {
+  background: var(--forest-card);
+  border: 1px solid var(--forest-border);
+  box-shadow: 0 0 60px rgba(13,138,79,0.15), 0 24px 48px rgba(0,0,0,0.4);
+}
+.d1 .vw-title { color: rgba(232,240,234,0.45); }
+.d1 .vw-badge { background: var(--forest-raised); color: rgba(232,240,234,0.7); }
+.d1 .vw-step { background: var(--forest-raised); }
+.d1 .vw-step-label { color: #e8f0ea; }
+.d1 .vw-step-icon { background: rgba(13,138,79,0.2); color: var(--green-dark); }
+.d1 .vw-step-tag { background: rgba(13,138,79,0.15); color: var(--green-dark); }
+.d1 .vw-stat { background: rgba(255,179,64,0.08); border: 1px solid rgba(255,179,64,0.15); }
+.d1 .vw-stat-num { color: var(--amber-dark); }
+.d1 .vw-stat-label { color: rgba(232,240,234,0.45); }
+
+/* ═══════════════════════════════════════════════
+   DIRECTION 2: PROOF LIGHT
+   Warm editorial, clean confidence, light canvas
+   ═══════════════════════════════════════════════ */
+.d2 {
+  background: var(--warm-base);
+  color: #0f1a10;
+  min-height: 100vh;
+  padding-top: 52px;
+  position: relative;
+}
+.d2 .site-nav { border-bottom: 1px solid var(--warm-border); }
+.d2 .site-nav .logo { color: #0f1a10; }
+.d2 .site-nav .logo span { color: var(--green-light); }
+.d2 .site-nav .nav-links a { color: rgba(15,26,16,0.5); }
+.d2 .site-nav .nav-links a:hover { color: #0f1a10; }
+.d2 .lang-btn { border-color: var(--warm-border); color: rgba(15,26,16,0.5); background: transparent; }
+.d2 .hero {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 56px;
+  align-items: center;
+  padding: 72px 40px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.d2 .eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-light);
+  margin-bottom: 24px;
+}
+.d2 h1 {
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: #0f1a10;
+  margin-bottom: 20px;
+}
+.d2 h1 em { color: var(--green-light); font-style: normal; }
+.d2 .subhead {
+  font-size: 17px;
+  color: rgba(15,26,16,0.55);
+  line-height: 1.65;
+  max-width: 420px;
+  margin-bottom: 14px;
+}
+.d2 .proof-line {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f1a10;
+  background: var(--warm-subtle);
+  border: 1px solid var(--warm-border);
+  padding: 10px 16px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-bottom: 32px;
+}
+.d2 .cta-group { display: flex; gap: 12px; align-items: center; margin-bottom: 40px; }
+.d2 .btn-primary-green { background: var(--green-light); }
+.d2 .stats-row { display: flex; gap: 32px; padding-top: 24px; border-top: 1px solid var(--warm-border); }
+.d2 .stat-item .num {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--amber-light);
+}
+.d2 .stat-item .lbl {
+  font-size: 12px;
+  color: rgba(15,26,16,0.4);
+}
+.d2 .vw {
+  background: var(--forest-card);
+  border: 1px solid var(--forest-border);
+  box-shadow: 0 20px 60px rgba(12,20,16,0.18);
+}
+.d2 .vw-title { color: rgba(232,240,234,0.4); }
+.d2 .vw-badge { background: var(--forest-raised); color: rgba(232,240,234,0.65); }
+.d2 .vw-step { background: var(--forest-raised); }
+.d2 .vw-step-label { color: #e8f0ea; }
+.d2 .vw-step-icon { background: rgba(0,230,118,0.15); color: var(--green-dark); }
+.d2 .vw-step-tag { background: rgba(0,230,118,0.12); color: var(--green-dark); }
+.d2 .vw-stat { background: rgba(255,179,64,0.1); border: 1px solid rgba(255,179,64,0.2); }
+.d2 .vw-stat-num { color: var(--amber-dark); }
+.d2 .vw-stat-label { color: rgba(232,240,234,0.4); }
+
+/* ═══════════════════════════════════════════════
+   DIRECTION 3: BENTO HERO
+   Asymmetric bento grid, 2026 SaaS modern
+   ═══════════════════════════════════════════════ */
+.d3 {
+  background: var(--warm-base);
+  color: #0f1a10;
+  min-height: 100vh;
+  padding-top: 52px;
+}
+.d3 .site-nav { background: var(--warm-card); border-bottom: 1px solid var(--warm-border); }
+.d3 .site-nav .logo { color: #0f1a10; }
+.d3 .site-nav .logo span { color: var(--green-light); }
+.d3 .site-nav .nav-links a { color: rgba(15,26,16,0.5); }
+.d3 .lang-btn { border-color: var(--warm-border); color: rgba(15,26,16,0.45); background: transparent; }
+.d3 .hero {
+  padding: 32px 40px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.d3 .bento {
+  display: grid;
+  grid-template-columns: 1fr 1fr 300px;
+  grid-template-rows: auto auto;
+  gap: 16px;
+}
+.d3 .b-headline {
+  grid-column: 1 / 3;
+  background: var(--forest-base);
+  border-radius: 24px;
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.d3 .b-headline::before {
+  content: '';
+  position: absolute;
+  bottom: -60px; right: -60px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(13,138,79,0.3) 0%, transparent 60%);
+  pointer-events: none;
+}
+.d3 .b-headline h1 {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #f0f5f1;
+  margin-bottom: 16px;
+}
+.d3 .b-headline h1 em { color: var(--green-dark); font-style: normal; }
+.d3 .b-headline p {
+  font-size: 16px;
+  color: rgba(232,240,234,0.55);
+  max-width: 380px;
+  line-height: 1.6;
+}
+.d3 .b-cta {
+  background: var(--warm-card);
+  border-radius: 24px;
+  padding: 32px;
+  border: 1px solid var(--warm-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.d3 .b-cta .lbl {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(15,26,16,0.35);
+  margin-bottom: 12px;
+}
+.d3 .b-cta .quote {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #0f1a10;
+  margin-bottom: 24px;
+}
+.d3 .b-proof {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  background: var(--forest-card);
+  border-radius: 24px;
+  padding: 20px;
+  border: 1px solid var(--forest-border);
+}
+.d3 .b-stat {
+  background: var(--amber-light);
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.d3 .b-stat .big-num {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #fff;
+  line-height: 1;
+}
+.d3 .b-stat .sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 6px;
+}
+.d3 .b-features {
+  background: var(--warm-subtle);
+  border-radius: 24px;
+  padding: 28px;
+  border: 1px solid var(--warm-border);
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.d3 .feat-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--warm-card);
+  border: 1px solid var(--warm-border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0f1a10;
+}
+.d3 .feat-chip .dot { width: 6px; height: 6px; background: var(--green-light); border-radius: 50%; }
+.d3 .vw-title { color: rgba(232,240,234,0.4); }
+.d3 .vw-badge { background: var(--forest-raised); color: rgba(232,240,234,0.65); }
+.d3 .vw-step { background: var(--forest-raised); }
+.d3 .vw-step-label { color: #e8f0ea; }
+.d3 .vw-step-icon { background: rgba(0,230,118,0.15); color: var(--green-dark); }
+.d3 .vw-step-tag { background: rgba(0,230,118,0.12); color: var(--green-dark); }
+.d3 .vw-stat { background: rgba(255,179,64,0.1); border: 1px solid rgba(255,179,64,0.2); }
+.d3 .vw-stat-num { color: var(--amber-dark); }
+.d3 .vw-stat-label { color: rgba(232,240,234,0.4); }
+
+/* ═══════════════════════════════════════════════
+   DIRECTION 4: GRADIENT DRAMA
+   Mesh gradient, cinematic depth, amber-led
+   ═══════════════════════════════════════════════ */
+.d4 {
+  background: #060d08;
+  color: #e8f0ea;
+  min-height: 100vh;
+  padding-top: 52px;
+  position: relative;
+  overflow: hidden;
+}
+.d4-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(13,138,79,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(201,122,10,0.15) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 70% at 50% 100%, rgba(13,138,79,0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+.d4 .site-nav { position: relative; z-index: 2; }
+.d4 .site-nav .logo { color: #e8f0ea; }
+.d4 .site-nav .logo .im { color: var(--amber-dark); }
+.d4 .site-nav .nav-links a { color: rgba(232,240,234,0.5); }
+.d4 .lang-btn { border-color: rgba(232,240,234,0.12); color: rgba(232,240,234,0.5); background: transparent; }
+.d4 .hero {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 48px;
+  align-items: center;
+  padding: 80px 40px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.d4 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber-dark);
+  margin-bottom: 24px;
+}
+.d4 h1 {
+  font-size: 62px;
+  font-weight: 800;
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+  color: #f0f5f1;
+  margin-bottom: 20px;
+}
+.d4 h1 em { color: var(--green-dark); font-style: normal; }
+.d4 .subhead {
+  font-size: 17px;
+  color: rgba(232,240,234,0.55);
+  line-height: 1.65;
+  max-width: 430px;
+  margin-bottom: 16px;
+}
+.d4 .proof-line {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--amber-dark);
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.d4 .proof-line::before { content: '✦'; font-size: 12px; }
+.d4 .cta-group { display: flex; gap: 12px; align-items: center; margin-bottom: 48px; }
+.d4 .btn-primary-amber {
+  background: var(--amber-light);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+.d4 .btn-primary-amber:hover { background: #b56c09; transform: translateY(-1px); }
+.d4 .stats-row { display: flex; gap: 36px; }
+.d4 .stat-item .num {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--amber-dark);
+}
+.d4 .stat-item .lbl { font-size: 12px; color: rgba(232,240,234,0.4); }
+.d4 .vw {
+  background: rgba(18,31,23,0.9);
+  border: 1px solid rgba(45,74,53,0.8);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 80px rgba(13,138,79,0.2), 0 32px 64px rgba(0,0,0,0.5);
+}
+.d4 .vw-title { color: rgba(232,240,234,0.35); }
+.d4 .vw-badge { background: rgba(26,46,32,0.8); color: rgba(232,240,234,0.65); }
+.d4 .vw-step { background: rgba(26,46,32,0.6); }
+.d4 .vw-step-label { color: #e8f0ea; }
+.d4 .vw-step-icon { background: rgba(13,138,79,0.2); color: var(--green-dark); }
+.d4 .vw-step-tag { background: rgba(13,138,79,0.15); color: var(--green-dark); }
+.d4 .vw-stat { background: rgba(255,179,64,0.08); border: 1px solid rgba(255,179,64,0.18); }
+.d4 .vw-stat-num { color: var(--amber-dark); }
+.d4 .vw-stat-label { color: rgba(232,240,234,0.4); }
+
+/* ═══════════════════════════════════════════════
+   DIRECTION 5: MONOLITH
+   Absolute minimal, near-black + single green
+   ═══════════════════════════════════════════════ */
+.d5 {
+  background: #070d08;
+  color: #dde8df;
+  min-height: 100vh;
+  padding-top: 52px;
+}
+.d5 .site-nav { padding: 0 48px; }
+.d5 .site-nav .logo { color: #dde8df; letter-spacing: -0.04em; }
+.d5 .site-nav .logo span { color: var(--green-dark); }
+.d5 .site-nav .nav-links a { color: rgba(221,232,223,0.35); font-size: 13px; }
+.d5 .site-nav .nav-links a:hover { color: #dde8df; }
+.d5 .lang-btn { border-color: rgba(221,232,223,0.1); color: rgba(221,232,223,0.35); background: transparent; }
+.d5 .hero {
+  padding: 100px 48px 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.d5 .hero-left {}
+.d5 .eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-dark);
+  margin-bottom: 32px;
+  display: block;
+}
+.d5 h1 {
+  font-size: 68px;
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: #dde8df;
+  margin-bottom: 0;
+}
+.d5 h1 strong {
+  font-weight: 800;
+  color: var(--green-dark);
+  display: block;
+}
+.d5 .divider {
+  width: 40px;
+  height: 2px;
+  background: var(--green-dark);
+  margin: 36px 0;
+}
+.d5 .subhead {
+  font-size: 16px;
+  color: rgba(221,232,223,0.45);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+.d5 .cta-group { display: flex; gap: 16px; align-items: center; margin-bottom: 56px; }
+.d5 .btn-outline-green {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--green-dark);
+  color: var(--green-dark);
+  background: transparent;
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+}
+.d5 .btn-outline-green:hover { background: rgba(0,230,118,0.08); }
+.d5 .btn-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(221,232,223,0.4);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.d5 .stat-block {
+  border-top: 1px solid rgba(221,232,223,0.08);
+  padding-top: 32px;
+  display: flex;
+  gap: 48px;
+}
+.d5 .stat-item .num {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #dde8df;
+}
+.d5 .stat-item .lbl { font-size: 11px; color: rgba(221,232,223,0.3); letter-spacing: 0.04em; }
+.d5 .hero-right { padding-top: 24px; }
+.d5 .vw {
+  background: rgba(18,28,20,0.6);
+  border: 1px solid rgba(221,232,223,0.07);
+}
+.d5 .vw-title { color: rgba(221,232,223,0.25); }
+.d5 .vw-badge { background: rgba(221,232,223,0.04); color: rgba(221,232,223,0.4); border: 1px solid rgba(221,232,223,0.07); }
+.d5 .vw-step { background: rgba(221,232,223,0.03); border: 1px solid rgba(221,232,223,0.06); }
+.d5 .vw-step-label { color: #dde8df; }
+.d5 .vw-step-icon { background: rgba(0,230,118,0.1); color: var(--green-dark); }
+.d5 .vw-step-tag { background: rgba(0,230,118,0.08); color: rgba(0,230,118,0.8); }
+.d5 .vw-stat { background: rgba(221,232,223,0.03); border: 1px solid rgba(221,232,223,0.06); }
+.d5 .vw-stat-num { color: #dde8df; }
+.d5 .vw-stat-label { color: rgba(221,232,223,0.3); }
+
+/* ═══════════════════════════════════════════════
+   DIRECTION 6: EDITORIAL SPLIT
+   Half dark / half light, asymmetric magazine
+   ═══════════════════════════════════════════════ */
+.d6 {
+  min-height: 100vh;
+  padding-top: 52px;
+  position: relative;
+}
+.d6 .site-nav {
+  background: var(--forest-base);
+  border-bottom: 1px solid var(--forest-border);
+  position: relative;
+  z-index: 2;
+}
+.d6 .site-nav .logo { color: #e8f0ea; }
+.d6 .site-nav .logo span { color: var(--green-dark); }
+.d6 .site-nav .nav-links a { color: rgba(232,240,234,0.5); }
+.d6 .lang-btn { border-color: var(--forest-border); color: rgba(232,240,234,0.5); background: transparent; }
+.d6 .hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 116px);
+}
+.d6 .hero-dark {
+  background: var(--forest-base);
+  padding: 64px 48px 64px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.d6 .hero-dark::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse 70% 50% at 60% 40%, rgba(13,138,79,0.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+.d6 .hero-light {
+  background: var(--warm-card);
+  padding: 64px 40px 64px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid var(--warm-border);
+}
+.d6 .eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-dark);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.d6 .eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--green-dark); display: block; }
+.d6 h1 {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  color: #f0f5f1;
+  margin-bottom: 20px;
+  position: relative;
+}
+.d6 h1 em { color: var(--green-dark); font-style: normal; }
+.d6 .subhead {
+  font-size: 16px;
+  color: rgba(232,240,234,0.55);
+  line-height: 1.65;
+  margin-bottom: 36px;
+  position: relative;
+}
+.d6 .cta-group { display: flex; gap: 12px; align-items: center; position: relative; }
+.d6 .vw-container {
+  padding: 24px 0;
+}
+.d6 .vw-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(15,26,16,0.35);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.d6 .vw-label::before { content: ''; width: 24px; height: 2px; background: var(--green-light); display: block; }
+.d6 .vw {
+  background: var(--forest-card);
+  border: 1px solid var(--forest-border);
+  box-shadow: 0 16px 48px rgba(12,20,16,0.14);
+  width: 100%;
+  max-width: 340px;
+}
+.d6 .right-bottom {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--warm-border);
+}
+.d6 .right-bottom p {
+  font-size: 14px;
+  color: rgba(15,26,16,0.5);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.d6 .right-bottom .stat-num {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--amber-light);
+}
+.d6 .right-bottom .stat-lbl {
+  font-size: 12px;
+  color: rgba(15,26,16,0.4);
+}
+.d6 .vw-title { color: rgba(232,240,234,0.35); }
+.d6 .vw-badge { background: var(--forest-raised); color: rgba(232,240,234,0.6); }
+.d6 .vw-step { background: var(--forest-raised); }
+.d6 .vw-step-label { color: #e8f0ea; }
+.d6 .vw-step-icon { background: rgba(0,230,118,0.15); color: var(--green-dark); }
+.d6 .vw-step-tag { background: rgba(0,230,118,0.1); color: var(--green-dark); }
+.d6 .vw-stat { background: rgba(255,179,64,0.08); border: 1px solid rgba(255,179,64,0.15); }
+.d6 .vw-stat-num { color: var(--amber-dark); }
+.d6 .vw-stat-label { color: rgba(232,240,234,0.4); }
+</style>
+</head>
+<body>
+
+<!-- ── SHOWCASE NAVIGATION ── -->
+<nav class="showcase-nav">
+  <a href="#d1">D1 · Dark Forest</a>
+  <a href="#d2">D2 · Proof Light</a>
+  <a href="#d3">D3 · Bento Hero</a>
+  <a href="#d4">D4 · Gradient Drama</a>
+  <a href="#d5">D5 · Monolith</a>
+  <a href="#d6">D6 · Editorial Split</a>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════════
+     DIRECTION 1: DARK FOREST
+     ══════════════════════════════════════════════════ -->
+<section id="d1" class="d1">
+  <div class="dir-label">D1 · Dark Forest</div>
+
+  <nav class="site-nav">
+    <div class="logo">Genu<span>im</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Use cases</a></li>
+      <li><a href="#">How it works</a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="lang-btn">UK</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-left">
+      <div class="eyebrow">Довіра через прозорість</div>
+      <h1>Make each product <em>instantly checkable.</em></h1>
+      <p class="subhead">genu.im turns product codes into trusted digital touchpoints — proof your buyers can see, not promises they have to believe.</p>
+      <p class="proof-line">Others promise. We prove.</p>
+      <div class="cta-group">
+        <a href="#" class="btn btn-primary-green">See proof →</a>
+        <a href="#" class="btn btn-ghost-dark">Talk to us</a>
+      </div>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="num">25M+</div>
+          <div class="lbl">marked units · Ukraine</div>
+        </div>
+        <div class="stat-item">
+          <div class="num">eАкциз</div>
+          <div class="lbl">ready · 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vw">
+      <div class="vw-header">
+        <span class="vw-title">Verification flow</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="rgba(232,240,234,0.2)" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#00e676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="vw-badges">
+        <span class="vw-badge">SERIALIZED</span>
+        <span class="vw-badge">UNIT LEVEL</span>
+      </div>
+      <div class="vw-step">
+        <div class="vw-step-icon">📦</div>
+        <div>
+          <div class="vw-step-label">Record</div>
+          <div class="vw-step-desc">Code linked to unit-level data</div>
+        </div>
+      </div>
+      <div class="vw-step">
+        <div class="vw-step-icon">📱</div>
+        <div>
+          <div class="vw-step-label">Scan</div>
+          <div class="vw-step-desc">Any phone. Result in seconds.</div>
+        </div>
+        <span class="vw-step-tag">NO APP</span>
+      </div>
+      <div class="vw-step">
+        <div class="vw-step-icon">✓</div>
+        <div>
+          <div class="vw-step-label">Proof</div>
+          <div class="vw-step-desc">Clear result from a real record.</div>
+        </div>
+        <span class="vw-step-tag">3 SEC</span>
+      </div>
+      <div class="vw-stat">
+        <div>
+          <div class="vw-stat-num">25M+</div>
+          <div class="vw-stat-label">marked units</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     DIRECTION 2: PROOF LIGHT
+     ══════════════════════════════════════════════════ -->
+<section id="d2" class="d2">
+  <div class="dir-label" style="color:rgba(15,26,16,0.3); background:rgba(15,26,16,0.06);">D2 · Proof Light</div>
+
+  <nav class="site-nav">
+    <div class="logo">Genu<span>im</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Use cases</a></li>
+      <li><a href="#">How it works</a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="lang-btn">UK</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-left">
+      <div class="eyebrow">TRUST THROUGH TRANSPARENCY</div>
+      <h1>Make each product <em>instantly checkable.</em></h1>
+      <p class="subhead">genu.im turns product codes into trusted digital touchpoints. Proof your partners can verify, not promises they must accept.</p>
+      <div class="proof-line">Others promise. We prove.</div>
+      <div class="cta-group">
+        <a href="#" class="btn btn-primary-green">See proof →</a>
+        <a href="#" class="btn btn-ghost-light">Talk to us</a>
+      </div>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="num">25M+</div>
+          <div class="lbl">marked units · NDA case</div>
+        </div>
+        <div class="stat-item">
+          <div class="num">eАкциз</div>
+          <div class="lbl">ready 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vw">
+      <div class="vw-header">
+        <span class="vw-title">Verification flow</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="rgba(232,240,234,0.25)" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#00e676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="vw-badges">
+        <span class="vw-badge">SERIALIZED</span>
+        <span class="vw-badge">UNIT LEVEL</span>
+      </div>
+      <div class="vw-step">
+        <div class="vw-step-icon">📦</div>
+        <div>
+          <div class="vw-step-label">Record</div>
+          <div class="vw-step-desc">Code linked to unit-level data</div>
+        </div>
+      </div>
+      <div class="vw-step">
+        <div class="vw-step-icon">📱</div>
+        <div>
+          <div class="vw-step-label">Scan</div>
+          <div class="vw-step-desc">Any phone. Result in seconds.</div>
+        </div>
+        <span class="vw-step-tag">NO APP</span>
+      </div>
+      <div class="vw-step">
+        <div class="vw-step-icon">✓</div>
+        <div>
+          <div class="vw-step-label">Proof</div>
+          <div class="vw-step-desc">Clear result from a real record.</div>
+        </div>
+        <span class="vw-step-tag">3 SEC</span>
+      </div>
+      <div class="vw-stat">
+        <div>
+          <div class="vw-stat-num">25M+</div>
+          <div class="vw-stat-label">marked units</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     DIRECTION 3: BENTO HERO
+     ══════════════════════════════════════════════════ -->
+<section id="d3" class="d3">
+  <div class="dir-label" style="color:rgba(15,26,16,0.3); background:rgba(15,26,16,0.06);">D3 · Bento Hero</div>
+
+  <nav class="site-nav">
+    <div class="logo">Genu<span>im</span></div>
+    <ul class="nav-links">
+      <li><a href="#" style="color:rgba(15,26,16,0.5);">Use cases</a></li>
+      <li><a href="#" style="color:rgba(15,26,16,0.5);">How it works</a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="lang-btn">UK</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="bento">
+      <!-- Big headline cell (dark) -->
+      <div class="b-headline">
+        <h1>Make each product <em>instantly checkable.</em></h1>
+        <p>genu.im turns product codes into trusted digital touchpoints — proof that travels with every unit.</p>
+      </div>
+
+      <!-- CTA cell (light) -->
+      <div class="b-cta">
+        <div>
+          <div class="lbl">Start here</div>
+          <div class="quote">"Others promise.<br>We prove."</div>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="#" class="btn btn-primary-green" style="font-size:13px; padding:10px 18px;">See proof →</a>
+          <a href="#" class="btn btn-ghost-light" style="font-size:13px; padding:10px 18px;">Talk to us</a>
+        </div>
+      </div>
+
+      <!-- Verification UI cell (right, spans 2 rows) -->
+      <div class="b-proof">
+        <div class="vw" style="width:100%; background:transparent; border:none; padding:0;">
+          <div class="vw-header">
+            <span class="vw-title">Verification flow</span>
+          </div>
+          <div class="vw-badges">
+            <span class="vw-badge">SERIALIZED</span>
+            <span class="vw-badge">UNIT LEVEL</span>
+          </div>
+          <div class="vw-step">
+            <div class="vw-step-icon">📦</div>
+            <div>
+              <div class="vw-step-label">Record</div>
+              <div class="vw-step-desc">Code linked to unit-level data</div>
+            </div>
+          </div>
+          <div class="vw-step">
+            <div class="vw-step-icon">📱</div>
+            <div>
+              <div class="vw-step-label">Scan</div>
+              <div class="vw-step-desc">Any phone.</div>
+            </div>
+            <span class="vw-step-tag">NO APP</span>
+          </div>
+          <div class="vw-step">
+            <div class="vw-step-icon">✓</div>
+            <div>
+              <div class="vw-step-label">Proof</div>
+              <div class="vw-step-desc">Clear result.</div>
+            </div>
+            <span class="vw-step-tag">3 SEC</span>
+          </div>
+          <div class="vw-stat">
+            <div>
+              <div class="vw-stat-num">25M+</div>
+              <div class="vw-stat-label">marked units</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat cell (amber) -->
+      <div class="b-stat">
+        <div class="big-num">25M+</div>
+        <div class="sub">industrial units marked · Ukraine · NDA case</div>
+      </div>
+
+      <!-- Features strip -->
+      <div class="b-features">
+        <div class="feat-chip"><span class="dot"></span> eАкциз ready 2026</div>
+        <div class="feat-chip"><span class="dot"></span> No app required</div>
+        <div class="feat-chip"><span class="dot"></span> Unit-level proof</div>
+        <div class="feat-chip"><span class="dot"></span> Brand layer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     DIRECTION 4: GRADIENT DRAMA
+     ══════════════════════════════════════════════════ -->
+<section id="d4" class="d4">
+  <div class="d4-bg"></div>
+  <div class="dir-label">D4 · Gradient Drama</div>
+
+  <nav class="site-nav">
+    <div class="logo">Genu<span class="im" style="color:var(--amber-dark)">im</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Use cases</a></li>
+      <li><a href="#">How it works</a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="lang-btn">UK</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-left">
+      <div class="eyebrow">✦ Довіра через прозорість</div>
+      <h1>Make each product <em>instantly checkable.</em></h1>
+      <p class="subhead">genu.im turns product codes into trusted digital touchpoints. Proof your buyers can verify in seconds — without apps, without friction.</p>
+      <div class="proof-line">Others promise. We prove.</div>
+      <div class="cta-group">
+        <a href="#" class="btn-primary-amber">See proof →</a>
+        <a href="#" class="btn btn-ghost-dark">Talk to us</a>
+      </div>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="num">25M+</div>
+          <div class="lbl">marked units · Ukraine</div>
+        </div>
+        <div class="stat-item">
+          <div class="num">eАкциз</div>
+          <div class="lbl">ready · 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vw">
+      <div class="vw-header">
+        <span class="vw-title">Verification flow</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="rgba(255,179,64,0.3)" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#ffb340" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="vw-badges">
+        <span class="vw-badge">SERIALIZED</span>
+        <span class="vw-badge">UNIT LEVEL</span>
+      </div>
+      <div class="vw-step">
+        <div class="vw-step-icon">📦</div>
+        <div>
+          <div class="vw-step-label">Record</div>
+          <div class="vw-step-desc">Code linked to unit-level data</div>
+        </div>
+      </div>
+      <div class="vw-step">
+        <div class="vw-step-icon">📱</div>
+        <div>
+          <div class="vw-step-label">Scan</div>
+          <div class="vw-step-desc">Any phone. Result in seconds.</div>
+        </div>
+        <span class="vw-step-tag">NO APP</span>
+      </div>
+      <div class="vw-step">
+        <div class="vw-step-icon">✓</div>
+        <div>
+          <div class="vw-step-label">Proof</div>
+          <div class="vw-step-desc">Clear result from a real record.</div>
+        </div>
+        <span class="vw-step-tag">3 SEC</span>
+      </div>
+      <div class="vw-stat">
+        <div>
+          <div class="vw-stat-num">25M+</div>
+          <div class="vw-stat-label">marked units</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     DIRECTION 5: MONOLITH
+     ══════════════════════════════════════════════════ -->
+<section id="d5" class="d5">
+  <div class="dir-label">D5 · Monolith</div>
+
+  <nav class="site-nav">
+    <div class="logo">Genu<span>im</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Use cases</a></li>
+      <li><a href="#">How it works</a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="lang-btn">UK</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-left">
+      <span class="eyebrow">Trust through transparency</span>
+      <h1>Make each<br>product<br><strong>instantly<br>checkable.</strong></h1>
+      <div class="divider"></div>
+      <p class="subhead">genu.im turns product codes into trusted digital touchpoints. Proof that travels with the product — not promises that stay in the pitch.</p>
+      <div class="cta-group">
+        <a href="#" class="btn-outline-green">See proof →</a>
+        <a href="#" class="btn-text">Talk to us ↗</a>
+      </div>
+      <div class="stat-block">
+        <div class="stat-item">
+          <div class="num">25M+</div>
+          <div class="lbl">MARKED UNITS</div>
+        </div>
+        <div class="stat-item">
+          <div class="num">UA</div>
+          <div class="lbl">PRODUCTION LIVE</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="vw">
+        <div class="vw-header">
+          <span class="vw-title">Verification flow</span>
+        </div>
+        <div class="vw-badges">
+          <span class="vw-badge">SERIALIZED</span>
+          <span class="vw-badge">UNIT LEVEL</span>
+        </div>
+        <div class="vw-step">
+          <div class="vw-step-icon">📦</div>
+          <div>
+            <div class="vw-step-label">Record</div>
+            <div class="vw-step-desc">Code linked to unit-level data</div>
+          </div>
+        </div>
+        <div class="vw-step">
+          <div class="vw-step-icon">📱</div>
+          <div>
+            <div class="vw-step-label">Scan</div>
+            <div class="vw-step-desc">Any phone. Result in seconds.</div>
+          </div>
+          <span class="vw-step-tag">NO APP</span>
+        </div>
+        <div class="vw-step">
+          <div class="vw-step-icon">✓</div>
+          <div>
+            <div class="vw-step-label">Proof</div>
+            <div class="vw-step-desc">Clear result from a real record.</div>
+          </div>
+          <span class="vw-step-tag">3 SEC</span>
+        </div>
+        <div class="vw-stat">
+          <div>
+            <div class="vw-stat-num">25M+</div>
+            <div class="vw-stat-label">marked units</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════
+     DIRECTION 6: EDITORIAL SPLIT
+     ══════════════════════════════════════════════════ -->
+<section id="d6" class="d6">
+  <div class="dir-label">D6 · Editorial Split</div>
+
+  <nav class="site-nav">
+    <div class="logo">Genu<span>im</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Use cases</a></li>
+      <li><a href="#">How it works</a></li>
+    </ul>
+    <div class="nav-controls">
+      <button class="lang-btn">UK</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-dark">
+      <div class="eyebrow">Довіра через прозорість</div>
+      <h1>Make each product <em>instantly checkable.</em></h1>
+      <p class="subhead">genu.im turns product codes into trusted digital touchpoints — proof that travels with the product, not promises that stay in the deck.</p>
+      <p class="subhead" style="color:rgba(232,240,234,0.9); font-weight:600; font-size:15px; margin-bottom:32px;">Others promise. We prove.</p>
+      <div class="cta-group">
+        <a href="#" class="btn btn-primary-green">See proof →</a>
+        <a href="#" class="btn btn-ghost-dark">Talk to us</a>
+      </div>
+    </div>
+
+    <div class="hero-light">
+      <div class="vw-label">Live verification preview</div>
+      <div class="vw">
+        <div class="vw-header">
+          <span class="vw-title">Verification flow</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="rgba(232,240,234,0.2)" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#00e676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="vw-badges">
+          <span class="vw-badge">SERIALIZED</span>
+          <span class="vw-badge">UNIT LEVEL</span>
+        </div>
+        <div class="vw-step">
+          <div class="vw-step-icon">📦</div>
+          <div>
+            <div class="vw-step-label">Record</div>
+            <div class="vw-step-desc">Code linked to unit-level data</div>
+          </div>
+        </div>
+        <div class="vw-step">
+          <div class="vw-step-icon">📱</div>
+          <div>
+            <div class="vw-step-label">Scan</div>
+            <div class="vw-step-desc">Any phone. Result in seconds.</div>
+          </div>
+          <span class="vw-step-tag">NO APP</span>
+        </div>
+        <div class="vw-step">
+          <div class="vw-step-icon">✓</div>
+          <div>
+            <div class="vw-step-label">Proof</div>
+            <div class="vw-step-desc">Clear result from a real record.</div>
+          </div>
+          <span class="vw-step-tag">3 SEC</span>
+        </div>
+        <div class="vw-stat">
+          <div>
+            <div class="vw-stat-num">25M+</div>
+            <div class="vw-stat-label">marked units</div>
+          </div>
+        </div>
+      </div>
+      <div class="right-bottom">
+        <p>This is what your buyer sees when they scan a product marked with genu.mark. Real data. Real proof. No app required.</p>
+        <div class="stat-num">25M+</div>
+        <div class="stat-lbl">Units already running on this infrastructure · Ukraine</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

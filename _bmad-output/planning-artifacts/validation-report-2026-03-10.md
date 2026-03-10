@@ -11,8 +11,22 @@ inputDocuments:
   - docs/genu-im-homepage-master-plan.md
   - AGENTS.md
   - CLAUDE.md
-validationStepsCompleted: []
-validationStatus: IN_PROGRESS
+validationStepsCompleted:
+  - step-v-01-discovery
+  - step-v-02-format-detection
+  - step-v-03-density-validation
+  - step-v-04-brief-coverage-validation
+  - step-v-05-measurability-validation
+  - step-v-06-traceability-validation
+  - step-v-07-implementation-leakage-validation
+  - step-v-08-domain-compliance-validation
+  - step-v-09-project-type-validation
+  - step-v-10-smart-validation
+  - step-v-11-holistic-quality-validation
+  - step-v-12-completeness-validation
+validationStatus: COMPLETE
+holisticQualityRating: '4/5 - Good'
+overallStatus: 'Warning'
 ---
 
 # PRD Validation Report
@@ -356,3 +370,310 @@ Implementation leakage has dropped sharply and is now concentrated in a small nu
 
 **Recommendation:**
 All required `web_app` sections are now present, and the previous missing-section failure is resolved.
+
+## SMART Requirements Validation
+
+**Total Functional Requirements:** 32
+
+### Scoring Summary
+
+**All scores >= 3:** 90.6% (29/32)
+**All scores >= 4:** 62.5% (20/32)
+**Overall Average Score:** 4.2/5.0
+
+### Scoring Table
+
+| FR # | Specific | Measurable | Attainable | Relevant | Traceable | Average | Flag |
+|------|----------|------------|------------|----------|-----------|--------|------|
+| FR1 | 4 | 4 | 5 | 4 | 4 | 4.2 | |
+| FR2 | 4 | 4 | 5 | 4 | 4 | 4.2 | |
+| FR3 | 4 | 4 | 5 | 4 | 4 | 4.2 | |
+| FR4 | 4 | 4 | 5 | 4 | 4 | 4.2 | |
+| FR5 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR6 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR7 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR8 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR9 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR10 | 4 | 3 | 5 | 5 | 4 | 4.2 | |
+| FR11 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR12 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR13 | 4 | 4 | 5 | 5 | 4 | 4.4 | |
+| FR14 | 4 | 3 | 5 | 5 | 5 | 4.4 | |
+| FR15 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR16 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
+| FR17 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
+| FR18 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
+| FR19 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
+| FR20 | 3 | 2 | 4 | 4 | 2 | 3.0 | X |
+| FR21 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
+| FR22 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
+| FR23 | 4 | 3 | 5 | 5 | 5 | 4.4 | |
+| FR24 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR25 | 4 | 2 | 5 | 5 | 4 | 4.0 | X |
+| FR26 | 5 | 5 | 5 | 5 | 5 | 5.0 | |
+| FR27 | 4 | 4 | 5 | 5 | 4 | 4.4 | |
+| FR28 | 4 | 4 | 4 | 4 | 2 | 3.6 | X |
+| FR29 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR30 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR31 | 4 | 4 | 5 | 5 | 5 | 4.6 | |
+| FR32 | 3 | 2 | 4 | 4 | 2 | 3.0 | X |
+
+**Legend:** 1=Poor, 3=Acceptable, 5=Excellent  
+**Flag:** X = Score < 3 in one or more categories
+
+### Improvement Suggestions
+
+**FR20:** Define the approved extension contract more tightly or move the requirement fully into a future appendix/phase note.
+
+**FR25:** Replace `stable` with a bounded expectation such as approved shareable states, expected persistence period, and preserved CTA behavior.
+
+**FR28:** Either add a Phase 2 knowledge-consumption journey or restate this as a roadmap note rather than a current FR.
+
+**FR32:** Keep it future-scoped, but add the minimum required abuse-control acceptance gate or move it fully out of the Phase 1 FR list.
+
+### Overall Assessment
+
+**Severity:** Warning
+
+**Recommendation:**
+Functional Requirements are now mostly strong and decomposition-ready. Remaining SMART weaknesses are concentrated in future-facing extensibility and later-phase requirements rather than the core Phase 1 delivery slice.
+
+## Post-Edit Consolidation
+
+After the focused edit pass requested during this validation run, the PRD was updated to tighten the remaining high-impact execution ambiguities.
+
+**Targeted Updates Applied:**
+- `SC3` and `SC4` now include explicit moderated-review context and an `80%` pass threshold.
+- `FR20`, `FR25`, and `FR32` were rewritten to clarify future-phase scope, share-state expectations, and bounded abuse-control intent.
+- Route-specific FR acceptance wording was reduced in `FR7`, `FR10`, `FR11`, and `FR12`.
+- Tool/vendor-specific wording was reduced in `NFR1`, `NFR2`, `NFR6`, and `NFR9`.
+- `NFR3`, `NFR7`, `NFR8`, `NFR11`, `NFR12`, and `NFR14` were tightened with explicit thresholds or required review conditions.
+- `Appendix C` was corrected for `FR13`, `FR14`, `FR15`, `FR25`, and `FR32` to better reflect actual support.
+
+**Updated Special-Focus Verdicts:**
+- **SC3:** Resolved for Phase 1 execution use.
+  - The criterion now defines review method, threshold, and the three required comprehension checks.
+- **SC4:** Resolved for Phase 1 execution use.
+  - The criterion now defines review method, threshold, and wrong-branch failure logic.
+- **FR20:** Warning, but acceptable as a future-ready guardrail.
+  - It is now clearly bounded to Phase 2+ extensibility rather than acting like a hidden Phase 1 platform requirement.
+- **FR25:** Resolved for Phase 1 execution use.
+  - Shareability now has a concrete invariant: same intended public state and same CTA destination in a new browser session.
+- **FR32:** Acceptable as a future placeholder, not a Phase 1 blocker.
+  - It now reads as a bounded Phase 3 concern rather than an implicit current-scope control requirement.
+- **Open Decisions:** Non-blocking for Phase 1.
+  - Defaults remain explicit and no critical Phase 1 flow depends on unresolved choice.
+
+**Post-Edit Position:**
+The remaining concerns are now concentrated in minor messaging/coverage nuances and later editorial compression, not in core Phase 1 execution ambiguity.
+
+## Holistic Quality Assessment
+
+### Document Flow & Coherence
+
+**Assessment:** Good
+
+**Strengths:**
+- The PRD now tells a coherent proof-first story from executive summary through journeys, FRs, and appendices.
+- Phase 1, Phase 2, and Phase 3 boundaries are visibly separated and easier for downstream teams to respect.
+- Appendix-based implementation notes preserve technical guidance without dominating the core PRD.
+
+**Areas for Improvement:**
+- Some Phase 1 concepts still repeat across scope, FRs, and appendices.
+- A few future-facing requirements still need careful downstream interpretation.
+- Some Product Brief messaging nuance remains intentionally narrowed for execution focus.
+
+### Dual Audience Effectiveness
+
+**For Humans:**
+- Executive-friendly: Strong - vision, scope, and trust model are understandable quickly.
+- Developer clarity: Strong - the Phase 1 surface area and primary acceptance contours are mostly clear.
+- Designer clarity: Strong - journeys, narrative order, and branch logic are explicit enough to guide UX work.
+- Stakeholder decision-making: Strong - scope boundaries, open decisions, and release logic are easy to review.
+
+**For LLMs:**
+- Machine-readable structure: Strong - sectioning and requirement patterns are consistent.
+- UX readiness: Strong - journeys and proof-path sequencing are detailed enough for UX generation.
+- Architecture readiness: Strong - NFRs and appendices provide enough constraint framing without overcommitting implementation.
+- Epic/Story readiness: Good - most FRs are decomposition-ready, though a few future-facing requirements still need restraint in downstream breakdown.
+
+**Dual Audience Score:** 4/5
+
+### BMAD PRD Principles Compliance
+
+| Principle | Status | Notes |
+|-----------|--------|-------|
+| Information Density | Met | Minor repetition remains, but the document is materially denser and clearer than the prior version. |
+| Measurability | Met | Core Phase 1 success criteria and the previously soft NFRs now use explicit thresholds or bounded review conditions. |
+| Traceability | Partial | Appendix C is improved and more honest, but future-phase items still need careful downstream handling. |
+| Domain Awareness | Met | Trust boundaries, `Дія` separation, no-data honesty, and public-proof limits are well captured. |
+| Zero Anti-Patterns | Partial | Core anti-patterns were reduced substantially, though a few future-facing labels remain intentionally broad. |
+| Dual Audience | Met | The PRD serves stakeholders and downstream AI consumers well. |
+| Markdown Format | Met | Structure is clean, extractable, and BMAD-compatible. |
+
+**Principles Met:** 5/7
+
+### Overall Quality Rating
+
+**Rating:** 4/5 - Good
+
+**Scale:**
+- 5/5 - Excellent: Exemplary, ready for production use
+- 4/5 - Good: Strong with minor improvements needed
+- 3/5 - Adequate: Acceptable but needs refinement
+- 2/5 - Needs Work: Significant gaps or issues
+- 1/5 - Problematic: Major flaws, needs substantial revision
+
+### Top 3 Improvements
+
+1. **Compress repeated Phase 1 wording**
+   A later editorial pass can shorten repeated proof-path, trust-floor, and future-ready language without changing meaning.
+
+2. **Restore any intentionally deferred messaging nuance that matters to MVP**
+   If About-as-self-verification, procurement FAQ specificity, or industrial-experience framing are still expected in Phase 1, they should be restored explicitly rather than assumed indirectly.
+
+3. **Keep future-phase requirements disciplined during downstream breakdown**
+   `FR20`, `FR28`, and `FR32` are now safer, but they should still be treated as phase-bounded items rather than pulled into Phase 1 implementation by accident.
+
+### Summary
+
+**This PRD is:** a strong Phase 1 execution PRD with limited non-blocking refinement needs.
+
+**To make it great:** Focus on the top 3 improvements above.
+
+## Completeness Validation
+
+### Template Completeness
+
+**Template Variables Found:** 0
+No template variables remaining ✓
+
+### Content Completeness by Section
+
+**Executive Summary:** Complete
+
+**Success Criteria:** Complete
+
+**Product Scope:** Complete
+
+**User Journeys:** Complete
+
+**Functional Requirements:** Complete
+
+**Non-Functional Requirements:** Complete
+
+**Other Sections:** Complete
+- Domain-Specific Requirements
+- Innovation & Novel Patterns
+- `web_app` Specific Requirements
+- Appendix A - Implementation Notes
+- Appendix B - Open Decisions
+- Appendix C - Traceability Mapping
+- Appendix D - Assumptions Used in This Edit Pass
+
+### Section-Specific Completeness
+
+**Success Criteria Measurability:** All measurable
+
+**User Journeys Coverage:** Yes - covers all primary user types in the current scope
+
+**FRs Cover MVP Scope:** Yes
+
+**NFRs Have Specific Criteria:** All
+
+### Frontmatter Completeness
+
+**stepsCompleted:** Present
+**classification:** Present
+**inputDocuments:** Present
+**date:** Present
+
+**Frontmatter Completeness:** 4/4
+
+### Completeness Summary
+
+**Overall Completeness:** 100% (13/13)
+
+**Critical Gaps:** 0
+**Minor Gaps:** 1 - some Product Brief messaging nuance remains intentionally narrowed for execution focus
+
+**Severity:** Warning
+
+**Recommendation:**
+PRD is complete and structurally ready for use. Remaining follow-up is optional refinement, not a validation blocker.
+
+## Consolidated Readiness Verdict
+
+### Delta vs 2026-03-09
+
+The revised PRD is materially stronger than the `2026-03-09` version. The previous critical issues around missing `web_app` structure, unresolved placeholders, broad implementation leakage, and broken traceability have been reduced substantially. The remaining issues are now concentrated in a small number of NFR-specific precision gaps and moderate messaging-coverage decisions rather than document-wide structural failure.
+
+### Final Risk Position
+
+The PRD is now close enough to Phase 1 execution-source readiness to serve as the working source of truth.
+
+**Resolved or reduced since the prior report:**
+- `SC3` and `SC4` are now strict enough for downstream execution.
+- `FR25` now has a concrete share-state invariant.
+- `FR20` is now bounded as future-ready extensibility instead of an implicit current-scope platform feature.
+- `FR32` is isolated as a Phase 3 placeholder and no longer muddies Phase 1 delivery.
+- Appendix C is more trustworthy after targeted correction.
+- Core implementation leakage is materially reduced.
+
+**Remaining warnings:**
+- Product Brief nuances such as About-as-self-verification and procurement-specific FAQ content remain moderate coverage gaps rather than release blockers.
+- A later editorial compression pass would improve density further.
+- `FR20`, `FR28`, and `FR32` still require disciplined phase handling during downstream decomposition.
+
+### Recommendation
+
+This PRD is ready to serve as the execution source of truth for Phase 1, with warnings rather than blockers. Use it for downstream UX, architecture, and epic/story work, and schedule a light follow-up pass to tighten the remaining NFR verification criteria.
+
+## Validation Summary
+
+**Overall Status:** Warning
+
+**Quick Results:**
+- Format: BMAD Standard
+- Information Density: Warning
+- Product Brief Coverage: Warning
+- Measurability: Warning after targeted fixes; remaining softness is concentrated in NFRs
+- Traceability: Warning
+- Implementation Leakage: Pass after targeted cleanup in the PRD core
+- Domain Compliance: Pass
+- Project-Type Compliance: 100%
+- SMART Quality: Strong overall; remaining concern is future-phase traceability around `FR28`
+- Holistic Quality: 4/5 - Good
+- Completeness: 100% (Warning due to soft NFR criteria)
+
+**Critical Issues:** None remaining for Phase 1 source-of-truth use.
+
+**Warnings:**
+- Product Brief nuance around About-as-self-verification, procurement FAQ specificity, and industrial-experience emphasis remains only partially preserved.
+- `FR28` and `FR32` should still be handled carefully as future-phase items during downstream decomposition.
+
+**Strengths:**
+- Clear Phase 1/2/3 boundary setting.
+- Strong proof-first narrative and trust model.
+- Better use of appendices to isolate implementation detail.
+- Good downstream readability for UX, architecture, and story generation.
+
+**Top 3 Improvements:**
+1. Tighten the remaining soft NFRs.
+2. Compress repeated Phase 1 wording.
+3. Restore any deferred MVP messaging nuance that still matters.
+
+## Narrow Cleanup Addendum
+
+After the final narrow cleanup pass, the PRD was adjusted without changing Phase 1 scope:
+
+- Product Brief nuance was restored narrowly by making About explicitly serve a compact self-verification role, adding starter procurement/audit FAQ coverage, and restoring industrial-experience emphasis through operational-confidence language.
+- `FR20`, `FR28`, and `FR32` now state explicitly that they are future-phase only and not part of Phase 1 decomposition.
+- Remaining dense wording was compressed in Phase 1 scope and related appendix language.
+- Appendix C no longer overstates current-phase traceability for `FR20` or `FR28`, and `FR9` now maps honestly to trust-floor success rather than proof-example comprehension.
+
+**Final Working Position:**
+Treat the PRD as ready for Phase 1 decomposition and readiness checking. Remaining improvements are optional editorial refinements, not validation blockers.
+
+**Master Plan Note:**
+All remarks from `docs/genu-im-homepage-master-plan.md` are now either reflected directly in PRD scope/requirements or explicitly accounted for in `Appendix E - Homepage Master Plan Alignment` so they do not remain implicit.
