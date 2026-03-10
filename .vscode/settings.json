@@ -16,5 +16,7 @@
 	},
 	"[typescript]": {
 		"editor.defaultFormatter": "biomejs.biome"
-	}
+	},
+	"git.rebaseWhenSync": true,
+	"git.autofetch": true
 }
