@@ -1,6 +1,5 @@
-Directory Index: _bmad-output
+Directory Index: repo-root
 
-BMAD artifacts (deduplicated) for genu.im.
 ---
 ## Files
 ### _bmad-output/
