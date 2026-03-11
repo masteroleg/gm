@@ -85,7 +85,7 @@ NFR16: Phase 1 public flows shall remain usable at 360px, 768px, and 1280px widt
 - Responsive quality is first-class: key flows must work cleanly on mobile, tablet, and desktop, with branch cards, proof pages, and request flows usable from 360px upward.
 - Accessibility requirements from UX and architecture must be built into the story set: keyboard access, visible focus, screen-reader labels, `aria-*` sync, reduced-motion fallback, and semantic page structure.
 - SEO implementation requires full per-page metadata, canonical/hreflang handling, JSON-LD in `<head>`, static `sitemap.xml`, `robots.txt`, and an OG image baseline.
-- Phase 1 request capture is expected to use a lightweight `mailto:` fallback with scenario and source-path metadata capture, while keeping within the PRD privacy limits.
+- Phase 1 request capture is expected to use a lightweight `mailto:` fallback with scenario, source-path, and optional proof-path metadata capture, while keeping within the PRD privacy limits.
 - Architecture expects self-hosted Manrope Variable with preload and `font-display: swap` to protect performance and CLS.
 - New controllers and flows must be decomposed so they can be covered with Jest unit tests plus Playwright smoke/E2E coverage for persisted or browser-visible behavior.
 - Homepage decomposition must preserve the narrative order from the master plan: category framing -> bridge "not just a QR" -> mandatory verification preview -> branch split -> conversion -> trust floor.
@@ -113,7 +113,7 @@ FR16: Epic 2 - hidden empty proof sections
 FR17: Epic 2 - source-labeled public proof facts
 FR18: Epic 2 - supporting evidence links/documents
 FR19: Epic 2 - suppression of unsupported sustainability content
-FR20: Epic 2 - future-ready proof model extension seam
+FR20: Deferred future-phase reference - proof model extension seam
 FR21: Epic 3 - consumer-intent intercept to `Дія`
 FR22: Epic 3 - separate B2B CTA on consumer/B2B routing paths
 FR23: Epic 3 - qualified request submission flow
@@ -121,11 +121,11 @@ FR24: Epic 3 - scenario and source-path metadata capture
 FR25: Epic 2 - shareable public proof/demo states without login
 FR26: Epic 1 - trust-floor destination access from the public site
 FR27: Epic 1 - reserved knowledge navigation and IA
-FR28: Epic 4 - future knowledge entry to CTA flow
+FR28: Deferred future-phase reference - knowledge entry to CTA flow
 FR29: Epic 4 - visibility into homepage-to-proof movement
 FR30: Epic 4 - reporting by scenario and entry source
 FR31: Epic 4 - reviewable proof-first funnel
-FR32: Epic 4 - future abuse controls for live lookup
+FR32: Deferred future-phase reference - live lookup abuse controls
 
 ## Epic List
 
@@ -145,18 +145,17 @@ Priority order:
 
 ### Epic 2: Public Proof Experience
 Users can open the main verification example, see a clear result, use the demo input, encounter an honest no-data state, and view only proof content that is actually supported.
-**FRs covered:** FR10, FR11, FR12, FR13, FR14, FR15, FR16, FR17, FR18, FR19, FR20, FR25
+**FRs covered:** FR10, FR11, FR12, FR13, FR14, FR15, FR16, FR17, FR18, FR19, FR25
 
 Recommended stories:
 - `2.1` Show the Main Verification Example
 - `2.2` Show a Clear No-Data Result
-- `2.3` Use the Demo Input and Sample Links
+- `2.3` Use the Demo Input and Example-Code Action
 - `2.4` Show Only Supported Proof Content
-- `2.5` Keep the Proof Page Ready for Future Fields
 
 Priority order:
 - `/v/genuim` as primary proof artifact precedes `/v/` as discovery/input surface
-- `2.1 -> 2.2 -> 2.3 -> 2.4 -> 2.5`
+- `2.1 -> 2.2 -> 2.3 -> 2.4`
 
 ### Epic 3: Audience Routing and Qualified Conversion
 Users get the correct route by intent, then a relevant B2B CTA, then a qualified request flow, while scenario and source metadata are captured without extra user burden.
@@ -172,23 +171,22 @@ Priority order:
 - routing precedes form-building
 - `3.1 -> 3.2 -> 3.3 -> 3.4`
 
-### Epic 4: Funnel Visibility and Growth-Ready Trust Expansion
-The team gains measurable funnel visibility and review capability while the public surface remains ready for safe trust/knowledge expansion and future live-lookup protections.
-**FRs covered:** FR28, FR29, FR30, FR31, FR32
+### Epic 4: Funnel Visibility and Review
+The team gains measurable funnel visibility and review capability for the Phase 1 proof-first journey.
+**FRs covered:** FR29, FR30, FR31
 
 Recommended stories:
 - `4.1` Track Movement from Homepage to Proof
 - `4.2` Track Requests by Scenario and Source
 - `4.3` Review the Proof-First Funnel
-- `4.4` Connect Future Knowledge Pages to the Next Step
-- `4.5` Protect Future Live Checks from Repeated Abuse
-
-Internal tracks:
-- funnel visibility / reporting
-- growth-ready trust / knowledge expansion
 
 Boundary note:
-- this epic owns review and expansion outcomes, not the initial capture prerequisites embedded in `Epic 2` and `Epic 3`
+- this epic owns active Phase 1 review outcomes, not future knowledge or live-lookup expansion work
+
+Deferred future-phase references:
+- `FR20` / `Story 2.5`
+- `FR28` / `Story 4.4`
+- `FR32` / `Story 4.5`
 
 Global guardrails:
 - primary narrative value precedes trust completion
@@ -199,7 +197,7 @@ Global guardrails:
 - `Does this story strengthen the trust-first journey, or is it merely convenient to implement?`
 
 Handoff note:
-- This epic structure is approved as a trust-first, cross-functional delivery model. It preserves the user journey from clarity to proof to action, keeps implementation slices independently deliverable, embeds quality-critical constraints at story level, and separates early capture prerequisites from later funnel visibility and expansion outcomes.
+- This epic structure is approved as a trust-first, cross-functional delivery model. It preserves the user journey from clarity to proof to action, keeps implementation slices independently deliverable, embeds quality-critical constraints at story level, and keeps deferred future-phase expansion separate from the active Phase 1 backlog.
 
 ## Epic 1: Trust-First Homepage Foundation
 
@@ -233,6 +231,11 @@ So that I can understand the offer without confusion and know where to go next.
 **Then** the core message and main CTA are visible and usable
 **And** the layout works at `360px` width without horizontal scrolling
 
+**Given** decorative or secondary interface elements are unavailable or do not load
+**When** a visitor sees the first screen
+**Then** the core explanation and primary next step remain understandable and usable
+**And** the page does not depend on those enhancements to explain what `genu.im` is
+
 ### Story 1.2: Show the Two Main Visitor Needs
 
 As a homepage visitor,
@@ -260,6 +263,11 @@ So that I can quickly see whether it fits my case.
 **When** the section is displayed
 **Then** both blocks and both CTAs are visible, readable, and usable
 **And** the layout works at `360px` width without hidden or overlapping actions
+
+**Given** decorative visuals or secondary supporting elements are unavailable
+**When** a visitor reads the two need blocks
+**Then** the branch distinction remains understandable from the copy and CTA language alone
+**And** the visitor is not forced to guess which path fits their case
 
 ### Story 1.3: Remember the Chosen Language and Theme
 
@@ -327,6 +335,11 @@ So that I can quickly find the background and policy information I need before m
 **Then** the content and links are readable and usable
 **And** the layout works at `360px` width without broken navigation or hidden links
 
+**Given** one of these destinations has only starter-level Phase 1 content
+**When** a visitor opens that page
+**Then** it still functions as a valid public destination with a clear purpose and usable navigation
+**And** it does not appear broken, empty, or misleadingly complete
+
 ### Story 1.5: Show the Knowledge Section in Site Navigation
 
 As a visitor,
@@ -355,6 +368,11 @@ So that I can see where guides and articles will live as the site grows.
 **Then** the content and links are readable and usable
 **And** the layout works at `360px` width without broken navigation or hidden links
 
+**Given** the full knowledge library is not yet available in Phase 1
+**When** a visitor opens the knowledge section
+**Then** the page still explains the purpose of the section and offers a usable way back into the main site flow
+**And** the visitor does not reach a dead end or a broken placeholder
+
 ## Epic 2: Public Proof Experience
 
 Users can open the main verification example, see a clear result, use the demo input, encounter an honest no-data state, and view only proof content that is actually supported.
@@ -379,13 +397,18 @@ So that I can understand what information this page provides.
 
 **Given** a visitor opens this page in Phase 1
 **When** the page is displayed
-**Then** the required demo or sample label is visible
+**Then** the required demo or sample label is visible from initial render
 **And** the page does not present the result as a live check
 
 **Given** a visitor opens the page on mobile or desktop
 **When** the page is displayed
 **Then** the result content and links are readable and usable
 **And** the layout works at `360px` width without broken structure or hidden core content
+
+**Given** an optional supporting section has no approved content to display
+**When** the main verification example loads
+**Then** the core verified example, source-labeled facts, and next-step CTA still render correctly
+**And** empty or unsupported sections are not shown
 
 ### Story 2.2: Show a Clear No-Data Result
 
@@ -415,17 +438,17 @@ So that I understand the outcome without thinking the page is broken.
 **Then** the message and links are readable and usable
 **And** the layout works at `360px` width without broken structure or hidden content
 
-### Story 2.3: Use the Demo Input and Sample Links
+### Story 2.3: Use the Demo Input and Example-Code Action
 
 As a visitor,
-I want to enter a code or choose a sample link on the demo page,
+I want to enter a code or use an example-code action on the demo page,
 So that I can reach a result page without needing an account.
 
 **Acceptance Criteria:**
 
 **Given** a visitor opens `/v/`
 **When** the page loads
-**Then** it shows a clear code input and sample links
+**Then** it shows a clear code input, an example-code action, and a persistent demo-mode notice from initial render
 **And** the page makes clear what the visitor can do there
 
 **Given** a visitor enters or pastes a code
@@ -433,14 +456,14 @@ So that I can reach a result page without needing an account.
 **Then** the site takes them to the matching result state for that code flow
 **And** the visitor does not need to log in
 
-**Given** a visitor chooses a sample link
-**When** they click it
-**Then** the corresponding sample result opens
-**And** the sample or demo labeling remains visible
+**Given** a visitor uses the example-code action
+**When** they activate it
+**Then** the approved Phase 1 result state opens
+**And** the demo labeling remains visible
 
 **Given** a visitor opens the demo page on mobile or desktop
 **When** the page is displayed
-**Then** the input and sample links are readable and usable
+**Then** the input and example-code action are readable and usable
 **And** the layout works at `360px` width without broken structure or hidden controls
 
 ### Story 2.4: Show Only Supported Proof Content
@@ -472,6 +495,8 @@ So that I can trust what the page displays.
 **And** the layout works at `360px` width without broken structure or hidden content
 
 ### Story 2.5: Keep the Proof Page Ready for Future Fields
+
+Deferred future-phase reference only. Not part of the implementation-ready Phase 1 backlog.
 
 As a visitor,
 I want the proof page format to stay consistent as new approved fields are added later,
@@ -521,6 +546,11 @@ So that I use the correct service for an official result.
 **Then** the message and CTA are readable and usable
 **And** the layout works at `360px` width without hidden or broken controls
 
+**Given** optional measurement or enhancement behavior is unavailable
+**When** a visitor uses the official-check guidance
+**Then** the message and CTA still work as the core path
+**And** the visitor is not blocked or misled about where the official check happens
+
 ### Story 3.2: Show the Right Business Next Step
 
 As a business visitor,
@@ -544,6 +574,11 @@ So that I can continue toward marking, proof, or transparency help instead of th
 **Then** the business copy and CTA are readable and usable
 **And** the layout works at `360px` width without hidden or broken controls
 
+**Given** optional measurement or metadata enhancement is unavailable
+**When** a visitor uses the business CTA path
+**Then** the matching next step still opens normally
+**And** the business route does not fail or degrade into a dead end
+
 ### Story 3.3: Send a Qualified Request
 
 As a business visitor,
@@ -554,12 +589,12 @@ So that I can ask for help without filling a long form.
 
 **Given** a visitor opens the request form
 **When** the form is displayed
-**Then** it asks only for the fields needed for the request
-**And** it stays within the Phase 1 limit of no more than `5` user-entered fields
+**Then** it asks only for these Phase 1 user-entered fields: business contact name, business email or phone, company name, scenario, and short context
+**And** no additional user-entered fields are required
 
 **Given** a visitor fills in the required fields correctly
 **When** they submit the form
-**Then** the request is prepared with their entered business details and scenario
+**Then** the request is prepared with their entered contact details, company name, scenario, and short context
 **And** the configured Phase 1 request handoff works without requiring login
 
 **Given** a visitor misses a required field or enters invalid data
@@ -582,22 +617,22 @@ So that I do not have to repeat that context by hand.
 
 **Given** a visitor reaches the request flow from a specific path or scenario
 **When** the request form loads or prepares the handoff
-**Then** the scenario and source details are attached automatically
+**Then** the scenario and source-path details are attached automatically
 **And** the visitor does not need to type them manually
 
 **Given** a request handoff is created
 **When** the request details are assembled
 **Then** the scenario and source-path details are included with the request
-**And** adding that metadata does not add extra user-entered fields
+**And** `proof_path` is included when the request starts from a proof surface without adding extra user-entered fields
 
 **Given** scenario or source metadata is missing or unavailable
 **When** the visitor submits the request
 **Then** the request still works
 **And** missing metadata does not block submission
 
-## Epic 4: Funnel Visibility and Growth-Ready Trust Expansion
+## Epic 4: Funnel Visibility and Review
 
-The team gains measurable funnel visibility and review capability while the public surface remains ready for safe trust and knowledge expansion and future live-check protections.
+The team gains measurable funnel visibility and review capability for the Phase 1 proof-first journey.
 
 ### Story 4.1: Track Movement from Homepage to Proof
 
@@ -665,6 +700,8 @@ So that I can judge whether the release supports the intended trust-first funnel
 
 ### Story 4.4: Connect Future Knowledge Pages to the Next Step
 
+Deferred future-phase reference only. Not part of the implementation-ready Phase 1 backlog.
+
 As a visitor,
 I want a future knowledge page to lead me to a relevant next step,
 So that guidance content can help me continue through the site.
@@ -682,6 +719,8 @@ So that guidance content can help me continue through the site.
 **And** they do not reach a dead end
 
 ### Story 4.5: Protect Future Live Checks from Repeated Abuse
+
+Deferred future-phase reference only. Not part of the implementation-ready Phase 1 backlog.
 
 As a product team member,
 I want future live public checks to apply simple protections against repeated abusive requests,

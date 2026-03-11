@@ -517,7 +517,7 @@ flowchart TD
 
 ### Концепція "Живі Зразки Довіри" (Live Trust Samples)
 
-Передвизначені sample-коди як маркетинговий та presales-інструмент:
+Передвизначені sample-коди як future-phase маркетинговий та presales-інструмент. Вони не входять до implementation-ready Phase 1 baseline без окремого затвердження.
 
 | URL | Призначення | Використання |
 |-----|------------|-------------|
@@ -525,12 +525,12 @@ flowchart TD
 | `/v/genu.alko` | Зразок для алко-виробника | Email, комерційні пропозиції для алко |
 | `/v/genu.cosm` | Зразок для косметики | Презентації для beauty/pharma |
 
-**Механіка кожної sample-сторінки:**
+**Механіка кожної sample-сторінки (після окремого затвердження):**
 - DataMatrix QR — сканується, веде сюди (доводить що код "живий")
 - Статус `✓ VERIFIED` — amber moment довіри
 - Source disclosure — "Дані: genu.mark контур, Дата: [timestamp]"
 - "Що це?" inline блок — онбординг прямо зі сторінки
-- CTA — "Хочу таке для мого виробництва →" з prefill галузі
+- CTA — "Хочу таке для мого виробництва →" з prefill сценарію
 
 **Використання QR-кодів зразків:**
 - 📊 **Презентації:** QR на слайді → клієнт сканує під час пітчу → бачить живу верифікацію
@@ -689,9 +689,9 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
 
 ---
 
-#### VerificationPage (шаблон `/v/{code}`)
+#### VerificationPage (шаблон proof surface)
 
-**Призначення:** Уніфікований шаблон для `/v/genuim`, `/v/genu.alko`, `/v/genu.cosm`
+**Призначення:** Phase 1 baseline-шаблон для `/v/genuim`, який можна повторно використати для окремо затверджених named sample pages у наступних фазах
 
 **Анатомія:**
 ```
@@ -712,7 +712,7 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
 └──────────────────────────────────────┘
 ```
 
-**Стани:** `sample` (з banner), `live` (без banner, Phase 3), `no-data` (нейтральний стан)
+**Стани:** `demo` (з banner), `live` (без banner, Phase 3), `no-data` (нейтральний стан)
 
 ---
 
@@ -751,7 +751,7 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
 
 **Призначення:** Форма кваліфікованого запиту з контекстом
 
-**Поля:** Сфера (prefill з `?sector=alko`), Компанія, Повідомлення, приховані: `source_path`, `proof_path`
+**Поля:** Ім'я контактної особи, Email або телефон, Компанія, Сценарій, Короткий контекст; приховані: `source_path`, опційний `proof_path`
 
 **Стани:** empty → filled → submitting → success → error
 
@@ -792,7 +792,7 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
 ### Дорожня карта реалізації
 
 **Фаза 1 — Core (блокери Phase 1 launch):**
-1. `VerificationPage` + `StatusBadge` + `NoDataState` → `/v/genuim` live
+1. `VerificationPage` + `StatusBadge` + `NoDataState` → `/v/genuim` як canonical proof example
 2. `BentoCard` + `AnimatedCounter` → Hero перший екран
 3. `BranchCard` → Branch Split (конверсія)
 4. `RequestForm` → CTA / лід-захоплення
@@ -806,7 +806,7 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
 **Фаза 3 — Delight:**
 9. `AnimatedCounter` з Intersection Observer
 10. Stagger animations на bento grid
-11. Sample pages `/v/genu.alko`, `/v/genu.cosm`
+11. Named sample pages `/v/genu.alko`, `/v/genu.cosm` після окремого scope approval
 
 ---
 
@@ -860,7 +860,7 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
   success  → border green + checkmark icon
 ```
 
-**Prefill паттерн:** `?sector=alko` → автоматично обирає відповідний варіант у селекті, із затримкою 300ms для видимості зміни
+**Prefill паттерн:** `?scenario=` або branch-driven default → автоматично підставляє відповідний сценарій у форму, із затримкою 300ms для видимості зміни
 
 **Submit flow:**
 1. Клік → кнопка: spinner + "Надсилаємо..." (disabled)
@@ -1040,10 +1040,10 @@ MOBILE:
 
 **Три елементи. Більше нічого.**
 - Input — основна дія
-- Sample shortcuts — знизити поріг входу
+- Example-code action — знизити поріг входу
 - DataMatrix ambient — атмосфера і ДНК платформи
 
-**Demo banner** — з'являється тільки після введення коду або кліку на sample. Не одразу — не лякати на вході.
+**Demo banner** — видимий з initial render на кожній non-live proof surface. На `/v/` він стоїть над input/result area, на `/v/genuim` — над proof content. Тон спокійний і неалармістичний.
 
 **B2B CTA** — після результату верифікації, внизу. Не на вході.
 

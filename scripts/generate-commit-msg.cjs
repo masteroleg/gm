@@ -124,10 +124,45 @@ Rules:
 - Subject must be an English Conventional Commit.
 - Body must be 1-4 short Russian lines.
 - Make the description specific and useful.
-- Name the actual artifact/theme of the change, not generic file counters.
-- For BMAD/planning updates, prefer phrases like "update planning artifacts", "revise PRD and architecture", or similarly concrete wording.
+- Describe the meaning of the change, not just the file list.
+- Name the actual decision, alignment, clarification, scope change, or contract update.
+- Do not use generic summaries like "update files", "sync project state", "planning artifacts", or category-only/file-list-only wording.
+- Do not make the body just a list of filenames.
+- For BMAD/planning updates, summarize what was aligned or clarified across PRD, architecture, epics, UX, sprint scope, metadata, routes, or phase boundaries.
 - Do not add markdown, code fences, bullets, analysis, or commentary.
 - Do not run tools or inspect the repository. Use only the context below.
+
+Bad example:
+{"subject":"docs(bmad): update planning artifacts","body":"BMAD: architecture.md, epics.md, prd.md"}
+
+Good example:
+{"subject":"docs(bmad): align Phase 1 planning scope","body":"Синхронизированы PRD, architecture и epics по scope proof-маршрутов, metadata request flow и границам future-phase функциональности."}
+
+Staged files:
+${files.join("\n")}
+
+Staged stat:
+${stat}
+
+Important diff excerpts:
+${compactDiff(diff)}`;
+
+const buildRepairPrompt = (
+	candidate,
+	files,
+	stat,
+	diff,
+) => `Rewrite this commit message as a semantic summary.
+
+Return JSON only with keys "subject" and "body".
+- Keep the same language rules: English Conventional Commit subject, short Russian body.
+- Preserve the real meaning of the changes.
+- Do not output a file list as the body.
+- Do not use generic phrases like "update planning artifacts" or "update files" unless the diff truly has no clearer theme.
+- Prefer the main decision, alignment, clarified scope, or contract change.
+
+Bad candidate:
+${candidate}
 
 Staged files:
 ${files.join("\n")}
@@ -143,6 +178,27 @@ const normalizeGeneratedMessage = (subject, body) => {
 	const cleanBody = String(body || "").trim();
 	if (!cleanSubject || !cleanBody) return "";
 	return `${cleanSubject}\n\n${cleanBody}\n`;
+};
+
+const isLowValueMessage = (message) => {
+	const clean = String(message || "").trim();
+	if (!clean) return true;
+
+	const [subject = "", , ...bodyLines] = clean.split(/\r?\n/);
+	const body = bodyLines.join(" ").trim();
+
+	if (/sync project state after updates/i.test(subject)) return true;
+	if (/update \d+ project files/i.test(subject)) return true;
+	if (/update planning artifacts/i.test(subject) && /^BMAD:/i.test(body))
+		return true;
+	if (/^(BMAD|Docs|Tests|Site|Config):\s+[^.]+(?:,[^.]+){1,}\.?$/i.test(body))
+		return true;
+	if (
+		/^(Updated|Категории изменений|Изменены следующие компоненты):/i.test(body)
+	)
+		return true;
+
+	return false;
 };
 
 const extractJsonMessage = (raw) => {
@@ -722,7 +778,12 @@ if (!files.length) process.exit(0);
 const stat = getStat();
 const diff = getDiff();
 const config = readConfig();
-const aiMessage = runOpencode(buildPrompt(files, stat, diff));
+let aiMessage = runOpencode(buildPrompt(files, stat, diff));
+
+if (aiMessage && isLowValueMessage(aiMessage)) {
+	aiMessage = runOpencode(buildRepairPrompt(aiMessage, files, stat, diff));
+}
+
 const nextMessage =
 	aiMessage ||
 	(config.fallbackToHeuristicGenerator ? buildMessage(files, stat) : "");

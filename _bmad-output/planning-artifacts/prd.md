@@ -82,7 +82,7 @@ Project Context: `brownfield`
 
 ### Business Success
 
-- **SC5:** Every submitted qualified request captures scenario, company type, business context, and source path.
+- **SC5:** Every submitted qualified request captures scenario, company name, short business context, and source path.
 - **SC6:** Within 2 weeks of release, the team can review a measurable proof-first path from homepage entry to proof example to request submission.
 - **SC7:** Within 2 weeks of release, the team has a baseline for qualified requests, proof-example visits, and proof-to-request conversion to support later product target setting.
 
@@ -214,6 +214,8 @@ These capabilities support all journeys rather than one branch only:
 ### Lookup and Path Defaults
 
 - Phase 1 default proof path is the canonical example route `/v/genuim` plus the paste-first demo input page `/v/`.
+- Approved Phase 1 proof/demo states are limited to `/v/genuim` and the `/v/` flow with its approved result states.
+- Named sector-specific sample pages require separate approval and are deferred by default.
 - Phase 1 does not require arbitrary dynamic public proof pages for every possible code.
 - Live lookup is a later-phase capability and must not be implied by Phase 1 copy.
 
@@ -361,14 +363,14 @@ These capabilities support all journeys rather than one branch only:
 
 - **FR23:** Visitors can submit a qualified request with contact data, scenario, and business context.
   - **Scope/Context:** Public request form.
-  - **Acceptance/Verification:** Submission requires contact, scenario, company type, and short context before completion.
+  - **Acceptance/Verification:** Submission requires these Phase 1 user-entered fields before completion: business contact name, business email or phone, company name, scenario, and short context.
 
 - **FR24:** The system can attach scenario and source-path metadata to each qualified request.
   - **Scope/Context:** Public request handling.
-  - **Acceptance/Verification:** Each submitted request includes scenario and source-path metadata in the receiving record or notification.
+  - **Acceptance/Verification:** Each submitted request includes scenario and source-path metadata in the receiving record or notification, and includes `proof_path` when the request starts from a proof surface.
 
 - **FR25:** Partners can share a public proof or demo link that opens the same intended public state and CTA destination without requiring login.
-  - **Scope/Context:** Canonical proof example and any approved Phase 1 demo state.
+  - **Scope/Context:** Canonical proof example and approved Phase 1 demo states within the `/v/genuim` plus `/v/` contract.
   - **Acceptance/Verification:** A shared public link opens successfully in a new browser session, shows the same intended proof or demo state, and preserves the intended CTA destination.
 
 ### Knowledge Base and Trust Surface
@@ -461,15 +463,15 @@ These capabilities support all journeys rather than one branch only:
 
 - **NFR12:** Public request capture shall require no more than `5` user-entered fields and shall not require personal data beyond business contact name, business email or phone, company name, scenario, and short context.
   - **Scope/Context:** Phase 1 request form.
-  - **Verification Signal:** Form-field review confirms the required-field count stays within the limit and no additional personal fields are mandatory.
+  - **Verification Signal:** Form-field review confirms the required-field count stays within the limit, hidden metadata such as `source_path` and `proof_path` do not count toward that limit, and no additional personal fields are mandatory.
 
 - **NFR13:** Public measurement and reporting shall exclude full raw codes and personal data from public analytics outputs.
   - **Scope/Context:** Phase 1 source tagging and later analytics expansion.
   - **Verification Signal:** Measurement-field review confirms public analytics outputs exclude raw codes and PII.
 
-- **NFR14:** Public pages shall be served over HTTPS and, in deployed review, shall expose at minimum `Content-Security-Policy`, `X-Content-Type-Options`, and `Referrer-Policy` headers appropriate for a static public site.
+- **NFR14:** Public pages shall be served over HTTPS in Phase 1. Where the deployment platform supports response-header control, public pages shall expose at minimum `Content-Security-Policy`, `X-Content-Type-Options`, and `Referrer-Policy` headers appropriate for a static public site. For GitHub Pages-based Phase 1 deployment, the release gate is documented platform-appropriate mitigation and explicit acknowledgment of header limitations, including CSP-oriented meta fallback where applicable.
   - **Scope/Context:** All public Phase 1 pages.
-  - **Verification Signal:** Deployed response review confirms HTTPS and the required security headers on each key public page type.
+  - **Verification Signal:** Phase 1 deployed review confirms HTTPS, documents the platform header limitation, and verifies configured mitigations for the active hosting target. When a header-capable hosting target is adopted, deployed response review confirms the required security headers on each key public page type.
 
 ### Compatibility and Responsive Quality
 
