@@ -207,6 +207,8 @@ Fix these problems:
 - make the summary explain the overall intent
 - make every bullet describe the actual change in that file
 - avoid filename-only or category-only explanations
+- do not use subjects like "update BMAD artifacts" or "update <filename>"
+- if the diff shows a milestone, readiness change, alignment, clarification, or deferred scope, name that explicitly
 
 Message to improve:
 ${previous}
@@ -229,13 +231,23 @@ const isWeakMessage = (message) => {
 		.filter(Boolean);
 	if (lines.length < 3) return true;
 
+	const subject = lines[0] || "";
 	const summary = lines[1] || "";
 	const bullets = lines.filter((line) => line.startsWith("- `"));
 
+	if (/update BMAD artifacts/i.test(subject)) return true;
+	if (
+		/update [\w.-]+\.(md|txt|json|ya?ml|js|cjs|mjs|ts|tsx|css|html)/i.test(
+			subject,
+		)
+	)
+		return true;
 	if (/^Несколько обновлений[:.]?/i.test(summary)) return true;
 	if (/^Обновлен[аоы]? /i.test(summary)) return true;
 	if (/^Updated[: ]/i.test(summary)) return true;
 	if (bullets.length === 0) return true;
+	if (bullets.some((line) => /—\s*(BMAD|Docs|Tests|Site|Config):/i.test(line)))
+		return true;
 	if (
 		bullets.some((line) =>
 			/—\s*(обновлен|updated|изменен файл|добавлены изменения)\b/i.test(line),
@@ -793,7 +805,8 @@ const messageFile = process.argv[2];
 if (!messageFile) process.exit(0);
 
 const current = readFileSync(messageFile, "utf8");
-if (hasMeaningfulMessageContent(current)) process.exit(0);
+if (hasMeaningfulMessageContent(current) && !isWeakMessage(current))
+	process.exit(0);
 
 let files = getStagedFiles();
 let stat = getStat();
