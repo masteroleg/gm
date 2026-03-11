@@ -9,6 +9,7 @@
 ### What Was Done
 
 **UX Design Specification for gm** — 1,156-line document covering:
+
 - Executive Summary (Project Vision, Target Users, Key Challenges)
 - Core Experience & Emotional Response
 - Design System (Tailwind v4, Manrope Variable, Green + Amber tokens)
@@ -23,39 +24,41 @@
 ### Key Decisions Fixed
 
 1. **TopNav Architecture (2026 level)**
+
    - Minimal: `[genu.im] [✓ Перевірити] [Увійти*] [Зв'язатись →]`
    - No "About", "Brand", "eАкциз" in nav — they're scroll-narrative sections
    - Language/Theme moved to **footer** (Phase 1) → **user profile dropdown** (Phase 3 auth)
-
 2. **`/v/` Proof Hub Design**
+
    - Google search simplicity + Jonny Ive atmosphere
    - Viewport-size DataMatrix glyph (opacity 3-4%) as background
    - Three elements: Input, Sample shortcuts, Ambient design
    - Demo banner + B2B CTA appear only after interaction (not on entry)
-
 3. **Live Trust Samples Pattern**
+
    - `/v/genuim` — Platform verifies itself (meta-verification)
    - `/v/genu.alko` — Sample for alcohol brands
    - `/v/genu.cosm` — Sample for cosmetics
    - Used in emails, presentations, sales decks as proof artifacts
-
 4. **Branch Handling**
-   - eАкциз (cold tones, ⚖️ scales, document iconography) 
+
+   - eАкциз (cold tones, ⚖️ scales, document iconography)
    - Brand (warm amber, 👁️ eye, storytelling)
    - Both present as scroll-narrative sections, not nav items; footer has anchor-links
 
 ### Issues Fixed
 
-✅ **Language Unification** — Entire document now Ukrainian (was mixed Russian/Ukrainian)  
-✅ **"Branch always visible" contradiction** — Clarified: branches are scroll-sections, not nav  
-✅ **Language/Theme placement** — Footer Phase 1, user profile Phase 3  
-✅ **Component table** — Split Navigation and Footer rows correctly  
+✅ **Language Unification** — Entire document now Ukrainian (was mixed Russian/Ukrainian)
+✅ **"Branch always visible" contradiction** — Clarified: branches are scroll-sections, not nav
+✅ **Language/Theme placement** — Footer Phase 1, user profile Phase 3
+✅ **Component table** — Split Navigation and Footer rows correctly
 
 ---
 
 ## Project Context (gm)
 
 ### Technology Stack
+
 - **Tailwind CSS v4** — CSS-first (no `@tailwind`, use `@import "tailwindcss"`)
 - **Manrope Variable** — Typography (300→800 weights, single file)
 - **Static Site** — GitHub Pages, no build step, `site/assets/css/output.css` committed
@@ -65,6 +68,7 @@
 - **Husky** — Pre-commit/pre-push hooks
 
 ### Critical Rules
+
 - **No framework hydration** — Direct DOM controllers on static markup
 - **Mobile-first** — 360px → 768px → 1280px breakpoints
 - **Lighthouse gates** — Performance ≥95, Accessibility ≥97
@@ -74,6 +78,7 @@
 - **FOUC prevention** — Theme/lang applied in `<head>` before render
 
 ### Project Goals
+
 - **Proof-first B2B lander** — genu.im demonstrates genu.mark through live verification
 - **Two audiences, one page** — eАкциз (compliance) + Brand (voluntary) split at branch
 - **Sequential persuasion** — Hook → Clarify → Bridge → Prove → Branch → Convert → Trust
@@ -94,11 +99,13 @@ Then: Create Epics and Stories → Check Implementation Readiness → Sprint Pla
 ## Design System Tokens (Fixed in Session)
 
 **Colors:**
+
 - Proof Green: `#0d8a4f` (light) / `#00e676` (dark)
 - Verification Amber: `#c97a0a` (light) / `#ffb340` (dark) — *NEW*
 - Dark Forest: `#0c1410` (ambient background)
 
 **Typography:**
+
 - Display: 72–96px, weight 700–800
 - H1: 48–56px, weight 700
 - H2: 32–40px, weight 600
@@ -112,6 +119,7 @@ Then: Create Epics and Stories → Check Implementation Readiness → Sprint Pla
 ## Component Roadmap
 
 **Phase 1 — Core (blockers):**
+
 1. VerificationPage + StatusBadge + NoDataState → `/v/genuim` live
 2. BentoCard + AnimatedCounter → Hero
 3. BranchCard → Branch Split
@@ -133,16 +141,19 @@ Then: Create Epics and Stories → Check Implementation Readiness → Sprint Pla
 ## Navigation & Footer Architecture
 
 **TopNav (Desktop):**
+
 ```
 [genu.im ▦]                    [✓ Перевірити]   [Увійти*]   [Зв'язатись →]
 ```
 
 **TopNav (Mobile):**
+
 ```
 [genu.im ▦]                                     [Зв'язатись →]   [≡]
 ```
 
 **Footer (Phase 1):**
+
 - Мова / Тема перемикачі
 - Trust links: About, Cases, FAQ, Privacy, Terms, Contact
 - Anchor-посилання на eАкциз & Brand секції
@@ -165,16 +176,19 @@ Then: Create Epics and Stories → Check Implementation Readiness → Sprint Pla
 ## Important Files & Locations
 
 **Specification:**
+
 - `_bmad-output/planning-artifacts/ux-design-specification.md` (complete, 1,156 lines)
 - `_bmad-output/planning-artifacts/prd.md` (PRD, complete)
 - `_bmad-output/planning-artifacts/product-brief-gm-2026-03-05.md` (brief, complete)
 
 **Project Knowledge:**
+
 - `_bmad-output/project-context.md` (195 rules, LLM-optimized)
 - `docs/genu-im-homepage-master-plan.md` (master plan)
 - `README.md` (CI/CD workflow, solo-flow, commit-msg auto-gen)
 
 **Code:**
+
 - `site/` — published static site (GitHub Pages)
 - `site/assets/css/input.css` — Tailwind config source
 - `site/assets/css/output.css` — **committed** production artifact
@@ -183,6 +197,7 @@ Then: Create Epics and Stories → Check Implementation Readiness → Sprint Pla
 - `tests/e2e/` — Playwright specs
 
 **CI/CD:**
+
 - `.husky/pre-push` — local gate (lint, typecheck, smoke)
 - `.github/workflows/ci.yml` — GitHub CI pipeline
 - `.github/workflows/full-regression.yml` — manual/nightly regression
@@ -193,18 +208,21 @@ Then: Create Epics and Stories → Check Implementation Readiness → Sprint Pla
 ## Working with the Specification
 
 ### For Developers
+
 1. Read: Design Direction (sections on Bento Hero + Dark Forest)
 2. Read: Component Strategy (detailed specs for 10 custom components)
 3. Read: Responsive Design & Accessibility (breakpoints, WCAG requirements)
 4. Implement Phase 1 Core components first (VerificationPage, BentoCard, BranchCard, RequestForm, IconSystem)
 
 ### For Designers
+
 1. Review: Visual Design Foundation (colors, typography, spacing)
 2. Review: Design Direction (D3+D1 rationale, implementation approach)
 3. Implement: Icon System audit + replacement (10 semantic icons)
 4. Validate: Color contrast, WCAG AA, mobile touch targets (≥44×44px)
 
 ### For QA
+
 1. Accessibility testing: WCAG 2.1 AA, Lighthouse ≥97, screen reader labels
 2. Responsive testing: 360px, 768px, 1280px breakpoints
 3. Proof-moment animations: Counter scroll-in, badge pulse, SVG draw
@@ -231,6 +249,7 @@ Then: Create Epics and Stories → Check Implementation Readiness → Sprint Pla
 - **Key message:** "We prove, we don't promise"
 
 <!-- rtk-instructions v2 -->
+
 # RTK (Rust Token Killer) - Token-Optimized Commands
 
 ## Golden Rule
@@ -238,6 +257,7 @@ Then: Create Epics and Stories → Check Implementation Readiness → Sprint Pla
 **Always prefix commands with `rtk`**. If RTK has a dedicated filter, it uses it. If not, it passes through unchanged. This means RTK is always safe to use.
 
 **Important**: Even in command chains with `&&`, use `rtk`:
+
 ```bash
 # ❌ Wrong
 git add . && git commit -m "msg" && git push
@@ -249,6 +269,7 @@ rtk git add . && rtk git commit -m "msg" && rtk git push
 ## RTK Commands by Workflow
 
 ### Build & Compile (80-90% savings)
+
 ```bash
 rtk cargo build         # Cargo build output
 rtk cargo check         # Cargo check output
@@ -260,6 +281,7 @@ rtk next build          # Next.js build with route metrics (87%)
 ```
 
 ### Test (90-99% savings)
+
 ```bash
 rtk cargo test          # Cargo test failures only (90%)
 rtk vitest run          # Vitest failures only (99.5%)
@@ -268,6 +290,7 @@ rtk test <cmd>          # Generic test wrapper - failures only
 ```
 
 ### Git (59-80% savings)
+
 ```bash
 rtk git status          # Compact status
 rtk git log             # Compact log (works with all git flags)
@@ -286,6 +309,7 @@ rtk git worktree        # Compact worktree
 Note: Git passthrough works for ALL subcommands, even those not explicitly listed.
 
 ### GitHub (26-87% savings)
+
 ```bash
 rtk gh pr view <num>    # Compact PR view (87%)
 rtk gh pr checks        # Compact PR checks (79%)
@@ -295,6 +319,7 @@ rtk gh api              # Compact API responses (26%)
 ```
 
 ### JavaScript/TypeScript Tooling (70-90% savings)
+
 ```bash
 rtk pnpm list           # Compact dependency tree (70%)
 rtk pnpm outdated       # Compact outdated packages (80%)
@@ -305,6 +330,7 @@ rtk prisma              # Prisma without ASCII art (88%)
 ```
 
 ### Files & Search (60-75% savings)
+
 ```bash
 rtk ls <path>           # Tree format, compact (65%)
 rtk read <file>         # Code reading with filtering (60%)
@@ -313,6 +339,7 @@ rtk find <pattern>      # Find grouped by directory (70%)
 ```
 
 ### Analysis & Debug (70-90% savings)
+
 ```bash
 rtk err <cmd>           # Filter errors only from any command
 rtk log <file>          # Deduplicated logs with counts
@@ -324,6 +351,7 @@ rtk diff                # Ultra-compact diffs
 ```
 
 ### Infrastructure (85% savings)
+
 ```bash
 rtk docker ps           # Compact container list
 rtk docker images       # Compact image list
@@ -333,12 +361,14 @@ rtk kubectl logs        # Deduplicated pod logs
 ```
 
 ### Network (65-70% savings)
+
 ```bash
 rtk curl <url>          # Compact HTTP responses (70%)
 rtk wget <url>          # Compact download output (65%)
 ```
 
 ### Meta Commands
+
 ```bash
 rtk gain                # View token savings statistics
 rtk gain --history      # View command history with savings
@@ -350,16 +380,17 @@ rtk init --global       # Add RTK to ~/.claude/CLAUDE.md
 
 ## Token Savings Overview
 
-| Category | Commands | Typical Savings |
-|----------|----------|-----------------|
-| Tests | vitest, playwright, cargo test | 90-99% |
-| Build | next, tsc, lint, prettier | 70-87% |
-| Git | status, log, diff, add, commit | 59-80% |
-| GitHub | gh pr, gh run, gh issue | 26-87% |
-| Package Managers | pnpm, npm, npx | 70-90% |
-| Files | ls, read, grep, find | 60-75% |
-| Infrastructure | docker, kubectl | 85% |
-| Network | curl, wget | 65-70% |
+| Category         | Commands                       | Typical Savings |
+| ---------------- | ------------------------------ | --------------- |
+| Tests            | vitest, playwright, cargo test | 90-99%          |
+| Build            | next, tsc, lint, prettier      | 70-87%          |
+| Git              | status, log, diff, add, commit | 59-80%          |
+| GitHub           | gh pr, gh run, gh issue        | 26-87%          |
+| Package Managers | pnpm, npm, npx                 | 70-90%          |
+| Files            | ls, read, grep, find           | 60-75%          |
+| Infrastructure   | docker, kubectl                | 85%             |
+| Network          | curl, wget                     | 65-70%          |
 
 Overall average: **60-90% token reduction** on common development operations.
-<!-- /rtk-instructions -->
+
+`<!-- /rtk-instructions -->`
