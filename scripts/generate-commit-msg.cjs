@@ -25,8 +25,20 @@ const getStagedFiles = () => {
 	return output ? output.split(/\r?\n/).filter(Boolean) : [];
 };
 
+const getWorkingTreeFiles = () => {
+	const changed = runGit(["diff", "--name-only"]);
+	const untracked = runGit(["ls-files", "--others", "--exclude-standard"]);
+	return [
+		...new Set(
+			[...changed.split(/\r?\n/), ...untracked.split(/\r?\n/)].filter(Boolean),
+		),
+	];
+};
+
 const getStat = () => runGit(["diff", "--cached", "--stat"]);
 const getDiff = () => runGit(["diff", "--cached"]);
+const getWorkingTreeStat = () => runGit(["diff", "--stat"]);
+const getWorkingTreeDiff = () => runGit(["diff"]);
 
 const readConfig = () => {
 	if (!existsSync(CONFIG_PATH)) {
@@ -797,11 +809,18 @@ const current = readFileSync(messageFile, "utf8");
 if (hasMeaningfulMessageContent(current) && !isLowValueMessage(current))
 	process.exit(0);
 
-const files = getStagedFiles();
+let files = getStagedFiles();
+let stat = getStat();
+let diff = getDiff();
+
+if (!files.length) {
+	files = getWorkingTreeFiles();
+	stat = getWorkingTreeStat();
+	diff = getWorkingTreeDiff();
+}
+
 if (!files.length) process.exit(0);
 
-const stat = getStat();
-const diff = getDiff();
 const config = readConfig();
 let aiMessage = runOpencode(buildPrompt(files, stat, diff));
 

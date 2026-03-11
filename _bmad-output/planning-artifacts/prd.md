@@ -122,12 +122,14 @@ Phase 1 includes only the public surfaces and measurement needed to ship the pro
   - branch split for `еАкциз` and responsible manufacturers
   - explicit CTA layer
   - trust floor
+- Language and theme foundations across all public Phase 1 surfaces
 - Compact compare-vs-generic-QR explanation plus a named `marking -> protocol -> proof` explainer
 - Canonical verification example
 - Paste-first demo input with example-code action
 - One neutral no-data proof state
 - Persistent demo-mode labeling on non-live proof surfaces
 - Qualified request form with scenario and source-path capture
+- Shareable public proof and demo links for approved Phase 1 states
 - Trust-floor destinations for About, Contact, Proof & Cases, Privacy, Terms, FAQ, and external company presence
   - About includes a compact company-controlled self-verification explanation of what `genu.im` is and is not
   - FAQ includes starter procurement and audit questions for Phase 1
@@ -294,21 +296,21 @@ These capabilities support all journeys rather than one branch only:
 
 ### Homepage Narrative and Branches
 
-- **FR5:** Homepage messaging identifies `genu.im` as a proof-first surface for marked products rather than a generic QR landing page.
+- **FR5:** Homepage messaging states that `genu.im` is a public proof surface for marked products and not a generic QR landing page.
   - **Scope/Context:** Homepage hero and bridge content.
-  - **Acceptance/Verification:** The homepage contains category framing, a compact `marking -> protocol -> proof` explainer, and a bridge section before the proof example entry point.
+  - **Acceptance/Verification:** The homepage contains category framing, a named `marking -> protocol -> proof` explainer, and a bridge section before the proof example entry point.
 
-- **FR6:** Relevant public surfaces show explicit role separation between official consumer checking in `Дія` and manufacturer or brand proof in `genu.mark`.
-  - **Scope/Context:** Homepage branch messaging, proof example, no-data state, and intercept path.
-  - **Acceptance/Verification:** Each relevant public surface includes clear copy that distinguishes the two roles without state mimicry.
+- **FR6:** Homepage branch messaging, canonical proof example, no-data state, and the consumer-intent intercept page show explicit role separation between official consumer checking in `Дія` and manufacturer or brand proof in `genu.mark`.
+  - **Scope/Context:** Homepage branch messaging, canonical proof example, no-data state, and consumer-intent intercept page.
+  - **Acceptance/Verification:** Each listed surface includes copy that distinguishes the two roles without state mimicry.
 
 - **FR7:** Primary homepage CTA opens the canonical verification example.
   - **Scope/Context:** Homepage hero and first proof CTA.
   - **Acceptance/Verification:** The primary proof CTA opens the canonical verification example surface.
 
-- **FR8:** Homepage exposes two distinct paths: `еАкциз` readiness and responsible-manufacturer proof.
+- **FR8:** Homepage exposes one `еАкциз` entry point and one responsible-manufacturer entry point, each with its own branch-specific CTA.
   - **Scope/Context:** Homepage branch section.
-  - **Acceptance/Verification:** The homepage exposes two differentiated branch entry points with branch-specific next-step CTAs.
+  - **Acceptance/Verification:** The homepage exposes the two named branch entry points with branch-specific next-step CTAs; the `еАкциз` branch names low-surprise operational readiness and risk reduction, and the responsible-manufacturer branch names public-proof value.
 
 - **FR9:** Trust-floor destinations are reachable from the public site.
   - **Scope/Context:** Homepage navigation and footer.
@@ -328,9 +330,9 @@ These capabilities support all journeys rather than one branch only:
   - **Scope/Context:** Demo input, canonical verification example, and any Phase 1 no-data example.
   - **Acceptance/Verification:** A visible notice above the result or input area states that the flow is a demo/example, not a live production lookup.
 
-- **FR13:** Canonical proof example displays an approved valid-state example for a product inside the `genu.mark` public proof contour.
+- **FR13:** Canonical proof example displays a valid-state example for a product inside the `genu.mark` public proof contour.
   - **Scope/Context:** Canonical proof example.
-  - **Acceptance/Verification:** The result page shows an approved proof state and public facts allowed by policy.
+  - **Acceptance/Verification:** The result page shows a valid proof state and public facts permitted by `Trust and Compliance Boundaries`.
 
 - **FR14:** Products without public proof in `genu.im` display the defined no-data state.
   - **Scope/Context:** Phase 1 no-data example.
@@ -338,19 +340,19 @@ These capabilities support all journeys rather than one branch only:
 
 - **FR15:** No-data state explains what public proof could appear and offers a next-step CTA.
   - **Scope/Context:** Phase 1 no-data example.
-  - **Acceptance/Verification:** The page includes a factual list of potential proof blocks and a business CTA.
+  - **Acceptance/Verification:** The page includes a list of potential proof blocks permitted by `Public Proof Rules` and a business CTA.
 
 - **FR16:** Empty proof sections remain hidden instead of rendering placeholder content.
   - **Scope/Context:** Valid-state proof example.
   - **Acceptance/Verification:** No empty section appears on a public proof page.
 
 - **FR17:** Each displayed public proof fact is labeled by source category.
-  - **Scope/Context:** Valid-state proof example and future live proof surfaces.
+  - **Scope/Context:** Valid-state proof example.
   - **Acceptance/Verification:** Each displayed fact indicates whether it comes from `genu.mark`, the brand, or a supporting document.
 
-- **FR18:** Supporting evidence links or documents appear whenever evidence exists for a displayed public claim.
-  - **Scope/Context:** Valid-state proof example and future live proof surfaces.
-  - **Acceptance/Verification:** Evidence is visible and clickable wherever evidence is provided.
+- **FR18:** Supporting evidence links or documents appear in NDA-safe public form for each displayed public claim that has supporting evidence.
+  - **Scope/Context:** Valid-state proof example.
+  - **Acceptance/Verification:** Each displayed public claim with supporting evidence includes at least one visible and clickable evidence link or document.
 
 - **FR19:** Sustainability content stays hidden when required evidence is missing.
   - **Scope/Context:** Public proof surfaces.
@@ -372,7 +374,7 @@ These capabilities support all journeys rather than one branch only:
 
 - **FR24:** Submitted qualified requests include scenario and source-path metadata.
   - **Scope/Context:** Public request handling.
-  - **Acceptance/Verification:** Each submitted request includes scenario and source-path metadata in the receiving record or notification, and includes `proof_path` when the request starts from a proof surface.
+  - **Acceptance/Verification:** Each submitted request retains scenario and source-path metadata, and includes proof-origin metadata when the request starts from a proof surface.
 
 - **FR25:** Shareable public proof or demo links open the same intended public state and CTA destination without requiring login.
   - **Scope/Context:** Canonical proof example and approved Phase 1 demo states.
@@ -382,37 +384,45 @@ These capabilities support all journeys rather than one branch only:
 
 - **FR26:** Trust-floor destinations for About, Contact, Proof & Cases, Privacy, Terms, and FAQ are reachable from the public site.
   - **Scope/Context:** Homepage and public proof surfaces.
-  - **Acceptance/Verification:** Each destination resolves successfully and contains non-empty starter content or approved placeholder content. In Phase 1, About explains the company-controlled proof role of `genu.im`, and FAQ includes starter procurement or audit-oriented questions covering SLA expectations, access model, business data handling, and no-surprise operating boundaries.
+  - **Acceptance/Verification:** Each destination resolves successfully and contains either at least one user-visible starter content section or a placeholder page that states the destination purpose and current CTA path. In Phase 1, About explains the company-controlled proof role of `genu.im`, and FAQ includes starter procurement or audit-oriented questions covering SLA expectations, access model, business data handling, and no-surprise operating boundaries.
 
-- **FR27:** Public IA reserves navigation for the future knowledge base without requiring full Phase 1 knowledge content.
+- **FR27:** Public IA includes a reserved knowledge-base navigation slot without requiring full Phase 1 knowledge content.
   - **Scope/Context:** Homepage navigation, footer, and trust-floor references.
-  - **Acceptance/Verification:** Public IA shows where the knowledge base will live or links to a branded non-empty placeholder destination that clearly marks future expansion and preserves a current Phase 1 CTA path.
+  - **Acceptance/Verification:** Public IA shows where the knowledge base will live or links to a placeholder destination that names the future knowledge-base purpose and preserves a current Phase 1 CTA path.
 
 ### Measurement and Enablement
 
 - **FR29:** Homepage-to-proof traffic is distinguishable in Phase 1 funnel review.
   - **Scope/Context:** Phase 1 proof-first funnel review.
-  - **Acceptance/Verification:** A dedicated proof-entry path or equivalent source tagging allows homepage-to-proof traffic review.
+  - **Acceptance/Verification:** One dedicated proof-entry identifier allows homepage-to-proof traffic review.
 
 - **FR30:** Qualified requests are distinguishable by scenario and entry source.
   - **Scope/Context:** Request review and basic reporting.
   - **Acceptance/Verification:** Request records can be filtered by scenario and source path.
 
 - **FR31:** Phase 1 proof-first funnel is reviewable across homepage, proof example, proof-surface CTA continuation, and request steps.
-  - **Scope/Context:** Phase 1 release review and Phase 2 reporting expansion.
-  - **Acceptance/Verification:** Phase 1 provides a reviewable source-tagged funnel that covers homepage entry, proof entry, proof-surface CTA continuation, and request submission when that final step occurs; deeper automated reporting may be added later.
+  - **Scope/Context:** Phase 1 release review.
+  - **Acceptance/Verification:** Phase 1 provides a reviewable source-tagged funnel that covers homepage entry, proof entry, proof-surface CTA continuation, and request submission when that final step occurs.
 
 ## Non-Functional Requirements
 
+### Release Validation Protocol
+
+- `Release validation run` means one mobile audit run and one desktop audit run for each required page type, using the same approved page-quality audit workflow and browser settings across all measured pages.
+- Manual checks referenced by `NFR5`, `NFR7`, `NFR8`, `NFR11`, `NFR14`, `NFR15`, and `NFR16` use one documented checklist per release candidate.
+- `Primary task set` for `NFR15` and `NFR16` includes homepage comprehension, proof-example entry, demo input interaction, request-form completion readiness, and trust-floor navigation.
+- `Copy review` for trust-boundary requirements uses one documented checklist that confirms `Дія` separation, non-state positioning, and no unsupported proof claims.
+- `Required security-header set` means `Content-Security-Policy`, `X-Content-Type-Options`, and `Referrer-Policy`.
+
 ### Performance
 
-- **NFR1:** Key Phase 1 pages shall achieve Performance >= 97 in the agreed mobile and desktop release validation run.
+- **NFR1:** Key Phase 1 pages shall achieve Performance >= 97 in the Phase 1 release validation run.
   - **Scope/Context:** Homepage, demo input surface, canonical verification example, no-data example, and trust-floor destinations.
-  - **Verification Signal:** Agreed release-validation results are captured for each required page type.
+  - **Verification Signal:** One mobile audit run and one desktop audit run are captured for each required page type using the Phase 1 release validation protocol.
 
-- **NFR2:** Key Phase 1 pages shall meet `LCP < 2.5s`, `CLS < 0.1`, and `INP < 200ms` at the release validation stage.
+- **NFR2:** Key Phase 1 pages shall meet `LCP < 2.5s`, `CLS < 0.1`, and `INP < 200ms` in the Phase 1 release validation run.
   - **Scope/Context:** Same key public pages as `NFR1`.
-  - **Verification Signal:** Agreed release-validation measurements record the required metrics for each key page type.
+  - **Verification Signal:** One mobile audit run and one desktop audit run record `LCP`, `CLS`, and `INP` for each key page type using the Phase 1 release validation protocol.
 
 - **NFR3:** Deferred client-side code for each key Phase 1 public page shall stay within a `<= 150 KB` compressed delivery budget and shall not be required to render first-screen explanatory content.
   - **Scope/Context:** Homepage, canonical verification example, demo input surface, and no-data example.
@@ -428,9 +438,9 @@ These capabilities support all journeys rather than one branch only:
   - **Scope/Context:** Homepage, canonical proof example, demo input, request form, and trust-floor navigation.
   - **Verification Signal:** A documented accessibility review confirms `0` WCAG 2.1 AA blockers on the required flows, `0` blocked critical-path tasks, and explicit release approval against the checklist.
 
-- **NFR6:** Key Phase 1 flows shall achieve Accessibility >= 97 in the agreed release validation run.
+- **NFR6:** Key Phase 1 flows shall achieve Accessibility >= 97 in the Phase 1 release validation run.
   - **Scope/Context:** Same key flows as `NFR5`.
-  - **Verification Signal:** Agreed release-validation results are captured for each required flow.
+  - **Verification Signal:** One mobile audit run and one desktop audit run are captured for each required flow using the Phase 1 release validation protocol.
 
 - **NFR7:** All key Phase 1 controls shall be keyboard accessible, visibly focusable, and screen-reader labeled, with `0` blocked tasks and `0` unlabeled interactive controls in release review.
   - **Scope/Context:** Navigation, branch selection, CTA buttons, proof-example entry, demo input, request form, and footer links.
@@ -442,16 +452,16 @@ These capabilities support all journeys rather than one branch only:
 
 ### SEO and Content Integrity
 
-- **NFR9:** Every indexable Phase 1 page shall include unique title, description, canonical, hreflang, social-preview metadata, and structured search metadata.
+- **NFR9:** `100%` of indexable Phase 1 pages shall include unique title, description, canonical, hreflang, social-preview metadata, and at least one structured-data block describing page type and canonical subject.
   - **Scope/Context:** Homepage, proof example, intercept path, and trust-floor destinations intended for indexing.
-  - **Verification Signal:** Markup review passes for each indexed page.
+  - **Verification Signal:** A markup inventory confirms presence of all required metadata fields and at least one structured-data block on `100%` of indexed Phase 1 pages.
 
 - **NFR10:** Consumer-intent public pages shall direct official checking to `Дія` and shall contain zero claims of official state status for `genu.im`.
   - **Scope/Context:** Intercept path and any proof pages referencing official checking.
-  - **Verification Signal:** Copy review confirms compliance before release.
+  - **Verification Signal:** The documented copy-review checklist confirms compliance before release.
 
-- **NFR11:** Public proof pages shall present `0` unsupported claims in release review; if required evidence or approved proof data is missing, the page shall fall back to the neutral no-data state instead.
-  - **Scope/Context:** Canonical proof example, no-data example, and later live proof pages.
+- **NFR11:** Canonical proof example and no-data example shall present `0` unsupported claims in release review; if required evidence or approved proof data is missing, the page shall fall back to the neutral no-data state instead.
+  - **Scope/Context:** Canonical proof example and no-data example.
   - **Verification Signal:** A release claim inventory confirms that every displayed public claim maps to approved proof support or evidence, and any claim lacking that support is absent or replaced by the defined no-data state.
 
 ### Privacy and Security
@@ -460,23 +470,23 @@ These capabilities support all journeys rather than one branch only:
   - **Scope/Context:** Phase 1 request form.
   - **Verification Signal:** Form-field review confirms the required-field count stays within the limit, hidden metadata such as `source_path` and `proof_path` do not count toward that limit, and no additional personal fields are mandatory.
 
-- **NFR13:** Public measurement and reporting shall exclude full raw codes and personal data from public analytics outputs.
-  - **Scope/Context:** Phase 1 source tagging and later analytics expansion.
-  - **Verification Signal:** Measurement-field review confirms public analytics outputs exclude raw codes and PII.
+- **NFR13:** Public measurement and reporting shall expose `0` full raw codes and `0` personal-data fields in public analytics outputs.
+  - **Scope/Context:** Phase 1 source tagging.
+  - **Verification Signal:** A measurement-field inventory confirms `0` full raw-code fields and `0` personal-data fields are present in public analytics outputs.
 
-- **NFR14:** Public pages shall be served over HTTPS in Phase 1. Where the deployment platform supports response-header control, public pages shall expose at minimum `Content-Security-Policy`, `X-Content-Type-Options`, and `Referrer-Policy` headers appropriate for a static public site. For GitHub Pages-based Phase 1 deployment, the release gate is documented platform-appropriate mitigation and explicit acknowledgment of header limitations, including CSP-oriented meta fallback where applicable.
+- **NFR14:** Public pages shall be served over HTTPS in Phase 1. Where hosting supports response-header control, each key public page type shall expose the required security-header set. Where hosting does not support response-header control, deployment review shall document compensating controls and the accepted limitation.
   - **Scope/Context:** All public Phase 1 pages.
-  - **Verification Signal:** A deployment security review confirms HTTPS on all public Phase 1 pages, records the active hosting target's header capabilities, and verifies either the required security headers or documented compensating controls for each key public page type.
+  - **Verification Signal:** A deployment security review confirms HTTPS on all public Phase 1 pages and verifies either the required security-header set or documented compensating controls for each key public page type.
 
 ### Compatibility and Responsive Quality
 
-- **NFR15:** Phase 1 public flows shall work on current stable Chrome, Edge, and Firefox, and unsupported browsers shall fail gracefully without blocking core comprehension or contact.
+- **NFR15:** Phase 1 public flows shall complete the defined primary task set on current stable Chrome, Edge, and Firefox with `0` blocked tasks, and unsupported browsers shall preserve homepage comprehension and contact access.
   - **Scope/Context:** Homepage, proof example, demo input, request form, and trust-floor destinations.
-  - **Verification Signal:** Manual browser smoke run passes on supported browsers and confirms graceful degradation elsewhere.
+  - **Verification Signal:** A manual browser smoke run completes the primary task set on each supported browser with `0` blocked tasks and confirms preserved homepage comprehension and contact access on unsupported browsers.
 
-- **NFR16:** Phase 1 public flows shall remain usable at 360px, 768px, and 1280px widths without horizontal scrolling on key content or hidden primary CTAs.
+- **NFR16:** Phase 1 public flows shall complete the defined primary task set at 360px, 768px, and 1280px widths with `0` horizontal scrolling on key content and `0` hidden primary CTAs.
   - **Scope/Context:** Homepage, proof example, demo input, request form, and trust-floor destinations.
-  - **Verification Signal:** Responsive smoke review passes at each required width.
+  - **Verification Signal:** A responsive smoke review completes the primary task set at each required width with `0` horizontal-scrolling blockers and `0` hidden primary CTAs.
 
 ## Appendix A - Implementation Notes
 
@@ -571,14 +581,16 @@ These decisions should not block the PRD edit pass. Each item includes a recomme
 | FR22 | SC4 | J5 |
 | FR23 | SC5 | J1, J2, J3, J4, J5 |
 | FR24 | SC5, SC6 | J1, J2, J3, J4, J5 |
-| FR25 | SC6 | J1 |
+| FR25 | SC6, SC7 | J1 |
 | FR26 | SC11 | J1, J2, J3, J4, J5 |
 | FR27 | SC12 | J1, J2, J3, J5 |
-| FR29 | SC6, SC14 | J1, J2, J3 |
-| FR30 | SC5, SC6 | J1, J2, J3, J4, J5 |
-| FR31 | SC6, SC14 | J1, J2, J3 |
+| FR29 | SC6, SC7, SC14 | J1, J2, J3 |
+| FR30 | SC5, SC6, SC7 | J1, J2, J3, J4, J5 |
+| FR31 | SC6, SC7, SC14 | J1, J2, J3 |
 
 Roadmap identifiers `FR20`, `FR28`, and `FR32` are tracked in `Appendix A` as future-phase notes and are intentionally excluded from the active Phase 1 traceability chain.
+
+`SC7`, `SC12`, and `SC14` are supported primarily through Cross-Journey Enablement and release-review behavior rather than a single numbered journey.
 
 ### Non-Functional Requirements Mapping
 
