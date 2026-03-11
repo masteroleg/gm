@@ -23,14 +23,11 @@ stepsCompleted:
   - step-e-03-edit
 inputDocuments:
   - _bmad-output/planning-artifacts/product-brief-gm-2026-02-23.md
-  - _bmad-output/project-context.md
   - _bmad-output/design-thinking-2026-02-23.md
   - _bmad-output/problem-solution-2026-02-23.md
   - _bmad-output/planning-artifacts/validation-report-2026-03-09.md
   - _bmad-output/planning-artifacts/validation-report-2026-03-10.md
   - docs/genu-im-homepage-master-plan.md
-  - AGENTS.md
-  - CLAUDE.md
 classification:
   projectType: web_app
   domain: general
@@ -284,7 +281,7 @@ These capabilities support all journeys rather than one branch only:
 
 - **FR2:** Selected language persists for returning visits on supported browsers.
   - **Scope/Context:** Phase 1 public pages.
-  - **Acceptance/Verification:** After reload or navigation, the previously selected language remains active unless storage is unavailable.
+  - **Acceptance/Verification:** After reload or navigation during returning visits on supported browsers, the previously selected language remains active.
 
 - **FR3:** Public site theme is switchable between light and dark.
   - **Scope/Context:** Homepage, proof example, demo input, and trust-floor destinations.
@@ -292,7 +289,7 @@ These capabilities support all journeys rather than one branch only:
 
 - **FR4:** Selected theme persists for returning visits on supported browsers.
   - **Scope/Context:** Phase 1 public pages.
-  - **Acceptance/Verification:** After reload or navigation, the previously selected theme remains active unless storage is unavailable.
+  - **Acceptance/Verification:** After reload or navigation during returning visits on supported browsers, the previously selected theme remains active.
 
 ### Homepage Narrative and Branches
 
@@ -436,7 +433,7 @@ These capabilities support all journeys rather than one branch only:
 
 - **NFR3:** Each key Phase 1 public page shall stay within the approved Phase 1 delivery budget and shall not require deferred interactions to render first-screen explanatory content.
   - **Scope/Context:** Homepage, canonical verification example, demo input surface, and no-data example.
-  - **Verification Signal:** Delivery-budget review confirms each required page stays within the approved Phase 1 budget defined in `Shared Validation Definitions`, and first-screen explanatory content remains visible before deferred interactions initialize.
+  - **Verification Signal:** Delivery-budget review confirms each required page stays within the approved Phase 1 budget defined in `Shared Validation Definitions`, and first-screen explanatory content remains visible on initial page render.
 
 - **NFR4:** Above-the-fold media and layout containers shall reserve space so no key Phase 1 page exceeds `CLS 0.1`.
   - **Scope/Context:** Homepage, proof example, demo input, and trust-floor destinations.
@@ -498,7 +495,7 @@ These capabilities support all journeys rather than one branch only:
   - **Scope/Context:** Homepage, proof example, demo input, request form, and trust-floor destinations.
   - **Verification Signal:** A responsive smoke review completes the primary task set defined in `Shared Validation Definitions` across the required responsive widths with `0` horizontal-scrolling blockers and `0` hidden primary CTAs.
 
-## Appendix A - Implementation Notes
+## Appendix A - Delivery Notes
 
 This appendix preserves technical detail without turning the PRD core into a solution-design document.
 

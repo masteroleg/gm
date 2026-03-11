@@ -19,6 +19,9 @@ validationStepsCompleted:
   - step-v-04-brief-coverage-validation
   - step-v-05-measurability-validation
   - step-v-06-traceability-validation
+  - step-v-07-implementation-leakage-validation
+  - step-v-08-domain-compliance-validation
+  - step-v-09-project-type-validation
 validationStatus: IN_PROGRESS
 ---
 
@@ -256,3 +259,66 @@ Appendix C now maps all active Phase 1 FRs to supporting success criteria and jo
 
 **Recommendation:**
 Traceability chain is intact. All active Phase 1 requirements now trace to user needs or business objectives without orphan FRs.
+
+## Implementation Leakage Validation
+
+### Leakage by Category
+
+**Frontend Frameworks:** 0 violations
+
+**Backend Frameworks:** 0 violations
+
+**Databases:** 0 violations
+
+**Cloud Platforms:** 0 violations
+
+**Infrastructure:** 0 violations
+
+**Libraries:** 0 violations
+
+**Other Implementation Details:** 5 grouped low-severity issues remain under strict whole-document review, concentrated in delivery-note appendices and validation-definition phrasing rather than in active Phase 1 FR/NFR capability statements.
+
+### Summary
+
+**Total Implementation Leakage Violations:** 5 grouped low-severity issues under strict whole-document review
+
+**Severity:** Warning
+
+**Recommendation:**
+Active Phase 1 FR/NFR content is near-clean and materially implementation-agnostic. Remaining leakage is limited to delivery-note and appendix material rather than core capability requirements.
+
+## Domain Compliance Validation
+
+**Domain:** general
+**Complexity:** Low (general/standard)
+**Assessment:** N/A - No special domain compliance requirements
+
+**Note:** This PRD is for a standard domain without regulatory compliance requirements.
+
+## Project-Type Compliance Validation
+
+**Project Type:** web_app
+
+### Required Sections
+
+**browser_matrix:** Present
+**responsive_design:** Present
+**performance_targets:** Present
+**seo_strategy:** Present
+**accessibility_level:** Present
+
+### Excluded Sections (Should Not Be Present)
+
+**native_features:** Absent ✓
+**cli_commands:** Absent ✓
+
+### Compliance Summary
+
+**Required Sections:** 5/5 present
+**Excluded Sections Present:** 0
+**Compliance Score:** 100%
+
+**Severity:** Pass
+
+**Recommendation:**
+All required `web_app` sections are present and no excluded sections were found.

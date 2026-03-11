@@ -131,135 +131,38 @@ const buildPrompt = (
 	diff,
 ) => `You are a git commit message assistant.
 
-Rules:
-- Return JSON only with keys "subject" and "body".
-- Subject must be an English Conventional Commit.
-- Body must be 1-4 short Russian lines.
-- Make the description specific and useful.
-- Describe the meaning of the change, not just the file list.
-- Name the actual decision, alignment, clarification, scope change, or contract update.
-- Do not use generic summaries like "update files", "sync project state", "planning artifacts", or category-only/file-list-only wording.
-- Do not make the body just a list of filenames.
-- For BMAD/planning updates, summarize what was aligned or clarified across PRD, architecture, epics, UX, sprint scope, metadata, routes, or phase boundaries.
-- Do not add markdown, code fences, bullets, analysis, or commentary.
-- Do not run tools or inspect the repository. Use only the context below.
+Generate a commit message in this exact format:
 
-Bad example:
-{"subject":"docs(bmad): update planning artifacts","body":"BMAD: architecture.md, epics.md, prd.md"}
+<subject line in English (Conventional Commit)>
 
-Good example:
-{"subject":"docs(bmad): align Phase 1 planning scope","body":"Синхронизированы PRD, architecture и epics по scope proof-маршрутов, metadata request flow и границам future-phase функциональности."}
+<general summary in Russian>
 
-Staged files:
+- \`<file-1>\` — <what changed in this file>
+- \`<file-2>\` — <what changed in this file>
+
+Subject rules:
+- English only
+- Conventional Commit format (type(scope): description)
+- Describe the MEANING of the change, not "update files"
+
+Body rules:
+- First line: short Russian summary of overall change
+- Then: file-by-file list with brief notes
+- Each note should help future reader understand what changed
+
+Use only the files and diff below. Do not invent changes.
+
+Files:
 ${files.join("\n")}
 
-Staged stat:
+Stat:
 ${stat}
 
-Important diff excerpts:
+Diff excerpts:
 ${compactDiff(diff)}`;
-
-const buildRepairPrompt = (
-	candidate,
-	files,
-	stat,
-	diff,
-) => `Rewrite this commit message as a semantic summary.
-
-Return JSON only with keys "subject" and "body".
-- Keep the same language rules: English Conventional Commit subject, short Russian body.
-- Preserve the real meaning of the changes.
-- Do not output a file list as the body.
-- Do not use generic phrases like "update planning artifacts" or "update files" unless the diff truly has no clearer theme.
-- Prefer the main decision, alignment, clarified scope, or contract change.
-
-Bad candidate:
-${candidate}
-
-Staged files:
-${files.join("\n")}
-
-Staged stat:
-${stat}
-
-Important diff excerpts:
-${compactDiff(diff)}`;
-
-const normalizeGeneratedMessage = (subject, body) => {
-	const cleanSubject = String(subject || "").trim();
-	const cleanBody = String(body || "").trim();
-	if (!cleanSubject || !cleanBody) return "";
-	return `${cleanSubject}\n\n${cleanBody}\n`;
-};
-
-const looksLikeFileNameList = (value) => {
-	const clean = String(value || "").trim();
-	if (!clean) return false;
-	return /\b[\w.-]+\.(md|txt|json|ya?ml|js|cjs|mjs|ts|tsx|css|html)\b/i.test(
-		clean,
-	);
-};
-
-const isLowValueMessage = (message) => {
-	const clean = String(message || "").trim();
-	if (!clean) return true;
-
-	const [subject = "", , ...bodyLines] = clean.split(/\r?\n/);
-	const body = bodyLines.join(" ").trim();
-	const subjectText = subject.replace(
-		/^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?!?:\s*/i,
-		"",
-	);
-
-	if (/sync project state after updates/i.test(subject)) return true;
-	if (/update \d+ project files/i.test(subject)) return true;
-	if (/^update\s+/i.test(subjectText) && looksLikeFileNameList(subjectText))
-		return true;
-	if (/^add\s+/i.test(subjectText) && looksLikeFileNameList(subjectText))
-		return true;
-	if (/^update planning artifacts/i.test(subjectText)) return true;
-	if (/update planning artifacts/i.test(subject) && /^BMAD:/i.test(body))
-		return true;
-	if (/^(BMAD|Docs|Tests|Site|Config):\s+[\w./,-]+\.?$/i.test(body))
-		return true;
-	if (/^(BMAD|Docs|Tests|Site|Config):\s+[^.]+(?:,[^.]+){1,}\.?$/i.test(body))
-		return true;
-	if (
-		/^(Updated|Категории изменений|Изменены следующие компоненты):/i.test(body)
-	)
-		return true;
-	if (looksLikeFileNameList(body) && body.split(/\s+/).length <= 12)
-		return true;
-
-	return false;
-};
 
 const hasMeaningfulMessageContent = (value) =>
 	/^[\t ]*[^#\s].+/m.test(value || "");
-
-const extractJsonMessage = (raw) => {
-	const clean = stripAnsi(raw).trim();
-	if (!clean) return "";
-
-	for (const line of clean.split(/\r?\n/)) {
-		const trimmed = line.trim();
-		if (!trimmed.startsWith("{")) continue;
-
-		try {
-			const event = JSON.parse(trimmed);
-			const text = event?.part?.text;
-			if (!text) continue;
-
-			const payload = JSON.parse(text);
-			const message = normalizeGeneratedMessage(payload.subject, payload.body);
-			if (message) return message;
-		} catch {
-			// ignore malformed event lines
-		}
-	}
-
-	return "";
-};
 
 const extractMessage = (raw) => {
 	const clean = stripAnsi(raw).trim();
@@ -430,16 +333,7 @@ const runOpencodeCommand = (
 	sessionID,
 	attachUrl = "",
 ) => {
-	const args = [
-		"run",
-		prompt,
-		"--model",
-		model,
-		"--session",
-		sessionID,
-		"--format",
-		"json",
-	];
+	const args = ["run", prompt, "--model", model, "--session", sessionID];
 
 	if (attachUrl) args.push("--attach", attachUrl);
 
@@ -447,7 +341,7 @@ const runOpencodeCommand = (
 	if (!result.ok) return "";
 
 	const output = `${result.stdout}\n${result.stderr}`;
-	return extractJsonMessage(output) || extractMessage(output);
+	return extractMessage(output);
 };
 
 const runOpencodeWindows = (
@@ -806,8 +700,7 @@ const messageFile = process.argv[2];
 if (!messageFile) process.exit(0);
 
 const current = readFileSync(messageFile, "utf8");
-if (hasMeaningfulMessageContent(current) && !isLowValueMessage(current))
-	process.exit(0);
+if (hasMeaningfulMessageContent(current)) process.exit(0);
 
 let files = getStagedFiles();
 let stat = getStat();
@@ -822,11 +715,7 @@ if (!files.length) {
 if (!files.length) process.exit(0);
 
 const config = readConfig();
-let aiMessage = runOpencode(buildPrompt(files, stat, diff));
-
-if (aiMessage && isLowValueMessage(aiMessage)) {
-	aiMessage = runOpencode(buildRepairPrompt(aiMessage, files, stat, diff));
-}
+const aiMessage = runOpencode(buildPrompt(files, stat, diff));
 
 const nextMessage =
 	aiMessage ||
