@@ -468,10 +468,28 @@ const summarize = (files, stat, type) => {
 	const prefix = scope ? `${type}(${scope})` : type;
 
 	if (fileCount <= 3) {
-		// For small commits, be more specific
+		// For small commits, be more specific - show actual file names in body
+		const fileNames = files.map((f) => f.split("/").pop()).join(", ");
+		let bodyText = "";
+
+		// Build informative body based on categories
+		if (categories.bmad.length) {
+			bodyText = `BMAD: ${categories.bmad.map((f) => f.split("/").pop()).join(", ")}`;
+		} else if (categories.docs.length) {
+			bodyText = `Docs: ${categories.docs.map((f) => f.split("/").pop()).join(", ")}`;
+		} else if (categories.tests.length) {
+			bodyText = `Tests: ${categories.tests.map((f) => f.split("/").pop()).join(", ")}`;
+		} else if (categories.site.length) {
+			bodyText = `Site: ${categories.site.map((f) => f.split("/").pop()).join(", ")}`;
+		} else if (categories.config.length) {
+			bodyText = `Config: ${categories.config.map((f) => f.split("/").pop()).join(", ")}`;
+		} else {
+			bodyText = `Updated: ${fileNames}`;
+		}
+
 		return {
-			subject: `${prefix}: update ${files.map((f) => f.split("/").pop()).join(", ")}`,
-			body: `Изменены следующие компоненты: ${categoryList}.`,
+			subject: `${prefix}: update ${fileNames}`,
+			body: bodyText,
 		};
 	}
 
