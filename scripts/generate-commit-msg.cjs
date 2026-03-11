@@ -68,6 +68,51 @@ const readConfig = () => {
 
 const stripAnsi = (value) => value.replace(ANSI_PATTERN, "").replace(/\r/g, "");
 
+const compactDiff = (diff, maxChars = 6000) => {
+	if (!diff) return "";
+
+	const sections = diff.split(/^diff --git /m).filter(Boolean);
+	const snippets = [];
+	let total = 0;
+
+	for (const section of sections) {
+		const lines = section.split(/\r?\n/);
+		const picked = [];
+		let changeLines = 0;
+
+		for (const line of lines) {
+			if (
+				line.startsWith("a/") ||
+				line.startsWith("index ") ||
+				line.startsWith("--- ") ||
+				line.startsWith("+++ ") ||
+				line.startsWith("@@") ||
+				(line.startsWith("+") && !line.startsWith("+++")) ||
+				(line.startsWith("-") && !line.startsWith("---"))
+			) {
+				picked.push(line);
+				if (
+					(line.startsWith("+") && !line.startsWith("+++")) ||
+					(line.startsWith("-") && !line.startsWith("---"))
+				) {
+					changeLines += 1;
+				}
+			}
+
+			if (changeLines >= 12) break;
+		}
+
+		const snippet = `diff --git ${picked.join("\n")}`.trim();
+		if (!snippet) continue;
+
+		if (total + snippet.length > maxChars) break;
+		snippets.push(snippet);
+		total += snippet.length + 2;
+	}
+
+	return snippets.join("\n\n");
+};
+
 const buildPrompt = (
 	files,
 	stat,
@@ -75,10 +120,12 @@ const buildPrompt = (
 ) => `You are a git commit message assistant.
 
 Rules:
-- Output plain text only.
-- Return exactly: subject line, blank line, short Russian body.
+- Return JSON only with keys "subject" and "body".
 - Subject must be an English Conventional Commit.
 - Body must be 1-4 short Russian lines.
+- Make the description specific and useful.
+- Name the actual artifact/theme of the change, not generic file counters.
+- For BMAD/planning updates, prefer phrases like "update planning artifacts", "revise PRD and architecture", or similarly concrete wording.
 - Do not add markdown, code fences, bullets, analysis, or commentary.
 - Do not run tools or inspect the repository. Use only the context below.
 
@@ -88,8 +135,39 @@ ${files.join("\n")}
 Staged stat:
 ${stat}
 
-Staged diff:
-${diff}`;
+Important diff excerpts:
+${compactDiff(diff)}`;
+
+const normalizeGeneratedMessage = (subject, body) => {
+	const cleanSubject = String(subject || "").trim();
+	const cleanBody = String(body || "").trim();
+	if (!cleanSubject || !cleanBody) return "";
+	return `${cleanSubject}\n\n${cleanBody}\n`;
+};
+
+const extractJsonMessage = (raw) => {
+	const clean = stripAnsi(raw).trim();
+	if (!clean) return "";
+
+	for (const line of clean.split(/\r?\n/)) {
+		const trimmed = line.trim();
+		if (!trimmed.startsWith("{")) continue;
+
+		try {
+			const event = JSON.parse(trimmed);
+			const text = event?.part?.text;
+			if (!text) continue;
+
+			const payload = JSON.parse(text);
+			const message = normalizeGeneratedMessage(payload.subject, payload.body);
+			if (message) return message;
+		} catch {
+			// ignore malformed event lines
+		}
+	}
+
+	return "";
+};
 
 const extractMessage = (raw) => {
 	const clean = stripAnsi(raw).trim();
@@ -260,12 +338,24 @@ const runOpencodeCommand = (
 	sessionID,
 	attachUrl = "",
 ) => {
-	const args = ["run", prompt, "--model", model, "--session", sessionID];
+	const args = [
+		"run",
+		prompt,
+		"--model",
+		model,
+		"--session",
+		sessionID,
+		"--format",
+		"json",
+	];
 
 	if (attachUrl) args.push("--attach", attachUrl);
 
 	const result = runCommand(binary, args);
-	return result.ok ? extractMessage(`${result.stdout}\n${result.stderr}`) : "";
+	if (!result.ok) return "";
+
+	const output = `${result.stdout}\n${result.stderr}`;
+	return extractJsonMessage(output) || extractMessage(output);
 };
 
 const runOpencodeWindows = (
@@ -338,6 +428,12 @@ const detectType = (files) => {
 	if (!files.length) return "chore";
 	if (
 		files.every(
+			(file) => file.startsWith("_bmad/") || file.startsWith("_bmad-output/"),
+		)
+	)
+		return "docs";
+	if (
+		files.every(
 			(file) =>
 				/^README/i.test(file) ||
 				file.startsWith("docs/") ||
@@ -363,6 +459,12 @@ const detectType = (files) => {
 
 const detectScope = (files) => {
 	if (!files.length) return "";
+	if (
+		files.some(
+			(file) => file.startsWith("_bmad/") || file.startsWith("_bmad-output/"),
+		)
+	)
+		return "bmad";
 	if (files.some((file) => file.startsWith(".husky/"))) return "hooks";
 	if (files.some((file) => /^README/i.test(file) || file.includes("/README")))
 		return "readme";
@@ -443,6 +545,17 @@ const buildCategoryDescription = (categories) => {
 
 	return descriptions;
 };
+
+const toBaseName = (file) => file.split("/").pop();
+
+const formatFileList = (files, limit = 5) => {
+	const names = files.map(toBaseName);
+	if (names.length <= limit) return names.join(", ");
+	return `${names.slice(0, limit).join(", ")} and ${names.length - limit} more`;
+};
+
+const allFilesInPath = (files, prefix) =>
+	files.every((file) => file.startsWith(prefix));
 
 const summarize = (files, stat, type) => {
 	const fileCount = files.length;
@@ -525,9 +638,32 @@ const summarize = (files, stat, type) => {
 		};
 	}
 
+	if (categories.bmad.length === fileCount) {
+		return {
+			subject: allFilesInPath(files, "_bmad-output/planning-artifacts/")
+				? "docs(bmad): update planning artifacts"
+				: "docs(bmad): update BMAD artifacts",
+			body: `BMAD: ${formatFileList(categories.bmad)}.`,
+		};
+	}
+
+	if (categories.docs.length === fileCount) {
+		return {
+			subject: "docs: update project documentation",
+			body: `Docs: ${formatFileList(categories.docs)}.`,
+		};
+	}
+
+	if (categories.site.length === fileCount) {
+		return {
+			subject: "feat(site): update site content and assets",
+			body: `Site: ${formatFileList(categories.site)}.`,
+		};
+	}
+
 	return {
-		subject: `${prefix}: sync project state after updates`,
-		body: `Обновлены файлы проекта (${fileCount} total): ${categoryList}.`,
+		subject: `${prefix}: update ${fileCount} project files`,
+		body: `Категории изменений: ${categoryList}.`,
 	};
 };
 
