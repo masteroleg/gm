@@ -18,7 +18,7 @@ This document provides the complete epic and story breakdown for gm, decomposing
 
 ## Requirements Inventory
 
-### Functional Requirements
+### Active Phase 1 Functional Requirements
 
 FR1: Users can switch the public site between UK and EN across the homepage, proof example, demo input, and trust-floor destinations.
 FR2: The system can persist the selected language for returning visits on supported browsers.
@@ -39,7 +39,6 @@ FR16: The system can hide empty proof sections instead of rendering placeholder 
 FR17: The system can label each displayed public proof fact by source category.
 FR18: The system can show supporting evidence links or documents when they exist for a displayed public claim.
 FR19: The system can suppress sustainability content when required evidence is missing.
-FR20: Phase 2+ only: approved public proof extensions can add new content fields within the existing public proof structure without requiring a new page type.
 FR21: Consumer-intent visitors can open a dedicated intercept page that points them to `Дія` for official consumer checking.
 FR22: Consumer-intent visitors can also see a separate B2B CTA for marking, proof, or transparency services.
 FR23: Visitors can submit a qualified request with contact data, scenario, and business context.
@@ -47,10 +46,16 @@ FR24: The system can attach scenario and source-path metadata to each qualified 
 FR25: Partners can share a public proof or demo link that opens the same intended public state and CTA destination without requiring login.
 FR26: Visitors can open trust-floor destinations for About, Contact, Proof & Cases, Privacy, Terms, and FAQ from the public site.
 FR27: Visitors can see reserved navigation and IA for the future knowledge base without requiring full Phase 1 knowledge content.
-FR28: Phase 2 only: when knowledge content is enabled, visitors can open a knowledge entry and continue to a relevant CTA.
 FR29: The product team can distinguish visits that move from the homepage into the proof example path.
 FR30: The product team can distinguish qualified requests by scenario and entry source.
 FR31: The product team can review a proof-first funnel consisting of homepage, proof example, and request steps.
+
+### Roadmap-Only Requirement Notes
+
+These references are intentionally excluded from the implementation-ready Phase 1 backlog.
+
+FR20: Phase 2+ only: approved public proof extensions can add new content fields within the existing public proof structure without requiring a new page type.
+FR28: Phase 2 only: when knowledge content is enabled, visitors can open a knowledge entry and continue to a relevant CTA.
 FR32: Phase 3 only: when live public lookup is enabled, the system can apply bounded abuse controls to reduce repeated enumeration-style requests against the public proof endpoint.
 
 ### NonFunctional Requirements
@@ -85,7 +90,10 @@ NFR16: Phase 1 public flows shall remain usable at 360px, 768px, and 1280px widt
 - Responsive quality is first-class: key flows must work cleanly on mobile, tablet, and desktop, with branch cards, proof pages, and request flows usable from 360px upward.
 - Accessibility requirements from UX and architecture must be built into the story set: keyboard access, visible focus, screen-reader labels, `aria-*` sync, reduced-motion fallback, and semantic page structure.
 - SEO implementation requires full per-page metadata, canonical/hreflang handling, JSON-LD in `<head>`, static `sitemap.xml`, `robots.txt`, and an OG image baseline.
-- Phase 1 request capture is expected to use a lightweight `mailto:` fallback with scenario, source-path, and optional proof-path metadata capture, while keeping within the PRD privacy limits.
+- Phase 1 request/contact flow uses `mailto:` as a UX handoff mechanism, not as a reliable transport or server-side request ingestion path.
+- Metadata in the Phase 1 handoff is best-effort and environment-dependent: `scenario`, `source_path`, and optional `proof_path` are included when the client supports the generated `mailto:` payload.
+- If no configured mail client is available or `mailto:` cannot open, the fallback must preserve user-entered values on the page, show an explicit contact next step, and avoid claiming that the request was submitted.
+- No backend request capture, request logging, or telemetry pipeline is introduced in this Phase 1 backlog pass.
 - Architecture expects self-hosted Manrope Variable with preload and `font-display: swap` to protect performance and CLS.
 - New controllers and flows must be decomposed so they can be covered with Jest unit tests plus Playwright smoke/E2E coverage for persisted or browser-visible behavior.
 - Homepage decomposition must preserve the narrative order from the master plan: category framing -> bridge "not just a QR" -> mandatory verification preview -> branch split -> conversion -> trust floor.
@@ -113,7 +121,6 @@ FR16: Epic 2 - hidden empty proof sections
 FR17: Epic 2 - source-labeled public proof facts
 FR18: Epic 2 - supporting evidence links/documents
 FR19: Epic 2 - suppression of unsupported sustainability content
-FR20: Deferred future-phase reference - proof model extension seam
 FR21: Epic 3 - consumer-intent intercept to `Дія`
 FR22: Epic 3 - separate B2B CTA on consumer/B2B routing paths
 FR23: Epic 3 - qualified request submission flow
@@ -121,10 +128,13 @@ FR24: Epic 3 - scenario and source-path metadata capture
 FR25: Epic 2 - shareable public proof/demo states without login
 FR26: Epic 1 - trust-floor destination access from the public site
 FR27: Epic 1 - reserved knowledge navigation and IA
-FR28: Deferred future-phase reference - knowledge entry to CTA flow
 FR29: Epic 4 - visibility into homepage-to-proof movement
 FR30: Epic 4 - reporting by scenario and entry source
 FR31: Epic 4 - reviewable proof-first funnel
+
+Roadmap-only references (not implementation scope):
+FR20: Deferred future-phase reference - proof model extension seam
+FR28: Deferred future-phase reference - knowledge entry to CTA flow
 FR32: Deferred future-phase reference - live lookup abuse controls
 
 ## Epic List
@@ -494,7 +504,7 @@ So that I can trust what the page displays.
 **Then** the content and evidence links are readable and usable
 **And** the layout works at `360px` width without broken structure or hidden content
 
-### Story 2.5: Keep the Proof Page Ready for Future Fields
+### Roadmap-Only Story 2.5: Keep the Proof Page Ready for Future Fields
 
 Deferred future-phase reference only. Not part of the implementation-ready Phase 1 backlog.
 
@@ -597,6 +607,11 @@ So that I can ask for help without filling a long form.
 **Then** the request is prepared with their entered contact details, company name, scenario, and short context
 **And** the configured Phase 1 request handoff works without requiring login
 
+**Given** a visitor fills in the required fields correctly
+**When** the request handoff uses `mailto:` in a supported client environment
+**Then** the generated handoff includes the visible request details
+**And** the flow does not promise a server-side submission or stored request record
+
 **Given** a visitor misses a required field or enters invalid data
 **When** they try to submit the form
 **Then** the form is not sent
@@ -606,6 +621,11 @@ So that I can ask for help without filling a long form.
 **When** they use it
 **Then** the fields, labels, and submit action are readable and usable
 **And** the layout works at `360px` width without broken structure or hidden controls
+
+**Given** a visitor has no configured mail client or the `mailto:` handoff cannot open
+**When** they attempt to submit the form
+**Then** the page keeps the entered values available on screen
+**And** it shows an explicit contact fallback / next step without claiming that the request was submitted
 
 ### Story 3.4: Attach Scenario and Source Details
 
@@ -625,10 +645,20 @@ So that I do not have to repeat that context by hand.
 **Then** the scenario and source-path details are included with the request
 **And** `proof_path` is included when the request starts from a proof surface without adding extra user-entered fields
 
+**Given** the request flow runs in an environment that supports the generated `mailto:` payload
+**When** metadata is attached to the handoff
+**Then** `scenario`, `source_path`, and optional `proof_path` are passed on a best-effort basis
+**And** the flow does not claim guaranteed transport or server-side capture of that metadata
+
 **Given** scenario or source metadata is missing or unavailable
 **When** the visitor submits the request
 **Then** the request still works
 **And** missing metadata does not block submission
+
+**Given** the `mailto:` handoff is unavailable
+**When** metadata cannot be carried into a client mail composer
+**Then** the fallback path still keeps the visible scenario/context available to the user on page
+**And** the absence of metadata transport does not get presented as a completed submission
 
 ## Epic 4: Funnel Visibility and Review
 
@@ -698,7 +728,12 @@ So that I can judge whether the release supports the intended trust-first funnel
 **Then** they can see where visitors continue and where they stop
 **And** they can review the funnel without needing raw personal data
 
-### Story 4.4: Connect Future Knowledge Pages to the Next Step
+**Given** some measurement inputs are missing, delayed, or only partially available
+**When** the funnel is reviewed
+**Then** the available homepage, proof, and request signals still use consistent definitions
+**And** the review makes incomplete inputs visible without implying missing data was captured elsewhere
+
+### Roadmap-Only Story 4.4: Connect Future Knowledge Pages to the Next Step
 
 Deferred future-phase reference only. Not part of the implementation-ready Phase 1 backlog.
 
@@ -718,7 +753,7 @@ So that guidance content can help me continue through the site.
 **Then** they are taken to a matching next step
 **And** they do not reach a dead end
 
-### Story 4.5: Protect Future Live Checks from Repeated Abuse
+### Roadmap-Only Story 4.5: Protect Future Live Checks from Repeated Abuse
 
 Deferred future-phase reference only. Not part of the implementation-ready Phase 1 backlog.
 

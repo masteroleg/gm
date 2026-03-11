@@ -1,0 +1,69 @@
+# generated: 2026-03-11
+# project: gm
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: D:\w\genu.im\gm\_bmad-output\implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog -> in-progress: Automatically when first story is created (via create-story)
+#   - in-progress -> done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-03-11
+project: gm
+project_key: NOKEY
+tracking_system: file-system
+story_location: D:\w\genu.im\gm\_bmad-output\implementation-artifacts
+
+development_status:
+  epic-1: backlog
+  1-1-clarify-the-homepage-first-screen: backlog
+  1-2-show-the-two-main-visitor-needs: backlog
+  1-3-remember-the-chosen-language-and-theme: backlog
+  1-4-open-the-main-site-information-pages: backlog
+  1-5-show-the-knowledge-section-in-site-navigation: backlog
+  epic-1-retrospective: optional
+
+  epic-2: backlog
+  2-1-show-the-main-verification-example: backlog
+  2-2-show-a-clear-no-data-result: backlog
+  2-3-use-the-demo-input-and-example-code-action: backlog
+  2-4-show-only-supported-proof-content: backlog
+  epic-2-retrospective: optional
+
+  epic-3: backlog
+  3-1-guide-official-checks-to-diia: backlog
+  3-2-show-the-right-business-next-step: backlog
+  3-3-send-a-qualified-request: backlog
+  3-4-attach-scenario-and-source-details: backlog
+  epic-3-retrospective: optional
+
+  epic-4: backlog
+  4-1-track-movement-from-homepage-to-proof: backlog
+  4-2-track-requests-by-scenario-and-source: backlog
+  4-3-review-the-proof-first-funnel: backlog
+  epic-4-retrospective: optional
