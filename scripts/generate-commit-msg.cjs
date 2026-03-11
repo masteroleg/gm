@@ -125,32 +125,34 @@ const compactDiff = (diff, maxChars = 6000) => {
 	return snippets.join("\n\n");
 };
 
-const buildPrompt = (
-	files,
-	stat,
-	diff,
-) => `You are a git commit message assistant.
+const buildPrompt = (files, stat, diff) => `Generate commit message.
 
-Generate a commit message in this exact format:
+Format (STRICT - follow exactly):
 
-<subject line in English (Conventional Commit)>
+<subject>
 
-<general summary in Russian>
+<Russian summary>
 
-- \`<file-1>\` — <what changed in this file>
-- \`<file-2>\` — <what changed in this file>
+- \`<file-1>\` — <note>
+- \`<file-2>\` — <note>
 
-Subject rules:
-- English only
-- Conventional Commit format (type(scope): description)
-- Describe the MEANING of the change, not "update files"
+Subject: English, Conventional Commit, MEANING not filename.
+Body: Russian summary, then bullet list with actual notes per file.
 
-Body rules:
-- First line: short Russian summary of overall change
-- Then: file-by-file list with brief notes
-- Each note should help future reader understand what changed
+Example good output:
 
-Use only the files and diff below. Do not invent changes.
+docs(bmad): align Phase 1 proof scope and request metadata
+
+Синхронизированы planning artifacts для Phase 1.
+
+- \`_bmad-output/planning-artifacts/prd.md\` — уточнены acceptance criteria и SC moderation rules
+- \`_bmad-output/planning-artifacts/epics.md\` — убраны future-phase элементы из active backlog
+- \`_bmad-output/planning-artifacts/architecture.md\` — выровнены proof routes и request metadata
+
+Bad (DO NOT OUTPUT):
+chore: update prd.md, validation-report.md
+
+BMAD: prd.md, validation-report.md
 
 Files:
 ${files.join("\n")}
@@ -158,7 +160,7 @@ ${files.join("\n")}
 Stat:
 ${stat}
 
-Diff excerpts:
+Diff:
 ${compactDiff(diff)}`;
 
 const hasMeaningfulMessageContent = (value) =>

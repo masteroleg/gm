@@ -4,14 +4,11 @@ validationDate: '2026-03-11'
 inputDocuments:
   - _bmad-output/planning-artifacts/prd.md
   - _bmad-output/planning-artifacts/product-brief-gm-2026-02-23.md
-  - _bmad-output/project-context.md
   - _bmad-output/design-thinking-2026-02-23.md
   - _bmad-output/problem-solution-2026-02-23.md
   - _bmad-output/planning-artifacts/validation-report-2026-03-09.md
   - _bmad-output/planning-artifacts/validation-report-2026-03-10.md
   - docs/genu-im-homepage-master-plan.md
-  - AGENTS.md
-  - CLAUDE.md
 validationStepsCompleted:
   - step-v-01-discovery
   - step-v-02-format-detection
@@ -22,7 +19,12 @@ validationStepsCompleted:
   - step-v-07-implementation-leakage-validation
   - step-v-08-domain-compliance-validation
   - step-v-09-project-type-validation
-validationStatus: IN_PROGRESS
+  - step-v-10-smart-validation
+  - step-v-11-holistic-quality-validation
+  - step-v-12-completeness-validation
+validationStatus: COMPLETE
+holisticQualityRating: '4/5 - Good'
+overallStatus: 'Warning'
 ---
 
 # PRD Validation Report
@@ -34,14 +36,11 @@ validationStatus: IN_PROGRESS
 
 - `_bmad-output/planning-artifacts/prd.md`
 - `_bmad-output/planning-artifacts/product-brief-gm-2026-02-23.md`
-- `_bmad-output/project-context.md`
 - `_bmad-output/design-thinking-2026-02-23.md`
 - `_bmad-output/problem-solution-2026-02-23.md`
 - `_bmad-output/planning-artifacts/validation-report-2026-03-09.md`
 - `_bmad-output/planning-artifacts/validation-report-2026-03-10.md`
 - `docs/genu-im-homepage-master-plan.md`
-- `AGENTS.md`
-- `CLAUDE.md`
 
 ## Validation Findings
 
@@ -60,7 +59,7 @@ validationStatus: IN_PROGRESS
 - `web_app Specific Requirements`
 - `Functional Requirements`
 - `Non-Functional Requirements`
-- `Appendix A - Implementation Notes`
+- `Appendix A - Delivery Notes`
 - `Appendix B - Open Decisions`
 - `Appendix C - Traceability Mapping`
 - `Appendix D - Assumptions Used in This Edit Pass`
@@ -81,47 +80,18 @@ validationStatus: IN_PROGRESS
 
 **Anti-Pattern Violations:**
 
-**Conversational Filler:** 29 occurrences
-- `prd.md:277` - `FR1: Users can switch the public site between UK and EN.`
-- `prd.md:281` - `FR2: The system can persist the selected language for returning visits on supported browsers.`
-- `prd.md:285` - `FR3: Users can switch the public site between light and dark theme.`
-- `prd.md:289` - `FR4: The system can persist the selected theme for returning visits on supported browsers.`
-- `prd.md:295` - `FR5: Visitors can identify from the homepage that genu.im is a proof-first surface...`
-- `prd.md:299` - `FR6: Visitors can see explicit role separation...`
-- `prd.md:303` - `FR7: Visitors can open the canonical verification example...`
-- `prd.md:307` - `FR8: Visitors can identify two distinct homepage paths...`
-- `prd.md:311` - `FR9: Visitors can reach trust-floor destinations...`
-- `prd.md:317` - `FR10: Visitors can open the canonical verification example...`
-- `prd.md:321` - `FR11: Visitors can open the Phase 1 demo input surface...`
-- `prd.md:325` - `FR12: The system can display a persistent demo-mode notice...`
-- `prd.md:329` - `FR13: The system can present a valid-state example...`
-- `prd.md:333` - `FR14: The system can present a defined no-data state...`
-- `prd.md:337` - `FR15: The system can explain what public proof could appear...`
-- `prd.md:341` - `FR16: The system can hide empty proof sections...`
-- `prd.md:345` - `FR17: The system can label each displayed public proof fact...`
-- `prd.md:349` - `FR18: The system can show supporting evidence links...`
-- `prd.md:353` - `FR19: The system can suppress sustainability content...`
-- `prd.md:359` - `FR21: Consumer-intent visitors can open a dedicated intercept page...`
-- `prd.md:363` - `FR22: Consumer-intent visitors can also see a separate B2B CTA...`
-- `prd.md:367` - `FR23: Visitors can submit a qualified request...`
-- `prd.md:371` - `FR24: The system can attach scenario and source-path metadata...`
-- `prd.md:375` - `FR25: Partners can share a public proof or demo link...`
-- `prd.md:381` - `FR26: Visitors can open trust-floor destinations...`
-- `prd.md:385` - `FR27: Visitors can see reserved navigation and IA...`
-- `prd.md:391` - `FR29: The product team can distinguish visits...`
-- `prd.md:395` - `FR30: The product team can distinguish qualified requests...`
-- `prd.md:399` - `FR31: The product team can review a proof-first funnel...`
+**Conversational Filler:** 0 occurrences
 
 **Wordy Phrases:** 0 occurrences
 
 **Redundant Phrases:** 0 occurrences
 
-**Total Violations:** 29
+**Total Violations:** 0
 
-**Severity Assessment:** Critical
+**Severity Assessment:** Pass
 
 **Recommendation:**
-PRD remains structurally strong, but the FR set still uses repeated indirect stems such as `Users can`, `Visitors can`, and `The system can`. A final compression pass should replace those boilerplate openings with denser capability wording while preserving measurability and traceability.
+PRD demonstrates good information density with minimal violations.
 
 ## Product Brief Coverage
 
@@ -129,163 +99,104 @@ PRD remains structurally strong, but the FR set still uses repeated indirect ste
 
 ### Coverage Map
 
-**Vision Statement:** Fully Covered
-- Production-grade marking contour, public verification, proof artifact, `еАкциз` readiness, and voluntary brand-protection modes are all represented in the PRD.
-
-**Target Users:** Partially Covered
-- COO/compliance, brand/marketing, and procurement/audit coverage is strong.
-- Automation engineer / IT integrator remains indirect through the partner/integration journey. Severity: Moderate.
-
+**Vision Statement:** Mostly Covered
 **Problem Statement:** Partially Covered
-- Marking reliability, proof, auditability, and `еАкциз` risk are covered well.
-- Explicit line-stoppage / operational disruption pain is implied more than stated. Severity: Moderate.
+**Proposed Solution:** Fully Covered
+**Key Differentiators:** Partially Covered
+**Target Users:** Partially Covered
+**User Journey:** Fully Covered
+**MVP Scope:** Fully Covered
+**MVP Success Criteria:** Partially Covered
+**Future Vision:** Fully Covered
+**Success Metrics / Business Objectives:** Partially Covered
 
-**Key Features:** Partially Covered
-- Proof-first landing, canonical verification example, branch split, About self-verification, and CTA contour are covered.
-- Compact `marking -> protocol -> proof` explainer and named procurement FAQ topics are not required explicitly enough. Severity: Moderate.
+### Gaps & Severity
 
-**Goals/Objectives:** Partially Covered
-- First-screen understanding and proof-path measurement are covered strongly.
-- Return-from-proof-to-CTA behavior is only indirect, and some business targets are intentionally downgraded to baseline/open-decision handling. Severity: Moderate.
-
-**Differentiators:** Partially Covered
-- Proof over slogans, `Дія` vs `genu.mark` separation, and `еАкциз` timing are covered.
-- Production-grade industrial experience is present but softened; `25M+` and Ukravit proof remain intentionally excluded pending approval. Severity: Informational.
+- **Operational success metrics missing** (line-stoppage / incident reduction) — Medium
+- **`25M+` / Ukravit proof claim unresolved** — High (intentionally gated)
+- **Time-boxed business objectives not translated** — Medium
+- **Persona narrative artifacts not preserved** — Low
 
 ### Coverage Summary
 
-**Overall Coverage:** Strong for Phase 1 execution, with several moderate business-nuance gaps.
+**Overall Coverage:** Strong for Phase 1 delivery with deliberate scope-tightening
 **Critical Gaps:** 0
-**Moderate Gaps:** 4
-- Automation engineer / IT integrator persona remains indirect
-- Explicit line-stoppage / operational disruption pain remains softened
-- Compact `marking -> protocol -> proof` explainer is not explicit enough
-- Procurement FAQ topic list is still too generic
-**Informational Gaps:** 3
-- Return-from-proof-to-CTA behavior is indirect rather than explicit
-- `25M+` and Ukravit proof remain intentionally excluded pending approval
-- Long-range commercial targets remain intentionally excluded from Phase 1 acceptance
+**Moderate Gaps:** 3
+**Informational Gaps:** 1
 
 **Recommendation:**
-PRD covers the brief well enough for controlled Phase 1 execution, but it still leaves a few moderate messaging and persona nuances partially implicit. Tightening those areas would improve brief parity without changing scope.
-
-## Post-Adjust Recheck
-
-After the targeted cleanup pass requested during validation, the PRD was rechecked against the active findings.
-
-### Information Density Recheck
-
-- Conversational filler: 0
-- Wordy phrases: 0
-- Redundant phrases: 0
-- Total violations: 0
-- Severity: Pass
-
-The repeated indirect FR stems were removed, and the current FR/NFR wording now passes the density scan cleanly.
-
-### Product Brief Coverage Recheck
-
-- Critical gaps: 0
-- Moderate gaps: 0
-- Informational gaps only: integrator persona richness remains slightly lighter than the original brief; long-range business targets and named proof claims remain intentionally deferred pending approval.
-
-The latest edits resolved the previously flagged gaps around integrator relevance, line-stoppage pain, the `marking -> protocol -> proof` explainer, and procurement FAQ specificity.
+PRD provides solid Phase 1 coverage; remaining gaps are primarily about deferred proof claims and business-goal framing from the brief.
 
 ## Measurability Validation
 
 ### Functional Requirements
 
 **Total FRs Analyzed:** 29
-
-**Format Violations:** 0
-
-**Subjective Adjectives Found:** 0
-
-**Vague Quantifiers Found:** 0
-
-**Implementation Leakage:** 0
-
 **FR Violations Total:** 0
 
 ### Non-Functional Requirements
 
 **Total NFRs Analyzed:** 16
+**NFR Violations Total:** 4
 
-**Missing Metrics:** 0
-
-**Incomplete Template:** 0
-
-**Missing Context:** 0
-
-**NFR Violations Total:** 0
+**Remaining Issues:**
+- `NFR3` (`prd.md:437`) - “first-screen explanatory content” not explicitly defined
+- `NFR5` (`prd.md:447`) - “0 blockers” lacks an in-file blocker definition
+- `NFR7` (`prd.md:455`) - keyboard/labeling checklist referenced but not defined
+- `NFR8` (`prd.md:459`) - release checklist referenced but not defined
 
 ### Overall Assessment
 
 **Total Requirements:** 45
-**Total Violations:** 0
+**Total Violations:** 4
 
-**Severity:** Pass
+**Severity:** Warning
 
 **Recommendation:**
-Active FRs and NFRs now pass measurability validation cleanly. The latest cleanup removed the remaining vague terms, future-scope bleed, and undefined measurement-method gaps.
+FRs are clean. To make NFRs fully self-contained, add minimal definitions for blocker severity and the keyboard/language review checklists.
 
 ## Traceability Validation
 
 ### Chain Validation
 
 **Executive Summary -> Success Criteria:** Intact
-
 **Success Criteria -> User Journeys:** Intact
-
 **User Journeys -> Functional Requirements:** Intact
-
 **Scope -> FR Alignment:** Intact
 
 ### Orphan Elements
 
 **Orphan Functional Requirements:** 0
-
 **Unsupported Success Criteria:** 0
-
 **User Journeys Without FRs:** 0
 
 ### Traceability Matrix
 
-Appendix C now maps all active Phase 1 FRs to supporting success criteria and journeys, while future-phase identifiers remain isolated in `Appendix A`.
+Active Phase 1 FR/NFR sets map cleanly to success criteria and journeys, while roadmap identifiers remain excluded by design.
 
 **Total Traceability Issues:** 0
 
 **Severity:** Pass
 
 **Recommendation:**
-Traceability chain is intact. All active Phase 1 requirements now trace to user needs or business objectives without orphan FRs.
+Traceability chain is intact across all active requirements.
 
 ## Implementation Leakage Validation
 
 ### Leakage by Category
 
-**Frontend Frameworks:** 0 violations
-
-**Backend Frameworks:** 0 violations
-
-**Databases:** 0 violations
-
-**Cloud Platforms:** 0 violations
-
-**Infrastructure:** 0 violations
-
-**Libraries:** 0 violations
-
-**Other Implementation Details:** 5 grouped low-severity issues remain under strict whole-document review, concentrated in delivery-note appendices and validation-definition phrasing rather than in active Phase 1 FR/NFR capability statements.
+**IA/Placement Specificity:** 3
+**Interaction Mechanics Specificity:** 3
+**Delivery/Technical Constraint Specificity:** 1
 
 ### Summary
 
-**Total Implementation Leakage Violations:** 5 grouped low-severity issues under strict whole-document review
+**Total Implementation Leakage Violations:** 7
 
 **Severity:** Warning
 
 **Recommendation:**
-Active Phase 1 FR/NFR content is near-clean and materially implementation-agnostic. Remaining leakage is limited to delivery-note and appendix material rather than core capability requirements.
+Residual leakage is low and localized, primarily in a few placement/mechanics phrases and one delivery constraint. If a stricter separation is required, rephrase those items without changing scope.
 
 ## Domain Compliance Validation
 
@@ -321,4 +232,129 @@ Active Phase 1 FR/NFR content is near-clean and materially implementation-agnost
 **Severity:** Pass
 
 **Recommendation:**
-All required `web_app` sections are present and no excluded sections were found.
+All required sections for `web_app` are present. No excluded sections found.
+
+## SMART Requirements Validation
+
+**Total Functional Requirements:** 29
+
+### Scoring Summary
+
+**Low-Scoring FRs:** 7
+
+**Flagged:** `FR5`, `FR8`, `FR15`, `FR18`, `FR29`, `FR30`, `FR31`
+
+### Overall Assessment
+
+**Severity:** Warning
+
+**Recommendation:**
+Several FRs would benefit from tighter SMART clarity, especially around message requirements and review period definitions.
+
+## Holistic Quality Assessment
+
+### Document Flow & Coherence
+
+**Assessment:** Good
+
+**Strengths:**
+- Clear progression from trust model to scope, journeys, and requirements
+- Phase 1 boundaries and de-scope are explicit
+- Appendices preserve decisions without overtly driving implementation
+
+**Areas for Improvement:**
+- Repetition of trust-boundary language increases reading load
+- Long FR/NFR blocks reduce executive skim speed
+
+### Dual Audience Effectiveness
+
+**For Humans:**
+- Executive-friendly: Good
+- Developer clarity: Good
+- Designer clarity: Good
+- Stakeholder decision-making: Good
+
+**For LLMs:**
+- Machine-readable structure: Strong
+- UX readiness: Strong
+- Architecture readiness: Good
+- Epic/Story readiness: Strong
+
+**Dual Audience Score:** 4/5
+
+### BMAD PRD Principles Compliance
+
+| Principle | Status | Notes |
+|-----------|--------|-------|
+| Information Density | Met | Core content is dense and direct. |
+| Measurability | Partial | Remaining NFR checklist gaps noted. |
+| Traceability | Met | Active Phase 1 chain is intact. |
+| Domain Awareness | Met | Trust-boundary logic is consistent. |
+| Zero Anti-Patterns | Met | No filler patterns detected. |
+| Dual Audience | Met | Works for humans and LLMs with minor scan friction. |
+| Markdown Format | Met | Structure is consistent. |
+
+**Principles Met:** 6/7
+
+### Overall Quality Rating
+
+**Rating:** 4/5 - Good
+
+### Top 3 Improvements
+
+1. **Reduce trust-boundary repetition**
+   Consolidate a single boundary summary and reference it rather than repeating in multiple sections.
+
+2. **Bridge journeys to surfaces**
+   Add a short Phase 1 surface map for non-technical readers.
+
+3. **Clarify requirement priority**
+   Mark release gates vs nice-to-have checks to aid planning.
+
+### Summary
+
+**This PRD is:** strong and usable with minor readability and measurability refinements outstanding.
+
+## Completeness Validation
+
+### Template Completeness
+
+**Template Variables Found:** 0
+No template variables remaining ✓
+
+### Content Completeness by Section
+
+**Executive Summary:** Complete
+**Success Criteria:** Complete
+**Product Scope:** Complete
+**User Journeys:** Complete
+**Functional Requirements:** Complete
+**Non-Functional Requirements:** Complete
+
+### Section-Specific Completeness
+
+**Success Criteria Measurability:** Some measurable
+**User Journeys Coverage:** Yes
+**FRs Cover MVP Scope:** Yes
+**NFRs Have Specific Criteria:** Some
+
+### Frontmatter Completeness
+
+**stepsCompleted:** Present
+**classification:** Present
+**inputDocuments:** Present
+**date:** Present
+
+**Frontmatter Completeness:** 4/4
+
+### Completeness Summary
+
+**Overall Completeness:** 100%
+
+**Critical Gaps:** 0
+**Minor Gaps:** 0
+
+**Severity:** Pass
+
+**Recommendation:**
+PRD is complete with all required sections and content present.
