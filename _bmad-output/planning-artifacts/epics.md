@@ -266,8 +266,8 @@ So that I can quickly see whether it fits my case.
 
 **Given** a visitor chooses the block that fits their case
 **When** they click its CTA
-**Then** they are taken to the matching destination for that block
-**And** they do not need to guess which block is meant for them
+**Then** they are taken to the request form with the matching scenario already selected
+**And** they do not need to guess which block is meant for them or what happens after click
 
 **Given** a visitor opens the section on mobile or desktop
 **When** the section is displayed
@@ -328,7 +328,7 @@ So that I can quickly find the background and policy information I need before m
 **Given** a visitor opens one of these pages
 **When** the page is shown
 **Then** it is clear what the page is for
-**And** the page contains enough content to be useful
+**And** the page includes a page-specific title, starter content that matches its purpose, and clear navigation back to the homepage or request path
 
 **Given** a visitor opens one of these pages from the public site
 **When** the page loads
@@ -347,8 +347,8 @@ So that I can quickly find the background and policy information I need before m
 
 **Given** one of these destinations has only starter-level Phase 1 content
 **When** a visitor opens that page
-**Then** it still functions as a valid public destination with a clear purpose and usable navigation
-**And** it does not appear broken, empty, or misleadingly complete
+**Then** it still functions as a valid public destination with a clear purpose, starter content, and usable navigation
+**And** it does not appear broken, empty, or falsely complete
 
 ### Story 1.5: Show the Knowledge Section in Site Navigation
 
@@ -438,10 +438,20 @@ So that I understand the outcome without thinking the page is broken.
 **Then** it makes clear that the code may not be available in the public verification view or may have been entered incorrectly
 **And** the wording stays factual and calm
 
+**Given** supported public proof data exists for a result in this surface
+**When** that result is shown
+**Then** only the supported proof blocks are rendered, such as status, source-labeled facts, product or category details, source disclosure, and evidence links when approved
+**And** empty or unsupported sections remain hidden
+
 **Given** a visitor wants an official check after seeing no data
 **When** they read the next-step guidance
 **Then** the page points them to `Дія` for official checking
 **And** it does not suggest that `genu.im` provides the official result
+
+**Given** a visitor wants a business next step after seeing no data
+**When** they use the business CTA
+**Then** they are taken to the request form with the matching scenario already selected
+**And** that CTA is clearly separate from the official-check path to `Дія`
 
 **Given** a visitor opens the no-data result on mobile or desktop
 **When** the page is displayed
@@ -576,8 +586,8 @@ So that I can continue toward marking, proof, or transparency help instead of th
 
 **Given** a visitor wants the business path
 **When** they use its CTA
-**Then** they are taken to the matching business next step
-**And** the CTA text makes that next step clear before click
+**Then** they are taken to the request form with the matching scenario already selected
+**And** the CTA text makes that request step clear before click
 
 **Given** a visitor opens this business option on mobile or desktop
 **When** the section or page is displayed
@@ -604,13 +614,13 @@ So that I can ask for help without filling a long form.
 
 **Given** a visitor fills in the required fields correctly
 **When** they submit the form
-**Then** the request is prepared with their entered contact details, company name, scenario, and short context
-**And** the configured Phase 1 request handoff works without requiring login
+**Then** the site initiates the Phase 1 `mailto:` handoff with their entered contact details, company name, scenario, and short context
+**And** that handoff works without requiring login when the client environment supports it
 
 **Given** a visitor fills in the required fields correctly
 **When** the request handoff uses `mailto:` in a supported client environment
 **Then** the generated handoff includes the visible request details
-**And** the flow does not promise a server-side submission or stored request record
+**And** the flow confirms handoff initiation only, not a server-side submission or stored request record
 
 **Given** a visitor misses a required field or enters invalid data
 **When** they try to submit the form
@@ -624,8 +634,8 @@ So that I can ask for help without filling a long form.
 
 **Given** a visitor has no configured mail client or the `mailto:` handoff cannot open
 **When** they attempt to submit the form
-**Then** the page keeps the entered values available on screen
-**And** it shows an explicit contact fallback / next step without claiming that the request was submitted
+**Then** the page keeps the entered values visible and editable on screen
+**And** it shows an explicit fallback contact next step without claiming that the request was submitted
 
 ### Story 3.4: Attach Scenario and Source Details
 

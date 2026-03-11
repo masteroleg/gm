@@ -718,14 +718,27 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
 
 #### NoDataState
 
-**Призначення:** Чесний нейтральний стан коли код не знайдено — USP чесності платформи
+**Призначення:** Чесний нейтральний стан коли в `genu.im` немає публічного proof для цього коду. Це межа публічної surface, а не помилка, не підтвердження справжності, не юридичний висновок і не live lookup.
 
 **Копія:**
-> *"Цей код не зареєстрований у genu.mark. Можливо, продукт не маркований через нашу платформу — або код введено невірно. Для офіційної перевірки акцизу → Дія."*
+> *"Для цього коду в `genu.im` зараз немає публічного proof. Це може означати, що публічний запис у цій surface зараз недоступний — або код введено невірно. `genu.im` не показує офіційний результат перевірки акцизу; для офіційної перевірки використовуйте Дія."*
 
-**Заборони:** жодного червоного кольору, жодних "помилок", жодного overclaiming
+**Якщо для цього результату є підтримані дані, тут можуть з'явитися лише такі блоки:**
+- статус / result label
+- source-labeled facts з контуру `genu.mark`
+- відомості про продукт або категорію
+- source disclosure (`джерело`, `timestamp`)
+- NDA-safe evidence links або documents, якщо вони справді доступні
 
-**Accessibility:** `role="status"`, нейтральний тон, посилання на Дія в новій вкладці з `aria-label`
+**Next steps:**
+- `Дія ↗` — окремий external action тільки для official checking
+- окремий business CTA до того самого request form із відповідним scenario prefill
+
+**Заборони:** жодного червоного кольору, жодних "помилок", жодного overclaiming, жодних authenticity / legality / state-approval claims, жодних submission semantics, жодних live lookup semantics, жодних нових Phase 1 surfaces
+
+**Додаткове правило:** показуються тільки підтримані proof blocks; порожні секції не рендеряться
+
+**Accessibility:** `role="status"`, нейтральний тон, окремі й візуально розділені дії для `Дія` та business CTA, посилання на `Дія` в новій вкладці з `aria-label`
 
 ---
 
@@ -753,7 +766,7 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
 
 **Поля:** Ім'я контактної особи, Email або телефон, Компанія, Сценарій, Короткий контекст; приховані: `source_path`, опційний `proof_path`
 
-**Стани:** empty → filled → submitting → success → error
+**Стани:** empty → filled → submitting → handoff / fallback → error
 
 **Accessibility:** Всі поля з `<label>`, error з `aria-describedby`, `aria-invalid`
 
@@ -833,7 +846,8 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
 
 | Тип | Тригер | Вигляд | Тон копії |
 |-----|--------|--------|----------|
-| **Success** | Форма відправлена | Amber badge + зелений текст | "Запит отримано. Зв'яжемося протягом..." |
+| **Handoff** | Поштовий клієнт відкрито або підготовлено чернетку | Muted amber / neutral info state | "Ми підготували чернетку листа з вашим запитом. Перевірте та надішліть її у вашому поштовому клієнті." |
+| **Fallback** | Поштовий клієнт не відкрився | Neutral inline guidance | "Дані запиту залишилися на сторінці. Скористайтесь вказаним контактом або скопіюйте зміст запиту вручну." |
 | **Error** | Форма невалідна | Inline під полем, червоний бордер | Конкретно: "Вкажіть назву компанії" |
 | **Info** | Demo/Sample banner | Muted amber banner зверху сторінки | "Це демо-сторінка. Живі дані — після підключення." |
 | **No-data** | Код не знайдено | Нейтральний сірий, без червоного | "Код не зареєстровано в genu.mark..." |
@@ -841,7 +855,7 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
 **Правила:**
 - Ніколи не використовувати червоний для `no-data` — це не помилка, а чесна відповідь
 - Feedback завжди inline — жодних модальних вікон для помилок форми
-- `aria-live="polite"` для success/info, `aria-live="assertive"` для errors
+- `aria-live="polite"` для handoff/info/fallback, `aria-live="assertive"` для errors
 
 ---
 
@@ -860,12 +874,13 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
   success  → border green + checkmark icon
 ```
 
-**Prefill паттерн:** `?scenario=` або branch-driven default → автоматично підставляє відповідний сценарій у форму, із затримкою 300ms для видимості зміни
+**Prefill паттерн:** `?scenario=` або branch-driven default веде в той самий request form і автоматично підставляє відповідний сценарій у форму; це змінює лише видимий контекст запиту, а не механізм handoff
 
 **Submit flow:**
-1. Клік → кнопка: spinner + "Надсилаємо..." (disabled)
-2. Success → форма зникає, з'являється success message з amber badge
-3. Error → форма залишається, error toast зверху сторінки
+1. Клік → кнопка: spinner + "Відкриваємо email..." (disabled)
+2. Якщо client environment supports `mailto:` → відкривається передзаповнений лист; сторінка може показати inline handoff info, але не стверджує що запит уже надіслано
+3. Якщо `mailto:` недоступний або не відкрився → форма залишається на місці, усі значення видно, показано явний fallback contact next step
+4. Якщо дані невалідні → handoff не ініціюється, проблемні поля пояснюються inline
 
 ---
 
