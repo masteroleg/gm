@@ -32,6 +32,7 @@ const readConfig = () => {
 	if (!existsSync(CONFIG_PATH)) {
 		return {
 			opencodeModels: [],
+			opencodeAttachUrl: "",
 			maxPromptChars: 12000,
 			fallbackToHeuristicGenerator: true,
 		};
@@ -44,6 +45,10 @@ const readConfig = () => {
 				Array.isArray(parsed.opencodeModels) && parsed.opencodeModels.length
 					? parsed.opencodeModels.filter(Boolean)
 					: [],
+			opencodeAttachUrl:
+				typeof parsed.opencodeAttachUrl === "string"
+					? parsed.opencodeAttachUrl.trim()
+					: "",
 			maxPromptChars:
 				typeof parsed.maxPromptChars === "number" && parsed.maxPromptChars > 0
 					? parsed.maxPromptChars
@@ -54,6 +59,7 @@ const readConfig = () => {
 	} catch {
 		return {
 			opencodeModels: [],
+			opencodeAttachUrl: "",
 			maxPromptChars: 12000,
 			fallbackToHeuristicGenerator: true,
 		};
@@ -98,7 +104,10 @@ const extractMessage = (raw) => {
 
 		const candidate = lines
 			.slice(index)
-			.filter((line, lineIndex) => lineIndex === 0 || !line.startsWith("$ "))
+			.filter(
+				(line, lineIndex) =>
+					lineIndex === 0 || (!line.startsWith("$ ") && !line.startsWith("> ")),
+			)
 			.join("\n")
 			.trim();
 
@@ -244,7 +253,32 @@ const selectModel = (availableModels, candidates) => {
 	return "";
 };
 
-const runOpencodeWindows = (binary, model, prompt, sessionID) => {
+const runOpencodeCommand = (
+	binary,
+	model,
+	prompt,
+	sessionID,
+	attachUrl = "",
+) => {
+	const args = ["run", prompt, "--model", model, "--session", sessionID];
+
+	if (attachUrl) args.push("--attach", attachUrl);
+
+	const result = runCommand(binary, args);
+	return result.ok ? extractMessage(`${result.stdout}\n${result.stderr}`) : "";
+};
+
+const runOpencodeWindows = (
+	binary,
+	model,
+	prompt,
+	sessionID,
+	attachUrl = "",
+) => {
+	if (attachUrl) {
+		return runOpencodeCommand(binary, model, prompt, sessionID, attachUrl);
+	}
+
 	const promptFile = path.join(
 		os.tmpdir(),
 		`opencode-commit-${process.pid}-${Date.now()}.txt`,
@@ -253,7 +287,7 @@ const runOpencodeWindows = (binary, model, prompt, sessionID) => {
 
 	const result = runWindowsPowerShell(
 		binary,
-		"& '__BINARY__' run (Get-Content -Raw $env:OPENCODE_PROMPT_FILE) -m $env:OPENCODE_MODEL -s $env:OPENCODE_SESSION_ID",
+		"& '__BINARY__' run (Get-Content -Raw $env:OPENCODE_PROMPT_FILE) --model $env:OPENCODE_MODEL --session $env:OPENCODE_SESSION_ID",
 		{
 			...process.env,
 			OPENCODE_PROMPT_FILE: promptFile,
@@ -271,17 +305,8 @@ const runOpencodeWindows = (binary, model, prompt, sessionID) => {
 	return result.ok ? extractMessage(`${result.stdout}\n${result.stderr}`) : "";
 };
 
-const runOpencodePosix = (binary, model, prompt, sessionID) => {
-	const result = runCommand(binary, [
-		"run",
-		prompt,
-		"-m",
-		model,
-		"-s",
-		sessionID,
-	]);
-	return result.ok ? extractMessage(`${result.stdout}\n${result.stderr}`) : "";
-};
+const runOpencodePosix = (binary, model, prompt, sessionID, attachUrl = "") =>
+	runOpencodeCommand(binary, model, prompt, sessionID, attachUrl);
 
 const runOpencode = (prompt) => {
 	const config = readConfig();
@@ -294,12 +319,19 @@ const runOpencode = (prompt) => {
 	const candidates = resolveModelCandidates(config);
 	const selectedModel = selectModel(availableModels, candidates);
 	const sessionID = resolveCommitSessionId(binary);
+	const attachUrl = config.opencodeAttachUrl;
 
 	if (!selectedModel || !sessionID) return "";
 
 	if (process.platform === "win32")
-		return runOpencodeWindows(binary, selectedModel, prompt, sessionID);
-	return runOpencodePosix(binary, selectedModel, prompt, sessionID);
+		return runOpencodeWindows(
+			binary,
+			selectedModel,
+			prompt,
+			sessionID,
+			attachUrl,
+		);
+	return runOpencodePosix(binary, selectedModel, prompt, sessionID, attachUrl);
 };
 
 const detectType = (files) => {

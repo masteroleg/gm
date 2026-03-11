@@ -4,6 +4,7 @@
 		"opencode/gpt-5-nano",
 		"opencode/big-pickle"
 	],
+	"opencodeAttachUrl": "http://127.0.0.1:4096",
 	"maxPromptChars": 12000,
 	"fallbackToHeuristicGenerator": true
 }
