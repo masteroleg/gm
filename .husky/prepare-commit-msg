@@ -4,7 +4,7 @@ MSG_FILE="$1"
 
 # Do not override merge commits, squashes, etc.
 COMMIT_SOURCE="$2"
-if [ -n "$COMMIT_SOURCE" ]; then
+if [ "$COMMIT_SOURCE" = "merge" ] || [ "$COMMIT_SOURCE" = "squash" ]; then
 	exit 0
 fi
 

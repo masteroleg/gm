@@ -370,7 +370,7 @@ These capabilities support all journeys rather than one branch only:
 
 - **FR23:** Public request form captures a qualified request with contact data, scenario, and business context.
   - **Scope/Context:** Public request form.
-  - **Acceptance/Verification:** A request counts as qualified when submission requires and captures these Phase 1 user-entered fields before completion: business contact name, one reachable business email or phone, company name, scenario, and short context.
+  - **Acceptance/Verification:** A request counts as qualified when submission requires and captures the Phase 1 qualification fields defined in `Appendix A` before completion.
 
 - **FR24:** Submitted qualified requests include scenario and source-path metadata.
   - **Scope/Context:** Public request handling.
@@ -394,7 +394,7 @@ These capabilities support all journeys rather than one branch only:
 
 - **FR29:** Homepage-to-proof traffic is distinguishable in Phase 1 funnel review.
   - **Scope/Context:** Phase 1 proof-first funnel review.
-  - **Acceptance/Verification:** One dedicated proof-entry identifier allows homepage-to-proof traffic review.
+  - **Acceptance/Verification:** Review data separates homepage-to-proof visits from other entry paths.
 
 - **FR30:** Qualified requests are distinguishable by scenario and entry source.
   - **Scope/Context:** Request review and basic reporting.
@@ -402,91 +402,87 @@ These capabilities support all journeys rather than one branch only:
 
 - **FR31:** Phase 1 proof-first funnel is reviewable across homepage, proof example, proof-surface CTA continuation, and request steps.
   - **Scope/Context:** Phase 1 release review.
-  - **Acceptance/Verification:** Phase 1 provides a reviewable source-tagged funnel that covers homepage entry, proof entry, proof-surface CTA continuation, and request submission when that final step occurs.
+  - **Acceptance/Verification:** Phase 1 release review shows homepage entry, proof entry, proof-surface CTA continuation, and request submission when that final step occurs.
 
 ## Non-Functional Requirements
 
 ### Release Validation Protocol
 
-- `Release validation run` means one mobile audit run and one desktop audit run for each required page type, using the same approved page-quality audit workflow and browser settings across all measured pages.
-- Manual checks referenced by `NFR5`, `NFR7`, `NFR8`, `NFR11`, `NFR14`, `NFR15`, and `NFR16` use one documented checklist per release candidate.
-- `Primary task set` for `NFR15` and `NFR16` includes homepage comprehension, proof-example entry, demo input interaction, request-form completion readiness, and trust-floor navigation.
-- `Copy review` for trust-boundary requirements uses one documented checklist that confirms `Дія` separation, non-state positioning, and no unsupported proof claims.
-- `Required security-header set` means `Content-Security-Policy`, `X-Content-Type-Options`, and `Referrer-Policy`.
+- Release-validation details, primary task set, trust-boundary copy checks, required SEO metadata set, required security-header set, and Phase 1 qualification fields are defined in `Appendix A`.
 
 ### Performance
 
-- **NFR1:** Key Phase 1 pages shall achieve Performance >= 97 in the Phase 1 release validation run.
+- **NFR1:** Key Phase 1 pages shall achieve Performance >= 97 in the Phase 1 release validation protocol.
   - **Scope/Context:** Homepage, demo input surface, canonical verification example, no-data example, and trust-floor destinations.
-  - **Verification Signal:** One mobile audit run and one desktop audit run are captured for each required page type using the Phase 1 release validation protocol.
+  - **Verification Signal:** Validation results are captured for each required page type using the Phase 1 release validation protocol defined in `Appendix A`.
 
-- **NFR2:** Key Phase 1 pages shall meet `LCP < 2.5s`, `CLS < 0.1`, and `INP < 200ms` in the Phase 1 release validation run.
+- **NFR2:** Key Phase 1 pages shall meet `LCP < 2.5s`, `CLS < 0.1`, and `INP < 200ms` in the Phase 1 release validation protocol.
   - **Scope/Context:** Same key public pages as `NFR1`.
-  - **Verification Signal:** One mobile audit run and one desktop audit run record `LCP`, `CLS`, and `INP` for each key page type using the Phase 1 release validation protocol.
+  - **Verification Signal:** Validation results record `LCP`, `CLS`, and `INP` for each key page type using the Phase 1 release validation protocol defined in `Appendix A`.
 
-- **NFR3:** Deferred client-side code for each key Phase 1 public page shall stay within a `<= 150 KB` compressed delivery budget and shall not be required to render first-screen explanatory content.
+- **NFR3:** Each key Phase 1 public page shall stay within the approved Phase 1 delivery budget and shall not require deferred interactions to render first-screen explanatory content.
   - **Scope/Context:** Homepage, canonical verification example, demo input surface, and no-data example.
-  - **Verification Signal:** Release network review confirms each required page stays within the compressed deferred-code budget and first-screen explanatory content remains visible before deferred interactions initialize.
+  - **Verification Signal:** Delivery-budget review confirms each required page stays within the approved Phase 1 budget defined in `Appendix A`, and first-screen explanatory content remains visible before deferred interactions initialize.
 
 - **NFR4:** Above-the-fold media and layout containers shall reserve space so no key Phase 1 page exceeds `CLS 0.1`.
   - **Scope/Context:** Homepage, proof example, demo input, and trust-floor destinations.
-  - **Verification Signal:** Lighthouse CLS check plus slow-load manual review.
+  - **Verification Signal:** Release validation results and slow-load manual review confirm the required `CLS` threshold.
 
 ### Accessibility and Language Integrity
 
-- **NFR5:** Key Phase 1 flows shall conform to WCAG 2.1 AA.
+- **NFR5:** Key Phase 1 flows shall conform to the accessibility level defined in `accessibility_level`.
   - **Scope/Context:** Homepage, canonical proof example, demo input, request form, and trust-floor navigation.
-  - **Verification Signal:** A documented accessibility review confirms `0` WCAG 2.1 AA blockers on the required flows, `0` blocked critical-path tasks, and explicit release approval against the checklist.
+  - **Verification Signal:** A documented accessibility review confirms `0` blockers against the required accessibility level, `0` blocked critical-path tasks, and explicit release approval against the checklist defined in `Appendix A`.
 
-- **NFR6:** Key Phase 1 flows shall achieve Accessibility >= 97 in the Phase 1 release validation run.
+- **NFR6:** Key Phase 1 flows shall achieve Accessibility >= 97 in the Phase 1 release validation protocol.
   - **Scope/Context:** Same key flows as `NFR5`.
-  - **Verification Signal:** One mobile audit run and one desktop audit run are captured for each required flow using the Phase 1 release validation protocol.
+  - **Verification Signal:** Validation results are captured for each required flow using the Phase 1 release validation protocol defined in `Appendix A`.
 
 - **NFR7:** All key Phase 1 controls shall be keyboard accessible, visibly focusable, and screen-reader labeled, with `0` blocked tasks and `0` unlabeled interactive controls in release review.
   - **Scope/Context:** Navigation, branch selection, CTA buttons, proof-example entry, demo input, request form, and footer links.
-  - **Verification Signal:** A manual keyboard-only walkthrough completes `100%` of critical tasks across the required surfaces with `0` keyboard traps, `0` missing visible focus indicators, and `0` unlabeled interactive controls.
+  - **Verification Signal:** A keyboard and labeling review using the checklist defined in `Appendix A` confirms `100%` completion of critical tasks, `0` keyboard traps, `0` missing visible focus indicators, and `0` unlabeled interactive controls.
 
 - **NFR8:** Language, theme, proof-state labels, and no-data messaging shall remain consistent across UK and EN public pages, with `0` mixed-language UI fragments and `0` contradictory proof-state labels in release review.
   - **Scope/Context:** Homepage, proof example, demo input, intercept page, and trust-floor destinations.
-  - **Verification Signal:** Cross-language and cross-theme review across supported browsers confirms `0` mixed-language UI fragments, `0` contradictory proof-state or no-data labels, and `0` language/theme persistence mismatches after reload on the required surfaces.
+  - **Verification Signal:** Cross-language and cross-theme review using the release checklist defined in `Appendix A` confirms `0` mixed-language UI fragments, `0` contradictory proof-state or no-data labels, and `0` language or theme persistence mismatches after reload on the required surfaces.
 
 ### SEO and Content Integrity
 
-- **NFR9:** `100%` of indexable Phase 1 pages shall include unique title, description, canonical, hreflang, social-preview metadata, and at least one structured-data block describing page type and canonical subject.
+- **NFR9:** `100%` of indexable Phase 1 pages shall include the required SEO metadata set and required structured search data set defined in `Appendix A`.
   - **Scope/Context:** Homepage, proof example, intercept path, and trust-floor destinations intended for indexing.
-  - **Verification Signal:** A markup inventory confirms presence of all required metadata fields and at least one structured-data block on `100%` of indexed Phase 1 pages.
+  - **Verification Signal:** A markup inventory confirms presence of the complete SEO metadata set and structured search data set on `100%` of indexed Phase 1 pages.
 
 - **NFR10:** Consumer-intent public pages shall direct official checking to `Дія` and shall contain zero claims of official state status for `genu.im`.
   - **Scope/Context:** Intercept path and any proof pages referencing official checking.
-  - **Verification Signal:** The documented copy-review checklist confirms compliance before release.
+  - **Verification Signal:** The documented trust-boundary copy-review checklist defined in `Appendix A` confirms compliance before release.
 
 - **NFR11:** Canonical proof example and no-data example shall present `0` unsupported claims in release review; if required evidence or approved proof data is missing, the page shall fall back to the neutral no-data state instead.
   - **Scope/Context:** Canonical proof example and no-data example.
-  - **Verification Signal:** A release claim inventory confirms that every displayed public claim maps to approved proof support or evidence, and any claim lacking that support is absent or replaced by the defined no-data state.
+  - **Verification Signal:** A claim inventory using the review checklist defined in `Appendix A` confirms that every displayed public claim maps to approved proof support or evidence, and any claim lacking that support is absent or replaced by the defined no-data state.
 
 ### Privacy and Security
 
 - **NFR12:** Public request capture shall require no more than `5` user-entered fields and shall not require personal data beyond business contact name, business email or phone, company name, scenario, and short context.
   - **Scope/Context:** Phase 1 request form.
-  - **Verification Signal:** Form-field review confirms the required-field count stays within the limit, hidden metadata such as `source_path` and `proof_path` do not count toward that limit, and no additional personal fields are mandatory.
+  - **Verification Signal:** Form-field review confirms the required-field count stays within the limit, supporting metadata fields do not count toward that limit, and no additional personal fields are mandatory.
 
 - **NFR13:** Public measurement and reporting shall expose `0` full raw codes and `0` personal-data fields in public analytics outputs.
   - **Scope/Context:** Phase 1 source tagging.
   - **Verification Signal:** A measurement-field inventory confirms `0` full raw-code fields and `0` personal-data fields are present in public analytics outputs.
 
-- **NFR14:** Public pages shall be served over HTTPS in Phase 1. Where hosting supports response-header control, each key public page type shall expose the required security-header set. Where hosting does not support response-header control, deployment review shall document compensating controls and the accepted limitation.
+- **NFR14:** Public pages shall be served over HTTPS in Phase 1. Each key public page type shall satisfy the deployment-security requirements defined in `Appendix A`, whether through direct controls or documented compensating controls.
   - **Scope/Context:** All public Phase 1 pages.
-  - **Verification Signal:** A deployment security review confirms HTTPS on all public Phase 1 pages and verifies either the required security-header set or documented compensating controls for each key public page type.
+  - **Verification Signal:** A deployment security review confirms HTTPS on all public Phase 1 pages and verifies the deployment-security requirements defined in `Appendix A` for each key public page type.
 
 ### Compatibility and Responsive Quality
 
-- **NFR15:** Phase 1 public flows shall complete the defined primary task set on current stable Chrome, Edge, and Firefox with `0` blocked tasks, and unsupported browsers shall preserve homepage comprehension and contact access.
+- **NFR15:** Phase 1 public flows shall complete the primary task set across the supported-browser matrix with `0` blocked tasks, and unsupported browsers shall preserve homepage comprehension and contact access.
   - **Scope/Context:** Homepage, proof example, demo input, request form, and trust-floor destinations.
-  - **Verification Signal:** A manual browser smoke run completes the primary task set on each supported browser with `0` blocked tasks and confirms preserved homepage comprehension and contact access on unsupported browsers.
+  - **Verification Signal:** A manual browser smoke run completes the primary task set defined in `Appendix A` across the supported-browser matrix with `0` blocked tasks and confirms preserved homepage comprehension and contact access on unsupported browsers.
 
-- **NFR16:** Phase 1 public flows shall complete the defined primary task set at 360px, 768px, and 1280px widths with `0` horizontal scrolling on key content and `0` hidden primary CTAs.
+- **NFR16:** Phase 1 public flows shall complete the primary task set across the required responsive widths with `0` horizontal scrolling on key content and `0` hidden primary CTAs.
   - **Scope/Context:** Homepage, proof example, demo input, request form, and trust-floor destinations.
-  - **Verification Signal:** A responsive smoke review completes the primary task set at each required width with `0` horizontal-scrolling blockers and `0` hidden primary CTAs.
+  - **Verification Signal:** A responsive smoke review completes the primary task set defined in `Appendix A` across the required responsive widths with `0` horizontal-scrolling blockers and `0` hidden primary CTAs.
 
 ## Appendix A - Implementation Notes
 
@@ -527,6 +523,20 @@ This appendix preserves technical detail without turning the PRD core into a sol
 - **FR20 (Phase 2+ roadmap note):** Approved public proof extensions may add new proof field categories within the existing public proof structure without requiring a new public page type. Later-phase implementation must preserve source labeling, evidence visibility, and no-empty-section rules.
 - **FR28 (Phase 2 roadmap note):** When knowledge content is enabled, visitors may open a knowledge entry and continue to a CTA aligned to that entry's topic. This behavior is deferred until Phase 2 knowledge rollout is approved.
 - **FR32 (Phase 3 roadmap note):** When live public lookup is enabled, the product specification must define bounded abuse controls, neutral blocked-response behavior, and a review procedure for suspected enumeration-style requests before Phase 3 release.
+
+### A6. Validation and Measurement Definitions
+
+- **Phase 1 qualification fields:** business contact name, one reachable business email or phone, company name, scenario, and short context.
+- **Primary task set:** homepage comprehension, proof-example entry, demo input interaction, request-form completion readiness, and trust-floor navigation.
+- **Supported-browser matrix:** the browser commitments defined in `browser_matrix`.
+- **Required responsive widths:** the viewport commitments defined in `responsive_design`.
+- **Approved Phase 1 delivery budget:** deferred page-delivery budget of `<= 150 KB` compressed for each key public page.
+- **Phase 1 release validation protocol:** one mobile audit run and one desktop audit run for each required page type, using the same approved page-quality audit workflow and browser settings across all measured pages.
+- **Trust-boundary copy-review checklist:** confirms `Дія` separation, non-state positioning, and absence of unsupported proof claims.
+- **Required SEO metadata set:** unique title, description, canonical, hreflang, and social-preview metadata.
+- **Required structured search data set:** at least one structured-data block describing page type and canonical subject.
+- **Deployment-security requirements:** HTTPS on all public pages plus the required security-header set where direct controls are available, or documented compensating controls where they are not.
+- **Required security-header set:** `Content-Security-Policy`, `X-Content-Type-Options`, and `Referrer-Policy`.
 
 ## Appendix B - Open Decisions
 
