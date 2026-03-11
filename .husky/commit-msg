@@ -2,12 +2,6 @@
 
 MSG_FILE="$1"
 
-# Do not override merge commits, squashes, etc.
-COMMIT_SOURCE="$2"
-if [ -n "$COMMIT_SOURCE" ]; then
-	exit 0
-fi
-
 if command -v node >/dev/null 2>&1; then
 	node scripts/generate-commit-msg.cjs "$MSG_FILE"
 	exit 0

@@ -180,16 +180,35 @@ const normalizeGeneratedMessage = (subject, body) => {
 	return `${cleanSubject}\n\n${cleanBody}\n`;
 };
 
+const looksLikeFileNameList = (value) => {
+	const clean = String(value || "").trim();
+	if (!clean) return false;
+	return /\b[\w.-]+\.(md|txt|json|ya?ml|js|cjs|mjs|ts|tsx|css|html)\b/i.test(
+		clean,
+	);
+};
+
 const isLowValueMessage = (message) => {
 	const clean = String(message || "").trim();
 	if (!clean) return true;
 
 	const [subject = "", , ...bodyLines] = clean.split(/\r?\n/);
 	const body = bodyLines.join(" ").trim();
+	const subjectText = subject.replace(
+		/^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?!?:\s*/i,
+		"",
+	);
 
 	if (/sync project state after updates/i.test(subject)) return true;
 	if (/update \d+ project files/i.test(subject)) return true;
+	if (/^update\s+/i.test(subjectText) && looksLikeFileNameList(subjectText))
+		return true;
+	if (/^add\s+/i.test(subjectText) && looksLikeFileNameList(subjectText))
+		return true;
+	if (/^update planning artifacts/i.test(subjectText)) return true;
 	if (/update planning artifacts/i.test(subject) && /^BMAD:/i.test(body))
+		return true;
+	if (/^(BMAD|Docs|Tests|Site|Config):\s+[\w./,-]+\.?$/i.test(body))
 		return true;
 	if (/^(BMAD|Docs|Tests|Site|Config):\s+[^.]+(?:,[^.]+){1,}\.?$/i.test(body))
 		return true;
@@ -197,9 +216,14 @@ const isLowValueMessage = (message) => {
 		/^(Updated|Категории изменений|Изменены следующие компоненты):/i.test(body)
 	)
 		return true;
+	if (looksLikeFileNameList(body) && body.split(/\s+/).length <= 12)
+		return true;
 
 	return false;
 };
+
+const hasMeaningfulMessageContent = (value) =>
+	/^[\t ]*[^#\s].+/m.test(value || "");
 
 const extractJsonMessage = (raw) => {
 	const clean = stripAnsi(raw).trim();
@@ -770,7 +794,8 @@ const messageFile = process.argv[2];
 if (!messageFile) process.exit(0);
 
 const current = readFileSync(messageFile, "utf8");
-if (/^[\t ]*[^#\s].+/m.test(current)) process.exit(0);
+if (hasMeaningfulMessageContent(current) && !isLowValueMessage(current))
+	process.exit(0);
 
 const files = getStagedFiles();
 if (!files.length) process.exit(0);

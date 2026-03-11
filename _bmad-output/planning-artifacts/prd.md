@@ -41,6 +41,8 @@ editHistory:
     changes: Reworked the PRD for full homepage transformation with measurable requirements, restored traceability, implementation-agnostic core sections, and appendix-based technical notes.
   - date: 2026-03-11
     changes: Tightened Phase 1 FR/NFR measurability, moved future-phase requirement IDs out of the active FR set, corrected traceability boundaries, and compressed repeated wording.
+  - date: 2026-03-11
+    changes: Compressed FR wording, restored operator-risk and explainer nuance from the brief, and made procurement FAQ topics more explicit.
 ---
 
 # Product Requirements Document - gm
@@ -55,7 +57,7 @@ editHistory:
 
 The trust model is explicit. `genu.im` does not act as certification, expert assessment, or a state service. Official consumer checking for `еАкциз` belongs to `Дія`. `genu.im` explains and demonstrates what `genu.mark` can prove for products inside its own contour: marked-product proof, public transparency facts, and a clear no-data boundary when public proof is unavailable.
 
-Phase 1 is a build-now web delivery slice, not a full product platform. It ships the homepage, a canonical verification example, a paste-first demo input, one defined no-data proof state, request capture, trust-floor destinations, and proof-path attribution. The experience must communicate production-contour reliability through operational confidence, low-surprise language, and visible proof boundaries while meeting the Phase 1 performance, accessibility, browser, language, and theme stability gates in this PRD. Live lookup, private B2B workflows, and richer knowledge-base or analytics capabilities remain staged for later phases.
+Phase 1 is a build-now web delivery slice, not a full product platform. It ships the homepage, a canonical verification example, a paste-first demo input, one defined no-data proof state, request capture, trust-floor destinations, and proof-path attribution. The experience must communicate production-contour reliability through operational confidence, low-surprise language, visible proof boundaries, and explicit avoidance of line-stoppage and data-chaos risk while meeting the Phase 1 performance, accessibility, browser, language, and theme stability gates in this PRD. Live lookup, private B2B workflows, and richer knowledge-base or analytics capabilities remain staged for later phases.
 
 ### What Makes This Product Different
 
@@ -120,7 +122,7 @@ Phase 1 includes only the public surfaces and measurement needed to ship the pro
   - branch split for `еАкциз` and responsible manufacturers
   - explicit CTA layer
   - trust floor
-- Compact compare-vs-generic-QR explanation and operational flow content
+- Compact compare-vs-generic-QR explanation plus a named `marking -> protocol -> proof` explainer
 - Canonical verification example
 - Paste-first demo input with example-code action
 - One neutral no-data proof state
@@ -159,15 +161,15 @@ Phase 1 includes only the public surfaces and measurement needed to ship the pro
 
 ## User Journeys
 
-### Journey 1 - Equipment or integration partner
+### Journey 1 - Automation lead, integrator, or equipment partner
 
-- **Trigger:** Partner needs a proof surface that strengthens a marking or implementation sale.
-- **Needs:** Clear role separation, operational confidence, proof example, and a shareable next step.
-- **Success Outcome:** Partner shares the public proof/demo surface and uses it as a presales asset that leads to a qualified request.
+- **Trigger:** Automation lead, integrator, or equipment partner needs a proof surface that strengthens a marking or implementation decision without introducing line-stability or data-integrity doubt.
+- **Needs:** Clear role separation, operational confidence, implementation-owner relevance, proof example, and a shareable next step.
+- **Success Outcome:** The implementation owner or partner uses the public proof/demo surface as a presales or alignment artifact that supports line-confidence discussion and leads to a qualified request.
 
 ### Journey 2 - Manufacturer preparing for `еАкциз`
 
-- **Trigger:** Operations or compliance stakeholder wants a low-surprise marking path.
+- **Trigger:** Operations or compliance stakeholder wants a low-surprise marking path that avoids line stoppage, data chaos, and regulatory surprise.
 - **Needs:** Clear division between `Дія` and `genu.mark`, confidence in proof/readiness language, and a request path with operational context.
 - **Success Outcome:** Stakeholder understands the contour, does not confuse the product with state checking, and requests a relevant conversation.
 
@@ -274,131 +276,131 @@ These capabilities support all journeys rather than one branch only:
 
 ### Language and Theme Foundations
 
-- **FR1:** Users can switch the public site between UK and EN.
+- **FR1:** Public site language is switchable between UK and EN.
   - **Scope/Context:** Homepage, proof example, demo input, and trust-floor destinations.
   - **Acceptance/Verification:** The selected language updates visible UI copy on supported Phase 1 surfaces.
 
-- **FR2:** The system can persist the selected language for returning visits on supported browsers.
+- **FR2:** Selected language persists for returning visits on supported browsers.
   - **Scope/Context:** Phase 1 public pages.
   - **Acceptance/Verification:** After reload or navigation, the previously selected language remains active unless storage is unavailable.
 
-- **FR3:** Users can switch the public site between light and dark theme.
+- **FR3:** Public site theme is switchable between light and dark.
   - **Scope/Context:** Homepage, proof example, demo input, and trust-floor destinations.
   - **Acceptance/Verification:** The selected theme updates visible UI state on supported Phase 1 surfaces.
 
-- **FR4:** The system can persist the selected theme for returning visits on supported browsers.
+- **FR4:** Selected theme persists for returning visits on supported browsers.
   - **Scope/Context:** Phase 1 public pages.
   - **Acceptance/Verification:** After reload or navigation, the previously selected theme remains active unless storage is unavailable.
 
 ### Homepage Narrative and Branches
 
-- **FR5:** Visitors can identify from the homepage that `genu.im` is a proof-first surface for marked products rather than a generic QR landing page.
+- **FR5:** Homepage messaging identifies `genu.im` as a proof-first surface for marked products rather than a generic QR landing page.
   - **Scope/Context:** Homepage hero and bridge content.
-  - **Acceptance/Verification:** The homepage contains category framing and a bridge section before the proof example entry point.
+  - **Acceptance/Verification:** The homepage contains category framing, a compact `marking -> protocol -> proof` explainer, and a bridge section before the proof example entry point.
 
-- **FR6:** Visitors can see explicit role separation between official consumer checking in `Дія` and manufacturer/brand proof in `genu.mark`.
+- **FR6:** Relevant public surfaces show explicit role separation between official consumer checking in `Дія` and manufacturer or brand proof in `genu.mark`.
   - **Scope/Context:** Homepage branch messaging, proof example, no-data state, and intercept path.
   - **Acceptance/Verification:** Each relevant public surface includes clear copy that distinguishes the two roles without state mimicry.
 
-- **FR7:** Visitors can open the canonical verification example from the primary homepage CTA.
+- **FR7:** Primary homepage CTA opens the canonical verification example.
   - **Scope/Context:** Homepage hero and first proof CTA.
   - **Acceptance/Verification:** The primary proof CTA opens the canonical verification example surface.
 
-- **FR8:** Visitors can identify two distinct homepage paths: `еАкциз` readiness and responsible-manufacturer proof.
+- **FR8:** Homepage exposes two distinct paths: `еАкциз` readiness and responsible-manufacturer proof.
   - **Scope/Context:** Homepage branch section.
   - **Acceptance/Verification:** The homepage exposes two differentiated branch entry points with branch-specific next-step CTAs.
 
-- **FR9:** Visitors can reach trust-floor destinations from the public site.
+- **FR9:** Trust-floor destinations are reachable from the public site.
   - **Scope/Context:** Homepage navigation and footer.
   - **Acceptance/Verification:** About, Contact, Proof & Cases, Privacy, Terms, and FAQ are visible and resolvable from the public site.
 
 ### Proof Example and Demo Input
 
-- **FR10:** Visitors can open the canonical verification example and view an approved proof-example state.
+- **FR10:** Canonical verification example displays an approved proof-example state.
   - **Scope/Context:** Primary proof page.
   - **Acceptance/Verification:** The page identifies the proof-example context, shows source-labeled public facts, states that the surface is a demo/example rather than a live production lookup, and includes one intended next-step CTA.
 
-- **FR11:** Visitors can open the Phase 1 demo input surface and submit a pasted code or use an example-code action to view a demo result.
+- **FR11:** Phase 1 demo input surface accepts a pasted code or an example-code action to open a demo result.
   - **Scope/Context:** Phase 1 demo input page.
   - **Acceptance/Verification:** The page accepts paste-first input and offers an example-code action without requiring a scanner.
 
-- **FR12:** The system can display a persistent demo-mode notice on every non-live verification surface.
+- **FR12:** Every non-live verification surface displays a persistent demo-mode notice.
   - **Scope/Context:** Demo input, canonical verification example, and any Phase 1 no-data example.
   - **Acceptance/Verification:** A visible notice above the result or input area states that the flow is a demo/example, not a live production lookup.
 
-- **FR13:** The system can present a valid-state example for a product inside the `genu.mark` public proof contour.
+- **FR13:** Canonical proof example displays an approved valid-state example for a product inside the `genu.mark` public proof contour.
   - **Scope/Context:** Canonical proof example.
   - **Acceptance/Verification:** The result page shows an approved proof state and public facts allowed by policy.
 
-- **FR14:** The system can present a defined no-data state for products without public proof in `genu.im`.
+- **FR14:** Products without public proof in `genu.im` display the defined no-data state.
   - **Scope/Context:** Phase 1 no-data example.
   - **Acceptance/Verification:** The page states that no public proof data is available in `genu.im`, makes no authenticity, legality, or state-approval claims, and keeps the next-step CTA separate from any official consumer-check action.
 
-- **FR15:** The system can explain what public proof could appear in the no-data state and offer a next-step CTA.
+- **FR15:** No-data state explains what public proof could appear and offers a next-step CTA.
   - **Scope/Context:** Phase 1 no-data example.
   - **Acceptance/Verification:** The page includes a factual list of potential proof blocks and a business CTA.
 
-- **FR16:** The system can hide empty proof sections instead of rendering placeholder content.
+- **FR16:** Empty proof sections remain hidden instead of rendering placeholder content.
   - **Scope/Context:** Valid-state proof example.
   - **Acceptance/Verification:** No empty section appears on a public proof page.
 
-- **FR17:** The system can label each displayed public proof fact by source category.
+- **FR17:** Each displayed public proof fact is labeled by source category.
   - **Scope/Context:** Valid-state proof example and future live proof surfaces.
   - **Acceptance/Verification:** Each displayed fact indicates whether it comes from `genu.mark`, the brand, or a supporting document.
 
-- **FR18:** The system can show supporting evidence links or documents when they exist for a displayed public claim.
+- **FR18:** Supporting evidence links or documents appear whenever evidence exists for a displayed public claim.
   - **Scope/Context:** Valid-state proof example and future live proof surfaces.
   - **Acceptance/Verification:** Evidence is visible and clickable wherever evidence is provided.
 
-- **FR19:** The system can suppress sustainability content when required evidence is missing.
+- **FR19:** Sustainability content stays hidden when required evidence is missing.
   - **Scope/Context:** Public proof surfaces.
   - **Acceptance/Verification:** No sustainability claim renders without evidence.
 
 ### SEO Intercept and Lead Capture
 
-- **FR21:** Consumer-intent visitors can open a dedicated intercept page that points them to `Дія` for official consumer checking.
+- **FR21:** Consumer-intent intercept page points official consumer checking to `Дія`.
   - **Scope/Context:** Consumer-intent search path.
   - **Acceptance/Verification:** The intercept page explicitly names `Дія` as the official consumer-check path and does not mimic a state interface.
 
-- **FR22:** Consumer-intent visitors can also see a separate B2B CTA for marking, proof, or transparency services.
+- **FR22:** Consumer-intent intercept page also shows a separate B2B CTA for marking, proof, or transparency services.
   - **Scope/Context:** Consumer-intent intercept page.
   - **Acceptance/Verification:** The B2B CTA is visibly separate from the `Дія` action and uses non-governmental language.
 
-- **FR23:** Visitors can submit a qualified request with contact data, scenario, and business context.
+- **FR23:** Public request form captures a qualified request with contact data, scenario, and business context.
   - **Scope/Context:** Public request form.
   - **Acceptance/Verification:** A request counts as qualified when submission requires and captures these Phase 1 user-entered fields before completion: business contact name, one reachable business email or phone, company name, scenario, and short context.
 
-- **FR24:** The system can attach scenario and source-path metadata to each qualified request.
+- **FR24:** Submitted qualified requests include scenario and source-path metadata.
   - **Scope/Context:** Public request handling.
   - **Acceptance/Verification:** Each submitted request includes scenario and source-path metadata in the receiving record or notification, and includes `proof_path` when the request starts from a proof surface.
 
-- **FR25:** Partners can share a public proof or demo link that opens the same intended public state and CTA destination without requiring login.
+- **FR25:** Shareable public proof or demo links open the same intended public state and CTA destination without requiring login.
   - **Scope/Context:** Canonical proof example and approved Phase 1 demo states.
   - **Acceptance/Verification:** A shared public link opens successfully in a new browser session, shows the same intended proof or demo state, and preserves the intended CTA destination.
 
 ### Knowledge Base and Trust Surface
 
-- **FR26:** Visitors can open trust-floor destinations for About, Contact, Proof & Cases, Privacy, Terms, and FAQ from the public site.
+- **FR26:** Trust-floor destinations for About, Contact, Proof & Cases, Privacy, Terms, and FAQ are reachable from the public site.
   - **Scope/Context:** Homepage and public proof surfaces.
-  - **Acceptance/Verification:** Each destination resolves successfully and contains non-empty starter content or approved placeholder content. In Phase 1, About explains the company-controlled proof role of `genu.im`, and FAQ includes starter procurement or audit-oriented questions.
+  - **Acceptance/Verification:** Each destination resolves successfully and contains non-empty starter content or approved placeholder content. In Phase 1, About explains the company-controlled proof role of `genu.im`, and FAQ includes starter procurement or audit-oriented questions covering SLA expectations, access model, business data handling, and no-surprise operating boundaries.
 
-- **FR27:** Visitors can see reserved navigation and IA for the future knowledge base without requiring full Phase 1 knowledge content.
+- **FR27:** Public IA reserves navigation for the future knowledge base without requiring full Phase 1 knowledge content.
   - **Scope/Context:** Homepage navigation, footer, and trust-floor references.
   - **Acceptance/Verification:** Public IA shows where the knowledge base will live or links to a branded non-empty placeholder destination that clearly marks future expansion and preserves a current Phase 1 CTA path.
 
 ### Measurement and Enablement
 
-- **FR29:** The product team can distinguish visits that move from the homepage into the proof example path.
+- **FR29:** Homepage-to-proof traffic is distinguishable in Phase 1 funnel review.
   - **Scope/Context:** Phase 1 proof-first funnel review.
   - **Acceptance/Verification:** A dedicated proof-entry path or equivalent source tagging allows homepage-to-proof traffic review.
 
-- **FR30:** The product team can distinguish qualified requests by scenario and entry source.
+- **FR30:** Qualified requests are distinguishable by scenario and entry source.
   - **Scope/Context:** Request review and basic reporting.
   - **Acceptance/Verification:** Request records can be filtered by scenario and source path.
 
-- **FR31:** The product team can review a proof-first funnel consisting of homepage, proof example, and request steps.
+- **FR31:** Phase 1 proof-first funnel is reviewable across homepage, proof example, proof-surface CTA continuation, and request steps.
   - **Scope/Context:** Phase 1 release review and Phase 2 reporting expansion.
-  - **Acceptance/Verification:** Phase 1 provides a reviewable source-tagged funnel; deeper automated reporting may be added later.
+  - **Acceptance/Verification:** Phase 1 provides a reviewable source-tagged funnel that covers homepage entry, proof entry, proof-surface CTA continuation, and request submission when that final step occurs; deeper automated reporting may be added later.
 
 ## Non-Functional Requirements
 
