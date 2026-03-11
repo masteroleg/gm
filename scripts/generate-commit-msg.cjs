@@ -139,20 +139,44 @@ Format (STRICT - follow exactly):
 Subject: English, Conventional Commit, MEANING not filename.
 Body: Russian summary, then bullet list with actual notes per file.
 
+Quality rules:
+- The Russian summary must explain the overall intent of the change, not say "Несколько обновлений", "Обновлены файлы", or similar filler.
+- Each bullet must explain what changed in that file and why it matters for future reading.
+- Prefer precise wording over generic wording.
+- Avoid mixed English/Russian jargon when a clear Russian phrase exists.
+- If one file changes documentation/rules and another changes automation, explain both clearly.
+- Do not repeat the filename as the whole explanation.
+- Do not write empty/general notes like "обновлен файл", "добавлены изменения", "упрощена логика" without saying what changed.
+
 Example good output:
 
 docs(bmad): align Phase 1 proof scope and request metadata
 
-Синхронизированы planning artifacts для Phase 1.
+Синхронизированы planning artifacts для Phase 1: уточнены границы proof scope, metadata request flow и validation rules.
 
 - \`_bmad-output/planning-artifacts/prd.md\` — уточнены acceptance criteria и SC moderation rules
 - \`_bmad-output/planning-artifacts/epics.md\` — убраны future-phase элементы из active backlog
 - \`_bmad-output/planning-artifacts/architecture.md\` — выровнены proof routes и request metadata
 
+Example better output for mixed docs/tooling changes:
+
+docs: refine PRD acceptance rules and validation coverage
+
+Уточнены критерии приемки в PRD и расширена проверка артефактов, чтобы требования к persistence и implementation leakage были проверяемыми и однозначными.
+
+- \`_bmad-output/planning-artifacts/prd.md\` — конкретизированы acceptance criteria для persistence и связанных validation expectations
+- \`_bmad-output/planning-artifacts/validation-report-2026-03-11.md\` — добавлены проверки implementation leakage и дополнительные validation steps
+- \`scripts/generate-commit-msg.cjs\` — ужесточены правила генерации commit message для более содержательных summary и notes
+
 Bad (DO NOT OUTPUT):
 chore: update prd.md, validation-report.md
 
 BMAD: prd.md, validation-report.md
+
+Also bad:
+- "Несколько обновлений: ..."
+- bullets that only restate filenames
+- vague notes without the actual nature of the change
 
 Files:
 ${files.join("\n")}
@@ -162,6 +186,73 @@ ${stat}
 
 Diff:
 ${compactDiff(diff)}`;
+
+const buildRepairPrompt = (
+	files,
+	stat,
+	diff,
+	previous,
+) => `Rewrite the commit message below to make it more specific and useful.
+
+Keep the same output format:
+
+<subject>
+
+<Russian summary>
+
+- \`<file-1>\` — <note>
+
+Fix these problems:
+- remove filler like "Несколько обновлений"
+- make the summary explain the overall intent
+- make every bullet describe the actual change in that file
+- avoid filename-only or category-only explanations
+
+Message to improve:
+${previous}
+
+Files:
+${files.join("\n")}
+
+Stat:
+${stat}
+
+Diff:
+${compactDiff(diff)}`;
+
+const isWeakMessage = (message) => {
+	const clean = String(message || "").trim();
+	if (!clean) return true;
+	const lines = clean
+		.split(/\r?\n/)
+		.map((line) => line.trim())
+		.filter(Boolean);
+	if (lines.length < 3) return true;
+
+	const summary = lines[1] || "";
+	const bullets = lines.filter((line) => line.startsWith("- `"));
+
+	if (/^Несколько обновлений[:.]?/i.test(summary)) return true;
+	if (/^Обновлен[аоы]? /i.test(summary)) return true;
+	if (/^Updated[: ]/i.test(summary)) return true;
+	if (bullets.length === 0) return true;
+	if (
+		bullets.some((line) =>
+			/—\s*(обновлен|updated|изменен файл|добавлены изменения)\b/i.test(line),
+		)
+	)
+		return true;
+	if (
+		bullets.some((line) =>
+			/—\s*[^—]*\b[\w.-]+\.(md|txt|json|ya?ml|js|cjs|mjs|ts|tsx|css|html)\b\.?$/i.test(
+				line,
+			),
+		)
+	)
+		return true;
+
+	return false;
+};
 
 const hasMeaningfulMessageContent = (value) =>
 	/^[\t ]*[^#\s].+/m.test(value || "");
@@ -717,7 +808,11 @@ if (!files.length) {
 if (!files.length) process.exit(0);
 
 const config = readConfig();
-const aiMessage = runOpencode(buildPrompt(files, stat, diff));
+let aiMessage = runOpencode(buildPrompt(files, stat, diff));
+
+if (aiMessage && isWeakMessage(aiMessage)) {
+	aiMessage = runOpencode(buildRepairPrompt(files, stat, diff, aiMessage));
+}
 
 const nextMessage =
 	aiMessage ||
