@@ -2,12 +2,9 @@ Directory Index: repo-root
 
 ---
 ## Files
-### _archive/
-- **[index.md](_archive/migration/index.md)** - Migration Directory Index
-- **[migration.md](_archive/migration/migration.md)** - Главная идея (обновлено):
 ### _bmad-output/
 - **[design-thinking-2026-02-23.md](_bmad-output/design-thinking-2026-02-23.md)** - Design Thinking Session: gm
-- **[index.md](_bmad-output/implementation-artifacts/index.md)** - Directory Index
+- **[index.md](_bmad-output/implementation-artifacts/index.md)** - Directory Index: _bmad-output/implementation-artifacts
 - **[tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md](_bmad-output/implementation-artifacts/tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md)** - ---
 - **[tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md](_bmad-output/implementation-artifacts/tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md)** - ---
 - **[index.md](_bmad-output/index.md)** - Directory Index: _bmad-output
@@ -24,8 +21,8 @@ Directory Index: repo-root
 - **[e2e-testing-visual-regression.md](_bmad-output/knowledge/fragments/e2e-testing-visual-regression.md)** - E2E Testing: Visual Regression Gap
 - **[genuim-business-model.md](_bmad-output/knowledge/fragments/genuim-business-model.md)** - genu.im Business Model: Real Pricing
 - **[husky-v9-migration.md](_bmad-output/knowledge/fragments/husky-v9-migration.md)** - Husky v9 Migration Notes
-- **[index.md](_bmad-output/knowledge/fragments/index.md)** - Directory Index
-- **[index.md](_bmad-output/knowledge/index.md)** - Directory Index
+- **[index.md](_bmad-output/knowledge/fragments/index.md)** - Directory Index: _bmad-output/knowledge/fragments
+- **[index.md](_bmad-output/knowledge/index.md)** - Directory Index: _bmad-output/knowledge
 - **[migration-converter-detailed-findings.md](_bmad-output/knowledge/migration-converter-detailed-findings.md)** - Detailed Code Review Findings with Specific Examples
 - **[migration-converter-final-review.md](_bmad-output/knowledge/migration-converter-final-review.md)** - BMAD Code Review Summary - Migration Converter and Generation Results
 - **[migration-converter-findings.md](_bmad-output/knowledge/migration-converter-findings.md)** - 🔴 CRITICAL ISSUES
@@ -33,10 +30,15 @@ Directory Index: repo-root
 - **[migration-converter-summary.md](_bmad-output/knowledge/migration-converter-summary.md)** - 🔥 CODE REVIEW FINDINGS, GenuIm!
 - **[migration-report.md](_bmad-output/knowledge/migration-report.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
 - **[open-questions.md](_bmad-output/knowledge/open-questions.md)** - Open Questions and Validation Items
-- **[index.md](_bmad-output/planning-artifacts/index.md)** - Directory Index
+- **[architecture.md](_bmad-output/planning-artifacts/architecture.md)** - ---
+- **[epics.md](_bmad-output/planning-artifacts/epics.md)** - ---
+- **[implementation-readiness-report-2026-03-11.md](_bmad-output/planning-artifacts/implementation-readiness-report-2026-03-11.md)** - ---
+- **[index.md](_bmad-output/planning-artifacts/index.md)** - Directory Index: _bmad-output/planning-artifacts
 - **[prd.md](_bmad-output/planning-artifacts/prd.md)** - ---
 - **[product-brief-gm-2026-02-23.md](_bmad-output/planning-artifacts/product-brief-gm-2026-02-23.md)** - ---
 - **[product-brief-gm-2026-03-05.md](_bmad-output/planning-artifacts/product-brief-gm-2026-03-05.md)** - ---
+- **[sprint-change-proposal-2026-03-11.md](_bmad-output/planning-artifacts/sprint-change-proposal-2026-03-11.md)** - ---
+- **[ux-design-specification.md](_bmad-output/planning-artifacts/ux-design-specification.md)** - ---
 - **[validation-report-2026-03-09.md](_bmad-output/planning-artifacts/validation-report-2026-03-09.md)** - ---
 - **[validation-report-2026-03-10.md](_bmad-output/planning-artifacts/validation-report-2026-03-10.md)** - ---
 - **[problem-solution-2026-02-23.md](_bmad-output/problem-solution-2026-02-23.md)** - Problem Solving Session: Уникальный B2B-лендинг genu.im, который конвертит и запоминается
@@ -44,13 +46,14 @@ Directory Index: repo-root
 - **[ADR-001-output-css-tracking.md](_bmad-output/solutioning/adrs/ADR-001-output-css-tracking.md)** - ---
 - **[ADR-002-target-customer-criteria.md](_bmad-output/solutioning/adrs/ADR-002-target-customer-criteria.md)** - ---
 - **[ADR-003-architecture-decisions.md](_bmad-output/solutioning/adrs/ADR-003-architecture-decisions.md)** - ---
-- **[index.md](_bmad-output/solutioning/adrs/index.md)** - Directory Index
+- **[index.md](_bmad-output/solutioning/adrs/index.md)** - Directory Index: _bmad-output/solutioning/adrs
+- **[index.md](_bmad-output/solutioning/index.md)** - Directory Index: _bmad-output/solutioning
 - **[ci-pipeline-progress.md](_bmad-output/test-artifacts/ci-pipeline-progress.md)** - ---
+- **[index.md](_bmad-output/test-artifacts/index.md)** - Directory Index: _bmad-output/test-artifacts
 
 ---
 ### _archive/
 Archived legacy materials and migration inputs.
-- **[/_archive/migration](./_archive/migration/)**
 - **[/_archive/perevir-product](./_archive/perevir-product/)**
 
-Last updated: 2026-03-10
+Last updated: 2026-03-11
