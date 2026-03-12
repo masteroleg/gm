@@ -1,0 +1,6 @@
+docs: advance Epic 1 stories to ready-for-dev and improve commit generator
+
+Sprint начат — Epic 1 переведён в in-progress, story 1-1, 1-2, 1-3 готовы к разработке. Также улучшен генератор commit messages.
+
+- `_bmad-output/implementation-artifacts/sprint-status.yaml` — epic-1 переведён в in-progress, story 1-1, 1-2, 1-3 переведены в ready-for-dev, дата обновлена на 2026-03-12
+- `scripts/generate-commit-msg.cjs` — добавлена фильтрация тестовых файлов (commit-msg-test.txt, COMMIT_EDITMSG) из diff при генерации commit message для более точного анализа изменений

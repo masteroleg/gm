@@ -20,19 +20,30 @@ const COMMIT_SESSION_TITLE_PATTERN = /^Git commit message/i;
 
 const runGit = (args) => execFileSync("git", args, { encoding: "utf8" }).trim();
 
+const EXCLUDED_MESSAGE_FILES = new Set([
+	"commit-msg-test.txt",
+	"COMMIT_EDITMSG",
+	".git/COMMIT_EDITMSG",
+]);
+
+const filterMessageFiles = (files) =>
+	files.filter((file) => !EXCLUDED_MESSAGE_FILES.has(file));
+
 const getStagedFiles = () => {
 	const output = runGit(["diff", "--cached", "--name-only"]);
-	return output ? output.split(/\r?\n/).filter(Boolean) : [];
+	const files = output ? output.split(/\r?\n/).filter(Boolean) : [];
+	return filterMessageFiles(files);
 };
 
 const getWorkingTreeFiles = () => {
 	const changed = runGit(["diff", "--name-only"]);
 	const untracked = runGit(["ls-files", "--others", "--exclude-standard"]);
-	return [
+	const files = [
 		...new Set(
 			[...changed.split(/\r?\n/), ...untracked.split(/\r?\n/)].filter(Boolean),
 		),
 	];
+	return filterMessageFiles(files);
 };
 
 const getStat = () => runGit(["diff", "--cached", "--stat"]);
@@ -125,67 +136,84 @@ const compactDiff = (diff, maxChars = 6000) => {
 	return snippets.join("\n\n");
 };
 
-const buildPrompt = (files, stat, diff) => `Generate commit message.
+const buildPromptWithOptions = (files, stat, diff, options) => {
+	const examples = options.includeExamples
+		? `Example good output:\n\n` +
+			`docs(bmad): align Phase 1 proof scope and request metadata\n\n` +
+			`Синхронизированы planning artifacts для Phase 1: уточнены границы proof scope, metadata request flow и validation rules.\n\n` +
+			`- \`_bmad-output/planning-artifacts/prd.md\` — уточнены acceptance criteria и SC moderation rules\n` +
+			`- \`_bmad-output/planning-artifacts/epics.md\` — убраны future-phase элементы из active backlog\n` +
+			`- \`_bmad-output/planning-artifacts/architecture.md\` — выровнены proof routes и request metadata\n\n` +
+			`Example better output for mixed docs/tooling changes:\n\n` +
+			`docs: refine PRD acceptance rules and validation coverage\n\n` +
+			`Уточнены критерии приемки в PRD и расширена проверка артефактов, чтобы требования к persistence и implementation leakage были проверяемыми и однозначными.\n\n` +
+			`- \`_bmad-output/planning-artifacts/prd.md\` — конкретизированы acceptance criteria для persistence и связанных validation expectations\n` +
+			`- \`_bmad-output/planning-artifacts/validation-report-2026-03-11.md\` — добавлены проверки implementation leakage и дополнительные validation steps\n` +
+			`- \`scripts/generate-commit-msg.cjs\` — ужесточены правила генерации commit message для более содержательных summary и notes\n\n`
+		: "";
 
-Format (STRICT - follow exactly):
+	const diffSnippet =
+		options.diffBudget > 0 ? compactDiff(diff, options.diffBudget) : "";
 
-<subject>
+	return (
+		`Generate commit message.\n\n` +
+		`Format (STRICT - follow exactly):\n\n` +
+		`<subject>\n\n` +
+		`<Russian summary>\n\n` +
+		`- \`<file-1>\` — <note>\n` +
+		`- \`<file-2>\` — <note>\n\n` +
+		`Subject: English, Conventional Commit, MEANING not filename.\n` +
+		`Body: Russian summary, then bullet list with actual notes per file.\n\n` +
+		`Quality rules:\n` +
+		`- The Russian summary must explain the overall intent of the change, not say "Несколько обновлений", "Обновлены файлы", or similar filler.\n` +
+		`- Each bullet must explain what changed in that file and why it matters for future reading.\n` +
+		`- Prefer precise wording over generic wording.\n` +
+		`- Avoid mixed English/Russian jargon when a clear Russian phrase exists.\n` +
+		`- If one file changes documentation/rules and another changes automation, explain both clearly.\n` +
+		`- Do not repeat the filename as the whole explanation.\n` +
+		`- Do not write empty/general notes like "обновлен файл", "добавлены изменения", "упрощена логика" without saying what changed.\n\n` +
+		`${examples}` +
+		`Bad (DO NOT OUTPUT):\n` +
+		`chore: update prd.md, validation-report.md\n\n` +
+		`BMAD: prd.md, validation-report.md\n\n` +
+		`Also bad:\n` +
+		`- "Несколько обновлений: ..."\n` +
+		`- bullets that only restate filenames\n` +
+		`- vague notes without the actual nature of the change\n\n` +
+		`Files:\n${files.join("\n")}\n\n` +
+		`Stat:\n${stat}\n\n` +
+		`Diff:\n${diffSnippet}`
+	);
+};
 
-<Russian summary>
+const buildPrompt = (files, stat, diff, maxChars) => {
+	const baseWithExamples = buildPromptWithOptions(files, stat, "", {
+		includeExamples: true,
+		diffBudget: 0,
+	});
+	let diffBudget = Math.max(800, maxChars - baseWithExamples.length - 50);
+	let prompt = buildPromptWithOptions(files, stat, diff, {
+		includeExamples: true,
+		diffBudget,
+	});
+	if (prompt.length <= maxChars) return prompt;
 
-- \`<file-1>\` — <note>
-- \`<file-2>\` — <note>
+	const baseNoExamples = buildPromptWithOptions(files, stat, "", {
+		includeExamples: false,
+		diffBudget: 0,
+	});
+	diffBudget = Math.max(500, maxChars - baseNoExamples.length - 50);
+	prompt = buildPromptWithOptions(files, stat, diff, {
+		includeExamples: false,
+		diffBudget,
+	});
+	if (prompt.length <= maxChars) return prompt;
 
-Subject: English, Conventional Commit, MEANING not filename.
-Body: Russian summary, then bullet list with actual notes per file.
-
-Quality rules:
-- The Russian summary must explain the overall intent of the change, not say "Несколько обновлений", "Обновлены файлы", or similar filler.
-- Each bullet must explain what changed in that file and why it matters for future reading.
-- Prefer precise wording over generic wording.
-- Avoid mixed English/Russian jargon when a clear Russian phrase exists.
-- If one file changes documentation/rules and another changes automation, explain both clearly.
-- Do not repeat the filename as the whole explanation.
-- Do not write empty/general notes like "обновлен файл", "добавлены изменения", "упрощена логика" without saying what changed.
-
-Example good output:
-
-docs(bmad): align Phase 1 proof scope and request metadata
-
-Синхронизированы planning artifacts для Phase 1: уточнены границы proof scope, metadata request flow и validation rules.
-
-- \`_bmad-output/planning-artifacts/prd.md\` — уточнены acceptance criteria и SC moderation rules
-- \`_bmad-output/planning-artifacts/epics.md\` — убраны future-phase элементы из active backlog
-- \`_bmad-output/planning-artifacts/architecture.md\` — выровнены proof routes и request metadata
-
-Example better output for mixed docs/tooling changes:
-
-docs: refine PRD acceptance rules and validation coverage
-
-Уточнены критерии приемки в PRD и расширена проверка артефактов, чтобы требования к persistence и implementation leakage были проверяемыми и однозначными.
-
-- \`_bmad-output/planning-artifacts/prd.md\` — конкретизированы acceptance criteria для persistence и связанных validation expectations
-- \`_bmad-output/planning-artifacts/validation-report-2026-03-11.md\` — добавлены проверки implementation leakage и дополнительные validation steps
-- \`scripts/generate-commit-msg.cjs\` — ужесточены правила генерации commit message для более содержательных summary и notes
-
-Bad (DO NOT OUTPUT):
-chore: update prd.md, validation-report.md
-
-BMAD: prd.md, validation-report.md
-
-Also bad:
-- "Несколько обновлений: ..."
-- bullets that only restate filenames
-- vague notes without the actual nature of the change
-
-Files:
-${files.join("\n")}
-
-Stat:
-${stat}
-
-Diff:
-${compactDiff(diff)}`;
+	return buildPromptWithOptions(files, stat, "", {
+		includeExamples: false,
+		diffBudget: 0,
+	});
+};
 
 const buildRepairPrompt = (
 	files,
@@ -395,9 +423,11 @@ const getSessionList = (binary) => {
 
 const resolveCommitSessionId = (binary) => {
 	const cached = readCachedSessionId();
-	if (cached) return cached;
-
 	const sessions = getSessionList(binary);
+
+	if (cached && sessions.some((session) => session.id === cached))
+		return cached;
+
 	const existing = sessions.find((session) =>
 		COMMIT_SESSION_TITLE_PATTERN.test(session.title),
 	);
@@ -431,16 +461,12 @@ const selectModel = (availableModels, candidates) => {
 	return "";
 };
 
-const runOpencodeCommand = (
-	binary,
-	model,
-	prompt,
-	sessionID,
-	attachUrl = "",
-) => {
-	const args = ["run", prompt, "--model", model, "--session", sessionID];
+const runOpencodeCommand = (binary, model, prompt, options) => {
+	const args = ["run", prompt, "--model", model];
 
-	if (attachUrl) args.push("--attach", attachUrl);
+	if (options.sessionID) args.push("--session", options.sessionID);
+	if (options.useContinue) args.push("--continue");
+	if (options.attachUrl) args.push("--attach", options.attachUrl);
 
 	const result = runCommand(binary, args);
 	if (!result.ok) return "";
@@ -449,15 +475,9 @@ const runOpencodeCommand = (
 	return extractMessage(output);
 };
 
-const runOpencodeWindows = (
-	binary,
-	model,
-	prompt,
-	sessionID,
-	attachUrl = "",
-) => {
-	if (attachUrl) {
-		return runOpencodeCommand(binary, model, prompt, sessionID, attachUrl);
+const runOpencodeWindows = (binary, model, prompt, options) => {
+	if (options.attachUrl) {
+		return runOpencodeCommand(binary, model, prompt, options);
 	}
 
 	const promptFile = path.join(
@@ -466,16 +486,16 @@ const runOpencodeWindows = (
 	);
 	writeFileSync(promptFile, prompt, "utf8");
 
-	const result = runWindowsPowerShell(
-		binary,
-		"& '__BINARY__' run (Get-Content -Raw $env:OPENCODE_PROMPT_FILE) --model $env:OPENCODE_MODEL --session $env:OPENCODE_SESSION_ID",
-		{
-			...process.env,
-			OPENCODE_PROMPT_FILE: promptFile,
-			OPENCODE_MODEL: model,
-			OPENCODE_SESSION_ID: sessionID,
-		},
-	);
+	const command = options.useContinue
+		? "& '__BINARY__' run (Get-Content -Raw $env:OPENCODE_PROMPT_FILE) --model $env:OPENCODE_MODEL --continue"
+		: "& '__BINARY__' run (Get-Content -Raw $env:OPENCODE_PROMPT_FILE) --model $env:OPENCODE_MODEL --session $env:OPENCODE_SESSION_ID";
+
+	const result = runWindowsPowerShell(binary, command, {
+		...process.env,
+		OPENCODE_PROMPT_FILE: promptFile,
+		OPENCODE_MODEL: model,
+		OPENCODE_SESSION_ID: options.sessionID || "",
+	});
 
 	try {
 		unlinkSync(promptFile);
@@ -486,8 +506,8 @@ const runOpencodeWindows = (
 	return result.ok ? extractMessage(`${result.stdout}\n${result.stderr}`) : "";
 };
 
-const runOpencodePosix = (binary, model, prompt, sessionID, attachUrl = "") =>
-	runOpencodeCommand(binary, model, prompt, sessionID, attachUrl);
+const runOpencodePosix = (binary, model, prompt, options) =>
+	runOpencodeCommand(binary, model, prompt, options);
 
 const runOpencode = (prompt) => {
 	const config = readConfig();
@@ -502,17 +522,25 @@ const runOpencode = (prompt) => {
 	const sessionID = resolveCommitSessionId(binary);
 	const attachUrl = config.opencodeAttachUrl;
 
-	if (!selectedModel || !sessionID) return "";
+	if (!selectedModel) return "";
 
-	if (process.platform === "win32")
-		return runOpencodeWindows(
-			binary,
-			selectedModel,
-			prompt,
-			sessionID,
-			attachUrl,
-		);
-	return runOpencodePosix(binary, selectedModel, prompt, sessionID, attachUrl);
+	const attempts = [
+		{ sessionID, attachUrl, useContinue: false },
+		{ sessionID: "", attachUrl, useContinue: true },
+		{ sessionID, attachUrl: "", useContinue: false },
+		{ sessionID: "", attachUrl: "", useContinue: true },
+	];
+
+	for (const attempt of attempts) {
+		if (!attempt.sessionID && !attempt.useContinue) continue;
+		const result =
+			process.platform === "win32"
+				? runOpencodeWindows(binary, selectedModel, prompt, attempt)
+				: runOpencodePosix(binary, selectedModel, prompt, attempt);
+		if (result) return result;
+	}
+
+	return "";
 };
 
 const detectType = (files) => {
@@ -821,7 +849,8 @@ if (!files.length) {
 if (!files.length) process.exit(0);
 
 const config = readConfig();
-let aiMessage = runOpencode(buildPrompt(files, stat, diff));
+const prompt = buildPrompt(files, stat, diff, config.maxPromptChars);
+let aiMessage = runOpencode(prompt);
 
 if (aiMessage && isWeakMessage(aiMessage)) {
 	aiMessage = runOpencode(buildRepairPrompt(files, stat, diff, aiMessage));
