@@ -58,4 +58,4 @@ BMAD artifacts (deduplicated) for genu.im.
 Archived legacy materials and migration inputs.
 - **[/_archive/perevir-product](./_archive/perevir-product/)**
 
-Last updated: 2026-03-11
+Last updated: 2026-03-12
