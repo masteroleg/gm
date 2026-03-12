@@ -1,6 +1,6 @@
 # Story 1.1: Прояснить первый экран главной страницы
 
-Status: ready-for-dev
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -39,32 +39,32 @@ Status: ready-for-dev
 
 ## Tasks / Subtasks
 
-- [ ] Переписать first-screen messaging в `site/index.html` так, чтобы hero сразу объяснял категорию продукта, границу доверия и следующий шаг. (AC: 1, 2, 5)
-  - [ ] Заменить текущую generic trust copy на формулировки, которые явно говорят: `genu.im` = публичная proof-first surface, `genu.mark` = слой proof производителя/бренда, `Дія` = официальный путь проверки.
-  - [ ] Убрать или переработать wording, который звучит как generic QR landing page, official checker или live-state claim без доказуемой опоры в PRD.
-  - [ ] Сохранить понятность первого экрана даже если decorative preview, signal pills или ambient visuals не загрузятся.
+- [x] Переписать first-screen messaging в `site/index.html` так, чтобы hero сразу объяснял категорию продукта, границу доверия и следующий шаг. (AC: 1, 2, 5)
+  - [x] Заменить текущую generic trust copy на формулировки, которые явно говорят: `genu.im` = публичная proof-first surface, `genu.mark` = слой proof производителя/бренда, `Дія` = официальный путь проверки.
+  - [x] Убрать или переработать wording, который звучит как generic QR landing page, official checker или live-state claim без доказуемой опоры в PRD.
+  - [x] Сохранить понятность первого экрана даже если decorative preview, signal pills или ambient visuals не загрузятся.
 
-- [ ] Исправить primary CTA первого экрана на переход к `/v/genuim` с ясной подписью действия. (AC: 3)
-  - [ ] Убрать текущее расхождение, где primary CTA ведет на `#final-cta`, а не на канонический proof path.
-  - [ ] Обновить текст CTA в HTML fallback и в `site/assets/js/lang-toggle.js`, чтобы пользователь заранее понимал переход к proof example.
+- [x] Исправить primary CTA первого экрана на переход к `/v/genuim` с ясной подписью действия. (AC: 3)
+  - [x] Убрать текущее расхождение, где primary CTA ведет на `#final-cta`, а не на канонический proof path.
+  - [x] Обновить текст CTA в HTML fallback и в `site/assets/js/lang-toggle.js`, чтобы пользователь заранее понимал переход к proof example.
 
-- [ ] Сохранить существующие контракты header controls и preference controllers. (AC: 4)
-  - [ ] Не ломать существующие ID и связи: `#langToggle`, `#langLabel`, `#themeToggle`, `#burgerBtn`, `#closeMenu`, `#mainNav`.
-  - [ ] Не переносить persistence logic языка/темы в эту story; это зона Story `1.3`.
+- [x] Сохранить существующие контракты header controls и preference controllers. (AC: 4)
+  - [x] Не ломать существующие ID и связи: `#langToggle`, `#langLabel`, `#themeToggle`, `#burgerBtn`, `#closeMenu`, `#mainNav`.
+  - [x] Не переносить persistence logic языка/темы в эту story; это зона Story `1.3`.
 
-- [ ] Подстроить hero layout под обновленную copy без регрессий в mobile/tablet. (AC: 4, 5)
-  - [ ] Проверить, что `.hero-title`, `.hero-description`, `.hero-actions`, `.hero-proof-strip` и `.hero-visual` остаются читаемыми на `360px`, `768px`, `1280px`.
-  - [ ] Если текущий preview panel остается на первом экране, сделать его supporting proof context, а не главным источником понимания.
-  - [ ] Сохранить visible focus, touch targets >= `44x44px`, отсутствие horizontal scroll и корректную работу light/dark themes.
+- [x] Подстроить hero layout под обновленную copy без регрессий в mobile/tablet. (AC: 4, 5)
+  - [x] Проверить, что `.hero-title`, `.hero-description`, `.hero-actions`, `.hero-proof-strip` и `.hero-visual` остаются читаемыми на `360px`, `768px`, `1280px`.
+  - [x] Если текущий preview panel остается на первом экране, сделать его supporting proof context, а не главным источником понимания.
+  - [x] Сохранить visible focus, touch targets >= `44x44px`, отсутствие horizontal scroll и корректную работу light/dark themes.
 
-- [ ] Удержать scope Story `1.1` строго в пределах first screen. (AC: 1, 2, 3, 4, 5)
-  - [ ] Не переносить в эту story branch behavior и branch decision logic из Story `1.2`.
-  - [ ] Не добавлять request-flow semantics, handoff behavior или submission semantics из Epic `3.x`.
-  - [ ] Не затрагивать knowledge/info-page behavior, trust destinations или navigation behavior из Story `1.4` beyond what already exists on the first screen.
+- [x] Удержать scope Story `1.1` строго в пределах first screen. (AC: 1, 2, 3, 4, 5)
+  - [x] Не переносить в эту story branch behavior и branch decision logic из Story `1.2`.
+  - [x] Не добавлять request-flow semantics, handoff behavior или submission semantics из Epic `3.x`.
+  - [x] Не затрагивать knowledge/info-page behavior, trust destinations или navigation behavior из Story `1.4` beyond what already exists on the first screen.
 
-- [ ] Обновить regression coverage для first-screen behavior. (AC: 1, 2, 3, 4, 5)
-  - [ ] Обновить `tests/e2e/home.spec.ts` или родственный homepage spec так, чтобы проверялись hero explanation, видимость CTA и destination `/v/genuim`.
-  - [ ] Если изменятся accessible labels или control text, точечно обновить unit tests для `lang-toggle`, `theme-toggle` и `menu`, не расширяя scope beyond changed contracts.
+- [x] Обновить regression coverage для first-screen behavior. (AC: 1, 2, 3, 4, 5)
+  - [x] Обновить `tests/e2e/home.spec.ts` или родственный homepage spec так, чтобы проверялись hero explanation, видимость CTA и destination `/v/genuim`.
+  - [x] Если изменятся accessible labels или control text, точечно обновить unit tests для `lang-toggle`, `theme-toggle` и `menu`, не расширяя scope beyond changed contracts.
 
 ## Dev Notes
 
@@ -158,13 +158,14 @@ Status: ready-for-dev
 
 ### Agent Model Used
 
-openai/gpt-5.4
+anthropic/claude-sonnet-4-6
 
 ### Debug Log References
 
 - Анализ текущей homepage implementation выполнен по `site/index.html`, `site/assets/css/input.css`, `site/assets/js/lang-toggle.js`, `site/assets/js/theme-toggle.js`, `site/assets/js/menu.js`, `tests/e2e/home.spec.ts`.
 - Предыдущей story в Epic 1 еще нет, поэтому previous-story intelligence и git-pattern carryover для implementation отсутствуют.
 - `validate-workflow.xml`, на который ссылается workflow, отсутствует в `_bmad/core/tasks/`; checklist review выполнен вручную по `_bmad/bmm/workflows/4-implementation/create-story/checklist.md`.
+- Реализация выполнена 2026-03-12. Jest 15/15, Playwright 20/20 (Chromium, WebKit, Firefox, mobile Chrome, mobile Safari).
 
 ### Completion Notes List
 
@@ -172,13 +173,25 @@ openai/gpt-5.4
 - Story переведена в `ready-for-dev` после контекстной подготовки.
 - Во время quality review выявлена исходная неоднозначность around first-screen scope, CTA destination и роли preview panel; в этом документе она снята явными guardrails.
 - Во исполнение пользовательского ограничения batch processing по Epic 1 должен быть остановлен после Story `1.1`; следующие stories продолжать в single-story mode, а не форсировать автоматически.
-- Completion note: Ultimate context engine analysis completed - comprehensive developer guide created.
+- Implementation 2026-03-12: hero eyebrow/title/description переписаны под FR5/FR6; primary CTA исправлен с `#final-cta` на `/v/genuim` с текстом "See a proof example"; signal pill `Real-time check` заменён на `Instant proof check` (убран live-lookup намёк); HTML fallback синхронизирован с translation source; unit tests и E2E обновлены.
+- Follow-up patch 2026-03-12 (translation + review fixes): применены финальные одобренные hero strings по translation rules; UK copy очищена от calques ("proof-поверхня" → "Публічний доказ", "заслуговує на" → "має супроводжуватися"); M1 — добавлены genu.mark и Diia assertions в AC2 тест; M2 — CTA тест помечен @smoke; M3 — `aria-label="Verification flow"` на hero-visual выровнен с eyebrow; L1 — отступ `<p class="hero-eyebrow">` восстановлен; `hero.previewEyebrow` UK обновлён на "Як відбувається перевірка". Jest 15/15, Playwright smoke 4/4, home spec 20/20.
 
 ### File List
 
 - `site/index.html`
 - `site/assets/js/lang-toggle.js`
-- `site/assets/js/theme-toggle.js`
-- `site/assets/js/menu.js`
-- `site/assets/css/input.css`
 - `tests/e2e/home.spec.ts`
+- `tests/lang-toggle.test.js`
+
+### Senior Developer Review (AI)
+
+Date: 2026-03-12  
+Result: PASS — all findings resolved in follow-up patch.
+
+Findings addressed:
+- M1: AC2 test now asserts genu.mark and Diia presence in hero description
+- M2: CTA→/v/genuim test tagged @smoke, now runs in push CI
+- M3: `aria-label="Verification flow"` aligned with eyebrow content
+- L1: HTML indentation regression in hero-copy restored
+- L2/L3: `hero.signalRealtime` content → "Instant proof view" (removed clock-icon ambiguity)
+- UK translation: all calques removed, fully idiomatic Ukrainian copy applied per translation rules

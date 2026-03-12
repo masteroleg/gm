@@ -34,7 +34,7 @@ describe("language toggle controller", () => {
 
 		expect(document.documentElement.lang).toBe("en");
 		expect(document.querySelector("[data-i18n]").textContent).toBe(
-			"Trust through transparency",
+			"Public proof for marked products",
 		);
 		expect(
 			document
@@ -56,7 +56,7 @@ describe("language toggle controller", () => {
 
 		expect(document.documentElement.lang).toBe("uk");
 		expect(document.querySelector("[data-i18n]").textContent).toContain(
-			"Довіра",
+			"доказ",
 		);
 		expect(
 			document.getElementById("langToggle").getAttribute("aria-label"),
@@ -77,7 +77,7 @@ describe("language toggle controller", () => {
 		expect(localStorage.getItem("lang")).toBe("uk");
 		expect(document.getElementById("langLabel").textContent).toBe("UA");
 		expect(document.querySelector("[data-i18n]").textContent).toContain(
-			"Довіра",
+			"доказ",
 		);
 	});
 
@@ -121,7 +121,7 @@ describe("language toggle controller", () => {
 		}).not.toThrow();
 
 		expect(document.querySelector("[data-i18n]").textContent).toBe(
-			"Trust through transparency",
+			"Public proof for marked products",
 		);
 	});
 });
