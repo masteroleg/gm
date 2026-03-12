@@ -1,6 +1,6 @@
 # Story 1.4: Open the Main Site Information Pages
 
-Status: ready-for-dev
+Status: review
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -44,32 +44,32 @@ Status: ready-for-dev
 
 ## Tasks / Subtasks
 
-- [ ] Добавить trust-floor destinations как реальные статические страницы в `site/`. (AC: 1, 2, 3, 6)
-  - [ ] Создать public routes для `About`, `Contact`, `Proof & Cases`, `Privacy`, `Terms`, `FAQ` в структуре `site/<slug>/index.html`, используя project-consistent kebab-case slugs.
-  - [ ] Убедиться, что каждая страница содержит осмысленный `<main>` с page-specific heading, starter content и clear purpose statement, а не пустую заглушку.
-  - [ ] Для `About` явно объяснить, что такое `genu.im` и чем он не является как company-controlled proof surface. [Source: `_bmad-output/planning-artifacts/prd.md` - About includes compact self-verification explanation]
-  - [ ] Для `FAQ` включить starter procurement / audit questions Phase 1, а не общий lorem placeholder. [Source: `_bmad-output/planning-artifacts/prd.md` - FAQ includes starter procurement and audit questions]
+- [x] Добавить trust-floor destinations как реальные статические страницы в `site/`. (AC: 1, 2, 3, 6)
+  - [x] Создать public routes для `About`, `Contact`, `Proof & Cases`, `Privacy`, `Terms`, `FAQ` в структуре `site/<slug>/index.html`, используя project-consistent kebab-case slugs.
+  - [x] Убедиться, что каждая страница содержит осмысленный `<main>` с page-specific heading, starter content и clear purpose statement, а не пустую заглушку.
+  - [x] Для `About` явно объяснить, что такое `genu.im` и чем он не является как company-controlled proof surface. [Source: `_bmad-output/planning-artifacts/prd.md` - About includes compact self-verification explanation]
+  - [x] Для `FAQ` включить starter procurement / audit questions Phase 1, а не общий lorem placeholder. [Source: `_bmad-output/planning-artifacts/prd.md` - FAQ includes starter procurement and audit questions]
 
-- [ ] Сделать эти страницы достижимыми из публичного сайта. (AC: 1, 4, 5)
-  - [ ] Добавить entry points на homepage navigation и/или footer так, чтобы visitor мог открыть все шесть destinations с public site без dead ends.
-  - [ ] Сохранить clear way back to homepage и переходы между public destinations.
-  - [ ] Не прятать trust-floor links за desktop-only patterns; на `360px` они должны оставаться usable.
+- [x] Сделать эти страницы достижимыми из публичного сайта. (AC: 1, 4, 5)
+  - [x] Добавить entry points на homepage navigation и/или footer так, чтобы visitor мог открыть все шесть destinations с public site без dead ends.
+  - [x] Сохранить clear way back to homepage и переходы между public destinations.
+  - [x] Не прятать trust-floor links за desktop-only patterns; на `360px` они должны оставаться usable.
 
-- [ ] Привести trust-floor pages к общему public-page contract по SEO и metadata. (AC: 2, 3, 6)
-  - [ ] Добавить unique `<title>`, `<meta name="description">`, canonical, OG tags и `hreflang` (`uk`, `en`, `x-default`) на каждую indexable page.
-  - [ ] Сохранить обязательный `<head>` order pattern из architecture и не выносить JSON-LD в конец `<body>`.
-  - [ ] Если structured data для starter pages минимальна, все равно не оставлять metadata пустой или generic-copy duplicated across all pages.
+- [x] Привести trust-floor pages к общему public-page contract по SEO и metadata. (AC: 2, 3, 6)
+  - [x] Добавить unique `<title>`, `<meta name="description">`, canonical, OG tags и `hreflang` (`uk`, `en`, `x-default`) на каждую indexable page.
+  - [x] Сохранить обязательный `<head>` order pattern из architecture и не выносить JSON-LD в конец `<body>`.
+  - [x] Если structured data для starter pages минимальна, все равно не оставлять metadata пустой или generic-copy duplicated across all pages.
 
-- [ ] Сохранить current architecture и scope boundaries. (AC: 2, 4, 5, 6)
-  - [ ] Не превращать эти pages в knowledge hub; knowledge section reserved for Story `1.5`.
-  - [ ] Не вводить request submission semantics, request form behavior или `mailto:` handoff logic; можно только дать clear navigation back to existing public CTA path without inventing flow semantics.
-  - [ ] Не переиспользовать legacy content from `site/perevir-produkt/` как public trust-floor source-of-truth.
-  - [ ] Не тянуть сюда proof-page implementation из Epic `2`; `Proof & Cases` page может быть starter trust-floor explainer, а не полноценный proof surface.
+- [x] Сохранить current architecture и scope boundaries. (AC: 2, 4, 5, 6)
+  - [x] Не превращать эти pages в knowledge hub; knowledge section reserved for Story `1.5`.
+  - [x] Не вводить request submission semantics, request form behavior или `mailto:` handoff logic; можно только дать clear navigation back to existing public CTA path without inventing flow semantics.
+  - [x] Не переиспользовать legacy content from `site/perevir-produkt/` как public trust-floor source-of-truth.
+  - [x] Не тянуть сюда proof-page implementation из Epic `2`; `Proof & Cases` page может быть starter trust-floor explainer, а не полноценный proof surface.
 
-- [ ] Добавить regression coverage для trust-floor navigation и public-page validity. (AC: 1, 2, 3, 4, 5, 6)
-  - [ ] Расширить homepage/browser tests так, чтобы проверялась достижимость trust-floor links.
-  - [ ] Добавить browser smoke coverage, что каждая trust-floor page resolves, имеет visible title/heading и usable way back.
-  - [ ] По возможности проверить базовый head/SEO contract на каждой new page: title, canonical и non-empty description.
+- [x] Добавить regression coverage для trust-floor navigation и public-page validity. (AC: 1, 2, 3, 4, 5, 6)
+  - [x] Расширить homepage/browser tests так, чтобы проверялась достижимость trust-floor links.
+  - [x] Добавить browser smoke coverage, что каждая trust-floor page resolves, имеет visible title/heading и usable way back.
+  - [x] По возможности проверить базовый head/SEO contract на каждой new page: title, canonical и non-empty description.
 
 ## Dev Notes
 
@@ -174,16 +174,24 @@ openai/gpt-5.4
 - Проверено, что в checked-in codebase отсутствуют required trust-floor destinations and homepage links for them.
 - Проверено, что current homepage footer is too thin for FR9/FR26 and that translation map lacks trust-floor navigation labels.
 - `validate-workflow.xml`, на который ссылается workflow, отсутствует в `_bmad/core/tasks/`; checklist review выполнен вручную по `_bmad/bmm/workflows/4-implementation/create-story/checklist.md`.
+- Созданы public pages `site/privacy/index.html` и `site/terms/index.html` по established trust-floor template с SEO metadata, hreflang, JSON-LD, lang/theme controls и back navigation.
+- Homepage footer расширен до trust-floor navigation surface; добавлены links на `About`, `Contact`, `Proof & Cases`, `FAQ`, `Privacy`, `Terms`.
+- Translation map `site/assets/js/lang-toggle.js` расширен nav keys и page-content keys для всех trust-floor destinations на `en` и `uk`.
+- В `site/assets/css/input.css` добавлены `info-page*` и `footer-nav*` classes; `site/assets/css/output.css` пересобран для production delivery.
+- Browser regression coverage расширено в `tests/e2e/home.spec.ts` для footer reachability, per-page heading/back-link checks, unique meta descriptions и `360px` usability.
+- Validation выполнена командами `npm test`, `npm run lint`, `npm run typecheck`, `npm run test:smoke`, `npm run test:smoke:mobile` - все passing.
 
 ### Completion Notes List
 
-- Story `1.4` подготовлена как implementation-ready single-story artifact.
-- Явно отделены trust-floor destinations от knowledge section, proof surfaces и request-flow implementation.
-- Зафиксировано, что starter-level content acceptable, но broken/empty placeholders - нет.
-- Completion note: Ultimate context engine analysis completed - comprehensive developer guide created.
+- Story `1.4` реализует все 6 trust-floor destinations как valid public static pages under `site/`.
+- Navigation contract закрыт через footer links on homepage and reciprocal footer/back navigation on trust-floor pages.
+- SEO/public-page contract закрыт: unique title/description, canonical, OG, `hreflang`, JSON-LD на каждой new page.
+- Mobile/browser validation закрыта smoke coverage на desktop и `mobile-chrome`; trust-floor pages usable на `360px` без overflow regression.
+- Scope guardrails соблюдены: knowledge hub, request semantics и Epic `2` proof-surface logic не внедрялись.
 
 ### File List
 
+- `_bmad-output/implementation-artifacts/1-4-open-the-main-site-information-pages.md`
 - `site/index.html`
 - `site/about/index.html`
 - `site/contact/index.html`
@@ -193,4 +201,5 @@ openai/gpt-5.4
 - `site/faq/index.html`
 - `site/assets/js/lang-toggle.js`
 - `site/assets/css/input.css`
+- `site/assets/css/output.css`
 - `tests/e2e/home.spec.ts`

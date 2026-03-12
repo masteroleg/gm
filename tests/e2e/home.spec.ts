@@ -131,3 +131,106 @@ test("GM use-cases branch CTAs are visible and usable at 360px width", async ({
 	);
 	expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
 });
+
+// ── Trust-floor pages (Story 1.4) ──
+
+test("@smoke GM homepage footer has trust-floor nav links", async ({
+	page,
+	baseURL,
+}) => {
+	await page.goto(new URL("/", baseURL ?? "http://localhost:3000").toString());
+	await page.waitForLoadState("domcontentloaded");
+
+	// All six trust-floor links must be present in footer nav (AC: 1, 4)
+	const footerNav = page.locator(".footer-nav");
+	await expect(footerNav).toBeVisible();
+	await expect(footerNav.locator('a[href="about/"]')).toBeVisible();
+	await expect(footerNav.locator('a[href="contact/"]')).toBeVisible();
+	await expect(footerNav.locator('a[href="proof-cases/"]')).toBeVisible();
+	await expect(footerNav.locator('a[href="faq/"]')).toBeVisible();
+	await expect(footerNav.locator('a[href="privacy/"]')).toBeVisible();
+	await expect(footerNav.locator('a[href="terms/"]')).toBeVisible();
+});
+
+const trustFloorPages = [
+	{ path: "/about/", heading: /genu\.im/i, eyebrow: /about/i },
+	{ path: "/contact/", heading: /get in touch|contact/i, eyebrow: /contact/i },
+	{ path: "/proof-cases/", heading: /proof/i, eyebrow: /proof/i },
+	{ path: "/faq/", heading: /questions|faq/i, eyebrow: /faq/i },
+	{ path: "/privacy/", heading: /privacy/i, eyebrow: /privacy/i },
+	{ path: "/terms/", heading: /terms/i, eyebrow: /terms/i },
+];
+
+for (const { path, heading } of trustFloorPages) {
+	test(`@smoke GM trust-floor page ${path} resolves with visible heading and back link`, async ({
+		page,
+		baseURL,
+	}) => {
+		await page.goto(
+			new URL(path, baseURL ?? "http://localhost:3000").toString(),
+		);
+		await page.waitForLoadState("domcontentloaded");
+
+		// Page title in browser tab must contain genu.im (AC: 2, 3)
+		await expect(page).toHaveTitle(/genu\.im/i);
+
+		// h1 must be visible and match expected content (AC: 2)
+		const h1 = page.locator("h1.info-page__title");
+		await expect(h1).toBeVisible();
+		await expect(h1).toContainText(heading);
+
+		// Back link to homepage must be present (AC: 4)
+		const backLink = page.locator(".info-back-link");
+		await expect(backLink).toBeVisible();
+		await expect(backLink).toHaveAttribute("href", "../");
+	});
+}
+
+test("@smoke GM trust-floor pages have unique non-empty meta descriptions", async ({
+	page,
+	baseURL,
+}) => {
+	const descriptions: string[] = [];
+	for (const { path } of trustFloorPages) {
+		await page.goto(
+			new URL(path, baseURL ?? "http://localhost:3000").toString(),
+		);
+		await page.waitForLoadState("domcontentloaded");
+		const desc = await page
+			.locator('meta[name="description"]')
+			.getAttribute("content");
+		// Each page must have a non-empty description (AC: 3)
+		expect(desc).toBeTruthy();
+		expect(desc?.length).toBeGreaterThan(20);
+		descriptions.push(desc ?? "");
+	}
+	// All descriptions must be unique (AC: 3)
+	const unique = new Set(descriptions);
+	expect(unique.size).toBe(trustFloorPages.length);
+});
+
+test("GM trust-floor pages are usable at 360px width", async ({
+	page,
+	baseURL,
+}) => {
+	await page.setViewportSize({ width: 360, height: 640 });
+	for (const { path } of trustFloorPages) {
+		await page.goto(
+			new URL(path, baseURL ?? "http://localhost:3000").toString(),
+		);
+		await page.waitForLoadState("domcontentloaded");
+
+		// No horizontal overflow at 360px (AC: 5)
+		const scrollWidth = await page.evaluate(
+			() => document.documentElement.scrollWidth,
+		);
+		const clientWidth = await page.evaluate(
+			() => document.documentElement.clientWidth,
+		);
+		expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
+
+		// h1 and back link must be visible (AC: 5)
+		await expect(page.locator("h1.info-page__title")).toBeVisible();
+		await expect(page.locator(".info-back-link")).toBeVisible();
+	}
+});

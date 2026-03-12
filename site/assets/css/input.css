@@ -2791,6 +2791,116 @@
 		filter: drop-shadow(var(--shadow-qr));
 	}
 
+	/* ── Info pages (trust-floor) ── */
+	.info-page {
+		display: grid;
+		gap: var(--space-2xl);
+		padding-block: var(--space-xl) var(--space-2xl);
+		max-width: 48rem;
+	}
+
+	.info-page__header {
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	.info-page__title {
+		color: var(--color-heading);
+		font-family: var(--font-display);
+		font-size: clamp(1.8rem, 3vw, 2.8rem);
+		font-weight: 750;
+		line-height: 1.08;
+		letter-spacing: -0.03em;
+		text-wrap: balance;
+	}
+
+	.info-page__lead {
+		color: var(--color-body);
+		font-size: 1.05rem;
+		line-height: 1.65;
+		max-width: 40rem;
+		text-wrap: pretty;
+	}
+
+	.info-page__body {
+		display: grid;
+		gap: var(--space-xl);
+	}
+
+	.info-section {
+		display: grid;
+		gap: 0.65rem;
+	}
+
+	.info-section__heading {
+		color: var(--color-heading);
+		font-family: var(--font-display);
+		font-size: 1.15rem;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+	}
+
+	.info-section__meta {
+		color: var(--color-muted);
+		font-size: 0.84rem;
+		font-weight: 500;
+	}
+
+	.info-section p {
+		color: var(--color-body);
+		font-size: 0.97rem;
+		line-height: 1.7;
+		text-wrap: pretty;
+	}
+
+	.info-page__back {
+		padding-top: var(--space-sm);
+		border-top: var(--border-subtle);
+	}
+
+	.info-back-link {
+		display: inline-flex;
+		align-items: center;
+		color: var(--color-brand-deep);
+		font-size: 0.9rem;
+		font-weight: 600;
+		transition: opacity var(--duration-fast) var(--easing-standard);
+	}
+
+	.info-back-link:hover,
+	.info-back-link:focus-visible {
+		opacity: 0.75;
+	}
+
+	.dark .info-back-link {
+		color: var(--color-brand-bright);
+	}
+
+	/* ── Footer nav ── */
+	.footer-nav {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.2rem 0.85rem;
+		margin-top: 0.6rem;
+	}
+
+	.footer-nav__link {
+		color: var(--color-muted);
+		font-size: 0.8rem;
+		font-weight: 500;
+		opacity: 0.72;
+		transition: opacity var(--duration-fast) var(--easing-standard);
+		min-height: 44px;
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.footer-nav__link:hover,
+	.footer-nav__link:focus-visible {
+		opacity: 1;
+	}
+
 	/* ── Footer ── */
 	.site-footer {
 		padding-block: var(--space-sm);
