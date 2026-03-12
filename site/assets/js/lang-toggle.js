@@ -170,6 +170,8 @@ const translations = {
 		"nav.privacy": "Privacy",
 		"nav.terms": "Terms",
 		"nav.backHome": "\u2190 Back to homepage",
+		"nav.homeAria": "genu.im home",
+		"footer.trustNav": "Site pages",
 		"about.eyebrow": "About",
 		"about.title": "What genu.im is \u2014 and what it is not.",
 		"about.lead":
@@ -206,9 +208,10 @@ const translations = {
 		"proofCases.section2.heading": "How a proof record works",
 		"proofCases.section2.body":
 			"Each product unit gets a unique code. That code is linked to a brand-published record in genu.im. When someone scans the code \u2014 buyer, partner, or inspector \u2014 they see the brand\u2019s proof, not a generic result.",
-		"proofCases.section3.heading": "See a live example",
+		"proofCases.section3.heading": "See a proof example",
 		"proofCases.section3.body":
-			"You can scan or visit the genu.im proof record directly at genu.im/v/genuim \u2014 this is genu.im\u2019s own brand proof page, running on the same infrastructure.",
+			"You can scan or visit the genu.im proof record directly at genu.im/v/genuim \u2014 this is genu.im\u2019s own brand proof page built on the same proof infrastructure.",
+		"proofCases.section3.link": "View proof example \u2192",
 		"faq.eyebrow": "FAQ",
 		"faq.title": "Common questions.",
 		"faq.lead":
@@ -440,6 +443,8 @@ const translations = {
 		"nav.privacy": "Конфіденційність",
 		"nav.terms": "Умови використання",
 		"nav.backHome": "\u2190 На головну",
+		"nav.homeAria": "Головна genu.im",
+		"footer.trustNav": "Сторінки сайту",
 		"about.eyebrow": "Про нас",
 		"about.title": "Що таке genu.im \u2014 і чим він не є.",
 		"about.lead":
@@ -475,9 +480,10 @@ const translations = {
 		"proofCases.section2.heading": "Як працює запис-доказ",
 		"proofCases.section2.body":
 			"Кожна одиниця товару отримує унікальний код. Цей код прив\u2019язаний до запису, опублікованого брендом у genu.im. Коли хтось сканує код \u2014 покупець, партнер або інспектор \u2014 він бачить доказ бренду, а не загальний результат.",
-		"proofCases.section3.heading": "Переглянути живий приклад",
+		"proofCases.section3.heading": "Переглянути приклад доказу",
 		"proofCases.section3.body":
-			"Ви можете відсканувати або відвідати сторінку доказу genu.im за адресою genu.im/v/genuim \u2014 це власна сторінка доказу бренду genu.im, що працює на тій самій інфраструктурі.",
+			"Ви можете відсканувати або відвідати сторінку доказу genu.im за адресою genu.im/v/genuim \u2014 це власна сторінка доказу бренду genu.im, побудована на тій самій інфраструктурі доказу.",
+		"proofCases.section3.link": "Переглянути приклад доказу \u2192",
 		"faq.eyebrow": "Питання та відповіді",
 		"faq.title": "Поширені запитання.",
 		"faq.lead":

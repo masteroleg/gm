@@ -153,15 +153,45 @@ test("@smoke GM homepage footer has trust-floor nav links", async ({
 });
 
 const trustFloorPages = [
-	{ path: "/about/", heading: /genu\.im/i, eyebrow: /about/i },
-	{ path: "/contact/", heading: /get in touch|contact/i, eyebrow: /contact/i },
-	{ path: "/proof-cases/", heading: /proof/i, eyebrow: /proof/i },
-	{ path: "/faq/", heading: /questions|faq/i, eyebrow: /faq/i },
-	{ path: "/privacy/", heading: /privacy/i, eyebrow: /privacy/i },
-	{ path: "/terms/", heading: /terms/i, eyebrow: /terms/i },
+	{
+		path: "/about/",
+		heading: /genu\.im/i,
+		title: /About\s+[-—]\s+genu\.im/i,
+		canonical: "https://genu.im/about/",
+	},
+	{
+		path: "/contact/",
+		heading: /get in touch|contact/i,
+		title: /Contact\s+[-—]\s+genu\.im/i,
+		canonical: "https://genu.im/contact/",
+	},
+	{
+		path: "/proof-cases/",
+		heading: /proof/i,
+		title: /Proof\s*&\s*Cases\s+[-—]\s+genu\.im/i,
+		canonical: "https://genu.im/proof-cases/",
+	},
+	{
+		path: "/faq/",
+		heading: /questions|faq/i,
+		title: /FAQ\s+[-—]\s+genu\.im/i,
+		canonical: "https://genu.im/faq/",
+	},
+	{
+		path: "/privacy/",
+		heading: /privacy/i,
+		title: /Privacy Policy\s+[-—]\s+genu\.im/i,
+		canonical: "https://genu.im/privacy/",
+	},
+	{
+		path: "/terms/",
+		heading: /terms/i,
+		title: /Terms of Use\s+[-—]\s+genu\.im/i,
+		canonical: "https://genu.im/terms/",
+	},
 ];
 
-for (const { path, heading } of trustFloorPages) {
+for (const { path, heading, title } of trustFloorPages) {
 	test(`@smoke GM trust-floor page ${path} resolves with visible heading and back link`, async ({
 		page,
 		baseURL,
@@ -171,8 +201,8 @@ for (const { path, heading } of trustFloorPages) {
 		);
 		await page.waitForLoadState("domcontentloaded");
 
-		// Page title in browser tab must contain genu.im (AC: 2, 3)
-		await expect(page).toHaveTitle(/genu\.im/i);
+		// Page title in browser tab must be page-specific (AC: 2, 3)
+		await expect(page).toHaveTitle(title);
 
 		// h1 must be visible and match expected content (AC: 2)
 		const h1 = page.locator("h1.info-page__title");
@@ -186,16 +216,21 @@ for (const { path, heading } of trustFloorPages) {
 	});
 }
 
-test("@smoke GM trust-floor pages have unique non-empty meta descriptions", async ({
+test("@smoke GM trust-floor pages have page-specific SEO metadata", async ({
 	page,
 	baseURL,
 }) => {
 	const descriptions: string[] = [];
-	for (const { path } of trustFloorPages) {
+	for (const { path, canonical, title } of trustFloorPages) {
 		await page.goto(
 			new URL(path, baseURL ?? "http://localhost:3000").toString(),
 		);
 		await page.waitForLoadState("domcontentloaded");
+		await expect(page).toHaveTitle(title);
+		await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+			"href",
+			canonical,
+		);
 		const desc = await page
 			.locator('meta[name="description"]')
 			.getAttribute("content");
@@ -207,6 +242,65 @@ test("@smoke GM trust-floor pages have unique non-empty meta descriptions", asyn
 	// All descriptions must be unique (AC: 3)
 	const unique = new Set(descriptions);
 	expect(unique.size).toBe(trustFloorPages.length);
+});
+
+test("GM trust-floor accessibility labels switch with language", async ({
+	page,
+	baseURL,
+}) => {
+	for (const { path } of trustFloorPages) {
+		await page.goto(
+			new URL("/", baseURL ?? "http://localhost:3000").toString(),
+		);
+		await page.evaluate(() => {
+			window.localStorage.removeItem("lang");
+		});
+		await page.goto(
+			new URL(path, baseURL ?? "http://localhost:3000").toString(),
+		);
+		await page.waitForLoadState("domcontentloaded");
+
+		await expect(page.locator(".logo-lockup")).toHaveAttribute(
+			"aria-label",
+			"genu.im home",
+		);
+		await expect(page.locator(".footer-nav")).toHaveAttribute(
+			"aria-label",
+			"Site pages",
+		);
+
+		await page.locator("#langToggle").click();
+
+		await expect(page.locator(".logo-lockup")).toHaveAttribute(
+			"aria-label",
+			"Головна genu.im",
+		);
+		await expect(page.locator(".footer-nav")).toHaveAttribute(
+			"aria-label",
+			"Сторінки сайту",
+		);
+	}
+});
+
+test("GM homepage trust-floor nav label switches with language", async ({
+	page,
+	baseURL,
+}) => {
+	await page.goto(new URL("/", baseURL ?? "http://localhost:3000").toString());
+	await page.evaluate(() => {
+		window.localStorage.removeItem("lang");
+	});
+	await page.goto(new URL("/", baseURL ?? "http://localhost:3000").toString());
+	await page.waitForLoadState("domcontentloaded");
+	await expect(page.locator(".footer-nav")).toHaveAttribute(
+		"aria-label",
+		"Site pages",
+	);
+	await page.locator("#langToggle").click();
+	await expect(page.locator(".footer-nav")).toHaveAttribute(
+		"aria-label",
+		"Сторінки сайту",
+	);
 });
 
 test("GM trust-floor pages are usable at 360px width", async ({

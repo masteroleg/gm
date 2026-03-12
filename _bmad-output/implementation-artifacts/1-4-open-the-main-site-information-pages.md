@@ -179,7 +179,8 @@ openai/gpt-5.4
 - Translation map `site/assets/js/lang-toggle.js` расширен nav keys и page-content keys для всех trust-floor destinations на `en` и `uk`.
 - В `site/assets/css/input.css` добавлены `info-page*` и `footer-nav*` classes; `site/assets/css/output.css` пересобран для production delivery.
 - Browser regression coverage расширено в `tests/e2e/home.spec.ts` для footer reachability, per-page heading/back-link checks, unique meta descriptions и `360px` usability.
-- Validation выполнена командами `npm test`, `npm run lint`, `npm run typecheck`, `npm run test:smoke`, `npm run test:smoke:mobile` - все passing.
+- Review correction pass: исправлены mismatched `data-i18n` keys на `contact` и `proof-cases`, удалены unsupported proof claims, добавлены translated aria-label hooks для trust-floor logo/footer nav.
+- Validation выполнена командами `npm test`, `npm run lint`, `npm run typecheck`, `npm run test:smoke`, `npm run test:smoke:mobile`, `npx playwright test tests/e2e/home.spec.ts --config=playwright.config.ts --project=chromium -g "GM trust-floor accessibility labels switch with language|GM homepage trust-floor nav label switches with language|GM trust-floor pages are usable at 360px width"` - все passing.
 
 ### Completion Notes List
 
@@ -203,3 +204,23 @@ openai/gpt-5.4
 - `site/assets/css/input.css`
 - `site/assets/css/output.css`
 - `tests/e2e/home.spec.ts`
+
+## Senior Developer Review (AI)
+
+- Reviewer: openai/gpt-5.4
+- Date: 2026-03-12
+- Outcome: changes requested -> fixed in same pass -> ready for review
+- Blocking findings fixed:
+  - aligned trust-floor `data-i18n` keys between HTML and `site/assets/js/lang-toggle.js`
+  - removed unsupported claims from `site/proof-cases/index.html`
+  - added translated accessibility labels for trust-floor logo and footer navigation
+- Should-fix findings fixed:
+  - extended Playwright coverage for page-specific titles and canonical links
+  - added Playwright coverage for translated accessibility labels on trust-floor pages and homepage footer nav
+  - corrected validation record to match the commands actually run
+- Second-pass review check: no remaining blocking or should-fix findings were found within Story `1.4` scope.
+
+## Change Log
+
+- 2026-03-12: Story `1.4` implemented and moved to `review`.
+- 2026-03-12: Review correction pass fixed i18n key mismatches, claim wording, SEO/a11y coverage, and validation notes; story remains `review`.
