@@ -1625,6 +1625,31 @@
 		text-wrap: pretty;
 	}
 
+	.content-card__cta {
+		display: inline-flex;
+		align-items: center;
+		align-self: start;
+		margin-top: var(--space-md);
+		padding: 0.625rem 1.25rem;
+		min-height: 44px;
+		background: var(--color-brand);
+		color: oklch(1 0 0);
+		font-size: 0.88rem;
+		font-weight: 600;
+		border-radius: 6px;
+		text-decoration: none;
+		transition: background 0.15s ease;
+	}
+
+	.content-card__cta:hover {
+		background: var(--color-brand-deep);
+	}
+
+	.content-card__cta:focus-visible {
+		outline: 2px solid var(--color-brand);
+		outline-offset: 3px;
+	}
+
 	.content-list {
 		display: grid;
 		gap: 0.82rem;
@@ -2617,6 +2642,16 @@
 
 	.dark .content-card__support {
 		border-top-color: --alpha(var(--color-proof-text) / 8%);
+	}
+
+	.dark .content-card__cta {
+		background: var(--color-brand-bright);
+		color: oklch(0.16 0.035 250);
+	}
+
+	.dark .content-card__cta:hover {
+		background: var(--color-brand);
+		color: oklch(1 0 0);
 	}
 
 	.dark .content-card__footer {

@@ -1,6 +1,6 @@
 # Story 1.2: Show the Two Main Visitor Needs
 
-Status: ready-for-dev
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -39,37 +39,37 @@ Status: ready-for-dev
 
 ## Tasks / Subtasks
 
-- [ ] Превратить section `#use-cases` в явный branch split между двумя business needs. (AC: 1, 2, 5)
-  - [ ] Переписать section heading и copy в `site/index.html` и `site/assets/js/lang-toggle.js` так, чтобы она описывала две разные visitor needs, а не абстрактные brand jobs.
-  - [ ] Для блока `еАкциз` прямо назвать operational readiness и risk-reduction value.
-  - [ ] Для блока manufacturer/brand proof прямо назвать public-proof value для buyers, partners и auditors.
-  - [ ] Сохранить copy distinction достаточной даже без decorative rails, visuals и footer-style supporting elements.
+- [x] Превратить section `#use-cases` в явный branch split между двумя business needs. (AC: 1, 2, 5)
+  - [x] Переписать section heading и copy в `site/index.html` и `site/assets/js/lang-toggle.js` так, чтобы она описывала две разные visitor needs, а не абстрактные brand jobs.
+  - [x] Для блока `еАкциз` прямо назвать operational readiness и risk-reduction value.
+  - [x] Для блока manufacturer/brand proof прямо назвать public-proof value для buyers, partners и auditors.
+  - [x] Сохранить copy distinction достаточной даже без decorative rails, visuals и footer-style supporting elements.
 
-- [ ] Добавить branch-specific CTA в каждый из двух блоков. (AC: 2, 3)
-  - [ ] Ввести отдельный CTA для `еАкциз` branch и отдельный CTA для manufacturer/brand-proof branch.
-  - [ ] Текст каждого CTA должен заранее объяснять business next step, а не использовать generic wording вроде `Talk to us`.
-  - [ ] Не сводить эти CTA обратно к direct `mailto:` или к hero proof CTA; это отдельные branch-entry actions.
+- [x] Добавить branch-specific CTA в каждый из двух блоков. (AC: 2, 3)
+  - [x] Ввести отдельный CTA для `еАкциз` branch и отдельный CTA для manufacturer/brand-proof branch.
+  - [x] Текст каждого CTA должен заранее объяснять business next step, а не использовать generic wording вроде `Talk to us`.
+  - [x] Не сводить эти CTA обратно к direct `mailto:` или к hero proof CTA; это отдельные branch-entry actions.
 
-- [ ] Подключить branch CTA к shared request-form path с scenario prefill contract. (AC: 3)
-  - [ ] Использовать standard navigation к request surface, а не SPA-routing, modal flow или JS-only state transition.
-  - [ ] Передавать branch context через стабильный `?scenario=` contract, который request-form controller сможет прочитать при init.
-  - [ ] Если request surface еще отсутствует в codebase, не заменять это direct `mailto:` handoff; сохранить navigation + prefill contract как source-of-truth implementation target.
+- [x] Подключить branch CTA к shared request-form path с scenario prefill contract. (AC: 3)
+  - [x] Использовать standard navigation к request surface, а не SPA-routing, modal flow или JS-only state transition.
+  - [x] Передавать branch context через стабильный `?scenario=` contract, который request-form controller сможет прочитать при init.
+  - [x] Если request surface еще отсутствует в codebase, не заменять это direct `mailto:` handoff; сохранить navigation + prefill contract как source-of-truth implementation target.
 
-- [ ] Сохранить scope Story `1.2` в пределах branch section и branch-entry behavior. (AC: 1, 2, 3, 4, 5)
-  - [ ] Не трогать first-screen explanation и hero CTA `/v/genuim`, зафиксированные Story `1.1`, кроме случаев strict compatibility.
-  - [ ] Не вводить official-check guidance to `Дія`; это scope Story `3.1`.
-  - [ ] Не вводить request submission, mailto handoff, validation rules или fallback messaging; это scope Stories `3.3` и `3.4`.
-  - [ ] Не тянуть trust-floor navigation или info-page behavior; это scope Story `1.4`.
+- [x] Сохранить scope Story `1.2` в пределах branch section и branch-entry behavior. (AC: 1, 2, 3, 4, 5)
+  - [x] Не трогать first-screen explanation и hero CTA `/v/genuim`, зафиксированные Story `1.1`, кроме случаев strict compatibility.
+  - [x] Не вводить official-check guidance to `Дія`; это scope Story `3.1`.
+  - [x] Не вводить request submission, mailto handoff, validation rules или fallback messaging; это scope Stories `3.3` и `3.4`.
+  - [x] Не тянуть trust-floor navigation или info-page behavior; это scope Story `1.4`.
 
-- [ ] Адаптировать layout и styling section под два различимых branch cards с visible CTA. (AC: 1, 2, 4, 5)
-  - [ ] Расширить существующую систему `use-case-grid` / `content-card` в `site/assets/css/input.css` без full-page redesign.
-  - [ ] Обеспечить читаемость headings, body copy и CTA на `360px`, `768px`, `1280px`.
-  - [ ] Сохранить keyboard focus, touch targets >= `44x44px`, отсутствие horizontal scroll и отсутствие hidden/overlapping actions.
+- [x] Адаптировать layout и styling section под два различимых branch cards с visible CTA. (AC: 1, 2, 4, 5)
+  - [x] Расширить существующую систему `use-case-grid` / `content-card` в `site/assets/css/input.css` без full-page redesign.
+  - [x] Обеспечить читаемость headings, body copy и CTA на `360px`, `768px`, `1280px`.
+  - [x] Сохранить keyboard focus, touch targets >= `44x44px`, отсутствие horizontal scroll и отсутствие hidden/overlapping actions.
 
-- [ ] Обновить regression coverage для branch split section. (AC: 1, 2, 3, 4, 5)
-  - [ ] Обновить homepage browser coverage так, чтобы проверялись наличие двух отличимых blocks и двух branch-specific CTA.
-  - [ ] Проверить, что CTA target uses request-form navigation with distinct scenario prefill values rather than generic anchors or direct `mailto:`.
-  - [ ] Если в этой story вводится request-surface prefill logic, добавить focused unit/browser coverage для initial selected scenario без захвата submit semantics.
+- [x] Обновить regression coverage для branch split section. (AC: 1, 2, 3, 4, 5)
+  - [x] Обновить homepage browser coverage так, чтобы проверялись наличие двух отличимых blocks и двух branch-specific CTA.
+  - [x] Проверить, что CTA target uses request-form navigation with distinct scenario prefill values rather than generic anchors or direct `mailto:`.
+  - [x] Request-surface prefill logic не вводилась в Story 1.2 (out of scope); prefill contract зафиксирован через `?scenario=` в href.
 
 ## Dev Notes
 

@@ -58,3 +58,76 @@ test("GM landing page first screen is usable at 360px width", async ({
 	);
 	expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
 });
+
+test("@smoke GM use-cases section shows two distinct branch cards", async ({
+	page,
+	baseURL,
+}) => {
+	await page.goto(new URL("/", baseURL ?? "http://localhost:3000").toString());
+	await page.waitForLoadState("domcontentloaded");
+
+	// Both branch cards must exist with distinct headings (AC: 1, 2)
+	const regulatedCard = page.locator(".content-card--regulated");
+	const brandCard = page.locator(".content-card--brand");
+	await expect(regulatedCard).toBeVisible();
+	await expect(brandCard).toBeVisible();
+
+	const regulatedTitle = await regulatedCard
+		.locator(".content-card__title")
+		.textContent();
+	const brandTitle = await brandCard
+		.locator(".content-card__title")
+		.textContent();
+	expect(regulatedTitle).not.toEqual(brandTitle);
+});
+
+test("@smoke GM use-cases regulated card CTA links to /request?scenario=eaktsyz", async ({
+	page,
+	baseURL,
+}) => {
+	await page.goto(new URL("/", baseURL ?? "http://localhost:3000").toString());
+	await page.waitForLoadState("domcontentloaded");
+
+	// Regulated branch CTA must navigate to request surface with correct scenario (AC: 3)
+	const cta = page.locator(".content-card--regulated .content-card__cta");
+	await expect(cta).toBeVisible();
+	await expect(cta).toHaveAttribute("href", "/request?scenario=eaktsyz");
+});
+
+test("@smoke GM use-cases brand card CTA links to /request?scenario=brand-proof", async ({
+	page,
+	baseURL,
+}) => {
+	await page.goto(new URL("/", baseURL ?? "http://localhost:3000").toString());
+	await page.waitForLoadState("domcontentloaded");
+
+	// Brand branch CTA must navigate to request surface with correct scenario (AC: 3)
+	const cta = page.locator(".content-card--brand .content-card__cta");
+	await expect(cta).toBeVisible();
+	await expect(cta).toHaveAttribute("href", "/request?scenario=brand-proof");
+});
+
+test("GM use-cases branch CTAs are visible and usable at 360px width", async ({
+	page,
+	baseURL,
+}) => {
+	await page.setViewportSize({ width: 360, height: 640 });
+	await page.goto(new URL("/", baseURL ?? "http://localhost:3000").toString());
+	await page.waitForLoadState("domcontentloaded");
+
+	// Both branch CTAs visible at mobile width, no horizontal overflow (AC: 4)
+	const regulatedCta = page.locator(
+		".content-card--regulated .content-card__cta",
+	);
+	const brandCta = page.locator(".content-card--brand .content-card__cta");
+	await expect(regulatedCta).toBeVisible();
+	await expect(brandCta).toBeVisible();
+
+	const scrollWidth = await page.evaluate(
+		() => document.documentElement.scrollWidth,
+	);
+	const clientWidth = await page.evaluate(
+		() => document.documentElement.clientWidth,
+	);
+	expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
+});
