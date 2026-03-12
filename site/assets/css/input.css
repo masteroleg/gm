@@ -2897,6 +2897,206 @@
 		color: var(--color-brand-bright);
 	}
 
+	.verification-page {
+		display: grid;
+		gap: var(--space-xl);
+		padding-block: var(--space-xl) var(--space-2xl);
+		max-width: 56rem;
+	}
+
+	.verification-page__header {
+		display: grid;
+		gap: 0.85rem;
+	}
+
+	.verification-page__title {
+		color: var(--color-heading);
+		font-family: var(--font-display);
+		font-size: clamp(1.95rem, 3.4vw, 3.1rem);
+		font-weight: 780;
+		line-height: 1.05;
+		letter-spacing: -0.03em;
+		text-wrap: balance;
+	}
+
+	.verification-page__lead {
+		color: var(--color-body);
+		font-size: 1.02rem;
+		line-height: 1.68;
+		max-width: 44rem;
+		text-wrap: pretty;
+	}
+
+	.proof-demo-banner {
+		display: inline-flex;
+		align-items: center;
+		justify-self: start;
+		min-height: 2.4rem;
+		padding: 0.55rem 0.9rem;
+		border-radius: 1rem;
+		border: 1px solid --alpha(var(--color-warm) / 26%);
+		background: linear-gradient(
+			180deg,
+			--alpha(var(--color-warm) / 14%) 0%,
+			--alpha(var(--color-panel) / 82%) 100%
+		);
+		color: var(--color-heading);
+		font-size: 0.84rem;
+		font-weight: 600;
+		line-height: 1.4;
+		text-wrap: pretty;
+	}
+
+	.proof-result-card,
+	.proof-facts-panel,
+	.proof-next-step {
+		display: grid;
+		gap: var(--space-md);
+		padding: var(--space-lg);
+		border: var(--border-subtle);
+		border-radius: var(--radius-card-sm);
+		background: linear-gradient(
+			180deg,
+			--alpha(var(--color-panel) / 90%) 0%,
+			--alpha(var(--color-paper) / 76%) 100%
+		);
+		box-shadow:
+			inset 0 1px 0 --alpha(var(--color-panel) / 76%),
+			0 18px 44px --alpha(oklch(0 0 0) / 6%);
+	}
+
+	.proof-result-card__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: var(--space-md);
+	}
+
+	.proof-result-card__eyebrow,
+	.proof-source-pill,
+	.proof-meta-item dt {
+		color: var(--color-muted);
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.proof-result-card__title,
+	.proof-facts-panel__title,
+	.proof-next-step__title,
+	.proof-fact__title {
+		color: var(--color-heading);
+		font-family: var(--font-display);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		text-wrap: balance;
+	}
+
+	.proof-result-card__title,
+	.proof-facts-panel__title,
+	.proof-next-step__title {
+		font-size: 1.3rem;
+		line-height: 1.14;
+	}
+
+	.proof-fact__title {
+		font-size: 1.02rem;
+		line-height: 1.18;
+	}
+
+	.proof-status-badge {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 2rem;
+		padding-inline: 0.8rem;
+		border-radius: var(--radius-pill);
+		border: 1px solid --alpha(var(--color-brand) / 22%);
+		background: --alpha(var(--color-brand) / 12%);
+		color: var(--color-brand-deep);
+		font-size: 0.76rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.dark .proof-status-badge {
+		color: var(--color-brand-bright);
+	}
+
+	.proof-result-card__body,
+	.proof-next-step__body,
+	.proof-fact__body {
+		color: var(--color-body);
+		font-size: 0.97rem;
+		line-height: 1.68;
+		text-wrap: pretty;
+	}
+
+	.proof-meta-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.85rem;
+	}
+
+	.proof-meta-item {
+		display: grid;
+		gap: 0.3rem;
+		padding: 0.9rem 1rem;
+		border-radius: 1rem;
+		border: 1px solid --alpha(var(--color-heading) / 7%);
+		background: --alpha(var(--color-panel) / 68%);
+	}
+
+	.proof-meta-item dd {
+		color: var(--color-heading);
+		font-size: 0.92rem;
+		font-weight: 600;
+		line-height: 1.45;
+	}
+
+	.proof-inline-code {
+		font-family: var(--font-mono);
+		letter-spacing: 0.05em;
+	}
+
+	.proof-facts-list {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: var(--space-md);
+	}
+
+	.proof-fact {
+		display: grid;
+		gap: 0.7rem;
+		padding: 1rem;
+		border-radius: 1rem;
+		border: 1px solid --alpha(var(--color-heading) / 7%);
+		background: linear-gradient(
+			180deg,
+			--alpha(var(--color-panel) / 86%) 0%,
+			--alpha(var(--color-paper) / 72%) 100%
+		);
+	}
+
+	.proof-source-pill {
+		display: inline-flex;
+		justify-self: start;
+		align-items: center;
+		min-height: 1.85rem;
+		padding-inline: 0.7rem;
+		border-radius: var(--radius-pill);
+		border: 1px solid --alpha(var(--color-heading) / 8%);
+		background: --alpha(var(--color-heading) / 5%);
+	}
+
+	.verification-page__back {
+		padding-top: 0;
+		border-top: none;
+	}
+
 	/* ── Footer nav ── */
 	.footer-nav {
 		display: flex;
@@ -3177,6 +3377,15 @@
 		}
 
 		.proof-feature__band {
+			grid-template-columns: 1fr;
+		}
+
+		.proof-result-card__header {
+			flex-direction: column;
+		}
+
+		.proof-meta-grid,
+		.proof-facts-list {
 			grid-template-columns: 1fr;
 		}
 

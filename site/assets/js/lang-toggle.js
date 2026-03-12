@@ -213,6 +213,41 @@ const translations = {
 		"proofCases.section3.body":
 			"You can scan or visit the genu.im proof record directly at genu.im/v/genuim \u2014 this is genu.im\u2019s own brand proof page built on the same proof infrastructure.",
 		"proofCases.section3.link": "View proof example \u2192",
+		"verification.eyebrow": "Proof example",
+		"verification.title": "What a public proof record can show.",
+		"verification.lead":
+			"This page shows a brand-published proof example inside genu.mark. It is not live lookup and it is not an official state check.",
+		"verification.demoNotice":
+			"Demo/example view only. This page shows a static proof example, not a live production lookup.",
+		"verification.resultEyebrow": "Result",
+		"verification.resultTitle":
+			"Public proof is available for this sample item.",
+		"verification.resultBadge": "Proof available",
+		"verification.resultBody":
+			"The record shows how a marked product can present brand-published proof without presenting it as an official state result.",
+		"verification.codeLabel": "Example code",
+		"verification.boundaryLabel": "Trust boundary",
+		"verification.boundaryValue":
+			"Brand proof in genu.mark. Official state checks stay in Diia.",
+		"verification.factsTitle": "Visible proof facts",
+		"verification.fact1Source": "Source: genu.mark",
+		"verification.fact1Title": "Serialized unit record",
+		"verification.fact1Body":
+			"The unit has a published proof record inside the brand proof layer.",
+		"verification.fact2Source": "Source: brand",
+		"verification.fact2Title": "Product line",
+		"verification.fact2Body":
+			"Example packaging for the genu.im public proof demonstration.",
+		"verification.fact3Source": "Source: brand",
+		"verification.fact3Title": "Public status",
+		"verification.fact3Body":
+			"This sample item is shown as a static proof example for Phase 1.",
+		"verification.nextStepTitle": "Next step",
+		"verification.nextStepBody":
+			"If you want this type of proof on your own marked products, use the contact path to discuss rollout scope.",
+		"verification.cta": "Talk about proof for your product",
+		"verification.ctaAria":
+			"Go to contact page to talk about proof for your product",
 		"knowledge.eyebrow": "Knowledge",
 		"knowledge.title": "Guides and articles will live here.",
 		"knowledge.lead":
@@ -499,6 +534,40 @@ const translations = {
 		"proofCases.section3.body":
 			"Ви можете відсканувати або відвідати сторінку доказу genu.im за адресою genu.im/v/genuim \u2014 це власна сторінка доказу бренду genu.im, побудована на тій самій інфраструктурі доказу.",
 		"proofCases.section3.link": "Переглянути приклад доказу \u2192",
+		"verification.eyebrow": "Приклад доказу",
+		"verification.title": "Що може показати публічний запис-доказ.",
+		"verification.lead":
+			"Ця сторінка показує приклад доказу, який бренд публікує в genu.mark. Це не живий пошук і не офіційна державна перевірка.",
+		"verification.demoNotice":
+			"Лише демонстраційний приклад. Тут показано статичний запис-доказ, а не робочий пошук у реальному середовищі.",
+		"verification.resultEyebrow": "Результат",
+		"verification.resultTitle": "Публічний доказ для цього прикладу доступний.",
+		"verification.resultBadge": "Доказ доступний",
+		"verification.resultBody":
+			"Цей запис показує, як маркований товар може мати доказ, опублікований брендом, без подання його як державно підтвердженого результату.",
+		"verification.codeLabel": "Приклад коду",
+		"verification.boundaryLabel": "Межа довіри",
+		"verification.boundaryValue":
+			"Доказ бренду в genu.mark. Офіційна державна перевірка залишається в Дії.",
+		"verification.factsTitle": "Видимі факти доказу",
+		"verification.fact1Source": "Джерело: genu.mark",
+		"verification.fact1Title": "Запис одиниці з унікальним кодом",
+		"verification.fact1Body":
+			"Для цієї одиниці опубліковано запис у шарі доказу бренду.",
+		"verification.fact2Source": "Джерело: бренд",
+		"verification.fact2Title": "Лінійка продукту",
+		"verification.fact2Body":
+			"Приклад пакування для публічної демонстрації доказу genu.im.",
+		"verification.fact3Source": "Джерело: бренд",
+		"verification.fact3Title": "Публічний статус",
+		"verification.fact3Body":
+			"Цю одиницю показано як статичний приклад доказу для першої фази.",
+		"verification.nextStepTitle": "Наступний крок",
+		"verification.nextStepBody":
+			"Якщо ви хочете такий самий формат доказу для власних маркованих товарів, перейдіть на сторінку контактів і опишіть задачу впровадження.",
+		"verification.cta": "Обговорити доказ для свого продукту",
+		"verification.ctaAria":
+			"Перейти на сторінку контактів і обговорити доказ для свого продукту",
 		"knowledge.eyebrow": "База знань",
 		"knowledge.title": "Тут з'являться гіди та статті.",
 		"knowledge.lead":

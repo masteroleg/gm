@@ -35,7 +35,7 @@ test("@smoke GM landing page primary CTA links to /v/genuim", async ({
 	// Primary CTA in hero must navigate to canonical proof path (AC: 3)
 	const primaryCta = page.locator(".hero-actions .cta-button").first();
 	await expect(primaryCta).toBeVisible();
-	await expect(primaryCta).toHaveAttribute("href", "/v/genuim");
+	await expect(primaryCta).toHaveAttribute("href", "/v/genuim/");
 });
 
 test("GM landing page first screen is usable at 360px width", async ({

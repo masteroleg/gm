@@ -48,8 +48,8 @@ development_status:
   1-5-show-the-knowledge-section-in-site-navigation: done
   epic-1-retrospective: optional
 
-  epic-2: backlog
-  2-1-show-the-main-verification-example: backlog
+  epic-2: in-progress
+  2-1-show-the-main-verification-example: done
   2-2-show-a-clear-no-data-result: backlog
   2-3-use-the-demo-input-and-example-code-action: backlog
   2-4-show-only-supported-proof-content: backlog
