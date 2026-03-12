@@ -48,9 +48,9 @@ test.describe("genu.im — preferences", () => {
 		await expect(app.heroEyebrow).toBeVisible();
 
 		if (lang === "uk") {
-			await expect(app.heroEyebrow).toContainText("Довіра");
+			await expect(app.heroEyebrow).toContainText("доказ");
 		} else {
-			await expect(app.heroEyebrow).toContainText("Trust");
+			await expect(app.heroEyebrow).toContainText("proof");
 		}
 	});
 

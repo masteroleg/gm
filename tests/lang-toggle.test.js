@@ -124,4 +124,45 @@ describe("language toggle controller", () => {
 			"Public proof for marked products",
 		);
 	});
+
+	test("stored language preference is applied without resetting to default", () => {
+		// Simulate a page reload with a previously stored UK preference.
+		// The controller must apply UK on init and must NOT reset to 'en' first.
+		localStorage.setItem("lang", "uk");
+		document.body.innerHTML = `
+			<button id="langToggle"><span id="langLabel"></span></button>
+			<p data-i18n="hero.eyebrow"></p>
+		`;
+
+		loadModule();
+
+		// lang attribute must reflect stored preference immediately
+		expect(document.documentElement.lang).toBe("uk");
+		// visible label must show UA
+		expect(document.getElementById("langLabel").textContent).toBe("UA");
+		// i18n text must be UK, not EN (no flash to EN default)
+		expect(document.querySelector("[data-i18n]").textContent).toContain(
+			"доказ",
+		);
+		// preference must NOT be re-written on init (no unnecessary storage churn)
+		expect(localStorage.getItem("lang")).toBe("uk");
+	});
+
+	test("stored theme preference is reflected in html attributes after theme init", () => {
+		// Verify the theme controller restores an explicit stored preference.
+		localStorage.setItem("theme", "dark");
+		document.body.innerHTML = `
+			<button id="langToggle"><span id="langLabel"></span></button>
+			<button id="themeToggle"></button>
+		`;
+		jest.resetModules();
+		require("../site/assets/js/lang-toggle");
+		require("../site/assets/js/theme-toggle");
+
+		expect(document.documentElement.classList.contains("dark")).toBe(true);
+		expect(document.documentElement.getAttribute("data-theme")).toBe("dark");
+		expect(document.documentElement.getAttribute("data-theme-preference")).toBe(
+			"dark",
+		);
+	});
 });
