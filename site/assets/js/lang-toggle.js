@@ -643,6 +643,15 @@ const syncLangToggle = (lang) => {
 	}
 };
 
+const clearPendingI18nState = () => {
+	document.documentElement.removeAttribute("data-i18n-pending");
+
+	if (window.__gmLangPendingTimer) {
+		clearTimeout(window.__gmLangPendingTimer);
+		delete window.__gmLangPendingTimer;
+	}
+};
+
 const createI18nApi = () => ({
 	getLang: () => {
 		const currentLang = document.documentElement.lang || "en";
@@ -666,6 +675,7 @@ const setLang = (lang, options = {}) => {
 	applyTextTranslations(nextLang);
 	applyAriaTranslations(nextLang);
 	syncLangToggle(nextLang);
+	clearPendingI18nState();
 
 	document.dispatchEvent(
 		new CustomEvent("gm:lang-change", {
@@ -702,6 +712,7 @@ if (typeof module !== "undefined") {
 		getTranslation,
 		initLangToggle,
 		isSupportedLang,
+		clearPendingI18nState,
 		readStoredLang,
 		setLang,
 		syncLangToggle,

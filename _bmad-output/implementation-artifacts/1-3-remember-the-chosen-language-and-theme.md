@@ -1,6 +1,6 @@
 # Story 1.3: Remember the Chosen Language and Theme
 
-Status: review
+Status: done
 Release: 2.1
 Tag: 2.1
 
@@ -170,24 +170,52 @@ anthropic/claude-sonnet-4-6
 - Использованы previous-story boundaries из Stories `1.1` и `1.2`, чтобы исключить scope creep в messaging, branch selection и request flow.
 - Текущий implementation gap identified: language first-paint consistency is weaker than theme first-paint consistency because inline bootstrap sets `html.lang` but not visible translated copy; this is treated as a known limitation to improve pragmatically, not as a requirement for full architectural rework.
 - `validate-workflow.xml`, на который ссылается workflow, отсутствует в `_bmad/core/tasks/`; checklist review выполнен вручную по `_bmad/bmm/workflows/4-implementation/create-story/checklist.md`.
+- Code review fix pass: public pages now mark non-default stored language as pending during head bootstrap, and `lang-toggle.js` clears that state immediately after applying translations so returning UK users do not see misleading mixed-language first paint.
+- Code review fix pass: added explicit `360px` preference-controls coverage and a browser regression that verifies stored UK preference resolves to translated content without leaving pending i18n state.
+- Rebuilt `site/assets/css/output.css` after adding the temporary i18n cloak rule in `site/assets/css/input.css`.
+- Review validation выполнена командами `npm run build:css`, `npx jest tests/lang-toggle.test.js tests/theme-toggle.test.js --runInBand`, `npx playwright test tests/e2e/genuim.preferences.spec.ts --config=playwright.config.ts`, `npx biome check site tests/lang-toggle.test.js tests/e2e/genuim.preferences.spec.ts`, `npx tsc --noEmit`.
 
 ### Completion Notes List
 
-- Story `1.3` подготовлена как implementation-ready single-story artifact.
-- Зафиксировано, что story hardens existing preference system instead of introducing a new persistence model.
-- Явно отделены runtime persistence concerns от unrelated homepage content/navigation work.
-- Completion note: Ultimate context engine analysis completed - comprehensive developer guide created.
+- Story `1.3` теперь закрывает persistence и first-render consistency для языка и темы в пределах текущей static architecture.
+- Runtime preference behavior остался local-first и DOM-first: без SSR, cookies, backend state или новой i18n architecture.
+- Returning users со stored UK preference больше не получают misleading mixed-language first paint before deferred controller sync.
+- Preference controls подтверждены usable на `360px`, а reload persistence покрыта и Jest, и Playwright regression checks.
 
 ### File List
 
-Changed:
-- `tests/lang-toggle.test.js` — 2 new unit tests added
-- `tests/e2e/genuim.preferences.spec.ts` — stale assertion fixed
-
-Unchanged (confirmed correct, no edits needed):
+- `_bmad-output/implementation-artifacts/1-3-remember-the-chosen-language-and-theme.md`
 - `site/index.html`
+- `site/about/index.html`
+- `site/contact/index.html`
+- `site/faq/index.html`
+- `site/privacy/index.html`
+- `site/proof-cases/index.html`
+- `site/terms/index.html`
+- `site/knowledge/index.html`
 - `site/assets/js/lang-toggle.js`
-- `site/assets/js/theme-toggle.js`
 - `site/assets/css/input.css`
-- `tests/theme-toggle.test.js`
-- `tests/e2e/pages/genuim.page.ts`
+- `site/assets/css/output.css`
+- `tests/lang-toggle.test.js`
+- `tests/e2e/genuim.preferences.spec.ts`
+
+## Senior Developer Review (AI)
+
+### Reviewer
+
+Amelia (`openai/gpt-5.4`)
+
+### Outcome
+
+Approved after fixes.
+
+### Review Notes
+
+- Fixed blocking issue on language first paint: head bootstrap now marks stored non-default language as pending and the runtime controller clears that state as soon as translations are applied, removing the misleading mixed-language window for returning UK users.
+- Fixed should-fix coverage gap by adding explicit browser checks for stored UK preference recovery and `360px` control usability.
+- Existing theme persistence, explicit-vs-system behavior, fail-soft storage handling, and language/theme controller contracts remain consistent with story scope and project contract.
+
+## Change Log
+
+- 2026-03-12: Code review fix pass hardened language first paint behavior, added preference mobile coverage, and completed the Story `1.3` review record.
+- 2026-03-12: Story `1.3` review approved after fixes and status moved to `done`.

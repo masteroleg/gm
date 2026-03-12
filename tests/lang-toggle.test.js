@@ -129,6 +129,7 @@ describe("language toggle controller", () => {
 		// Simulate a page reload with a previously stored UK preference.
 		// The controller must apply UK on init and must NOT reset to 'en' first.
 		localStorage.setItem("lang", "uk");
+		document.documentElement.setAttribute("data-i18n-pending", "true");
 		document.body.innerHTML = `
 			<button id="langToggle"><span id="langLabel"></span></button>
 			<p data-i18n="hero.eyebrow"></p>
@@ -143,6 +144,9 @@ describe("language toggle controller", () => {
 		// i18n text must be UK, not EN (no flash to EN default)
 		expect(document.querySelector("[data-i18n]").textContent).toContain(
 			"доказ",
+		);
+		expect(document.documentElement.hasAttribute("data-i18n-pending")).toBe(
+			false,
 		);
 		// preference must NOT be re-written on init (no unnecessary storage churn)
 		expect(localStorage.getItem("lang")).toBe("uk");

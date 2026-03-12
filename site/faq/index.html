@@ -27,7 +27,15 @@
 			html.setAttribute('data-theme', resolvedTheme);
 			html.setAttribute('data-theme-preference', themePreference);
 			const storedLang = localStorage.getItem('lang');
-			if (storedLang === 'en' || storedLang === 'uk') { html.lang = storedLang; }
+			if (storedLang === 'en' || storedLang === 'uk') {
+				html.lang = storedLang;
+				if (storedLang !== 'en') {
+					html.setAttribute('data-i18n-pending', 'true');
+					window.__gmLangPendingTimer = window.setTimeout(() => {
+						html.removeAttribute('data-i18n-pending');
+					}, 1500);
+				}
+			}
 		} catch (_e) {}
 	</script>
 

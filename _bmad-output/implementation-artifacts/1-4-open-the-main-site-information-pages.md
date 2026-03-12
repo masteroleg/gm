@@ -1,6 +1,6 @@
 # Story 1.4: Open the Main Site Information Pages
 
-Status: review
+Status: done
 Release: 2.1
 Tag: 2.1
 
@@ -211,7 +211,7 @@ openai/gpt-5.4
 
 - Reviewer: openai/gpt-5.4
 - Date: 2026-03-12
-- Outcome: changes requested -> fixed in same pass -> ready for review
+- Outcome: approved after fixes
 - Blocking findings fixed:
   - aligned trust-floor `data-i18n` keys between HTML and `site/assets/js/lang-toggle.js`
   - removed unsupported claims from `site/proof-cases/index.html`
@@ -225,4 +225,5 @@ openai/gpt-5.4
 ## Change Log
 
 - 2026-03-12: Story `1.4` implemented and moved to `review`.
-- 2026-03-12: Review correction pass fixed i18n key mismatches, claim wording, SEO/a11y coverage, and validation notes; story remains `review`.
+- 2026-03-12: Review correction pass fixed i18n key mismatches, claim wording, SEO/a11y coverage, and validation notes.
+- 2026-03-12: Story `1.4` review approved after fixes and status moved to `done`.

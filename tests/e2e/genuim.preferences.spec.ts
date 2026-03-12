@@ -73,4 +73,41 @@ test.describe("genu.im — preferences", () => {
 		await page.waitForLoadState("domcontentloaded");
 		await expect(app.html).toHaveAttribute("lang", lang);
 	});
+
+	test("stored UK preference loads translated content without pending i18n state", async ({
+		page,
+	}) => {
+		await page.addInitScript(() => {
+			localStorage.setItem("lang", "uk");
+		});
+
+		const app = new GenuimPage(page);
+		await app.gotoHome();
+
+		await expect(app.html).toHaveAttribute("lang", "uk");
+		await expect(app.html).not.toHaveAttribute("data-i18n-pending", "true");
+		await expect(app.heroEyebrow).toContainText("доказ");
+	});
+
+	test("language and theme controls stay usable at 360px", async ({ page }) => {
+		const app = new GenuimPage(page);
+
+		await page.setViewportSize({ width: 360, height: 640 });
+		await app.gotoHome();
+
+		await expect(app.langToggle).toBeVisible();
+		await expect(app.themeToggle).toBeVisible();
+
+		const initialDark = await app.isDark();
+		await app.toggleLanguageAndWait();
+		await app.toggleThemeAndWait(!initialDark);
+
+		const scrollWidth = await page.evaluate(
+			() => document.documentElement.scrollWidth,
+		);
+		const clientWidth = await page.evaluate(
+			() => document.documentElement.clientWidth,
+		);
+		expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
+	});
 });
