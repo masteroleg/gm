@@ -2,6 +2,9 @@
 
 ## Core Validation
 
+- [ ] `docs/project-contract.md` loaded and applied during sprint planning
+- [ ] Story execution discipline is preserved in generated planning guidance
+
 ### Complete Coverage Check
 
 - [ ] Every epic found in epic\*.md files appears in sprint-status.yaml

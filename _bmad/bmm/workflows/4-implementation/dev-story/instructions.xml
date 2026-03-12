@@ -11,6 +11,7 @@
     other instruction.</critical>
   <critical>Do NOT schedule a "next session" or request review pauses unless a HALT condition applies. Only Step 6 decides completion.</critical>
   <critical>User skill level ({user_skill_level}) affects conversation style ONLY, not code updates.</critical>
+  <critical>Load and apply `docs/project-contract.md` before implementation. Follow the more restrictive rule when it overlaps with story or project context guidance.</critical>
 
   <step n="1" goal="Find next ready story and load it" tag="sprint-status">
     <check if="{{story_path}} is provided">
@@ -138,9 +139,13 @@
     <critical>Load all available context to inform implementation</critical>
 
     <action>Load {project_context} for coding standards and project-wide patterns (if exists)</action>
+    <action>Load `{project-root}/docs/project-contract.md` as the permanent implementation contract (if exists)</action>
     <action>Parse sections: Story, Acceptance Criteria, Tasks/Subtasks, Dev Notes, Dev Agent Record, File List, Change Log, Status</action>
     <action>Load comprehensive context from story file's Dev Notes section</action>
     <action>Extract developer guidance from Dev Notes: architecture requirements, previous learnings, technical specifications</action>
+    <action>Extract contract requirements from `docs/project-contract.md`: delivery discipline, contract-first rule, architecture limits, HTML/accessibility/copy/translation rules, misleading-claims rule, CTA rule, test coverage rule, story execution rule</action>
+    <action>Before any code changes, state an 8-12 line implementation contract covering: story scope, explicit out-of-scope, files to change, protected files/areas, user-visible behavior that will change, behavior that must remain unchanged, tests to add/update, and validation commands to run</action>
+    <action if="implementation contract cannot be stated clearly in 8-12 lines">HALT: "Story scope or implementation contract is ambiguous"</action>
     <action>Use enhanced story context to inform implementation decisions and approaches</action>
     <output>✅ **Context Loaded**
       Story and project context available for implementation
@@ -159,7 +164,7 @@
         - Review outcome (Approve/Changes Requested/Blocked)
         - Review date
         - Total action items with checkboxes (count checked vs unchecked)
-        - Severity breakdown (High/Med/Low counts)
+        - Severity breakdown (blocking/should-fix/non-blocking counts)
       </action>
       <action>Count unchecked [ ] review follow-up tasks in "Review Follow-ups (AI)" subsection</action>
       <action>Store list of unchecked review items as {{pending_review_items}}</action>
@@ -168,7 +173,7 @@
 
         **Review Outcome:** {{review_outcome}}
         **Action Items:** {{unchecked_review_count}} remaining to address
-        **Priorities:** {{high_count}} High, {{med_count}} Medium, {{low_count}} Low
+        **Priorities:** {{blocking_count}} blocking, {{should_fix_count}} should-fix, {{non_blocking_count}} non-blocking
 
         **Strategy:** Will prioritize review follow-up tasks (marked [AI-Review]) before continuing with regular tasks.
       </output>
@@ -245,6 +250,7 @@
     <action if="new dependencies required beyond story specifications">HALT: "Additional dependencies need user approval"</action>
     <action if="3 consecutive implementation failures occur">HALT and request guidance</action>
     <action if="required configuration is missing">HALT: "Cannot proceed without necessary configuration files"</action>
+    <action if="proposed change falls outside active story scope or project contract">HALT: "Requested implementation exceeds story or project contract scope"</action>
 
     <critical>NEVER implement anything not mapped to a specific task/subtask in the story file</critical>
     <critical>NEVER proceed to next task until current task/subtask is complete AND tests pass</critical>

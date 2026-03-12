@@ -27,10 +27,28 @@ so that {{benefit}}.
 - Source tree components to touch
 - Testing standards summary
 
+### Contract-First Implementation Brief
+
+- Story scope:
+- Explicitly out of scope:
+- Files or areas expected to change:
+- Protected files or areas not to change:
+- User-visible behavior that will change:
+- Behavior that must remain unchanged:
+- Tests to add or update:
+- Validation commands to run:
+
 ### Project Structure Notes
 
 - Alignment with unified project structure (paths, modules, naming)
 - Detected conflicts or variances (with rationale)
+
+### Project Contract Guardrails
+
+- Preserve the current static-site architecture unless the story explicitly changes it
+- Preserve product positioning: brand publishes proof via genu.mark; official state verification happens in Diia
+- Avoid misleading claims not supported by the story
+- Preserve semantic HTML, accessibility alignment, responsive integrity, CTA clarity, and translation quality
 
 ### References
 

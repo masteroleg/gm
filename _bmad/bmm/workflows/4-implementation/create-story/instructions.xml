@@ -16,6 +16,7 @@
   <critical>❓ SAVE QUESTIONS: If you think of questions or clarifications during analysis, save them for the end after the complete story is
     written</critical>
   <critical>🎯 ZERO USER INTERVENTION: Process should be fully automated except for initial epic/story selection or missing documents</critical>
+  <critical>Load and apply `docs/project-contract.md` before story generation. Generated story context must inherit the project contract and follow the more restrictive rule when guidance overlaps.</critical>
 
   <step n="1" goal="Determine target story">
     <check if="{{story_path}} is provided by user or user provided the epic and story number such as 2-4 or 1.6 or epic 1 story 5">
@@ -182,6 +183,8 @@
       name="discover_inputs" />
     <note>Available content: {epics_content}, {prd_content}, {architecture_content}, {ux_content},
     {project_context}</note>
+    <action>Load `{project-root}/docs/project-contract.md` as the permanent implementation contract (if exists)</action>
+    <action>Extract contract requirements that must flow into the story: delivery discipline, contract-first rule, architecture boundaries, HTML/accessibility rules, copy/translation/product-positioning rules, misleading-claims rule, CTA rule, test coverage rule, story execution rule</action>
 
     <!-- Analyze epics file for story foundation -->
     <action>From {epics_content}, extract Epic {{epic_num}} complete context:</action> **EPIC ANALYSIS:** - Epic
@@ -299,6 +302,21 @@
     <!-- Project context reference -->
     <template-output
       file="{default_output_file}">project_context_reference</template-output>
+
+    <!-- Project contract guardrails -->
+    <action>Populate Dev Notes with an explicit contract-first implementation brief covering:
+      - story scope
+      - explicit out-of-scope
+      - files and areas expected to change
+      - protected files and areas not to change
+      - user-visible behavior that should change
+      - behavior that must remain unchanged
+      - tests to add or update
+      - validation commands to run
+    </action>
+    <action>Ensure generated story guidance explicitly preserves static-site architecture and avoids future-story behavior</action>
+    <action>Ensure generated story guidance explicitly preserves product-positioning rules: genu.mark publishes product proof, Diia performs official state verification</action>
+    <action>Ensure generated story guidance explicitly warns against misleading claims such as live lookup, real-time verification, official verification, backend submission, or implied stored request confirmation unless the story requires them</action>
 
     <!-- Final status update -->
     <template-output file="{default_output_file}">

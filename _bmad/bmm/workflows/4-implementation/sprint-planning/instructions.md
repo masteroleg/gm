@@ -2,6 +2,7 @@
 
 <critical>The workflow execution engine is governed by: {project-root}/_bmad/core/tasks/workflow.xml</critical>
 <critical>You MUST have already loaded and processed: {project-root}/_bmad/bmm/workflows/4-implementation/sprint-planning/workflow.yaml</critical>
+<critical>Load and apply `docs/project-contract.md` before generating sprint status. Treat it as the permanent contract for story execution discipline.</critical>
 
 ## 📚 Document Discovery - Full Epic Loading
 
@@ -24,6 +25,7 @@
 
 <step n="1" goal="Parse epic files and extract all work items">
 <action>Load {project_context} for project-wide patterns and conventions (if exists)</action>
+<action>Load `{project-root}/docs/project-contract.md` for permanent planning and execution guardrails (if exists)</action>
 <action>Communicate in {communication_language} with {user_name}</action>
 <action>Look for all files matching `{epics_pattern}` in {epics_location}</action>
 <action>Could be a single `epics.md` file or multiple `epic-1.md`, `epic-2.md` files</action>
@@ -42,6 +44,7 @@
 - Final key: `1-1-user-authentication`
 
 <action>Build complete inventory of all epics and stories from all epic files</action>
+<action>Preserve story execution discipline in planning notes: contract first -> implement -> run validation -> update story record -> update file list -> update sprint status -> move to next story</action>
 </step>
 
   <step n="0.5" goal="Discover and load project documents">
@@ -177,6 +180,7 @@ development_status:
 2. Use this file to track development progress
 3. Agents will update statuses as they work
 4. Re-run this workflow to refresh auto-detected statuses
+5. Do not start the next story before the current one passes dev validation and review discipline
 
 </step>
 

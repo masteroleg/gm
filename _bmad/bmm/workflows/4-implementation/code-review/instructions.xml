@@ -10,8 +10,9 @@
   <critical>Find 3-10 specific issues in every review minimum - no lazy "looks good" reviews - YOU are so much better than the dev agent
     that wrote this slop</critical>
   <critical>Read EVERY file in the File List - verify implementation against story requirements</critical>
-  <critical>Tasks marked complete but not done = CRITICAL finding</critical>
-  <critical>Acceptance Criteria not implemented = HIGH severity finding</critical>
+  <critical>Load and apply `docs/project-contract.md` before reviewing. Follow the more restrictive rule when it overlaps with story or project context guidance.</critical>
+  <critical>Tasks marked complete but not done = blocking finding</critical>
+  <critical>Acceptance Criteria not implemented = blocking finding</critical>
   <critical>Do not review files that are not part of the application's source code. Always exclude the _bmad/ and _bmad-output/ folders from the review. Always exclude IDE and CLI configuration folders like .cursor/ and .windsurf/ and .claude/</critical>
 
 
@@ -41,6 +42,7 @@
 
     <invoke-protocol name="discover_inputs" />
     <action>Load {project_context} for coding standards (if exists)</action>
+    <action>Load `{project-root}/docs/project-contract.md` for permanent implementation/review rules (if exists)</action>
   </step>
 
   <step n="2" goal="Build review attack plan">
@@ -51,8 +53,9 @@
     <action>Create review plan:
       1. **AC Validation**: Verify each AC is actually implemented
       2. **Task Audit**: Verify each [x] task is really done
-      3. **Code Quality**: Security, performance, maintainability
-      4. **Test Quality**: Real tests vs placeholder bullshit
+      3. **Contract Compliance**: Scope discipline, architecture boundaries, semantic HTML, accessibility consistency, translation consistency, product claims, CTA clarity
+      4. **Code Quality**: Security, performance, maintainability
+      5. **Test Quality**: Real tests vs placeholder bullshit
     </action>
   </step>
 
@@ -61,9 +64,9 @@
 
     <!-- Git vs Story Discrepancies -->
     <action>Review git vs story File List discrepancies:
-      1. **Files changed but not in story File List** → MEDIUM finding (incomplete documentation)
-      2. **Story lists files but no git changes** → HIGH finding (false claims)
-      3. **Uncommitted changes not documented** → MEDIUM finding (transparency issue)
+      1. **Files changed but not in story File List** → should-fix finding (incomplete documentation)
+      2. **Story lists files but no git changes** → blocking finding (false claims)
+      3. **Uncommitted changes not documented** → should-fix finding (transparency issue)
     </action>
 
     <!-- Use combined file list: story File List + git discovered files -->
@@ -74,15 +77,26 @@
       1. Read the AC requirement
       2. Search implementation files for evidence
       3. Determine: IMPLEMENTED, PARTIAL, or MISSING
-      4. If MISSING/PARTIAL → HIGH SEVERITY finding
+      4. If MISSING/PARTIAL → blocking finding
     </action>
 
     <!-- Task Completion Audit -->
     <action>For EACH task marked [x]:
       1. Read the task description
       2. Search files for evidence it was actually done
-      3. **CRITICAL**: If marked [x] but NOT DONE → CRITICAL finding
+      3. **CRITICAL**: If marked [x] but NOT DONE → blocking finding
       4. Record specific proof (file:line)
+    </action>
+
+    <action>For EACH story under review, verify project contract compliance:
+      1. Story scope adherence and absence of future-story behavior
+      2. Static-site architecture preservation and controller-boundary discipline
+      3. Semantic HTML quality and responsive integrity
+      4. Accessibility consistency across visible labels, aria-labels, translation strings, and fallback HTML
+      5. Translation consistency and natural Ukrainian copy where applicable
+      6. Absence of misleading product claims (live lookup, real-time verification, official verification, backend submission)
+      7. CTA clarity and alignment with actual next-step behavior
+      8. Adequacy of tests for critical UI behavior
     </action>
 
     <!-- Code Quality Deep Dive -->
@@ -99,6 +113,7 @@
       <action>Re-examine code for:
         - Edge cases and null handling
         - Architecture violations
+        - Contract violations
         - Documentation gaps
         - Integration issues
         - Dependency problems
@@ -109,7 +124,7 @@
   </step>
 
   <step n="4" goal="Present findings and fix them">
-    <action>Categorize findings: HIGH (must fix), MEDIUM (should fix), LOW (nice to fix)</action>
+    <action>Categorize findings: blocking, should-fix, non-blocking</action>
     <action>Set {{fixed_count}} = 0</action>
     <action>Set {{action_count}} = 0</action>
 
@@ -117,22 +132,23 @@
 
       **Story:** {{story_file}}
       **Git vs Story Discrepancies:** {{git_discrepancy_count}} found
-      **Issues Found:** {{high_count}} High, {{medium_count}} Medium, {{low_count}} Low
+      **Issues Found:** {{blocking_count}} blocking, {{should_fix_count}} should-fix, {{non_blocking_count}} non-blocking
 
-      ## 🔴 CRITICAL ISSUES
+      ## 🔴 BLOCKING
       - Tasks marked [x] but not actually implemented
       - Acceptance Criteria not implemented
       - Story claims files changed but no git evidence
       - Security vulnerabilities
+      - Contract violations that materially change scope or product behavior
 
-      ## 🟡 MEDIUM ISSUES
+      ## 🟡 SHOULD-FIX
       - Files changed but not documented in story File List
       - Uncommitted changes not tracked
       - Performance problems
       - Poor test coverage/quality
       - Code maintainability issues
 
-      ## 🟢 LOW ISSUES
+      ## 🟢 NON-BLOCKING
       - Code style improvements
       - Documentation gaps
       - Git commit message quality
@@ -147,11 +163,11 @@
       Choose [1], [2], or specify which issue to examine:</ask>
 
     <check if="user chooses 1">
-      <action>Fix all HIGH and MEDIUM issues in the code</action>
+      <action>Fix all blocking and should-fix issues in the code</action>
       <action>Add/update tests as needed</action>
       <action>Update File List in story if files changed</action>
       <action>Update story Dev Agent Record with fixes applied</action>
-      <action>Set {{fixed_count}} = number of HIGH and MEDIUM issues fixed</action>
+      <action>Set {{fixed_count}} = number of blocking and should-fix issues fixed</action>
       <action>Set {{action_count}} = 0</action>
     </check>
 
@@ -170,11 +186,11 @@
 
   <step n="5" goal="Update story status and sync sprint tracking">
     <!-- Determine new status based on review outcome -->
-    <check if="all HIGH and MEDIUM issues fixed AND all ACs implemented">
+    <check if="all blocking and should-fix issues fixed AND all ACs implemented">
       <action>Set {{new_status}} = "done"</action>
       <action>Update story Status field to "done"</action>
     </check>
-    <check if="HIGH or MEDIUM issues remain OR ACs not fully implemented">
+    <check if="blocking or should-fix issues remain OR ACs not fully implemented">
       <action>Set {{new_status}} = "in-progress"</action>
       <action>Update story Status field to "in-progress"</action>
     </check>

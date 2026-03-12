@@ -72,6 +72,9 @@ You will systematically re-do the entire story creation process, but with a crit
 
 ### **Step 2: Exhaustive Source Document Analysis**
 
+- Load `docs/project-contract.md` and treat it as a required source for implementation and review guardrails
+- Verify the generated story passes through the permanent contract rules, not just the epic text
+
 **🔥 CRITICAL: Treat this like YOU are creating the story from scratch to PREVENT DISASTERS!**
 **Discover everything the original LLM missed that could cause developer mistakes, omissions, or disasters!**
 
@@ -166,6 +169,15 @@ You will systematically re-do the entire story creation process, but with a crit
 - **Scope creep:** Missing boundaries that could cause unnecessary work
 - **Quality failures:** Missing quality requirements that could deliver broken features
 
+#### **3.6 Project Contract Gaps**
+
+- **Missing contract-first brief:** Story does not clearly state scope, out-of-scope, protected areas, changed behavior, unchanged behavior, tests, and validation commands
+- **Architecture drift risk:** Story allows backend, framework, or non-static-site behavior not approved by the contract
+- **Product-positioning risk:** Story does not preserve genu.mark vs Diia responsibilities clearly enough
+- **Misleading claims risk:** Story language could imply live lookup, real-time verification, official verification, backend submission, or stored confirmation
+- **HTML/accessibility risk:** Story does not preserve semantic HTML, accessibility alignment, and responsive integrity guidance
+- **Translation/copy risk:** Story does not preserve semantic parity, idiomatic Ukrainian, CTA clarity, and calm factual tone
+
 ### **Step 4: LLM-Dev-Agent Optimization Analysis**
 
 **CRITICAL STEP: Optimize story context for LLM developer agent consumption**
@@ -196,6 +208,7 @@ You will systematically re-do the entire story creation process, but with a crit
 - Missing previous story context that could cause errors
 - Missing anti-pattern prevention that could lead to duplicate code
 - Missing security or performance requirements
+- Missing project-contract guardrails that downstream dev/review workflows require
 
 #### **5.2 Enhancement Opportunities (Should Add)**
 

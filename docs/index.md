@@ -7,6 +7,7 @@
 - **[ci.md](./ci.md)** - CI и деплой: техническая схема
 - **[genu-im-homepage-master-plan.md](./genu-im-homepage-master-plan.md)** - genu.im Homepage Master Plan
 - **[lighthouse.md](./lighthouse.md)** - Lighthouse: регулярная проверка качества
+- **[project-contract.md](./project-contract.md)** - Permanent implementation and review contract for BMAD workflows
 
 ## Subdirectories
 

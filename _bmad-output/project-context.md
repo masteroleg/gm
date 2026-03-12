@@ -375,6 +375,25 @@ _This file contains critical rules and patterns that AI agents must follow when 
 
 ---
 
+## Permanent Project Contract
+
+_These rules apply to ALL BMAD dev-story and code-review workflows. They override ad-hoc stylistic choices by agents._
+
+Authoritative source: `docs/project-contract.md`
+
+Use that file as the durable contract for:
+
+- delivery discipline and contract-first execution
+- architecture and controller-boundary rules
+- HTML, accessibility, and responsive implementation constraints
+- copy, translation, CTA, and product-positioning rules
+- code-review expectations and finding severity
+- critical test coverage and story execution sequence
+
+When implementing or reviewing, read `docs/project-contract.md` together with this file and follow the more restrictive rule when guidance overlaps.
+
+---
+
 ## Usage Guidelines
 
 **For AI Agents:**
@@ -389,7 +408,7 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Review quarterly for outdated rules
 - Remove rules that become obvious over time
 
-**Last Updated:** 2026-03-09
+**Last Updated:** 2026-03-12
 
 <!-- Knowledge Fragments: See _bmad-output/knowledge/ for detailed patterns -->
 <!-- ADRs: See _bmad-output/solutioning/adrs/ for architectural decisions -->

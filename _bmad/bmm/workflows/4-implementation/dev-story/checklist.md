@@ -24,8 +24,11 @@ validation-rules:
 
 ## 📋 Context & Requirements Validation
 
+- [ ] **Contract-First Framing:** An 8-12 line implementation contract was stated before coding
+- [ ] **Project Contract Loaded:** `docs/project-contract.md` was loaded and applied with overlapping rules resolved to the stricter guidance
 - [ ] **Story Context Completeness:** Dev Notes contains ALL necessary technical requirements, architecture patterns, and implementation guidance
 - [ ] **Architecture Compliance:** Implementation follows all architectural requirements specified in Dev Notes
+- [ ] **Scope Discipline:** Changes stay strictly within active story scope; no future-story behavior introduced
 - [ ] **Technical Specifications:** All technical specifications (libraries, frameworks, versions) from Dev Notes are implemented correctly
 - [ ] **Previous Story Learnings:** Previous story insights incorporated (if applicable) and build upon appropriately
 
@@ -36,6 +39,8 @@ validation-rules:
 - [ ] **No Ambiguous Implementation:** Clear, unambiguous implementation that meets story requirements
 - [ ] **Edge Cases Handled:** Error conditions and edge cases appropriately addressed
 - [ ] **Dependencies Within Scope:** Only uses dependencies specified in story or project-context.md
+- [ ] **Protected Areas Respected:** Files/areas declared out of scope or protected were not modified
+- [ ] **Low-Risk Change Shape:** No broad rewrite, formatting churn, or unrelated cleanup outside story value
 
 ## 🧪 Testing & Quality Assurance
 
@@ -46,6 +51,7 @@ validation-rules:
 - [ ] **Regression Prevention:** ALL existing tests pass (no regressions introduced)
 - [ ] **Code Quality:** Linting and static checks pass when configured in project
 - [ ] **Test Framework Compliance:** Tests use project's testing frameworks and patterns from Dev Notes
+- [ ] **Validation Commands Run:** Required validation commands were run and results recorded accurately
 
 ## 📝 Documentation & Tracking
 
