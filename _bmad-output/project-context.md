@@ -315,7 +315,9 @@ _This file contains critical rules and patterns that AI agents must follow when 
 - Use git tags and GitHub Releases to mark meaningful public site versions.
 - `1.0` is the first compact published version of the site before the large landing-page redesign.
 - `2.0` is the current large landing-page version.
+- `2.1` is the current Phase 1 delivery release scope and consists of Epics 1-4 defined in `_bmad-output/planning-artifacts/epics.md`.
 - Treat major site milestones as releases; do not create a release for every small fix.
+- Create the git tag and GitHub Release `2.1` after the Epic 1-4 scope is complete and release validation passes.
 - Future version numbering principles should evolve from these anchored release points rather than from arbitrary commit counts.
 
 **Change Management:**

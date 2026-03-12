@@ -8,14 +8,7 @@ on:
       - "repo-index.md"
       - "scripts/index_docs.py"
       - "tests/index_docs_test.py"
-  pull_request:
-    branches: [ main ]
-    types: [opened, synchronize, reopened]
-    paths:
-      - "_bmad-output/**"
-      - "repo-index.md"
-      - "scripts/index_docs.py"
-      - "tests/index_docs_test.py"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -27,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -42,17 +37,24 @@ jobs:
       - name: Run index docs test (pytest)
         run: pytest -q tests/index_docs_test.py
 
-      - name: Commit and push changes (auto-branch)
+      - name: Commit and push changes
         id: commit_changes
         run: |
+          BRANCH="index-docs-auto"
           if [ -n "$(git status --porcelain)" ]; then
-            BRANCH="index-docs-auto-${{ github.run_id }}"
             git config user.name "github-actions"
             git config user.email "github-actions@github.com"
-            git checkout -b "$BRANCH"
+
+            if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
+              git fetch origin "$BRANCH"
+              git checkout -B "$BRANCH" origin/main
+            else
+              git checkout -b "$BRANCH"
+            fi
+
             git add -A
             git commit -m "ci(index-docs): auto-update indexes"
-            git push -u origin "$BRANCH"
+            git push -u origin "$BRANCH" --force-with-lease
             echo "branch=$BRANCH" >> $GITHUB_OUTPUT
           else
             echo "branch=" >> $GITHUB_OUTPUT
@@ -64,7 +66,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           BRANCH="${{ steps.commit_changes.outputs.branch }}"
-          # если PR уже существует — не падаем
           PR_NUMBER=$(gh pr list --base main --head "$BRANCH" --json number -q ".[0].number" 2>/dev/null || true)
           if [ -n "$PR_NUMBER" ]; then
             echo "PR already exists: #$PR_NUMBER"

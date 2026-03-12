@@ -16,6 +16,8 @@ inputDocuments:
 
 This document provides the complete epic and story breakdown for gm, decomposing the requirements from the PRD, UX Design if it exists, and Architecture requirements into implementable stories.
 
+Release mapping note: Epics 1-4 together define the planned `2.1` release scope for the current Phase 1 public-site delivery.
+
 ## Requirements Inventory
 
 ### Active Phase 1 Functional Requirements

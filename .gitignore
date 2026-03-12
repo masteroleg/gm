@@ -4,6 +4,9 @@ node_modules/
 # 📝 Logs, temp, misc
 *.log
 *.tmp
+__pycache__/
+*.py[cod]
+.pytest_cache/
 
 # ⚙️ VS Code settings
 .vscode/
