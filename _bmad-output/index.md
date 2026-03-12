@@ -5,6 +5,12 @@ BMAD artifacts (deduplicated) for genu.im.
 ## Files
 ### _bmad-output/
 - **[design-thinking-2026-02-23.md](_bmad-output/design-thinking-2026-02-23.md)** - Design Thinking Session: gm
+- **[1-1-clarify-the-homepage-first-screen.md](_bmad-output/implementation-artifacts/1-1-clarify-the-homepage-first-screen.md)** - Story 1.1: Прояснить первый экран главной страницы
+- **[1-2-show-the-two-main-visitor-needs.md](_bmad-output/implementation-artifacts/1-2-show-the-two-main-visitor-needs.md)** - Story 1.2: Show the Two Main Visitor Needs
+- **[1-3-remember-the-chosen-language-and-theme.md](_bmad-output/implementation-artifacts/1-3-remember-the-chosen-language-and-theme.md)** - Story 1.3: Remember the Chosen Language and Theme
+- **[1-4-open-the-main-site-information-pages.md](_bmad-output/implementation-artifacts/1-4-open-the-main-site-information-pages.md)** - Story 1.4: Open the Main Site Information Pages
+- **[1-5-show-the-knowledge-section-in-site-navigation.md](_bmad-output/implementation-artifacts/1-5-show-the-knowledge-section-in-site-navigation.md)** - Story 1.5: Show the Knowledge Section in Site Navigation
+- **[epic-1-dev-handoff.md](_bmad-output/implementation-artifacts/epic-1-dev-handoff.md)** - Epic 1 Dev Handoff
 - **[index.md](_bmad-output/implementation-artifacts/index.md)** - Directory Index: _bmad-output/implementation-artifacts
 - **[tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md](_bmad-output/implementation-artifacts/tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md)** - ---
 - **[tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md](_bmad-output/implementation-artifacts/tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md)** - ---
@@ -33,12 +39,13 @@ BMAD artifacts (deduplicated) for genu.im.
 - **[open-questions.md](_bmad-output/knowledge/open-questions.md)** - Open Questions and Validation Items
 - **[architecture.md](_bmad-output/planning-artifacts/architecture.md)** - ---
 - **[epics.md](_bmad-output/planning-artifacts/epics.md)** - ---
+- **[implementation-readiness-report-2026-03-11-2.md](_bmad-output/planning-artifacts/implementation-readiness-report-2026-03-11-2.md)** - ---
 - **[implementation-readiness-report-2026-03-11.md](_bmad-output/planning-artifacts/implementation-readiness-report-2026-03-11.md)** - ---
 - **[index.md](_bmad-output/planning-artifacts/index.md)** - Directory Index: _bmad-output/planning-artifacts
 - **[prd.md](_bmad-output/planning-artifacts/prd.md)** - ---
 - **[product-brief-gm-2026-02-23.md](_bmad-output/planning-artifacts/product-brief-gm-2026-02-23.md)** - ---
 - **[product-brief-gm-2026-03-05.md](_bmad-output/planning-artifacts/product-brief-gm-2026-03-05.md)** - ---
-- **[sprint-change-proposal-2026-03-11.md](_bmad-output/planning-artifacts/sprint-change-proposal-2026-03-11.md)** - ---
+- **[sprint-change-proposal-2026-03-11.md](_bmad-output/planning-artifacts/sprint-change-proposal-2026-03-11.md)** - Sprint Change Proposal - 2026-03-11
 - **[ux-design-specification.md](_bmad-output/planning-artifacts/ux-design-specification.md)** - ---
 - **[validation-report-2026-03-09.md](_bmad-output/planning-artifacts/validation-report-2026-03-09.md)** - ---
 - **[validation-report-2026-03-10.md](_bmad-output/planning-artifacts/validation-report-2026-03-10.md)** - ---
@@ -58,4 +65,4 @@ BMAD artifacts (deduplicated) for genu.im.
 Archived legacy materials and migration inputs.
 - **[/_archive/perevir-product](./_archive/perevir-product/)**
 
-Last updated: 2026-03-11
+Last updated: 2026-03-12
