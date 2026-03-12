@@ -9,6 +9,7 @@ const translations = {
 		"controls.theme.titleToLight": "Switch to light mode",
 		"nav.useCases": "Use cases",
 		"nav.howItWorks": "How it works",
+		"nav.knowledge": "Knowledge",
 		"hero.eyebrow": "Public proof for marked products",
 		"hero.titleLine1": "Every marked product",
 		"hero.titleLine2": "should come with",
@@ -212,6 +213,19 @@ const translations = {
 		"proofCases.section3.body":
 			"You can scan or visit the genu.im proof record directly at genu.im/v/genuim \u2014 this is genu.im\u2019s own brand proof page built on the same proof infrastructure.",
 		"proofCases.section3.link": "View proof example \u2192",
+		"knowledge.eyebrow": "Knowledge",
+		"knowledge.title": "Guides and articles will live here.",
+		"knowledge.lead":
+			"This is the early knowledge section for genu.im. It is reserved for future guides, articles, and explainers - not a full library yet.",
+		"knowledge.section1.heading": "What this section is for",
+		"knowledge.section1.body":
+			"Over time, this section will hold practical guides, articles, and explainers about product proof, marked products, and how the genu.im trust flow works.",
+		"knowledge.section2.heading": "Current stage",
+		"knowledge.section2.body":
+			"Right now this is a Phase 1 placeholder. We are opening the navigation slot early so the information architecture is clear before the full content area is published.",
+		"knowledge.section3.heading": "What to do for now",
+		"knowledge.section3.body":
+			"Use the main site pages below to review proof context, trust-floor information, and contact paths. This page is here to show where the knowledge area will grow next.",
 		"faq.eyebrow": "FAQ",
 		"faq.title": "Common questions.",
 		"faq.lead":
@@ -439,6 +453,7 @@ const translations = {
 		"nav.about": "Про нас",
 		"nav.contact": "Контакти",
 		"nav.proofCases": "Докази та кейси",
+		"nav.knowledge": "База знань",
 		"nav.faq": "Питання та відповіді",
 		"nav.privacy": "Конфіденційність",
 		"nav.terms": "Умови використання",
@@ -484,6 +499,19 @@ const translations = {
 		"proofCases.section3.body":
 			"Ви можете відсканувати або відвідати сторінку доказу genu.im за адресою genu.im/v/genuim \u2014 це власна сторінка доказу бренду genu.im, побудована на тій самій інфраструктурі доказу.",
 		"proofCases.section3.link": "Переглянути приклад доказу \u2192",
+		"knowledge.eyebrow": "База знань",
+		"knowledge.title": "Тут з'являться гіди та статті.",
+		"knowledge.lead":
+			"Це рання версія розділу знань genu.im. Тут з часом будуть гіди, статті та пояснення - але повної бібліотеки ще немає.",
+		"knowledge.section1.heading": "Для чого цей розділ",
+		"knowledge.section1.body":
+			"Згодом тут будуть практичні гіди, статті та пояснення про доказ продукту, марковані товари й те, як працює шлях довіри в genu.im.",
+		"knowledge.section2.heading": "Поточний етап",
+		"knowledge.section2.body":
+			"Зараз це placeholder першої фази. Ми відкриваємо navigation slot заздалегідь, щоб інформаційна архітектура була зрозумілою ще до публікації повної content area.",
+		"knowledge.section3.heading": "Що робити зараз",
+		"knowledge.section3.body":
+			"Поки що використовуйте основні сторінки сайту нижче, щоб переглянути контекст доказу, trust-floor інформацію та способи зв'язку. Ця сторінка показує, де далі зростатиме knowledge area.",
 		"faq.eyebrow": "Питання та відповіді",
 		"faq.title": "Поширені запитання.",
 		"faq.lead":

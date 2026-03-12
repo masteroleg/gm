@@ -328,3 +328,81 @@ test("GM trust-floor pages are usable at 360px width", async ({
 		await expect(page.locator(".info-back-link")).toBeVisible();
 	}
 });
+
+// ── Knowledge placeholder (Story 1.5) ──
+
+test("@smoke GM homepage exposes knowledge link in public navigation and footer", async ({
+	page,
+	baseURL,
+}) => {
+	await page.goto(new URL("/", baseURL ?? "http://localhost:3000").toString());
+	await page.waitForLoadState("domcontentloaded");
+
+	await expect(page.locator('.footer-nav a[href="knowledge/"]')).toBeVisible();
+
+	const burgerButton = page.locator("#burgerBtn");
+	if (await burgerButton.isVisible()) {
+		await burgerButton.click();
+		await expect(page.locator('#mainNav a[href="/knowledge/"]')).toBeVisible();
+	} else {
+		await expect(page.locator('#mainNav a[href="/knowledge/"]')).toBeVisible();
+	}
+});
+
+test("@smoke GM knowledge page resolves with purpose copy and way back", async ({
+	page,
+	baseURL,
+}) => {
+	await page.goto(
+		new URL("/knowledge/", baseURL ?? "http://localhost:3000").toString(),
+	);
+	await page.waitForLoadState("domcontentloaded");
+
+	await expect(page).toHaveTitle(/Knowledge\s+[-—]\s+genu\.im/i);
+	await expect(page.locator("h1.info-page__title")).toBeVisible();
+	await expect(page.locator("main")).toContainText(/guides|articles/i);
+	await expect(page.locator("main")).toContainText(/early|phase 1|not yet/i);
+	await expect(page.locator(".info-back-link")).toHaveAttribute("href", "../");
+});
+
+test("@smoke GM knowledge page has page-specific SEO metadata", async ({
+	page,
+	baseURL,
+}) => {
+	await page.goto(
+		new URL("/knowledge/", baseURL ?? "http://localhost:3000").toString(),
+	);
+	await page.waitForLoadState("domcontentloaded");
+
+	await expect(page).toHaveTitle(/Knowledge\s+[-—]\s+genu\.im/i);
+	await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+		"href",
+		"https://genu.im/knowledge/",
+	);
+	const desc = await page
+		.locator('meta[name="description"]')
+		.getAttribute("content");
+	expect(desc).toBeTruthy();
+	expect(desc?.length).toBeGreaterThan(20);
+});
+
+test("GM knowledge page is usable at 360px width", async ({
+	page,
+	baseURL,
+}) => {
+	await page.setViewportSize({ width: 360, height: 640 });
+	await page.goto(
+		new URL("/knowledge/", baseURL ?? "http://localhost:3000").toString(),
+	);
+	await page.waitForLoadState("domcontentloaded");
+
+	const scrollWidth = await page.evaluate(
+		() => document.documentElement.scrollWidth,
+	);
+	const clientWidth = await page.evaluate(
+		() => document.documentElement.clientWidth,
+	);
+	expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
+	await expect(page.locator("h1.info-page__title")).toBeVisible();
+	await expect(page.locator(".info-back-link")).toBeVisible();
+});

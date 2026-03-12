@@ -148,6 +148,47 @@ describe("language toggle controller", () => {
 		expect(localStorage.getItem("lang")).toBe("uk");
 	});
 
+	test("applies knowledge navigation and placeholder translations including aria labels", () => {
+		document.body.innerHTML = `
+			<button id="langToggle"><span id="langLabel"></span></button>
+			<a class="logo-lockup" data-i18n-aria-label="nav.homeAria" aria-label="genu.im home"></a>
+			<nav class="footer-nav" data-i18n-aria-label="footer.trustNav" aria-label="Site pages"></nav>
+			<a data-i18n="nav.knowledge"></a>
+			<h1 data-i18n="knowledge.title"></h1>
+			<p data-i18n="knowledge.lead"></p>
+		`;
+
+		loadModule();
+
+		expect(
+			document.querySelector('[data-i18n="nav.knowledge"]').textContent,
+		).toBe("Knowledge");
+		expect(
+			document.querySelector('[data-i18n="knowledge.title"]').textContent,
+		).toContain("Guides and articles");
+		expect(
+			document.querySelector(".logo-lockup").getAttribute("aria-label"),
+		).toBe("genu.im home");
+		expect(
+			document.querySelector(".footer-nav").getAttribute("aria-label"),
+		).toBe("Site pages");
+
+		document.getElementById("langToggle").click();
+
+		expect(
+			document.querySelector('[data-i18n="nav.knowledge"]').textContent,
+		).toBe("База знань");
+		expect(
+			document.querySelector('[data-i18n="knowledge.title"]').textContent,
+		).toContain("гіди та статті");
+		expect(
+			document.querySelector(".logo-lockup").getAttribute("aria-label"),
+		).toBe("Головна genu.im");
+		expect(
+			document.querySelector(".footer-nav").getAttribute("aria-label"),
+		).toBe("Сторінки сайту");
+	});
+
 	test("stored theme preference is reflected in html attributes after theme init", () => {
 		// Verify the theme controller restores an explicit stored preference.
 		localStorage.setItem("theme", "dark");

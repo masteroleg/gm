@@ -1,6 +1,6 @@
 # Story 1.5: Show the Knowledge Section in Site Navigation
 
-Status: ready-for-dev
+Status: review
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -39,35 +39,35 @@ Status: ready-for-dev
 
 ## Tasks / Subtasks
 
-- [ ] Добавить knowledge-base slot в public IA. (AC: 1, 3, 4)
-  - [ ] Добавить named navigation/footer entry для knowledge section на homepage и/или других public entry surfaces, сохранив clear discoverability.
-  - [ ] Выбрать понятный public label для knowledge slot (`Knowledge`, `Insights` или `Resources`) и провести его последовательно через HTML и translation maps.
-  - [ ] Убедиться, что на mobile knowledge link остается reachable и usable, а не исчезает из compact navigation patterns.
+- [x] Добавить knowledge-base slot в public IA. (AC: 1, 3, 4)
+  - [x] Добавить named navigation/footer entry для knowledge section на homepage и/или других public entry surfaces, сохранив clear discoverability.
+  - [x] Выбрать понятный public label для knowledge slot (`Knowledge`, `Insights` или `Resources`) и провести его последовательно через HTML и translation maps.
+  - [x] Убедиться, что на mobile knowledge link остается reachable и usable, а не исчезает из compact navigation patterns.
 
-- [ ] Создать working placeholder page для `site/knowledge/`. (AC: 1, 2, 4, 5)
-  - [ ] Создать `site/knowledge/index.html` как honest Phase 1 placeholder destination с clear title, purpose statement и starter content.
-  - [ ] Явно объяснить, что section предназначена для guides, articles и future explainers, но full library еще не опубликована.
-  - [ ] Дать usable way back to homepage и/или current approved CTA path without inventing article-consumption flow.
+- [x] Создать working placeholder page для `site/knowledge/`. (AC: 1, 2, 4, 5)
+  - [x] Создать `site/knowledge/index.html` как honest Phase 1 placeholder destination с clear title, purpose statement и starter content.
+  - [x] Явно объяснить, что section предназначена для guides, articles и future explainers, но full library еще не опубликована.
+  - [x] Дать usable way back to homepage и/или current approved CTA path without inventing article-consumption flow.
 
-- [ ] Сохранить knowledge page как IA reservation, а не full content rollout. (AC: 2, 5)
-  - [ ] Не показывать fake counts, empty category grids, fabricated article cards или wording, будто полноценная library already exists.
-  - [ ] Если `site/knowledge/article-template.html` добавляется или резервируется как architecture support file, не делать его visitor-facing live article route в рамках этой story.
-  - [ ] Следовать recommended Phase 1 default: placeholder-ready destination only, если live starter article не был отдельно approved. [Source: `_bmad-output/planning-artifacts/prd.md` - Recommended Phase 1 Default]
+- [x] Сохранить knowledge page как IA reservation, а не full content rollout. (AC: 2, 5)
+  - [x] Не показывать fake counts, empty category grids, fabricated article cards или wording, будто полноценная library already exists.
+  - [x] Если `site/knowledge/article-template.html` добавляется или резервируется как architecture support file, не делать его visitor-facing live article route в рамках этой story.
+  - [x] Следовать recommended Phase 1 default: placeholder-ready destination only, если live starter article не был отдельно approved. [Source: `_bmad-output/planning-artifacts/prd.md` - Recommended Phase 1 Default]
 
-- [ ] Привести knowledge page к public-page contract по SEO и metadata. (AC: 1, 2, 5)
-  - [ ] Добавить unique `<title>`, `<meta name="description">`, canonical, OG tags и `hreflang` (`uk`, `en`, `x-default`) для `/knowledge/`.
-  - [ ] Сохранить required `<head>` order pattern и indexable placeholder contract for `/knowledge/`.
-  - [ ] Если используется `article-template.html` как reserved artifact, держать его вне public navigation и не смешивать с indexable placeholder page.
+- [x] Привести knowledge page к public-page contract по SEO и metadata. (AC: 1, 2, 5)
+  - [x] Добавить unique `<title>`, `<meta name="description">`, canonical, OG tags и `hreflang` (`uk`, `en`, `x-default`) для `/knowledge/`.
+  - [x] Сохранить required `<head>` order pattern и indexable placeholder contract for `/knowledge/`.
+  - [x] Если используется `article-template.html` как reserved artifact, держать его вне public navigation и не смешивать с indexable placeholder page.
 
-- [ ] Сохранить согласованность с trust-floor assumptions из Story `1.4`. (AC: 3, 5)
-  - [ ] Добавить knowledge section как отдельный IA slot, не заменяя trust-floor destinations `About`, `Contact`, `Proof & Cases`, `Privacy`, `Terms`, `FAQ`.
-  - [ ] Не обнаружено прямого противоречия со Story `1.4`; реализовать knowledge link как additive public destination, а не как замену trust-floor links.
-  - [ ] Не тянуть сюда request-flow semantics, proof-page behavior или deep article taxonomy beyond placeholder scope.
+- [x] Сохранить согласованность с trust-floor assumptions из Story `1.4`. (AC: 3, 5)
+  - [x] Добавить knowledge section как отдельный IA slot, не заменяя trust-floor destinations `About`, `Contact`, `Proof & Cases`, `Privacy`, `Terms`, `FAQ`.
+  - [x] Не обнаружено прямого противоречия со Story `1.4`; реализовать knowledge link как additive public destination, а не как замену trust-floor links.
+  - [x] Не тянуть сюда request-flow semantics, proof-page behavior или deep article taxonomy beyond placeholder scope.
 
-- [ ] Добавить regression coverage для knowledge navigation и placeholder validity. (AC: 1, 2, 3, 4, 5)
-  - [ ] Расширить browser smoke/homepage coverage так, чтобы knowledge link был reachable из public site.
-  - [ ] Добавить browser check, что `/knowledge/` resolves, имеет visible heading/purpose copy и usable way back.
-  - [ ] По возможности проверить базовый head/SEO contract на `/knowledge/`: non-empty title, description, canonical.
+- [x] Добавить regression coverage для knowledge navigation и placeholder validity. (AC: 1, 2, 3, 4, 5)
+  - [x] Расширить browser smoke/homepage coverage так, чтобы knowledge link был reachable из public site.
+  - [x] Добавить browser check, что `/knowledge/` resolves, имеет visible heading/purpose copy и usable way back.
+  - [x] По возможности проверить базовый head/SEO contract на `/knowledge/`: non-empty title, description, canonical.
 
 ## Dev Notes
 
@@ -167,19 +167,38 @@ openai/gpt-5.4
 - Проверено, что `site/knowledge/` в checked-in public IA отсутствует, а public navigation slot for knowledge is missing.
 - Проверена Story `1.4` на возможное противоречие; прямой конфликт не обнаружен, knowledge slot трактуется как additive IA reservation.
 - `validate-workflow.xml`, на который ссылается workflow, отсутствует в `_bmad/core/tasks/`; checklist review выполнен вручную по `_bmad/bmm/workflows/4-implementation/create-story/checklist.md`.
+- RED phase: добавлены browser tests для knowledge nav slot, `/knowledge/` placeholder, SEO metadata и `360px` usability; до реализации они падали ожидаемо.
+- GREEN phase: knowledge slot добавлен в homepage main nav и footer, а также в trust-floor footers как additive IA destination без замены existing links.
+- Создан `site/knowledge/index.html` как indexable Phase 1 placeholder с honest copy, back link, shared theme/lang controls и public-page metadata pattern.
+- Translation map расширен ключами `nav.knowledge` и `knowledge.*` для `en` и `uk`; добавлен unit test для translation + aria-label sync.
+- Validation выполнена командами `npm test`, `npm run lint`, `npm run typecheck`, `npm run test:smoke`, `npm run test:smoke:mobile`, `npx playwright test tests/e2e/home.spec.ts --config=playwright.config.ts --project=chromium -g "GM knowledge page is usable at 360px width"`.
+- Final regression suite `npm run test:ci` выполнен успешно; all Jest and Playwright projects passed without regressions.
 
 ### Completion Notes List
 
-- Story `1.5` подготовлена как implementation-ready single-story artifact.
-- Явно зафиксировано, что Phase 1 knowledge scope = placeholder-ready destination only, not a live article library.
-- Зафиксировано отсутствие противоречия с trust-floor assumptions из Story `1.4`.
-- Completion note: Ultimate context engine analysis completed - comprehensive developer guide created.
+- Story `1.5` реализует public knowledge IA slot без расширения scope до full article library.
+- `/knowledge/` открыт как честный indexable placeholder для будущих guides, articles и explainers.
+- Navigation остается clear: knowledge link reachable с homepage, на mobile и через footer surfaces; back path на homepage сохранен.
+- Trust-floor destinations из Story `1.4` сохранены и дополнены knowledge link как additive public destination.
+- Browser smoke и targeted `360px` checks подтверждают knowledge reachability, metadata и usability.
+- Unit coverage подтверждает translation-driven sync для `nav.knowledge`, `knowledge.*` и accessibility labels.
 
 ### File List
 
+- `_bmad-output/implementation-artifacts/1-5-show-the-knowledge-section-in-site-navigation.md`
+- `_bmad-output/implementation-artifacts/sprint-status.yaml`
 - `site/index.html`
+- `site/about/index.html`
+- `site/contact/index.html`
+- `site/proof-cases/index.html`
+- `site/faq/index.html`
+- `site/privacy/index.html`
+- `site/terms/index.html`
 - `site/knowledge/index.html`
-- `site/knowledge/article-template.html`
 - `site/assets/js/lang-toggle.js`
-- `site/assets/css/input.css`
 - `tests/e2e/home.spec.ts`
+- `tests/lang-toggle.test.js`
+
+## Change Log
+
+- 2026-03-12: Added public knowledge navigation slot, created `/knowledge/` placeholder page, extended translations, and added browser/unit coverage for knowledge reachability and metadata.
