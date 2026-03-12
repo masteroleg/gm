@@ -1,6 +1,8 @@
 # Story 1.3: Remember the Chosen Language and Theme
 
 Status: review
+Release: 2.1
+Tag: 2.1
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 

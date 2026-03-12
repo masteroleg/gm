@@ -1,6 +1,8 @@
 # Story 1.5: Show the Knowledge Section in Site Navigation
 
 Status: done
+Release: 2.1
+Tag: 2.1
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 

@@ -1,6 +1,8 @@
 # Story 1.1: Прояснить первый экран главной страницы
 
 Status: done
+Release: 2.1
+Tag: 2.1
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 

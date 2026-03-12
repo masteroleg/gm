@@ -1,6 +1,8 @@
 # Story 1.4: Open the Main Site Information Pages
 
 Status: review
+Release: 2.1
+Tag: 2.1
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
