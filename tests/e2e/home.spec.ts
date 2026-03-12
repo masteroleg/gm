@@ -362,6 +362,13 @@ test("@smoke GM knowledge page resolves with purpose copy and way back", async (
 	await expect(page.locator("h1.info-page__title")).toBeVisible();
 	await expect(page.locator("main")).toContainText(/guides|articles/i);
 	await expect(page.locator("main")).toContainText(/early|phase 1|not yet/i);
+	await expect(page.locator("main .info-section")).toHaveCount(3);
+	await expect(page.locator("main a")).toHaveCount(1);
+	await expect(page.locator("main form")).toHaveCount(0);
+	await expect(page.locator("main input")).toHaveCount(0);
+	await expect(page.locator("main")).not.toContainText(
+		/sign in|log in|live lookup|verified|search/i,
+	);
 	await expect(page.locator(".info-back-link")).toHaveAttribute("href", "../");
 });
 
@@ -379,11 +386,56 @@ test("@smoke GM knowledge page has page-specific SEO metadata", async ({
 		"href",
 		"https://genu.im/knowledge/",
 	);
+	await expect(
+		page.locator('link[rel="alternate"][hreflang="uk"]'),
+	).toHaveAttribute("href", "https://genu.im/knowledge/");
+	await expect(
+		page.locator('link[rel="alternate"][hreflang="en"]'),
+	).toHaveAttribute("href", "https://genu.im/knowledge/");
+	await expect(
+		page.locator('link[rel="alternate"][hreflang="x-default"]'),
+	).toHaveAttribute("href", "https://genu.im/knowledge/");
+	await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+		"content",
+		"Knowledge — genu.im",
+	);
+	await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
+		"content",
+		"website",
+	);
+	await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+		"content",
+		"https://genu.im/knowledge/",
+	);
+	await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+		"content",
+		"https://genu.im/assets/favicon/android-chrome-512x512.png",
+	);
+	await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+		"content",
+		"summary_large_image",
+	);
+	await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute(
+		"content",
+		"Knowledge — genu.im",
+	);
 	const desc = await page
 		.locator('meta[name="description"]')
 		.getAttribute("content");
 	expect(desc).toBeTruthy();
 	expect(desc?.length).toBeGreaterThan(20);
+	await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
+		"content",
+		desc ?? "",
+	);
+	await expect(
+		page.locator('meta[name="twitter:description"]'),
+	).toHaveAttribute("content", desc ?? "");
+	const structuredData = await page
+		.locator('script[type="application/ld+json"]')
+		.textContent();
+	expect(structuredData).toContain('"@type":"WebPage"');
+	expect(structuredData).toContain('"url":"https://genu.im/knowledge/"');
 });
 
 test("GM knowledge page is usable at 360px width", async ({

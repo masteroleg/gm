@@ -40,7 +40,7 @@
 			if (storedLang === 'en' || storedLang === 'uk') {
 				html.lang = storedLang;
 			}
-		} catch (e) {}
+		} catch (_e) {}
 	</script>
 
 	<script defer>
@@ -52,7 +52,7 @@
 				document.head.appendChild(script);
 
 				window.dataLayer = window.dataLayer || [];
-				window.gtag = function gtag(){dataLayer.push(arguments);};
+				window.gtag = function gtag(...args) { dataLayer.push(args); };
 				window.gtag('js', new Date());
 				window.gtag('config', 'G-RBD0C4LE5V');
 			};
@@ -83,7 +83,7 @@
 						<a href="#use-cases" class="site-nav__link" data-i18n="nav.useCases">Use cases</a>
 						<a href="#how-it-works" class="site-nav__link" data-i18n="nav.howItWorks">How it works</a>
 						<a href="/knowledge/" class="site-nav__link" data-i18n="nav.knowledge">Knowledge</a>
-						<button id="closeMenu" class="site-nav__close absolute top-5 right-5 md:hidden" aria-label="Close menu">&times;</button>
+						<button id="closeMenu" type="button" class="site-nav__close absolute top-5 right-5 md:hidden" aria-label="Close menu">&times;</button>
 					</nav>
 
 					<div class="utility-strip">

@@ -28,7 +28,7 @@
 			html.setAttribute('data-theme-preference', themePreference);
 			const storedLang = localStorage.getItem('lang');
 			if (storedLang === 'en' || storedLang === 'uk') { html.lang = storedLang; }
-		} catch (e) {}
+		} catch (_e) {}
 	</script>
 
 	<link rel="icon" href="../assets/favicon/favicon.ico" />

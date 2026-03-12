@@ -1,6 +1,6 @@
 # Story 1.5: Show the Knowledge Section in Site Navigation
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -173,6 +173,12 @@ openai/gpt-5.4
 - Translation map расширен ключами `nav.knowledge` и `knowledge.*` для `en` и `uk`; добавлен unit test для translation + aria-label sync.
 - Validation выполнена командами `npm test`, `npm run lint`, `npm run typecheck`, `npm run test:smoke`, `npm run test:smoke:mobile`, `npx playwright test tests/e2e/home.spec.ts --config=playwright.config.ts --project=chromium -g "GM knowledge page is usable at 360px width"`.
 - Final regression suite `npm run test:ci` выполнен успешно; all Jest and Playwright projects passed without regressions.
+- Code review fix pass: для `/knowledge/` выровнен SEO/head contract, добавлены missing social-preview metadata и strengthened metadata ordering against architecture head pattern.
+- Code review fix pass: knowledge placeholder tests расширены negative checks against fake library/auth/verification semantics и richer assertions для `hreflang`, social-preview metadata и JSON-LD.
+- Code review fix pass: украинский knowledge copy очищен от mixed-language UI wording (`placeholder`, `navigation slot`, `content area`, `knowledge area`) в пользу idiomatic Ukrainian.
+- Review validation выполнена командами `npx playwright test tests/e2e/home.spec.ts -g "knowledge"`, `npx jest tests/lang-toggle.test.js --runInBand`, `npx biome check site/assets/js/lang-toggle.js tests/e2e/home.spec.ts tests/lang-toggle.test.js`, `npx tsc --noEmit`.
+- Follow-up lint cleanup по запросу пользователя: вычищены Biome issues в homepage/trust pages и в дополнительных site artifacts; в `biome.json` включён Tailwind CSS parser support для `@theme` / `@custom-variant`, после чего `biome check site` проходит clean.
+- Follow-up validation: `npx biome check site` и `npx playwright test tests/e2e/home.spec.ts --config=playwright.config.ts --project=chromium` выполнены успешно.
 
 ### Completion Notes List
 
@@ -182,23 +188,61 @@ openai/gpt-5.4
 - Trust-floor destinations из Story `1.4` сохранены и дополнены knowledge link как additive public destination.
 - Browser smoke и targeted `360px` checks подтверждают knowledge reachability, metadata и usability.
 - Unit coverage подтверждает translation-driven sync для `nav.knowledge`, `knowledge.*` и accessibility labels.
+- Code review fixes довели `/knowledge/` до expected placeholder honesty and public-page metadata contract without expanding story scope.
 
 ### File List
 
 - `_bmad-output/implementation-artifacts/1-5-show-the-knowledge-section-in-site-navigation.md`
 - `_bmad-output/implementation-artifacts/sprint-status.yaml`
+- `biome.json`
 - `site/index.html`
 - `site/about/index.html`
+- `site/assets/css/input.css`
+- `site/assets/favicon/site.webmanifest`
 - `site/contact/index.html`
 - `site/proof-cases/index.html`
 - `site/faq/index.html`
 - `site/privacy/index.html`
 - `site/terms/index.html`
 - `site/knowledge/index.html`
+- `site/perevir-produkt/index.html`
 - `site/assets/js/lang-toggle.js`
 - `tests/e2e/home.spec.ts`
 - `tests/lang-toggle.test.js`
 
+## Senior Developer Review (AI)
+
+### Reviewer
+
+Amelia (`openai/gpt-5.4`)
+
+### Outcome
+
+Approved after fixes.
+
+### Review Notes
+
+- Git vs story check against latest story commit found no substantive File List discrepancy for Story `1.5`.
+- Fixed blocking issue on `site/knowledge/index.html`: restored story-level SEO/head contract by moving stylesheet loading ahead of SEO/script metadata, keeping JSON-LD in `<head>`, and adding missing social-preview metadata including `og:image` and Twitter tags.
+- Fixed should-fix issue in `tests/e2e/home.spec.ts`: added negative placeholder-honesty assertions so `/knowledge/` does not silently regress into fake library depth, auth/search semantics, or misleading CTA behavior.
+- Fixed should-fix issue in `tests/e2e/home.spec.ts`: expanded metadata coverage for `hreflang`, OG/Twitter social-preview tags, and JSON-LD so CI now protects the claimed contract.
+- Fixed should-fix issue in `site/assets/js/lang-toggle.js`: replaced mixed-language Ukrainian placeholder copy with idiomatic UI wording consistent with the project contract.
+
+### Process Follow-up
+
+- Non-blocking governance note: release/tag `2.1` should be set consistently across all Epic `1`-`4` stories. This is logged as a process follow-up and is not treated as a product blocker for Story `1.5`.
+
+### Validation
+
+- `npx playwright test tests/e2e/home.spec.ts -g "knowledge"`
+- `npx jest tests/lang-toggle.test.js --runInBand`
+- `npx biome check site/assets/js/lang-toggle.js tests/e2e/home.spec.ts tests/lang-toggle.test.js`
+- `npx tsc --noEmit`
+- `npx biome check site`
+- `npx playwright test tests/e2e/home.spec.ts --config=playwright.config.ts --project=chromium`
+
 ## Change Log
 
 - 2026-03-12: Added public knowledge navigation slot, created `/knowledge/` placeholder page, extended translations, and added browser/unit coverage for knowledge reachability and metadata.
+- 2026-03-12: Code review fix pass aligned `/knowledge/` SEO/head metadata, strengthened knowledge regression checks, refined Ukrainian placeholder copy, and logged the separate `2.1` governance follow-up.
+- 2026-03-12: User-requested lint cleanup enabled Tailwind-aware Biome parsing, fixed site-wide HTML/manifest lint findings, and verified `biome check site` clean.

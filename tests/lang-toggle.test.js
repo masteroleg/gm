@@ -182,6 +182,9 @@ describe("language toggle controller", () => {
 			document.querySelector('[data-i18n="knowledge.title"]').textContent,
 		).toContain("гіди та статті");
 		expect(
+			document.querySelector('[data-i18n="knowledge.lead"]').textContent,
+		).toContain("повної бібліотеки матеріалів");
+		expect(
 			document.querySelector(".logo-lockup").getAttribute("aria-label"),
 		).toBe("Головна genu.im");
 		expect(
