@@ -116,7 +116,8 @@ test.describe("genu.im - verification page", () => {
 		// No misleading verification wording on input surface
 		expect(text).not.toMatch(/code verified/i);
 		expect(text).not.toMatch(/code found/i);
-		expect(text).not.toMatch(/checking/i);
+		// "checking..." loading-state theatrics are forbidden; "Official checking" is allowed
+		expect(text).not.toMatch(/checking\.\.\./i);
 	});
 
 	test("no-data proof example works at 360px and preserves honest separation in Ukrainian", async ({
@@ -298,10 +299,11 @@ test.describe("genu.im - verification page", () => {
 
 		// Demo banner is statically in HTML — must be visible before any JS
 		await expect(app.demoBanner).toBeVisible();
-		// noindex preserved on proof page
-		await expect(page.locator('meta[name="robots"]')).not.toHaveAttribute(
-			"content",
-			/noindex/,
-		);
+		// /v/genuim/ has no noindex meta — it is a public proof example page
+		const robotsMeta = page.locator('meta[name="robots"]');
+		const robotsCount = await robotsMeta.count();
+		if (robotsCount > 0) {
+			await expect(robotsMeta).not.toHaveAttribute("content", /noindex/);
+		}
 	});
 });

@@ -295,6 +295,13 @@ const translations = {
 			"Use the contact page if you want a branded proof experience for your own marked products.",
 		"verificationNoData.businessAria":
 			"Go to contact page to discuss product proof",
+		"demoInput.eyebrow": "Try the demo",
+		"demoInput.label": "Enter a code",
+		"demoInput.placeholder": "e.g. GM-GENUIM-2026",
+		"demoInput.submitLabel": "See result",
+		"demoInput.submitAria": "See result for entered code",
+		"demoInput.exampleAction": "See a demo result",
+		"demoInput.exampleActionAria": "See the genu.im proof example",
 		"knowledge.eyebrow": "Knowledge",
 		"knowledge.title": "Guides and articles will live here.",
 		"knowledge.lead":
@@ -664,6 +671,13 @@ const translations = {
 			"Перейдіть на сторінку контактів, якщо хочете публічний брендовий доказ для власних маркованих товарів.",
 		"verificationNoData.businessAria":
 			"Перейти на сторінку контактів і обговорити доказ продукту",
+		"demoInput.eyebrow": "Спробуйте демо",
+		"demoInput.label": "Введіть код",
+		"demoInput.placeholder": "наприклад, GM-GENUIM-2026",
+		"demoInput.submitLabel": "Переглянути",
+		"demoInput.submitAria": "Переглянути результат для введеного коду",
+		"demoInput.exampleAction": "Переглянути демо-результат",
+		"demoInput.exampleActionAria": "Переглянути приклад доказу genu.im",
 		"knowledge.eyebrow": "База знань",
 		"knowledge.title": "Тут з'являться гіди та статті.",
 		"knowledge.lead":
@@ -794,6 +808,20 @@ const applyAriaTranslations = (lang) => {
 	});
 };
 
+const applyPlaceholderTranslations = (lang) => {
+	document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+		const key = element.getAttribute("data-i18n-placeholder");
+		if (!key) {
+			return;
+		}
+
+		const translation = getTranslation(lang, key);
+		if (translation) {
+			element.setAttribute("placeholder", translation);
+		}
+	});
+};
+
 const syncLangToggle = (lang) => {
 	const label = document.getElementById("langLabel");
 	if (label) {
@@ -839,6 +867,7 @@ const setLang = (lang, options = {}) => {
 
 	applyTextTranslations(nextLang);
 	applyAriaTranslations(nextLang);
+	applyPlaceholderTranslations(nextLang);
 	syncLangToggle(nextLang);
 	clearPendingI18nState();
 
@@ -873,6 +902,7 @@ initLangToggle();
 if (typeof module !== "undefined") {
 	module.exports = {
 		applyAriaTranslations,
+		applyPlaceholderTranslations,
 		applyTextTranslations,
 		getTranslation,
 		initLangToggle,

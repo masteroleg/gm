@@ -51,7 +51,7 @@ development_status:
   epic-2: in-progress
   2-1-show-the-main-verification-example: done
   2-2-show-a-clear-no-data-result: done
-  2-3-use-the-demo-input-and-example-code-action: in-progress
+  2-3-use-the-demo-input-and-example-code-action: review
   2-4-show-only-supported-proof-content: done
   epic-2-retrospective: optional
 
