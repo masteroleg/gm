@@ -397,6 +397,30 @@ const translations = {
 			"genu.mark lets brands publish checkable proof tied to each marked unit. Tell us about your rollout.",
 		"routing.business.cta": "Send a request",
 		"routing.business.ctaAria": "Send a request for brand proof setup",
+		"request.eyebrow": "Send a request",
+		"request.title": "Tell us about your rollout.",
+		"request.lead":
+			"Fill in the short form and your mail client will open with the details ready to send. This is a handoff — not a stored submission.",
+		"request.field.name": "Contact name",
+		"request.field.namePlaceholder": "Your name",
+		"request.field.email": "Business email or phone",
+		"request.field.emailPlaceholder": "email@company.com or +38...",
+		"request.field.company": "Company name",
+		"request.field.companyPlaceholder": "Company Ltd.",
+		"request.field.scenario": "Scenario",
+		"request.field.scenarioPlaceholder": "Select a scenario",
+		"request.field.context": "Short context",
+		"request.field.contextPlaceholder": "Brief description of your situation",
+		"request.scenario.brandProof": "Brand proof rollout",
+		"request.scenario.eaktsyz": "eAktsyz readiness",
+		"request.submit": "Send request",
+		"request.confirmation.text":
+			"Your mail client should now open with the details filled in. This is a handoff — not a stored submission.",
+		"request.fallback.text":
+			"Your mail client did not open. Your details are still visible below. To send your request, email us directly at",
+		"request.error.required": "This field is required.",
+		"request.error.emailInvalid":
+			"Enter a valid email address or phone number.",
 	},
 	uk: {
 		"controls.lang.toggle": "Мова: UA. Натисніть, щоб перемкнути.",
@@ -788,20 +812,30 @@ const translations = {
 		"officialCheck.cta": "Відкрити Дію",
 		"officialCheck.ctaAria":
 			"Відкрити Дію для офіційної перевірки в новій вкладці",
-		"routing.official.eyebrow": "Офіційна перевірка",
-		"routing.official.title": "Потрібна офіційна державна перевірка?",
-		"routing.official.body":
-			"Офіційна перевірка еАкцизу відбувається в Дії. genu.im \u2014 це не сервіс державної верифікації.",
-		"routing.official.cta": "Відкрити Дію",
-		"routing.official.ctaAria":
-			"Відкрити Дію для офіційної перевірки в новій вкладці",
-		"routing.business.eyebrow": "Наступний крок для бізнесу",
-		"routing.business.title": "Хочете доказ для своїх продуктів?",
-		"routing.business.body":
-			"genu.mark дає брендам змогу публікувати перевірюваний доказ для кожної промаркованої одиниці. Розкажіть нам про своє впровадження.",
-		"routing.business.cta": "Надіслати запит",
-		"routing.business.ctaAria":
-			"Надіслати запит щодо налаштування доказу бренду",
+		"request.eyebrow": "Надіслати запит",
+		"request.title": "Розкажіть про своє впровадження.",
+		"request.lead":
+			"Заповніть коротку форму — ваш поштовий клієнт вікриється з готовими даними. Це ініціація передачі, а не збережений запит.",
+		"request.field.name": "Контактне ім'я",
+		"request.field.namePlaceholder": "Ваше ім'я",
+		"request.field.email": "Робоча електронна пошта або телефон",
+		"request.field.emailPlaceholder": "email@company.com або +38...",
+		"request.field.company": "Назва компанії",
+		"request.field.companyPlaceholder": "ТОВ «Компанія»",
+		"request.field.scenario": "Сценарій",
+		"request.field.scenarioPlaceholder": "Оберіть сценарій",
+		"request.field.context": "Короткий контекст",
+		"request.field.contextPlaceholder": "Коротко про вашу ситуацію",
+		"request.scenario.brandProof": "Впровадження доказу бренду",
+		"request.scenario.eaktsyz": "Готовність до еАкцизу",
+		"request.submit": "Надіслати запит",
+		"request.confirmation.text":
+			"Ваш поштовий клієнт має відкритися з готовими даними. Це ініціація передачі — не збережений запит.",
+		"request.fallback.text":
+			"Поштовий клієнт не відкрився. Ваші дані залишаються на екрані. Щоб надіслати запит, напишіть нам безпосередньо на",
+		"request.error.required": "Це поле обов'язкове.",
+		"request.error.emailInvalid":
+			"Введіть дійсну електронну адресу або номер телефону.",
 	},
 };
 

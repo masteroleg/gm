@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full" data-theme="light" data-theme-preference="system">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Send a request — genu.im</title>
+	<meta name="description" content="Send a qualified request to genu.im. Tell us about your rollout — brand proof or eAktsyz readiness. We respond within two business days." />
+	<link rel="canonical" href="https://genu.im/request/" />
+	<link rel="alternate" hreflang="uk" href="https://genu.im/request/" />
+	<link rel="alternate" hreflang="en" href="https://genu.im/request/" />
+	<link rel="alternate" hreflang="x-default" href="https://genu.im/request/" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Send a request — genu.im" />
+	<meta property="og:description" content="Tell us about your rollout. We respond within two business days." />
+	<meta property="og:url" content="https://genu.im/request/" />
+	<meta property="og:site_name" content="genu.im" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:locale:alternate" content="uk_UA" />
+	<script>/* Prevent FOUC */
+		try {
+			const html = document.documentElement;
+			const storedTheme = localStorage.getItem('theme');
+			const themePreference = storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : 'system';
+			const resolvedTheme = themePreference === 'dark' || (themePreference === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+			html.classList.toggle('dark', resolvedTheme === 'dark');
+			html.setAttribute('data-theme', resolvedTheme);
+			html.setAttribute('data-theme-preference', themePreference);
+			const storedLang = localStorage.getItem('lang');
+			if (storedLang === 'en' || storedLang === 'uk') {
+				html.lang = storedLang;
+				if (storedLang !== 'en') {
+					html.setAttribute('data-i18n-pending', 'true');
+					window.__gmLangPendingTimer = window.setTimeout(() => {
+						html.removeAttribute('data-i18n-pending');
+					}, 1500);
+				}
+			}
+		} catch (_e) {}
+	</script>
+
+	<link rel="icon" href="../assets/favicon/favicon.ico" />
+	<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png" />
+	<link href="../assets/css/output.css?v=18" rel="stylesheet" />
+</head>
+
+<body class="site-body">
+	<div class="page-shell">
+		<div class="content-shell shell-frame shell-frame--page">
+
+			<header class="site-header">
+				<a href="../" class="logo-lockup" data-i18n-aria-label="nav.homeAria" aria-label="genu.im home">
+					<img src="../assets/img/logo-01_black.svg" alt="genu.im" width="116" height="40" class="logo-image logo-image--light" loading="eager" />
+					<img src="../assets/img/logo-02_white.svg" alt="genu.im" width="116" height="40" class="logo-image logo-image--dark" loading="eager" />
+				</a>
+				<div class="header-controls">
+					<div class="utility-strip">
+						<button id="langToggle" type="button" class="control-chip" aria-label="Language: EN. Click to switch." tabindex="0">
+							<span id="langLabel">EN</span>
+						</button>
+						<span class="utility-strip__divider" aria-hidden="true"></span>
+						<button id="themeToggle" type="button" class="control-icon"
+							aria-label="Switch to dark mode" aria-pressed="false">
+							<div class="theme-toggle__glyph">
+								<svg class="theme-toggle__icon theme-toggle__icon--sun" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+								</svg>
+								<svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+									<path fill-rule="evenodd" d="M21.752 15.002A9.72 9.72 0 0118 15.75 9.75 9.75 0 018.25 6c0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25 9.75 9.75 0 0012.75 21a9.753 9.753 0 009.002-5.998z" clip-rule="evenodd" />
+								</svg>
+							</div>
+						</button>
+					</div>
+				</div>
+			</header>
+
+			<main class="info-page request-page">
+				<div class="info-page__header">
+					<p class="section-eyebrow" data-i18n="request.eyebrow">Send a request</p>
+					<h1 class="info-page__title" data-i18n="request.title">Tell us about your rollout.</h1>
+					<p class="info-page__lead" data-i18n="request.lead">Fill in the short form and your mail client will open with the details ready to send. This is a handoff — not a stored submission.</p>
+				</div>
+
+				<div class="info-page__body">
+					<form id="requestForm" class="request-form" data-request-form novalidate>
+
+						<div class="request-form__group">
+							<label for="contactName" class="request-form__label" data-i18n="request.field.name">
+								Contact name
+							</label>
+							<input
+								type="text"
+								id="contactName"
+								name="contactName"
+								class="request-form__input"
+								data-i18n-placeholder="request.field.namePlaceholder"
+								placeholder="Your name"
+								required
+								autocomplete="name"
+							/>
+							<span class="request-form__error" id="contactNameError" role="alert" aria-live="polite"></span>
+						</div>
+
+						<div class="request-form__group">
+							<label for="contactEmail" class="request-form__label" data-i18n="request.field.email">
+								Business email or phone
+							</label>
+							<input
+								type="text"
+								id="contactEmail"
+								name="contactEmail"
+								class="request-form__input"
+								data-i18n-placeholder="request.field.emailPlaceholder"
+								placeholder="email@company.com or +38..."
+								required
+								autocomplete="email"
+							/>
+							<span class="request-form__error" id="contactEmailError" role="alert" aria-live="polite"></span>
+						</div>
+
+						<div class="request-form__group">
+							<label for="companyName" class="request-form__label" data-i18n="request.field.company">
+								Company name
+							</label>
+							<input
+								type="text"
+								id="companyName"
+								name="companyName"
+								class="request-form__input"
+								data-i18n-placeholder="request.field.companyPlaceholder"
+								placeholder="Company Ltd."
+								required
+								autocomplete="organization"
+							/>
+							<span class="request-form__error" id="companyNameError" role="alert" aria-live="polite"></span>
+						</div>
+
+						<div class="request-form__group">
+							<label for="scenario" class="request-form__label" data-i18n="request.field.scenario">
+								Scenario
+							</label>
+							<select
+								id="scenario"
+								name="scenario"
+								class="request-form__select"
+								required
+							>
+								<option value="" data-i18n="request.field.scenarioPlaceholder">Select a scenario</option>
+								<option value="brand-proof" data-i18n="request.scenario.brandProof">Brand proof rollout</option>
+								<option value="eaktsyz" data-i18n="request.scenario.eaktsyz">eAktsyz readiness</option>
+							</select>
+							<span class="request-form__error" id="scenarioError" role="alert" aria-live="polite"></span>
+						</div>
+
+						<div class="request-form__group">
+							<label for="context" class="request-form__label" data-i18n="request.field.context">
+								Short context
+							</label>
+							<textarea
+								id="context"
+								name="context"
+								class="request-form__textarea"
+								rows="4"
+								data-i18n-placeholder="request.field.contextPlaceholder"
+								placeholder="Brief description of your situation"
+								required
+							></textarea>
+							<span class="request-form__error" id="contextError" role="alert" aria-live="polite"></span>
+						</div>
+
+						<button type="submit" class="cta-button request-form__submit" data-i18n="request.submit">
+							Send request
+						</button>
+					</form>
+
+					<div class="request-form__confirmation" id="requestConfirmation" hidden data-request-confirmation>
+						<p class="request-form__confirmation-text" data-i18n="request.confirmation.text">
+							Your mail client should now open with the details filled in.
+							This is a handoff — not a stored submission.
+						</p>
+					</div>
+
+					<div class="request-form__fallback" id="requestFallback" hidden data-request-fallback>
+						<p class="request-form__fallback-text">
+							<span data-i18n="request.fallback.text">Your mail client did not open. Your details are still visible below. To send your request, email us directly at</span>
+							<a href="mailto:hello@genu.im" class="info-link">hello@genu.im</a>.
+						</p>
+					</div>
+				</div>
+
+				<div class="info-page__back">
+					<a href="../" class="info-back-link" data-i18n="nav.backHome">&#8592; Back to homepage</a>
+				</div>
+			</main>
+
+			<footer class="site-footer">
+				<p data-i18n="footer.tagline" class="footer-tagline">Trust built through transparency</p>
+				<nav class="footer-nav" data-i18n-aria-label="footer.trustNav" aria-label="Site pages">
+					<a href="../about/" class="footer-nav__link" data-i18n="nav.about">About</a>
+					<a href="../contact/" class="footer-nav__link" data-i18n="nav.contact">Contact</a>
+					<a href="../proof-cases/" class="footer-nav__link" data-i18n="nav.proofCases">Proof &amp; Cases</a>
+					<a href="../knowledge/" class="footer-nav__link" data-i18n="nav.knowledge">Knowledge</a>
+					<a href="../faq/" class="footer-nav__link" data-i18n="nav.faq">FAQ</a>
+					<a href="../privacy/" class="footer-nav__link" data-i18n="nav.privacy">Privacy</a>
+					<a href="../terms/" class="footer-nav__link" data-i18n="nav.terms">Terms</a>
+				</nav>
+			</footer>
+
+		</div>
+	</div>
+	<script src="../assets/js/lang-toggle.js" defer></script>
+	<script src="../assets/js/theme-toggle.js" defer></script>
+	<script src="../assets/js/request-form.js" defer></script>
+</body>
+</html>

@@ -2897,6 +2897,101 @@
 		color: var(--color-brand-bright);
 	}
 
+	/* Request form — Story 3.3 */
+	.request-page .info-page__body {
+		gap: var(--space-lg);
+	}
+
+	.request-form {
+		display: grid;
+		gap: var(--space-lg);
+		max-width: 36rem;
+		width: 100%;
+	}
+
+	.request-form__group {
+		display: grid;
+		gap: 0.4rem;
+	}
+
+	.request-form__label {
+		color: var(--color-heading);
+		font-size: 0.9rem;
+		font-weight: 600;
+		line-height: 1.35;
+	}
+
+	.request-form__input,
+	.request-form__select,
+	.request-form__textarea {
+		width: 100%;
+		min-height: 2.85rem;
+		padding: 0.6rem 0.85rem;
+		border: 1px solid var(--color-heading);
+		border-opacity: 0.16;
+		border-radius: 0.6rem;
+		background: var(--color-paper);
+		color: var(--color-body);
+		font-family: var(--font-sans);
+		font-size: 0.95rem;
+		line-height: 1.5;
+		transition: border-color var(--duration-fast) var(--easing-standard),
+			box-shadow var(--duration-fast) var(--easing-standard);
+		appearance: none;
+		-webkit-appearance: none;
+	}
+
+	.request-form__input:focus,
+	.request-form__select:focus,
+	.request-form__textarea:focus {
+		outline: none;
+		border-color: var(--color-brand);
+		box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-brand) 15%, transparent);
+	}
+
+	.request-form__input::placeholder,
+	.request-form__textarea::placeholder {
+		color: var(--color-muted);
+		opacity: 0.8;
+	}
+
+	.request-form__select {
+		cursor: pointer;
+	}
+
+	.request-form__textarea {
+		min-height: 8rem;
+		resize: vertical;
+	}
+
+	.request-form__error {
+		color: var(--color-error);
+		font-size: 0.85rem;
+		min-height: 1.2em;
+	}
+
+	.request-form__submit {
+		margin-top: var(--space-sm);
+	}
+
+	.request-form__confirmation,
+	.request-form__fallback {
+		padding: var(--space-md);
+		background: var(--color-paper);
+		border-radius: 0.6rem;
+		border: 1px solid var(--color-heading);
+		border-opacity: 0.1;
+	}
+
+	.request-form__confirmation-text,
+	.request-form__fallback-text {
+		margin: 0;
+	}
+
+	.request-form__fallback a {
+		color: var(--color-brand);
+	}
+
 	/* Audience routing surface — Story 3.2 */
 	.audience-routing {
 		display: grid;
