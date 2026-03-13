@@ -98,15 +98,15 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test --config=playwright.config.ts --project="$PW_PROJECT" --grep @smoke
 
-        - name: Upload Playwright artifacts
-          if: failure()
-          uses: actions/upload-artifact@v7
-          with:
-            name: playwright-${{ matrix.project }}
-            path: |
-              playwright-report/
-              test-results/
-            retention-days: 30
+      - name: Upload Playwright artifacts
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-${{ matrix.project }}
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 30
 
   deploy:
     name: deploy-pages
