@@ -1,6 +1,6 @@
 # Story 3.1: Guide Official Checks to `Дія`
 
-Status: ready-for-dev
+Status: review
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -34,18 +34,18 @@ So that I use the correct service for an official result.
 
 ## Tasks / Subtasks
 
-- [ ] Implement official-check guidance component (AC: #1, #2)
-  - [ ] Create clear messaging that directs users to `Дія` for official checks
-  - [ ] Ensure messaging explicitly states that `genu.im` does not provide official results
-- [ ] Implement official-check CTA (AC: #3, #4)
-  - [ ] Create a CTA that directs users to `Дія`
-  - [ ] Ensure CTA text clearly describes the navigation action
-- [ ] Ensure responsive design (AC: #5)
-  - [ ] Verify layout works at 360px width without hidden or broken controls
-  - [ ] Test on mobile and desktop viewports
-- [ ] Implement graceful degradation (AC: #6)
-  - [ ] Ensure guidance works even if optional measurement/enhancement behavior is unavailable
-  - [ ] Verify visitor is not blocked or misled about where the official check happens
+- [x] Implement official-check guidance component (AC: #1, #2)
+  - [x] Create clear messaging that directs users to `Дія` for official checks
+  - [x] Ensure messaging explicitly states that `genu.im` does not provide official results
+- [x] Implement official-check CTA (AC: #3, #4)
+  - [x] Create a CTA that directs users to `Дія`
+  - [x] Ensure CTA text clearly describes the navigation action
+- [x] Ensure responsive design (AC: #5)
+  - [x] Verify layout works at 360px width without hidden or broken controls
+  - [x] Test on mobile and desktop viewports
+- [x] Implement graceful degradation (AC: #6)
+  - [x] Ensure guidance works even if optional measurement/enhancement behavior is unavailable
+  - [x] Verify visitor is not blocked or misled about where the official check happens
 
 ## Dev Notes
 
@@ -148,10 +148,33 @@ So that I use the correct service for an official result.
 
 ### Agent Model Used
 
-opencode/nemotron-3-super-free
+anthropic/claude-opus-4-6
 
 ### Debug Log References
 
+- Lint warnings fixed: `node:` protocol for fs/path imports, `?.` replacing `!` non-null assertions
+- All validation commands passed without errors
+
 ### Completion Notes List
 
+- Created dedicated official-check intercept page at `/perevir-product/` using existing `info-page` pattern
+- Page structure follows About/Contact/FAQ info-page conventions (semantic HTML, `data-i18n`, shared header/footer)
+- 11 EN + 11 UK `officialCheck.*` translation keys added inline to `lang-toggle.js`
+- CTA links to `https://diia.gov.ua/` with `target="_blank"`, `rel="noreferrer noopener"`, external-link SVG icon
+- All content is static HTML with EN fallback — works fully without JavaScript
+- No new CSS, no new JS controllers, no changes to existing pages or controllers
+- Replaced BMAD stub that was at `site/perevir-product/index.html`
+
+### Change Log
+
+- **Created** `site/perevir-product/index.html` — Dedicated official-check guidance page directing visitors to Diia
+- **Modified** `site/assets/js/lang-toggle.js` — Added 11 EN + 11 UK `officialCheck.*` translation keys
+- **Created** `tests/official-check-guidance.test.js` — 12 unit tests covering messaging, CTA, degradation, translations
+- **Created** `tests/e2e/official-check.spec.ts` — 11 E2E tests covering rendering, CTA, responsive, i18n, navigation
+
 ### File List
+
+- `site/perevir-product/index.html` (created)
+- `site/assets/js/lang-toggle.js` (modified)
+- `tests/official-check-guidance.test.js` (created)
+- `tests/e2e/official-check.spec.ts` (created)

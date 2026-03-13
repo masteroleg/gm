@@ -370,6 +370,21 @@ const translations = {
 		"terms.section4.heading": "Changes to these terms",
 		"terms.section4.body":
 			"These terms may be updated as the platform evolves. Continued use of genu.im after a change constitutes acceptance of the updated terms. Material changes will be noted with a new effective date.",
+		"officialCheck.eyebrow": "Official checking",
+		"officialCheck.title": "Use Diia for the official state check",
+		"officialCheck.lead":
+			"genu.im is a brand proof layer, not an official verification service. If you need the official state check for a marked product, use Diia.",
+		"officialCheck.section1.heading": "What this page is for",
+		"officialCheck.section1.body":
+			"genu.im does not perform official state verification. Official eAktsyz checking and state product verification happen through Diia. This page helps you find the right path.",
+		"officialCheck.section2.heading": "Where official checking happens",
+		"officialCheck.section2.body":
+			"Diia is the official state platform for product verification in Ukraine. If you need to check a product through the state system, open Diia directly.",
+		"officialCheck.section3.heading": "What genu.im does instead",
+		"officialCheck.section3.body":
+			"genu.im provides brand-published proof for marked products through genu.mark. This is a brand layer, not a state verification. Brands use it to attach a checkable record to each product unit.",
+		"officialCheck.cta": "Open Diia",
+		"officialCheck.ctaAria": "Open Diia for official checking in a new tab",
 	},
 	uk: {
 		"controls.lang.toggle": "Мова: UA. Натисніть, щоб перемкнути.",
@@ -745,6 +760,22 @@ const translations = {
 		"terms.section4.heading": "Зміни до цих умов",
 		"terms.section4.body":
 			"Ці умови можуть оновлюватися в міру розвитку платформи. Подальше використання genu.im після змін означає прийняття оновлених умов. Суттєві зміни будуть відзначені новою датою набрання чинності.",
+		"officialCheck.eyebrow": "Офіційна перевірка",
+		"officialCheck.title": "Використайте Дію для офіційної державної перевірки",
+		"officialCheck.lead":
+			"genu.im \u2014 це шар брендового доказу, а не офіційний сервіс верифікації. Якщо вам потрібна офіційна державна перевірка маркованого товару, використовуйте Дію.",
+		"officialCheck.section1.heading": "Для чого ця сторінка",
+		"officialCheck.section1.body":
+			"genu.im не виконує офіційну державну верифікацію. Офіційна перевірка еАкцизу та державна перевірка товарів відбувається через Дію. Ця сторінка допоможе знайти правильний шлях.",
+		"officialCheck.section2.heading": "Де відбувається офіційна перевірка",
+		"officialCheck.section2.body":
+			"Дія \u2014 офіційна державна платформа для перевірки продукції в Україні. Якщо вам потрібно перевірити товар через державну систему, відкрийте Дію.",
+		"officialCheck.section3.heading": "Що робить genu.im",
+		"officialCheck.section3.body":
+			"genu.im надає опублікований брендом доказ для маркованих товарів через genu.mark. Це брендовий шар, а не державна верифікація. Бренди використовують його, щоб прив\u2019язати перевірюваний запис до кожної одиниці продукту.",
+		"officialCheck.cta": "Відкрити Дію",
+		"officialCheck.ctaAria":
+			"Відкрити Дію для офіційної перевірки в новій вкладці",
 	},
 };
 
