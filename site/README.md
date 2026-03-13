@@ -209,3 +209,4 @@ npm run lighthouse
 4. `.github/workflows/ci.yml` - что реально происходит в GitHub
 5. `package.json` - команды `test:smoke`, `test:e2e:ci`
 # Test CI fix Fri Mar 13 17:16:46 FLEST 2026
+# Test redeploy 2026-03-13T15:54:44Z
