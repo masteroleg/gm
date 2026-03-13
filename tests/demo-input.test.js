@@ -72,6 +72,76 @@ describe("demo-input controller", () => {
 		expect(resolveDestination(undefined)).toBe(DEMO_DESTINATIONS.fallback);
 	});
 
+	// ── Edge cases: invalid and non-string input ────────────────────
+
+	test("resolveDestination returns /v/ for numeric input", () => {
+		const { resolveDestination, DEMO_DESTINATIONS } = loadModule();
+		expect(resolveDestination(0)).toBe(DEMO_DESTINATIONS.fallback);
+		expect(resolveDestination(2026)).toBe(DEMO_DESTINATIONS.fallback);
+	});
+
+	test("resolveDestination returns /v/ for boolean input", () => {
+		const { resolveDestination, DEMO_DESTINATIONS } = loadModule();
+		expect(resolveDestination(true)).toBe(DEMO_DESTINATIONS.fallback);
+		expect(resolveDestination(false)).toBe(DEMO_DESTINATIONS.fallback);
+	});
+
+	test("resolveDestination returns /v/ for object/array input", () => {
+		const { resolveDestination, DEMO_DESTINATIONS } = loadModule();
+		expect(resolveDestination({})).toBe(DEMO_DESTINATIONS.fallback);
+		expect(resolveDestination([])).toBe(DEMO_DESTINATIONS.fallback);
+	});
+
+	test("resolveDestination returns /v/ for special characters", () => {
+		const { resolveDestination, DEMO_DESTINATIONS } = loadModule();
+		expect(resolveDestination("<script>alert(1)</script>")).toBe(
+			DEMO_DESTINATIONS.fallback,
+		);
+		expect(resolveDestination("'; DROP TABLE--")).toBe(
+			DEMO_DESTINATIONS.fallback,
+		);
+		expect(resolveDestination("../../etc/passwd")).toBe(
+			DEMO_DESTINATIONS.fallback,
+		);
+	});
+
+	test("resolveDestination returns /v/ for very long input", () => {
+		const { resolveDestination, DEMO_DESTINATIONS } = loadModule();
+		const longInput = "A".repeat(10000);
+		expect(resolveDestination(longInput)).toBe(DEMO_DESTINATIONS.fallback);
+	});
+
+	test("resolveDestination matches approved code with embedded newline (whitespace is stripped)", () => {
+		// Newline is whitespace — stripped by normalization — so result matches approved code.
+		// This is deliberate: /\s+/g covers \n, \t, \r, spaces. Documented behavior.
+		const { resolveDestination, DEMO_DESTINATIONS } = loadModule();
+		expect(resolveDestination("GM-GENUIM\n-2026")).toBe(
+			DEMO_DESTINATIONS.example,
+		);
+	});
+
+	test("resolveDestination does not match partial approved code", () => {
+		const { resolveDestination, DEMO_DESTINATIONS } = loadModule();
+		expect(resolveDestination("GM-GENUIM")).toBe(DEMO_DESTINATIONS.fallback);
+		expect(resolveDestination("GENUIM-2026")).toBe(DEMO_DESTINATIONS.fallback);
+		expect(resolveDestination("GM-GENUIM-2026-EXTRA")).toBe(
+			DEMO_DESTINATIONS.fallback,
+		);
+	});
+
+	test("resolveDestination returns /v/ for dashes-only input", () => {
+		const { resolveDestination, DEMO_DESTINATIONS } = loadModule();
+		expect(resolveDestination("---")).toBe(DEMO_DESTINATIONS.fallback);
+	});
+
+	test("resolveDestination returns /v/ for unicode lookalike input", () => {
+		// Cyrillic 'с' (U+0441) instead of Latin 'c' — visually similar
+		const { resolveDestination, DEMO_DESTINATIONS } = loadModule();
+		expect(resolveDestination("GM-GENUIM-2О26")).toBe(
+			DEMO_DESTINATIONS.fallback,
+		); // Cyrillic О instead of 0
+	});
+
 	// ── DEMO_EXAMPLE_CODE constant ──────────────────────────────────
 
 	test("DEMO_EXAMPLE_CODE is defined as a single named constant", () => {

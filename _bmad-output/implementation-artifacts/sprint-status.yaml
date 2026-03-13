@@ -53,13 +53,13 @@ development_status:
   2-2-show-a-clear-no-data-result: done
   2-3-use-the-demo-input-and-example-code-action: done
   2-4-show-only-supported-proof-content: done
-  epic-2-retrospective: optional
+  epic-2-retrospective: done
 
-  epic-3: backlog
-  3-1-guide-official-checks-to-diia: backlog
-  3-2-show-the-right-business-next-step: backlog
-  3-3-send-a-qualified-request: backlog
-  3-4-attach-scenario-and-source-details: backlog
+  epic-3: in-progress
+  3-1-guide-official-checks-to-diia: ready-for-dev
+  3-2-show-the-right-business-next-step: ready-for-dev
+  3-3-send-a-qualified-request: ready-for-dev
+  3-4-attach-scenario-and-source-details: ready-for-dev
   epic-3-retrospective: optional
 
   epic-4: backlog
