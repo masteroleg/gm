@@ -2897,6 +2897,88 @@
 		color: var(--color-brand-bright);
 	}
 
+	/* Audience routing surface — Story 3.2 */
+	.audience-routing {
+		display: grid;
+		gap: var(--space-lg);
+		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 640px) {
+		.audience-routing {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	.routing-card {
+		display: grid;
+		gap: var(--space-md);
+		padding: var(--space-xl);
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--color-border, oklch(0.88 0.01 250));
+		background: var(--color-paper);
+		align-content: start;
+	}
+
+	.routing-card--business {
+		border-color: var(--color-brand);
+		background: color-mix(in oklch, var(--color-brand) 5%, var(--color-paper));
+	}
+
+	.dark .routing-card {
+		background: oklch(0.19 0.018 248);
+		border-color: oklch(0.3 0.02 250);
+	}
+
+	.dark .routing-card--business {
+		border-color: var(--color-brand-bright);
+		background: color-mix(
+			in oklch,
+			var(--color-brand-bright) 8%,
+			oklch(0.19 0.018 248)
+		);
+	}
+
+	.routing-card__eyebrow {
+		color: var(--color-muted);
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.routing-card--business .routing-card__eyebrow {
+		color: var(--color-brand-deep);
+	}
+
+	.dark .routing-card--business .routing-card__eyebrow {
+		color: var(--color-brand-bright);
+	}
+
+	.routing-card__title {
+		color: var(--color-heading);
+		font-family: var(--font-display);
+		font-size: 1.15rem;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		line-height: 1.2;
+	}
+
+	.routing-card__body {
+		color: var(--color-body);
+		font-size: 0.95rem;
+		line-height: 1.65;
+		text-wrap: pretty;
+	}
+
+	.routing-card__cta {
+		margin-top: auto;
+		align-self: end;
+		justify-self: start;
+		min-height: 44px;
+		min-width: 44px;
+	}
+
 	.verification-page {
 		display: grid;
 		gap: var(--space-xl);

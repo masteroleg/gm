@@ -385,6 +385,18 @@ const translations = {
 			"genu.im provides brand-published proof for marked products through genu.mark. This is a brand layer, not a state verification. Brands use it to attach a checkable record to each product unit.",
 		"officialCheck.cta": "Open Diia",
 		"officialCheck.ctaAria": "Open Diia for official checking in a new tab",
+		"routing.official.eyebrow": "Official checking",
+		"routing.official.title": "Need the official state check?",
+		"routing.official.body":
+			"Official eAktsyz verification happens in Diia. genu.im is not a state verification service.",
+		"routing.official.cta": "Open Diia",
+		"routing.official.ctaAria": "Open Diia for official checking in a new tab",
+		"routing.business.eyebrow": "Business next step",
+		"routing.business.title": "Want proof for your own products?",
+		"routing.business.body":
+			"genu.mark lets brands publish checkable proof tied to each marked unit. Tell us about your rollout.",
+		"routing.business.cta": "Send a request",
+		"routing.business.ctaAria": "Send a request for brand proof setup",
 	},
 	uk: {
 		"controls.lang.toggle": "Мова: UA. Натисніть, щоб перемкнути.",
@@ -776,6 +788,20 @@ const translations = {
 		"officialCheck.cta": "Відкрити Дію",
 		"officialCheck.ctaAria":
 			"Відкрити Дію для офіційної перевірки в новій вкладці",
+		"routing.official.eyebrow": "Офіційна перевірка",
+		"routing.official.title": "Потрібна офіційна державна перевірка?",
+		"routing.official.body":
+			"Офіційна перевірка еАкцизу відбувається в Дії. genu.im \u2014 це не сервіс державної верифікації.",
+		"routing.official.cta": "Відкрити Дію",
+		"routing.official.ctaAria":
+			"Відкрити Дію для офіційної перевірки в новій вкладці",
+		"routing.business.eyebrow": "Наступний крок для бізнесу",
+		"routing.business.title": "Хочете доказ для своїх продуктів?",
+		"routing.business.body":
+			"genu.mark дає брендам змогу публікувати перевірюваний доказ для кожної промаркованої одиниці. Розкажіть нам про своє впровадження.",
+		"routing.business.cta": "Надіслати запит",
+		"routing.business.ctaAria":
+			"Надіслати запит щодо налаштування доказу бренду",
 	},
 };
 

@@ -98,20 +98,51 @@
 					</section>
 				</div>
 
-				<div class="info-page__cta-section">
-					<a href="https://diia.gov.ua/" class="cta-button" target="_blank" rel="noreferrer noopener"
-						data-i18n-aria-label="officialCheck.ctaAria"
+			<div class="info-page__cta-section">
+				<a href="https://diia.gov.ua/" class="cta-button" target="_blank" rel="noreferrer noopener"
+					data-i18n-aria-label="officialCheck.ctaAria"
+					aria-label="Open Diia for official checking in a new tab">
+					<svg class="cta-button__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+					</svg>
+					<span data-i18n="officialCheck.cta">Open Diia</span>
+				</a>
+			</div>
+
+			<div class="audience-routing" data-audience-routing>
+				<article class="routing-card routing-card--official" data-routing-official>
+					<p class="routing-card__eyebrow" data-i18n="routing.official.eyebrow">Official checking</p>
+					<h2 class="routing-card__title" data-i18n="routing.official.title">Need the official state check?</h2>
+					<p class="routing-card__body" data-i18n="routing.official.body">Official eAktsyz verification happens in Diia. genu.im is not a state verification service.</p>
+					<a href="https://diia.gov.ua/" class="routing-card__cta cta-button" target="_blank" rel="noreferrer noopener"
+						data-i18n-aria-label="routing.official.ctaAria"
 						aria-label="Open Diia for official checking in a new tab">
 						<svg class="cta-button__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
 						</svg>
-						<span data-i18n="officialCheck.cta">Open Diia</span>
+						<span data-i18n="routing.official.cta">Open Diia</span>
 					</a>
-				</div>
+				</article>
 
-				<div class="info-page__back">
-					<a href="../" class="info-back-link" data-i18n="nav.backHome">&#8592; Back to homepage</a>
-				</div>
+				<article class="routing-card routing-card--business" data-routing-business>
+					<p class="routing-card__eyebrow" data-i18n="routing.business.eyebrow">Business next step</p>
+					<h2 class="routing-card__title" data-i18n="routing.business.title">Want proof for your own products?</h2>
+					<p class="routing-card__body" data-i18n="routing.business.body">genu.mark lets brands publish checkable proof tied to each marked unit. Tell us about your rollout.</p>
+					<a href="/request?scenario=brand-proof" class="routing-card__cta cta-button"
+						data-i18n-aria-label="routing.business.ctaAria"
+						aria-label="Send a request for brand proof setup"
+						data-business-cta>
+						<svg class="cta-button__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+						</svg>
+						<span data-i18n="routing.business.cta">Send a request</span>
+					</a>
+				</article>
+			</div>
+
+			<div class="info-page__back">
+				<a href="../" class="info-back-link" data-i18n="nav.backHome">&#8592; Back to homepage</a>
+			</div>
 			</main>
 
 			<footer class="site-footer">

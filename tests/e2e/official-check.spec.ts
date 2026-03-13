@@ -20,7 +20,10 @@ test.describe("Official Check Guidance Page", () => {
 	});
 
 	test("CTA links to Diia and opens in new tab @smoke", async ({ page }) => {
-		const cta = page.locator('a.cta-button[href="https://diia.gov.ua/"]');
+		// Select the primary Story 3.1 CTA in the info-page__cta-section
+		const cta = page.locator(
+			'.info-page__cta-section a.cta-button[href="https://diia.gov.ua/"]',
+		);
 		await expect(cta).toBeVisible();
 		await expect(cta).toHaveAttribute("target", "_blank");
 		await expect(cta).toHaveAttribute("rel", /noopener/);
@@ -94,7 +97,9 @@ test.describe("Official Check Guidance Page", () => {
 			expect(mainBox.width).toBeLessThanOrEqual(viewportWidth);
 		}
 
-		const cta = page.locator('a.cta-button[href="https://diia.gov.ua/"]');
+		const cta = page.locator(
+			'.info-page__cta-section a.cta-button[href="https://diia.gov.ua/"]',
+		);
 		await expect(cta).toBeVisible();
 
 		// Check CTA is not clipped or hidden

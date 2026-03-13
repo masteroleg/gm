@@ -1,6 +1,6 @@
 # Story 3.2: Show the Right Business Next Step
 
-Status: ready-for-dev
+Status: review
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -34,18 +34,18 @@ So that I can continue toward marking, proof, or transparency help instead of th
 
 ## Tasks / Subtasks
 
-- [ ] Implement audience routing decision surface (AC: #1, #2)
-  - [ ] Create separate routing UI that distinguishes official-check path from business path
-  - [ ] Ensure business option copy clearly indicates it is for business/B2B intent
-- [ ] Implement business CTA (AC: #3, #4)
-  - [ ] Create CTA that navigates to request form with scenario pre-selected
-  - [ ] Ensure CTA text clearly describes the business next step
-- [ ] Ensure responsive design (AC: #5)
-  - [ ] Verify routing UI displays correctly at 360px width
-  - [ ] Test on mobile and desktop viewports
-- [ ] Implement graceful degradation (AC: #6)
-  - [ ] Ensure routing works even if optional metadata/measurement unavailable
-  - [ ] Verify business route navigates to request form even if enhancements fail
+- [x] Implement audience routing decision surface (AC: #1, #2)
+  - [x] Create separate routing UI that distinguishes official-check path from business path
+  - [x] Ensure business option copy clearly indicates it is for business/B2B intent
+- [x] Implement business CTA (AC: #3, #4)
+  - [x] Create CTA that navigates to request form with scenario pre-selected
+  - [x] Ensure CTA text clearly describes the business next step
+- [x] Ensure responsive design (AC: #5)
+  - [x] Verify routing UI displays correctly at 360px width
+  - [x] Test on mobile and desktop viewports
+- [x] Implement graceful degradation (AC: #6)
+  - [x] Ensure routing works even if optional metadata/measurement unavailable
+  - [x] Verify business route navigates to request form even if enhancements fail
 
 ## Dev Notes
 
@@ -179,10 +179,32 @@ Story 3.1 established the official-check guidance pattern:
 
 ### Agent Model Used
 
-opencode/nemotron-3-super-free
+anthropic/claude-sonnet-4-6
 
 ### Debug Log References
 
+- Fixed strict mode violation in `official-check.spec.ts` tests (lines 22, 75): two Diia CTAs now exist on page (Story 3.1 original + Story 3.2 routing card). Scoped selectors to `.info-page__cta-section` to preserve existing test intent.
+- Fixed 3 Biome lint warnings (`noNonNullAssertion`) in `business-next-step.spec.ts` — replaced `!` with `?.` optional chaining.
+
 ### Completion Notes List
 
+- Implemented `[data-audience-routing]` surface on `/perevir-product/` with two `routing-card` articles: `routing-card--official` (→ Diia) and `routing-card--business` (→ `/request?scenario=brand-proof`).
+- Business card: eyebrow "Business next step", title "Want proof for your own products?", body referencing genu.mark, CTA "Send a request" with `data-business-cta` hook.
+- Official card mirrors existing Story 3.1 Diia guidance, preserving separation between official and business paths.
+- Added 10 EN + 10 UK translation keys under `routing.official.*` and `routing.business.*` namespaces in `lang-toggle.js`.
+- Added CSS in `input.css`: `.audience-routing` responsive grid (1-col → 2-col at 640px), `.routing-card` with brand-accented business variant, touch targets ≥44px.
+- All 4 tasks and 8 subtasks checked. 85 unit tests pass. 29 smoke (desktop) + 30 smoke (mobile) pass. Lint clean. Typecheck clean.
+
 ### File List
+
+- `site/perevir-product/index.html` — added `[data-audience-routing]` section with official and business routing cards
+- `site/assets/js/lang-toggle.js` — added `routing.official.*` and `routing.business.*` translation keys (EN + UK)
+- `site/assets/css/input.css` — added `.audience-routing`, `.routing-card`, `.routing-card--official`, `.routing-card--business` styles
+- `site/assets/css/output.css` — rebuilt CSS production artifact
+- `tests/business-next-step.test.js` — new unit tests (21 tests, all AC covered)
+- `tests/e2e/business-next-step.spec.ts` — new E2E smoke tests for routing surface
+- `tests/e2e/official-check.spec.ts` — updated selectors to be more specific (`.info-page__cta-section`) to handle 2 Diia CTAs on page
+
+## Change Log
+
+- 2026-03-13: Story 3.2 implemented — audience routing surface with business CTA on `/perevir-product/`. Added routing cards, translations (EN/UK), CSS, unit tests, E2E tests. All validations pass.
