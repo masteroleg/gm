@@ -605,7 +605,7 @@ const translations = {
 			"Доказ бренду в genu.mark. Офіційна державна перевірка залишається в Дії.",
 		"verification.factsTitle": "Видимі факти доказу",
 		"verification.fact1Source": "Джерело: genu.mark",
-		"verification.fact1Title": "Запис одиниці з унікальним кодом",
+		"verification.fact1Title": "Серіалізований запис одиниці",
 		"verification.fact1Body":
 			"Для цієї одиниці опубліковано запис у шарі доказу бренду.",
 		"verification.fact1Evidence": "Нотатка з публічним підтвердженням",
@@ -624,8 +624,7 @@ const translations = {
 		"verification.ctaAria":
 			"Перейти на сторінку контактів і обговорити доказ для свого продукту",
 		"verification.supportTitle": "Підтверджені джерела",
-		"verification.supportLabel":
-			"Підтверджує: запис одиниці з унікальним кодом",
+		"verification.supportLabel": "Підтверджує: серіалізований запис одиниці",
 		"verification.supportBody":
 			"Ця публічна нотатка пояснює, як запис-доказ показується у брендовому контурі genu.mark.",
 		"verification.supportLink": "Відкрити публічну нотатку",
@@ -665,7 +664,7 @@ const translations = {
 			"genu.im — це шар брендового доказу, а не офіційна перевірка. Відкрийте Дію в новій вкладці, якщо вам потрібен державний шлях перевірки.",
 		"verificationNoData.diiaAria":
 			"Відкрити Дію для офіційної перевірки в новій вкладці",
-		"verificationNoData.businessEyebrow": "Бізнес-наступний крок",
+		"verificationNoData.businessEyebrow": "Наступний крок для бізнесу",
 		"verificationNoData.businessTitle": "Обговорити доказ для свого продукту",
 		"verificationNoData.businessBody":
 			"Перейдіть на сторінку контактів, якщо хочете публічний брендовий доказ для власних маркованих товарів.",

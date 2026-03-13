@@ -65,6 +65,7 @@ test.describe("genu.im - verification page", () => {
 		await expect(app.title).toContainText("публічний запис");
 		await expect(app.demoBanner).toContainText("демонстраційний приклад");
 		await expect(app.factList).toContainText("Джерело: genu.mark");
+		await expect(app.factList).toContainText("Серіалізований запис одиниці");
 		await expect(app.primaryCta).toContainText("Обговорити доказ");
 	});
 
