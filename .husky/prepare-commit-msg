@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Robust prepare-commit-msg hook with index integrity check
+# This runs BEFORE the commit message is edited, early in the commit process
+
 MSG_FILE="$1"
 
 # Do not override merge commits, squashes, etc.
@@ -7,6 +10,47 @@ COMMIT_SOURCE="$2"
 if [ "$COMMIT_SOURCE" = "merge" ] || [ "$COMMIT_SOURCE" = "squash" ]; then
 	exit 0
 fi
+
+# ===== INDEX INTEGRITY CHECK =====
+# Check if index is valid before any git operations
+# This prevents corruption from causing confusing errors
+
+check_index() {
+	# Try to read the index - if corrupted, this will fail
+	if ! git ls-files --stage >/dev/null 2>&1; then
+		echo "WARNING: Git index appears corrupted. Attempting to rebuild..."
+		
+		# Backup corrupted index
+		if [ -f .git/index ]; then
+			mv .git/index .git/index.corrupted.$(date +%Y%m%d%H%M%S)
+		fi
+		
+		# Rebuild index from HEAD
+		git read-tree --reset HEAD
+		
+		echo "Index rebuilt successfully. Please retry your commit."
+		exit 1
+	fi
+	
+	# Additional check: verify index can be read properly
+	if ! git diff --cached --name-only >/dev/null 2>&1; then
+		echo "WARNING: Index read failed. Rebuilding..."
+		
+		if [ -f .git/index ]; then
+			mv .git/index .git/index.corrupted.$(date +%Y%m%d%H%M%S)
+		fi
+		
+		git read-tree --reset HEAD
+		
+		echo "Index rebuilt. Please retry your commit."
+		exit 1
+	fi
+}
+
+# Run index integrity check
+check_index
+
+# ===== EXISTING COMMIT MESSAGE GENERATION LOGIC =====
 
 if command -v node >/dev/null 2>&1; then
 	node scripts/generate-commit-msg.cjs "$MSG_FILE"

@@ -1,6 +1,40 @@
 #!/bin/sh
 
-if git diff --cached --name-only | grep -Eq '^site/assets/css/input\.css$'; then
-	npm run build:css || exit 1
-	git add site/assets/css/output.css
+# Robust pre-commit hook with index integrity check
+# This runs before the commit is finalized
+
+# ===== INDEX INTEGRITY CHECK =====
+check_index() {
+	if ! git ls-files --stage >/dev/null 2>&1; then
+		echo "ERROR: Git index is corrupted. Cannot run pre-commit checks."
+		echo "Please run: git read-tree --reset HEAD"
+		exit 1
+	fi
+}
+
+check_index
+
+# ===== CSS BUILD CHECK (no index modification!) =====
+
+# Check if input.css is staged
+if git diff --cached --name-only 2>/dev/null | grep -Eq '^site/assets/css/input\.css$'; then
+	# Build the CSS
+	if ! npm run build:css 2>/dev/null; then
+		echo "ERROR: CSS build failed. Commit aborted."
+		exit 1
+	fi
+	
+	# Check if output.css differs from HEAD
+	# NOTE: We do NOT add output.css to the index here!
+	# Adding files during pre-commit causes index corruption.
+	# Instead, we warn the user to add it manually.
+	
+	if ! git diff --quiet HEAD -- site/assets/css/output.css 2>/dev/null; then
+		echo "NOTE: site/assets/css/output.css was regenerated but NOT auto-staged."
+		echo "To include it in this commit, run in another terminal:"
+		echo "  git add site/assets/css/output.css"
+		echo ""
+	fi
 fi
+
+exit 0
