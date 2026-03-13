@@ -3,25 +3,25 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>No Public Proof &#x2014; genu.im</title>
-	<meta name="description" content="A static no-data proof example from genu.im. No public proof is available in this view, and official state checks remain in Diia." />
+	<title>Demo Input &#x2014; genu.im</title>
+	<meta name="description" content="Enter a code or try the example to see a demo proof result from genu.im. No account required. This is a static demo, not a live lookup." />
 	<meta name="robots" content="noindex, nofollow" />
 	<link rel="canonical" href="https://genu.im/v/" />
 	<link rel="alternate" hreflang="uk" href="https://genu.im/v/" />
 	<link rel="alternate" hreflang="en" href="https://genu.im/v/" />
 	<link rel="alternate" hreflang="x-default" href="https://genu.im/v/" />
 	<meta property="og:type" content="website" />
-	<meta property="og:title" content="No Public Proof &#x2014; genu.im" />
-	<meta property="og:description" content="A static no-data proof example from genu.im. No public proof is available in this view, and official state checks remain in Diia." />
+	<meta property="og:title" content="Demo Input &#x2014; genu.im" />
+	<meta property="og:description" content="Enter a code or try the example to see a demo proof result from genu.im. No account required. This is a static demo, not a live lookup." />
 	<meta property="og:url" content="https://genu.im/v/" />
 	<meta property="og:image" content="https://genu.im/assets/favicon/android-chrome-512x512.png" />
-	<meta property="og:image:alt" content="genu.im no-data proof example page" />
+	<meta property="og:image:alt" content="genu.im demo input page" />
 	<meta property="og:site_name" content="genu.im" />
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:locale:alternate" content="uk_UA" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="No Public Proof &#x2014; genu.im" />
-	<meta name="twitter:description" content="A static no-data proof example from genu.im. No public proof is available in this view, and official state checks remain in Diia." />
+	<meta name="twitter:title" content="Demo Input &#x2014; genu.im" />
+	<meta name="twitter:description" content="Enter a code or try the example to see a demo proof result from genu.im. No account required. This is a static demo, not a live lookup." />
 	<meta name="twitter:image" content="https://genu.im/assets/favicon/android-chrome-512x512.png" />
 	<script>/* Prevent FOUC */
 		try {
@@ -48,7 +48,7 @@
 	</script>
 	<link rel="icon" href="../assets/favicon/favicon.ico" />
 	<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png" />
-	<link href="../assets/css/output.css?v=18" rel="stylesheet" />
+	<link href="../assets/css/output.css?v=19" rel="stylesheet" />
 </head>
 
 <body class="site-body">
@@ -80,6 +80,39 @@
 			</header>
 
 			<main class="verification-page" data-proof-page>
+
+				<section class="demo-input-section" aria-label="Demo input">
+					<p class="section-eyebrow demo-input__eyebrow" data-i18n="demoInput.eyebrow">Try the demo</p>
+					<form class="demo-input__form" id="demoInputForm" novalidate>
+						<label class="demo-input__label" for="demoCode" data-i18n="demoInput.label">Enter a code</label>
+						<div class="demo-input__row">
+							<input
+								class="demo-input__field"
+								type="text"
+								id="demoCode"
+								name="code"
+								autocomplete="off"
+								spellcheck="false"
+								data-i18n-placeholder="demoInput.placeholder"
+								placeholder="e.g. GM-GENUIM-2026"
+							/>
+							<button
+								class="demo-input__submit"
+								type="submit"
+								data-i18n-aria-label="demoInput.submitAria"
+								aria-label="See result"
+							><span data-i18n="demoInput.submitLabel">See result</span></button>
+						</div>
+					</form>
+					<a
+						class="demo-input__example"
+						href="/v/genuim/"
+						data-i18n="demoInput.exampleAction"
+						data-i18n-aria-label="demoInput.exampleActionAria"
+						aria-label="See the genu.im proof example"
+					>See a demo result</a>
+				</section>
+
 				<div class="verification-page__header">
 					<p class="section-eyebrow" data-i18n="verificationNoData.eyebrow">No-data proof example</p>
 					<h1 class="verification-page__title" data-i18n="verificationNoData.title">No public proof is available for this code.</h1>
@@ -157,5 +190,6 @@
 	<script src="../assets/js/lang-toggle.js" defer></script>
 	<script src="../assets/js/theme-toggle.js" defer></script>
 	<script src="../assets/js/verification-page.js" defer></script>
+	<script src="../assets/js/demo-input.js" defer></script>
 </body>
 </html>
