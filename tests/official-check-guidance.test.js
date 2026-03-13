@@ -133,6 +133,70 @@ describe("Official Check Guidance page", () => {
 		});
 	});
 
+	describe("semantic HTML and accessibility contract", () => {
+		test("page has required semantic structure", () => {
+			document.body.innerHTML = `
+				<main class="info-page" data-official-check-guidance>
+					<div class="info-page__header">
+						<h1 class="info-page__title">Test Title</h1>
+					</div>
+					<div class="info-page__body">
+						<section class="info-section">
+							<h2 class="info-section__heading">Section Heading</h2>
+							<p>Section body text</p>
+						</section>
+					</div>
+					<div class="info-page__cta-section">
+						<a href="https://diia.gov.ua/" class="cta-button">Open Diia</a>
+					</div>
+				</main>
+			`;
+
+			// Verify one main element exists
+			const main = document.querySelector("main");
+			expect(main).not.toBeNull();
+			expect(main.classList.contains("info-page")).toBe(true);
+
+			// Verify one primary h1 exists
+			const h1 = document.querySelector("h1");
+			expect(h1).not.toBeNull();
+			expect(h1.textContent.length).toBeGreaterThan(0);
+
+			// Verify CTA is accessible (has href and visible text)
+			const cta = document.querySelector(".cta-button");
+			expect(cta).not.toBeNull();
+			expect(cta.getAttribute("href")).toBe("https://diia.gov.ua/");
+			expect(cta.textContent.length).toBeGreaterThan(0);
+
+			// Verify essential landmarks exist
+			const header = document.querySelector(".info-page__header");
+			const body = document.querySelector(".info-page__body");
+			expect(header).not.toBeNull();
+			expect(body).not.toBeNull();
+		});
+
+		test("CTA has proper accessibility attributes", () => {
+			document.body.innerHTML = `
+				<a href="https://diia.gov.ua/" class="cta-button" target="_blank" rel="noreferrer noopener"
+					data-i18n-aria-label="officialCheck.ctaAria"
+					aria-label="Open Diia for official checking in a new tab">
+					<span data-i18n="officialCheck.cta">Open Diia</span>
+				</a>
+			`;
+
+			const cta = document.querySelector(".cta-button");
+			expect(cta).not.toBeNull();
+			expect(cta.getAttribute("href")).toBe("https://diia.gov.ua/");
+			expect(cta.getAttribute("target")).toBe("_blank");
+			expect(cta.getAttribute("rel")).toContain("noopener");
+			expect(cta.getAttribute("rel")).toContain("noreferrer");
+			expect(cta.getAttribute("aria-label")).toContain("Diia");
+			expect(cta.getAttribute("data-i18n-aria-label")).toBe(
+				"officialCheck.ctaAria",
+			);
+		});
+	});
+
 	describe("graceful degradation (AC #6)", () => {
 		test("core messaging and CTA work as static HTML without any JS controllers", () => {
 			document.body.innerHTML = `
@@ -215,6 +279,42 @@ describe("Official Check Guidance page", () => {
 			expect(ukSection).toBeDefined();
 			for (const key of requiredKeys) {
 				expect(ukSection).toContain(`"${key}"`);
+			}
+		});
+
+		test("EN and UK translation schemas are consistent", () => {
+			// Extract all officialCheck keys from EN section
+			const enSection = langToggleSource.match(/en:\s*\{[\s\S]*?\},\s*uk:/);
+			expect(enSection).not.toBeNull();
+
+			const enKeys = [];
+			const enKeyRegex = /"officialCheck\.[^"]+"/g;
+			let enMatch = enKeyRegex.exec(enSection[0]);
+			while (enMatch !== null) {
+				const key = enMatch[0].replace(/"/g, "");
+				enKeys.push(key);
+				enMatch = enKeyRegex.exec(enSection[0]);
+			}
+
+			// Extract all officialCheck keys from UK section
+			const ukSection = langToggleSource.split("uk:")[1];
+			const ukKeys = [];
+			const ukKeyRegex = /"officialCheck\.[^"]+"/g;
+			let ukMatch = ukKeyRegex.exec(ukSection);
+			while (ukMatch !== null) {
+				const key = ukMatch[0].replace(/"/g, "");
+				ukKeys.push(key);
+				ukMatch = ukKeyRegex.exec(ukSection);
+			}
+
+			// Verify both languages have the same officialCheck keys
+			expect(ukKeys.length).toBe(enKeys.length);
+			expect(ukKeys.sort()).toEqual(enKeys.sort());
+
+			// Verify all required keys are present in both languages
+			for (const key of requiredKeys) {
+				expect(enKeys).toContain(key);
+				expect(ukKeys).toContain(key);
 			}
 		});
 

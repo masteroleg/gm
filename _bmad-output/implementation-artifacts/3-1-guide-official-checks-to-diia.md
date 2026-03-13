@@ -1,6 +1,6 @@
 # Story 3.1: Guide Official Checks to `Дія`
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -46,6 +46,12 @@ So that I use the correct service for an official result.
 - [x] Implement graceful degradation (AC: #6)
   - [x] Ensure guidance works even if optional measurement/enhancement behavior is unavailable
   - [x] Verify visitor is not blocked or misled about where the official check happens
+- [x] Review Follow-ups (AI)
+  - [x] [AI-Review][Should-Fix] Consider route alignment: page at `/perevir-product/` but content is about "official checking" - log decision or plan rename for later [site/perevir-product/index.html]
+  - [x] [AI-Review][Should-Fix] Strengthen mobile responsiveness tests to verify no horizontal overflow [tests/e2e/official-check.spec.ts]
+  - [x] [AI-Review][Should-Fix] Add assertions for actual guidance content/body sections [tests/e2e/official-check.spec.ts]
+  - [x] [AI-Review][Should-Fix] Add page-level required-schema consistency test for EN/UK translations [tests/official-check-guidance.test.js]
+  - [x] [AI-Review][Should-Fix] Add minimal semantic/accessibility contract test [tests/official-check-guidance.test.js]
 
 ## Dev Notes
 
@@ -169,8 +175,11 @@ anthropic/claude-opus-4-6
 
 - **Created** `site/perevir-product/index.html` — Dedicated official-check guidance page directing visitors to Diia
 - **Modified** `site/assets/js/lang-toggle.js` — Added 11 EN + 11 UK `officialCheck.*` translation keys
-- **Created** `tests/official-check-guidance.test.js` — 12 unit tests covering messaging, CTA, degradation, translations
-- **Created** `tests/e2e/official-check.spec.ts` — 11 E2E tests covering rendering, CTA, responsive, i18n, navigation
+- **Created** `tests/official-check-guidance.test.js` — Unit tests covering messaging, CTA, degradation, translations, semantic structure
+- **Created** `tests/e2e/official-check.spec.ts` — E2E tests covering rendering, CTA, responsive, i18n, navigation, content visibility
+- **Fixed** Mobile responsiveness tests to verify no horizontal scrolling and content visibility at 360px
+- **Fixed** Translation consistency test to verify EN/UK schema alignment
+- **Fixed** Added semantic/accessibility contract tests for required page structure
 
 ### File List
 

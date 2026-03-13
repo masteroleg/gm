@@ -44,6 +44,26 @@ test.describe("Official Check Guidance Page", () => {
 		const text = await body.textContent();
 		expect(text).toContain("genu.im");
 		expect(text).toContain("Diia");
+
+		// Verify guidance body sections are visible and readable
+		const sections = page.locator(".info-section");
+		const sectionCount = await sections.count();
+		expect(sectionCount).toBeGreaterThanOrEqual(3); // At least 3 guidance sections
+
+		// Verify each section has heading and body text
+		for (let i = 0; i < sectionCount; i++) {
+			const section = sections.nth(i);
+			const heading = section.locator(".info-section__heading");
+			const body = section.locator("p");
+			await expect(heading).toBeVisible();
+			await expect(body).toBeVisible();
+
+			// Verify text is readable (has content)
+			const headingText = await heading.textContent();
+			const bodyText = await body.textContent();
+			expect(headingText?.length).toBeGreaterThan(0);
+			expect(bodyText?.length).toBeGreaterThan(10);
+		}
 	});
 
 	test("all user-facing text has data-i18n attributes", async ({ page }) => {
@@ -56,8 +76,23 @@ test.describe("Official Check Guidance Page", () => {
 		await page.setViewportSize({ width: 360, height: 640 });
 		await page.goto("/perevir-product/");
 
+		// Verify no horizontal scrolling
+		const scrollWidth = await page.evaluate(
+			() => document.documentElement.scrollWidth,
+		);
+		const viewportWidth = 360;
+		expect(scrollWidth).toBeLessThanOrEqual(viewportWidth);
+
 		const title = page.locator(".info-page__title");
 		await expect(title).toBeVisible();
+
+		// Verify content container fits viewport
+		const main = page.locator(".info-page");
+		const mainBox = await main.boundingBox();
+		expect(mainBox).not.toBeNull();
+		if (mainBox) {
+			expect(mainBox.width).toBeLessThanOrEqual(viewportWidth);
+		}
 
 		const cta = page.locator('a.cta-button[href="https://diia.gov.ua/"]');
 		await expect(cta).toBeVisible();
@@ -67,6 +102,16 @@ test.describe("Official Check Guidance Page", () => {
 		expect(ctaBox).not.toBeNull();
 		expect(ctaBox?.width).toBeGreaterThanOrEqual(44);
 		expect(ctaBox?.height).toBeGreaterThanOrEqual(44);
+
+		// Verify key page content is visible and readable
+		const lead = page.locator(".info-page__lead");
+		await expect(lead).toBeVisible();
+		const leadBox = await lead.boundingBox();
+		expect(leadBox).not.toBeNull();
+		if (leadBox) {
+			expect(leadBox.width).toBeGreaterThan(0);
+			expect(leadBox.height).toBeGreaterThan(0);
+		}
 	});
 
 	test("language toggle works on guidance page", async ({ page }) => {
