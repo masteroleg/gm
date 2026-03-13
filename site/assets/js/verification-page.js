@@ -21,10 +21,39 @@ const syncEvidenceLinks = (root = document) => {
 	});
 };
 
+const hasRequiredEvidence = (element) => {
+	return Array.from(element.querySelectorAll("[data-proof-evidence]")).some(
+		(candidate) => hasApprovedEvidence(candidate),
+	);
+};
+
+const syncSupportedProofBlocks = (root = document) => {
+	root.querySelectorAll("[data-proof-requires-evidence]").forEach((element) => {
+		element.hidden = !hasRequiredEvidence(element);
+	});
+};
+
+const hasHiddenAncestorWithinSection = (section, element) => {
+	let current = element.parentElement;
+
+	while (current && current !== section) {
+		if (current.hidden) {
+			return true;
+		}
+
+		current = current.parentElement;
+	}
+
+	return false;
+};
+
 const sectionHasVisibleContent = (section) => {
 	const contentNodes = Array.from(
 		section.querySelectorAll("[data-proof-content], [data-proof-evidence]"),
-	).filter((element) => !element.hidden);
+	).filter(
+		(element) =>
+			!element.hidden && !hasHiddenAncestorWithinSection(section, element),
+	);
 
 	if (contentNodes.length === 0) {
 		return false;
@@ -41,6 +70,7 @@ const sectionHasVisibleContent = (section) => {
 
 const syncProofSections = (root = document) => {
 	syncEvidenceLinks(root);
+	syncSupportedProofBlocks(root);
 
 	root.querySelectorAll("[data-proof-section]").forEach((section) => {
 		if (section.getAttribute("data-proof-required") === "always") {
@@ -66,10 +96,13 @@ initVerificationPage();
 if (typeof module !== "undefined") {
 	module.exports = {
 		hasApprovedEvidence,
+		hasHiddenAncestorWithinSection,
+		hasRequiredEvidence,
 		hasMeaningfulContent,
 		initVerificationPage,
 		sectionHasVisibleContent,
 		syncEvidenceLinks,
+		syncSupportedProofBlocks,
 		syncProofSections,
 	};
 }

@@ -234,6 +234,7 @@ const translations = {
 		"verification.fact1Title": "Serialized unit record",
 		"verification.fact1Body":
 			"The unit has a published proof record inside the brand proof layer.",
+		"verification.fact1Evidence": "Supporting case note",
 		"verification.fact2Source": "Source: brand",
 		"verification.fact2Title": "Product line",
 		"verification.fact2Body":
@@ -248,6 +249,52 @@ const translations = {
 		"verification.cta": "Talk about proof for your product",
 		"verification.ctaAria":
 			"Go to contact page to talk about proof for your product",
+		"verification.supportTitle": "Supported evidence",
+		"verification.supportLabel": "Supports: Serialized unit record",
+		"verification.supportBody":
+			"This public note explains how the proof record is presented on the brand side of the genu.mark contour.",
+		"verification.supportLink": "Read the public case note",
+		"verification.unsupportedLabel": "Suppressed without support",
+		"verification.unsupportedBody":
+			"Example sustainability or trust claims stay hidden when the required public evidence is missing.",
+		"verification.unsupportedLink": "Missing evidence",
+		"verificationNoData.eyebrow": "No-data proof example",
+		"verificationNoData.title": "No public proof is available for this code.",
+		"verificationNoData.lead":
+			"This page shows the neutral no-data result inside genu.mark. It is not a live lookup, and it is not an official state check.",
+		"verificationNoData.resultEyebrow": "Result",
+		"verificationNoData.resultTitle":
+			"No public proof is available in genu.im for this example code.",
+		"verificationNoData.resultBadge": "No public proof",
+		"verificationNoData.resultBody":
+			"This can mean the code has no public proof in this view, or that the code was entered incorrectly. The page stays neutral and does not make authenticity, legality, or state-status claims.",
+		"verificationNoData.codeLabel": "Example code",
+		"verificationNoData.boundaryLabel": "Trust boundary",
+		"verificationNoData.boundaryValue":
+			"genu.mark can publish brand proof. Official state checks stay in Diia.",
+		"verificationNoData.availableTitle":
+			"When public proof exists, this surface can show:",
+		"verificationNoData.available1": "Status or result label",
+		"verificationNoData.available2":
+			"Source-labeled facts from genu.mark, the brand, or approved documents",
+		"verificationNoData.available3": "Product or category details",
+		"verificationNoData.available4":
+			"Source disclosure such as origin and timestamp",
+		"verificationNoData.available5":
+			"Evidence links only when approved public support exists",
+		"verificationNoData.nextStepTitle": "Choose the right next step",
+		"verificationNoData.diiaEyebrow": "Official checking",
+		"verificationNoData.diiaTitle": "Use Diia for the official state check",
+		"verificationNoData.diiaBody":
+			"genu.im is a brand proof layer, not an official check. Open Diia in a new tab if you need the state verification path.",
+		"verificationNoData.diiaAria":
+			"Open Diia for official checking in a new tab",
+		"verificationNoData.businessEyebrow": "Business next step",
+		"verificationNoData.businessTitle": "Talk about proof for your product",
+		"verificationNoData.businessBody":
+			"Use the contact page if you want a branded proof experience for your own marked products.",
+		"verificationNoData.businessAria":
+			"Go to contact page to discuss product proof",
 		"knowledge.eyebrow": "Knowledge",
 		"knowledge.title": "Guides and articles will live here.",
 		"knowledge.lead":
@@ -554,6 +601,7 @@ const translations = {
 		"verification.fact1Title": "Запис одиниці з унікальним кодом",
 		"verification.fact1Body":
 			"Для цієї одиниці опубліковано запис у шарі доказу бренду.",
+		"verification.fact1Evidence": "Нотатка з публічним підтвердженням",
 		"verification.fact2Source": "Джерело: бренд",
 		"verification.fact2Title": "Лінійка продукту",
 		"verification.fact2Body":
@@ -568,6 +616,54 @@ const translations = {
 		"verification.cta": "Обговорити доказ для свого продукту",
 		"verification.ctaAria":
 			"Перейти на сторінку контактів і обговорити доказ для свого продукту",
+		"verification.supportTitle": "Підтверджені джерела",
+		"verification.supportLabel":
+			"Підтверджує: запис одиниці з унікальним кодом",
+		"verification.supportBody":
+			"Ця публічна нотатка пояснює, як запис-доказ показується у брендовому контурі genu.mark.",
+		"verification.supportLink": "Відкрити публічну нотатку",
+		"verification.unsupportedLabel": "Приховано без підтвердження",
+		"verification.unsupportedBody":
+			"Приклади заяв про сталий розвиток або подібних довірчих тверджень залишаються прихованими, якщо немає потрібного публічного підтвердження.",
+		"verification.unsupportedLink": "Підтвердження відсутнє",
+		"verificationNoData.eyebrow": "Приклад без публічних даних",
+		"verificationNoData.title": "Для цього коду немає публічного доказу.",
+		"verificationNoData.lead":
+			"Ця сторінка показує нейтральний no-data результат у контурі genu.mark. Це не живий пошук і не офіційна державна перевірка.",
+		"verificationNoData.resultEyebrow": "Результат",
+		"verificationNoData.resultTitle":
+			"У genu.im немає публічного доказу для цього прикладного коду.",
+		"verificationNoData.resultBadge": "Публічний доказ відсутній",
+		"verificationNoData.resultBody":
+			"Це може означати, що для цього коду немає публічного доказу в цьому перегляді або код введено неправильно. Сторінка зберігає нейтральний тон і не робить заяв про справжність, законність чи державний статус.",
+		"verificationNoData.codeLabel": "Приклад коду",
+		"verificationNoData.boundaryLabel": "Межа довіри",
+		"verificationNoData.boundaryValue":
+			"genu.mark може публікувати брендовий доказ. Офіційна державна перевірка залишається в Дії.",
+		"verificationNoData.availableTitle":
+			"Коли публічний доказ існує, ця сторінка може показувати:",
+		"verificationNoData.available1": "Статус або позначку результату",
+		"verificationNoData.available2":
+			"Факти з позначеним джерелом з genu.mark, бренду або дозволених документів",
+		"verificationNoData.available3": "Відомості про продукт або категорію",
+		"verificationNoData.available4":
+			"Розкриття джерела, наприклад походження та час оновлення",
+		"verificationNoData.available5":
+			"Посилання на підтвердження лише тоді, коли існує дозволена публічна опора",
+		"verificationNoData.nextStepTitle": "Оберіть правильний наступний крок",
+		"verificationNoData.diiaEyebrow": "Офіційна перевірка",
+		"verificationNoData.diiaTitle":
+			"Використайте Дію для офіційної державної перевірки",
+		"verificationNoData.diiaBody":
+			"genu.im — це шар брендового доказу, а не офіційна перевірка. Відкрийте Дію в новій вкладці, якщо вам потрібен державний шлях перевірки.",
+		"verificationNoData.diiaAria":
+			"Відкрити Дію для офіційної перевірки в новій вкладці",
+		"verificationNoData.businessEyebrow": "Бізнес-наступний крок",
+		"verificationNoData.businessTitle": "Обговорити доказ для свого продукту",
+		"verificationNoData.businessBody":
+			"Перейдіть на сторінку контактів, якщо хочете публічний брендовий доказ для власних маркованих товарів.",
+		"verificationNoData.businessAria":
+			"Перейти на сторінку контактів і обговорити доказ продукту",
 		"knowledge.eyebrow": "База знань",
 		"knowledge.title": "Тут з'являться гіди та статті.",
 		"knowledge.lead":

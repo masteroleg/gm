@@ -57,6 +57,45 @@ describe("verification page controller", () => {
 		expect(document.querySelector("[data-proof-section]").hidden).toBe(false);
 	});
 
+	test("hides blocks that require evidence when support is missing", () => {
+		document.body.innerHTML = `
+			<main data-proof-page>
+				<section data-proof-section>
+					<div data-proof-requires-evidence>
+						<p data-proof-content>Unsupported sustainability claim</p>
+						<a data-proof-evidence href=""> </a>
+					</div>
+				</section>
+			</main>
+		`;
+
+		loadModule();
+
+		expect(
+			document.querySelector("[data-proof-requires-evidence]").hidden,
+		).toBe(true);
+		expect(document.querySelector("[data-proof-section]").hidden).toBe(true);
+	});
+
+	test("keeps blocks that require evidence visible when support exists", () => {
+		document.body.innerHTML = `
+			<main data-proof-page>
+				<section data-proof-section data-proof-required="always">
+					<div data-proof-requires-evidence>
+						<p data-proof-content>Supported public claim</p>
+						<a data-proof-evidence href="/proof-cases/">Public support</a>
+					</div>
+				</section>
+			</main>
+		`;
+
+		loadModule();
+
+		expect(
+			document.querySelector("[data-proof-requires-evidence]").hidden,
+		).toBe(false);
+	});
+
 	test("hides invalid evidence links and the empty parent section", () => {
 		document.body.innerHTML = `
 			<main data-proof-page>

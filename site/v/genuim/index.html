@@ -48,7 +48,7 @@
 	</script>
 	<link rel="icon" href="../../assets/favicon/favicon.ico" />
 	<link rel="apple-touch-icon" href="../../assets/favicon/apple-touch-icon.png" />
-	<link href="../../assets/css/output.css?v=17" rel="stylesheet" />
+	<link href="../../assets/css/output.css?v=18" rel="stylesheet" />
 </head>
 
 <body class="site-body">
@@ -115,6 +115,7 @@
 							<span class="proof-source-pill" data-i18n="verification.fact1Source">Source: genu.mark</span>
 							<h3 class="proof-fact__title" data-i18n="verification.fact1Title">Serialized unit record</h3>
 							<p class="proof-fact__body" data-i18n="verification.fact1Body">The unit has a published proof record inside the brand proof layer.</p>
+							<a href="/proof-cases/" class="proof-evidence-link" data-proof-evidence data-i18n="verification.fact1Evidence">Supporting case note</a>
 						</li>
 						<li class="proof-fact" data-proof-content>
 							<span class="proof-source-pill" data-i18n="verification.fact2Source">Source: brand</span>
@@ -127,6 +128,23 @@
 							<p class="proof-fact__body" data-i18n="verification.fact3Body">This sample item is shown as a static proof example for Phase 1.</p>
 						</li>
 					</ul>
+				</section>
+
+				<section class="proof-support-panel" data-proof-section>
+					<h2 class="proof-facts-panel__title" data-i18n="verification.supportTitle">Supported evidence</h2>
+					<div class="proof-support-item" data-proof-requires-evidence>
+						<p class="proof-support-item__label" data-i18n="verification.supportLabel">Supports: Serialized unit record</p>
+						<p class="proof-support-item__body" data-i18n="verification.supportBody" data-proof-content>This public note explains how the proof record is presented on the brand side of the genu.mark contour.</p>
+						<a href="/proof-cases/" class="proof-evidence-link" data-proof-evidence data-i18n="verification.supportLink">Read the public case note</a>
+					</div>
+				</section>
+
+				<section class="proof-support-panel" hidden>
+					<div class="proof-support-item" data-proof-requires-evidence>
+						<p class="proof-support-item__label" data-i18n="verification.unsupportedLabel">Suppressed without support</p>
+						<p class="proof-support-item__body" data-i18n="verification.unsupportedBody" data-proof-content>Example sustainability or trust claims stay hidden when the required public evidence is missing.</p>
+						<a href="" class="proof-evidence-link" data-proof-evidence data-i18n="verification.unsupportedLink">Missing evidence</a>
+					</div>
 				</section>
 
 				<section class="proof-next-step" data-proof-section data-proof-required="always">

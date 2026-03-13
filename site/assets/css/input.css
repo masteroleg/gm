@@ -3026,6 +3026,12 @@
 		color: var(--color-brand-bright);
 	}
 
+	.proof-status-badge--neutral {
+		border-color: --alpha(var(--color-heading) / 12%);
+		background: --alpha(var(--color-heading) / 7%);
+		color: var(--color-heading);
+	}
+
 	.proof-result-card__body,
 	.proof-next-step__body,
 	.proof-fact__body {
@@ -3090,6 +3096,125 @@
 		border-radius: var(--radius-pill);
 		border: 1px solid --alpha(var(--color-heading) / 8%);
 		background: --alpha(var(--color-heading) / 5%);
+	}
+
+	.proof-evidence-link {
+		display: inline-flex;
+		justify-self: start;
+		align-items: center;
+		min-height: 2rem;
+		padding-inline: 0.8rem;
+		border-radius: var(--radius-pill);
+		border: 1px solid --alpha(var(--color-brand) / 18%);
+		background: --alpha(var(--color-brand) / 10%);
+		color: var(--color-brand-deep);
+		font-size: 0.82rem;
+		font-weight: 600;
+		line-height: 1.4;
+		text-decoration: none;
+	}
+
+	.proof-evidence-link:hover,
+	.proof-evidence-link:focus-visible {
+		background: --alpha(var(--color-brand) / 15%);
+	}
+
+	.dark .proof-evidence-link {
+		color: var(--color-brand-bright);
+	}
+
+	.proof-support-panel,
+	.proof-actions-panel {
+		display: grid;
+		gap: var(--space-md);
+		padding: var(--space-lg);
+		border: var(--border-subtle);
+		border-radius: var(--radius-card-sm);
+		background: linear-gradient(
+			180deg,
+			--alpha(var(--color-panel) / 88%) 0%,
+			--alpha(var(--color-paper) / 72%) 100%
+		);
+	}
+
+	.proof-support-item {
+		display: grid;
+		gap: 0.85rem;
+		padding: 1rem;
+		border-radius: 1rem;
+		border: 1px solid --alpha(var(--color-heading) / 7%);
+		background: --alpha(var(--color-panel) / 68%);
+	}
+
+	.proof-support-item__label,
+	.proof-action-card__eyebrow {
+		color: var(--color-muted);
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.proof-support-item__body,
+	.proof-action-card__body,
+	.proof-guidance-list li {
+		color: var(--color-body);
+		font-size: 0.95rem;
+		line-height: 1.65;
+		text-wrap: pretty;
+	}
+
+	.proof-guidance-list {
+		display: grid;
+		gap: 0.8rem;
+		padding-left: 1.2rem;
+	}
+
+	.proof-guidance-list li::marker {
+		color: var(--color-brand);
+	}
+
+	.proof-actions-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: var(--space-md);
+	}
+
+	.proof-action-card {
+		display: grid;
+		gap: 0.7rem;
+		padding: 1rem;
+		border-radius: 1rem;
+		border: 1px solid --alpha(var(--color-heading) / 8%);
+		background: --alpha(var(--color-panel) / 68%);
+		text-decoration: none;
+	}
+
+	.proof-action-card__title {
+		color: var(--color-heading);
+		font-family: var(--font-display);
+		font-size: 1.05rem;
+		font-weight: 700;
+		line-height: 1.18;
+		letter-spacing: -0.02em;
+		text-wrap: balance;
+	}
+
+	.proof-action-card--external {
+		border-color: --alpha(var(--color-warm) / 18%);
+	}
+
+	.proof-action-card--business {
+		border-color: --alpha(var(--color-brand) / 16%);
+	}
+
+	.proof-action-card:hover,
+	.proof-action-card:focus-visible {
+		transform: translateY(-1px);
+	}
+
+	[hidden] {
+		display: none !important;
 	}
 
 	.verification-page__back {
@@ -3385,7 +3510,8 @@
 		}
 
 		.proof-meta-grid,
-		.proof-facts-list {
+		.proof-facts-list,
+		.proof-actions-grid {
 			grid-template-columns: 1fr;
 		}
 
