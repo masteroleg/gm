@@ -55,12 +55,12 @@ development_status:
   2-4-show-only-supported-proof-content: done
   epic-2-retrospective: done
 
-  epic-3: in-progress
+  epic-3: done
   3-1-guide-official-checks-to-diia: done
   3-2-show-the-right-business-next-step: done
   3-3-send-a-qualified-request: done
   3-4-attach-scenario-and-source-details: done
-  epic-3-retrospective: optional
+  epic-3-retrospective: done
 
   epic-4: backlog
   4-1-track-movement-from-homepage-to-proof: backlog
