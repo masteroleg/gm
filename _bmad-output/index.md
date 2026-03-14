@@ -18,8 +18,12 @@ BMAD artifacts (deduplicated) for genu.im.
 - **[3-2-show-the-right-business-next-step.md](_bmad-output/implementation-artifacts/3-2-show-the-right-business-next-step.md)** - Story 3.2: Show the Right Business Next Step
 - **[3-3-send-a-qualified-request.md](_bmad-output/implementation-artifacts/3-3-send-a-qualified-request.md)** - Story 3.3: Send a Qualified Request
 - **[3-4-attach-scenario-and-source-details.md](_bmad-output/implementation-artifacts/3-4-attach-scenario-and-source-details.md)** - Story 3.4: Attach Scenario and Source Details
+- **[4-1-track-movement-from-homepage-to-proof.md](_bmad-output/implementation-artifacts/4-1-track-movement-from-homepage-to-proof.md)** - Story 4.1: Track Movement from Homepage to Proof
+- **[4-2-track-requests-by-scenario-and-source.md](_bmad-output/implementation-artifacts/4-2-track-requests-by-scenario-and-source.md)** - Story 4.2: Track Requests by Scenario and Source
+- **[4-3-review-the-proof-first-funnel.md](_bmad-output/implementation-artifacts/4-3-review-the-proof-first-funnel.md)** - Story 4.3: Review the Proof-First Funnel
 - **[epic-1-dev-handoff.md](_bmad-output/implementation-artifacts/epic-1-dev-handoff.md)** - Epic 1 Dev Handoff
 - **[epic-2-retrospective.md](_bmad-output/implementation-artifacts/epic-2-retrospective.md)** - Epic 2 Retrospective: Public Proof Experience
+- **[epic-3-retro-2026-03-14.md](_bmad-output/implementation-artifacts/epic-3-retro-2026-03-14.md)** - Ретроспектива Epic 3: Audience Routing and Qualified Conversion
 - **[README.md](_bmad-output/implementation-artifacts/genu-im-baseline/README.md)** - genu.im baseline capture
 - **[index.md](_bmad-output/implementation-artifacts/index.md)** - Directory Index: _bmad-output/implementation-artifacts
 - **[tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md](_bmad-output/implementation-artifacts/tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md)** - ---
