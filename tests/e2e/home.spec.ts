@@ -32,10 +32,36 @@ test("@smoke GM landing page primary CTA links to /v/genuim", async ({
 	await page.goto(new URL("/", baseURL ?? "http://localhost:3000").toString());
 	await page.waitForLoadState("domcontentloaded");
 
-	// Primary CTA in hero must navigate to canonical proof path (AC: 3)
+	// Primary CTA in hero must navigate to canonical proof path with UTM params (AC: 3)
 	const primaryCta = page.locator(".hero-actions .cta-button").first();
 	await expect(primaryCta).toBeVisible();
-	await expect(primaryCta).toHaveAttribute("href", "/v/genuim/");
+	await expect(primaryCta).toHaveAttribute(
+		"href",
+		"/v/genuim/?utm_source=homepage&utm_medium=hero_cta&utm_campaign=proof_entry",
+	);
+});
+
+test("@smoke GM hero CTA includes required UTM params for homepage-to-proof tracking", async ({
+	page,
+	baseURL,
+}) => {
+	await page.goto(new URL("/", baseURL ?? "http://localhost:3000").toString());
+	await page.waitForLoadState("domcontentloaded");
+
+	// Primary CTA href must contain all required UTM parameters (AC: 1, 2)
+	const primaryCta = page.locator(".hero-actions .cta-button").first();
+	const href = await primaryCta.getAttribute("href");
+
+	// Verify all three UTM params are present
+	expect(href).toContain("utm_source=homepage");
+	expect(href).toContain("utm_medium=hero_cta");
+	expect(href).toContain("utm_campaign=proof_entry");
+
+	// Verify UTM values are static and do not contain personal data or raw codes
+	expect(href).not.toContain("email");
+	expect(href).not.toContain("@");
+	expect(href).not.toContain("phone");
+	expect(href).not.toContain("code");
 });
 
 test("GM landing page first screen is usable at 360px width", async ({
