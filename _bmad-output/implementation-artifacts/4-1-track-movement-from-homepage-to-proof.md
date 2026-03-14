@@ -1,6 +1,6 @@
 # Story 4.1: Track Movement from Homepage to Proof
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -284,6 +284,60 @@ anthropic/claude-haiku-4-5
 - `site/index.html` — Updated line 164: added UTM params to hero CTA href
 - `tests/e2e/home.spec.ts` — Updated line 38: modified exact href assertion to include UTM params; Added lines 44-66: new @smoke test for UTM params verification
 
+## Senior Developer Review (AI)
+
+**Reviewer:** Dev Agent (anthropic/claude-sonnet-4-6)
+**Date:** 2026-03-14
+**Verdict:** ✅ APPROVED — Story 4.1 passes code review. No blocking or should-fix issues found.
+
+### Review Summary
+
+**BLOCKING:** 0
+**SHOULD-FIX:** 0
+**NON-BLOCKING (informational):** 2
+
+**Scope separation note:** A separate baseline regression hotfix (`da64873`) restoring the `/perevir-product/` official routing card was applied before Story 4.1 resumed. That hotfix is explicitly outside Story 4.1 scope and was not reviewed as part of this story.
+
+### AC Validation
+
+- **AC #1** (movement captured, distinguishable): `site/index.html:164` — exact UTM params applied, verified by exact-match smoke test. ✅
+- **AC #2** (no PII/raw codes): All three UTM values are static predefined labels. Privacy compliance verified by smoke test assertions and AC confirmed by privacy table in Dev Notes. ✅
+- **AC #3** (failure-safe): Passive `href` attribute — cannot throw, cannot block navigation. No JS dependency. ✅
+
+### Task Audit
+
+All tasks marked `[x]` confirmed implemented. Evidence:
+- `site/index.html:164` — exact URL `/v/genuim/?utm_source=homepage&utm_medium=hero_cta&utm_campaign=proof_entry` ✅
+- `tests/e2e/home.spec.ts:38-41` — updated exact-match assertion ✅
+- `tests/e2e/home.spec.ts:44-65` — new @smoke UTM params test ✅
+- Smoke desktop: 41/41 verified live ✅
+- Smoke mobile: 42/42 verified live ✅
+
+### Epic 4 Boundary Compliance
+
+| Forbidden item | Status |
+|---|---|
+| Analytics script tag (GA, Plausible) | None added ✅ |
+| JS tracking events (`gtag()` etc.) | None added ✅ |
+| Backend ingestion / telemetry | None ✅ |
+| Live dashboard | None ✅ |
+| PII or raw codes in UTM values | None ✅ |
+| Changes to non-scope files | None (lang-toggle.js, input.css, output.css, request-form.js, site/v/index.html untouched) ✅ |
+
+### Quality Checks
+
+- Lint: 1 pre-existing warning in `scripts/generate-commit-msg.cjs:825` — unrelated to Story 4.1, pre-documented. ✅
+- Typecheck: clean. ✅
+- File List accuracy: exact — only `site/index.html` and `tests/e2e/home.spec.ts`. ✅
+- Sprint-status consistency: `4-1-track-movement-from-homepage-to-proof: review` matched story status at review time. ✅
+
+### Informational Notes (non-blocking, no action required)
+
+1. **Commit message historical note:** Story 4.1 source changes (`site/index.html`, `tests/e2e/home.spec.ts`) were committed in `ce13f08` under the message `fix(/perevir-product): restore official routing card`. This does not reflect Story 4.1 work in `git log`. Git history rewrite is not warranted. Recorded here for future reference only.
+
+2. **PII assertions redundancy:** The four `not.toContain` checks in the new UTM test are logically superseded by the exact-match assertion in the first test. They serve as living documentation of the privacy contract and are harmless to keep.
+
 ## Change Log
 
 - 2026-03-14: Story 4.1 implemented — UTM params added to homepage hero CTA for homepage-to-proof tracking. Updated existing smoke test to assert new URL. Added new @smoke test verifying UTM params presence and privacy compliance. All smoke tests pass (41 desktop, 42 mobile). Lint and typecheck clean.
+- 2026-03-14: Code review complete — APPROVED. BLOCKING 0, SHOULD-FIX 0. Story status updated to done.

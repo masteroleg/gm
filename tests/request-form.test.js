@@ -883,3 +883,162 @@ describe("Request form — graceful degradation with missing metadata (Story 3.4
 		expect(() => captureMetadata()).not.toThrow();
 	});
 });
+
+// ── Story 4.2: Scenario label lookup (AC #1, #2) ──────────────────────────
+
+describe("Request form — scenario label lookup: getScenarioLabel (Story 4.2 AC #1, #2)", () => {
+	let getScenarioLabel, SCENARIO_LABELS;
+
+	beforeEach(() => {
+		jest.resetModules();
+		({
+			getScenarioLabel,
+			SCENARIO_LABELS,
+		} = require("../site/assets/js/request-form.js"));
+	});
+
+	test("getScenarioLabel returns display label for brand-proof", () => {
+		expect(getScenarioLabel("brand-proof")).toBe("Brand Proof Rollout");
+	});
+
+	test("getScenarioLabel returns display label for eaktsyz", () => {
+		expect(getScenarioLabel("eaktsyz")).toBe("eAktsyz Readiness");
+	});
+
+	test("getScenarioLabel returns raw value for unknown scenario", () => {
+		expect(getScenarioLabel("unknown-value")).toBe("unknown-value");
+	});
+
+	test("getScenarioLabel returns empty string for empty scenario — no throw", () => {
+		expect(getScenarioLabel("")).toBe("");
+	});
+
+	test("getScenarioLabel returns empty string for undefined — no throw", () => {
+		expect(getScenarioLabel(undefined)).toBe("");
+	});
+
+	test("SCENARIO_LABELS is exported and contains expected keys", () => {
+		expect(SCENARIO_LABELS).toHaveProperty(
+			"brand-proof",
+			"Brand Proof Rollout",
+		);
+		expect(SCENARIO_LABELS).toHaveProperty("eaktsyz", "eAktsyz Readiness");
+	});
+
+	test("NFR13: no SCENARIO_LABELS value starts with digits (excise code pattern guard)", () => {
+		for (const label of Object.values(SCENARIO_LABELS)) {
+			expect(label).not.toMatch(/^\d+/);
+		}
+	});
+
+	test("NFR13: all SCENARIO_LABELS values are non-empty descriptive text strings", () => {
+		for (const label of Object.values(SCENARIO_LABELS)) {
+			expect(typeof label).toBe("string");
+			expect(label.trim().length).toBeGreaterThan(0);
+		}
+	});
+});
+
+// ── Story 4.2: Review-readiness in mailto: body (AC #1, #2, #3) ──────────
+
+describe("Request form — review-readiness in mailto: body (Story 4.2 AC #1, #2, #3)", () => {
+	let buildMailtoUrl;
+
+	beforeEach(() => {
+		jest.resetModules();
+		({ buildMailtoUrl } = require("../site/assets/js/request-form.js"));
+	});
+
+	test("buildMailtoUrl Scenario line contains display label and raw value for brand-proof", () => {
+		const url = buildMailtoUrl({
+			contactName: "Alice",
+			contactEmail: "alice@example.com",
+			companyName: "ACME",
+			scenario: "brand-proof",
+			context: "Need proof rollout",
+		});
+		const decoded = decodeURIComponent(url);
+		expect(decoded).toContain("Brand Proof Rollout [brand-proof]");
+	});
+
+	test("buildMailtoUrl Scenario line contains display label and raw value for eaktsyz", () => {
+		const url = buildMailtoUrl({
+			contactName: "Alice",
+			contactEmail: "alice@example.com",
+			companyName: "ACME",
+			scenario: "eaktsyz",
+			context: "eAktsyz compliance check",
+		});
+		const decoded = decodeURIComponent(url);
+		expect(decoded).toContain("eAktsyz Readiness [eaktsyz]");
+	});
+
+	test("buildMailtoUrl subject line is unchanged — contains company and raw scenario", () => {
+		const url = buildMailtoUrl({
+			contactName: "Alice",
+			contactEmail: "alice@example.com",
+			companyName: "ACME",
+			scenario: "brand-proof",
+			context: "Some context",
+		});
+		const decoded = decodeURIComponent(url);
+		expect(decoded).toContain("genu.im request: ACME — brand-proof");
+	});
+
+	test("buildMailtoUrl with empty scenario — body produced, no crash, Scenario line graceful", () => {
+		const url = buildMailtoUrl({
+			contactName: "Alice",
+			contactEmail: "alice@example.com",
+			companyName: "ACME",
+			scenario: "",
+			context: "Some context",
+		});
+		expect(url).toMatch(/^mailto:/);
+		const decoded = decodeURIComponent(url);
+		// Must not throw and must produce a valid mailto URL
+		expect(decoded).toContain("hello@genu.im");
+		// Scenario line with empty values: "Scenario:  []"
+		expect(decoded).toContain("Scenario:");
+	});
+
+	test("buildMailtoUrl with empty source_path — Source line omitted (existing behavior)", () => {
+		const url = buildMailtoUrl({
+			contactName: "Alice",
+			contactEmail: "alice@example.com",
+			companyName: "ACME",
+			scenario: "brand-proof",
+			context: "Some context",
+			source_path: "",
+		});
+		const decoded = decodeURIComponent(url);
+		expect(decoded).not.toContain("Source:");
+	});
+
+	test("buildMailtoUrl with empty proof_path — Proof page line omitted (existing behavior)", () => {
+		const url = buildMailtoUrl({
+			contactName: "Alice",
+			contactEmail: "alice@example.com",
+			companyName: "ACME",
+			scenario: "brand-proof",
+			context: "Some context",
+			source_path: "/request/",
+			proof_path: "",
+		});
+		const decoded = decodeURIComponent(url);
+		expect(decoded).not.toContain("Proof page:");
+	});
+
+	test("buildMailtoUrl with all metadata empty — still returns valid mailto: URL", () => {
+		const url = buildMailtoUrl({
+			contactName: "Alice",
+			contactEmail: "alice@example.com",
+			companyName: "ACME",
+			scenario: "",
+			context: "Some context",
+			source_path: "",
+			proof_path: "",
+		});
+		expect(url).toMatch(/^mailto:/);
+		expect(url).toContain("hello@genu.im");
+	});
+});

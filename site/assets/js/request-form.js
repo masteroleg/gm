@@ -4,6 +4,22 @@
 
 const RECIPIENT = "hello@genu.im";
 
+// Scenario display labels for review-friendly email body.
+// Keys: option values from #scenario select in site/request/index.html.
+// Values: English display names for team-internal review emails.
+// Source: lang-toggle.js EN translations (request.scenario.*).
+const SCENARIO_LABELS = {
+	"brand-proof": "Brand Proof Rollout",
+	eaktsyz: "eAktsyz Readiness",
+};
+
+// Returns a human-readable label for the given scenario value.
+// Falls back to the raw value if not found — never throws, never returns undefined.
+const getScenarioLabel = (scenario) => {
+	if (!scenario) return scenario || "";
+	return SCENARIO_LABELS[scenario] || scenario;
+};
+
 // ── Email validation helper ────────────────────────────────────────────────
 // Accepts valid email OR non-empty phone-like string (starts with + or digit).
 // Rejects strings containing @ but malformed (e.g. "foo@").
@@ -65,7 +81,7 @@ const buildMailtoUrl = ({
 		`Contact: ${contactName}`,
 		`Email / Phone: ${contactEmail}`,
 		`Company: ${companyName}`,
-		`Scenario: ${scenario}`,
+		`Scenario: ${getScenarioLabel(scenario)} [${scenario}]`,
 		``,
 		`Context:`,
 		context,
@@ -303,8 +319,10 @@ if (typeof module !== "undefined") {
 	module.exports = {
 		buildMailtoUrl,
 		captureMetadata,
+		getScenarioLabel,
 		initRequestForm,
 		isValidContact,
+		SCENARIO_LABELS,
 		showConfirmation,
 		showFallback,
 		showFallbackWithMeta,
