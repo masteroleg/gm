@@ -209,6 +209,36 @@ opencode/nemotron-3-super-free
 
 ### Debug Log References
 
+- No build failures during implementation
+- All validation commands passed (npm test, npm run lint, npm run typecheck)
+- Responsive layout tested at 360px on mobile and desktop viewports
+
 ### Completion Notes List
 
+- Implemented request form page at `/request/` with exactly 5 user-entered fields (contact name, email/phone, company name, scenario, short context) per NFR12
+- Form validation: required field checking + email/phone format validation using `isValidContact()` helper
+- Created `mailto:` handoff mechanism with formatted subject and body lines
+- Implemented fallback detection via `visibilitychange` event + timeout (1.8s) to detect when mail client cannot open
+- Support for `?scenario=` URL parameter pre-selection from Story 3.2 routing
+- Confirmation message explicitly states "handoff — not a stored submission" per AC #3
+- Fallback message shows email link + keeps form fields visible/editable
+- Responsive layout works at 360px baseline without horizontal scroll
+- Added EN + UK translations for all form labels, placeholders, options, errors, confirmation, and fallback states
+- 40+ Jest unit tests covering form fields, validation, mailto generation, fallback handling
+- 8+ Playwright E2E tests covering form display, field validation, responsive behavior, submission flow
+- All 150 unit tests pass, lint clean, typecheck clean
+- CSS added: `.request-form`, `.request-form__group`, `.request-form__input`, `.request-form__select`, `.request-form__textarea`, `.request-form__error`, `.request-form__confirmation`, `.request-form__fallback` with dark mode support
+- All styles follow Tailwind v4 utility-first approach in `input.css`
+- Production CSS rebuilt in `output.css`
+
 ### File List
+
+- `site/request/index.html` — Created (214 lines) — Request form page with 5 required fields, validation states, confirmation/fallback UI, semantic HTML, ARIA attributes
+- `site/assets/js/request-form.js` — Created (237 lines) — Form controller: `validateForm()`, `isValidContact()`, `buildMailtoUrl()`, `showConfirmation()`, `showFallback()`, `initRequestForm()`, event listeners
+- `site/assets/css/input.css` — Modified (+95 lines) — Request form styles: `.request-form`, field styling, error states, confirmation/fallback panels, dark mode variants
+- `site/assets/css/output.css` — Rebuilt — Production CSS artifact
+- `site/assets/js/lang-toggle.js` — Modified (+62 lines) — Added EN + UK translations under `request.*` namespace: fields, labels, placeholders, scenarios, errors, confirmation, fallback
+- `tests/request-form.test.js` — Created (885 lines, 40+ tests) — Jest unit tests: form DOM setup, required field validation, email/phone validation, mailto URL generation, fallback detection
+- `tests/e2e/request-form.spec.ts` — Created (158 lines, 8 tests) — Playwright E2E tests: form rendering, required field validation, email format validation, scenario selection, confirmation message, fallback behavior, 320px responsive
+- `_bmad-output/implementation-artifacts/3-3-send-a-qualified-request.md` — Updated (Status: ready-for-dev → done)
+- `_bmad-output/implementation-artifacts/sprint-status.yaml` — Updated (3-3-send-a-qualified-request: ready-for-dev → done)

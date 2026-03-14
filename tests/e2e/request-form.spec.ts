@@ -137,9 +137,13 @@ test.describe("Request form — /request/", () => {
 		await page.locator("#scenario").selectOption("brand-proof");
 		await page.locator("#context").fill("Test context");
 
+		// Submit the form to trigger the mailto: handoff and fallback logic
+		await page.locator("[data-request-form] button[type='submit']").click();
+
 		// Verify the fallback element exists and has the email link
+		// Wait for fallback to appear (triggered after 1.8s timeout in triggerMailtoWithFallback)
 		const fallbackLink = page.locator('a[href="mailto:hello@genu.im"]');
-		await expect(fallbackLink).toBeVisible();
+		await expect(fallbackLink).toBeVisible({ timeout: 10000 });
 	});
 
 	test("confirmation text does not claim server submission", async ({

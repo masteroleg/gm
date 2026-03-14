@@ -417,7 +417,9 @@ const translations = {
 		"request.confirmation.text":
 			"Your mail client should now open with the details filled in. This is a handoff — not a stored submission.",
 		"request.fallback.text":
-			"Your mail client did not open. Your details are still visible below. To send your request, email us directly at",
+			"Your mail client did not open. To send your request, email us directly at",
+		"request.fallback.edit":
+			" You can also edit your details above and try again.",
 		"request.error.required": "This field is required.",
 		"request.error.emailInvalid":
 			"Enter a valid email address or phone number.",
@@ -845,7 +847,9 @@ const translations = {
 		"request.confirmation.text":
 			"Ваш поштовий клієнт має відкритися з готовими даними. Це ініціація передачі — не збережений запит.",
 		"request.fallback.text":
-			"Поштовий клієнт не відкрився. Ваші дані залишаються на екрані. Щоб надіслати запит, напишіть нам безпосередньо на",
+			"Поштовий клієнт не відкрився. Щоб надіслати запит, напишіть нам безпосередньо на",
+		"request.fallback.edit":
+			" Ви також можете відредагувати свої дані вище та спробувати ще раз.",
 		"request.error.required": "Це поле обов'язкове.",
 		"request.error.emailInvalid":
 			"Введіть дійсну електронну адресу або номер телефону.",

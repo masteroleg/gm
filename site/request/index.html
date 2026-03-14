@@ -181,10 +181,12 @@
 
 				<div class="request-form__fallback" id="requestFallback" hidden data-request-fallback>
 					<p class="request-form__fallback-text">
-						<span data-i18n="request.fallback.text">Your mail client did not open. Your details are still visible below. To send your request, email us directly at</span>
+						<span data-i18n="request.fallback.text">Your mail client did not open. To send your request, email us directly at</span>
 						<a href="mailto:hello@genu.im" class="info-link">hello@genu.im</a>.
+						<span data-i18n="request.fallback.edit"> You can also edit your details above and try again.</span>
 					</p>
-					<p class="request-form__fallback-meta" id="requestFallbackMeta" hidden data-request-fallback-meta></p>
+					<p class="request-form__fallback-meta" id="requestFallbackMeta" hidden data-request-fallback-meta 
+					   role="region" aria-live="polite" aria-label="Request details"></p>
 				</div>
 				</div>
 

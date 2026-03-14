@@ -1,6 +1,6 @@
 # Story 3.4: Attach Scenario and Source Details
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -200,6 +200,7 @@ anthropic/claude-sonnet-4-6
 
 - Pre-existing regression in `business-next-step.test.js`: missing `routing.official.*` and `routing.business.*` UK translations from Story 3.2. Fixed as part of this story since it blocked full suite green.
 - JSDOM `window.location` cannot be reassigned directly; `captureMetadata` accepts optional `_loc` parameter for testability.
+- Code review identified E2E test timing issue for fallback visibility - fixed by adding proper wait timeout and form submission trigger.
 
 ### Completion Notes List
 
@@ -212,7 +213,8 @@ anthropic/claude-sonnet-4-6
 - Fixed pre-existing regression: added `routing.official.*` and `routing.business.*` UK translations to `lang-toggle.js`.
 - All exports: `buildMailtoUrl`, `captureMetadata`, `initRequestForm`, `isValidContact`, `showConfirmation`, `showFallback`, `showFallbackWithMeta`, `validateForm`.
 - Unit tests: 25 new tests across 4 describe blocks. Total suite: 150 tests, all green.
-- E2E smoke tests: 4 new tests added to `request-form.spec.ts`. All 40 smoke tests pass.
+- E2E smoke tests: 4 new tests added to `request-form.spec.ts`. All 41 smoke tests pass.
+- Code review fix: Updated E2E test "fallback link is present in fallback message" to properly wait for fallback appearance after form submission and increased timeout to accommodate 1.8s delay.
 
 ### File List
 
@@ -220,8 +222,9 @@ anthropic/claude-sonnet-4-6
 - `site/assets/js/lang-toggle.js` — added UK translations for `routing.official.*` and `routing.business.*`
 - `site/request/index.html` — added `data-request-fallback-meta` element in fallback section
 - `tests/request-form.test.js` — added 25 new unit tests for Story 3.4 metadata features
-- `tests/e2e/request-form.spec.ts` — added 4 new E2E smoke tests for Story 3.4
+- `tests/e2e/request-form.spec.ts` — added 4 new E2E smoke tests for Story 3.4 (1 fixed during code review)
 
 ## Change Log
 
 - 2026-03-14: Story 3.4 implemented — metadata capture and attachment to mailto: handoff, fallback meta display, graceful degradation. Pre-existing routing UK translation regression also fixed.
+- 2026-03-14: Code review fixes — updated E2E test for fallback link visibility to properly handle timeout behavior and added missing form submission trigger.
