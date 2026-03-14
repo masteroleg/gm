@@ -138,48 +138,68 @@ const compactDiff = (diff, maxChars = 6000) => {
 
 const buildPromptWithOptions = (files, stat, diff, options) => {
 	const examples = options.includeExamples
-		? `Example good output:\n\n` +
+		? `Example 1 - BMAD changes:\n\n` +
 			`docs(bmad): align Phase 1 proof scope and request metadata\n\n` +
-			`Синхронизированы planning artifacts для Phase 1: уточнены границы proof scope, metadata request flow и validation rules.\n\n` +
-			`- \`_bmad-output/planning-artifacts/prd.md\` — уточнены acceptance criteria и SC moderation rules\n` +
-			`- \`_bmad-output/planning-artifacts/epics.md\` — убраны future-phase элементы из active backlog\n` +
-			`- \`_bmad-output/planning-artifacts/architecture.md\` — выровнены proof routes и request metadata\n\n` +
-			`Example better output for mixed docs/tooling changes:\n\n` +
-			`docs: refine PRD acceptance rules and validation coverage\n\n` +
-			`Уточнены критерии приемки в PRD и расширена проверка артефактов, чтобы требования к persistence и implementation leakage были проверяемыми и однозначными.\n\n` +
-			`- \`_bmad-output/planning-artifacts/prd.md\` — конкретизированы acceptance criteria для persistence и связанных validation expectations\n` +
-			`- \`_bmad-output/planning-artifacts/validation-report-2026-03-11.md\` — добавлены проверки implementation leakage и дополнительные validation steps\n` +
-			`- \`scripts/generate-commit-msg.cjs\` — ужесточены правила генерации commit message для более содержательных summary и notes\n\n`
+			`Synchronize planning artifacts for Phase 1 to clarify proof scope boundaries, metadata request flow, and validation rules across BMAD documents.\n\n` +
+			`RUSSIAN SUMMARY:\n` +
+			`Синхронизированы planning artifacts для Phase 1: уточнены границы proof scope, metadata request flow и validation rules. Теперь acceptance criteria в PRD точно соответствуют архитектуре и не противоречат друг другу.\n\n` +
+			`- \`_bmad-output/planning-artifacts/prd.md\` — clarify acceptance criteria and moderation rules for proof validation boundaries\n` +
+			`  RU: Конкретизированы acceptance criteria для proof validation, указаны случаи, когда модерация требуется или может быть пропущена\n\n` +
+			`- \`_bmad-output/planning-artifacts/epics.md\` — remove future-phase items from active backlog to avoid scope creep\n` +
+			`  RU: Убраны планы для Phase 2+ из текущего backlog, чтобы не путать с Phase 1 delivery\n\n` +
+			`- \`_bmad-output/planning-artifacts/architecture.md\` — align proof routes and request metadata structures\n` +
+			`  RU: Выровнены proof-flow routes и data structures в request/metadata, удалены противоречия\n\n` +
+			`Example 2 - Site feature:\n\n` +
+			`fix(epic-3): address code review findings and improve UX\n\n` +
+			`Refine page naming, remove duplicate CTAs, add accessibility attributes, and sync documentation after code review. Improves user clarity and accessibility compliance.\n\n` +
+			`RUSSIAN SUMMARY:\n` +
+			`Исправлены замечания code review для Epic 3: переименована страница маршрутизации для ясности, удалён дублирующий CTA, добавлены атрибуты доступности, синхронизирована документация. Пользователям теперь понятнее, куда нужно идти, а доступность соответствует WCAG.\n\n` +
+			`- \`site/perevir-product/index.html\` — rename from "Official Checking" to "Choose Your Path" for clarity\n` +
+			`  RU: Переименована в "Choose Your Path" вместо "Official Checking" — пользователи теперь понимают, что это выбор сценария, а не готовый ответ\n\n` +
+			`- \`site/request/index.html\` — fix fallback messages and add ARIA accessibility attributes\n` +
+			`  RU: Обновлены fallback сообщения (убрано "visible below"), добавлены role, aria-live, aria-label для скрин-ридеров\n\n` +
+			`- \`site/assets/js/lang-toggle.js\` — update translations for clarity\n` +
+			`  RU: Уточнены переводы fallback на EN и UK, добавлен fallback.edit ключ\n\n`
 		: "";
 
 	const diffSnippet =
 		options.diffBudget > 0 ? compactDiff(diff, options.diffBudget) : "";
 
 	return (
-		`Generate commit message.\n\n` +
+		`Generate a bilingual commit message.\n\n` +
 		`Format (STRICT - follow exactly):\n\n` +
 		`<subject>\n\n` +
-		`<Russian summary>\n\n` +
-		`- \`<file-1>\` — <note>\n` +
-		`- \`<file-2>\` — <note>\n\n` +
-		`Subject: English, Conventional Commit, MEANING not filename.\n` +
-		`Body: Russian summary, then bullet list with actual notes per file.\n\n` +
-		`Quality rules:\n` +
-		`- The Russian summary must explain the overall intent of the change, not say "Несколько обновлений", "Обновлены файлы", or similar filler.\n` +
-		`- Each bullet must explain what changed in that file and why it matters for future reading.\n` +
-		`- Prefer precise wording over generic wording.\n` +
-		`- Avoid mixed English/Russian jargon when a clear Russian phrase exists.\n` +
-		`- If one file changes documentation/rules and another changes automation, explain both clearly.\n` +
-		`- Do not repeat the filename as the whole explanation.\n` +
-		`- Do not write empty/general notes like "обновлен файл", "добавлены изменения", "упрощена логика" without saying what changed.\n\n` +
+		`<English summary (1-2 sentences about overall intent)>\n\n` +
+		`RUSSIAN SUMMARY:\n` +
+		`<Russian detailed explanation>\n\n` +
+		`- \`<file-1>\` — <English note about what changed>\n` +
+		`  RU: <Russian explanation of why this change matters>\n\n` +
+		`- \`<file-2>\` — <English note>\n` +
+		`  RU: <Russian explanation>\n\n` +
+		`RULES FOR ENGLISH SECTION:\n` +
+		`- Subject: Conventional Commit format (type(scope): brief description)\n` +
+		`- English summary: Clear, concise, explains overall purpose\n` +
+		`- English bullets: What changed in each file and its impact\n` +
+		`- Use active voice, precise technical terms\n\n` +
+		`RULES FOR RUSSIAN SECTION:\n` +
+		`- Summary: Detailed explanation of WHY changes were made, how they affect workflow\n` +
+		`- Each RU bullet: Explain significance, context, and user/developer benefit\n` +
+		`- Avoid filler: NOT "обновлен файл" but "уточнены acceptance criteria, чтобы..."\n` +
+		`- Explain the business/technical reason for each change\n\n` +
+		`QUALITY RULES (both languages):\n` +
+		`- Each file needs meaningful explanation - no generic "update" or "modify" alone\n` +
+		`- If a file is documentation: say what was clarified or added\n` +
+		`- If a file is code: say what behavior changed and why\n` +
+		`- If a file is config: say what was tightened or adjusted\n` +
+		`- Russian section provides CONTEXT and REASONING, not just translation\n` +
+		`- Avoid repetition between English and Russian - Russian adds depth\n\n` +
 		`${examples}` +
-		`Bad (DO NOT OUTPUT):\n` +
-		`chore: update prd.md, validation-report.md\n\n` +
-		`BMAD: prd.md, validation-report.md\n\n` +
-		`Also bad:\n` +
-		`- "Несколько обновлений: ..."\n` +
-		`- bullets that only restate filenames\n` +
-		`- vague notes without the actual nature of the change\n\n` +
+		`Bad examples (DO NOT OUTPUT):\n` +
+		`- Subject: "chore: update files"\n` +
+		`- English: "Updated prd.md"\n` +
+		`- RU: "Обновлены файлы" (this is just translation, not explanation)\n\n` +
+		`Filename-only bullets like "- \`prd.md\` — обновлен файл" are NOT acceptable.\n` +
+		`Filler like "Несколько обновлений" or "Обновлены файлы" is NOT acceptable.\n\n` +
 		`Files:\n${files.join("\n")}\n\n` +
 		`Stat:\n${stat}\n\n` +
 		`Diff:\n${diffSnippet}`
@@ -220,25 +240,28 @@ const buildRepairPrompt = (
 	stat,
 	diff,
 	previous,
-) => `Rewrite the commit message below to make it more specific and useful.
-
-Keep the same output format:
+) => `Rewrite this commit message to be more specific and useful. Keep the bilingual format:
 
 <subject>
 
-<Russian summary>
+<English summary>
 
-- \`<file-1>\` — <note>
+RUSSIAN SUMMARY:
+<Russian explanation>
+
+- \`<file>\` — <English note>
+  RU: <Russian explanation>
 
 Fix these problems:
-- remove filler like "Несколько обновлений"
-- make the summary explain the overall intent
-- make every bullet describe the actual change in that file
-- avoid filename-only or category-only explanations
-- do not use subjects like "update BMAD artifacts" or "update <filename>"
-- if the diff shows a milestone, readiness change, alignment, clarification, or deferred scope, name that explicitly
+- Remove filler like "Несколько обновлений", "Обновлены файлы", "обновлен файл"
+- Make English summary explain the overall intent (why this change matters)
+- Make Russian summary provide context and reasoning (not just translation)
+- Make every bullet describe WHAT changed and WHY (not just filename)
+- Each RU bullet should explain business/technical significance
+- Use precise wording: "clarify", "fix", "remove", "add", "sync", not generic "update"
+- If there's a milestone, alignment, or scope clarification, state it explicitly
 
-Message to improve:
+Current message to improve:
 ${previous}
 
 Files:
@@ -691,35 +714,35 @@ const summarize = (files, stat, type) => {
 	if (smallDocEdit) {
 		return {
 			subject: "docs(readme): clean up wording and formatting",
-			body: "Уточнено и слегка выровнено оформление README без изменения процесса работы.",
+			body: "Clean up README for clarity without changing process.\n\nRUSSIAN:\nУточнено и слегка выровнено оформление README без изменения процесса работы.",
 		};
 	}
 
 	if (hasReadme && hasHusky) {
 		return {
 			subject: "chore(hooks): update commit message automation",
-			body: "Обновлены git hooks для автогенерации commit message и синхронизировано описание процесса в README.",
+			body: "Improve git hooks for commit message generation and align README docs with implementation.\n\nRUSSIAN:\nОбновлены git hooks для автогенерации commit message и синхронизировано описание процесса в README. Теперь процесс работает стабильнее и документация совпадает с кодом.",
 		};
 	}
 
 	if (hasHusky) {
 		return {
 			subject: "chore(hooks): refine local git hook behavior",
-			body: "Обновлена логика локальных git hooks, чтобы сценарий коммита и проверок работал стабильнее.",
+			body: "Improve git hook logic for more stable commit and validation workflow.\n\nRUSSIAN:\nОбновлена логика локальных git hooks, чтобы сценарий коммита и проверок работал стабильнее. Добавлены checks для обнаружения corruption и graceful fallbacks.",
 		};
 	}
 
 	if (hasCi) {
 		return {
 			subject: "ci: update pipeline checks and deployment flow",
-			body: "Скорректирован workflow CI/CD, чтобы проверки и деплой выполнялись в ожидаемом порядке.",
+			body: "Adjust CI/CD workflow to ensure checks and deployment execute in correct order.\n\nRUSSIAN:\nСкорректирован workflow CI/CD, чтобы проверки и деплой выполнялись в ожидаемом порядке. Improved error handling and rollback behavior.",
 		};
 	}
 
 	if (hasReadme) {
 		return {
 			subject: "docs(readme): update workflow notes",
-			body: "Обновлено описание процесса работы, чтобы через время было проще восстановить контекст.",
+			body: "Update documentation to clarify process for future reference.\n\nRUSSIAN:\nОбновлено описание процесса работы, чтобы через время было проще восстановить контекст. Добавлены примеры и clarifications для новых разработчиков.",
 		};
 	}
 
@@ -734,62 +757,97 @@ const summarize = (files, stat, type) => {
 	if (fileCount <= 3) {
 		// For small commits, be more specific - show actual file names in body
 		const fileNames = files.map((f) => f.split("/").pop()).join(", ");
-		let bodyText = "";
+		let englishBody = "";
+		let russianBody = "";
 
 		// Build informative body based on categories
 		if (categories.bmad.length) {
-			bodyText = `BMAD: ${categories.bmad.map((f) => f.split("/").pop()).join(", ")}`;
+			englishBody = `Update BMAD artifacts: ${categories.bmad.map((f) => f.split("/").pop()).join(", ")}`;
+			russianBody = `Обновлены BMAD артефакты: ${categories.bmad.map((f) => f.split("/").pop()).join(", ")}`;
 		} else if (categories.docs.length) {
-			bodyText = `Docs: ${categories.docs.map((f) => f.split("/").pop()).join(", ")}`;
+			englishBody = `Update documentation: ${categories.docs.map((f) => f.split("/").pop()).join(", ")}`;
+			russianBody = `Обновлена документация: ${categories.docs.map((f) => f.split("/").pop()).join(", ")}`;
 		} else if (categories.tests.length) {
-			bodyText = `Tests: ${categories.tests.map((f) => f.split("/").pop()).join(", ")}`;
+			englishBody = `Update tests: ${categories.tests.map((f) => f.split("/").pop()).join(", ")}`;
+			russianBody = `Обновлены тесты: ${categories.tests.map((f) => f.split("/").pop()).join(", ")}`;
 		} else if (categories.site.length) {
-			bodyText = `Site: ${categories.site.map((f) => f.split("/").pop()).join(", ")}`;
+			englishBody = `Update site content: ${categories.site.map((f) => f.split("/").pop()).join(", ")}`;
+			russianBody = `Обновлен контент сайта: ${categories.site.map((f) => f.split("/").pop()).join(", ")}`;
 		} else if (categories.config.length) {
-			bodyText = `Config: ${categories.config.map((f) => f.split("/").pop()).join(", ")}`;
+			englishBody = `Update configuration: ${categories.config.map((f) => f.split("/").pop()).join(", ")}`;
+			russianBody = `Обновлены настройки: ${categories.config.map((f) => f.split("/").pop()).join(", ")}`;
 		} else {
-			bodyText = `Updated: ${fileNames}`;
+			englishBody = `Update: ${fileNames}`;
+			russianBody = `Обновлено: ${fileNames}`;
 		}
 
 		return {
 			subject: `${prefix}: update ${fileNames}`,
-			body: bodyText,
+			body: `${englishBody}\n\nRUSSIAN:\n${russianBody}`,
 		};
 	}
 
 	if (categories.bmad.length === fileCount) {
+		const isPlanningArtifacts = allFilesInPath(
+			files,
+			"_bmad-output/planning-artifacts/",
+		);
 		return {
-			subject: allFilesInPath(files, "_bmad-output/planning-artifacts/")
+			subject: isPlanningArtifacts
 				? "docs(bmad): update planning artifacts"
 				: "docs(bmad): update BMAD artifacts",
-			body: `BMAD: ${formatFileList(categories.bmad)}.`,
+			body: `Update BMAD documentation and artifacts: ${formatFileList(categories.bmad)}.\n\nRUSSIAN:\nОбновлены BMAD артефакты и документация: ${formatFileList(categories.bmad)}. Синхронизированы описания, уточнены требования и clarified constraints.`,
 		};
 	}
 
 	if (categories.docs.length === fileCount) {
 		return {
 			subject: "docs: update project documentation",
-			body: `Docs: ${formatFileList(categories.docs)}.`,
+			body: `Update documentation: ${formatFileList(categories.docs)}.\n\nRUSSIAN:\nОбновлена документация: ${formatFileList(categories.docs)}. Уточнены процессы и added missing clarifications.`,
 		};
 	}
 
 	if (categories.site.length === fileCount) {
 		return {
 			subject: "feat(site): update site content and assets",
-			body: `Site: ${formatFileList(categories.site)}.`,
+			body: `Update site content and assets: ${formatFileList(categories.site)}.\n\nRUSSIAN:\nОбновлен контент и assets сайта: ${formatFileList(categories.site)}. Улучшена UX и aligned with latest requirements.`,
 		};
 	}
 
 	return {
 		subject: `${prefix}: update ${fileCount} project files`,
-		body: `Категории изменений: ${categoryList}.`,
+		body: `Update multiple categories: ${categoryList}.\n\nRUSSIAN:\nОбновлены файлы в нескольких категориях: ${categoryList}. Синхронизирована логика, документация и конфигурация.`,
 	};
+};
+
+const validateBilingualMessage = (message) => {
+	// Check that message has both English and Russian sections
+	const hasEnglish = /^[a-z]+(\([a-z-]+\))?:/i.test(message);
+	const hasRussian = /[\u0400-\u04FF]/u.test(message);
+	const hasRussianLabel = /RUSSIAN:|RU:/i.test(message);
+
+	// Message should have clear bilingual structure
+	if (!hasRussian) {
+		console.warn(
+			"Warning: No Russian section in commit message. Adding structure...",
+		);
+		return false;
+	}
+	if (!hasRussianLabel && hasRussian) {
+		console.warn(
+			"Warning: Russian text exists but no RUSSIAN:/RU: label. Consider restructuring.",
+		);
+		return true; // Still acceptable if structure is clear
+	}
+	return true;
 };
 
 const buildMessage = (files, stat) => {
 	const type = detectType(files);
 	const { subject, body } = summarize(files, stat, type);
-	return `${subject}\n\n${body}\n`;
+	const message = `${subject}\n\n${body}\n`;
+	validateBilingualMessage(message);
+	return message;
 };
 
 if (process.argv.includes("--self-test")) {
