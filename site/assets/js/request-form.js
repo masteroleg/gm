@@ -1,5 +1,6 @@
-// Request form controller — Story 3.3: Send a Qualified Request
+// Request form controller — Story 3.3 / 3.4
 // Phase 1 mailto: handoff mechanism. No server-side submission.
+// Metadata (scenario, source_path, proof_path) is best-effort; no guarantees on transport.
 
 const RECIPIENT = "hello@genu.im";
 
@@ -18,17 +19,49 @@ const isValidContact = (value) => {
 	return trimmed.length > 0;
 };
 
+// ── Metadata capture (Story 3.4 AC #1, #2) ────────────────────────────────
+// Reads scenario and source routing details from page context.
+// Best-effort: returns empty strings when data is unavailable.
+// Accepts optional _loc parameter for testability (defaults to window.location).
+const captureMetadata = (_loc) => {
+	let scenario = "";
+	let source_path = "";
+	let proof_path = "";
+
+	try {
+		const loc = _loc || window.location;
+		const params = new URLSearchParams(loc.search || "");
+
+		// Scenario from URL param (set by Story 3.2 routing)
+		scenario = params.get("scenario") || "";
+
+		// source_path: prefer explicit ?from= param; fall back to current pathname
+		source_path = params.get("from") || loc.pathname || "";
+
+		// proof_path: read from data-proof-path attribute when request originates from proof surface
+		const proofEl = document.querySelector("[data-proof-path]");
+		proof_path = proofEl ? proofEl.getAttribute("data-proof-path") || "" : "";
+	} catch (_e) {
+		/* noop — degrade gracefully; all fields remain empty strings */
+	}
+
+	return { scenario, source_path, proof_path };
+};
+
 // ── Build mailto: URL ──────────────────────────────────────────────────────
+// source_path and proof_path are optional metadata fields (best-effort).
 const buildMailtoUrl = ({
 	contactName,
 	contactEmail,
 	companyName,
 	scenario,
 	context,
+	source_path,
+	proof_path,
 }) => {
 	const subject = `genu.im request: ${companyName} — ${scenario}`;
 
-	const body = [
+	const bodyLines = [
 		`Contact: ${contactName}`,
 		`Email / Phone: ${contactEmail}`,
 		`Company: ${companyName}`,
@@ -36,10 +69,23 @@ const buildMailtoUrl = ({
 		``,
 		`Context:`,
 		context,
+	];
+
+	// Attach metadata lines when available (best-effort, not guaranteed)
+	if (source_path) {
+		bodyLines.push(``, `Source: ${source_path}`);
+	}
+	if (proof_path) {
+		bodyLines.push(`Proof page: ${proof_path}`);
+	}
+
+	bodyLines.push(
 		``,
 		`---`,
 		`Sent via genu.im request form (mailto: handoff — not server submission)`,
-	].join("\n");
+	);
+
+	const body = bodyLines.join("\n");
 
 	return `mailto:${RECIPIENT}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 };
@@ -57,6 +103,29 @@ const showFallback = () => {
 	if (el) {
 		el.hidden = false;
 	}
+};
+
+// ── Show fallback with captured metadata (Story 3.4 AC #5) ────────────────
+// Keeps scenario/source context visible on page if mailto: cannot open.
+// Does NOT claim submission succeeded or metadata was transported.
+const showFallbackWithMeta = ({ scenario, source_path, proof_path } = {}) => {
+	// Show fallback panel
+	const fallback = document.getElementById("requestFallback");
+	if (fallback) {
+		fallback.hidden = false;
+	}
+
+	// Populate metadata section if the element exists
+	const metaEl = document.getElementById("requestFallbackMeta");
+	if (!metaEl) return;
+
+	const lines = [];
+	if (scenario) lines.push(`Scenario: ${scenario}`);
+	if (source_path) lines.push(`Source: ${source_path}`);
+	if (proof_path) lines.push(`Proof page: ${proof_path}`);
+
+	metaEl.textContent = lines.join(" | ");
+	metaEl.hidden = false;
 };
 
 // ── Validation ────────────────────────────────────────────────────────────
@@ -169,7 +238,7 @@ const applyUrlParams = () => {
 // ── Fallback detection ─────────────────────────────────────────────────────
 // After triggering mailto:, we wait briefly and check if the window stayed
 // visible / focused. If the user is still here, mailto: likely didn't open.
-const triggerMailtoWithFallback = (mailtoUrl) => {
+const triggerMailtoWithFallback = (mailtoUrl, metadata) => {
 	let fallbackTimer;
 
 	const onVisibilityChange = () => {
@@ -187,7 +256,7 @@ const triggerMailtoWithFallback = (mailtoUrl) => {
 	fallbackTimer = setTimeout(() => {
 		document.removeEventListener("visibilitychange", onVisibilityChange);
 		if (document.visibilityState !== "hidden") {
-			showFallback();
+			showFallbackWithMeta(metadata || {});
 		} else {
 			showConfirmation();
 		}
@@ -208,6 +277,9 @@ const initRequestForm = () => {
 
 		if (!validateForm()) return;
 
+		// Capture routing metadata (best-effort, AC #1, #2)
+		const metadata = captureMetadata();
+
 		const data = {
 			contactName: (document.getElementById("contactName")?.value || "").trim(),
 			contactEmail: (
@@ -216,10 +288,12 @@ const initRequestForm = () => {
 			companyName: (document.getElementById("companyName")?.value || "").trim(),
 			scenario: (document.getElementById("scenario")?.value || "").trim(),
 			context: (document.getElementById("context")?.value || "").trim(),
+			source_path: metadata.source_path,
+			proof_path: metadata.proof_path,
 		};
 
 		const mailtoUrl = buildMailtoUrl(data);
-		triggerMailtoWithFallback(mailtoUrl);
+		triggerMailtoWithFallback(mailtoUrl, metadata);
 	});
 };
 
@@ -228,10 +302,12 @@ initRequestForm();
 if (typeof module !== "undefined") {
 	module.exports = {
 		buildMailtoUrl,
+		captureMetadata,
 		initRequestForm,
 		isValidContact,
 		showConfirmation,
 		showFallback,
+		showFallbackWithMeta,
 		validateForm,
 	};
 }

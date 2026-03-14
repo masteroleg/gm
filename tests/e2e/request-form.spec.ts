@@ -155,4 +155,43 @@ test.describe("Request form — /request/", () => {
 		expect(text).toContain("handoff");
 		expect(text).toContain("not a stored submission");
 	});
+
+	// ── Story 3.4: Scenario pre-population from routing ───────────────────
+
+	test("@smoke ?scenario=brand-proof pre-fills the scenario dropdown", async ({
+		page,
+	}) => {
+		await page.goto("/request/?scenario=brand-proof");
+		const select = page.locator("#scenario");
+		const value = await select.inputValue();
+		expect(value).toBe("brand-proof");
+	});
+
+	test("@smoke scenario dropdown is pre-filled when arriving from routing with ?scenario=eaktsyz", async ({
+		page,
+	}) => {
+		await page.goto("/request/?scenario=eaktsyz");
+		const select = page.locator("#scenario");
+		await expect(select).toHaveValue("eaktsyz");
+	});
+
+	test("fallback meta section is present in DOM (Story 3.4 AC #5)", async ({
+		page,
+	}) => {
+		// The data-request-fallback-meta element should exist in page markup
+		const metaEl = page.locator("[data-request-fallback-meta]");
+		await expect(metaEl).toBeAttached();
+	});
+
+	test("fallback does not claim submission succeeded when metadata absent (Story 3.4 AC #5)", async ({
+		page,
+	}) => {
+		// The fallback element should not contain claims of server success
+		const fallback = page.locator("[data-request-fallback]");
+		const text = await fallback.textContent();
+		// Ensure no claims of successful server submission in markup
+		expect(text?.toLowerCase()).not.toMatch(
+			/request (has been|was) (submitted|stored|received)/i,
+		);
+	});
 });

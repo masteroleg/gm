@@ -812,6 +812,19 @@ const translations = {
 		"officialCheck.cta": "Відкрити Дію",
 		"officialCheck.ctaAria":
 			"Відкрити Дію для офіційної перевірки в новій вкладці",
+		"routing.official.eyebrow": "Офіційна перевірка",
+		"routing.official.title": "Потрібна офіційна державна перевірка?",
+		"routing.official.body":
+			"Офіційна перевірка еАкцизу відбувається у Дії. genu.im — не державний сервіс верифікації.",
+		"routing.official.cta": "Відкрити Дію",
+		"routing.official.ctaAria":
+			"Відкрити Дію для офіційної перевірки в новій вкладці",
+		"routing.business.eyebrow": "Наступний крок для бізнесу",
+		"routing.business.title": "Хочете доказ для власних товарів?",
+		"routing.business.body":
+			"genu.mark дозволяє брендам публікувати перевірюваний доказ для кожної маркованої одиниці. Розкажіть про своє впровадження.",
+		"routing.business.cta": "Надіслати запит",
+		"routing.business.ctaAria": "Надіслати запит на налаштування доказу бренду",
 		"request.eyebrow": "Надіслати запит",
 		"request.title": "Розкажіть про своє впровадження.",
 		"request.lead":

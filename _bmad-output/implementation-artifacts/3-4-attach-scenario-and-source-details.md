@@ -1,6 +1,6 @@
 # Story 3.4: Attach Scenario and Source Details
 
-Status: ready-for-dev
+Status: review
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -39,22 +39,22 @@ So that I do not have to repeat that context by hand.
 
 ## Tasks / Subtasks
 
-- [ ] Implement scenario/source metadata capture (AC: #1, #2)
-  - [ ] Capture scenario from routing decision (Story 3.2)
-  - [ ] Capture source_path from current page context
-  - [ ] Capture proof_path when request originates from proof surface
-- [ ] Implement metadata attachment to `mailto:` handoff (AC: #3, #4)
-  - [ ] Include scenario, source_path, and optional proof_path in email body
-  - [ ] Use best-effort approach with no guarantees
-  - [ ] Do NOT claim metadata will be captured server-side
-- [ ] Implement metadata fallback handling (AC: #5)
-  - [ ] Keep metadata visible on page if `mailto:` handoff fails
-  - [ ] Preserve scenario/context for user reference
-  - [ ] Do NOT claim submission succeeded if metadata cannot be transported
-- [ ] Implement graceful degradation (AC: #5)
-  - [ ] Request form works even if metadata is missing or unavailable
-  - [ ] Form submission not blocked by missing metadata
-  - [ ] Ensure all 5 user-entered fields can be submitted independently
+- [x] Implement scenario/source metadata capture (AC: #1, #2)
+  - [x] Capture scenario from routing decision (Story 3.2)
+  - [x] Capture source_path from current page context
+  - [x] Capture proof_path when request originates from proof surface
+- [x] Implement metadata attachment to `mailto:` handoff (AC: #3, #4)
+  - [x] Include scenario, source_path, and optional proof_path in email body
+  - [x] Use best-effort approach with no guarantees
+  - [x] Do NOT claim metadata will be captured server-side
+- [x] Implement metadata fallback handling (AC: #5)
+  - [x] Keep metadata visible on page if `mailto:` handoff fails
+  - [x] Preserve scenario/context for user reference
+  - [x] Do NOT claim submission succeeded if metadata cannot be transported
+- [x] Implement graceful degradation (AC: #5)
+  - [x] Request form works even if metadata is missing or unavailable
+  - [x] Form submission not blocked by missing metadata
+  - [x] Ensure all 5 user-entered fields can be submitted independently
 
 ## Dev Notes
 
@@ -194,10 +194,34 @@ Stories 3.1-3.3 established the request flow foundation:
 
 ### Agent Model Used
 
-opencode/nemotron-3-super-free
+anthropic/claude-sonnet-4-6
 
 ### Debug Log References
 
+- Pre-existing regression in `business-next-step.test.js`: missing `routing.official.*` and `routing.business.*` UK translations from Story 3.2. Fixed as part of this story since it blocked full suite green.
+- JSDOM `window.location` cannot be reassigned directly; `captureMetadata` accepts optional `_loc` parameter for testability.
+
 ### Completion Notes List
 
+- Implemented `captureMetadata(_loc)` in `request-form.js`: reads `?scenario=`, `?from=`, `window.location.pathname`, and `data-proof-path` attribute. Returns `{scenario, source_path, proof_path}` — best-effort, never throws.
+- Extended `buildMailtoUrl({..., source_path, proof_path})`: appends `Source:` line when `source_path` non-empty; appends `Proof page:` line when `proof_path` non-empty. No guarantees claimed in body text.
+- Added `showFallbackWithMeta({scenario, source_path, proof_path})`: shows fallback panel and populates `#requestFallbackMeta` with captured context. Works safely when element is absent.
+- Updated `triggerMailtoWithFallback(mailtoUrl, metadata)` to call `showFallbackWithMeta(metadata)` instead of bare `showFallback()`.
+- Updated `initRequestForm()`: captures metadata before building mailto URL; passes metadata to trigger function.
+- Added `data-request-fallback-meta` hidden `<p>` to `site/request/index.html` fallback section.
+- Fixed pre-existing regression: added `routing.official.*` and `routing.business.*` UK translations to `lang-toggle.js`.
+- All exports: `buildMailtoUrl`, `captureMetadata`, `initRequestForm`, `isValidContact`, `showConfirmation`, `showFallback`, `showFallbackWithMeta`, `validateForm`.
+- Unit tests: 25 new tests across 4 describe blocks. Total suite: 150 tests, all green.
+- E2E smoke tests: 4 new tests added to `request-form.spec.ts`. All 40 smoke tests pass.
+
 ### File List
+
+- `site/assets/js/request-form.js` — enhanced with `captureMetadata`, `showFallbackWithMeta`, updated `buildMailtoUrl`, `triggerMailtoWithFallback`, `initRequestForm`
+- `site/assets/js/lang-toggle.js` — added UK translations for `routing.official.*` and `routing.business.*`
+- `site/request/index.html` — added `data-request-fallback-meta` element in fallback section
+- `tests/request-form.test.js` — added 25 new unit tests for Story 3.4 metadata features
+- `tests/e2e/request-form.spec.ts` — added 4 new E2E smoke tests for Story 3.4
+
+## Change Log
+
+- 2026-03-14: Story 3.4 implemented — metadata capture and attachment to mailto: handoff, fallback meta display, graceful degradation. Pre-existing routing UK translation regression also fixed.

@@ -570,3 +570,316 @@ describe("Translation keys for request form in lang-toggle.js", () => {
 		expect(confirmText).not.toContain("submitted to server");
 	});
 });
+
+// ── Story 3.4: Metadata capture ───────────────────────────────────────────
+
+describe("Request form — metadata capture: captureMetadata (Story 3.4 AC #1, #2)", () => {
+	let captureMetadata;
+
+	beforeEach(() => {
+		jest.resetModules();
+		({ captureMetadata } = require("../site/assets/js/request-form.js"));
+	});
+
+	test("captureMetadata returns an object with scenario, source_path, proof_path", () => {
+		// Pass a fake location object directly (avoids window.location mock issues in JSDOM)
+		const meta = captureMetadata({ search: "", pathname: "/request/" });
+		expect(meta).toHaveProperty("scenario");
+		expect(meta).toHaveProperty("source_path");
+		expect(meta).toHaveProperty("proof_path");
+	});
+
+	test("captureMetadata reads scenario from ?scenario= URL param", () => {
+		const meta = captureMetadata({
+			search: "?scenario=eaktsyz",
+			pathname: "/request/",
+		});
+		expect(meta.scenario).toBe("eaktsyz");
+	});
+
+	test("captureMetadata reads source_path from current pathname", () => {
+		const meta = captureMetadata({
+			search: "?scenario=brand-proof",
+			pathname: "/request/",
+		});
+		expect(meta.source_path).toBe("/request/");
+	});
+
+	test("captureMetadata reads source_path from ?from= URL param when present", () => {
+		const meta = captureMetadata({
+			search: "?scenario=brand-proof&from=/proof/",
+			pathname: "/request/",
+		});
+		expect(meta.source_path).toBe("/proof/");
+	});
+
+	test("captureMetadata sets proof_path when data-proof-path attribute exists on page", () => {
+		document.body.innerHTML = `
+			<div data-proof-path="/proof/acme-corp/unit-123"></div>
+			<form data-request-form></form>
+		`;
+		const meta = captureMetadata({ search: "", pathname: "/request/" });
+		expect(meta.proof_path).toBe("/proof/acme-corp/unit-123");
+	});
+
+	test("captureMetadata returns empty proof_path when no data-proof-path exists", () => {
+		document.body.innerHTML = `<form data-request-form></form>`;
+		const meta = captureMetadata({ search: "", pathname: "/request/" });
+		expect(meta.proof_path).toBe("");
+	});
+
+	test("captureMetadata returns empty strings gracefully when called without arguments", () => {
+		// Should not throw even without explicit location param (falls back to window.location)
+		expect(() => captureMetadata()).not.toThrow();
+		const meta = captureMetadata();
+		expect(typeof meta).toBe("object");
+		expect(meta).not.toBeNull();
+	});
+
+	test("captureMetadata returns empty scenario when no param present", () => {
+		const meta = captureMetadata({ search: "", pathname: "/request/" });
+		expect(meta.scenario).toBe("");
+	});
+});
+
+// ── Story 3.4: metadata in mailto: payload (AC #3) ────────────────────────
+
+describe("Request form — metadata in mailto: URL (Story 3.4 AC #3)", () => {
+	let buildMailtoUrl;
+
+	beforeEach(() => {
+		jest.resetModules();
+		({ buildMailtoUrl } = require("../site/assets/js/request-form.js"));
+	});
+
+	test("buildMailtoUrl includes source_path in body when provided", () => {
+		const url = buildMailtoUrl({
+			contactName: "Alice",
+			contactEmail: "alice@example.com",
+			companyName: "ACME",
+			scenario: "brand-proof",
+			context: "Some context",
+			source_path: "/proof/acme/",
+		});
+		const decoded = decodeURIComponent(url);
+		expect(decoded).toContain("/proof/acme/");
+	});
+
+	test("buildMailtoUrl includes proof_path in body when provided", () => {
+		const url = buildMailtoUrl({
+			contactName: "Alice",
+			contactEmail: "alice@example.com",
+			companyName: "ACME",
+			scenario: "brand-proof",
+			context: "Some context",
+			source_path: "/proof/acme/",
+			proof_path: "/proof/acme/unit-456",
+		});
+		const decoded = decodeURIComponent(url);
+		expect(decoded).toContain("/proof/acme/unit-456");
+	});
+
+	test("buildMailtoUrl omits proof_path line when proof_path is empty", () => {
+		const url = buildMailtoUrl({
+			contactName: "Alice",
+			contactEmail: "alice@example.com",
+			companyName: "ACME",
+			scenario: "brand-proof",
+			context: "Some context",
+			source_path: "/request/",
+			proof_path: "",
+		});
+		const decoded = decodeURIComponent(url);
+		expect(decoded).not.toContain("Proof page:");
+	});
+
+	test("buildMailtoUrl still works when source_path and proof_path are absent", () => {
+		const url = buildMailtoUrl({
+			contactName: "Alice",
+			contactEmail: "alice@example.com",
+			companyName: "ACME",
+			scenario: "brand-proof",
+			context: "Some context",
+		});
+		expect(url).toMatch(/^mailto:/);
+		expect(url).toContain("hello@genu.im");
+	});
+
+	test("buildMailtoUrl uses best-effort language — does not claim guaranteed transport", () => {
+		const url = buildMailtoUrl({
+			contactName: "Alice",
+			contactEmail: "alice@example.com",
+			companyName: "ACME",
+			scenario: "brand-proof",
+			context: "Some context",
+			source_path: "/request/",
+		});
+		const decoded = decodeURIComponent(url).toLowerCase();
+		// Must NOT claim guaranteed server capture
+		expect(decoded).not.toContain("guaranteed");
+		expect(decoded).not.toContain("stored on server");
+		expect(decoded).not.toContain("captured server");
+	});
+});
+
+// ── Story 3.4: fallback shows metadata (AC #5) ───────────────────────────
+
+describe("Request form — fallback shows metadata (Story 3.4 AC #5)", () => {
+	let showFallbackWithMeta;
+
+	beforeEach(() => {
+		jest.resetModules();
+		document.body.innerHTML = `
+			<form data-request-form novalidate>
+				<input id="contactName" value="Alice" />
+				<input id="contactEmail" value="alice@example.com" />
+				<input id="companyName" value="ACME" />
+				<select id="scenario"><option value="brand-proof" selected>Brand proof</option></select>
+				<textarea id="context">Some context</textarea>
+			</form>
+			<div id="requestFallback" hidden data-request-fallback>
+				<p><span data-i18n="request.fallback.text">Your mail client did not open.</span>
+				<a href="mailto:hello@genu.im">hello@genu.im</a></p>
+				<div id="requestFallbackMeta" hidden data-request-fallback-meta></div>
+			</div>
+		`;
+		({ showFallbackWithMeta } = require("../site/assets/js/request-form.js"));
+	});
+
+	test("showFallbackWithMeta is exported", () => {
+		expect(typeof showFallbackWithMeta).toBe("function");
+	});
+
+	test("showFallbackWithMeta shows the fallback element", () => {
+		const fallback = document.getElementById("requestFallback");
+		showFallbackWithMeta({
+			scenario: "brand-proof",
+			source_path: "/request/",
+			proof_path: "",
+		});
+		expect(fallback.hidden).toBe(false);
+	});
+
+	test("showFallbackWithMeta reveals meta section when it exists", () => {
+		showFallbackWithMeta({
+			scenario: "brand-proof",
+			source_path: "/request/",
+			proof_path: "",
+		});
+		const meta = document.getElementById("requestFallbackMeta");
+		expect(meta.hidden).toBe(false);
+	});
+
+	test("showFallbackWithMeta populates scenario in meta section", () => {
+		showFallbackWithMeta({
+			scenario: "eaktsyz",
+			source_path: "/proof/",
+			proof_path: "",
+		});
+		const meta = document.getElementById("requestFallbackMeta");
+		expect(meta.textContent).toContain("eaktsyz");
+	});
+
+	test("showFallbackWithMeta populates source_path in meta section", () => {
+		showFallbackWithMeta({
+			scenario: "brand-proof",
+			source_path: "/proof/acme/",
+			proof_path: "",
+		});
+		const meta = document.getElementById("requestFallbackMeta");
+		expect(meta.textContent).toContain("/proof/acme/");
+	});
+
+	test("showFallbackWithMeta populates proof_path in meta section when present", () => {
+		showFallbackWithMeta({
+			scenario: "brand-proof",
+			source_path: "/proof/acme/",
+			proof_path: "/proof/acme/unit-789",
+		});
+		const meta = document.getElementById("requestFallbackMeta");
+		expect(meta.textContent).toContain("/proof/acme/unit-789");
+	});
+
+	test("showFallbackWithMeta does not crash when meta element is absent", () => {
+		document.body.innerHTML = `
+			<div id="requestFallback" hidden data-request-fallback>
+				<p><a href="mailto:hello@genu.im">hello@genu.im</a></p>
+			</div>
+		`;
+		jest.resetModules();
+		({ showFallbackWithMeta } = require("../site/assets/js/request-form.js"));
+		expect(() => {
+			showFallbackWithMeta({
+				scenario: "brand-proof",
+				source_path: "/request/",
+				proof_path: "",
+			});
+		}).not.toThrow();
+	});
+
+	test("showFallbackWithMeta works with empty/missing metadata fields", () => {
+		expect(() => {
+			showFallbackWithMeta({});
+		}).not.toThrow();
+	});
+
+	test("showFallbackWithMeta does not claim submission was completed", () => {
+		showFallbackWithMeta({
+			scenario: "brand-proof",
+			source_path: "/request/",
+			proof_path: "",
+		});
+		const meta = document.getElementById("requestFallbackMeta");
+		const text = meta.textContent.toLowerCase();
+		expect(text).not.toMatch(
+			/request (has been|was) (submitted|stored|received)/i,
+		);
+	});
+});
+
+// ── Story 3.4: graceful degradation (AC #4, #5) ──────────────────────────
+
+describe("Request form — graceful degradation with missing metadata (Story 3.4 AC #4, #5)", () => {
+	let buildMailtoUrl, captureMetadata;
+
+	beforeEach(() => {
+		jest.resetModules();
+		({
+			buildMailtoUrl,
+			captureMetadata,
+		} = require("../site/assets/js/request-form.js"));
+	});
+
+	test("form submission not blocked when metadata returns empty scenario", () => {
+		// captureMetadata with empty search — buildMailtoUrl should not throw
+		const meta = captureMetadata({ search: "", pathname: "/request/" });
+		expect(() => {
+			buildMailtoUrl({
+				contactName: "Alice",
+				contactEmail: "alice@example.com",
+				companyName: "ACME",
+				scenario: "brand-proof", // user-entered is still used
+				context: "Context",
+				source_path: meta.source_path,
+				proof_path: meta.proof_path,
+			});
+		}).not.toThrow();
+	});
+
+	test("buildMailtoUrl is valid even with all metadata empty strings", () => {
+		const url = buildMailtoUrl({
+			contactName: "Bob",
+			contactEmail: "bob@example.com",
+			companyName: "Corp",
+			scenario: "eaktsyz",
+			context: "Some context",
+			source_path: "",
+			proof_path: "",
+		});
+		expect(url).toMatch(/^mailto:/);
+	});
+
+	test("captureMetadata does not throw when called with no arguments", () => {
+		expect(() => captureMetadata()).not.toThrow();
+	});
+});
