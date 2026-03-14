@@ -10,7 +10,17 @@ BMAD artifacts (deduplicated) for genu.im.
 - **[1-3-remember-the-chosen-language-and-theme.md](_bmad-output/implementation-artifacts/1-3-remember-the-chosen-language-and-theme.md)** - Story 1.3: Remember the Chosen Language and Theme
 - **[1-4-open-the-main-site-information-pages.md](_bmad-output/implementation-artifacts/1-4-open-the-main-site-information-pages.md)** - Story 1.4: Open the Main Site Information Pages
 - **[1-5-show-the-knowledge-section-in-site-navigation.md](_bmad-output/implementation-artifacts/1-5-show-the-knowledge-section-in-site-navigation.md)** - Story 1.5: Show the Knowledge Section in Site Navigation
+- **[2-1-show-the-main-verification-example.md](_bmad-output/implementation-artifacts/2-1-show-the-main-verification-example.md)** - Story 2.1: Show the Main Verification Example
+- **[2-2-show-a-clear-no-data-result.md](_bmad-output/implementation-artifacts/2-2-show-a-clear-no-data-result.md)** - Story 2.2: Show a Clear No-Data Result
+- **[2-3-use-the-demo-input-and-example-code-action.md](_bmad-output/implementation-artifacts/2-3-use-the-demo-input-and-example-code-action.md)** - Dev Agent Record
+- **[2-4-show-only-supported-proof-content.md](_bmad-output/implementation-artifacts/2-4-show-only-supported-proof-content.md)** - Story 2.4: Show Only Supported Proof Content
+- **[3-1-guide-official-checks-to-diia.md](_bmad-output/implementation-artifacts/3-1-guide-official-checks-to-diia.md)** - Story 3.1: Guide Official Checks to `Дія`
+- **[3-2-show-the-right-business-next-step.md](_bmad-output/implementation-artifacts/3-2-show-the-right-business-next-step.md)** - Story 3.2: Show the Right Business Next Step
+- **[3-3-send-a-qualified-request.md](_bmad-output/implementation-artifacts/3-3-send-a-qualified-request.md)** - Story 3.3: Send a Qualified Request
+- **[3-4-attach-scenario-and-source-details.md](_bmad-output/implementation-artifacts/3-4-attach-scenario-and-source-details.md)** - Story 3.4: Attach Scenario and Source Details
 - **[epic-1-dev-handoff.md](_bmad-output/implementation-artifacts/epic-1-dev-handoff.md)** - Epic 1 Dev Handoff
+- **[epic-2-retrospective.md](_bmad-output/implementation-artifacts/epic-2-retrospective.md)** - Epic 2 Retrospective: Public Proof Experience
+- **[README.md](_bmad-output/implementation-artifacts/genu-im-baseline/README.md)** - genu.im baseline capture
 - **[index.md](_bmad-output/implementation-artifacts/index.md)** - Directory Index: _bmad-output/implementation-artifacts
 - **[tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md](_bmad-output/implementation-artifacts/tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md)** - ---
 - **[tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md](_bmad-output/implementation-artifacts/tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md)** - ---
@@ -65,4 +75,4 @@ BMAD artifacts (deduplicated) for genu.im.
 Archived legacy materials and migration inputs.
 - **[/_archive/perevir-product](./_archive/perevir-product/)**
 
-Last updated: 2026-03-12
+Last updated: 2026-03-14
