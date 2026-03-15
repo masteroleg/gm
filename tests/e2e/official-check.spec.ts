@@ -35,7 +35,9 @@ test.describe("Official Check Guidance Page", () => {
 	});
 
 	test("page has accessible aria-label on CTA", async ({ page }) => {
-		const cta = page.locator('a.cta-button[href="https://diia.gov.ua/"]');
+		const cta = page.locator(
+			'.info-page__cta-section a.cta-button[href="https://diia.gov.ua/"]',
+		);
 		const ariaLabel = await cta.getAttribute("aria-label");
 		expect(ariaLabel).toContain("Diia");
 	});

@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# Post-merge hook - runs after git pull, merge, or rebase
+# Checks for site-impacting changes and runs smoke tests
+
+# Only run if there are site-impacting changes
+if ! git diff-tree --no-commit-id --name-only -r HEAD | sh scripts/has-site-impact.sh --stdin; then
+    echo 'No site-impacting changes detected; skipping post-pull checks.'
+    exit 0
+fi
+
+echo 'Site-impacting changes detected. Running smoke tests...'
+
+npm run test:smoke
+result=$?
+
+if [ $result -ne 0 ]; then
+    echo ''
+    echo '⚠️  Smoke tests FAILED after pull!'
+    echo 'Your local code may have incoming regressions.'
+    echo 'To view failures: npm run test:smoke'
+    echo ''
+    echo 'Options:'
+    echo '  [F] Force continue (not recommended)'
+    echo '  [R] Reset to before pull and try again'
+    echo '  [I] Ignore and continue (tests will fail on next push)'
+    echo ''
+    printf 'Select [F/R/I]: '
+    read -r choice
+    
+    case "$choice" in
+        F|f)
+            echo 'Continuing... warnings will appear on next push.'
+            exit 0
+            ;;
+        R|r)
+            echo 'Resetting to previous state...'
+            git reset --hard '@{1}'
+            exit 0
+            ;;
+        *)
+            echo 'Ignoring. Note: push will fail until tests pass.'
+            exit 0
+            ;;
+    esac
+fi
+
+echo '✅ Smoke tests passed!'
+exit 0
