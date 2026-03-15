@@ -23,8 +23,10 @@ Directory Index: repo-root
 - **[epic-1-dev-handoff.md](_bmad-output/implementation-artifacts/epic-1-dev-handoff.md)** - Epic 1 Dev Handoff
 - **[epic-2-retrospective.md](_bmad-output/implementation-artifacts/epic-2-retrospective.md)** - Epic 2 Retrospective: Public Proof Experience
 - **[epic-3-retro-2026-03-14.md](_bmad-output/implementation-artifacts/epic-3-retro-2026-03-14.md)** - Ретроспектива Epic 3: Audience Routing and Qualified Conversion
+- **[epic-4-retro-2026-03-15.md](_bmad-output/implementation-artifacts/epic-4-retro-2026-03-15.md)** - Ретроспектива Epic 4: Funnel Visibility and Review
 - **[README.md](_bmad-output/implementation-artifacts/genu-im-baseline/README.md)** - genu.im baseline capture
 - **[index.md](_bmad-output/implementation-artifacts/index.md)** - Directory Index: _bmad-output/implementation-artifacts
+- **[tech-spec-fix-ambiguous-diia-locator.md](_bmad-output/implementation-artifacts/tech-spec-fix-ambiguous-diia-locator.md)** - ---
 - **[tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md](_bmad-output/implementation-artifacts/tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md)** - ---
 - **[tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md](_bmad-output/implementation-artifacts/tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md)** - ---
 - **[index.md](_bmad-output/index.md)** - Directory Index: _bmad-output
@@ -78,4 +80,4 @@ Directory Index: repo-root
 Archived legacy materials and migration inputs.
 - **[/_archive/perevir-product](./_archive/perevir-product/)**
 
-Last updated: 2026-03-14
+Last updated: 2026-03-15
