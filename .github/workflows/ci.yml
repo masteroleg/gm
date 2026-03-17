@@ -91,7 +91,7 @@ jobs:
         run: npx playwright test --config=playwright.config.ts --project="$PW_PROJECT" --grep @smoke
       - name: Upload Playwright artifacts
         if: failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: playwright-${{ matrix.project }}
           path: |
@@ -138,7 +138,7 @@ jobs:
         run: npm run test:e2e:ci -- --project="$PW_PROJECT"
       - name: Upload Playwright artifacts
         if: failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: playwright-${{ matrix.project }}
           path: |
