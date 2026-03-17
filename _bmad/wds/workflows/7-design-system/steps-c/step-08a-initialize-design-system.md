@@ -343,7 +343,7 @@ Create interactive HTML catalog:
 
 File: D-Design-System/catalog.html
 Components: 1
-View: file:///path/to/catalog.html
+View: `file:///path/to/catalog.html`
 ```
 
 ---
