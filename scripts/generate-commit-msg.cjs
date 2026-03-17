@@ -5,7 +5,21 @@ const path = require("node:path");
 const CONFIG_PATH = path.join(process.cwd(), "commit-message.config.json");
 const ANSI_PATTERN = new RegExp(`${String.fromCharCode(27)}\\[[0-9;]*m`, "g");
 
-const runGit = (args) => execFileSync("git", args, { encoding: "utf8" }).trim();
+const runGit = (args) => {
+	try {
+		const result = execFileSync("git", args, {
+			encoding: "utf8",
+			maxBuffer: 10 * 1024 * 1024, // 10MB buffer
+		}).trim();
+		return result;
+	} catch (error) {
+		// If command fails due to buffer, return empty
+		if (error.code === "ERR_CHILD_PROCESS_STDIO_MAXBUFFER") {
+			return "";
+		}
+		throw error;
+	}
+};
 
 const EXCLUDED_MESSAGE_FILES = new Set([
 	"commit-msg-test.txt",
@@ -34,7 +48,24 @@ const _getWorkingTreeFiles = () => {
 };
 
 const getStat = () => runGit(["diff", "--cached", "--stat"]);
-const getDiff = () => runGit(["diff", "--cached"]);
+const getDiff = () => {
+	// Limit diff output to prevent buffer overflow with large repositories
+	return runGit([
+		"diff",
+		"--cached",
+		"--stat",
+		"--",
+		"*.js",
+		"*.json",
+		"*.md",
+		"*.ts",
+		"*.tsx",
+		"*.html",
+		"*.css",
+		"*.yml",
+		"*.yaml",
+	]);
+};
 const _getWorkingTreeStat = () => runGit(["diff", "--stat"]);
 const _getWorkingTreeDiff = () => runGit(["diff"]);
 
@@ -376,11 +407,11 @@ const runOpencode = (prompt) => {
 		"const fs = require('fs');",
 		`const BINARY = ${JSON.stringify(binary)};`,
 		`const PROMPT = ${JSON.stringify(prompt)};`,
-		`const MODEL = ${JSON.stringify(candidates[0])};`, // Use the first candidate model
+		`const MODEL = ${JSON.stringify(candidates[0])};`,
 		`const DIR = ${JSON.stringify(DIR)};`,
 		`const RESULT_PATH = ${JSON.stringify(resultPath)};`,
-		"const USER = 'x';",
-		"const PASS = 'commit-gen-2026';",
+		`const USER = ${JSON.stringify("opencode")};`,
+		`const PASS = ${JSON.stringify(process.env.OPENCODE_SERVER_PASSWORD || "x")};`,
 		"const AUTH = Buffer.from(USER + ':' + PASS).toString('base64');",
 		"",
 		"const api = (port, method, path, body) => new Promise((resolve, reject) => {",
@@ -403,20 +434,26 @@ const runOpencode = (prompt) => {
 		"});",
 		"",
 		"(async () => {",
-		"  // Start server",
+		"  // Start server with NO auth (opencode will generate password)",
 		"  const server = spawn(BINARY, ['serve', '--port', '0'], {",
-		"    stdio: ['ignore', 'pipe', 'ignore'],",
-		"    env: { ...process.env, OPENCODE_SERVER_PASSWORD: PASS, OPENCODE_SERVER_USERNAME: USER }",
+		"    stdio: ['ignore', 'pipe', 'pipe'],",
+		"    env: process.env",
 		"  });",
 		"  let port;",
+		"  let password = '';",
 		"  try {",
 		"    port = await new Promise((resolve, reject) => {",
 		"      let buf = '';",
-		"      const t = setTimeout(() => reject(new Error('Server start timeout')), 8000);",
+		"      const t = setTimeout(() => reject(new Error('Server start timeout')), 10000);",
 		"      server.stdout.on('data', d => {",
 		"        buf += d.toString();",
 		"        const m = buf.match(/listening on http:\\/\\/[^:]+:(\\d+)/);",
 		"        if (m) { clearTimeout(t); resolve(parseInt(m[1], 10)); }",
+		"      });",
+		"      server.stderr.on('data', d => {",
+		"        const s = d.toString();",
+		"        const pm = s.match(/password[:\\s]+([a-f0-9-]+)/i);",
+		"        if (pm) password = pm[1];",
 		"      });",
 		"      server.on('exit', code => reject(new Error(`Server exited: ${code}`)));",
 		"    });",
@@ -425,11 +462,15 @@ const runOpencode = (prompt) => {
 		"  }",
 		"  let result = '';",
 		"  try {",
+		"    // Use actual credentials from environment",
+		"    const actualUser = process.env.OPENCODE_SERVER_USERNAME || 'opencode';",
+		"    const actualPass = process.env.OPENCODE_SERVER_PASSWORD || password || '';",
+		"    const actualAuth = Buffer.from(actualUser + ':' + actualPass).toString('base64');",
 		"    // Create session",
 		"    const session = await api(port, 'POST', '/session', { title: 'commit-gen' });",
 		"    if (!session || !session.id) throw new Error('No session ID');",
 		"    const sessionId = session.id;",
-		"    // Use the first candidate model",
+		"    // Send message",
 		"    const resp = await api(port, 'POST', `/session/${sessionId}/message`, {",
 		"      model: MODEL,",
 		"      parts: [{ type: 'text', text: PROMPT }],",
@@ -449,7 +490,7 @@ const runOpencode = (prompt) => {
 		"  }",
 		"  fs.writeFileSync(RESULT_PATH, result, 'utf8');",
 		"})().catch(e => {",
-		"  process.stderr.write(e.message + '\\n');",
+		"  console.error('Worker error:', e.message);",
 		"  process.exit(1);",
 		"});",
 	].join("\n");
