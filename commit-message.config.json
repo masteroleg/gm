@@ -1,8 +1,10 @@
 {
 	"opencodeModels": [
+		"opencode/nemotron-3-super-free",
+		"opencode/big-pickle",
+		"opencode/mimo-v2-flash-free",
 		"opencode/minimax-m2.5-free",
-		"opencode/gpt-5-nano",
-		"opencode/big-pickle"
+		"opencode/gpt-5-nano"
 	],
 	"opencodeAttachUrl": "http://127.0.0.1:4096",
 	"maxPromptChars": 12000,
