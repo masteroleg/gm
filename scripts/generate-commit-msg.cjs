@@ -1,22 +1,9 @@
 const { execFileSync, spawnSync } = require("node:child_process");
-const {
-	existsSync,
-	readFileSync,
-	unlinkSync,
-	writeFileSync,
-} = require("node:fs");
-const os = require("node:os");
+const { existsSync, readFileSync, writeFileSync } = require("node:fs");
 const path = require("node:path");
 
 const CONFIG_PATH = path.join(process.cwd(), "commit-message.config.json");
-const SESSION_CACHE_PATH = path.join(
-	process.cwd(),
-	".git",
-	"opencode-commit-session",
-);
 const ANSI_PATTERN = new RegExp(`${String.fromCharCode(27)}\\[[0-9;]*m`, "g");
-const SESSION_ID_PATTERN = /^ses_[A-Za-z0-9]+$/;
-const COMMIT_SESSION_TITLE_PATTERN = /^Git commit message/i;
 
 const runGit = (args) => execFileSync("git", args, { encoding: "utf8" }).trim();
 
@@ -35,7 +22,7 @@ const getStagedFiles = () => {
 	return filterMessageFiles(files);
 };
 
-const getWorkingTreeFiles = () => {
+const _getWorkingTreeFiles = () => {
 	const changed = runGit(["diff", "--name-only"]);
 	const untracked = runGit(["ls-files", "--others", "--exclude-standard"]);
 	const files = [
@@ -48,8 +35,8 @@ const getWorkingTreeFiles = () => {
 
 const getStat = () => runGit(["diff", "--cached", "--stat"]);
 const getDiff = () => runGit(["diff", "--cached"]);
-const getWorkingTreeStat = () => runGit(["diff", "--stat"]);
-const getWorkingTreeDiff = () => runGit(["diff"]);
+const _getWorkingTreeStat = () => runGit(["diff", "--stat"]);
+const _getWorkingTreeDiff = () => runGit(["diff"]);
 
 const readConfig = () => {
 	if (!existsSync(CONFIG_PATH)) {
@@ -320,250 +307,186 @@ const isWeakMessage = (message) => {
 const hasMeaningfulMessageContent = (value) =>
 	/^[\t ]*[^#\s].+/m.test(value || "");
 
-const extractMessage = (raw) => {
+const _extractMessage = (raw) => {
 	const clean = stripAnsi(raw).trim();
 	if (!clean) return "";
 
-	const lines = clean.split(/\n/);
-	const subjectRegex =
-		/^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?!?: .+/i;
-
-	for (let index = lines.length - 1; index >= 0; index -= 1) {
-		if (!subjectRegex.test(lines[index].trim())) continue;
-
-		const candidate = lines
-			.slice(index)
-			.filter(
-				(line, lineIndex) =>
-					lineIndex === 0 || (!line.startsWith("$ ") && !line.startsWith("> ")),
-			)
-			.join("\n")
-			.trim();
-
-		if (candidate) return `${candidate}\n`;
+	// Extract the actual message content, ignoring any comments or metadata
+	const lines = clean.split("\n");
+	const messageLines = [];
+	for (const line of lines) {
+		// Skip comment lines (starting with #) and empty lines
+		if (line.startsWith("#") || !line.trim()) continue;
+		messageLines.push(line);
 	}
 
-	return "";
+	return messageLines.join("\n").trim();
 };
 
-const parseModelList = (raw) =>
-	raw
-		.split(/\r?\n/)
-		.map((line) => stripAnsi(line).trim())
-		.filter(Boolean)
-		.filter((line) => line.includes("/"));
-
+// Resolve opencode binary path
 const resolveOpencode = () => {
-	const preferredWindowsPath = "D:\\app\\opencode\\opencode.exe";
-	if (process.platform === "win32" && existsSync(preferredWindowsPath)) {
-		return preferredWindowsPath;
-	}
-
 	try {
 		const locator = process.platform === "win32" ? "where.exe" : "which";
 		const result = execFileSync(locator, ["opencode"], {
 			encoding: "utf8",
 		}).trim();
-		return result.split(/\r?\n/).find(Boolean) || "";
+		const candidate = (result.split(/\r?\n/).find(Boolean) || "").replace(
+			/^"|"$/g,
+			"",
+		);
+		return existsSync(candidate) ? candidate : "";
 	} catch {
 		return "";
 	}
 };
 
-const runCommand = (command, args, env = process.env) => {
-	const result = spawnSync(command, args, {
-		encoding: "utf8",
-		env,
-	});
-
-	if (result.error) {
-		return { ok: false, stdout: "", stderr: result.error.message };
-	}
-
-	return {
-		ok: result.status === 0,
-		stdout: result.stdout || "",
-		stderr: result.stderr || "",
-	};
-};
-
-const readCachedSessionId = () => {
-	if (!existsSync(SESSION_CACHE_PATH)) return "";
-
-	try {
-		const value = readFileSync(SESSION_CACHE_PATH, "utf8").trim();
-		return SESSION_ID_PATTERN.test(value) ? value : "";
-	} catch {
-		return "";
-	}
-};
-
-const writeCachedSessionId = (sessionID) => {
-	if (!SESSION_ID_PATTERN.test(sessionID)) return;
-
-	try {
-		writeFileSync(SESSION_CACHE_PATH, `${sessionID}\n`, "utf8");
-	} catch {
-		// ignore cache write failures
-	}
-};
-
-const runWindowsPowerShell = (binary, script, env = process.env) =>
-	runCommand(
-		"powershell.exe",
-		[
-			"-NoProfile",
-			"-NonInteractive",
-			"-ExecutionPolicy",
-			"Bypass",
-			"-Command",
-			script.replace(/__BINARY__/g, binary.replace(/'/g, "''")),
-		],
-		env,
-	);
-
-const getSessionList = (binary) => {
-	if (!binary) return [];
-
-	const result =
-		process.platform === "win32"
-			? runWindowsPowerShell(binary, "& '__BINARY__' session list")
-			: runCommand(binary, ["session", "list"]);
-
-	if (!result.ok) return [];
-
-	return stripAnsi(result.stdout)
-		.split(/\r?\n/)
-		.map((line) => line.trimEnd())
-		.filter((line) => SESSION_ID_PATTERN.test(line.split(/\s+/)[0] || ""))
-		.map((line) => {
-			const match = line.match(/^(ses_[A-Za-z0-9]+)\s+(.+?)\s{2,}.+$/);
-			if (!match) return null;
-			return { id: match[1], title: match[2].trim() };
-		})
-		.filter(Boolean);
-};
-
-const resolveCommitSessionId = (binary) => {
-	const cached = readCachedSessionId();
-	const sessions = getSessionList(binary);
-
-	if (cached && sessions.some((session) => session.id === cached))
-		return cached;
-
-	const existing = sessions.find((session) =>
-		COMMIT_SESSION_TITLE_PATTERN.test(session.title),
-	);
-
-	if (!existing) return "";
-
-	writeCachedSessionId(existing.id);
-	return existing.id;
-};
-
-const getAvailableModels = (binary) => {
-	if (!binary) return [];
-
-	if (process.platform === "win32") {
-		const result = runWindowsPowerShell(binary, "& '__BINARY__' models");
-		return result.ok ? parseModelList(result.stdout) : [];
-	}
-
-	const result = runCommand(binary, ["models"]);
-	return result.ok ? parseModelList(result.stdout) : [];
-};
-
-const resolveModelCandidates = (config) =>
-	config.opencodeModels.filter(Boolean);
-
-const selectModel = (availableModels, candidates) => {
-	for (const candidate of candidates) {
-		if (availableModels.includes(candidate)) return candidate;
-	}
-
-	return "";
-};
-
-const runOpencodeCommand = (binary, model, prompt, options) => {
-	const args = ["run", prompt, "--model", model];
-
-	if (options.sessionID) args.push("--session", options.sessionID);
-	if (options.useContinue) args.push("--continue");
-	if (options.attachUrl) args.push("--attach", options.attachUrl);
-
-	const result = runCommand(binary, args);
-	if (!result.ok) return "";
-
-	const output = `${result.stdout}\n${result.stderr}`;
-	return extractMessage(output);
-};
-
-const runOpencodeWindows = (binary, model, prompt, options) => {
-	if (options.attachUrl) {
-		return runOpencodeCommand(binary, model, prompt, options);
-	}
-
-	const promptFile = path.join(
-		os.tmpdir(),
-		`opencode-commit-${process.pid}-${Date.now()}.txt`,
-	);
-	writeFileSync(promptFile, prompt, "utf8");
-
-	const command = options.useContinue
-		? "& '__BINARY__' run (Get-Content -Raw $env:OPENCODE_PROMPT_FILE) --model $env:OPENCODE_MODEL --continue"
-		: "& '__BINARY__' run (Get-Content -Raw $env:OPENCODE_PROMPT_FILE) --model $env:OPENCODE_MODEL --session $env:OPENCODE_SESSION_ID";
-
-	const result = runWindowsPowerShell(binary, command, {
-		...process.env,
-		OPENCODE_PROMPT_FILE: promptFile,
-		OPENCODE_MODEL: model,
-		OPENCODE_SESSION_ID: options.sessionID || "",
-	});
-
-	try {
-		unlinkSync(promptFile);
-	} catch {
-		// ignore temp cleanup failures
-	}
-
-	return result.ok ? extractMessage(`${result.stdout}\n${result.stderr}`) : "";
-};
-
-const runOpencodePosix = (binary, model, prompt, options) =>
-	runOpencodeCommand(binary, model, prompt, options);
-
+// Run opencode via its REST API: spin up isolated serve, create session,
+// send prompt, get response, delete session, kill server.
+// One session per run — no leftover artifacts.
 const runOpencode = (prompt) => {
+	const { spawn } = require("node:child_process");
+	const os = require("node:os");
+
 	const config = readConfig();
 	if (prompt.length > config.maxPromptChars) return "";
 
 	const binary = resolveOpencode();
 	if (!binary) return "";
 
-	const availableModels = getAvailableModels(binary);
-	const candidates = resolveModelCandidates(config);
-	const selectedModel = selectModel(availableModels, candidates);
-	const sessionID = resolveCommitSessionId(binary);
-	const attachUrl = config.opencodeAttachUrl;
+	const candidates = (config.opencodeModels || []).filter(Boolean);
+	if (!candidates.length) return "";
 
-	if (!selectedModel) return "";
+	// Fixed credentials for our isolated server instance
+	const USER = "x";
+	const PASS = "commit-gen-2026";
+	const AUTH = Buffer.from(`${USER}:${PASS}`).toString("base64");
+	const DIR = process.cwd().replace(/\\/g, "/");
 
-	const attempts = [
-		{ sessionID, attachUrl, useContinue: false },
-		{ sessionID: "", attachUrl, useContinue: true },
-		{ sessionID, attachUrl: "", useContinue: false },
-		{ sessionID: "", attachUrl: "", useContinue: true },
-	];
+	// Write async worker script to a temp file to avoid template literal issues.
+	const workerPath = path
+		.join(os.tmpdir(), `oc-commit-worker-${process.pid}.js`)
+		.replace(/\\/g, "/");
+	const resultPath = path
+		.join(os.tmpdir(), `oc-commit-result-${process.pid}.txt`)
+		.replace(/\\/g, "/");
 
-	for (const attempt of attempts) {
-		if (!attempt.sessionID && !attempt.useContinue) continue;
-		const result =
-			process.platform === "win32"
-				? runOpencodeWindows(binary, selectedModel, prompt, attempt)
-				: runOpencodePosix(binary, selectedModel, prompt, attempt);
-		if (result) return result;
+	const workerCode = [
+		"const { spawn } = require('child_process');",
+		"const http = require('http');",
+		"const fs = require('fs');",
+		`const BINARY = ${JSON.stringify(binary)};`,
+		`const PROMPT = ${JSON.stringify(prompt)};`,
+		`const MODEL = ${JSON.stringify(candidates[0])};`, // Use the first candidate model
+		`const DIR = ${JSON.stringify(DIR)};`,
+		`const RESULT_PATH = ${JSON.stringify(resultPath)};`,
+		"const USER = 'x';",
+		"const PASS = 'commit-gen-2026';",
+		"const AUTH = Buffer.from(USER + ':' + PASS).toString('base64');",
+		"",
+		"const api = (port, method, path, body) => new Promise((resolve, reject) => {",
+		"  const payload = body ? JSON.stringify(body) : null;",
+		"  const req = http.request({",
+		"    hostname: '127.0.0.1', port, path: '/v1' + path, method,",
+		"    headers: {",
+		"      'Authorization': 'Basic ' + AUTH,",
+		"      'Content-Type': 'application/json',",
+		"      'x-opencode-directory': encodeURIComponent(DIR),",
+		"      ...(payload ? { 'Content-Length': Buffer.byteLength(payload) } : {})",
+		"    }",
+		"  }, res => {",
+		"    let d = ''; res.on('data', c => d += c);",
+		"    res.on('end', () => { try { resolve(JSON.parse(d)); } catch { resolve(d); } });",
+		"  });",
+		"  req.on('error', reject);",
+		"  if (payload) req.write(payload);",
+		"  req.end();",
+		"});",
+		"",
+		"(async () => {",
+		"  // Start server",
+		"  const server = spawn(BINARY, ['serve', '--port', '0'], {",
+		"    stdio: ['ignore', 'pipe', 'ignore'],",
+		"    env: { ...process.env, OPENCODE_SERVER_PASSWORD: PASS, OPENCODE_SERVER_USERNAME: USER }",
+		"  });",
+		"  let port;",
+		"  try {",
+		"    port = await new Promise((resolve, reject) => {",
+		"      let buf = '';",
+		"      const t = setTimeout(() => reject(new Error('Server start timeout')), 8000);",
+		"      server.stdout.on('data', d => {",
+		"        buf += d.toString();",
+		"        const m = buf.match(/listening on http:\\/\\/[^:]+:(\\d+)/);",
+		"        if (m) { clearTimeout(t); resolve(parseInt(m[1], 10)); }",
+		"      });",
+		"      server.on('exit', code => reject(new Error(`Server exited: ${code}`)));",
+		"    });",
+		"  } catch (e) {",
+		"    server.kill(); process.exit(1);",
+		"  }",
+		"  let result = '';",
+		"  try {",
+		"    // Create session",
+		"    const session = await api(port, 'POST', '/session', { title: 'commit-gen' });",
+		"    if (!session || !session.id) throw new Error('No session ID');",
+		"    const sessionId = session.id;",
+		"    // Use the first candidate model",
+		"    const resp = await api(port, 'POST', `/session/${sessionId}/message`, {",
+		"      model: MODEL,",
+		"      parts: [{ type: 'text', text: PROMPT }],",
+		"      noReply: false",
+		"    });",
+		"    if (resp && resp.parts) {",
+		"      const text = resp.parts",
+		"        .filter(p => p.type === 'text')",
+		"        .map(p => p.text || p.content || '')",
+		"        .join('')",
+		"        .trim();",
+		"      if (text) { result = text; }",
+		"    }",
+		"    await api(port, 'DELETE', `/session/${sessionId}`, null).catch(() => {});",
+		"  } finally {",
+		"    server.kill();",
+		"  }",
+		"  fs.writeFileSync(RESULT_PATH, result, 'utf8');",
+		"})().catch(e => {",
+		"  process.stderr.write(e.message + '\\n');",
+		"  process.exit(1);",
+		"});",
+	].join("\n");
+
+	try {
+		writeFileSync(workerPath, workerCode, "utf8");
+	} catch {
+		return "";
 	}
 
-	return "";
+	const r = spawnSync(process.execPath, [workerPath], {
+		encoding: "utf8",
+		timeout: 120000,
+	});
+
+	let result = "";
+	try {
+		if (existsSync(resultPath)) {
+			result = readFileSync(resultPath, "utf8").trim();
+		}
+	} catch {
+		// ignore
+	}
+
+	// Cleanup temp files
+	try {
+		require("node:fs").unlinkSync(workerPath);
+	} catch {
+		/* ignore */
+	}
+	try {
+		require("node:fs").unlinkSync(resultPath);
+	} catch {
+		/* ignore */
+	}
+
+	return result;
 };
 
 const detectType = (files) => {
@@ -701,91 +624,142 @@ const allFilesInPath = (files, prefix) =>
 
 const summarize = (files, stat, type) => {
 	const fileCount = files.length;
+
+	// ALWAYS produce file-by-file bullets for small commits (most useful)
+	if (fileCount <= 15 && fileCount > 0) {
+		let englishBullets = "";
+		for (const file of files) {
+			let englishNote = `update file`;
+			let russianNote = `обновить файл`;
+			// Determine note based on file path
+			if (file.startsWith(".github/workflows/")) {
+				englishNote = `update CI/CD workflow configuration`;
+				russianNote = `обновить конфигурацию CI/CD workflow`;
+			} else if (file.startsWith(".husky/")) {
+				const hookName = file.split("/").pop();
+				englishNote = `update ${hookName} git hook`;
+				russianNote = `обновить git хук ${hookName}`;
+			} else if (file.startsWith(".vscode/")) {
+				const settingName = file.split("/").pop();
+				englishNote = `update VSCode ${settingName} settings`;
+				russianNote = `обновить настройки VSCode ${settingName}`;
+			} else if (file.startsWith("site/")) {
+				englishNote = `update site file`;
+				russianNote = `обновить файл сайта`;
+			} else if (file.startsWith("scripts/")) {
+				const scriptName = file.split("/").pop();
+				englishNote = `update ${scriptName} script`;
+				russianNote = `обновить скрипт ${scriptName}`;
+			} else if (file.includes("package.json")) {
+				englishNote = `update package dependencies or scripts`;
+				russianNote = `обновить зависимости или скрипты пакета`;
+			} else if (
+				file.includes("tsconfig.json") ||
+				file.includes("biome.json")
+			) {
+				englishNote = `update build/lint configuration`;
+				russianNote = `обновить конфигурацию сборки или линтера`;
+			} else if (file.startsWith("site/assets/css/")) {
+				englishNote = `update site styles`;
+				russianNote = `обновить стили сайта`;
+			} else if (/^README/i.test(file)) {
+				englishNote = `update documentation`;
+				russianNote = `обновить документацию`;
+			}
+			englishBullets += `- \`${file}\` — ${englishNote}\n  RU: ${russianNote}\n`;
+		}
+		englishBullets = englishBullets.trimEnd();
+
+		const scope = detectScope(files);
+		const prefix = scope ? `${type}(${scope})` : type;
+		const fileList = files.join(", ");
+
+		const generateRussianNote = (file) => {
+			if (file.includes("workflows/") || file.includes("ci.yml")) {
+				return "изменены настройки pipeline, добавлены/удалены проверки";
+			} else if (file.includes(".husky/")) {
+				return "улучшена логика хуков для более стабильной работы";
+			} else if (file.includes(".vscode/")) {
+				return "настроено поведение IDE для удобной разработки";
+			} else if (file.includes("README")) {
+				return "уточнена документация для разработчиков";
+			} else if (file.includes("scripts/")) {
+				return "обновлена автоматизация для генерации коммитов";
+			} else if (file.includes("package.json")) {
+				return "изменены зависимости или npm скрипты";
+			} else if (file.includes("site/")) {
+				return "обновлен контент или стили сайта";
+			}
+			return "внесены изменения в файл";
+		};
+
+		// Generate Russian bullets - matching the English structure
+		const russianBullets = [];
+		for (let i = 0; i < files.length; i++) {
+			const file = files[i];
+			const enLine = englishBullets.split("\n")[i];
+			// Extract the English part after "— "
+			const enMatch = enLine.match(/— (.+)$/);
+			const enPart = enMatch ? enMatch[1] : "";
+			const ru = generateRussianNote(file);
+			russianBullets.push("- `" + file + "` — " + ru);
+		}
+		const russianBody = russianBullets.join("\n");
+
+		return {
+			subject: `${prefix}: update ${fileCount} files`,
+			body: englishBullets + "\n\nRUSSIAN SUMMARY:\n" + russianBody,
+		};
+	}
+
 	const hasReadme = files.some(
 		(file) => /^README/i.test(file) || file.includes("/README"),
 	);
 	const hasHusky = files.some((file) => file.startsWith(".husky/"));
 	const hasCi = files.some((file) => file.startsWith(".github/workflows/"));
-	const smallDocEdit =
-		fileCount === 1 &&
-		hasReadme &&
-		/1 file changed, 1 insertion\(\+\), 1 deletion\(-\)/.test(stat);
 
 	if (smallDocEdit) {
 		return {
 			subject: "docs(readme): clean up wording and formatting",
-			body: "Clean up README for clarity without changing process.\n\nRUSSIAN:\nУточнено и слегка выровнено оформление README без изменения процесса работы.",
+			body: "Clean up README for clarity without changing process.\n\nRUSSIAN SUMMARY:\nУточнено и слегка выровнено оформление README без изменения процесса работы.",
 		};
 	}
 
 	if (hasReadme && hasHusky) {
 		return {
 			subject: "chore(hooks): update commit message automation",
-			body: "Improve git hooks for commit message generation and align README docs with implementation.\n\nRUSSIAN:\nОбновлены git hooks для автогенерации commit message и синхронизировано описание процесса в README. Теперь процесс работает стабильнее и документация совпадает с кодом.",
+			body: "Improve git hooks for commit message generation and align README docs with implementation.\n\nRUSSIAN SUMMARY:\nОбновлены git hooks для автогенерации commit message и синхронизировано описание процесса в README. Теперь процесс работает стабильнее и документация совпадает с кодом.",
 		};
 	}
 
 	if (hasHusky) {
 		return {
 			subject: "chore(hooks): refine local git hook behavior",
-			body: "Improve git hook logic for more stable commit and validation workflow.\n\nRUSSIAN:\nОбновлена логика локальных git hooks, чтобы сценарий коммита и проверок работал стабильнее. Добавлены checks для обнаружения corruption и graceful fallbacks.",
+			body: "Improve git hook logic for more stable commit and validation workflow.\n\nRUSSIAN SUMMARY:\nОбновлена логика локальных git hooks, чтобы сценарий коммита и проверок работал стабильнее. Добавлены checks для обнаружения corruption и graceful fallbacks.",
 		};
 	}
 
 	if (hasCi) {
 		return {
 			subject: "ci: update pipeline checks and deployment flow",
-			body: "Adjust CI/CD workflow to ensure checks and deployment execute in correct order.\n\nRUSSIAN:\nСкорректирован workflow CI/CD, чтобы проверки и деплой выполнялись в ожидаемом порядке. Improved error handling and rollback behavior.",
+			body: "Adjust CI/CD workflow to ensure checks and deployment execute in correct order.\n\nRUSSIAN SUMMARY:\nСкорректирован workflow CI/CD, чтобы проверки и деплой выполнялись в ожидаемом порядке. Improved error handling and rollback behavior.",
 		};
 	}
 
 	if (hasReadme) {
 		return {
 			subject: "docs(readme): update workflow notes",
-			body: "Update documentation to clarify process for future reference.\n\nRUSSIAN:\nОбновлено описание процесса работы, чтобы через время было проще восстановить контекст. Добавлены примеры и clarifications для новых разработчиков.",
+			body: "Update documentation to clarify process for future reference.\n\nRUSSIAN SUMMARY:\nОбновлено описание процесса работы, чтобы через время было проще восстановить контекст. Добавлены примеры и clarifications для новых разработчиков.",
 		};
 	}
 
-	// Multi-file case: analyze and describe what was actually changed
+	// Multi-file case (15+ files): analyze and describe what was actually changed
 	const categories = categorizeFiles(files);
 	const descriptions = buildCategoryDescription(categories);
 	const categoryList = descriptions.join(", ");
 
 	const scope = detectScope(files);
 	const prefix = scope ? `${type}(${scope})` : type;
-
-	if (fileCount <= 3) {
-		// For small commits, be more specific - show actual file names in body
-		const fileNames = files.map((f) => f.split("/").pop()).join(", ");
-		let englishBody = "";
-		let russianBody = "";
-
-		// Build informative body based on categories
-		if (categories.bmad.length) {
-			englishBody = `Update BMAD artifacts: ${categories.bmad.map((f) => f.split("/").pop()).join(", ")}`;
-			russianBody = `Обновлены BMAD артефакты: ${categories.bmad.map((f) => f.split("/").pop()).join(", ")}`;
-		} else if (categories.docs.length) {
-			englishBody = `Update documentation: ${categories.docs.map((f) => f.split("/").pop()).join(", ")}`;
-			russianBody = `Обновлена документация: ${categories.docs.map((f) => f.split("/").pop()).join(", ")}`;
-		} else if (categories.tests.length) {
-			englishBody = `Update tests: ${categories.tests.map((f) => f.split("/").pop()).join(", ")}`;
-			russianBody = `Обновлены тесты: ${categories.tests.map((f) => f.split("/").pop()).join(", ")}`;
-		} else if (categories.site.length) {
-			englishBody = `Update site content: ${categories.site.map((f) => f.split("/").pop()).join(", ")}`;
-			russianBody = `Обновлен контент сайта: ${categories.site.map((f) => f.split("/").pop()).join(", ")}`;
-		} else if (categories.config.length) {
-			englishBody = `Update configuration: ${categories.config.map((f) => f.split("/").pop()).join(", ")}`;
-			russianBody = `Обновлены настройки: ${categories.config.map((f) => f.split("/").pop()).join(", ")}`;
-		} else {
-			englishBody = `Update: ${fileNames}`;
-			russianBody = `Обновлено: ${fileNames}`;
-		}
-
-		return {
-			subject: `${prefix}: update ${fileNames}`,
-			body: `${englishBody}\n\nRUSSIAN:\n${russianBody}`,
-		};
-	}
 
 	if (categories.bmad.length === fileCount) {
 		const isPlanningArtifacts = allFilesInPath(
@@ -796,48 +770,42 @@ const summarize = (files, stat, type) => {
 			subject: isPlanningArtifacts
 				? "docs(bmad): update planning artifacts"
 				: "docs(bmad): update BMAD artifacts",
-			body: `Update BMAD documentation and artifacts: ${formatFileList(categories.bmad)}.\n\nRUSSIAN:\nОбновлены BMAD артефакты и документация: ${formatFileList(categories.bmad)}. Синхронизированы описания, уточнены требования и clarified constraints.`,
+			body: `Update BMAD documentation and artifacts: ${formatFileList(categories.bmad)}.\n\nRUSSIAN SUMMARY:\nОбновлены BMAD артефакты и документация: ${formatFileList(categories.bmad)}. Синхронизированы описания, уточнены требования и clarified constraints.`,
 		};
 	}
 
 	if (categories.docs.length === fileCount) {
 		return {
 			subject: "docs: update project documentation",
-			body: `Update documentation: ${formatFileList(categories.docs)}.\n\nRUSSIAN:\nОбновлена документация: ${formatFileList(categories.docs)}. Уточнены процессы и added missing clarifications.`,
+			body: `Update documentation: ${formatFileList(categories.docs)}.\n\nRUSSIAN SUMMARY:\nОбновлена документация: ${formatFileList(categories.docs)}. Уточнены процессы и added missing clarifications.`,
 		};
 	}
 
 	if (categories.site.length === fileCount) {
 		return {
 			subject: "feat(site): update site content and assets",
-			body: `Update site content and assets: ${formatFileList(categories.site)}.\n\nRUSSIAN:\nОбновлен контент и assets сайта: ${formatFileList(categories.site)}. Улучшена UX и aligned with latest requirements.`,
+			body: `Update site content and assets: ${formatFileList(categories.site)}.\n\nRUSSIAN SUMMARY:\nОбновлен контент и assets сайта: ${formatFileList(categories.site)}. Улучшена UX и aligned with latest requirements.`,
 		};
 	}
 
 	return {
 		subject: `${prefix}: update ${fileCount} project files`,
-		body: `Update multiple categories: ${categoryList}.\n\nRUSSIAN:\nОбновлены файлы в нескольких категориях: ${categoryList}. Синхронизирована логика, документация и конфигурация.`,
+		body: `Update multiple categories: ${categoryList}.\n\nRUSSIAN SUMMARY:\nОбновлены файлы в нескольких категориях: ${categoryList}. Синхронизирована логика, документация и конфигурация.`,
 	};
 };
 
 const validateBilingualMessage = (message) => {
 	// Check that message has both English and Russian sections
-	const hasEnglish = /^[a-z]+(\([a-z-]+\))?:/i.test(message);
 	const hasRussian = /[\u0400-\u04FF]/u.test(message);
-	const hasRussianLabel = /RUSSIAN:|RU:/i.test(message);
+	const hasRussianLabel = /RUSSIAN SUMMARY:|RUSSIAN:|RU:/i.test(message);
 
-	// Message should have clear bilingual structure
 	if (!hasRussian) {
-		console.warn(
-			"Warning: No Russian section in commit message. Adding structure...",
-		);
+		console.warn("Warning: No Russian section in commit message.");
 		return false;
 	}
 	if (!hasRussianLabel && hasRussian) {
-		console.warn(
-			"Warning: Russian text exists but no RUSSIAN:/RU: label. Consider restructuring.",
-		);
-		return true; // Still acceptable if structure is clear
+		console.warn("Warning: Russian text exists but no RUSSIAN SUMMARY: label.");
+		return true;
 	}
 	return true;
 };
@@ -894,16 +862,12 @@ const current = readFileSync(messageFile, "utf8");
 if (hasMeaningfulMessageContent(current) && !isWeakMessage(current))
 	process.exit(0);
 
-let files = getStagedFiles();
-let stat = getStat();
-let diff = getDiff();
+// Analyze ONLY staged files (never fallback to working tree)
+const files = getStagedFiles();
+const stat = getStat();
+const diff = getDiff();
 
-if (!files.length) {
-	files = getWorkingTreeFiles();
-	stat = getWorkingTreeStat();
-	diff = getWorkingTreeDiff();
-}
-
+// If no staged files, nothing to generate
 if (!files.length) process.exit(0);
 
 const config = readConfig();

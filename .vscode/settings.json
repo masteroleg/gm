@@ -18,5 +18,7 @@
 		"editor.defaultFormatter": "biomejs.biome"
 	},
 	"git.rebaseWhenSync": true,
-	"git.autofetch": true
+	"git.autofetch": true,
+	"git.useEditorAsCommitInput": true,
+	"git.terminalGitEditor": true
 }

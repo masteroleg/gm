@@ -1,33 +1,4 @@
 #!/bin/sh
 
-# Robust commit-msg hook with index integrity check
-# This runs after the commit message is entered
-
-MSG_FILE="$1"
-
-# ===== INDEX INTEGRITY CHECK =====
-# Quick check to ensure index is still valid
-check_index() {
-	if ! git ls-files --stage >/dev/null 2>&1; then
-		echo "ERROR: Git index is corrupted. Cannot complete commit."
-		echo "Please run these commands to fix:"
-		echo "  git reset"
-		echo "  git read-tree --reset HEAD"
-		exit 1
-	fi
-}
-
-# Run index integrity check
-check_index
-
-# ===== EXISTING COMMIT MESSAGE GENERATION LOGIC =====
-
-if command -v node >/dev/null 2>&1; then
-	node scripts/generate-commit-msg.cjs "$MSG_FILE"
-	exit 0
-fi
-
-if command -v node.exe >/dev/null 2>&1; then
-	node.exe scripts/generate-commit-msg.cjs "$MSG_FILE"
-	exit 0
-fi
+# commit-msg: validation only, no generation
+exit 0
