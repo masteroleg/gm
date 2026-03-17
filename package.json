@@ -27,7 +27,7 @@
 		"test:e2e:headed": "playwright test --config=playwright.config.ts --headed"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.6",
+		"@biomejs/biome": "^2.4.7",
 		"@playwright/test": "^1.58.2",
 		"@tailwindcss/cli": "^4.2.1",
 		"chrome-launcher": "^1.2.1",
