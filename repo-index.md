@@ -28,6 +28,7 @@ Directory Index: repo-root
 - **[index.md](_bmad-output/implementation-artifacts/index.md)** - Directory Index: _bmad-output/implementation-artifacts
 - **[tech-spec-fix-ambiguous-diia-locator.md](_bmad-output/implementation-artifacts/tech-spec-fix-ambiguous-diia-locator.md)** - ---
 - **[tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md](_bmad-output/implementation-artifacts/tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md)** - ---
+- **[tech-spec-p1-remediation-nav-trust-pills.md](_bmad-output/implementation-artifacts/tech-spec-p1-remediation-nav-trust-pills.md)** - ---
 - **[tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md](_bmad-output/implementation-artifacts/tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md)** - ---
 - **[index.md](_bmad-output/index.md)** - Directory Index: _bmad-output
 - **[20260217_2241_command-messageinitcommand-message-8536d10d.md](_bmad-output/knowledge/fragments/20260217_2241_command-messageinitcommand-message-8536d10d.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
@@ -65,6 +66,8 @@ Directory Index: repo-root
 - **[validation-report-2026-03-09.md](_bmad-output/planning-artifacts/validation-report-2026-03-09.md)** - ---
 - **[validation-report-2026-03-10.md](_bmad-output/planning-artifacts/validation-report-2026-03-10.md)** - ---
 - **[validation-report-2026-03-11.md](_bmad-output/planning-artifacts/validation-report-2026-03-11.md)** - ---
+- **[adversarial-review-p1-remediation.md](_bmad-output/plans/adversarial-review-p1-remediation.md)** - Adversarial Review — tech-spec-p1-remediation-nav-trust-pills.md
+- **[p1-remediation-plan.md](_bmad-output/plans/p1-remediation-plan.md)** - P1 Remediation Plan — genu.im
 - **[problem-solution-2026-02-23.md](_bmad-output/problem-solution-2026-02-23.md)** - Problem Solving Session: Уникальный B2B-лендинг genu.im, который конвертит и запоминается
 - **[project-context.md](_bmad-output/project-context.md)** - ---
 - **[ADR-001-output-css-tracking.md](_bmad-output/solutioning/adrs/ADR-001-output-css-tracking.md)** - ---
@@ -80,4 +83,4 @@ Directory Index: repo-root
 Archived legacy materials and migration inputs.
 - **[/_archive/perevir-product](./_archive/perevir-product/)**
 
-Last updated: 2026-03-15
+Last updated: 2026-03-17
