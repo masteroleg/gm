@@ -21,7 +21,9 @@
 | **Severity** | **Critical** |
 | **Effort** | **S** — extend homepage header component to all pages |
 | **Owner** | FE |
-| **Status** | Open |
+| **Status** | **Fixed — 2026-03-17** |
+| **Fix** | Nav block (`#mainNav` + `#burgerBtn` + `#closeMenu`) inserted into all 9 secondary pages. `menu.js` added to each. Absolute-path anchors (`/#use-cases`, `/#how-it-works`, `/knowledge/`). CSS version bumped to `?v=20` sitewide. |
+| **Rechecked** | Yes — 2026-03-17 (post-fix smoke: 9 pages × desktop + mobile × EN + UK) |
 | **Validation status** | Verified |
 | **Evidence type** | Screenshot (3 viewports × 9 pages) |
 | **Confidence** | High |
@@ -67,6 +69,9 @@
 | **Severity** | **High** |
 | **Effort** | **XS** |
 | **Owner** | Design |
+| **Status** | **Fixed — 2026-03-17** |
+| **Fix** | Added `data-source-type="primary"` to the `genu.mark` pill in `site/v/genuim/index.html`. Added CSS rule `.proof-source-pill[data-source-type="primary"]` with brand-colored border, background, color, and font-weight 600 to `input.css`; rebuilt `output.css`. |
+| **Rechecked** | Yes — 2026-03-17 (post-fix smoke: `/v/genuim/` desktop + mobile × EN + UK) |
 | **Validation status** | Verified |
 | **Evidence type** | Screenshot |
 | **Confidence** | High |
@@ -80,6 +85,9 @@
 | **Severity** | **High** |
 | **Effort** | **XS** |
 | **Owner** | Content |
+| **Status** | **Fixed — 2026-03-17** |
+| **Fix** | Stripped "for Phase 1" / "для першої фази" from `verification.fact3Body` in both EN and UK in `lang-toggle.js`. Updated HTML fallback text in `site/v/genuim/index.html`. |
+| **Rechecked** | Yes — 2026-03-17 (post-fix smoke: `/v/genuim/` desktop + mobile × EN + UK) |
 | **UA rewrite available** | Yes |
 | **Validation status** | Verified |
 | **Evidence type** | Screenshot (UA + EN) |
@@ -96,6 +104,9 @@
 | **Severity** | **High** |
 | **Effort** | **XS** |
 | **Owner** | Product + Content |
+| **Status** | **Fixed — 2026-03-17** |
+| **Fix** | Replaced `knowledge.section2.body` EN/UK in `lang-toggle.js` with neutral stage descriptions. EN: "This section is open early so the information architecture is clear before the full content area is published." UK: "Цей розділ відкрито завчасно, щоб структура сайту була зрозумілою ще до появи повного набору матеріалів." Updated HTML fallback in `site/knowledge/index.html`. |
+| **Rechecked** | Yes — 2026-03-17 (post-fix smoke: `/knowledge/` desktop + mobile × EN + UK) |
 | **UA rewrite available** | Yes |
 | **Validation status** | Verified |
 | **Evidence type** | Screenshot (UA mobile + EN mobile) |
@@ -112,6 +123,9 @@
 | **Severity** | **High** |
 | **Effort** | **XS** |
 | **Owner** | Legal + Content |
+| **Status** | **Fixed — 2026-03-17** |
+| **Fix** | Stripped "Phase 1 starter policy. " prefix from `privacy.lead` EN and "Стартова політика першої фази. " from UK in `lang-toggle.js`. Updated HTML fallback in `site/privacy/index.html`. |
+| **Rechecked** | Yes — 2026-03-17 (post-fix smoke: `/privacy/` desktop + mobile × EN + UK) |
 | **UA rewrite available** | Yes |
 | **Validation status** | Verified |
 | **Evidence type** | Screenshot (UA + EN mobile) |
@@ -128,6 +142,9 @@
 | **Severity** | **High** |
 | **Effort** | **XS** |
 | **Owner** | Legal + Content |
+| **Status** | **Fixed — 2026-03-17** |
+| **Fix** | Stripped "Phase 1 starter terms. " prefix from `terms.lead` EN and "Стартові умови першої фази. " from UK in `lang-toggle.js`. Updated HTML fallback in `site/terms/index.html`. |
+| **Rechecked** | Yes — 2026-03-17 (post-fix smoke: `/terms/` desktop + mobile × EN + UK) |
 | **UA rewrite available** | Yes |
 | **Validation status** | Verified |
 | **Evidence type** | Screenshot (UA + EN mobile) |
@@ -246,10 +263,11 @@
 
 | Category | Count | IDs |
 |---|---:|---|
-| Critical | 1 | IA-001 |
-| High | 8 | VIS-002, TRUST-001, TRUST-002, TRUST-003, TRUST-004, TRUST-005, TRUST-006, CONV-002 |
+| Critical | 0 | ~~IA-001~~ (fixed) |
+| High | 3 | VIS-002, TRUST-001, CONV-002 |
 | Medium | 2 | COPY-001, COPY-002 |
 | Low | 1 | A11Y-001 |
+| **Fixed (2026-03-17)** | **6** | IA-001, TRUST-002, TRUST-003, TRUST-004, TRUST-005, TRUST-006 |
 | Closed | 4 | L10N-001, A11Y-002, A11Y-003, A11Y-004 |
 | Strategic | 1 | STRAT-001 |
-| **Total active** | **12** | |
+| **Total active** | **6** | |

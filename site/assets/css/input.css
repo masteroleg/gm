@@ -2935,7 +2935,8 @@
 		font-family: var(--font-sans);
 		font-size: 0.95rem;
 		line-height: 1.5;
-		transition: border-color var(--duration-fast) var(--easing-standard),
+		transition:
+			border-color var(--duration-fast) var(--easing-standard),
 			box-shadow var(--duration-fast) var(--easing-standard);
 		appearance: none;
 		-webkit-appearance: none;
@@ -2946,7 +2947,8 @@
 	.request-form__textarea:focus {
 		outline: none;
 		border-color: var(--color-brand);
-		box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-brand) 15%, transparent);
+		box-shadow: 0 0 0 3px
+			color-mix(in oklab, var(--color-brand) 15%, transparent);
 	}
 
 	.request-form__input::placeholder,
@@ -3273,6 +3275,13 @@
 		border-radius: var(--radius-pill);
 		border: 1px solid --alpha(var(--color-heading) / 8%);
 		background: --alpha(var(--color-heading) / 5%);
+	}
+
+	.proof-source-pill[data-source-type="primary"] {
+		border: 1px solid --alpha(var(--color-brand) / 20%);
+		background: --alpha(var(--color-brand) / 10%);
+		color: var(--color-brand-deep);
+		font-weight: 600;
 	}
 
 	.proof-evidence-link {

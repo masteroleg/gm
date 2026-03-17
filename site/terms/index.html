@@ -41,7 +41,7 @@
 
 	<link rel="icon" href="../assets/favicon/favicon.ico" />
 	<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png" />
-	<link href="../assets/css/output.css?v=17" rel="stylesheet" />
+	<link href="../assets/css/output.css?v=20" rel="stylesheet" />
 </head>
 
 <body class="site-body">
@@ -53,32 +53,49 @@
 					<img src="../assets/img/logo-01_black.svg" alt="genu.im" width="116" height="40" class="logo-image logo-image--light" />
 					<img src="../assets/img/logo-02_white.svg" alt="genu.im" width="116" height="40" class="logo-image logo-image--dark" />
 				</a>
-				<div class="header-controls">
-					<div class="utility-strip">
-						<button id="langToggle" type="button" class="control-chip" aria-label="Language: EN. Click to switch." tabindex="0">
-							<span id="langLabel">EN</span>
-						</button>
-						<span class="utility-strip__divider" aria-hidden="true"></span>
-						<button id="themeToggle" type="button" class="control-icon"
-							aria-label="Switch to dark mode" aria-pressed="false">
-							<div class="theme-toggle__glyph">
-								<svg class="theme-toggle__icon theme-toggle__icon--sun" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-								</svg>
-								<svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-									<path fill-rule="evenodd" d="M21.752 15.002A9.72 9.72 0 0118 15.75 9.75 9.75 0 018.25 6c0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25 9.75 9.75 0 0012.75 21a9.753 9.753 0 009.002-5.998z" clip-rule="evenodd" />
-								</svg>
-							</div>
-						</button>
-					</div>
+			<div class="header-controls">
+				<nav id="mainNav"
+					class="site-nav fixed inset-0 z-50 hidden md:flex md:static md:inset-auto md:z-auto">
+					<a href="/#use-cases" class="site-nav__link" data-i18n="nav.useCases">Use cases</a>
+					<a href="/#how-it-works" class="site-nav__link" data-i18n="nav.howItWorks">How it works</a>
+					<a href="/knowledge/" class="site-nav__link" data-i18n="nav.knowledge">Knowledge</a>
+					<button id="closeMenu" type="button" class="site-nav__close absolute top-5 right-5 md:hidden"
+						aria-label="Close menu">&times;</button>
+				</nav>
+				<div class="utility-strip">
+					<button id="langToggle" type="button" class="control-chip" aria-label="Language: EN. Click to switch." tabindex="0">
+						<span id="langLabel">EN</span>
+					</button>
+					<span class="utility-strip__divider" aria-hidden="true"></span>
+					<button id="themeToggle" type="button" class="control-icon"
+						aria-label="Switch to dark mode" aria-pressed="false">
+						<div class="theme-toggle__glyph">
+							<svg class="theme-toggle__icon theme-toggle__icon--sun" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+							</svg>
+							<svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path fill-rule="evenodd" d="M21.752 15.002A9.72 9.72 0 0118 15.75 9.75 9.75 0 018.25 6c0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25 9.75 9.75 0 0012.75 21a9.753 9.753 0 009.002-5.998z" clip-rule="evenodd" />
+							</svg>
+						</div>
+					</button>
 				</div>
-			</header>
+				<button id="burgerBtn" type="button" class="control-icon burger-button md:hidden"
+					aria-controls="mainNav" aria-expanded="false" aria-label="Open menu">
+					<svg class="burger-button__icon" fill="none" stroke="currentColor" stroke-width="2"
+						viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<line x1="3" y1="6" x2="21" y2="6" />
+						<line x1="3" y1="12" x2="21" y2="12" />
+						<line x1="3" y1="18" x2="21" y2="18" />
+					</svg>
+				</button>
+			</div>
+		</header>
 
 			<main class="info-page">
 				<div class="info-page__header">
 					<p class="section-eyebrow" data-i18n="terms.eyebrow">Terms</p>
 					<h1 class="info-page__title" data-i18n="terms.title">Terms of Use</h1>
-					<p class="info-page__lead" data-i18n="terms.lead">Phase 1 starter terms. By using genu.im you agree to these conditions.</p>
+					<p class="info-page__lead" data-i18n="terms.lead">By using genu.im you agree to these conditions.</p>
 				</div>
 
 				<div class="info-page__body">
@@ -129,5 +146,6 @@
 	</div>
 	<script src="../assets/js/lang-toggle.js" defer></script>
 	<script src="../assets/js/theme-toggle.js" defer></script>
+	<script src="../assets/js/menu.js" defer></script>
 </body>
 </html>

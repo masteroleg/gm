@@ -242,7 +242,7 @@ const translations = {
 		"verification.fact3Source": "Source: brand",
 		"verification.fact3Title": "Public status",
 		"verification.fact3Body":
-			"This sample item is shown as a static proof example for Phase 1.",
+			"This sample item is shown as a static proof example.",
 		"verification.nextStepTitle": "Next step",
 		"verification.nextStepBody":
 			"If you want this type of proof on your own marked products, use the contact path to discuss rollout scope.",
@@ -311,7 +311,7 @@ const translations = {
 			"Over time, this section will hold practical guides, articles, and explainers about product proof, marked products, and how the genu.im trust flow works.",
 		"knowledge.section2.heading": "Current stage",
 		"knowledge.section2.body":
-			"Right now this is a Phase 1 placeholder. We are opening the navigation slot early so the information architecture is clear before the full content area is published.",
+			"This section is open early so the information architecture is clear before the full content area is published.",
 		"knowledge.section3.heading": "What to do for now",
 		"knowledge.section3.body":
 			"Use the main site pages below to review proof context, trust-floor information, and contact paths. This page is here to show where the knowledge area will grow next.",
@@ -339,7 +339,7 @@ const translations = {
 		"privacy.eyebrow": "Privacy",
 		"privacy.title": "Privacy Policy",
 		"privacy.lead":
-			"Phase 1 starter policy. This page describes how genu.im handles data at this stage of operations.",
+			"This page describes how genu.im handles data at this stage of operations.",
 		"privacy.lastUpdated": "Last updated: March 2026",
 		"privacy.section1.heading": "What we collect",
 		"privacy.section1.body":
@@ -355,8 +355,7 @@ const translations = {
 			"As genu.im grows, this policy will be updated to reflect new data practices. Material changes will be noted with a new effective date at the top of this page.",
 		"terms.eyebrow": "Terms",
 		"terms.title": "Terms of Use",
-		"terms.lead":
-			"Phase 1 starter terms. By using genu.im you agree to these conditions.",
+		"terms.lead": "By using genu.im you agree to these conditions.",
 		"terms.lastUpdated": "Last updated: March 2026",
 		"terms.section1.heading": "Use of the platform",
 		"terms.section1.body":
@@ -669,7 +668,7 @@ const translations = {
 		"verification.fact3Source": "Джерело: бренд",
 		"verification.fact3Title": "Публічний статус",
 		"verification.fact3Body":
-			"Цю одиницю показано як статичний приклад доказу для першої фази.",
+			"Цю одиницю показано як статичний приклад доказу.",
 		"verification.nextStepTitle": "Наступний крок",
 		"verification.nextStepBody":
 			"Якщо ви хочете такий самий формат доказу для власних маркованих товарів, перейдіть на сторінку контактів і опишіть задачу впровадження.",
@@ -739,7 +738,7 @@ const translations = {
 			"Згодом тут будуть практичні гіди, статті та пояснення про доказ продукту, марковані товари й те, як працює шлях довіри в genu.im.",
 		"knowledge.section2.heading": "Поточний етап",
 		"knowledge.section2.body":
-			"Зараз це сторінка-заглушка для першої фази. Ми відкриваємо цей розділ завчасно, щоб структура сайту була зрозумілою ще до появи повного набору матеріалів.",
+			"Цей розділ відкрито завчасно, щоб структура сайту була зрозумілою ще до появи повного набору матеріалів.",
 		"knowledge.section3.heading": "Що робити зараз",
 		"knowledge.section3.body":
 			"Поки що скористайтеся основними сторінками сайту: там уже є контекст, базова довідкова інформація та способи зв'язку. Ця сторінка лише показує, куди далі розвиватиметься розділ знань.",
@@ -767,7 +766,7 @@ const translations = {
 		"privacy.eyebrow": "Конфіденційність",
 		"privacy.title": "Політика конфіденційності",
 		"privacy.lead":
-			"Стартова політика першої фази. На цій сторінці описано, як genu.im обробляє дані на поточному етапі роботи.",
+			"На цій сторінці описано, як genu.im обробляє дані на поточному етапі роботи.",
 		"privacy.lastUpdated": "Останнє оновлення: березень 2026",
 		"privacy.section1.heading": "Що ми збираємо",
 		"privacy.section1.body":
@@ -783,8 +782,7 @@ const translations = {
 			"У міру розвитку genu.im ця політика буде оновлюватися відповідно до нових практик роботи з даними. Суттєві зміни будуть відзначені новою датою набрання чинності вгорі сторінки.",
 		"terms.eyebrow": "Умови використання",
 		"terms.title": "Умови використання",
-		"terms.lead":
-			"Стартові умови першої фази. Використовуючи genu.im, ви погоджуєтесь із цими умовами.",
+		"terms.lead": "Використовуючи genu.im, ви погоджуєтесь із цими умовами.",
 		"terms.lastUpdated": "Останнє оновлення: березень 2026",
 		"terms.section1.heading": "Використання платформи",
 		"terms.section1.body":
