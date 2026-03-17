@@ -17,7 +17,8 @@ fi
 DIFF=$(git diff --cached)
 [ -z "$DIFF" ] && exit 0
 
-# Use Node.js script with REST API approach for AI generation
+# Use Node.js script to generate bilingual commit message
+# Falls back to intelligent heuristic generator when AI is unavailable
 # Get the repo root directory
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 node "$REPO_ROOT/scripts/generate-commit-msg.cjs" "$MSG_FILE"

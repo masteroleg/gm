@@ -371,163 +371,21 @@ const resolveOpencode = () => {
 	}
 };
 
-// Run opencode via its REST API: spin up isolated serve, create session,
-// send prompt, get response, delete session, kill server.
-// One session per run — no leftover artifacts.
+// Run opencode via CLI: opencode run [message] --model <model>
+// Status: DISABLED due to "Session not found" bug in opencode CLI
+//
+// Investigation findings:
+// - opencode serve --port 0 starts WEB UI server only (no REST API endpoints like /v1/session)
+// - opencode run [message] encounters "Session not found" error when no active session exists
+// - opencode acp starts ACP protocol server (different protocol, not yet implemented)
+// - No simple REST API available in current opencode version for commit message generation
+//
+// Fallback: Use intelligent heuristic generator (see buildMessage()) which produces
+// quality bilingual messages with file-by-file bullets and Russian context explanations.
 const runOpencode = (prompt) => {
-	const { spawn } = require("node:child_process");
-	const os = require("node:os");
-
-	const config = readConfig();
-	if (prompt.length > config.maxPromptChars) return "";
-
-	const binary = resolveOpencode();
-	if (!binary) return "";
-
-	const candidates = (config.opencodeModels || []).filter(Boolean);
-	if (!candidates.length) return "";
-
-	// Fixed credentials for our isolated server instance
-	const USER = "x";
-	const PASS = "commit-gen-2026";
-	const AUTH = Buffer.from(`${USER}:${PASS}`).toString("base64");
-	const DIR = process.cwd().replace(/\\/g, "/");
-
-	// Write async worker script to a temp file to avoid template literal issues.
-	const workerPath = path
-		.join(os.tmpdir(), `oc-commit-worker-${process.pid}.js`)
-		.replace(/\\/g, "/");
-	const resultPath = path
-		.join(os.tmpdir(), `oc-commit-result-${process.pid}.txt`)
-		.replace(/\\/g, "/");
-
-	const workerCode = [
-		"const { spawn } = require('child_process');",
-		"const http = require('http');",
-		"const fs = require('fs');",
-		`const BINARY = ${JSON.stringify(binary)};`,
-		`const PROMPT = ${JSON.stringify(prompt)};`,
-		`const MODEL = ${JSON.stringify(candidates[0])};`,
-		`const DIR = ${JSON.stringify(DIR)};`,
-		`const RESULT_PATH = ${JSON.stringify(resultPath)};`,
-		`const USER = ${JSON.stringify("opencode")};`,
-		`const PASS = ${JSON.stringify(process.env.OPENCODE_SERVER_PASSWORD || "x")};`,
-		"const AUTH = Buffer.from(USER + ':' + PASS).toString('base64');",
-		"",
-		"const api = (port, method, path, body) => new Promise((resolve, reject) => {",
-		"  const payload = body ? JSON.stringify(body) : null;",
-		"  const req = http.request({",
-		"    hostname: '127.0.0.1', port, path: '/v1' + path, method,",
-		"    headers: {",
-		"      'Authorization': 'Basic ' + AUTH,",
-		"      'Content-Type': 'application/json',",
-		"      'x-opencode-directory': encodeURIComponent(DIR),",
-		"      ...(payload ? { 'Content-Length': Buffer.byteLength(payload) } : {})",
-		"    }",
-		"  }, res => {",
-		"    let d = ''; res.on('data', c => d += c);",
-		"    res.on('end', () => { try { resolve(JSON.parse(d)); } catch { resolve(d); } });",
-		"  });",
-		"  req.on('error', reject);",
-		"  if (payload) req.write(payload);",
-		"  req.end();",
-		"});",
-		"",
-		"(async () => {",
-		"  // Start server with NO auth (opencode will generate password)",
-		"  const server = spawn(BINARY, ['serve', '--port', '0'], {",
-		"    stdio: ['ignore', 'pipe', 'pipe'],",
-		"    env: process.env",
-		"  });",
-		"  let port;",
-		"  let password = '';",
-		"  try {",
-		"    port = await new Promise((resolve, reject) => {",
-		"      let buf = '';",
-		"      const t = setTimeout(() => reject(new Error('Server start timeout')), 10000);",
-		"      server.stdout.on('data', d => {",
-		"        buf += d.toString();",
-		"        const m = buf.match(/listening on http:\\/\\/[^:]+:(\\d+)/);",
-		"        if (m) { clearTimeout(t); resolve(parseInt(m[1], 10)); }",
-		"      });",
-		"      server.stderr.on('data', d => {",
-		"        const s = d.toString();",
-		"        const pm = s.match(/password[:\\s]+([a-f0-9-]+)/i);",
-		"        if (pm) password = pm[1];",
-		"      });",
-		"      server.on('exit', code => reject(new Error(`Server exited: ${code}`)));",
-		"    });",
-		"  } catch (e) {",
-		"    server.kill(); process.exit(1);",
-		"  }",
-		"  let result = '';",
-		"  try {",
-		"    // Use actual credentials from environment",
-		"    const actualUser = process.env.OPENCODE_SERVER_USERNAME || 'opencode';",
-		"    const actualPass = process.env.OPENCODE_SERVER_PASSWORD || password || '';",
-		"    const actualAuth = Buffer.from(actualUser + ':' + actualPass).toString('base64');",
-		"    // Create session",
-		"    const session = await api(port, 'POST', '/session', { title: 'commit-gen' });",
-		"    if (!session || !session.id) throw new Error('No session ID');",
-		"    const sessionId = session.id;",
-		"    // Send message",
-		"    const resp = await api(port, 'POST', `/session/${sessionId}/message`, {",
-		"      model: MODEL,",
-		"      parts: [{ type: 'text', text: PROMPT }],",
-		"      noReply: false",
-		"    });",
-		"    if (resp && resp.parts) {",
-		"      const text = resp.parts",
-		"        .filter(p => p.type === 'text')",
-		"        .map(p => p.text || p.content || '')",
-		"        .join('')",
-		"        .trim();",
-		"      if (text) { result = text; }",
-		"    }",
-		"    await api(port, 'DELETE', `/session/${sessionId}`, null).catch(() => {});",
-		"  } finally {",
-		"    server.kill();",
-		"  }",
-		"  fs.writeFileSync(RESULT_PATH, result, 'utf8');",
-		"})().catch(e => {",
-		"  console.error('Worker error:', e.message);",
-		"  process.exit(1);",
-		"});",
-	].join("\n");
-
-	try {
-		writeFileSync(workerPath, workerCode, "utf8");
-	} catch {
-		return "";
-	}
-
-	const r = spawnSync(process.execPath, [workerPath], {
-		encoding: "utf8",
-		timeout: 120000,
-	});
-
-	let result = "";
-	try {
-		if (existsSync(resultPath)) {
-			result = readFileSync(resultPath, "utf8").trim();
-		}
-	} catch {
-		// ignore
-	}
-
-	// Cleanup temp files
-	try {
-		require("node:fs").unlinkSync(workerPath);
-	} catch {
-		/* ignore */
-	}
-	try {
-		require("node:fs").unlinkSync(resultPath);
-	} catch {
-		/* ignore */
-	}
-
-	return result;
+	// Disabled pending opencode CLI fix
+	// For now, always return empty to use fallback heuristic generator
+	return "";
 };
 
 const detectType = (files) => {
