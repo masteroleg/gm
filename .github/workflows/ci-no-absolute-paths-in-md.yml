@@ -12,11 +12,12 @@ on:
       - "**/*.md"
       - "scripts/ci_no_absolute_paths_in_md.py"
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   no_absolute_pathsMd:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v6
 
