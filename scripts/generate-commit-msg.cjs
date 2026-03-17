@@ -718,13 +718,6 @@ const summarize = (files, stat, type) => {
 	const hasHusky = files.some((file) => file.startsWith(".husky/"));
 	const hasCi = files.some((file) => file.startsWith(".github/workflows/"));
 
-	if (smallDocEdit) {
-		return {
-			subject: "docs(readme): clean up wording and formatting",
-			body: "Clean up README for clarity without changing process.\n\nRUSSIAN SUMMARY:\nУточнено и слегка выровнено оформление README без изменения процесса работы.",
-		};
-	}
-
 	if (hasReadme && hasHusky) {
 		return {
 			subject: "chore(hooks): update commit message automation",
