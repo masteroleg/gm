@@ -173,7 +173,17 @@ Classify findings as:
 - should-fix
 - non-blocking
 
-## 14. Test Coverage Rule
+## 14. CSS Variable Safety and Component State Rules
+
+- Do not use custom properties inside shorthand declarations for `background`, `border`, `transition`, or `animation` when failure would invalidate the entire declaration.
+- Prefer longhand declarations for `background`, `border`, `transition`, and `animation` when those values depend on custom properties.
+- Border design tokens must resolve through explicit width, style, and color tokens rather than shorthand border tokens.
+- Drive component hover, focus-visible, and theme-state visuals through custom property overrides instead of repeating resolved `background`, `box-shadow`, `opacity`, or similar rendered properties across selectors.
+- For component-local visual APIs, define private variables with a `--_` prefix in the base selector and override only public component variables in state or theme selectors.
+- Standardize interactive focus styles through custom-property fallbacks, including `--outline-size` and `--outline-offset`.
+- Preserve the project focus-ring token `--color-focus-ring` unless an approved spec explicitly changes it.
+
+## 15. Test Coverage Rule
 
 Critical UI behavior must be covered by tests.
 
@@ -187,7 +197,7 @@ Examples:
 
 Add smoke coverage for critical flows when practical.
 
-## 15. Story Execution Rule
+## 16. Story Execution Rule
 
 Preferred sequence:
 

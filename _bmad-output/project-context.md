@@ -66,6 +66,10 @@
 ### Styling / Token Rules
 - Tailwind CSS v4 only: use `@import "tailwindcss"`; do not use legacy `@tailwind` directives.
 - Define theme colors through CSS variables and tokens.
+- Avoid custom-property-backed shorthand declarations for `background`, `border`, `transition`, and `animation`; prefer longhand declarations instead.
+- Component hover, focus-visible, and theme-state styling must override variables instead of repeating resolved visual properties.
+- Use private `--_` component variables for local styling APIs and expose state/theme overrides through fallback stacks.
+- Standardize interactive focus outlines through `--outline-size` and `--outline-offset` fallbacks while preserving `--color-focus-ring`.
 - Current brand color tokens:
   - light: `#0d8a4f`
   - dark: `#00e676`
