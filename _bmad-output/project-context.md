@@ -2,7 +2,16 @@
 # Project Context — genu.im
 
 ## Technology Stack & Versions
-- [Fill from the actual project: framework, language, package manager, test stack, CSS toolchain, deploy target]
+- Language: HTML/CSS/JavaScript (TypeScript types only — no TS runtime compilation)
+- Package manager: npm
+- CSS: Tailwind CSS v4 (`@tailwindcss/cli ^4.2.1`) — `site/assets/css/input.css` → `site/assets/css/output.css`
+- Linter/formatter: Biome v2.4.7
+- Unit tests: Jest v30 + jsdom
+- E2E tests: Playwright v1.58.2
+- Type checking: TypeScript v5.9.3
+- Git hooks: husky v9.1.7
+- Performance: Lighthouse v13 (`scripts/run-lighthouse.cjs`)
+- Deploy target: GitHub Pages (static — no server runtime, no build step on deploy)
 - Published application surface is `site/`
 - Styling source is `site/assets/css/input.css`
 - Committed production CSS artifact is `site/assets/css/output.css`

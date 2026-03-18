@@ -60,9 +60,12 @@ Audit status:
 
 Current item counts:
 
-- **12 active verified defects**
-- **4 closed items**
-- **1 strategic / founder-track item**
+> **Superseded (2026-03-18):** Counts below reflect the pre-execution audit snapshot.
+> Current state: **6 open defects**, **6 fixed items**. Authoritative source: `docs/audits/genu.im-1/02_findings_register.md` v3.
+
+- ~~12 active verified defects~~ _(pre-execution count — superseded)_
+- ~~4 closed items~~ _(pre-execution count — superseded)_
+- **1 strategic / founder-track item** _(unchanged)_
 
 Important limitation:
 This package is sufficient for implementation, but it is **not** a final full QA certification.Known limitations remain for:

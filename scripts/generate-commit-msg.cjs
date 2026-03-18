@@ -1,4 +1,4 @@
-const { execFileSync, spawnSync } = require("node:child_process");
+const { execFileSync } = require("node:child_process");
 const { existsSync, readFileSync, writeFileSync } = require("node:fs");
 const path = require("node:path");
 
@@ -354,23 +354,6 @@ const _extractMessage = (raw) => {
 	return messageLines.join("\n").trim();
 };
 
-// Resolve opencode binary path
-const resolveOpencode = () => {
-	try {
-		const locator = process.platform === "win32" ? "where.exe" : "which";
-		const result = execFileSync(locator, ["opencode"], {
-			encoding: "utf8",
-		}).trim();
-		const candidate = (result.split(/\r?\n/).find(Boolean) || "").replace(
-			/^"|"$/g,
-			"",
-		);
-		return existsSync(candidate) ? candidate : "";
-	} catch {
-		return "";
-	}
-};
-
 // Run opencode via CLI: opencode run [message] --model <model>
 // Status: DISABLED due to "Session not found" bug in opencode CLI
 //
@@ -382,7 +365,7 @@ const resolveOpencode = () => {
 //
 // Fallback: Use intelligent heuristic generator (see buildMessage()) which produces
 // quality bilingual messages with file-by-file bullets and Russian context explanations.
-const runOpencode = (prompt) => {
+const runOpencode = () => {
 	// Disabled pending opencode CLI fix
 	// For now, always return empty to use fallback heuristic generator
 	return "";
@@ -521,7 +504,7 @@ const formatFileList = (files, limit = 5) => {
 const allFilesInPath = (files, prefix) =>
 	files.every((file) => file.startsWith(prefix));
 
-const summarize = (files, stat, type) => {
+const summarize = (files, type) => {
 	const fileCount = files.length;
 
 	// ALWAYS produce file-by-file bullets for small commits (most useful)
@@ -571,7 +554,6 @@ const summarize = (files, stat, type) => {
 
 		const scope = detectScope(files);
 		const prefix = scope ? `${type}(${scope})` : type;
-		const fileList = files.join(", ");
 
 		const generateRussianNote = (file) => {
 			if (file.includes("workflows/") || file.includes("ci.yml")) {
@@ -596,18 +578,17 @@ const summarize = (files, stat, type) => {
 		const russianBullets = [];
 		for (let i = 0; i < files.length; i++) {
 			const file = files[i];
-			const enLine = englishBullets.split("\n")[i];
-			// Extract the English part after "— "
-			const enMatch = enLine.match(/— (.+)$/);
-			const enPart = enMatch ? enMatch[1] : "";
 			const ru = generateRussianNote(file);
-			russianBullets.push("- `" + file + "` — " + ru);
+			russianBullets.push(`- \`${file}\` — ${ru}`);
 		}
 		const russianBody = russianBullets.join("\n");
 
 		return {
 			subject: `${prefix}: update ${fileCount} files`,
-			body: englishBullets + "\n\nRUSSIAN SUMMARY:\n" + russianBody,
+			body: `${englishBullets}
+
+RUSSIAN SUMMARY:
+${russianBody}`,
 		};
 	}
 
@@ -702,9 +683,9 @@ const validateBilingualMessage = (message) => {
 	return true;
 };
 
-const buildMessage = (files, stat) => {
+const buildMessage = (files) => {
 	const type = detectType(files);
-	const { subject, body } = summarize(files, stat, type);
+	const { subject, body } = summarize(files, type);
 	const message = `${subject}\n\n${body}\n`;
 	validateBilingualMessage(message);
 	return message;
@@ -742,7 +723,7 @@ if (process.argv.includes("--self-test")) {
 	};
 
 	const test = tests[testName] || tests.readme;
-	const message = buildMessage(test.files, test.stat);
+	const message = buildMessage(test.files);
 	process.stdout.write(message);
 	process.exit(0);
 }
@@ -771,8 +752,7 @@ if (aiMessage && isWeakMessage(aiMessage)) {
 }
 
 const nextMessage =
-	aiMessage ||
-	(config.fallbackToHeuristicGenerator ? buildMessage(files, stat) : "");
+	aiMessage || (config.fallbackToHeuristicGenerator ? buildMessage(files) : "");
 
 if (!nextMessage) process.exit(0);
 

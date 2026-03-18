@@ -2,7 +2,7 @@
 **Scope:** IA-001, TRUST-002, TRUST-003, TRUST-004, TRUST-005, TRUST-006  
 **Type:** Brownfield defect fix — verified P1 findings only  
 **Date:** 2026-03-17  
-**Status:** READY FOR REVIEW
+**Status:** COMPLETED — 2026-03-17/18. All 6 items verified fixed. See findings register v3.
 
 ---
 
