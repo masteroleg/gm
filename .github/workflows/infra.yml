@@ -37,6 +37,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+
       - name: Validate husky scripts
         run: |
           bash -n .husky/pre-commit
@@ -45,3 +50,9 @@ jobs:
 
       - name: Validate site impact helper
         run: bash -n scripts/has-site-impact.sh
+
+      - name: Validate commit message generator
+        run: |
+          node --check scripts/generate-commit-msg.cjs
+          node scripts/generate-commit-msg.cjs --self-test three >/tmp/commit-msg-three.txt
+          node scripts/generate-commit-msg.cjs --self-test cssRefactor >/tmp/commit-msg-css-refactor.txt

@@ -98,9 +98,15 @@ Automatic commit messages follow **Conventional Commits** style:
 
 The hook (`scripts/generate-commit-msg.cjs`) analyzes file paths and generates:
 1. **Category tags**: BMAD, tests, CI, docs, site, config
-2. **File listing**: For small commits (≤3 files), lists filenames
-3. **Category breakdown**: For large commits, shows category + file count
+2. **Detailed bullets for small commits**: For smaller commits (<=10 files), explains each file change and why it matters
+3. **Grouped bullets for large commits**: For larger commits, groups files by theme but keeps file-level detail inside each group
 4. **Type inference**: Detects feat/fix/docs/refactor/ci based on patterns
+5. **Commit-only output**: Generates engineering commit messages, not changelog/release-note sections
+
+The current standard intentionally separates commit history from changelog generation:
+- **Commit message**: engineering-focused, useful for `git log`, review, and local history
+- **Changelog**: separate release artifact derived later from commit subjects and summaries
+- The generator must **not** add sections like `Changelog:` or `Release Notes:` to commit messages
 
 **Examples:**
 

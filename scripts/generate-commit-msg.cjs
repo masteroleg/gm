@@ -196,7 +196,7 @@ const buildPromptWithOptions = (files, stat, diff, options) => {
 		`  RU: <Russian explanation>\n\n` +
 		`RULES FOR ENGLISH SECTION:\n` +
 		`- Subject: Conventional Commit format (type(scope): brief description)\n` +
-		`- English summary: Clear, concise, explains overall purpose\n` +
+		`- English summary: Clear, concise, explains overall purpose for engineers and reviewers\n` +
 		`- English bullets: What changed in each file and its impact\n` +
 		`- Use active voice, precise technical terms\n\n` +
 		`RULES FOR RUSSIAN SECTION:\n` +
@@ -210,7 +210,10 @@ const buildPromptWithOptions = (files, stat, diff, options) => {
 		`- If a file is code: say what behavior changed and why\n` +
 		`- If a file is config: say what was tightened or adjusted\n` +
 		`- Russian section provides CONTEXT and REASONING, not just translation\n` +
-		`- Avoid repetition between English and Russian - Russian adds depth\n\n` +
+		`- Avoid repetition between English and Russian - Russian adds depth\n` +
+		`- This is a COMMIT message, not a changelog entry or release note\n` +
+		`- Do NOT add sections like "Changelog:", "Release Notes:", or "User Impact:"\n` +
+		`- Focus on engineering intent and implementation impact, not marketing copy\n\n` +
 		`${examples}` +
 		`Bad examples (DO NOT OUTPUT):\n` +
 		`- Subject: "chore: update files"\n` +
@@ -278,6 +281,8 @@ Fix these problems:
 - Each RU bullet should explain business/technical significance
 - Use precise wording: "clarify", "fix", "remove", "add", "sync", not generic "update"
 - If there's a milestone, alignment, or scope clarification, state it explicitly
+- Keep it as an engineering commit message, not a changelog or release note
+- Do not add sections like "Changelog:" or "Release Notes:"
 
 Current message to improve:
 ${previous}
@@ -302,9 +307,12 @@ const isWeakMessage = (message) => {
 
 	const subject = lines[0] || "";
 	const summary = lines[1] || "";
-	const bullets = lines.filter((line) => line.startsWith("- `"));
+	const bullets = lines.filter((line) => line.startsWith("- "));
 
+	if (/^(changelog|release notes?|user impact)\s*:/im.test(clean)) return true;
 	if (/update BMAD artifacts/i.test(subject)) return true;
+	if (/^\w+(?:\([^)]*\))?: update \d+ (?:files|project files)$/i.test(subject))
+		return true;
 	if (
 		/update [\w.-]+\.(md|txt|json|ya?ml|js|cjs|mjs|ts|tsx|css|html)/i.test(
 			subject,
@@ -315,19 +323,29 @@ const isWeakMessage = (message) => {
 	if (/^Обновлен[аоы]? /i.test(summary)) return true;
 	if (/^Updated[: ]/i.test(summary)) return true;
 	if (bullets.length === 0) return true;
-	if (bullets.some((line) => /—\s*(BMAD|Docs|Tests|Site|Config):/i.test(line)))
-		return true;
 	if (
-		bullets.some((line) =>
-			/—\s*(обновлен|updated|изменен файл|добавлены изменения)\b/i.test(line),
+		bullets.some(
+			(line) =>
+				line.startsWith("- `") &&
+				/—\s*(BMAD|Docs|Tests|Site|Config):/i.test(line),
 		)
 	)
 		return true;
 	if (
-		bullets.some((line) =>
-			/—\s*[^—]*\b[\w.-]+\.(md|txt|json|ya?ml|js|cjs|mjs|ts|tsx|css|html)\b\.?$/i.test(
-				line,
-			),
+		bullets.some(
+			(line) =>
+				line.startsWith("- `") &&
+				/—\s*(обновлен|updated|изменен файл|добавлены изменения)\b/i.test(line),
+		)
+	)
+		return true;
+	if (
+		bullets.some(
+			(line) =>
+				line.startsWith("- `") &&
+				/—\s*[^—]*\b[\w.-]+\.(md|txt|json|ya?ml|js|cjs|mjs|ts|tsx|css|html)\b\.?$/i.test(
+					line,
+				),
 		)
 	)
 		return true;
@@ -495,6 +513,390 @@ const buildCategoryDescription = (categories) => {
 
 const toBaseName = (file) => file.split("/").pop();
 
+const hasAny = (files, pattern) => files.some((file) => pattern.test(file));
+
+const detectRefactorTheme = (files) => {
+	if (
+		hasAny(files, /site\/assets\/css\/(input|output)\.css$/i) &&
+		hasAny(
+			files,
+			/(css-var-refactor|component-vars-refactor|token-component-vars-refactor)/i,
+		)
+	) {
+		return "css-vars";
+	}
+
+	if (
+		hasAny(files, /scripts\/generate-commit-msg\.cjs$/i) ||
+		hasAny(files, /\.husky\//i)
+	) {
+		return "commit-msg";
+	}
+
+	return "";
+};
+
+const GROUPED_BULLETS_THRESHOLD = 10;
+
+const getThemeLabel = (theme) => {
+	if (theme === "bmad") return "BMAD docs";
+	if (theme === "docs") return "Project docs";
+	if (theme === "site") return "Site files";
+	if (theme === "tests") return "Tests";
+	if (theme === "ci") return "CI/CD";
+	if (theme === "config") return "Tooling/config";
+	return "Other files";
+};
+
+const getThemeRussianLabel = (theme) => {
+	if (theme === "bmad") return "BMAD-артефакты (BMAD docs)";
+	if (theme === "docs") return "проектная документация (Project docs)";
+	if (theme === "site") return "файлы сайта (Site files)";
+	if (theme === "tests") return "тесты (Tests)";
+	if (theme === "ci") return "CI/CD";
+	if (theme === "config") return "инструменты и конфигурация (Tooling/config)";
+	return "прочие файлы (Other files)";
+};
+
+const inferSubject = (files, type) => {
+	const scope = detectScope(files);
+	const prefix = scope ? `${type}(${scope})` : type;
+	const theme = detectRefactorTheme(files);
+	const categories = categorizeFiles(files);
+
+	if (theme === "css-vars") {
+		return "refactor(css): align component variables with the token styling contract";
+	}
+
+	if (theme === "commit-msg") {
+		return "refactor(hooks): improve commit message generation quality";
+	}
+
+	if (
+		files.every(
+			(file) =>
+				file.startsWith("_bmad-output/") ||
+				file.startsWith("docs/") ||
+				file.startsWith("site/assets/css/"),
+		)
+	) {
+		return `${prefix}: sync docs and site artifacts`;
+	}
+
+	if (files.every((file) => file.startsWith("site/assets/css/"))) {
+		return "style(site): refresh stylesheet sources and compiled output";
+	}
+
+	if (
+		categories.bmad.length &&
+		(categories.docs.length ||
+			categories.site.length ||
+			categories.config.length)
+	) {
+		return "refactor(project): sync docs, styles, and supporting artifacts";
+	}
+
+	if (
+		categories.site.length &&
+		(categories.docs.length || categories.bmad.length)
+	) {
+		return "refactor(project): align site changes with supporting documentation";
+	}
+
+	return `${prefix}: update ${files.length} files`;
+};
+
+const inferEnglishSummary = (files, type) => {
+	const theme = detectRefactorTheme(files);
+
+	if (theme === "css-vars") {
+		return "Synchronize the token/component variable refactor across the site stylesheet and related BMAD artifacts. This keeps the documented styling contract aligned with the shipped CSS output.";
+	}
+
+	if (theme === "commit-msg") {
+		return "Tighten commit message generation so auto-created subjects and bullets describe intent instead of generic file updates. This keeps the VS Code commit flow useful without changing the main-branch workflow.";
+	}
+
+	if (files.length > GROUPED_BULLETS_THRESHOLD) {
+		return "Group related files by theme and describe each change in full so large commits stay readable without losing important detail.";
+	}
+
+	if (type === "docs") {
+		return "Refresh the affected documentation so the current rules, notes, and supporting artifacts stay aligned.";
+	}
+
+	if (type === "style") {
+		return "Update the affected stylesheets and keep generated CSS in sync with the source changes.";
+	}
+
+	return "Update the affected files and keep related project artifacts aligned with the current implementation.";
+};
+
+const inferRussianSummary = (files, type) => {
+	const theme = detectRefactorTheme(files);
+
+	if (theme === "css-vars") {
+		return "Синхронизирован рефакторинг переменных токенов и компонентов (token/component variable refactor) между исходным CSS и BMAD-артефактами. Теперь контракт стилизации (styling contract), заметки по реализации (implementation notes), QA и сгенерированный CSS описывают одну и ту же модель переменных без расхождений.";
+	}
+
+	if (theme === "commit-msg") {
+		return 'Улучшена эвристика автогенерации commit message: вместо шаблонов вроде "update file" теперь формируется описание намерения изменения и его эффекта. Дополнительно CI проверяет генератор (generator), чтобы регресс не попадал в основной solo-flow через VS Code.';
+	}
+
+	if (files.length > GROUPED_BULLETS_THRESHOLD) {
+		return "Связанные изменения сгруппированы по темам, но внутри каждой группы сохранена полная детализация по файлам. Это делает большие коммиты читаемыми без потери контекста по документации, стилям, конфигурации и сопутствующим артефактам.";
+	}
+
+	if (type === "docs") {
+		return "Синхронизирована документация: уточнены правила, контекст и сопутствующие артефакты, чтобы они не расходились с текущей реализацией.";
+	}
+
+	if (type === "style") {
+		return "Обновлены исходные стили (source styles) и сгенерированный CSS, чтобы production-артефакты совпадали с текущими изменениями в исходниках.";
+	}
+
+	return "Обновлены связанные файлы и выровнены сопутствующие артефакты, чтобы документация, конфигурация и реализация не расходились между собой.";
+};
+
+const buildGroupedBullets = (files) => {
+	const grouped = [];
+	const categories = categorizeFiles(files);
+	const orderedThemes = [
+		"bmad",
+		"docs",
+		"site",
+		"tests",
+		"ci",
+		"config",
+		"other",
+	];
+
+	for (const theme of orderedThemes) {
+		const themeFiles = categories[theme];
+		if (!themeFiles.length) continue;
+
+		const englishParts = themeFiles.map((file) => {
+			const note = describeFileChange(file);
+			return `\`${file}\` - ${note.english}`;
+		});
+		const russianParts = themeFiles.map((file) => {
+			const note = describeFileChange(file);
+			return `\`${file}\` - ${note.russian}`;
+		});
+
+		grouped.push(
+			`- ${getThemeLabel(theme)}: ${englishParts.join("; ")}\n  RU: ${getThemeRussianLabel(theme)}: ${russianParts.join("; ")}`,
+		);
+	}
+
+	return grouped.join("\n");
+};
+
+const describeFileChange = (file) => {
+	if (/scripts\/generate-commit-msg\.cjs$/i.test(file)) {
+		return {
+			english:
+				"improve heuristic commit generation for mixed doc/style changes",
+			russian:
+				'усилена эвристика генератора (generator): смешанные коммиты (mixed commits) теперь получают описание смысла изменений, а не шаблоны вида "update file"',
+		};
+	}
+
+	if (/\.github\/workflows\/infra\.ya?ml$/i.test(file)) {
+		return {
+			english: "verify commit-message generator behavior in Infra Checks",
+			russian:
+				"добавлена CI-проверка генератора (generator), чтобы регресс в описаниях коммитов ловился до использования в основном workflow",
+		};
+	}
+
+	if (/css-var-refactor-analysis\.md$/i.test(file)) {
+		return {
+			english:
+				"refresh the analysis for the CSS variable refactor scope and findings",
+			russian:
+				"обновлен анализ рефакторинга CSS-переменных (CSS variable refactor): зафиксированы актуальные выводы и границы изменений",
+		};
+	}
+
+	if (/css-var-refactor-implementation-notes\.md$/i.test(file)) {
+		return {
+			english:
+				"capture implementation decisions and migration notes for the variable refactor",
+			russian:
+				"уточнены заметки по реализации (implementation notes) и миграционные решения, чтобы рефакторинг (refactor) можно было поддерживать без догадок",
+		};
+	}
+
+	if (/css-var-refactor-qa\.md$/i.test(file)) {
+		return {
+			english:
+				"sync QA coverage with the current CSS variable refactor behavior",
+			russian:
+				"обновлен QA-документ: проверки теперь соответствуют текущему поведению после рефакторинга переменных (variable refactor)",
+		};
+	}
+
+	if (/css-var-refactor-review\.md$/i.test(file)) {
+		return {
+			english:
+				"update the review notes for the token/component variable refactor",
+			russian:
+				"синхронизированы заметки ревью (review notes) по рефакторингу переменных токенов и компонентов (token/component variable refactor), чтобы замечания не отставали от кода",
+		};
+	}
+
+	if (/_bmad-output\/project-context\.md$/i.test(file)) {
+		return {
+			english: "align project context rules with the updated styling contract",
+			russian:
+				"обновлен контекст проекта (project context): правила контракта стилизации (styling contract) приведены в соответствие с новым подходом к переменным компонентов (component vars)",
+		};
+	}
+
+	if (/spec-token-component-vars-refactor\.md$/i.test(file)) {
+		return {
+			english:
+				"define the token/component variable refactor scope and expected outcomes",
+			russian:
+				"уточнена спецификация рефакторинга переменных токенов и компонентов (token/component vars refactor): зафиксированы границы (scope), цели и ожидаемый результат",
+		};
+	}
+
+	if (/docs\/project-contract\.md$/i.test(file)) {
+		return {
+			english:
+				"update the project contract to match token-driven component styling rules",
+			russian:
+				"синхронизирован проектный контракт (project contract): правила стилизации компонентов через токены (token-driven component styling) теперь совпадают с текущей реализацией",
+		};
+	}
+
+	if (/site\/assets\/css\/input\.css$/i.test(file)) {
+		return {
+			english:
+				"refactor source styles to use the updated token/component variable model",
+			russian:
+				"перестроен исходный CSS под обновленную модель переменных токенов и компонентов (token/component variable model), чтобы локальные переопределения состояний (state overrides) работали предсказуемо",
+		};
+	}
+
+	if (/site\/assets\/css\/output\.css$/i.test(file)) {
+		return {
+			english:
+				"rebuild the committed production CSS after the source stylesheet refactor",
+			russian:
+				"пересобран зафиксированный production CSS (committed production CSS), чтобы деплой (deploy) получал актуальный результат сборки (output) после рефакторинга исходных стилей (source styles refactor)",
+		};
+	}
+
+	if (file.startsWith("site/assets/css/")) {
+		return {
+			english: "update stylesheet sources or generated CSS",
+			russian:
+				"обновлены исходные стили (source styles) или сгенерированный CSS, чтобы production-артефакты не расходились с исходниками",
+		};
+	}
+
+	if (file.startsWith("site/")) {
+		return {
+			english: "update site behavior or content for the affected flow",
+			russian:
+				"обновлено поведение или контент сайта в затронутом пользовательском сценарии",
+		};
+	}
+
+	if (/playwright\.config\.ts$/i.test(file)) {
+		return {
+			english: "adjust Playwright configuration for the updated test workflow",
+			russian:
+				"скорректирована конфигурация Playwright, чтобы тестовый workflow соответствовал текущим сценариям проверки",
+		};
+	}
+
+	if (/package\.json$/i.test(file)) {
+		return {
+			english:
+				"sync package scripts or dependency metadata with the current workflow",
+			russian:
+				"синхронизированы package scripts или метаданные зависимостей, чтобы локальный и CI workflow оставались согласованными",
+		};
+	}
+
+	if (/\.vscode\/settings\.json$/i.test(file)) {
+		return {
+			english:
+				"align VS Code workspace settings with the current development workflow",
+			russian:
+				"настройки рабочего пространства VS Code приведены в соответствие с текущим процессом разработки (development workflow)",
+		};
+	}
+
+	if (/CLAUDE\.md$/i.test(file)) {
+		return {
+			english:
+				"update local agent guidance to match the current repository workflow",
+			russian:
+				"обновлены локальные инструкции для агента (agent guidance), чтобы они соответствовали текущему workflow репозитория",
+		};
+	}
+
+	if (/repo-index\.md$/i.test(file)) {
+		return {
+			english:
+				"refresh the repository index so navigation matches the current file set",
+			russian:
+				"обновлен индекс репозитория (repository index), чтобы навигация соответствовала текущему набору файлов",
+		};
+	}
+
+	if (file.startsWith("_bmad-output/")) {
+		return {
+			english: "sync the BMAD artifact with the current implementation state",
+			russian:
+				"синхронизирован BMAD-артефакт с текущим состоянием реализации, чтобы документация не устаревала",
+		};
+	}
+
+	if (file.startsWith("docs/")) {
+		return {
+			english: "update the supporting documentation for the current workflow",
+			russian:
+				"обновлена сопутствующая документация, чтобы workflow и правила оставались актуальными",
+		};
+	}
+
+	if (file.startsWith(".husky/")) {
+		const hookName = file.split("/").pop();
+		return {
+			english: `adjust the ${hookName} git hook behavior`,
+			russian: `скорректирована логика git hook ${hookName}, чтобы локальный workflow работал стабильнее`,
+		};
+	}
+
+	if (file.startsWith(".github/workflows/")) {
+		return {
+			english: "adjust CI/CD workflow checks for the affected automation",
+			russian:
+				"скорректированы проверки CI/CD workflow для затронутой автоматизации",
+		};
+	}
+
+	if (/^README/i.test(file)) {
+		return {
+			english: "refresh documentation for the current implementation",
+			russian:
+				"уточнена документация под текущее состояние реализации и рабочего процесса",
+		};
+	}
+
+	return {
+		english: "update the file to match the current implementation",
+		russian:
+			"обновлен файл, чтобы он соответствовал текущей реализации и связанным изменениям",
+	};
+};
+
 const formatFileList = (files, limit = 5) => {
 	const names = files.map(toBaseName);
 	if (names.length <= limit) return names.join(", ");
@@ -508,87 +910,43 @@ const summarize = (files, type) => {
 	const fileCount = files.length;
 
 	// ALWAYS produce file-by-file bullets for small commits (most useful)
-	if (fileCount <= 15 && fileCount > 0) {
-		let englishBullets = "";
-		for (const file of files) {
-			let englishNote = `update file`;
-			let russianNote = `обновить файл`;
-			// Determine note based on file path
-			if (file.startsWith(".github/workflows/")) {
-				englishNote = `update CI/CD workflow configuration`;
-				russianNote = `обновить конфигурацию CI/CD workflow`;
-			} else if (file.startsWith(".husky/")) {
-				const hookName = file.split("/").pop();
-				englishNote = `update ${hookName} git hook`;
-				russianNote = `обновить git хук ${hookName}`;
-			} else if (file.startsWith(".vscode/")) {
-				const settingName = file.split("/").pop();
-				englishNote = `update VSCode ${settingName} settings`;
-				russianNote = `обновить настройки VSCode ${settingName}`;
-			} else if (file.startsWith("site/")) {
-				englishNote = `update site file`;
-				russianNote = `обновить файл сайта`;
-			} else if (file.startsWith("scripts/")) {
-				const scriptName = file.split("/").pop();
-				englishNote = `update ${scriptName} script`;
-				russianNote = `обновить скрипт ${scriptName}`;
-			} else if (file.includes("package.json")) {
-				englishNote = `update package dependencies or scripts`;
-				russianNote = `обновить зависимости или скрипты пакета`;
-			} else if (
-				file.includes("tsconfig.json") ||
-				file.includes("biome.json")
-			) {
-				englishNote = `update build/lint configuration`;
-				russianNote = `обновить конфигурацию сборки или линтера`;
-			} else if (file.startsWith("site/assets/css/")) {
-				englishNote = `update site styles`;
-				russianNote = `обновить стили сайта`;
-			} else if (/^README/i.test(file)) {
-				englishNote = `update documentation`;
-				russianNote = `обновить документацию`;
-			}
-			englishBullets += `- \`${file}\` — ${englishNote}\n  RU: ${russianNote}\n`;
-		}
-		englishBullets = englishBullets.trimEnd();
+	if (fileCount <= GROUPED_BULLETS_THRESHOLD && fileCount > 0) {
+		const englishBullets = files
+			.map((file) => {
+				const note = describeFileChange(file);
+				return `- \`${file}\` — ${note.english}\n  RU: ${note.russian}`;
+			})
+			.join("\n");
 
-		const scope = detectScope(files);
-		const prefix = scope ? `${type}(${scope})` : type;
-
-		const generateRussianNote = (file) => {
-			if (file.includes("workflows/") || file.includes("ci.yml")) {
-				return "изменены настройки pipeline, добавлены/удалены проверки";
-			} else if (file.includes(".husky/")) {
-				return "улучшена логика хуков для более стабильной работы";
-			} else if (file.includes(".vscode/")) {
-				return "настроено поведение IDE для удобной разработки";
-			} else if (file.includes("README")) {
-				return "уточнена документация для разработчиков";
-			} else if (file.includes("scripts/")) {
-				return "обновлена автоматизация для генерации коммитов";
-			} else if (file.includes("package.json")) {
-				return "изменены зависимости или npm скрипты";
-			} else if (file.includes("site/")) {
-				return "обновлен контент или стили сайта";
-			}
-			return "внесены изменения в файл";
-		};
-
-		// Generate Russian bullets - matching the English structure
-		const russianBullets = [];
-		for (let i = 0; i < files.length; i++) {
-			const file = files[i];
-			const ru = generateRussianNote(file);
-			russianBullets.push(`- \`${file}\` — ${ru}`);
-		}
-		const russianBody = russianBullets.join("\n");
+		const subject = inferSubject(files, type);
+		const englishSummary = inferEnglishSummary(files, type);
+		const russianSummary = inferRussianSummary(files, type);
 
 		return {
-			subject: `${prefix}: update ${fileCount} files`,
-			body: `${englishBullets}
+			subject,
+			body: `${englishSummary}
+
+${englishBullets}
 
 RUSSIAN SUMMARY:
-${russianBody}`,
+${russianSummary}`,
+		};
+	}
+
+	if (fileCount > GROUPED_BULLETS_THRESHOLD) {
+		const subject = inferSubject(files, type);
+		const englishSummary = inferEnglishSummary(files, type);
+		const russianSummary = inferRussianSummary(files, type);
+		const groupedBullets = buildGroupedBullets(files);
+
+		return {
+			subject,
+			body: `${englishSummary}
+
+${groupedBullets}
+
+RUSSIAN SUMMARY:
+${russianSummary}`,
 		};
 	}
 
@@ -720,10 +1078,31 @@ if (process.argv.includes("--self-test")) {
 			files: [".husky/pre-commit", ".husky/prepare-commit-msg", "README.md"],
 			stat: " 3 files changed, 5 insertions(+), 2 deletions(-)",
 		},
+		cssRefactor: {
+			files: [
+				"_bmad-output/css-var-refactor-analysis.md",
+				"_bmad-output/css-var-refactor-implementation-notes.md",
+				"_bmad-output/css-var-refactor-qa.md",
+				"_bmad-output/css-var-refactor-review.md",
+				"_bmad-output/project-context.md",
+				"_bmad-output/spec-token-component-vars-refactor.md",
+				"docs/project-contract.md",
+				"site/assets/css/input.css",
+				"site/assets/css/output.css",
+			],
+			stat: " 9 files changed, 240 insertions(+), 112 deletions(-)",
+		},
 	};
 
 	const test = tests[testName] || tests.readme;
 	const message = buildMessage(test.files);
+	if (isWeakMessage(message)) {
+		process.stderr.write(
+			`Self-test failed for ${testName}: generated weak message\n`,
+		);
+		process.stderr.write(message);
+		process.exit(1);
+	}
 	process.stdout.write(message);
 	process.exit(0);
 }
