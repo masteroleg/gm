@@ -379,7 +379,7 @@ Hook → Clarify → Bridge → Prove → Branch → Convert → Trust
 - 🔍 Органічний пошук Google → homepage
 - 🔗 Пряме посилання (від менеджера, партнера, статті) → homepage
 - 📱 QR-код на продукті → `/v/{code}` (302 redirect через delivr.com)
-- 📧 Sample-посилання у листі/Telegram → `/v/genu.alko` тощо
+- 📧 Sample-посилання у листі/Telegram → окремо затверджений future-phase sample route, наприклад `/v/genu.alko`
 
 ---
 
@@ -400,7 +400,7 @@ flowchart TD
     G --> H[Ключові переваги\n• Безвідмовність лінії\n• Протокол без сюрпризів\n• Дія-інтеграція]
     H --> I[CTA: 'Обговорити мою ситуацію'\nФорма запиту з контекстом]
     I --> J[✅ Кваліфікований лід\nScenario + company + source]
-    E --> E1[Sample: /v/genu.alko\nякщо потрібен галузевий приклад]
+    E --> E1[Future-phase sample: /v/genu.alko\nлише після окремого approval]
     E1 --> F
 ```
 
@@ -410,7 +410,7 @@ flowchart TD
 - Proof: DataMatrix badge пульсує — "цей код живий"
 - Branch: два великих блоки з іконографікою (завод/протокол vs. бренд/прозорість)
 
-**Ключове уточнення:** Дія — це результат перевірки маркування, зробленого через genu.mark. genu.im додає бренд-шар поверх: виробник може показати більше, ніж просто "легально".
+**Ключове уточнення:** `Дія` і `genu.mark` — різні trust-шари. `Дія` використовується для офіційної перевірки акцизу, а `genu.mark` / `genu.im` показують виробничий і бренд-доказ без мімікрії під держсервіс.
 
 ---
 
@@ -428,7 +428,7 @@ flowchart TD
     E --> F[Brand-гілка\n'Прозорість як актив']
     F --> G[Що бачить покупець\nпісля сканування:\n• Походження продукту\n• Документи та сертифікати\n• CTA бренду]
     G --> H[Connected Packaging concept\n'Обов'язкова мітка → Канал комунікації']
-    H --> I[CTA: 'Обговорити для мого бренду'\n+ Sample посилання /v/genu.cosm]
+    H --> I[CTA: 'Обговорити для мого бренду'\n+ future-phase sample /v/genu.cosm за окремим approval]
     I --> J[✅ Лід з Brand-контекстом]
 ```
 
@@ -463,12 +463,12 @@ flowchart TD
 
 ### Journey 4: Партнер / Інтегратор
 
-**Тригер:** Менеджер надіслав посилання + sample QR у презентації
+**Тригер:** Менеджер надіслав посилання + окремо затверджений future-phase sample QR у презентації
 **Мета:** Зрозуміти технічну надійність, оцінити як presales-актив
 
 ```mermaid
 flowchart TD
-    A[📱 Сканує QR у презентації\ngenu.im/v/genu.alko] --> B[Sample Alco Verification Page\n'Зразок верифікації для алко']
+    A[📱 Сканує окремо затверджений sample QR у презентації\ngenu.im/v/genu.alko] --> B[Future-phase Sample Alco Verification Page\n'Зразок верифікації для алко']
     B --> C{'Це і є кінцевий артефакт?'}
     C --> D[CTA: 'Побачити для реального клієнта'\n→ /v/genuim]
     D --> E[genu.im homepage\n'Як ми це будуємо']
@@ -496,14 +496,14 @@ flowchart TD
 
 ---
 
-### Journey 6 (НОВА): Sample Code Discovery
+### Journey 6 (Future Phase): Sample Code Discovery
 
-**Тригер:** Email/Telegram/презентація з посиланням `/v/genu.alko`
+**Тригер:** Email/Telegram/презентація з окремо затвердженим sample-посиланням `/v/genu.alko`
 **Мета:** Побачити живий артефакт для своєї галузі → конвертуватись
 
 ```mermaid
 flowchart TD
-    A[📧 Отримав посилання\n'Ось як виглядає верифікація\nдля алко-виробника'] --> B[/v/genu.alko\nSample Alco Verification]
+    A[📧 Отримав окремо затверджене sample-посилання\n'Ось як виглядає верифікація\nдля алко-виробника'] --> B[/v/genu.alko\nFuture-phase Sample Alco Verification]
     B --> C[Бачить:\n✓ VERIFIED amber badge\nВиробник: Sample Alco Brand\nДата: 2026-03-10\nТип: Алкогольна продукція UA]
     C --> D{'Хочу таке для свого бренду'}
     D --> E[CTA: 'Обговорити для мого виробництва'\nз prefill: sector=alco]
@@ -515,15 +515,15 @@ flowchart TD
 
 ---
 
-### Концепція "Живі Зразки Довіри" (Live Trust Samples)
+### Концепція "Живі Зразки Довіри" (Live Trust Samples, Future Phase)
 
 Передвизначені sample-коди як future-phase маркетинговий та presales-інструмент. Вони не входять до implementation-ready Phase 1 baseline без окремого затвердження.
 
 | URL | Призначення | Використання |
 |-----|------------|-------------|
 | `/v/genuim` | Платформа верифікує саму себе | Homepage proof anchor, presales pitch |
-| `/v/genu.alko` | Зразок для алко-виробника | Email, комерційні пропозиції для алко |
-| `/v/genu.cosm` | Зразок для косметики | Презентації для beauty/pharma |
+| `/v/genu.alko` | Зразок для алко-виробника | Future-phase email, комерційні пропозиції для алко |
+| `/v/genu.cosm` | Зразок для косметики | Future-phase презентації для beauty/pharma |
 
 **Механіка кожної sample-сторінки (після окремого затвердження):**
 - DataMatrix QR — сканується, веде сюди (доводить що код "живий")
@@ -766,7 +766,7 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
 
 **Поля:** Ім'я контактної особи, Email або телефон, Компанія, Сценарій, Короткий контекст; приховані: `source_path`, опційний `proof_path`
 
-**Стани:** empty → filled → submitting → handoff / fallback → error
+**Стани:** empty → filled → handoff-pending → handoff / fallback → error
 
 **Accessibility:** Всі поля з `<label>`, error з `aria-describedby`, `aria-invalid`
 
@@ -846,7 +846,7 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
 
 | Тип | Тригер | Вигляд | Тон копії |
 |-----|--------|--------|----------|
-| **Handoff** | Поштовий клієнт відкрито або підготовлено чернетку | Muted amber / neutral info state | "Ми підготували чернетку листа з вашим запитом. Перевірте та надішліть її у вашому поштовому клієнті." |
+| **Handoff** | Поштовий клієнт відкрито або підготовлено чернетку | Muted amber / neutral info state | "Ми підготували чернетку листа з вашим запитом. Перевірте її та надішліть у вашому поштовому клієнті, якщо все правильно." |
 | **Fallback** | Поштовий клієнт не відкрився | Neutral inline guidance | "Дані запиту залишилися на сторінці. Скористайтесь вказаним контактом або скопіюйте зміст запиту вручну." |
 | **Error** | Форма невалідна | Inline під полем, червоний бордер | Конкретно: "Вкажіть назву компанії" |
 | **Info** | Demo/Sample banner | Muted amber banner зверху сторінки | "Це демо-сторінка. Живі дані — після підключення." |
@@ -906,7 +906,7 @@ genu.im будується на **Tailwind CSS v4** (CSS-first, без UI-біб
 
 | Ситуація | Паттерн |
 |----------|---------|
-| Форма submitting | Кнопка: spinner + "Надсилаємо..." (disabled) |
+| Форма handoff | Кнопка: spinner + "Готуємо email..." (disabled) |
 | Verification page (майбутнє) | Skeleton screen — контури контенту |
 | AnimatedCounter scroll-in | Число рахується від 0 — контекстне "завантаження" |
 
@@ -1048,7 +1048,7 @@ MOBILE:
 │                                         │
 │    [  Введіть або вставте код...  ] [→] │
 │                                         │
-│    [✓ genu.im]  [✓ alko]  [✓ cosm]     │
+│    [Спробувати приклад]  [Вставити код] │
 │                                         │
 └─────────────────────────────────────────┘
 ```

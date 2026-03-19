@@ -44,10 +44,10 @@ So that I can judge whether the release supports the intended trust-first funnel
   - [x] Create `docs/review-guide-funnel.md` (new file)
   - [x] Section 1 — Phase 1 Funnel Overview: define the three-step proof-first funnel; explain all signals are passive and manual; no backend, no live dashboard, no guaranteed capture
   - [x] Section 2 — Funnel Step Definitions with consistent signal sources:
-    - [x] Step 1 (Homepage → Proof): UTM param `proof_entry`; source = `/v/genuim/?utm_source=homepage&utm_medium=hero_cta&utm_campaign=proof_entry`; observable via Google Search Console; limitation: only homepage hero CTA carries this UTM; direct arrivals, demo input, external links do not
+    - [x] Step 1 (Proof visibility proxy): homepage hero CTA reserves UTM param `proof_entry`; nearest Phase 1 observable is Google Search Console visibility for `/v/genuim/`; limitation: GSC is only a proxy and does not isolate homepage CTA traffic
     - [x] Step 2 (Proof Page Engagement): page views on `/v/genuim/`; observable via GSC impressions/clicks for that URL; limitation: GSC shows organic search only; direct navigation is not captured without additional tooling (out of Phase 1 scope)
-    - [x] Step 3 (Request Submission): email received at `hello@genu.im` with scenario/source in body; observable via inbox review (see `docs/review-guide-requests.md`); limitation: `mailto:` is best-effort — not all requests arrive
-  - [x] Section 3 — Reading the Funnel Together: how to combine the three signals in a manual review session; what the data does and does NOT tell the team; include a minimal review template (step 1 signal count → step 2 GSC visits → step 3 inbox count)
+    - [x] Step 3 (Request handoff / received request): email received at `hello@genu.im` with scenario/source in body; observable via inbox review (see `docs/review-guide-requests.md`); limitation: `mailto:` is best-effort — not all requests arrive
+  - [x] Section 3 — Reading the Funnel Together: how to combine the three signals in a manual review session; what the data does and does NOT tell the team; include a minimal review template (step 1 proxy signal → step 2 GSC visits → step 3 inbox count)
   - [x] Section 4 — NFR13 Privacy Guardrails: no personal data in funnel aggregate; no raw excise codes; counts by scenario label and source path are safe; reference consistent with `docs/review-guide-requests.md` guardrails
   - [x] Section 5 — Partial/Missing Data Handling: explicit guidance for each missing-signal scenario; "state it as unavailable" — never extrapolate; partial funnel review is still valid and useful
   - [x] Section 6 — Known Phase 1 Limitations: UTM params captured at homepage hero CTA only; proof page views not tracked end-to-end without analytics; `mailto:` delivery is environment-dependent; no backend, no live data, no guaranteed capture
@@ -133,17 +133,17 @@ Everything Story 4.3 synthesizes was built in earlier stories. Do not touch thes
 The guide at `docs/review-guide-funnel.md` must follow the same quality bar as `docs/review-guide-requests.md`. Structure required:
 
 **Section 1: Phase 1 Funnel Overview**
-- The three-step funnel: Homepage → Proof Example (`/v/genuim/`) → Request (`/request/`)
+- The three-step funnel: Proof visibility around `/v/genuim/` → proof engagement → request handoff / received request review
 - All signals are passive and manual — no backend, no live data, no telemetry
 - Review mechanism: combine GSC URL data + manual inbox review
 - This guide is for product team review sessions, not for real-time monitoring
 
 **Section 2: Funnel Step Definitions**
 
-Step 1 — Homepage Entry → Proof Page:
+Step 1 — Proof Page Visibility Proxy:
 - Signal source: UTM param `utm_campaign=proof_entry` on hero CTA href
-- Observable: Google Search Console → Performance → filter `/v/genuim/` referral from homepage
-- Limitation: Only the homepage HERO CTA carries this UTM. Direct navigation, demo input (`/v/`), external links, and other CTAs do not carry it.
+- Observable: Google Search Console → Performance → filter `/v/genuim/` as an organic-search visibility proxy only
+- Limitation: GSC cannot isolate homepage CTA traffic, and the UTM is not measurable in Phase 1 without additional analytics tooling. Direct navigation, demo input (`/v/`), external links, and other CTAs are not separated here.
 
 Step 2 — Proof Page Engagement:
 - Signal source: Page views on `/v/genuim/`
@@ -151,7 +151,7 @@ Step 2 — Proof Page Engagement:
 - Limitation: GSC reflects organic search impressions, not direct navigation or UTM arrivals. True page-view counts for non-organic traffic require an analytics tool (out of Phase 1 scope).
 - Note: Visitors arriving via the homepage hero CTA will have UTM params in their URL bar — these are distinguishable in browser-level review tools if separately configured, but are not captured server-side.
 
-Step 3 — Request Submission:
+Step 3 — Request Handoff / Received Request:
 - Signal source: Email received at `hello@genu.im` with subject `genu.im request: CompanyName — scenario` and body containing `Scenario: Label [value]` and `Source: /path/`
 - Observable: Manual inbox inspection (full guidance in `docs/review-guide-requests.md`)
 - Limitation: `mailto:` is best-effort — delivery depends on visitor's mail client. Not all requests submitted will arrive in the inbox.
@@ -159,9 +159,9 @@ Step 3 — Request Submission:
 **Section 3: Reading the Funnel Together**
 
 The minimal Phase 1 funnel review combines:
-1. GSC signal count for `/v/genuim/` arrivals (directional, not precise)
+1. GSC signal count for `/v/genuim/` visibility and arrivals from Google search (directional, not precise)
 2. Inbox count of received requests, grouped by scenario and source
-3. A directional assessment: "Does the homepage entry path appear to be in use? Are requests arriving, and from which paths?"
+3. A directional assessment: "Is the proof surface being discovered? Are requests arriving, and from which visible paths?"
 
 Review template (simple, manual):
 ```
@@ -170,7 +170,7 @@ Funnel Review — [Date range]
 Step 1: Homepage → Proof
 - GSC impressions for /v/genuim/ in period: [N]
 - GSC clicks for /v/genuim/ in period: [N]
-- Note: UTM-attributed arrivals from hero CTA are not separately counted without an analytics tool
+- Note: homepage hero CTA arrivals are not separately counted in Phase 1 without an analytics tool
 
 Step 2: Proof Engagement
 - No direct signal beyond GSC page data above

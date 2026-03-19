@@ -12,9 +12,9 @@ _Team-internal documentation for Phase 1 funnel review and measurement._
 
 The genu.im proof-first funnel consists of three steps:
 
-1. **Homepage → Proof Entry** — Brand discovers genu.im and clicks the primary CTA to see a proof example
+1. **Homepage / Other Entry → Proof Visibility** — Brand reaches the proof example path and can inspect the public proof surface
 2. **Proof Engagement** — Visitor explores the proof example and verifies the concept
-3. **Request Submission** — Brand submits a request to integrate genu.im into their verification workflow
+3. **Request Handoff / Received Request** — Brand initiates a request handoff and the team later reviews received requests in the inbox
 
 ### Measurement Approach
 
@@ -45,13 +45,13 @@ Use this guide when:
 
 ## Section 2: Funnel Step Definitions
 
-### Step 1: Homepage → Proof Page Entry
+### Step 1: Proof Page Visibility Proxy
 
-**Signal Source:** UTM parameter `utm_campaign=proof_entry` on the primary hero CTA
+**Signal Source:** Google Search Console visibility for `/v/genuim/`, with homepage CTA UTM reserved only as a future analytics discriminator
 
 **Phase 1 Observable Limitation:** The UTM parameter (`utm_campaign=proof_entry`) exists on the hero CTA href and would identify homepage-to-proof CTA clicks in a client-side analytics tool (Google Analytics, Plausible, etc.). In Phase 1, no such tool is installed — **this UTM signal is not measurable in Phase 1.**
 
-**Nearest available proxy:** Google Search Console (GSC) → Performance tab for `/v/genuim/`. This measures organic search traffic to the proof page — it does **not** measure homepage CTA clicks.
+**Nearest available proxy:** Google Search Console (GSC) → Performance tab for `/v/genuim/`. This measures organic search traffic to the proof page — it does **not** measure homepage CTA clicks and does **not** satisfy `FR29` on its own.
 
 **How to use GSC as proxy:**
 1. Log into GSC for genu.im
@@ -64,7 +64,7 @@ Use this guide when:
 - **High clicks = Searchers are clicking through to the proof page from Google**
 - **Low impressions = Proof page is not yet ranking in organic search**
 
-**What GSC does NOT tell you for Step 1:** How many visitors arrived via the homepage hero CTA. That signal requires client-side analytics (Phase 2+ scope).
+**What GSC does NOT tell you for Step 1:** How many visitors arrived via the homepage hero CTA, how many arrived from other internal paths, or how many used direct navigation. That signal requires client-side analytics or a later measurement design outside current Phase 1 scope.
 
 **Key Limitation:**
 Only the **homepage hero CTA** carries the `utm_campaign=proof_entry` UTM param. Other entry points do NOT:
@@ -107,7 +107,7 @@ You can also visit `/v/genuim/` yourself to confirm:
 
 ---
 
-### Step 3: Request Submission
+### Step 3: Request Handoff and Received Requests
 
 **Signal Source:** Email received at `hello@genu.im` with scenario and source metadata in the body
 
@@ -136,8 +136,13 @@ Proof page: /v/genuim/
 4. See `docs/review-guide-requests.md` for detailed counting and privacy guidance
 
 **Interpretation:**
-- **High request count = Brands are interested and submitting requests**
-- **Source path distribution = You can see which CTAs are driving requests** (e.g., `/perevir-product/` vs other sources)
+- **High received request count = Brands are interested and some request handoffs are reaching the inbox**
+- **Source path distribution = You can see which visible paths are represented in received requests** (e.g., `/perevir-product/` vs other sources)
+
+**Important measurement boundary:**
+- Phase 1 funnel review is still directional and manual.
+- `FR29`, `FR30`, and `FR31` should be read as review goals for release assessment, not as a promise of precise analytics-grade attribution in Phase 1.
+- GSC plus inbox review can support a qualitative same-period discussion, but cannot directly prove homepage CTA usage counts without additional analytics tooling.
 - **Scenario breakdown = You can see which use cases are attracting interest** (Brand Proof vs eAktsyz)
 
 **Key Limitation:**

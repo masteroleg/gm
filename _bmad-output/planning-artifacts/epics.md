@@ -483,6 +483,11 @@ So that I can reach a result page without needing an account.
 **Then** the approved Phase 1 result state opens
 **And** the demo labeling remains visible
 
+**Given** a visitor submits the demo form with an empty input or a value that does not match the accepted Phase 1 input rules
+**When** the page validates the input
+**Then** the current page remains in place and shows a clear inline explanation of what the visitor must correct
+**And** no misleading result state is opened
+
 **Given** a visitor opens the demo page on mobile or desktop
 **When** the page is displayed
 **Then** the input and example-code action are readable and usable
@@ -732,13 +737,13 @@ So that I can judge whether the release supports the intended trust-first funnel
 
 **Given** homepage-to-proof and request-source data exist
 **When** the funnel is reviewed
-**Then** the homepage, proof, and request steps can be seen together
-**And** those steps use consistent definitions
+**Then** the review shows counts for homepage-originated proof entries, proof-surface CTA continuations, and request submissions for the same review period
+**And** those steps use the same source definitions as `FR29`, `FR30`, and `FR31`
 
 **Given** the team reviews the funnel
 **When** they compare the major steps
-**Then** they can see where visitors continue and where they stop
-**And** they can review the funnel without needing raw personal data
+**Then** they can compare continuation and drop-off between homepage, proof entry, proof CTA continuation, and request submission steps
+**And** the review excludes raw personal data and full raw codes
 
 **Given** some measurement inputs are missing, delayed, or only partially available
 **When** the funnel is reviewed
