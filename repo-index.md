@@ -2,34 +2,55 @@ Directory Index: repo-root
 
 ---
 ## Files
+### _archive/
+- **[workflow-setup-complete.md](_archive/docs/workflow-setup-complete.md)** - Workflow Setup Complete ✅
+- **[1-1-clarify-the-homepage-first-screen.md](_archive/implementation-artifacts/1-1-clarify-the-homepage-first-screen.md)** - Story 1.1: Прояснить первый экран главной страницы
+- **[1-2-show-the-two-main-visitor-needs.md](_archive/implementation-artifacts/1-2-show-the-two-main-visitor-needs.md)** - Story 1.2: Show the Two Main Visitor Needs
+- **[1-3-remember-the-chosen-language-and-theme.md](_archive/implementation-artifacts/1-3-remember-the-chosen-language-and-theme.md)** - Story 1.3: Remember the Chosen Language and Theme
+- **[1-4-open-the-main-site-information-pages.md](_archive/implementation-artifacts/1-4-open-the-main-site-information-pages.md)** - Story 1.4: Open the Main Site Information Pages
+- **[1-5-show-the-knowledge-section-in-site-navigation.md](_archive/implementation-artifacts/1-5-show-the-knowledge-section-in-site-navigation.md)** - Story 1.5: Show the Knowledge Section in Site Navigation
+- **[2-1-show-the-main-verification-example.md](_archive/implementation-artifacts/2-1-show-the-main-verification-example.md)** - Story 2.1: Show the Main Verification Example
+- **[2-2-show-a-clear-no-data-result.md](_archive/implementation-artifacts/2-2-show-a-clear-no-data-result.md)** - Story 2.2: Show a Clear No-Data Result
+- **[2-3-use-the-demo-input-and-example-code-action.md](_archive/implementation-artifacts/2-3-use-the-demo-input-and-example-code-action.md)** - Dev Agent Record
+- **[2-4-show-only-supported-proof-content.md](_archive/implementation-artifacts/2-4-show-only-supported-proof-content.md)** - Story 2.4: Show Only Supported Proof Content
+- **[3-1-guide-official-checks-to-diia.md](_archive/implementation-artifacts/3-1-guide-official-checks-to-diia.md)** - Story 3.1: Guide Official Checks to `Дія`
+- **[3-2-show-the-right-business-next-step.md](_archive/implementation-artifacts/3-2-show-the-right-business-next-step.md)** - Story 3.2: Show the Right Business Next Step
+- **[3-3-send-a-qualified-request.md](_archive/implementation-artifacts/3-3-send-a-qualified-request.md)** - Story 3.3: Send a Qualified Request
+- **[3-4-attach-scenario-and-source-details.md](_archive/implementation-artifacts/3-4-attach-scenario-and-source-details.md)** - Story 3.4: Attach Scenario and Source Details
+- **[4-1-track-movement-from-homepage-to-proof.md](_archive/implementation-artifacts/4-1-track-movement-from-homepage-to-proof.md)** - Story 4.1: Track Movement from Homepage to Proof
+- **[4-2-track-requests-by-scenario-and-source.md](_archive/implementation-artifacts/4-2-track-requests-by-scenario-and-source.md)** - Story 4.2: Track Requests by Scenario and Source
+- **[4-3-review-the-proof-first-funnel.md](_archive/implementation-artifacts/4-3-review-the-proof-first-funnel.md)** - Story 4.3: Review the Proof-First Funnel
+- **[epic-1-dev-handoff.md](_archive/implementation-artifacts/epic-1-dev-handoff.md)** - Epic 1 Dev Handoff
+- **[epic-2-retrospective.md](_archive/implementation-artifacts/epic-2-retrospective.md)** - Epic 2 Retrospective: Public Proof Experience
+- **[epic-3-retro-2026-03-14.md](_archive/implementation-artifacts/epic-3-retro-2026-03-14.md)** - Ретроспектива Epic 3: Audience Routing and Qualified Conversion
+- **[epic-4-retro-2026-03-15.md](_archive/implementation-artifacts/epic-4-retro-2026-03-15.md)** - Ретроспектива Epic 4: Funnel Visibility and Review
+- **[tech-spec-fix-ambiguous-diia-locator.md](_archive/implementation-artifacts/tech-spec-fix-ambiguous-diia-locator.md)** - ---
+- **[tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md](_archive/implementation-artifacts/tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md)** - ---
+- **[tech-spec-p1-remediation-nav-trust-pills.md](_archive/implementation-artifacts/tech-spec-p1-remediation-nav-trust-pills.md)** - ---
+- **[tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md](_archive/implementation-artifacts/tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md)** - ---
+- **[open-questions.md](_archive/knowledge/open-questions.md)** - Open Questions and Validation Items
+- **[implementation-readiness-report-2026-03-11-2.md](_archive/planning-artifacts/implementation-readiness-report-2026-03-11-2.md)** - ---
+- **[implementation-readiness-report-2026-03-11.md](_archive/planning-artifacts/implementation-readiness-report-2026-03-11.md)** - ---
+- **[product-brief-gm-2026-02-23.md](_archive/planning-artifacts/product-brief-gm-2026-02-23.md)** - ---
+- **[product-brief-gm-2026-03-05.md](_archive/planning-artifacts/product-brief-gm-2026-03-05.md)** - ---
 ### _bmad-output/
+- **[css-var-refactor-analysis.md](_bmad-output/css-var-refactor-analysis.md)** - CSS Variable Refactor Analysis
+- **[css-var-refactor-implementation-notes.md](_bmad-output/css-var-refactor-implementation-notes.md)** - CSS Variable Refactor Implementation Notes
+- **[css-var-refactor-qa.md](_bmad-output/css-var-refactor-qa.md)** - CSS Variable Refactor QA
+- **[css-var-refactor-review.md](_bmad-output/css-var-refactor-review.md)** - CSS Variable Refactor Review
 - **[design-thinking-2026-02-23.md](_bmad-output/design-thinking-2026-02-23.md)** - Design Thinking Session: gm
-- **[1-1-clarify-the-homepage-first-screen.md](_bmad-output/implementation-artifacts/1-1-clarify-the-homepage-first-screen.md)** - Story 1.1: Прояснить первый экран главной страницы
-- **[1-2-show-the-two-main-visitor-needs.md](_bmad-output/implementation-artifacts/1-2-show-the-two-main-visitor-needs.md)** - Story 1.2: Show the Two Main Visitor Needs
-- **[1-3-remember-the-chosen-language-and-theme.md](_bmad-output/implementation-artifacts/1-3-remember-the-chosen-language-and-theme.md)** - Story 1.3: Remember the Chosen Language and Theme
-- **[1-4-open-the-main-site-information-pages.md](_bmad-output/implementation-artifacts/1-4-open-the-main-site-information-pages.md)** - Story 1.4: Open the Main Site Information Pages
-- **[1-5-show-the-knowledge-section-in-site-navigation.md](_bmad-output/implementation-artifacts/1-5-show-the-knowledge-section-in-site-navigation.md)** - Story 1.5: Show the Knowledge Section in Site Navigation
-- **[2-1-show-the-main-verification-example.md](_bmad-output/implementation-artifacts/2-1-show-the-main-verification-example.md)** - Story 2.1: Show the Main Verification Example
-- **[2-2-show-a-clear-no-data-result.md](_bmad-output/implementation-artifacts/2-2-show-a-clear-no-data-result.md)** - Story 2.2: Show a Clear No-Data Result
-- **[2-3-use-the-demo-input-and-example-code-action.md](_bmad-output/implementation-artifacts/2-3-use-the-demo-input-and-example-code-action.md)** - Dev Agent Record
-- **[2-4-show-only-supported-proof-content.md](_bmad-output/implementation-artifacts/2-4-show-only-supported-proof-content.md)** - Story 2.4: Show Only Supported Proof Content
-- **[3-1-guide-official-checks-to-diia.md](_bmad-output/implementation-artifacts/3-1-guide-official-checks-to-diia.md)** - Story 3.1: Guide Official Checks to `Дія`
-- **[3-2-show-the-right-business-next-step.md](_bmad-output/implementation-artifacts/3-2-show-the-right-business-next-step.md)** - Story 3.2: Show the Right Business Next Step
-- **[3-3-send-a-qualified-request.md](_bmad-output/implementation-artifacts/3-3-send-a-qualified-request.md)** - Story 3.3: Send a Qualified Request
-- **[3-4-attach-scenario-and-source-details.md](_bmad-output/implementation-artifacts/3-4-attach-scenario-and-source-details.md)** - Story 3.4: Attach Scenario and Source Details
-- **[4-1-track-movement-from-homepage-to-proof.md](_bmad-output/implementation-artifacts/4-1-track-movement-from-homepage-to-proof.md)** - Story 4.1: Track Movement from Homepage to Proof
-- **[4-2-track-requests-by-scenario-and-source.md](_bmad-output/implementation-artifacts/4-2-track-requests-by-scenario-and-source.md)** - Story 4.2: Track Requests by Scenario and Source
-- **[4-3-review-the-proof-first-funnel.md](_bmad-output/implementation-artifacts/4-3-review-the-proof-first-funnel.md)** - Story 4.3: Review the Proof-First Funnel
-- **[epic-1-dev-handoff.md](_bmad-output/implementation-artifacts/epic-1-dev-handoff.md)** - Epic 1 Dev Handoff
-- **[epic-2-retrospective.md](_bmad-output/implementation-artifacts/epic-2-retrospective.md)** - Epic 2 Retrospective: Public Proof Experience
-- **[epic-3-retro-2026-03-14.md](_bmad-output/implementation-artifacts/epic-3-retro-2026-03-14.md)** - Ретроспектива Epic 3: Audience Routing and Qualified Conversion
-- **[epic-4-retro-2026-03-15.md](_bmad-output/implementation-artifacts/epic-4-retro-2026-03-15.md)** - Ретроспектива Epic 4: Funnel Visibility and Review
+- **[01-product-strategy-requirements.md](_bmad-output/gm-distillate/01-product-strategy-requirements.md)** - This section covers product model, business model/pricing, user personas, journeys, functional requirements, non-functional requirements, epic structure, funnel analytics, and SEO architecture. Part 1 of 4.
+- **[02-architecture-tech-implementation.md](_bmad-output/gm-distillate/02-architecture-tech-implementation.md)** - This section covers tech stack, ADRs, file layout, design system, component specs, and mandatory implementation patterns. Part 2 of 4.
+- **[03-audit-remediation-current-state.md](_bmad-output/gm-distillate/03-audit-remediation-current-state.md)** - This section covers findings register v3, open/fixed defects, Epic 5 remediation stories, anti-drift corrections, open drift items, and document authority. Part 3 of 4.
+- **[04-cicd-docs-governance-contracts.md](_bmad-output/gm-distillate/04-cicd-docs-governance-contracts.md)** - This section covers CI/CD pipeline architecture, project contract rules, documentation authority map, homepage master plan staged execution, and key file locations. Part 4 of 4.
+- **[_index.md](_bmad-output/gm-distillate/_index.md)** - ---
+- **[5-1-remove-perevir-produkt-legacy-route.md](_bmad-output/implementation-artifacts/5-1-remove-perevir-produkt-legacy-route.md)** - Story 5-1: Remove `site/perevir-produkt/` from the public surface
+- **[5-2-verify-homepage-cta-routes-to-request.md](_bmad-output/implementation-artifacts/5-2-verify-homepage-cta-routes-to-request.md)** - Story 5-2: Verify homepage CTA routes to `/request/` — close or fix
+- **[5-3-reword-homepage-copy-trust-boundary.md](_bmad-output/implementation-artifacts/5-3-reword-homepage-copy-trust-boundary.md)** - Story 5-3: Reword homepage/runtime copy implying live lookup or real-time verification
+- **[5-4-narrow-faq-verification-claims.md](_bmad-output/implementation-artifacts/5-4-narrow-faq-verification-claims.md)** - Story 5-4: Narrow FAQ verification claims
+- **[5-5-soften-contact-response-time-language.md](_bmad-output/implementation-artifacts/5-5-soften-contact-response-time-language.md)** - Story 5-5: Confirm response-time language does not imply an SLA
 - **[README.md](_bmad-output/implementation-artifacts/genu-im-baseline/README.md)** - genu.im baseline capture
 - **[index.md](_bmad-output/implementation-artifacts/index.md)** - Directory Index: _bmad-output/implementation-artifacts
-- **[tech-spec-fix-ambiguous-diia-locator.md](_bmad-output/implementation-artifacts/tech-spec-fix-ambiguous-diia-locator.md)** - ---
-- **[tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md](_bmad-output/implementation-artifacts/tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md)** - ---
-- **[tech-spec-p1-remediation-nav-trust-pills.md](_bmad-output/implementation-artifacts/tech-spec-p1-remediation-nav-trust-pills.md)** - ---
-- **[tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md](_bmad-output/implementation-artifacts/tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md)** - ---
 - **[index.md](_bmad-output/index.md)** - Directory Index: _bmad-output
 - **[20260217_2241_command-messageinitcommand-message-8536d10d.md](_bmad-output/knowledge/fragments/20260217_2241_command-messageinitcommand-message-8536d10d.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
 - **[20260218_2004_command-messagebmad-agent-bmm-pmcommand-message-2f51eaac.md](_bmad-output/knowledge/fragments/20260218_2004_command-messagebmad-agent-bmm-pmcommand-message-2f51eaac.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
@@ -52,15 +73,14 @@ Directory Index: repo-root
 - **[migration-converter-review.md](_bmad-output/knowledge/migration-converter-review.md)** - Senior Developer Review (AI)
 - **[migration-converter-summary.md](_bmad-output/knowledge/migration-converter-summary.md)** - 🔥 CODE REVIEW FINDINGS, GenuIm!
 - **[migration-report.md](_bmad-output/knowledge/migration-report.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
-- **[open-questions.md](_bmad-output/knowledge/open-questions.md)** - Open Questions and Validation Items
 - **[architecture.md](_bmad-output/planning-artifacts/architecture.md)** - ---
+- **[bmad-doc-consistency-todo-2026-03-19.md](_bmad-output/planning-artifacts/bmad-doc-consistency-todo-2026-03-19.md)** - BMAD Document Consistency ToDo
+- **[bmad-doc-inconsistency-report-2026-03-19.md](_bmad-output/planning-artifacts/bmad-doc-inconsistency-report-2026-03-19.md)** - BMAD Documentation Inconsistency Report
+- **[consistency-alignment-plan-2026-03-19.md](_bmad-output/planning-artifacts/consistency-alignment-plan-2026-03-19.md)** - Consistency Alignment Plan
 - **[epics.md](_bmad-output/planning-artifacts/epics.md)** - ---
-- **[implementation-readiness-report-2026-03-11-2.md](_bmad-output/planning-artifacts/implementation-readiness-report-2026-03-11-2.md)** - ---
-- **[implementation-readiness-report-2026-03-11.md](_bmad-output/planning-artifacts/implementation-readiness-report-2026-03-11.md)** - ---
+- **[implementation-readiness-report-2026-03-19.md](_bmad-output/planning-artifacts/implementation-readiness-report-2026-03-19.md)** - ---
 - **[index.md](_bmad-output/planning-artifacts/index.md)** - Directory Index: _bmad-output/planning-artifacts
 - **[prd.md](_bmad-output/planning-artifacts/prd.md)** - ---
-- **[product-brief-gm-2026-02-23.md](_bmad-output/planning-artifacts/product-brief-gm-2026-02-23.md)** - ---
-- **[product-brief-gm-2026-03-05.md](_bmad-output/planning-artifacts/product-brief-gm-2026-03-05.md)** - ---
 - **[sprint-change-proposal-2026-03-11.md](_bmad-output/planning-artifacts/sprint-change-proposal-2026-03-11.md)** - Sprint Change Proposal - 2026-03-11
 - **[ux-design-specification.md](_bmad-output/planning-artifacts/ux-design-specification.md)** - ---
 - **[validation-report-2026-03-09.md](_bmad-output/planning-artifacts/validation-report-2026-03-09.md)** - ---
@@ -70,17 +90,25 @@ Directory Index: repo-root
 - **[p1-remediation-plan.md](_bmad-output/plans/p1-remediation-plan.md)** - P1 Remediation Plan — genu.im
 - **[problem-solution-2026-02-23.md](_bmad-output/problem-solution-2026-02-23.md)** - Problem Solving Session: Уникальный B2B-лендинг genu.im, который конвертит и запоминается
 - **[project-context.md](_bmad-output/project-context.md)** - ---
+- **[anti-drift-audit-2026-03-18.md](_bmad-output/reviews/anti-drift-audit-2026-03-18.md)** - Anti-Drift Audit — genu.im
+- **[anti-drift-handoff-2026-03-18.md](_bmad-output/reviews/anti-drift-handoff-2026-03-18.md)** - Anti-Drift Handoff — genu.im
 - **[ADR-001-output-css-tracking.md](_bmad-output/solutioning/adrs/ADR-001-output-css-tracking.md)** - ---
 - **[ADR-002-target-customer-criteria.md](_bmad-output/solutioning/adrs/ADR-002-target-customer-criteria.md)** - ---
 - **[ADR-003-architecture-decisions.md](_bmad-output/solutioning/adrs/ADR-003-architecture-decisions.md)** - ---
 - **[index.md](_bmad-output/solutioning/adrs/index.md)** - Directory Index: _bmad-output/solutioning/adrs
 - **[index.md](_bmad-output/solutioning/index.md)** - Directory Index: _bmad-output/solutioning
+- **[spec-token-component-vars-refactor.md](_bmad-output/spec-token-component-vars-refactor.md)** - Spec: Token & Component Vars Refactor
+- **[anti-drift-correction-spec-2026-03-18.md](_bmad-output/specs/anti-drift-correction-spec-2026-03-18.md)** - Anti-Drift Correction Spec — genu.im
 - **[ci-pipeline-progress.md](_bmad-output/test-artifacts/ci-pipeline-progress.md)** - ---
 - **[index.md](_bmad-output/test-artifacts/index.md)** - Directory Index: _bmad-output/test-artifacts
 
 ---
 ### _archive/
 Archived legacy materials and migration inputs.
+- **[/_archive/docs](./_archive/docs/)**
+- **[/_archive/implementation-artifacts](./_archive/implementation-artifacts/)**
+- **[/_archive/knowledge](./_archive/knowledge/)**
 - **[/_archive/perevir-product](./_archive/perevir-product/)**
+- **[/_archive/planning-artifacts](./_archive/planning-artifacts/)**
 
-Last updated: 2026-03-17
+Last updated: 2026-03-21
