@@ -58,6 +58,19 @@ Flag every resolved conflict in `consistency-report.md` with:
 
 ---
 
+## BMAD SKILLS TO USE
+
+Do not perform these manually — invoke the corresponding BMAD skill:
+
+| Task | Skill |
+|---|---|
+| Navigate artifact folders | `/bmad-index-docs` → generates/updates `index.md` |
+| Re-distill changed artifacts | `/bmad-distillator` → compressed distillate sections |
+| Refresh AI rules | `/bmad-generate-project-context` → updates `project-context.md` |
+| Run this audit | `/bmad-analyst` → you are already here |
+
+---
+
 ## CONTEXT USAGE RULES
 
 - If `index.md` exists in a folder → use it to navigate; do NOT read every file
