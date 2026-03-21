@@ -49,6 +49,16 @@ On conflict: higher source wins; flag in consistency-report.
 
 ---
 
+## Оновлення normalized-context.md
+
+Оновлювати при:
+- Завершенні epic → секція Current State
+- Зміні PRD/Architecture → перегнати через `bmad-distillator`
+- Нових/закритих дефектах → вручну в `missing-pieces.md`
+- Перейменуванні файлів → вручну в `_bmad-output/index.md` + `gm-distillate/_index.md`
+
+---
+
 ## Communication
 
 - Language: Russian (conversation) / Ukrainian (documents)
