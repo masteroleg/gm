@@ -65,14 +65,12 @@ Lossless distillate of ~80 project documents (~160K tokens → 9K tokens, 17.5:1
 - **[architecture.md](./planning-artifacts/architecture.md)** - Technical architecture decisions and patterns
 - **[ux-design-specification.md](./planning-artifacts/ux-design-specification.md)** - UX design specification (1,156 lines, 10 components)
 - **[epics.md](./planning-artifacts/epics.md)** - Epic definitions for release 2.1 (Epics 1–4)
-- **[implementation-readiness-report-2026-03-19.md](./planning-artifacts/implementation-readiness-report-2026-03-19.md)** - Implementation readiness assessment (Warning status)
-- **[consistency-alignment-plan-2026-03-19.md](./planning-artifacts/consistency-alignment-plan-2026-03-19.md)** - Plan to resolve cross-doc inconsistencies
-- **[bmad-doc-inconsistency-report-2026-03-19.md](./planning-artifacts/bmad-doc-inconsistency-report-2026-03-19.md)** - Report of inconsistencies found across planning docs
-- **[bmad-doc-consistency-todo-2026-03-19.md](./planning-artifacts/bmad-doc-consistency-todo-2026-03-19.md)** - TODO list for consistency alignment
-- **[sprint-change-proposal-2026-03-11.md](./planning-artifacts/sprint-change-proposal-2026-03-11.md)** - Sprint change proposal (2026-03-11)
-- **[validation-report-2026-03-11.md](./planning-artifacts/validation-report-2026-03-11.md)** - PRD validation pass 3 (final)
-- **[validation-report-2026-03-10.md](./planning-artifacts/validation-report-2026-03-10.md)** - PRD validation pass 2
-- **[validation-report-2026-03-09.md](./planning-artifacts/validation-report-2026-03-09.md)** - PRD validation pass 1
+- **[implementation-readiness-report.md](./planning-artifacts/implementation-readiness-report.md)** - Implementation readiness assessment (Warning status)
+- **[doc-inconsistency-report.md](./planning-artifacts/doc-inconsistency-report.md)** - Report of inconsistencies found across planning docs
+- **[consistency-alignment-plan.md](./planning-artifacts/consistency-alignment-plan.md)** - Plan to resolve cross-doc inconsistencies
+- **[consistency-todo.md](./planning-artifacts/consistency-todo.md)** - TODO list for consistency alignment
+- **[sprint-change-proposal.md](./planning-artifacts/sprint-change-proposal.md)** - Sprint change proposal
+- **[validation-report.md](./planning-artifacts/validation-report.md)** - PRD validation (final pass)
 
 ---
 
@@ -85,8 +83,8 @@ Lossless distillate of ~80 project documents (~160K tokens → 9K tokens, 17.5:1
 
 ## reviews/
 
-- **[anti-drift-audit-2026-03-18.md](./reviews/anti-drift-audit-2026-03-18.md)** - Anti-drift audit: drift matrix, conflict analysis
-- **[anti-drift-handoff-2026-03-18.md](./reviews/anti-drift-handoff-2026-03-18.md)** - Ordered patch plan for anti-drift corrections
+- **[anti-drift-audit.md](./reviews/anti-drift-audit.md)** - Anti-drift audit: drift matrix, conflict analysis
+- **[anti-drift-handoff.md](./reviews/anti-drift-handoff.md)** - Ordered patch plan for anti-drift corrections
 
 ---
 
@@ -98,9 +96,16 @@ Lossless distillate of ~80 project documents (~160K tokens → 9K tokens, 17.5:1
 
 ---
 
+## analysis/
+
+- **[missing-pieces.md](./analysis/missing-pieces.md)** - Consolidated open items: 6 defects, drift decisions, strategic holds, migration bug
+- **[normalized-context.md](./analysis/normalized-context.md)** - Compact starter context for any new prompt or agent session (≤600 tokens)
+
+---
+
 ## specs/
 
-- **[anti-drift-correction-spec-2026-03-18.md](./specs/anti-drift-correction-spec-2026-03-18.md)** - Spec for anti-drift correction patches
+- **[anti-drift-correction-spec.md](./specs/anti-drift-correction-spec.md)** - Spec for anti-drift correction patches
 
 ---
 
@@ -110,4 +115,4 @@ Lossless distillate of ~80 project documents (~160K tokens → 9K tokens, 17.5:1
 
 ---
 
-*Last updated: 2026-03-21*
+*Last updated: 2026-03-21 — naming cleanup: 9 renames, 4 deletions, analysis/ added*

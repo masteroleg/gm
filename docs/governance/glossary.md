@@ -1,6 +1,6 @@
 # Glossary — genu.im
 
-> **Draft glossary — promote to active after review.**
+> **Active glossary.** Promoted 2026-03-21.
 > Source: `prd.md`, `architecture.md`, `epics.md`, `ux-design-specification.md`, `docs/project-contract.md`, `docs/governance/doc-governance.md`, `_bmad-output/project-context.md`.
 > Terms marked `[needs review]` require explicit confirmation against a canonical source before use.
 

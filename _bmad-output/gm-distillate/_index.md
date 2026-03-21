@@ -5,13 +5,11 @@ sources:
   - "../planning-artifacts/architecture.md"
   - "../planning-artifacts/ux-design-specification.md"
   - "../planning-artifacts/epics.md"
-  - "../planning-artifacts/implementation-readiness-report-2026-03-19.md"
-  - "../planning-artifacts/consistency-alignment-plan-2026-03-19.md"
-  - "../planning-artifacts/bmad-doc-inconsistency-report-2026-03-19.md"
-  - "../planning-artifacts/sprint-change-proposal-2026-03-11.md"
-  - "../planning-artifacts/validation-report-2026-03-09.md"
-  - "../planning-artifacts/validation-report-2026-03-10.md"
-  - "../planning-artifacts/validation-report-2026-03-11.md"
+  - "../planning-artifacts/implementation-readiness-report.md"
+  - "../planning-artifacts/consistency-alignment-plan.md"
+  - "../planning-artifacts/doc-inconsistency-report.md"
+  - "../planning-artifacts/sprint-change-proposal.md"
+  - "../planning-artifacts/validation-report.md"
   - "../project-context.md"
   - "../design-thinking-2026-02-23.md"
   - "../problem-solution-2026-02-23.md"
@@ -28,9 +26,9 @@ sources:
   - "../solutioning/adrs/ADR-001-output-css-tracking.md"
   - "../solutioning/adrs/ADR-002-target-customer-criteria.md"
   - "../solutioning/adrs/ADR-003-architecture-decisions.md"
-  - "../reviews/anti-drift-audit-2026-03-18.md"
-  - "../reviews/anti-drift-handoff-2026-03-18.md"
-  - "../specs/anti-drift-correction-spec-2026-03-18.md"
+  - "../reviews/anti-drift-audit.md"
+  - "../reviews/anti-drift-handoff.md"
+  - "../specs/anti-drift-correction-spec.md"
   - "../plans/adversarial-review-p1-remediation.md"
   - "../plans/p1-remediation-plan.md"
   - "../implementation-artifacts/5-1-remove-perevir-produkt-legacy-route.md"
@@ -96,7 +94,7 @@ Distillate of ~80 genu.im project documents (planning artifacts, project context
 - STRAT-001 (Domino/Omron disclosure): founder-track; do not use without approval
 - Public proof facts (25M+, Ukravit): requires founder approval before publishing
 - eАкциз messaging: direct vs diplomatic — A/B test planned
-- Founder decision required: version policy (package.json 1.0.0 vs CHANGELOG/RETROSPECTIVE claiming v2.0.2)
+- Founder decision required: version policy (package.json 1.0.0 vs previous CHANGELOG claiming v2.0.2; CHANGELOG/RETROSPECTIVE deleted as empty files 2026-03-21)
 
 ## Section Index
 - [01-product-strategy-requirements.md](./01-product-strategy-requirements.md) — product model, business model/pricing, personas, journeys, FRs 1–31, NFRs 1–16, epic structure, funnel/analytics, SEO architecture
