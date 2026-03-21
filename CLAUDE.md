@@ -49,13 +49,13 @@ On conflict: higher source wins; flag in consistency-report.
 
 ---
 
-## Оновлення normalized-context.md
+## When to update normalized-context.md
 
-Оновлювати при:
-- Завершенні epic → секція Current State
-- Зміні PRD/Architecture → перегнати через `bmad-distillator`
-- Нових/закритих дефектах → вручну в `missing-pieces.md`
-- Перейменуванні файлів → вручну в `_bmad-output/index.md` + `gm-distillate/_index.md`
+- Epic completed → update `Current State` section
+- PRD or Architecture changed → re-distill via `bmad-distillator`
+- Defects opened or closed → update `missing-pieces.md` manually
+- Files renamed or deleted → update `_bmad-output/index.md` + `gm-distillate/_index.md`
+- New term added → update `docs/governance/glossary.md`
 
 ---
 

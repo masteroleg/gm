@@ -7,6 +7,16 @@
 
 ---
 
+## Перший раз у проекті — з чого почати
+
+Якщо `_bmad-output/analysis/normalized-context.md` ще не існує:
+
+1. Запусти `/bmad-analyst` і передай промпт `docs/prompts/consistency-audit.md`
+2. Агент сам просканує репозиторій, покаже що знайшов, і створить потрібні файли
+3. Після цього — стандартний флоу нижче
+
+---
+
 ## Старт будь-якої AI-сесії — 2 файли
 
 Завжди завантажуй ці два файли **першими**, до будь-якої іншої роботи:
@@ -65,6 +75,26 @@ PRD  >  Architecture  >  UX Spec  >  Epics  >  Stories
 
 ---
 
+## Що і коли оновлювати — повна таблиця
+
+Після будь-якої значущої зміни в проекті оновлюй відповідні файли:
+
+| Тригер | Що оновити | Як |
+|---|---|---|
+| Завершено epic | `normalized-context.md` → секція Current State | вручну |
+| Завершено epic | `CLAUDE.md` → секція Current State | вручну |
+| Змінився PRD або Architecture | Відповідна частина дистиляту | `bmad-distillator` |
+| Нові або закриті дефекти | `_bmad-output/analysis/missing-pieces.md` | вручну |
+| Перейменовано або видалено файли | `_bmad-output/index.md` | вручну |
+| Перейменовано або видалено файли | `_bmad-output/gm-distillate/_index.md` | вручну |
+| Доданий новий термін | `docs/governance/glossary.md` | вручну |
+| Новий реюзабельний промпт | `docs/prompts/` | зберегти файл |
+| Нові правила для AI-агентів | `_bmad-output/project-context.md` | вручну або `bmad-generate-project-context` |
+
+> **Правило:** `CLAUDE.md` і `normalized-context.md` — живі документи. Якщо вони старіші за 1 epic, вважай їх застарілими.
+
+---
+
 ## Коли оновлювати normalized-context.md
 
 | Тригер | Що оновити |
@@ -91,11 +121,14 @@ PRD  >  Architecture  >  UX Spec  >  Epics  >  Stories
 
 ### Як запустити
 
-Відкрий файл промпту і вистав його агенту як системний інструктаж:
+Запускай через скіл `/bmad-analyst`, потім вистав вміст промпту:
 
 ```
-docs/prompts/consistency-audit.md
+/bmad-analyst
 ```
+
+Далі скопіюй вміст файлу `docs/prompts/consistency-audit.md` в чат.
+Або передай шлях агенту: "Use docs/prompts/consistency-audit.md as your instructions."
 
 Промпт сам:
 1. **Перевіряє що вже існує** (PRE-CHECK) — показує таблицю знайдених аналогів
@@ -141,14 +174,20 @@ docs/prompts/consistency-audit.md
 
 ## Коміти
 
-Повідомлення комітів — через HEREDOC, ніколи `--no-verify`:
+В проекті є pre-commit хук (`scripts/generate-commit-msg.cjs`) що **автоматично генерує** повідомлення коміту на основі diff. Стандартний флоу:
+
+```bash
+rtk git add <files>
+git commit        # ← хук генерує повідомлення сам, редактор не відкривається
+```
+
+Якщо потрібно **перевизначити** автогенерацію (наприклад для складного коміту з кількох логічних частин) — передавай через HEREDOC:
 
 ```bash
 git commit -m "$(cat <<'EOF'
-feat(scope): short summary
+docs(scope): short summary
 
 Detailed explanation of why, not what.
-What changed and what impact it has.
 
 Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
 EOF
@@ -157,6 +196,7 @@ EOF
 
 Формат: `type(scope): summary` — conventional commits.
 Типи: `feat`, `fix`, `docs`, `refactor`, `chore`, `test`.
+Ніколи не використовуй `--no-verify`.
 
 ---
 
