@@ -1,6 +1,6 @@
 {
 	"name": "genuim-site",
-	"version": "1.0.0",
+	"version": "2.0.3",
 	"private": true,
 	"scripts": {
 		"start": "http-server site -p 3000 -c-1",

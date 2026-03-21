@@ -1,22 +1,62 @@
-# CHANGELOG: genu.im — Complete Evolution v1.0 → v2.0.2  
+# CHANGELOG: genu.im — Complete Evolution v1.0 → v2.0.3
 
-*Trust-first verification platform: from foundation to full user journeys*  
+*Trust-first verification platform: from foundation to full user journeys*
 
-*Платформа верификации на основе доверия: от основ до полных пользовательских сценариев*  
+*Платформа верификации на основе доверия: от основ до полных пользовательских сценариев*
 
----  
+---
 
-## 📊 Release Timeline / Хронология релизов  
+## 📊 Release Timeline / Хронология релизов
 
-| Version | Date | Focus |  
-|---------|------|-------|  
-| **v1.0** | 2026-03-09 | Foundation — BMAD workflows, static site core, basic i18n |  
-| **v2.0** | 2026-03-09 | Reliability — CI split, git hooks, error handling |  
-| **v2.0.1** | 2026-03-15 | Quality Gates — two-tier CI, auto-indexing, docs |  
-| **v2.0.2** | 2026-03-18 | Completion — End-to-end user journeys (Epics 1-4) |  
+| Version | Date | Focus |
+|---------|------|-------|
+| **v1.0** | 2026-03-09 | Foundation — BMAD workflows, static site core, basic i18n |
+| **v2.0** | 2026-03-09 | Reliability — CI split, git hooks, error handling |
+| **v2.0.1** | 2026-03-15 | Quality Gates — two-tier CI, auto-indexing, docs |
+| **v2.0.2** | 2026-03-18 | Completion — End-to-end user journeys (Epics 1-4) |
+| **v2.0.3** | 2026-03-21 | Remediation — Epic 5 site fixes, anti-drift, distillate |
 
-**Total commits:** 102 (v2.0..v2.0.2)  
-**Total commits since v1.0:** ~140+  
+**Total commits:** ~155 (v1.0..v2.0.3)
+
+---
+
+## 🔧 v2.0.3 — Site Remediation & Documentation Authority (2026-03-21)
+
+### Epic 5: Site Remediation (all 5 stories completed)
+
+| Story | Change |
+|-------|--------|
+| 5-1 | Deleted legacy `site/perevir-produkt/` and `site/perevir-product/` routes + orphaned E2E specs |
+| 5-2 | Verified CTA routing — `/request?from=/`, `?scenario=eaktsyz`, `?scenario=brand-proof` |
+| 5-3 | Removed deprecated live-lookup language from `why.point2.title` and `proof.point1.title` EN+UK |
+| 5-4 | Replaced FAQ real-time scan claim with "fast scan response" / "швидка обробка сканування" |
+| 5-5 | Softened `contact.section3.body` EN+UK to remove SLA-implying language |
+
+### CSS Variable Refactor
+
+- Fixed shorthand violations in `.hero-card`, `.cta-button`, `.content-card__cta`, `.vcard`, `.demo-input__field`, `.demo-input__submit`, card components
+- Resolved state duplication and focus API gaps per project-contract §14
+- Documented in `_bmad-output/spec-token-component-vars-refactor.md`
+
+### Anti-Drift Corrections
+
+- `p1-remediation-plan.md` — marked COMPLETED 2026-03-17/18
+- `project-context.md` — replaced tech stack placeholder with actual facts
+- `remediation-brief.md` — annotated §4 with superseded notice; current state: 6 open, 6 fixed
+
+### BMAD Knowledge Distillate
+
+- Created `_bmad-output/gm-distillate/` — lossless 17.5:1 compression of ~80 project docs (~160K → ~9K tokens)
+- 4 semantic sections: product/strategy, architecture/tech, audit/remediation, CI/CD/governance
+- Updated `_bmad-output/index.md` to reflect all current artifacts
+
+### Cleanup
+
+- Removed leftover test/debug files: `commit-msg-test.txt`, `find`, `debug.log`
+- Removed empty `design-artifacts/` scaffold (A–G directories, 0 files)
+- Improved commit message generation hook quality
+
+---
 
 ---  
 
