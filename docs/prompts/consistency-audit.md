@@ -148,18 +148,29 @@ Do NOT copy distillate content into this file.
 ### 4. `missing-pieces.md`
 
 ```
-## Missing Functional Areas
-...
+## A — Open Defects
+| ID | Severity | Description | Effort | Notes |
 
-## Missing Technical Details
-APIs, data models, schemas
+## B — Drift Items (decisions pending)
+Items that exist but conflict or are unresolved
 
-## Required Assumptions
-What must be assumed to proceed
+## C — Strategic Decisions (founder / PO track)
+Do not act without explicit approval
 
-## Risks
-What may break later
+## D — Technical Debt / Migration Issues
+Broken pipelines, unreachable code, empty shell files
+
+## E — Quick Wins
+Small improvements that can be done immediately
+
+## F — Refresh Conditions
+Conditions that would make this file stale
 ```
+
+Rules:
+- Severity: HIGH / MEDIUM / LOW
+- Do NOT put items here that are already tracked in the defect register
+- Reference the authoritative source; do not copy content
 
 ### 5. `normalized-context.md` ← CRITICAL
 
@@ -181,12 +192,15 @@ Business rules and technical constraints
 ## Architecture Snapshot
 Short, structured
 
+## Current State
+Date + status of latest epic/sprint + count of open defects
+
 ## Load More (pointers only — no content duplication)
 | Topic | File |
 ```
 
 **Brownfield note:** If `normalized-context.md` already exists → update
-the "Current State" section only; preserve the rest unless a canonical term changed.
+`## Current State` only; preserve everything else unless a canonical term changed.
 
 ---
 
