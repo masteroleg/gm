@@ -10,11 +10,11 @@
 Якщо `normalized-context.md` ще не існує — спочатку створи артефакти:
 
 ```
-1. /bmad-index-docs          ← збудуй index.md для навігації
-2. /bmad-distillator         ← стисни планувальні артефакти в дистилят
+1. /bmad-distillator         ← стисни планувальні артефакти в дистилят
+2. /bmad-index-docs          ← збудуй index.md для навігації по дистиляту
 3. /bmad-generate-project-context  ← створи project-context.md (AI rules)
-4. /bmad-analyst + docs/prompts/consistency-audit.md
-                             ← аудит консистентності + normalized-context.md
+4. /bmad-analyst             ← аудит консистентності + normalized-context.md
+   "Use docs/prompts/consistency-audit.md as your instructions."
 ```
 
 Після цього — стандартний флоу нижче.

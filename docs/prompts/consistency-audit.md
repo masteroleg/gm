@@ -1,6 +1,7 @@
 # CONSISTENCY AUDIT + AI CONTEXT CREATION
 
-**How to run:** Type `/bmad-analyst` in Claude Code chat, then paste this file's contents.
+**How to run:** Type `/bmad-analyst` in Claude Code chat, then say:
+`"Use docs/prompts/consistency-audit.md as your instructions."`
 **Who runs it:** The `bmad-analyst` agent (Mary).
 **Scope:** All BMAD project artifacts (vision, requirements, architecture, indexes).
 
@@ -157,8 +158,8 @@ Services / modules
 Entities (one-line each)
 ```
 
-**Brownfield note:** If a distillate (`gm-distillate/` or similar) already covers
-this content → write only a 3-line summary + pointer to the distillate.
+**Brownfield note:** If a distillate folder already covers this content →
+write only a 3-line summary + pointer to it.
 Do NOT copy distillate content into this file.
 
 ### 4. `missing-pieces.md`
