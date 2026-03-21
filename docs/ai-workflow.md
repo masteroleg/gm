@@ -26,8 +26,8 @@
 Завжди завантажуй **першими**, до будь-якої іншої роботи:
 
 ```
-1. analysis/normalized-context.md    ← стан проекту (~600 токенів)
-2. <distillate-folder>/_index.md     ← карта артефактів
+1. _bmad-output/analysis/normalized-context.md    ← стан проекту (~600 токенів)
+2. <distillate-folder>/_index.md                  ← карта артефактів
 ```
 
 > `<distillate-folder>` — папка з дистилятом проекту (наприклад `gm-distillate/`).
@@ -44,13 +44,12 @@
 
 | Що шукаєш | Де шукати |
 |---|---|
-| Поточний стан, канонічні терміни | `analysis/normalized-context.md` |
-| Відкриті дефекти та рішення на паузі | `analysis/missing-pieces.md` |
-| Карта всіх артефактів | `<distillate>/_index.md` |
+| Поточний стан, канонічні терміни (≤600 токенів) | `_bmad-output/analysis/normalized-context.md` |
+| Відкриті дефекти та рішення на паузі | `_bmad-output/analysis/missing-pieces.md` |
+| Карта всіх артефактів | `<distillate-folder>/_index.md` |
 | Деталі по темі | Секції дистиляту — через `_index.md` |
 | Повний глосарій | `docs/governance/glossary.md` |
-| AI-правила проекту (195 правил реалізації) | `project-context.md` ← генерується `/bmad-generate-project-context` |
-| Компактний стартовий контекст (≤600 токенів) | `analysis/normalized-context.md` ← генерується аудит-промптом |
+| AI-правила проекту | `_bmad-output/project-context.md` ← `/bmad-generate-project-context` |
 | Реюзабельні промпти | `docs/prompts/` |
 
 > Специфічні шляхи для цього проекту — в `CLAUDE.md` → секція Key Files.
@@ -82,7 +81,7 @@
 PRD  >  Architecture  >  UX Spec  >  Epics  >  Stories
 ```
 
-Конфлікт завжди фіксуй в `analysis/` — не вирішуй мовчки.
+Конфлікт завжди фіксуй в `_bmad-output/analysis/` — не вирішуй мовчки.
 
 ---
 
@@ -103,10 +102,10 @@ PRD  >  Architecture  >  UX Spec  >  Epics  >  Stories
 
 | Тригер | Що оновити | Як |
 |---|---|---|
-| Завершено epic | `analysis/normalized-context.md` → Current State | вручну |
+| Завершено epic | `_bmad-output/analysis/normalized-context.md` → Current State | вручну |
 | Завершено epic | `CLAUDE.md` → Current State | вручну |
 | Змінився PRD або Architecture | Відповідна частина дистиляту | `/bmad-distillator` |
-| Нові або закриті дефекти | `analysis/missing-pieces.md` | вручну |
+| Нові або закриті дефекти | `_bmad-output/analysis/missing-pieces.md` | вручну |
 | Перейменовано / видалено файли | `_bmad-output/index.md` + `<distillate>/_index.md` | вручну |
 | Доданий новий термін | `docs/governance/glossary.md` | вручну |
 | Нові AI-правила | `project-context.md` | `/bmad-generate-project-context` |
@@ -133,7 +132,7 @@ PRD  >  Architecture  >  UX Spec  >  Epics  >  Stories
 ```
 Далі: "Use docs/prompts/consistency-audit.md as your instructions."
 
-### Що отримаєш (`analysis/`)
+### Що отримаєш (`_bmad-output/analysis/`)
 
 | Файл | Призначення |
 |---|---|

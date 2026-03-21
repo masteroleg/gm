@@ -7,8 +7,6 @@
 
 ---
 
----
-
 ## STEP 0 — PRE-CHECK (run before anything else)
 
 Scan the following locations and map what already exists:
@@ -230,7 +228,7 @@ Date + status of latest epic/sprint + count of open defects
 ✓ No invented features (only flagged in missing-pieces.md)
 ✓ normalized-context.md word count × 0.75 ≤ 600 tokens
 ✓ system-summary.md has zero duplicated content from existing distillate
-✓ All 5 output paths use _bmad-output/analysis/ (no path conflicts)
+✓ New files go to _bmad-output/analysis/; Brownfield updates go in place (no duplicates)
 ✓ Summaries are consistent with source material
 ```
 
