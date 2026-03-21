@@ -1,7 +1,10 @@
 # CONSISTENCY AUDIT + AI CONTEXT CREATION
 
-Analyze all BMAD project artifacts in this repository (vision, requirements,
-architecture, indexes, and related documents).
+**How to run:** Type `/bmad-analyst` in Claude Code chat, then paste this file's contents.
+**Who runs it:** The `bmad-analyst` agent (Mary).
+**Scope:** All BMAD project artifacts (vision, requirements, architecture, indexes).
+
+---
 
 ---
 
@@ -22,7 +25,7 @@ Report your findings as a table:
 |---|---|---|
 | consistency-report.md | e.g. doc-inconsistency-report.md | reference / update / create |
 | terminology.md | e.g. docs/governance/glossary.md | reference / update / create |
-| system-summary.md | e.g. gm-distillate/ | reference / update / create |
+| system-summary.md | e.g. <distillate-folder>/ | reference / update / create |
 | missing-pieces.md | none found | create |
 | normalized-context.md | none found | create |
 
@@ -60,14 +63,14 @@ Flag every resolved conflict in `consistency-report.md` with:
 
 ## BMAD SKILLS TO USE
 
-Do not perform these manually — invoke the corresponding BMAD skill:
+When you encounter tasks below, **stop and tell the user** to run the corresponding skill
+in a new Claude Code turn. Do not attempt to replicate what these skills do.
 
-| Task | Skill |
+| When you need to... | Tell user to run |
 |---|---|
-| Navigate artifact folders | `/bmad-index-docs` → generates/updates `index.md` |
-| Re-distill changed artifacts | `/bmad-distillator` → compressed distillate sections |
-| Refresh AI rules | `/bmad-generate-project-context` → updates `project-context.md` |
-| Run this audit | `/bmad-analyst` → you are already here |
+| Build or refresh folder navigation index | `/bmad-index-docs` |
+| Compress changed planning artifacts | `/bmad-distillator` |
+| Refresh AI rules for the project | `/bmad-generate-project-context` |
 
 ---
 

@@ -30,6 +30,9 @@
 2. <distillate-folder>/_index.md     ← карта артефактів
 ```
 
+> `<distillate-folder>` — папка з дистилятом проекту (наприклад `gm-distillate/`).
+> Її назву і шлях дивись в `CLAUDE.md` → секція Key Files.
+
 З `_index.md` бери тільки потрібні секції по темі — не читай все одразу.
 
 > **Чому?** Без цього агент читає сирі артефакти (1000+ рядків кожен),
@@ -46,7 +49,8 @@
 | Карта всіх артефактів | `<distillate>/_index.md` |
 | Деталі по темі | Секції дистиляту — через `_index.md` |
 | Повний глосарій | `docs/governance/glossary.md` |
-| AI-правила проекту | `project-context.md` |
+| AI-правила проекту (195 правил реалізації) | `project-context.md` ← генерується `/bmad-generate-project-context` |
+| Компактний стартовий контекст (≤600 токенів) | `analysis/normalized-context.md` ← генерується аудит-промптом |
 | Реюзабельні промпти | `docs/prompts/` |
 
 > Специфічні шляхи для цього проекту — в `CLAUDE.md` → секція Key Files.
@@ -55,9 +59,12 @@
 
 ## BMAD Skills — що і коли використовувати
 
+Скіли викликаються командою `/skill-name` **в чаті Claude Code** (не в терміналі).
+Просто введи `/bmad-distillator` — і агент запуститься з відповідними інструкціями.
+
 | Задача | Skill |
 |---|---|
-| Аудит консистентності + normalized-context | `/bmad-analyst` + `docs/prompts/consistency-audit.md` |
+| Аудит консистентності + normalized-context | `/bmad-analyst` → передай `docs/prompts/consistency-audit.md` |
 | Стиснути артефакти в дистилят | `/bmad-distillator` |
 | Згенерувати або оновити index.md | `/bmad-index-docs` |
 | Оновити project-context.md (AI rules) | `/bmad-generate-project-context` |
