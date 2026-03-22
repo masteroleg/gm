@@ -24,7 +24,7 @@ Report your findings as a table:
 |---|---|---|
 | consistency-report.md | e.g. doc-inconsistency-report.md | reference / update / create |
 | terminology.md | e.g. docs/governance/glossary.md | reference / update / create |
-| system-summary.md | e.g. <distillate-folder>/ | reference / update / create |
+| system-summary.md | e.g. gm-distillate/ | reference / update / create |
 | missing-pieces.md | none found | create |
 | normalized-context.md | none found | create |
 
@@ -169,7 +169,7 @@ Do NOT copy distillate content into this file.
 ## B — Drift Items (decisions pending)
 Items that exist but conflict or are unresolved
 
-## C — Strategic Decisions (founder / PO track)
+## C — Strategic Decisions (stakeholder / PO track)
 Do not act without explicit approval
 
 ## D — Technical Debt / Migration Issues

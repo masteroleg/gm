@@ -1,0 +1,28 @@
+---
+title: QA - Why Us / Regulated
+status: Locked asset QA gate
+owner: NotebookLM QA layer
+last_updated: 2026-03-21
+---
+
+# QA / Why Us / Regulated
+
+## Instant fail
+
+FAIL if the output sells a platform, hides the ERP split, treats `еАкциз` as core, sounds like internal notes, or lacks a next step.
+
+## Asset checklist
+
+- The asset reads like buyer-facing Why Us, not a company profile.
+- The value order is `genu.mark` -> `Dominanta` -> `Logictime` -> optional supporting proof.
+- The ERP split is visible.
+- `еАкциз` remains external.
+- The CTA points to scoped contour review / audit / pilot.
+
+## Acceptance criteria
+
+- mandatory launch context is clear
+- what is bought is concrete
+- partner value is specific and non-generic
+- implementation discipline is visible
+- the final CTA is explicit

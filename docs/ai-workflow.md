@@ -1,7 +1,9 @@
 # AI Workflow — командна інструкція
 
 **Оновлено:** 2026-03-21
-**Застосовується до:** будь-якого BMAD-проекту з дистилятом
+**Проект:** genu.im · **Distillate:** `gm-distillate/` · **Git prefix:** `rtk`
+
+> Інструкція налаштована для genu.im. Для іншого BMAD-проекту — зміни значення вище.
 
 ---
 
@@ -27,11 +29,8 @@
 
 ```
 1. _bmad-output/analysis/normalized-context.md    ← стан проекту (~600 токенів)
-2. <distillate-folder>/_index.md                  ← карта артефактів
+2. gm-distillate/_index.md                        ← карта артефактів
 ```
-
-> `<distillate-folder>` — папка з дистилятом проекту (наприклад `gm-distillate/`).
-> Її назву і шлях дивись в `CLAUDE.md` → секція Key Files.
 
 З `_index.md` бери тільки потрібні секції по темі — не читай все одразу.
 
@@ -46,7 +45,7 @@
 |---|---|
 | Поточний стан, канонічні терміни (≤600 токенів) | `_bmad-output/analysis/normalized-context.md` |
 | Відкриті дефекти та рішення на паузі | `_bmad-output/analysis/missing-pieces.md` |
-| Карта всіх артефактів | `<distillate-folder>/_index.md` |
+| Карта всіх артефактів | `gm-distillate/_index.md` |
 | Деталі по темі | Секції дистиляту — через `_index.md` |
 | Повний глосарій | `docs/governance/glossary.md` |
 | AI-правила проекту | `_bmad-output/project-context.md` ← `/bmad-generate-project-context` |
@@ -156,14 +155,14 @@ PRD  >  Architecture  >  UX Spec  >  Epics  >  Stories
 Pre-commit хук **автоматично генерує** повідомлення. Стандартний флоу:
 
 ```bash
-git add <files>
-git commit        # хук генерує повідомлення сам
+rtk git add <files>
+rtk git commit        # хук генерує повідомлення сам
 ```
 
 Для складного коміту — передай вручну через HEREDOC:
 
 ```bash
-git commit -m "$(cat <<'EOF'
+rtk git commit -m "$(cat <<'EOF'
 docs(scope): short summary
 
 Detailed explanation of why, not what.
