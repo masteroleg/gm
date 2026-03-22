@@ -11,7 +11,7 @@ secondary_cta: Use to route assets and CTAs
 owner: Founders / sales / analyst
 status: Approved upstream
 review_status: Reviewed for mandatory regulated pack on 2026-03-21
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 source_inputs:
   - ../product-brief-gm-2026-03-05.md
   - ../prd.md
@@ -34,6 +34,7 @@ They are trying to avoid:
 ## What they buy first
 
 They buy:
+- `genu.mark` as the strong line core;
 - safe implementation;
 - operational stability;
 - a controllable core on the line;
@@ -108,3 +109,14 @@ Weak first-contact language:
 ## Review question
 
 If an asset does not reduce buyer anxiety and move the decision toward audit / architecture session / pilot, it is not doing its job.
+
+## Buyer retell test
+
+After reading the asset, the buyer should be able to retell in their own words:
+- what is being sold;
+- what is core;
+- what is external;
+- why this path is safer;
+- what the next step is.
+
+If they cannot retell those five points quickly, the asset is still overloaded or blurred.

@@ -2,7 +2,7 @@
 title: Regulated Sales Kit Definition of Done
 status: Locked one-page rubric
 owner: Sales-kit control layer
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 ---
 
 # Regulated Sales Kit Definition of Done
@@ -49,3 +49,12 @@ At least one of these must be explicit:
 ## Release condition
 
 The kit is done only when all six mandatory regulated assets have a matching brief, prompt, runbook, and QA file, and each asset can be generated and released without verbal correction.
+
+## Retell condition
+
+A mandatory regulated asset is not ready unless a buyer can quickly retell:
+- what is sold;
+- what is core;
+- what is external;
+- why this path is safer;
+- what the next step is.

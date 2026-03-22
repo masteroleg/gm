@@ -2,7 +2,7 @@
 title: Edge Cases Brief - Regulated
 status: Locked generation brief
 owner: NotebookLM brief layer
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 source_asset: buyer-facing/regulated/04-edge-cases-exceptions.md
 ---
 
@@ -18,6 +18,7 @@ Generate a buyer-facing edge-cases asset that proves maturity in real exceptions
 - audience: technical / operations / skeptics
 - output language: modern buyer-facing Ukrainian
 - required CTA: fit review / technical session / pilot
+- required buyer feeling: they understand real production, not only happy path
 
 ## Required logic
 
@@ -27,4 +28,6 @@ Generate a buyer-facing edge-cases asset that proves maturity in real exceptions
 - offline / line stop / changeover
 - aggregation and packaging breaks
 - ERP handoffs and external state exchange
+- do not introduce any new product, architecture layer, or platform explanation beyond approved sources
+- do not use weak claims or inflated marketing language
 - CTA

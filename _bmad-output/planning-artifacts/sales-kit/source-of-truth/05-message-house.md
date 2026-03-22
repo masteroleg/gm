@@ -11,7 +11,7 @@ secondary_cta: Use as upstream source for briefs and buyer-facing assets
 owner: Founder / PM / sales
 status: Approved upstream
 review_status: Reviewed for mandatory regulated pack on 2026-03-21
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 source_inputs:
   - notebooklm-source/05-regulated-master-pack-sync.md
   - source-of-truth/01-platform-core.md
@@ -23,6 +23,9 @@ source_inputs:
 ## Core promise
 
 `genu.mark helps implement еАкциз without line chaos because it gives the buyer a strong core first and connects external contours deliberately.`
+
+Short core line:
+- `genu.mark = strong line core that receives codes, applies, verifies, aggregates, and gives packaging result.`
 
 ## Narrative order
 
@@ -76,3 +79,6 @@ Reject the copy if it:
 - blurs `еАкциз` into the core;
 - sounds like draft notes;
 - ends without a concrete next step.
+- opens through `genu.im` when the thought can be carried by `genu.mark`;
+- introduces new unsourced entities or platform layers;
+- relies on weak superiority claims instead of calm defendable language.

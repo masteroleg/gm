@@ -17,18 +17,18 @@ last_updated: 2026-03-22
 
 The agreed next-step resolution is:
 
-1. Do not expand the locked mandatory regulated pack further before a real baseline run.
-2. Run the executive route first.
-3. Review only through the locked QA gates.
-4. Use `source-of-truth/07-regulated-sop-distillate.md` only if the run exposes a concrete depth gap in exceptions, evidence, or responsibilities.
+1. Keep the mandatory regulated pack frozen at the meaning layer unless a concrete QA failure appears.
+2. The mandatory visual generation batch is now complete.
+3. Any further NotebookLM generation should move only to the next approved priority, not reopen the frozen meaning layer without a concrete QA signal.
+4. Keep `source-of-truth/07-regulated-sop-distillate.md` as upstream reinforcement only, not a default upload file.
 5. Keep `dominanta-sales/07-gorobina-account-note.md` as an account-specific branch, not a generic regulated source.
-6. Defer Figma visual transfer until after the baseline run and backlog review.
+6. Defer Figma visual transfer until the mandatory visual batch is either completed or technically blocked with a clear retry path.
 
 ## Backlog items
 
 ### B-01. Run executive baseline in NotebookLM
 
-Status: next
+Status: completed
 
 Run:
 
@@ -38,9 +38,14 @@ Success condition:
 
 - generated output exists and is reviewed against the locked gates.
 
+Outcome:
+
+- completed on 2026-03-22
+- clean result saved in `run-results/2026-03-22-executive-deck-notebooklm-rerun-v2-clean.md`
+
 ### B-02. Review executive output through QA gates
 
-Status: next
+Status: completed
 
 Review against:
 
@@ -53,9 +58,14 @@ Decision rule:
 - `Pass` -> continue to B-04
 - `Fail` -> continue to B-03
 
+Outcome:
+
+- executive route passed the tightened meaning gate after rerun
+- this unlocked the rest of the mandatory regulated batch
+
 ### B-03. Apply targeted upstream correction only if the run fails
 
-Status: conditional
+Status: completed
 
 Routing:
 
@@ -68,9 +78,64 @@ Guardrail:
 
 - do not make broad upstream edits without a concrete failure signal from the run.
 
-### B-04. Prepare Gorobina follow-up packet
+Outcome:
 
-Status: next-after-pass
+- targeted corrections were applied to control docs, briefs, prompts, and QA gates
+- all six mandatory regulated text routes now have clean pass candidates in `run-results/`
+
+### B-04. Finish mandatory visual generation in NotebookLM
+
+Status: completed
+
+Current state:
+
+- completed:
+  - `run-results/visuals/regulated-executive-deck-genu-mark-yak-sylne-iadro.pdf`
+  - `run-results/visuals/regulated-why-us-bezpechnishe-vprovadzhennia.pdf`
+  - `run-results/visuals/regulated-one-job-kerovana-liniia.pdf`
+  - `run-results/visuals/regulated-edge-cases-zrilist-vprovadzhennia.png`
+  - `run-results/visuals/regulated-evidence-pack-spokii-i-kontrol.png`
+  - `run-results/visuals/regulated-technical-deck-arkhitektura-iadra.png`
+
+Goal:
+
+- finish the remaining three mandatory visual artifacts without changing the frozen meaning layer unless a concrete QA failure appears
+
+Guardrail:
+
+- if Studio returns `Could not create slide deck.` while sources are present and meaning-layer outputs already passed, treat it as a Studio-execution blocker, not a strategy blocker
+
+Outcome:
+
+- slide-deck generation was completed for the first three assets
+- the remaining three assets were completed through the separate infographic quota
+- the full mandatory regulated visual batch now exists locally
+
+### B-05. Review the completed mandatory visual batch
+
+Status: next
+
+Artifacts to review:
+
+- `run-results/visuals/regulated-executive-deck-genu-mark-yak-sylne-iadro.pdf`
+- `run-results/visuals/regulated-why-us-bezpechnishe-vprovadzhennia.pdf`
+- `run-results/visuals/regulated-one-job-kerovana-liniia.pdf`
+- `run-results/visuals/regulated-edge-cases-zrilist-vprovadzhennia.png`
+- `run-results/visuals/regulated-evidence-pack-spokii-i-kontrol.png`
+- `run-results/visuals/regulated-technical-deck-arkhitektura-iadra.png`
+
+Success condition:
+
+- identify which artifacts are release-ready as-is and which need targeted rerun or local cleanup
+
+Known findings:
+
+- the infographic batch is completed, but `Edge Cases`, `Evidence Pack`, and `Technical deck` need a later rerun because visible copy drifted from Ukrainian-only rules
+- the technical infographic also needs a ban on `Risk-Free` / similar weak claims in visible copy
+
+### B-06. Prepare Gorobina follow-up packet
+
+Status: next-after-mandatory-visuals
 
 Use:
 
@@ -80,13 +145,13 @@ Use:
 
 Goal:
 
-- prepare a compact account-specific follow-up centered on contour review and pilot definition.
+- prepare a compact account-specific follow-up centered on contour review and pilot definition
 
-### B-05. Request only the minimum visual references for later transfer
+### B-07. Request only the minimum visual references for later transfer
 
 Status: later
 
-If visual work starts, request only 3-5 Figma screens:
+If visual transfer starts, request only 3-5 Figma screens:
 
 - operator screen
 - verification / reject / rework screen
@@ -102,4 +167,5 @@ Guardrail:
 
 - `source-of-truth/07-regulated-sop-distillate.md` is approved as upstream reinforcement, not as a default NotebookLM upload file.
 - `dominanta-sales/07-gorobina-account-note.md` is approved as internal account prep, not as generic buyer-facing copy.
-- The mandatory regulated pack remains frozen until the first real executive run is reviewed.
+- The mandatory regulated pack meaning layer is now validated and should stay frozen while the visual batch is being completed.
+- The current NotebookLM operating state is fixed in `regulated-final-bundle/08-notebooklm-registry.md`.

@@ -2,7 +2,7 @@
 title: Final Regulated Acceptance Gate
 status: Locked acceptance gate
 owner: Sales-kit QA layer
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 ---
 
 # Final Regulated Acceptance Gate
@@ -16,7 +16,10 @@ Release a generated regulated asset only if all of the following are true:
 - it keeps `еАкциз` external;
 - it reduces buyer anxiety around rollout;
 - it sounds buyer-facing and modern Ukrainian;
-- it ends in audit / architecture session / pilot.
+- it ends in audit / architecture session / pilot;
+- it does not introduce new unsourced entities or platform explanations;
+- it avoids weak superiority claims without proof;
+- a buyer could quickly retell what is sold, what is core, what is external, why this is safer, and what to do next.
 
 ## Universal instant fail conditions
 
@@ -27,7 +30,9 @@ Do not release if any of the following appear:
 - early `genu.code`;
 - regulated / voluntary mixing;
 - operator wording, bridge notes, or draft scaffolding;
-- a missing or weak CTA.
+- a missing or weak CTA;
+- a new product, layer, or platform explanation not present in approved sources;
+- weak claims such as `best equipment`, `turnkey`, `single responsibility`, or `full package` without proof.
 
 ## Asset release rule
 

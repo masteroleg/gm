@@ -11,7 +11,7 @@ secondary_cta: Use in drafting and QA
 owner: Founder / analyst / reviewer
 status: Approved upstream
 review_status: Reviewed for mandatory regulated pack on 2026-03-21
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 source_inputs:
   - notebooklm-source/05-regulated-master-pack-sync.md
   - source-of-truth/01-platform-core.md
@@ -31,6 +31,7 @@ source_inputs:
 | C-05 | `Dominanta + Logictime gives the buyer a more controllable implementation path.` | Safe comparative framing |
 | C-06 | `25M+ industrial deployment in Ukraine.` | Use as written; do not inflate |
 | C-07 | `Public proof does not replace official or legal verification.` | Use whenever public proof is mentioned |
+| C-08 | `genu.mark receives codes, applies, verifies, aggregates, and gives packaging result.` | Safe simple-core rendering for regulated assets |
 
 ## Qualified claims
 
@@ -44,9 +45,11 @@ source_inputs:
 Never use externally:
 - `ми єдині`, `№1`, `найбільші`, `тільки ми можемо`;
 - `guaranteed compliance`, `ensures compliance`, `guarantees acceptance`;
+- `best equipment`, `turnkey`, `single responsibility`, `full package`, or equivalent unsupported superiority claims;
 - any wording that makes `ERP` or `еАкциз` part of the core;
 - any early regulated narrative that introduces `genu.code`;
-- any opening sell that makes `genu.im` the main object of sale.
+- any opening sell that makes `genu.im` the main object of sale;
+- any new product, platform layer, or architectural entity not present in approved regulated sources.
 
 ## Mandatory fail gate
 
@@ -64,3 +67,4 @@ Reject the asset if:
 | `ERP integration` | `ERP -> production job; ERP / internal systems <- results and statuses` |
 | `proof solves compliance` | `proof supports review but does not replace official verification` |
 | `full contour from day one` | `start from the core and connect external blocks deliberately` |
+| `best equipment / turnkey / single responsibility / full package` | `reliable equipment / safer path / clearer boundaries / controllable rollout` |

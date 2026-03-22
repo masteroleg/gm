@@ -41,3 +41,4 @@ migration/transcripts/
 test-results/
 lighthouse-report/
 .lighthouse-tmp/
+.npm-cache/

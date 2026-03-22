@@ -11,7 +11,7 @@ secondary_cta: Підготувати карту інтерфейсів
 owner: Architect / sales lead
 status: Approved buyer-facing / generation-ready / QA-locked
 review_status: Passed in-session reviewer QA on 2026-03-21
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 source_inputs:
   - source-of-truth/01-platform-core.md
   - source-of-truth/04-regulated-buyer-model.md
@@ -41,6 +41,7 @@ source_inputs:
 **Headline:** `genu.mark = ядро лінії.`
 
 **Що має донести слайд:**
+- `genu.mark` отримує коди -> наносить -> перевіряє -> агрегує -> дає результат пакування;
 - виробничий потік на лінії;
 - нанесення коду;
 - перевірка;

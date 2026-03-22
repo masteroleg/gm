@@ -2,14 +2,14 @@
 title: QA - Evidence Pack / Regulated
 status: Locked asset QA gate
 owner: NotebookLM QA layer
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 ---
 
 # QA / Evidence Pack / Regulated
 
 ## Instant fail
 
-FAIL if the asset lacks a boundary statement, hides evidence categories, or sounds like internal audit notes.
+FAIL if the asset lacks a boundary statement, hides evidence categories, sounds like internal audit notes, introduces unsourced entities, or does not create calm reviewability.
 
 ## Asset checklist
 
@@ -18,6 +18,7 @@ FAIL if the asset lacks a boundary statement, hides evidence categories, or soun
 - handoff evidence is explicit
 - responsibility evidence is explicit
 - CTA is explicit
+- the buyer should feel calmer before checks and incidents
 
 ## Acceptance criteria
 
@@ -26,3 +27,4 @@ FAIL if the asset lacks a boundary statement, hides evidence categories, or soun
 - exceptions remain reviewable
 - responsibility split is visible
 - next step present
+- the buyer could retell why this contour feels calmer and more reviewable

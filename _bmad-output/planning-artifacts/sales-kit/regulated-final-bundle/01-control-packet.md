@@ -2,7 +2,7 @@
 title: Final Regulated Control Packet
 status: Locked execution control
 owner: Sales-kit control layer
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 ---
 
 # Final Regulated Control Packet
@@ -16,6 +16,15 @@ Use this file first for every mandatory regulated NotebookLM run.
 - Sell `genu.mark`.
 - Sell safe regulated implementation around the line core.
 - Sell `Dominanta + Logictime` as the safer path to rollout.
+
+## Core formula
+
+Render `genu.mark` everywhere as the simple strong line core that:
+- receives codes;
+- applies;
+- verifies;
+- aggregates;
+- gives packaging result.
 
 ## Non-negotiable narrative order
 
@@ -49,6 +58,8 @@ Use this order unless a later supporting proof section is explicitly needed:
 - Tone = calm, industrial, credible, low-drama.
 - Final output must be forwardable without oral explanation.
 - CTA must point to audit / architecture session / pilot.
+- If a thought can be explained through `genu.mark`, do not explain it through `genu.im`.
+- `genu.im` may appear only as supporting proof context, never as the opening frame.
 
 ## Instant fail gates
 
@@ -60,6 +71,8 @@ FAIL immediately if any output:
 - mixes regulated and voluntary logic;
 - sounds like an operator draft or internal note;
 - omits a next step to audit / architecture session / pilot.
+- introduces any new product, architecture layer, product branch, or platform explanation not present in the approved source packet;
+- uses unsupported broad superiority claims or weak claims such as `best equipment`, `turnkey`, `single responsibility`, or `full package`.
 
 ## Default compact source set per notebook
 
@@ -70,3 +83,5 @@ Upload only:
 - one matching brief
 
 Then paste the matching prompt and review against the matching QA file plus `regulated-final-bundle/04-acceptance-gate.md`.
+
+Do not add optional, legacy, or exploratory sources while the mandatory regulated asset is still being validated.

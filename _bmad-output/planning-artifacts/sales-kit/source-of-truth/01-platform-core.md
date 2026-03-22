@@ -11,7 +11,7 @@ secondary_cta: Use as upstream source for all regulated assets
 owner: Founders / product / sales
 status: Approved upstream
 review_status: Reviewed for mandatory regulated pack on 2026-03-21
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 source_inputs:
   - notebooklm-source/05-regulated-master-pack-sync.md
   - regulated-final-bundle/01-control-packet.md
@@ -34,6 +34,9 @@ It covers:
 - reject / rework control;
 - aggregation;
 - packaging result.
+
+Short reusable rendering:
+- `genu.mark receives codes -> applies -> verifies -> aggregates -> gives packaging result.`
 
 ## What is external
 
@@ -87,3 +90,4 @@ The correct explanation order is:
 - `genu.code` in early regulated narrative;
 - `ERP` or `еАкциз` as part of the core;
 - public proof as legal approval.
+- any new regulated product branch or architectural layer that is not part of the approved source packet.

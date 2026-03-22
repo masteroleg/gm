@@ -2,7 +2,7 @@
 title: Runbook - Executive Deck / Regulated
 status: Approved execution runbook
 owner: NotebookLM run layer
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 ---
 
 # Runbook / Executive Deck / Regulated
@@ -22,7 +22,9 @@ Paste:
 
 ## Expected deliverable
 
-- 8-10 slide executive deck
+- 10-12 slide executive deck by default
+- 8-9 slides only if no mandatory meaning is lost
+- 13-14 slides only if each extra slide closes a distinct buying-question
 - audience: CEO / owner / GM / sponsor
 - CTA: audit / architecture session / pilot
 
@@ -42,4 +44,4 @@ Review the generated output against:
 
 ## Release rule
 
-Release only if the deck is buyer-facing, modern Ukrainian, strategically correct, and ready to forward without verbal correction.
+Release only if the deck is buyer-facing, modern Ukrainian, strategically correct, ready to forward without verbal correction, and easy for the buyer to retell in five points: what is sold, what is core, what is external, why this is safer, and what the next step is.

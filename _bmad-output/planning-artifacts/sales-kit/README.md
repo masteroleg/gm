@@ -2,12 +2,25 @@
 
 ## Start Here
 
-If you touch the mandatory regulated motion, open these files in this order:
+If you are a new agent entering the project, open these files in this order:
+1. `regulated-final-bundle/00-continue-here.md`
+2. `regulated-final-bundle/11-claude-handoff-main.md`
+3. `regulated-final-bundle/12-claude-handoff-appendix.md`
+4. supporting operational files only after that
+
+If you are already operating inside the mandatory regulated motion, use these execution files:
 1. `regulated-final-bundle/01-control-packet.md`
 2. `regulated-final-bundle/02-approved-regulated-source-packet.md`
 3. `regulated-final-bundle/03-run-paths.md`
 4. `regulated-final-bundle/04-acceptance-gate.md`
 5. `regulated-final-bundle/05-regulated-sales-kit-definition-of-done.md`
+
+## Language Policy
+
+- agent-facing handoff and operating docs: English
+- chat with the founder: Russian
+- all outgoing buyer-facing artifacts: Ukrainian only
+- any English or mixed visible copy in buyer-facing outputs is not release-ready
 
 ## What This Kit Does
 

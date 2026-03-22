@@ -10,7 +10,7 @@ primary_cta: Approve or reject generated output
 secondary_cta: Route fixes to the correct upstream layer
 owner: Sales enablement / reviewer
 status: Locked fail gate
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 source_inputs:
   - regulated-final-bundle/01-control-packet.md
   - regulated-final-bundle/04-acceptance-gate.md
@@ -28,6 +28,7 @@ Reject immediately if any item below is true:
 - [ ] regulated and voluntary logic are mixed
 - [ ] the text sounds like operator-source draft
 - [ ] the output does not lead to audit / architecture session / pilot
+- [ ] the output introduces a new unsourced product, architecture layer, or platform explanation
 
 ## Core clarity
 
@@ -36,6 +37,7 @@ Reject immediately if any item below is true:
 - [ ] `ERP -> source of production job` is visible
 - [ ] `ERP / internal systems <- exchange of results and statuses` is visible
 - [ ] `еАкциз` is visibly external
+- [ ] the simple strong-core idea is easy to retell
 
 ## Buyer-facing quality
 
@@ -49,6 +51,15 @@ Reject immediately if any item below is true:
 - [ ] only safe or properly qualified claims are used
 - [ ] no guarantees, rank claims, or unsupported comparisons appear
 - [ ] proof language stays inside the approved boundary
+- [ ] no weak claims like `best equipment`, `turnkey`, `single responsibility`, or `full package` appear without explicit proof
+
+## Retell test
+
+- [ ] after reading, a buyer could quickly retell what is sold
+- [ ] after reading, a buyer could quickly retell what is core
+- [ ] after reading, a buyer could quickly retell what is external
+- [ ] after reading, a buyer could quickly retell why this path is safer
+- [ ] after reading, a buyer could quickly retell what the next step is
 
 ## Decision
 

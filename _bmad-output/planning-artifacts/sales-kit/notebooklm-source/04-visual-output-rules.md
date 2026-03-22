@@ -10,7 +10,7 @@ primary_cta: Approve visual generation rules
 secondary_cta: Use as the style source for all Notebook LM output tasks
 owner: Sales enablement / designer / UX review
 status: Legacy support doc
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 source_inputs:
   - dominanta-sales/05-ready-solution-visual-production-spec.md
   - dominanta-sales/03-system-map-visual.md
@@ -83,6 +83,22 @@ source_inputs:
 - seams / risk = контрастні маркери розривів;
 - next step = окремий CTA block.
 
+## Language discipline
+
+У buyer-facing regulated outputs вся видима копія повинна бути українською.
+
+Дозволені винятки:
+- назви брендів і продуктів: `genu.mark`, `Domino`, `ERP`;
+- короткі усталені технічні терміни, якщо вони вже входять в approved source wording.
+
+Заборонено:
+- англомовні headline;
+- англомовні body blocks;
+- змішані англо-українські модулі без потреби;
+- англомовні labels там, де є нормальний український відповідник.
+
+Якщо output візуально змішаний по мовах, його треба вважати visual QA fail.
+
 ## Що обов'язково стандартизувати
 
 У всіх generated assets мають бути однаковими:
@@ -104,7 +120,10 @@ Notebook LM не повинен генерувати або підказуват
 - generic stock-photo nonsense;
 - dashboard-like UI як головний візуал;
 - перевантажені architecture maps з перехресними стрілками;
-- великі абзаци замість модулів.
+- великі абзаци замість модулів;
+- нові products, нові architecture layers або нові platform explanations поза approved sources;
+- mixed-language buyer-facing copy;
+- `risk-free`, `guaranteed`, `гарантований`, `під ключ`, `єдина відповідальність`, `повний пакет` без доказової бази.
 
 ## Правило для deck outputs
 
@@ -133,6 +152,11 @@ Deck не має виглядати як:
 - system role map;
 - next step.
 
+Якщо інфографіка показує architecture / contours, вона повинна зберігати approved wording:
+- `ERP -> джерело виробничого завдання`
+- `ERP / внутрішні системи <- обмін результатами та статусами`
+- `еАкциз <- окремий зовнішній державний контур`
+
 ## Правило для weak solution-sellers
 
 Кожен generated asset повинен допомагати слабкому solution-seller, а не вимагати від нього більшої експертизи.
@@ -148,6 +172,10 @@ Deck не має виглядати як:
 Цей блок можна дослівно вставляти у generation tasks:
 
 `Create the output in a regulated industrial premium style: modern, elegant, clear, minimal, non-decorative. Prioritize hierarchy, explainability, and presentation ease. Use a strict grid, wide margins, restrained color, strong diagram logic, and low text density. Avoid decorative effects, dense paragraphs, software-dashboard aesthetics, generic stock imagery, and complex unreadable diagrams.`
+
+Для regulated buyer-facing outputs додатково додавати:
+
+`All visible copy must be in Ukrainian only, except approved brand or system names such as genu.mark, Domino, and ERP. Do not generate English headings, mixed-language labels, new entities, new architecture layers, or weak claims such as risk-free, guaranteed, turnkey, single responsibility, or full package. If architecture appears, preserve the approved ERP and eАкциз wording exactly.`
 
 ## Фінальний візуальний тест
 

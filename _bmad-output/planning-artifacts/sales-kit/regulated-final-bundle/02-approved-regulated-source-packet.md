@@ -2,7 +2,7 @@
 title: Approved Regulated Source Packet
 status: Approved compact source packet
 owner: Sales-kit control layer
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 ---
 
 # Approved Regulated Source Packet
@@ -21,6 +21,15 @@ Use it to keep NotebookLM source sets small and strategically stable.
 - Strong core first reduces rollout risk.
 - `Dominanta + Logictime` is the safer implementation path.
 - Next step = audit / architecture session / pilot.
+
+## Simple core formula
+
+Every regulated asset may phrase it differently, but the buyer must quickly understand that `genu.mark`:
+- receives codes;
+- applies;
+- verifies;
+- aggregates;
+- gives packaging result.
 
 ## Architecture that must remain identical everywhere
 
@@ -85,3 +94,4 @@ The mandatory regulated pack contains these approved buyer-facing sources:
 - early `genu.code`;
 - vague `ERP integration` wording that hides the split;
 - mixed regulated and voluntary narratives.
+- new product entities, architecture layers, or platform explanations that are not present in this approved source packet.

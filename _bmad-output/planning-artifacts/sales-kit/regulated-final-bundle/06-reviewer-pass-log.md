@@ -2,7 +2,7 @@
 title: Reviewer Pass Log - Regulated
 status: Active reviewer log
 owner: Sales-kit QA layer
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 ---
 
 # Reviewer Pass Log / Regulated
@@ -34,3 +34,62 @@ last_updated: 2026-03-21
 ## Remaining note
 
 If a later human commercial reviewer requests wording changes, update the matching asset, matching brief or prompt, and rerun the QA gate before release.
+
+## NotebookLM validation pass - 2026-03-22
+
+- executive deck -> clean pass candidate saved in `run-results/2026-03-22-executive-deck-notebooklm-rerun-v2-clean.md`
+- why us -> clean pass candidate saved in `run-results/2026-03-22-why-us-notebooklm-clean.md`
+- one job -> clean pass candidate saved in `run-results/2026-03-22-one-job-notebooklm-clean.md`
+- edge cases -> clean pass candidate saved in `run-results/2026-03-22-edge-cases-notebooklm-clean.md`
+- evidence pack -> clean pass candidate saved in `run-results/2026-03-22-evidence-pack-notebooklm-clean.md`
+- technical deck -> clean pass candidate saved in `run-results/2026-03-22-technical-deck-notebooklm-clean.md`
+
+All six mandatory routes were rerun against updated regulated sources, updated briefs, updated prompts, and tightened QA gates.
+
+## NotebookLM visual generation status - 2026-03-22
+
+Completed and downloaded locally:
+
+- executive deck -> `run-results/visuals/regulated-executive-deck-genu-mark-yak-sylne-iadro.pdf`
+- why us -> `run-results/visuals/regulated-why-us-bezpechnishe-vprovadzhennia.pdf`
+- one job -> `run-results/visuals/regulated-one-job-kerovana-liniia.pdf`
+
+Prepared and source-ready, but blocked by NotebookLM Studio slide-deck creation failure:
+
+- edge cases -> notebook prepared, Studio returned `Could not create slide deck.`
+- evidence pack -> notebook prepared, Studio returned `Could not create slide deck.`
+- technical deck -> notebook prepared, Studio returned `Could not create slide deck.`
+
+Current interpretation:
+
+- the mandatory regulated meaning layer is passing
+- the remaining blocker is now Studio artifact generation, not source quality or prompt discipline
+- the prepared notebooks should be retried before any optional expansion begins
+
+## NotebookLM infographic generation status - 2026-03-22
+
+The remaining three mandatory assets were rerouted through the separate infographic quota after the free-plan slide-deck limit was reached.
+
+Infographics completed and downloaded locally for:
+
+- edge cases -> `run-results/visuals/regulated-edge-cases-zrilist-vprovadzhennia.png`
+- evidence pack -> `run-results/visuals/regulated-evidence-pack-spokii-i-kontrol.png`
+- technical deck -> `run-results/visuals/regulated-technical-deck-arkhitektura-iadra.png`
+
+Result:
+
+- the full mandatory regulated batch now exists as generated buyer-facing visuals
+- the free-plan slide-deck cap was bypassed for the remaining assets through the separate infographic quota
+
+## Visual QA findings - 2026-03-22
+
+Primary findings from the completed infographic batch:
+
+- edge cases infographic -> structure is directionally strong, but visible copy drifted into English; requires Ukrainian-only rerun when another infographic slot is available
+- evidence pack infographic -> mixed English / Ukrainian output; structure is useful, but buyer-facing language discipline failed
+- technical deck infographic -> mixed-language output and unsafe `Risk-Free` headline; also paraphrases the approved architecture wording instead of preserving it exactly
+
+Interpretation:
+
+- this is a visual-production drift, not a meaning-layer failure
+- the next rerun should tighten visible-language rules, ban `risk-free` / similar weak claims, and require exact approved contour wording when architecture appears
