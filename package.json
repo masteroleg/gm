@@ -29,7 +29,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.7",
 		"@playwright/test": "^1.58.2",
-		"@tailwindcss/cli": "^4.2.1",
+		"@tailwindcss/cli": "^4.2.2",
 		"chrome-launcher": "^1.2.1",
 		"http-server": "^14.1.1",
 		"husky": "^9.1.7",
