@@ -15,8 +15,8 @@ Current split:
 
 - 3 assets generated as slide decks and downloaded locally
 - 3 assets generated as infographics and downloaded locally
-
-The slide-deck quota in free NotebookLM was exhausted after the first three visual artifacts, so the remaining assets were completed through the separate infographic quota.
+- `slide_deck` and `infographic` must be treated as separate visual-generation lanes with separate practical limits
+- the slide-deck lane was exhausted after the first three visual artifacts, so the remaining assets were completed through the separate infographic lane
 
 ## Language policy
 
@@ -151,14 +151,16 @@ NotebookLM text generation layer:
 Visual generation layer:
 
 - completed for all 6 mandatory assets
-- fully release-ready for 3 assets
-- requires later visual rerun for 3 assets due to production drift, not meaning drift
+- none are release-ready yet
+- all 6 require visual rerun due to production drift, not meaning drift
 
 ## Next priority
 
-1. Human review of the three completed slide-deck PDFs
-2. Later rerun of the three infographic assets when NotebookLM quota allows
-3. Only after that: account-specific branch or optional expansion
+1. Rerun `One Job` in the `slide_deck` lane
+2. Rerun `Why Us` in the `slide_deck` lane
+3. Rerun `Executive Deck` in the `slide_deck` lane
+4. Later rerun the three infographic artifacts when infographic capacity allows
+5. Only after that: account-specific branch or optional expansion
 
 ## Operating reference
 

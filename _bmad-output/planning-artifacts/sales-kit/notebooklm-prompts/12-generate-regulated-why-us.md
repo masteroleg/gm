@@ -16,6 +16,7 @@ Use only the uploaded sources.
 - Do not use unsafe claims such as `гарантує`, `найкраще`, `під ключ`, `єдина відповідальність`, or `повний пакет`.
 - Keep the output in modern, buyer-facing Ukrainian.
 - End with a clear next step to scoped contour review / audit / pilot.
+- Do not show NotebookLM branding, watermark, service logo, product chrome, generator badge, UI residue, or document-reference residue anywhere in the visible output.
 
 ## Output contract
 
@@ -38,5 +39,6 @@ Rewrite if the draft:
 - does not make `genu.mark` the thing being bought;
 - blurs `Dominanta` and `Logictime` roles;
 - introduces unsourced entities or platform layers;
+- shows NotebookLM branding, watermark, service chrome, logo, badge, or document-reference residue;
 - uses weak superiority claims;
 - leaves the buyer unable to retell why this is safer.

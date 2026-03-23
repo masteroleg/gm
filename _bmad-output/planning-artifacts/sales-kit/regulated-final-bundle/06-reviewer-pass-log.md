@@ -2,7 +2,7 @@
 title: Reviewer Pass Log - Regulated
 status: Active reviewer log
 owner: Sales-kit QA layer
-last_updated: 2026-03-22
+last_updated: 2026-03-23
 ---
 
 # Reviewer Pass Log / Regulated
@@ -93,3 +93,19 @@ Interpretation:
 
 - this is a visual-production drift, not a meaning-layer failure
 - the next rerun should tighten visible-language rules, ban `risk-free` / similar weak claims, and require exact approved contour wording when architecture appears
+
+## Visual QA findings - 2026-03-23
+
+Slide-deck review later found that the first three PDF artifacts are also not release-ready.
+
+Findings:
+
+- executive deck -> English visible copy on pages 4, 5, 6, 7, 9
+- why us -> English visible copy on pages 5, 6, 7, 9, 10; page 5 contour wording is correct and should be preserved as the reference contour slide
+- one job -> English visible copy on pages 1 and 4 only; best first rerun target
+
+Interpretation:
+
+- all six mandatory visual artifacts currently require rerun before release
+- no meaning-layer blocker is active
+- `slide_deck` and `infographic` must now be tracked as independent visual-generation lanes with independent practical limits

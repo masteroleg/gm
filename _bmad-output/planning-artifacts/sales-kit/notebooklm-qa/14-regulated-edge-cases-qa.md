@@ -9,7 +9,7 @@ last_updated: 2026-03-22
 
 ## Instant fail
 
-FAIL if the asset stays on happy path only, hides the contour split, lacks a next step, introduces unsourced entities, or reads like a decorative list of exceptions.
+FAIL if the asset stays on happy path only, hides the contour split, lacks a next step, introduces unsourced entities, reads like a decorative list of exceptions, or shows NotebookLM branding / watermark / service chrome / generator residue.
 
 ## Asset checklist
 
@@ -19,6 +19,7 @@ FAIL if the asset stays on happy path only, hides the contour split, lacks a nex
 - `еАкциз` remains external
 - the CTA is explicit
 - the buyer should feel that the team understands real production, not only happy path
+- No NotebookLM branding, watermark, service badge, UI chrome, or document-reference residue is visible.
 
 ## Acceptance criteria
 

@@ -10,7 +10,7 @@ primary_cta: Approve visual generation rules
 secondary_cta: Use as the style source for all Notebook LM output tasks
 owner: Sales enablement / designer / UX review
 status: Legacy support doc
-last_updated: 2026-03-22
+last_updated: 2026-03-23
 source_inputs:
   - dominanta-sales/05-ready-solution-visual-production-spec.md
   - dominanta-sales/03-system-map-visual.md
@@ -96,8 +96,23 @@ source_inputs:
 - англомовні body blocks;
 - змішані англо-українські модулі без потреби;
 - англомовні labels там, де є нормальний український відповідник.
+- логотип `NotebookLM`, watermark, service badge, generator branding, UI chrome або будь-який tool residue у buyer-facing output.
 
 Якщо output візуально змішаний по мовах, його треба вважати visual QA fail.
+Якщо output містить `NotebookLM` branding або tool residue, його теж треба вважати visual QA fail.
+
+## Independent generation lanes
+
+`slide_deck` і `infographic` треба трактувати як 2 окремі generation lanes.
+
+Правило роботи:
+- якщо вичерпано `slide_deck`-ліміт, не зупиняти весь visual flow, а переходити на `infographic`-задачі;
+- якщо вичерпано `infographic`-ліміт, переходити на `slide_deck`-задачі;
+- глобальна пауза для visual layer допустима лише якщо заблоковані обидві lanes або якщо з'явився meaning-level blocker.
+
+Правило обліку:
+- завжди фіксувати, в якій саме lane був створений artifact;
+- не змішувати оцінку якості artifact з доступністю іншої lane.
 
 ## Що обов'язково стандартизувати
 
@@ -123,6 +138,7 @@ Notebook LM не повинен генерувати або підказуват
 - великі абзаци замість модулів;
 - нові products, нові architecture layers або нові platform explanations поза approved sources;
 - mixed-language buyer-facing copy;
+- `NotebookLM` branding, watermark, product logo, service chrome, export badge, document-reference residue;
 - `risk-free`, `guaranteed`, `гарантований`, `під ключ`, `єдина відповідальність`, `повний пакет` без доказової бази.
 
 ## Правило для deck outputs
@@ -175,7 +191,7 @@ Deck не має виглядати як:
 
 Для regulated buyer-facing outputs додатково додавати:
 
-`All visible copy must be in Ukrainian only, except approved brand or system names such as genu.mark, Domino, and ERP. Do not generate English headings, mixed-language labels, new entities, new architecture layers, or weak claims such as risk-free, guaranteed, turnkey, single responsibility, or full package. If architecture appears, preserve the approved ERP and eАкциз wording exactly.`
+`All visible copy must be in Ukrainian only, except approved brand or system names such as genu.mark, Domino, and ERP. Do not generate English headings, mixed-language labels, new entities, new architecture layers, or weak claims such as risk-free, guaranteed, turnkey, single responsibility, or full package. Do not show NotebookLM branding, watermarks, service logos, product chrome, generator badges, document-reference residue, or any tool-origin marks. If architecture appears, preserve the approved ERP and eАкциз wording exactly.`
 
 ## Фінальний візуальний тест
 

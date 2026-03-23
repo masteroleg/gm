@@ -13,7 +13,11 @@ Mandatory regulated pack is complete at the meaning layer and complete at the fi
 
 Current work mode:
 
+- run a pilot `ralph loop` on one mandatory asset before scaling the loop to the whole mandatory pack
 - review and improve the generated visuals without reopening the frozen meaning layer unless a concrete QA signal appears
+- keep `slide_deck` and `infographic` as separate generation lanes
+- keep Codex and Claude aligned through shared local project memory
+- begin `package convergence` work in parallel: audit, classify, prune clutter, verify flow, finalize docs
 
 ## What is already completed
 
@@ -45,29 +49,51 @@ Visual rerun required for all six mandatory artifacts:
 - all six visual artifacts require rerun before release
 - root cause: NotebookLM generated English diagram labels despite Ukrainian-only instruction
 - reference fix available: Why Us deck p5 has correct Ukrainian ERP contour wording
+- `slide_deck` and `infographic` must be treated as independent quotas / lanes
+- `slide_deck` lane is confirmed available again because a new Technical Deck slide-deck artifact exists from 2026-03-23
 
 ## Exact next action
 
-Rerun visual generation for all three slide-deck PDFs with stricter Ukrainian-only enforcement.
+Run the full `ralph loop` first on one mandatory asset:
 
-Priority order (least work first):
+1. create or rerun artifact
+2. inspect
+3. analyze
+4. write recommendations
+5. apply fixes
+6. regenerate or revise
+7. verify
+8. update continuity docs
 
-1. **One Job** — only 2 pages need fixing (p1 doc-ref, p4 contour labels)
-2. **Why Us** — 5 pages, p10 stamp is the most visible failure; p5 contour wording is correct (preserve it)
-3. **Executive Deck** — 5 pages, p6 is worst (fully English diagram labels)
+Current pilot Ralph-loop target:
+
+1. **One Job** — pilot document for the full end-to-end loop; only 2 pages need fixing (p1 doc-ref, p4 contour labels) — rerun started, artifact `154d007d-9de3-4260-b02d-fb3fbb3e8405`
 
 For each rerun:
 
-- add to the generation prompt: `All visible copy must be in Ukrainian only. Do not generate English headings, labels, parentheticals, metadata, or stamps. Use this exact wording for ERP contour labels: ERP -> джерело виробничого завдання / ERP / внутрішні системи <- обмін результатами та статусами / еАкциз (окремий зовнішній державний контур).`
+- add to the generation prompt: `All visible copy must be in Ukrainian only. Do not generate English headings, labels, parentheticals, metadata, or stamps. Do not show NotebookLM branding, watermarks, service logos, product chrome, generator badges, or document-reference residue. Use this exact wording for ERP contour labels: ERP -> джерело виробничого завдання / ERP / внутрішні системи <- обмін результатами та статусами / еАкциз (окремий зовнішній державний контур).`
 - do not reopen meaning layer or source packets
 - full QA findings: `regulated-final-bundle/13-visual-review-protocol.md`
 
-After slide-deck reruns pass:
+After the `One Job` pilot loop succeeds:
 
-- prepare the next quality-improvement loop for:
+- reuse the same loop structure for:
+  - Why Us
+  - Executive Deck
+- then continue with:
   - Edge Cases visual
   - Evidence Pack visual
   - Technical Deck visual
+
+After the mandatory Ralph loops pass:
+
+- review the new Technical Deck slide-deck artifact created on 2026-03-23 before deciding whether it replaces the old infographic fallback
+- only then move into broad package convergence and cleanup
+
+Current in-progress runs:
+
+- `slide_deck` lane -> `One Job` rerun artifact `154d007d-9de3-4260-b02d-fb3fbb3e8405`
+- `infographic` lane -> `Edge Cases` rerun artifact `0ef38cfd-1fcb-474f-ae9b-6fb09d716b3a`
 
 ## Claude onboarding path
 
@@ -83,6 +109,13 @@ For a new Claude agent, open these files in this exact order:
 - handoff and agent operating docs: English
 - buyer-facing generated outputs: Ukrainian only
 - visible English or mixed-language copy in buyer-facing visuals = not release-ready
+- NotebookLM branding, watermark, service logo, product chrome, or generator residue in buyer-facing visuals = not release-ready
+
+## Shared-agent rule
+
+- Codex and Claude are working on the same project.
+- Both must reread local continuity docs before acting on interrupted work.
+- Both must write meaningful discoveries back into local artifacts instead of keeping them only in chat.
 
 ## Resume protocol
 
@@ -114,3 +147,5 @@ When resuming after interruption:
   - `regulated-final-bundle/13-visual-review-protocol.md`
 - local next-step queue:
   - `local-backlog.md`
+- package convergence plan:
+  - `regulated-final-bundle/14-package-convergence-plan.md`

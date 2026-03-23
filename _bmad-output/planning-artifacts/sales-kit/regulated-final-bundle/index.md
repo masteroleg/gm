@@ -6,6 +6,7 @@
 - **[11-claude-handoff-main.md](./11-claude-handoff-main.md)** - Main onboarding handoff for Claude
 - **[12-claude-handoff-appendix.md](./12-claude-handoff-appendix.md)** - Factual appendix and inventory for Claude
 - **[13-visual-review-protocol.md](./13-visual-review-protocol.md)** - Correct workflow for reviewing visual artifacts
+- **[14-package-convergence-plan.md](./14-package-convergence-plan.md)** - Next-phase cleanup, consistency, and finalization plan
 - **[01-control-packet.md](./01-control-packet.md)** - Locked control rules for regulated runs
 - **[02-approved-regulated-source-packet.md](./02-approved-regulated-source-packet.md)** - Compact approved source packet for generation
 - **[03-run-paths.md](./03-run-paths.md)** - Standardized NotebookLM run order by asset
@@ -16,3 +17,7 @@
 - **[08-notebooklm-registry.md](./08-notebooklm-registry.md)** - Notebook inventory, purposes, assets, next steps
 - **[09-asset-state-board.md](./09-asset-state-board.md)** - Compact state machine across mandatory assets
 - **[10-run-ledger.md](./10-run-ledger.md)** - Chronological ledger of meaningful runs and reruns
+
+## Related References
+
+- **[../external-references/index.md](../external-references/index.md)** - Distilled external references for prompts and NotebookLM tooling

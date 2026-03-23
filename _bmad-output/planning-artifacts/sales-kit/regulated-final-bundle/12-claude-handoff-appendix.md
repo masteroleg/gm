@@ -2,7 +2,7 @@
 title: Claude Handoff Appendix - Regulated Sales Kit
 status: Active onboarding appendix
 owner: Founder / next agent
-last_updated: 2026-03-22
+last_updated: 2026-03-23
 ---
 
 # Claude Handoff Appendix / Regulated Sales Kit
@@ -13,6 +13,19 @@ last_updated: 2026-03-22
 - all outgoing buyer-facing artifacts: Ukrainian only
 - allowed visible exceptions: approved names such as `genu.mark`, `Domino`, `ERP`
 - any English or mixed visible copy in buyer-facing output = not release-ready
+- any NotebookLM branding, watermark, service logo, product chrome, or generator residue in buyer-facing output = not release-ready
+
+## Visual Generation Lanes
+
+| Lane | Meaning | Project rule |
+| --- | --- | --- |
+| `slide_deck` | Multi-slide presentation lane | If available, use for deck outputs; if exhausted, switch to approved infographic work |
+| `infographic` | Single-screen / poster / one-page visual lane | If available, use for infographic outputs; if exhausted, continue approved slide-deck work |
+
+Lane policy:
+- treat the two lanes as operationally independent
+- do not call the visual pipeline globally blocked unless both lanes are unavailable
+- always record which lane produced each artifact
 
 ## Source Of Truth Map
 
@@ -71,31 +84,34 @@ last_updated: 2026-03-22
 | `REGULATED / Executive Deck / genu.mark як сильне ядро` | `82eafbb2-b335-4e5b-a925-a847ffd31c40` | slide_deck | available in `13-visual-review-protocol.md` | `run-results/visuals/regulated-executive-deck-genu-mark-yak-sylne-iadro.pdf` | visual QA fail — English copy on p4 p5 p6 p7 p9 | canonical candidate | Executive buyer-facing deck | rerun visual |
 | `REGULATED / Why Us / Безпечніше впровадження` | `3a604c9e-ce6b-46c9-b517-31442d61d695` | slide_deck | available in `13-visual-review-protocol.md` | `run-results/visuals/regulated-why-us-bezpechnishe-vprovadzhennia.pdf` | visual QA fail — English copy on p5 p6 p7 p9 p10 | canonical candidate | Why Us buyer-facing deck | rerun visual |
 | `REGULATED / One Job / Керована лінія` | `1e043704-33c6-4867-b169-1bd237e5491b` | slide_deck | available in `13-visual-review-protocol.md` | `run-results/visuals/regulated-one-job-kerovana-liniia.pdf` | visual QA fail — English copy on p1 p4 | canonical candidate | One Job buyer-facing deck | rerun visual |
+| `REGULATED / One Job / rerun in progress` | `154d007d-9de3-4260-b02d-fb3fbb3e8405` | slide_deck | pending completion | not downloaded yet | rerun in progress | experimental | One Job slide-deck rerun | review when complete |
 | `REGULATED / Edge Cases / Зрілість впровадження` | `9d7b789e-dbd0-403e-a1a5-13ecb0785010` | infographic | stored in NotebookLM visual notebook | `run-results/visuals/regulated-edge-cases-zrilist-vprovadzhennia.png` | English visible copy | experimental | Visual fallback for Edge Cases | use with caution |
+| `REGULATED / Edge Cases / rerun in progress` | `0ef38cfd-1fcb-474f-ae9b-6fb09d716b3a` | infographic | pending completion | not downloaded yet | rerun in progress | experimental | Edge Cases infographic rerun | review when complete |
 | `REGULATED / Evidence Pack / Спокій і контроль` | `6cf10629-ab59-42e4-91d5-29e25201a4fb` | infographic | stored in NotebookLM visual notebook | `run-results/visuals/regulated-evidence-pack-spokii-i-kontrol.png` | mixed-language copy | experimental | Visual fallback for Evidence Pack | use with caution |
 | `REGULATED / Technical Deck / Архітектура ядра` | `b15739a6-4403-4742-abf3-0d4dbb0e944a` | infographic | stored in NotebookLM visual notebook | `run-results/visuals/regulated-technical-deck-arkhitektura-iadra.png` | mixed-language + weak claim | experimental | Visual fallback for Technical Deck | use with caution |
+| `Resilient e-Excise Production Architecture` | `ebbb927d-5d8c-4ff0-b2bd-bbe6274569ac` | slide_deck | stored in NotebookLM visual notebook | not downloaded yet | unreviewed | experimental | Technical Deck slide-deck attempt from 2026-03-23 | review first |
 
 ## Prompt Library
 
 | Asset | Prompt path | Quality state | Notes |
 | --- | --- | --- | --- |
-| Executive Deck | `notebooklm-prompts/11-generate-regulated-executive-deck.md` | known good | passed text generation |
-| Why Us | `notebooklm-prompts/12-generate-regulated-why-us.md` | known good | passed text generation |
-| One Job | `notebooklm-prompts/13-generate-regulated-one-job.md` | known good | passed after tightening exact contour wording |
-| Edge Cases | `notebooklm-prompts/14-generate-regulated-edge-cases.md` | known good for text / revise visual later | text passed; visual fallback drifted |
-| Evidence Pack | `notebooklm-prompts/15-generate-regulated-evidence-pack.md` | known good for text / revise visual later | text passed; visual fallback drifted |
-| Technical Deck | `notebooklm-prompts/16-generate-regulated-technical-deck.md` | known good for text / revise visual later | text passed; visual fallback drifted |
+| Executive Deck | `notebooklm-prompts/11-generate-regulated-executive-deck.md` | known good for text / revise visual now | rerun visual with stronger Ukrainian-only visible-copy rule |
+| Why Us | `notebooklm-prompts/12-generate-regulated-why-us.md` | known good for text / revise visual now | preserve p5 contour wording |
+| One Job | `notebooklm-prompts/13-generate-regulated-one-job.md` | known good for text / revise visual now | first slide-deck rerun target |
+| Edge Cases | `notebooklm-prompts/14-generate-regulated-edge-cases.md` | known good for text / revise infographic later | text passed; infographic fallback drifted |
+| Evidence Pack | `notebooklm-prompts/15-generate-regulated-evidence-pack.md` | known good for text / revise infographic later | text passed; infographic fallback drifted |
+| Technical Deck | `notebooklm-prompts/16-generate-regulated-technical-deck.md` | known good for text / revise infographic later | text passed; infographic fallback drifted |
 
 ## Deck / Slide Review State
 
 | Asset | Text status | Visual status | Open issues | Next action |
 | --- | --- | --- | --- | --- |
-| Executive Deck | passed | visual QA fail | English copy on pages 4, 5, 6, 7, 9 — diagram labels and placeholder text | rerun visual generation with Ukrainian-only enforcement |
-| Why Us | passed | visual QA fail | English copy on pages 5, 6, 7, 9, 10 — labels and APPROVED FOR AUDIT stamp | rerun visual generation with Ukrainian-only enforcement |
-| One Job | passed | visual QA fail | English copy on pages 1, 4 — doc-ref metadata and ERP contour labels | rerun visual generation with Ukrainian-only enforcement |
-| Edge Cases | passed | generated but non-final | English visible copy | rerun visual later |
-| Evidence Pack | passed | generated but non-final | mixed-language visible copy | rerun visual later |
-| Technical Deck | passed | generated but non-final | mixed-language visible copy, `Risk-Free`, paraphrased contours | rerun visual later |
+| Executive Deck | passed | visual QA fail | English copy on pages 4, 5, 6, 7, 9 | rerun visual generation with Ukrainian-only enforcement |
+| Why Us | passed | visual QA fail | English copy on pages 5, 6, 7, 9, 10; p5 contour wording is correctly Ukrainian | rerun visual generation with Ukrainian-only enforcement |
+| One Job | passed | visual QA fail | English copy on pages 1, 4 | rerun visual generation with Ukrainian-only enforcement |
+| Edge Cases | passed | generated but non-final | English visible copy | rerun in infographic lane later |
+| Evidence Pack | passed | generated but non-final | mixed-language visible copy | rerun in infographic lane later |
+| Technical Deck | passed | generated but non-final | mixed-language visible copy, `Risk-Free`, paraphrased contours | rerun in infographic lane later |
 
 ## Output Lineage
 
@@ -112,9 +128,16 @@ last_updated: 2026-03-22
 
 | Asset | What is current now | What the next agent should know |
 | --- | --- | --- |
-| Executive Deck | visual QA fail — English labels on 5 pages | rerun visual generation; reference Why Us p5 for approved Ukrainian contour wording |
-| Why Us | visual QA fail — English labels on 5 pages; p5 contour wording is correctly Ukrainian (use as reference) | rerun visual generation; p10 APPROVED FOR AUDIT stamp is the most visible failure |
-| One Job | visual QA fail — English on 2 pages only, cleanest deck | rerun visual generation; reference Why Us p5 for contour wording; remove cover doc-ref metadata |
+| Executive Deck | visual QA fail — English labels on 5 pages | rerun in `slide_deck` lane; preserve exact contour wording |
+| Why Us | visual QA fail — English labels on 5 pages; p5 contour wording is correct | rerun in `slide_deck` lane; use p5 as wording reference |
+| One Job | visual QA fail — English on 2 pages only | rerun first in `slide_deck` lane |
 | Edge Cases | text is good, visual is fallback only | do not treat PNG as final |
 | Evidence Pack | text is good, visual is fallback only | do not treat PNG as final |
 | Technical Deck | text is good, visual is fallback only | rerun later with stricter visual-language and claim controls |
+
+## External References
+
+| Reference | Role | Use status |
+| --- | --- | --- |
+| `external-references/01-awesome-notebooklm-prompts-distillate.md` | Prompt-bible distillate for visual prompt design | use for prompt inspiration only |
+| `external-references/02-notebooklm-mcp-cli-distillate.md` | Distilled NotebookLM CLI/MCP access reference | use for tooling and workflow decisions |

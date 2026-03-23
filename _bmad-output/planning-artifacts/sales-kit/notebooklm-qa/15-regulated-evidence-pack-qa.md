@@ -9,7 +9,7 @@ last_updated: 2026-03-22
 
 ## Instant fail
 
-FAIL if the asset lacks a boundary statement, hides evidence categories, sounds like internal audit notes, introduces unsourced entities, or does not create calm reviewability.
+FAIL if the asset lacks a boundary statement, hides evidence categories, sounds like internal audit notes, introduces unsourced entities, does not create calm reviewability, or shows NotebookLM branding / watermark / service chrome / generator residue.
 
 ## Asset checklist
 
@@ -19,6 +19,7 @@ FAIL if the asset lacks a boundary statement, hides evidence categories, sounds 
 - responsibility evidence is explicit
 - CTA is explicit
 - the buyer should feel calmer before checks and incidents
+- No NotebookLM branding, watermark, service badge, UI chrome, or document-reference residue is visible.
 
 ## Acceptance criteria
 

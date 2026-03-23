@@ -2,7 +2,7 @@
 title: Final Regulated Run Paths
 status: Approved execution map
 owner: Sales-kit control layer
-last_updated: 2026-03-21
+last_updated: 2026-03-23
 ---
 
 # Final Regulated Run Paths
@@ -16,6 +16,13 @@ last_updated: 2026-03-21
 5. Paste the matching prompt.
 6. Review against the matching QA file and `regulated-final-bundle/04-acceptance-gate.md`.
 7. If the output fails, route fixes using `notebooklm-qa/02-failure-patterns.md`.
+
+## Visual lane rule
+
+- `slide_deck` and `infographic` are two separate generation lanes with separate practical limits.
+- If the target output is blocked in one lane by quota, continue approved work in the other lane if that other lane still has capacity.
+- Do not mark the whole visual pipeline blocked unless both lanes are unavailable or a meaning-layer blocker appears.
+- Always record which lane produced the current artifact in the continuity docs.
 
 ## Asset paths
 

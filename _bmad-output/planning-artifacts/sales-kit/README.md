@@ -6,7 +6,8 @@ If you are a new agent entering the project, open these files in this order:
 1. `regulated-final-bundle/00-continue-here.md`
 2. `regulated-final-bundle/11-claude-handoff-main.md`
 3. `regulated-final-bundle/12-claude-handoff-appendix.md`
-4. supporting operational files only after that
+4. `regulated-final-bundle/13-visual-review-protocol.md` when working with visual artifacts
+5. supporting operational files only after that
 
 If you are already operating inside the mandatory regulated motion, use these execution files:
 1. `regulated-final-bundle/01-control-packet.md`
@@ -21,6 +22,20 @@ If you are already operating inside the mandatory regulated motion, use these ex
 - chat with the founder: Russian
 - all outgoing buyer-facing artifacts: Ukrainian only
 - any English or mixed visible copy in buyer-facing outputs is not release-ready
+
+## Shared-Agent Policy
+
+- Codex and Claude work on the same project memory, not in separate private branches of understanding.
+- After every meaningful change, both agents must update the local continuity system.
+- Never rely on chat history as the primary source of project state.
+- Always write new operational discoveries into project artifacts so the next agent can resume without rediscovery.
+
+## NotebookLM Generation Lanes
+
+- `slide_deck` and `infographic` are separate visual-generation lanes with separate practical limits.
+- If `slide_deck` is blocked by quota, continue with `infographic` tasks that are already approved.
+- If `infographic` is blocked by quota, continue with `slide_deck` tasks that are still available.
+- The visual pipeline is only globally blocked when both lanes are unavailable or when meaning-layer issues appear.
 
 ## What This Kit Does
 
@@ -70,6 +85,10 @@ The single regulated execution entry lives in `regulated-final-bundle/`:
 - `04-acceptance-gate.md` = exact fail/pass gate;
 - `05-regulated-sales-kit-definition-of-done.md` = one-page rubric;
 - `06-reviewer-pass-log.md` = latest reviewer pass status.
+
+External distilled references live in `external-references/`:
+- `01-awesome-notebooklm-prompts-distillate.md` = prompt-bible distillate for visual prompt design
+- `02-notebooklm-mcp-cli-distillate.md` = distilled NotebookLM CLI/MCP operating reference
 
 ## Path Convention
 

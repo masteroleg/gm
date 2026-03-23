@@ -20,6 +20,7 @@ Use only the uploaded sources. Do not invent architecture, benefits, claims, or 
 - End with a clear next step to audit / architecture session / pilot.
 - Do not use vague wording like only `ERP integration`.
 - Do not use unsafe claims or superiority language such as `найкраще`, `№1`, `під ключ`, `гарантує`, `повністю закриває`, `єдина відповідальність за результат`, `гарантований комплаєнс`, `single responsibility`, `full package`, `best equipment`, `turnkey`.
+- Do not show NotebookLM branding, watermark, service logo, product chrome, generator badge, UI residue, or document-reference residue anywhere in the visible output.
 
 ## Output contract
 
@@ -96,6 +97,7 @@ Reject your own draft and rewrite if any of the following are true:
 - it uses inflated or unsafe claims;
 - it paraphrases the required ERP lines instead of printing them exactly;
 - it contains broken numbering or notebook artifacts;
+- it contains NotebookLM branding, watermark, service chrome, logo, badge, or document-reference residue;
 - it lacks a buyer-safe rollout message;
 - it lacks a clear CTA;
 - after reading, a buyer would not be able to retell what is sold, what is core, what is external, why this is safer, and what the next step is.

@@ -9,7 +9,7 @@ last_updated: 2026-03-22
 
 ## Instant fail
 
-FAIL if the output sells a platform, hides the ERP split, treats `еАкциз` as core, sounds like internal notes, lacks a next step, introduces unsourced entities, or uses weak superiority claims without proof.
+FAIL if the output sells a platform, hides the ERP split, treats `еАкциз` as core, sounds like internal notes, lacks a next step, introduces unsourced entities, uses weak superiority claims without proof, or shows NotebookLM branding / watermark / service chrome / generator residue.
 
 ## Asset checklist
 
@@ -19,6 +19,7 @@ FAIL if the output sells a platform, hides the ERP split, treats `еАкциз` 
 - `еАкциз` remains external.
 - The CTA points to scoped contour review / audit / pilot.
 - The buyer should feel this path is safer than most alternatives.
+- No NotebookLM branding, watermark, service badge, UI chrome, or document-reference residue is visible.
 
 ## Acceptance criteria
 

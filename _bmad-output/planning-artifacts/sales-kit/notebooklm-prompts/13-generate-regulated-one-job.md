@@ -15,6 +15,7 @@ Use only the uploaded sources.
 - Do not use weak superiority claims or company-bragging language.
 - Do not use unsafe claims such as `гарантує`, `найкраще`, `під ключ`, `єдина відповідальність`, or `повний пакет`.
 - Keep the output in modern, buyer-facing Ukrainian.
+- Do not show NotebookLM branding, watermark, service logo, product chrome, generator badge, or document-reference residue anywhere in the visible output.
 
 ## Output contract
 
@@ -29,5 +30,6 @@ Rewrite if the draft:
 - hides or paraphrases the ERP split;
 - introduces unsourced entities;
 - contains wording artifacts or odd tokens inside the core description;
+- contains NotebookLM branding, watermark, service chrome, logo, badge, or document-reference residue;
 - uses phrases like `найкоротший шлях`, `гарантує`, or any other overclaim;
 - leaves the buyer unable to retell how manual chaos is reduced.

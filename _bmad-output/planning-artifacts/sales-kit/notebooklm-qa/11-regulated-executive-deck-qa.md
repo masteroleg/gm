@@ -19,6 +19,7 @@ FAIL immediately if the output:
 - omits a next step to audit / architecture session / pilot.
 - introduces a new unsourced product, architecture layer, or platform explanation;
 - uses weak superiority claims without explicit proof.
+- shows NotebookLM branding, watermark, service logo, product chrome, generator badge, UI residue, or document-reference residue.
 
 ## Asset checklist
 
@@ -29,6 +30,7 @@ FAIL immediately if the output:
 - The ERP split is explicit in the final wording.
 - `еАкциз` remains external.
 - The output is modern Ukrainian and buyer-facing.
+- No NotebookLM branding, watermark, service badge, UI chrome, or document-reference residue is visible.
 
 ## Asset-specific acceptance criteria
 

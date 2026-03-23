@@ -17,6 +17,7 @@ Use only the uploaded sources.
 - Do not use unsafe claims such as `гарантує`, `найкраще`, `під ключ`, `єдина відповідальність`, or `повний пакет`.
 - Keep the output in modern, buyer-facing Ukrainian.
 - End with audit-ready review / scoping session / pilot.
+- Do not show NotebookLM branding, watermark, service logo, product chrome, generator badge, UI residue, or document-reference residue anywhere in the visible output.
 
 ## Output contract
 
@@ -30,5 +31,6 @@ Rewrite if the draft:
 - blurs the core / external boundary;
 - hides one of the ERP roles;
 - introduces unsourced entities;
+- shows NotebookLM branding, watermark, service chrome, logo, badge, or document-reference residue;
 - uses phrases like `гарантує` or other overclaims instead of calm defendable wording;
 - leaves the buyer unable to retell why this contour feels calmer before checks or incidents.

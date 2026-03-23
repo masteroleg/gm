@@ -9,7 +9,7 @@ last_updated: 2026-03-22
 
 ## Instant fail
 
-FAIL if the output is cluttered, vague about the core, vague about the ERP split, missing a CTA, introduces unsourced entities, or fails to show reduced manual chaos.
+FAIL if the output is cluttered, vague about the core, vague about the ERP split, missing a CTA, introduces unsourced entities, fails to show reduced manual chaos, contains English visible copy, or shows NotebookLM branding / watermark / service chrome / generator residue.
 
 ## Asset checklist
 
@@ -20,6 +20,7 @@ FAIL if the output is cluttered, vague about the core, vague about the ERP split
 - `еАкциз` remains external.
 - The CTA is explicit.
 - The buyer should feel lower manual chaos and daily stress.
+- No NotebookLM logo, watermark, service badge, UI chrome, or document-reference residue is visible.
 
 ## Acceptance criteria
 

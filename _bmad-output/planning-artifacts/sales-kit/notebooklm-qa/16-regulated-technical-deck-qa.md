@@ -9,7 +9,7 @@ last_updated: 2026-03-22
 
 ## Instant fail
 
-FAIL if the deck makes ERP or `еАкциз` part of the core, hides the ERP split, skips exceptions, lacks a rollout CTA, introduces unsourced entities, or drifts into platform-first explanation.
+FAIL if the deck makes ERP or `еАкциз` part of the core, hides the ERP split, skips exceptions, lacks a rollout CTA, introduces unsourced entities, drifts into platform-first explanation, or shows NotebookLM branding / watermark / service chrome / generator residue.
 
 ## Asset checklist
 
@@ -23,6 +23,7 @@ FAIL if the deck makes ERP or `еАкциз` part of the core, hides the ERP spl
 - evidence is covered
 - split of responsibility is covered
 - pilot / rollout path is covered
+- No NotebookLM branding, watermark, service badge, UI chrome, or document-reference residue is visible.
 
 ## Acceptance criteria
 

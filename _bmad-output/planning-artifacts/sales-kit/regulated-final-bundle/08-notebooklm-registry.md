@@ -2,7 +2,7 @@
 title: NotebookLM Registry - Regulated Sales Kit
 status: Active
 owner: Sales enablement / NotebookLM operator
-last_updated: 2026-03-22
+last_updated: 2026-03-23
 ---
 
 # NotebookLM Registry / Regulated Sales Kit
@@ -15,8 +15,10 @@ It answers:
 - how many notebooks exist for the regulated sales kit
 - what each notebook is for
 - what has already been generated
+- which generation lane was used
 - what artifacts were saved locally
 - what still needs to happen next
+- how Codex and Claude must coordinate on shared state
 
 Start every interrupted session from:
 
@@ -26,6 +28,19 @@ This registry is an operational support document, not the onboarding document.
 For a new Claude agent, use:
 - `regulated-final-bundle/11-claude-handoff-main.md`
 - `regulated-final-bundle/12-claude-handoff-appendix.md`
+
+## Shared-agent rule
+
+- Codex and Claude operate on the same project memory.
+- Neither agent may keep critical operational knowledge only in chat or private reasoning.
+- Any meaningful discovery about NotebookLM state, lane availability, artifact quality, or workflow constraints must be written back into the continuity system.
+
+## Generation lanes
+
+- `slide_deck` and `infographic` are independent visual-generation lanes.
+- They have separate practical limits and must be tracked separately.
+- If one lane is exhausted, continue approved work in the other lane.
+- Do not describe the whole visual pipeline as blocked unless both lanes are blocked or meaning-layer QA fails.
 
 ## Count
 
@@ -76,7 +91,7 @@ What was done:
 - baseline run
 - reruns after source/brief/prompt hardening
 - clean text pass achieved
-- visual slide deck generated
+- visual slide deck generated in the `slide_deck` lane
 
 Saved outputs:
 
@@ -89,11 +104,15 @@ Saved outputs:
 Current status:
 
 - text: passed
-- visual: release-ready candidate
+- visual: visual QA fail
+
+Reason:
+
+- English visible copy on pages 4, 5, 6, 7, 9
 
 Next step:
 
-- human visual review of the PDF
+- rerun in the `slide_deck` lane with Ukrainian-only visible-copy enforcement
 
 ### 2. Why Us
 
@@ -120,7 +139,7 @@ What was done:
 - first text run
 - rerun after tightening claim/language controls
 - clean text pass achieved
-- visual slide deck generated
+- visual slide deck generated in the `slide_deck` lane
 
 Saved outputs:
 
@@ -130,11 +149,16 @@ Saved outputs:
 Current status:
 
 - text: passed
-- visual: release-ready candidate
+- visual: visual QA fail
+
+Reason:
+
+- English visible copy on pages 5, 6, 7, 9, 10
+- page 5 has correct Ukrainian contour wording and should be preserved as the reference contour slide
 
 Next step:
 
-- human visual review of the PDF
+- rerun in the `slide_deck` lane with Ukrainian-only visible-copy enforcement
 
 ### 3. One Job / Text
 
@@ -197,19 +221,29 @@ Sources:
 
 What was done:
 
-- visual slide deck generated
+- visual slide deck generated in the `slide_deck` lane
+- rerun started on 2026-03-23 with stricter Ukrainian-only visible-copy enforcement
 
 Saved outputs:
 
 - `run-results/visuals/regulated-one-job-kerovana-liniia.pdf`
 
+Current in-progress artifact:
+
+- `154d007d-9de3-4260-b02d-fb3fbb3e8405` -> new `slide_deck` rerun started
+
 Current status:
 
-- visual: release-ready candidate
+- visual: visual QA fail
+
+Reason:
+
+- English visible copy on pages 1 and 4 only
+- this is the cleanest failed slide deck and the best first rerun candidate
 
 Next step:
 
-- human visual review of the PDF
+- rerun in the `slide_deck` lane first
 
 ### 5. Edge Cases / Text
 
@@ -272,13 +306,18 @@ Sources:
 
 What was done:
 
-- slide deck generation failed because the free-plan slide-deck quota was exhausted
-- asset was rerouted through infographic generation
+- slide deck generation failed because the `slide_deck` lane was exhausted at that time
+- asset was rerouted into the independent `infographic` lane
 - infographic completed and downloaded locally
+- infographic rerun started on 2026-03-23 with stricter Ukrainian-only visible-copy enforcement
 
 Saved outputs:
 
 - `run-results/visuals/regulated-edge-cases-zrilist-vprovadzhennia.png`
+
+Current in-progress artifact:
+
+- `0ef38cfd-1fcb-474f-ae9b-6fb09d716b3a` -> new `infographic` rerun started
 
 Current status:
 
@@ -290,7 +329,7 @@ Reason:
 
 Next step:
 
-- rerun later with infographic quota and stricter Ukrainian-only visual rules
+- review rerun artifact `0ef38cfd-1fcb-474f-ae9b-6fb09d716b3a` when complete
 
 ### 7. Evidence Pack / Text
 
@@ -353,8 +392,8 @@ Sources:
 
 What was done:
 
-- slide deck generation failed because the free-plan slide-deck quota was exhausted
-- asset was rerouted through infographic generation
+- slide deck generation failed because the `slide_deck` lane was exhausted at that time
+- asset was rerouted into the independent `infographic` lane
 - infographic completed and downloaded locally
 
 Saved outputs:
@@ -371,7 +410,7 @@ Reason:
 
 Next step:
 
-- rerun later with infographic quota and stricter Ukrainian-only visual rules
+- rerun later in the `infographic` lane with stricter Ukrainian-only visual rules
 
 ### 9. Technical Deck / Text
 
@@ -434,13 +473,18 @@ Sources:
 
 What was done:
 
-- slide deck generation failed because the free-plan slide-deck quota was exhausted
-- asset was rerouted through infographic generation
+- slide deck generation failed because the `slide_deck` lane was exhausted at that time
+- asset was rerouted into the independent `infographic` lane
 - infographic completed and downloaded locally
+- a new `slide_deck` artifact was also created on 2026-03-23, proving the `slide_deck` lane is available again
 
 Saved outputs:
 
 - `run-results/visuals/regulated-technical-deck-arkhitektura-iadra.png`
+
+Additional artifact recorded in NotebookLM:
+
+- `ebbb927d-5d8c-4ff0-b2bd-bbe6274569ac` -> `slide_deck` titled `Resilient e-Excise Production Architecture`
 
 Current status:
 
@@ -451,10 +495,12 @@ Reason:
 - mixed-language visible copy
 - unsafe `Risk-Free` wording in headline
 - architecture wording was paraphrased
+- new slide-deck artifact exists but is still unreviewed and not yet canonical
 
 Next step:
 
-- rerun later with infographic quota and stricter Ukrainian-only visual rules plus exact contour wording
+- review the new slide-deck artifact first
+- keep the infographic fallback as experimental until the new slide deck is reviewed
 
 ### 11. Technical Deck / Visual / Empty Draft
 
@@ -490,22 +536,32 @@ Next step:
 
 ### Mandatory visual layer
 
-- 3 assets are generated as slide decks and are the main release candidates:
+- all 6 mandatory assets have visual artifacts
+- none are currently release-ready
+- `slide_deck` lane artifacts that failed QA:
   - Executive Deck
   - Why Us
   - One Job
-- 3 assets are generated as infographics and need later rerun:
+- `infographic` lane artifacts that failed QA:
   - Edge Cases
   - Evidence Pack
   - Technical Deck
 
+## External references now stored locally
+
+- `external-references/01-awesome-notebooklm-prompts-distillate.md`
+- `external-references/02-notebooklm-mcp-cli-distillate.md`
+
 ## Next actions
 
-1. Review the three slide-deck PDFs visually and decide whether they are release-ready as-is
-2. Use the tightened visual rules for the next rerun wave
-3. Rerun later:
+1. Rerun `One Job` first in the `slide_deck` lane
+2. Review `One Job` rerun artifact `154d007d-9de3-4260-b02d-fb3fbb3e8405` when complete
+3. Rerun `Why Us` next in the `slide_deck` lane
+4. Rerun `Executive Deck` after that in the `slide_deck` lane
+4. Continue with `infographic`-lane reruns when that lane is available:
    - Edge Cases visual
    - Evidence Pack visual
    - Technical Deck visual
-4. After mandatory visual review, move to the next approved branch:
+5. Review the new Technical Deck slide-deck artifact before deciding canonical visual direction
+6. After mandatory visual reruns pass, move to the next approved branch:
    - Gorobina follow-up packet

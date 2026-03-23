@@ -18,6 +18,7 @@ Use only the uploaded sources.
 - Do not use unsafe claims such as `гарантує`, `найкраще`, `під ключ`, `єдина відповідальність`, or `повний пакет`.
 - Keep the output in modern, buyer-facing Ukrainian.
 - End with technical session / fit-validation / pilot planning.
+- Do not show NotebookLM branding, watermark, service logo, product chrome, generator badge, UI residue, or document-reference residue anywhere in the visible output.
 
 ## Output contract
 
@@ -29,5 +30,6 @@ Do not include citations, source markers, or notebook residue inside the text.
 Rewrite if the draft:
 - paraphrases the ERP split instead of printing the exact lines;
 - introduces unsourced entities or platform layers;
+- shows NotebookLM branding, watermark, service chrome, logo, badge, or document-reference residue;
 - uses `гарантує` or any unsupported superiority claim;
 - makes a reviewer less able to retell what is core, what is external, and why rollout is safer.

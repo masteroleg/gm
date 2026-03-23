@@ -2,14 +2,14 @@
 title: Claude Handoff Main - Regulated Sales Kit
 status: Active onboarding document
 owner: Founder / next agent
-last_updated: 2026-03-22
+last_updated: 2026-03-23
 ---
 
 # Claude Handoff Main / Regulated Sales Kit
 
 ## Executive Summary
 
-This project builds and hardens a regulated `sales-kit` for `еАкциз`-driven buyer conversations. The business objective is not to educate the market about why regulation exists, but to persuade buyers that `genu.mark` is the safest and clearest implementation path for a mandatory rollout.
+This project builds and hardens a regulated `sales-kit` for `eАкциз`-driven buyer conversations. The business objective is not to educate the market about regulation, but to persuade buyers that `genu.mark` is the safest and clearest path for a mandatory rollout.
 
 The core audience is:
 - executives and owners
@@ -21,25 +21,30 @@ Current state:
 - the mandatory regulated meaning layer is complete
 - all 6 mandatory text-generation routes have passed
 - all 6 mandatory visual routes have produced artifacts
-- 3 visual artifacts are current release candidates
-- 3 visual artifacts were generated through infographic fallback and need later rerun because of visible-copy drift
+- none of the 6 visual artifacts are release-ready yet
+- the 3 slide-deck artifacts later failed language QA
+- the 3 infographic artifacts remain fallback outputs that need later rerun because of language or claim drift
+- `slide_deck` lane is confirmed available again because a new Technical Deck slide deck was created on 2026-03-23
+- `One Job` rerun in the `slide_deck` lane is currently in progress
+- `Edge Cases` infographic rerun in the `infographic` lane is currently in progress
 
 Already done:
 - control packet and source packet are locked
 - mandatory regulated assets were rewritten around `genu.mark first`
 - prompts, briefs, runbooks, and QA files were hardened
 - NotebookLM notebook inventory and lineage are recorded
+- continuity and handoff system is in place
 
 Not finished:
-- final human visual review of the 3 PDF release candidates
-- later rerun of 3 infographic visuals with stricter Ukrainian-only output control
-- next branch after mandatory review: `Gorobina` follow-up packet
+- rerun of the 3 slide-deck visuals with stricter Ukrainian-only output control
+- later rerun of the 3 infographic visuals with stricter Ukrainian-only output control
+- next branch after mandatory visual reruns: `Gorobina` follow-up packet
 
 Most important decisions already made:
 - sell `genu.mark`, not the platform, because the buyer must immediately understand the object of sale
-- keep `ERP` and `еАкциз` outside the core, because architecture confusion weakens trust
+- keep `ERP` and `eАкциз` outside the core, because architecture confusion weakens trust
 - use `strong core first` as the central sales logic, because buyers are choosing a safer rollout path, not maximum system breadth
-- keep the handoff and operating docs in English, because this improves agent comprehension
+- keep handoff and operating docs in English, because this improves agent comprehension
 - keep all outgoing buyer-facing artifacts in Ukrainian only, because English or mixed visible copy is not release-ready
 
 ## System Context
@@ -50,6 +55,7 @@ The system consists of:
 - NotebookLM briefs, prompts, runbooks, and QA gates
 - working notebooks and saved artifacts
 - continuity and handoff docs in `regulated-final-bundle`
+- external distilled references for prompt design and NotebookLM tooling
 
 The working regulated notebooks are split by asset and by layer when needed:
 - executive deck
@@ -60,11 +66,11 @@ The working regulated notebooks are split by asset and by layer when needed:
 - technical deck
 
 Primary working artifacts:
-- 3 slide-deck PDFs:
+- 3 slide-deck PDFs that require rerun:
   - executive deck
   - why us
   - one job
-- 3 infographic PNGs:
+- 3 infographic PNGs that require rerun:
   - edge cases
   - evidence pack
   - technical deck
@@ -81,6 +87,10 @@ Operational support docs:
 - `regulated-final-bundle/09-asset-state-board.md`
 - `regulated-final-bundle/10-run-ledger.md`
 
+External distilled references:
+- `external-references/01-awesome-notebooklm-prompts-distillate.md`
+- `external-references/02-notebooklm-mcp-cli-distillate.md`
+
 ## Sales Narrative
 
 What is sold:
@@ -89,10 +99,10 @@ What is sold:
 - `Dominanta + Logictime` as the safer route to rollout
 
 Narrative order:
-1. `еАкциз` implementation is mandatory
+1. `eАкциз` implementation is mandatory
 2. the real buyer question is how to launch safely
 3. `genu.mark` is the strong line core
-4. `ERP` and `еАкциз` are external contours
+4. `ERP` and `eАкциз` are external contours
 5. `strong core first` lowers rollout risk
 6. `Dominanta + Logictime` is the safer implementation path
 7. next step is audit / architecture session / pilot
@@ -101,7 +111,7 @@ Mandatory wording:
 - `genu.mark` is the line core
 - `ERP -> source of production job`
 - `ERP / internal systems <- exchange of results and statuses`
-- `еАкциз <- separate external state contour`
+- `eАкциз <- separate external state contour`
 - the core receives codes, applies, verifies, aggregates, and returns packaging result
 
 Forbidden wording:
@@ -157,11 +167,11 @@ What belongs to the core:
 
 What stays external:
 - ERP in two roles
-- `еАкциз` state contour
+- `eАкциз` state contour
 - other internal systems
 
 What must never be mixed:
-- `genu.mark` core with `ERP` or `еАкциз`
+- `genu.mark` core with `ERP` or `eАкциз`
 - regulated narrative with `genu.code`
 - safe rollout story with abstract platform story
 
@@ -194,24 +204,31 @@ Do not use as default upload sources:
 
 ## Deck Review State
 
-Current visual review focus:
-- `Executive Deck`
+Current visual rerun focus:
+- `One Job` rerun artifact `154d007d-9de3-4260-b02d-fb3fbb3e8405`
 - `Why Us`
-- `One Job`
+- `Executive Deck`
+- `Technical Deck` new slide-deck artifact `ebbb927d-5d8c-4ff0-b2bd-bbe6274569ac` needs review
 
-Visual issues already found in the infographic batch:
-- English or mixed-language visible copy
-- unsafe visible claim like `Risk-Free`
-- paraphrased architecture wording where exact contour wording should remain
+Known slide-deck failures:
+- Executive Deck:
+  - English visible copy on pages 4, 5, 6, 7, 9
+- Why Us:
+  - English visible copy on pages 5, 6, 7, 9, 10
+  - page 5 contour wording is correct and should be preserved
+- One Job:
+  - English visible copy on pages 1 and 4 only
+  - best first rerun target
 
-Successful prompt behavior:
-- tighter prompts improved text-generation quality across all 6 mandatory assets
-- visual rules now explicitly require Ukrainian-only visible copy and exact contour wording when architecture appears
-
-Not yet visually finalized:
-- `Edge Cases`
-- `Evidence Pack`
-- `Technical Deck`
+Known infographic failures:
+- `Edge Cases`:
+  - English visible copy
+- `Evidence Pack`:
+  - mixed-language visible copy
+- `Technical Deck`:
+  - mixed-language visible copy
+  - unsafe `Risk-Free` wording
+  - paraphrased contour labels
 
 ## Visual Direction
 
@@ -230,6 +247,7 @@ Bad output:
 - startup or dashboard aesthetics
 - decorative complexity
 - English or mixed visible copy
+- NotebookLM branding, service logo, watermark, product chrome, or generator residue
 - architecture sprawl
 - unsourced new concepts
 - broad superiority claims
@@ -269,32 +287,46 @@ Do not lose source grounding:
 Working environment:
 - NotebookLM via MCP is operational
 - notebook state, ids, and outputs are tracked locally
+- upstream NotebookLM access docs are distilled locally in `external-references/02-notebooklm-mcp-cli-distillate.md`
 
 Practical rule:
 - source files in NotebookLM are static copies
 - if a source or brief changes, refresh it in the notebook before rerunning
 
+Generation-lane rule:
+- `slide_deck` and `infographic` are independent practical lanes with separate limits
+- if one lane is exhausted, continue approved work in the other lane
+- do not call the whole visual pipeline blocked unless both lanes are unavailable
+
 Known working local references:
 - notebooks and statuses are tracked in `08-notebooklm-registry.md`
 - run history is tracked in `10-run-ledger.md`
-
-Known instability:
-- free NotebookLM plan has a slide-deck generation cap
-- infographic generation may still work after slide-deck quota is exhausted
 
 ## Risks And Failure Modes
 
 High-risk mistakes:
 - selling `genu.im` instead of `genu.mark`
-- blending core with `ERP` or `еАкциз`
+- blending core with `ERP` or `eАкциз`
 - reintroducing `genu.code` into regulated buyer-facing logic
 - treating passed text assets as permission to reopen meaning-layer decisions
 - trusting mixed-language visual outputs as final
+- forgetting that `slide_deck` and `infographic` are separate lanes
 
 False assumptions to avoid:
 - “visual generation succeeded” does not mean “release-ready”
 - “English in visuals is acceptable because the handoff is English” is false
 - “a new notebook title explains itself” is false unless it is recorded in the registry
+- “slide-deck quota exhausted means all visual work is blocked” is false
+
+## Multi-Agent Coordination
+
+Codex and Claude are working on the same project.
+
+Rules:
+- do not keep critical discoveries in private memory only
+- reread continuity docs before acting on interrupted work
+- after any meaningful change, update the local continuity system
+- if one agent changes operating truth, the other agent must be able to discover it from local files, not from chat reconstruction
 
 ## Language Policy
 
@@ -312,16 +344,18 @@ Allowed visible exceptions:
 
 Automatic non-final condition:
 - any buyer-facing artifact with English or mixed visible copy is not release-ready
+- any buyer-facing artifact with NotebookLM branding, watermark, service logo, product chrome, or generator residue is not release-ready
 
 ## What Must Not Be Broken
 
 - `genu.mark first`
 - `strong core first`
 - `ERP` external in two roles
-- `еАкциз` external
+- `eАкциз` external
 - safe rollout message over platform story
 - Ukrainian-only buyer-facing outputs
 - one notebook = one asset
+- `slide_deck` and `infographic` must stay distinct as operating lanes
 - source-of-truth vs experimental outputs must stay explicit
 
 ## What The Next Agent Must Do First
@@ -330,19 +364,25 @@ Automatic non-final condition:
 2. read this handoff
 3. read the appendix inventory
 4. read `09-asset-state-board.md`
-5. review the three PDF release candidates
-6. decide what is release-ready and what needs targeted visual revision
+5. rerun `One Job` in the `slide_deck` lane
+6. continue with `Why Us`
+7. continue with `Executive Deck`
 
 ## Next Actions
 
 Highest priority now:
-- review the three slide-deck PDFs visually
+- review `One Job` rerun artifact when complete
+- then continue the failed slide-deck visuals in this order:
+  - Why Us
+  - Executive Deck
+
+Parallel note:
+- because the lanes are independent, infographic reruns may continue whenever infographic capacity exists
+- current infographic rerun already in progress:
+  - Edge Cases artifact `0ef38cfd-1fcb-474f-ae9b-6fb09d716b3a`
 
 Next deliverable after that:
-- a clean visual review verdict for:
-  - Executive Deck
-  - Why Us
-  - One Job
+- three Ukrainian-only slide-deck reruns that pass language QA
 
 Then:
 - prepare rerun prompts for:
@@ -359,9 +399,9 @@ Open in this order:
 4. `regulated-final-bundle/09-asset-state-board.md`
 
 Then inspect:
-- `run-results/visuals/regulated-executive-deck-genu-mark-yak-sylne-iadro.pdf`
-- `run-results/visuals/regulated-why-us-bezpechnishe-vprovadzhennia.pdf`
-- `run-results/visuals/regulated-one-job-kerovana-liniia.pdf`
+- current slide-deck QA failures
+- `13-visual-review-protocol.md`
+- relevant notebook and prompt files before rerunning
 
 ## First 60 Minutes Plan
 
@@ -369,10 +409,10 @@ Then inspect:
 2. Read Roles And Product Boundaries
 3. Read Sales Narrative
 4. Read the appendix inventory
-5. Confirm the active notebooks and artifacts
-6. Review the three PDF release candidates
-7. Record visual findings without reopening the frozen meaning layer
-8. Prepare the next revision loop only for the assets that still fail visual quality
+5. Confirm the active notebooks, lanes, and artifacts
+6. Review `One Job` rerun artifact when complete
+7. Update continuity docs with the new result
+8. Continue with `Why Us` only after the shared state is updated
 
 ## Questions Claude Should Not Re-ask
 
@@ -384,9 +424,10 @@ Then inspect:
 - which notebooks are active
 - which MCP path is already working
 - what language the outgoing artifacts must use
+- whether `slide_deck` and `infographic` are one combined quota
 
 ## Open Questions That Actually Matter
 
-- are the three PDF release candidates visually strong enough to be accepted as-is
-- which of the three infographic assets should be rerun first once more quota is available
-- should the next branch after mandatory visual review be `Gorobina` or another explicitly approved deliverable
+- can the next `slide_deck` reruns eliminate English visible copy without harming structure quality
+- in what order should infographic reruns be executed once infographic capacity is available
+- should the next branch after mandatory visual reruns be `Gorobina` or another explicitly approved deliverable
