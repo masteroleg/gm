@@ -2,7 +2,7 @@
 title: Continue Here - Regulated Sales Kit
 status: Active entry point
 owner: Founder / next agent / NotebookLM operator
-last_updated: 2026-03-22
+last_updated: 2026-03-23
 ---
 
 # Continue Here / Regulated Sales Kit
@@ -25,43 +25,45 @@ Current work mode:
 
 ## What is currently usable
 
-Main release-ready visual candidates:
+No slide-deck PDFs are release-ready. All three failed language QA gate on 2026-03-23.
 
-- `run-results/visuals/regulated-executive-deck-genu-mark-yak-sylne-iadro.pdf`
-- `run-results/visuals/regulated-why-us-bezpechnishe-vprovadzhennia.pdf`
-- `run-results/visuals/regulated-one-job-kerovana-liniia.pdf`
+Visual rerun required for all six mandatory artifacts:
 
-Generated but not yet final:
-
-- `run-results/visuals/regulated-edge-cases-zrilist-vprovadzhennia.png`
-- `run-results/visuals/regulated-evidence-pack-spokii-i-kontrol.png`
-- `run-results/visuals/regulated-technical-deck-arkhitektura-iadra.png`
+| Artifact | Path | Status |
+| --- | --- | --- |
+| Executive Deck | `run-results/visuals/regulated-executive-deck-genu-mark-yak-sylne-iadro.pdf` | visual QA fail — English on p4 p5 p6 p7 p9 |
+| Why Us | `run-results/visuals/regulated-why-us-bezpechnishe-vprovadzhennia.pdf` | visual QA fail — English on p5 p6 p7 p9 p10 |
+| One Job | `run-results/visuals/regulated-one-job-kerovana-liniia.pdf` | visual QA fail — English on p1 p4 only (fewest failures) |
+| Edge Cases | `run-results/visuals/regulated-edge-cases-zrilist-vprovadzhennia.png` | English visible copy |
+| Evidence Pack | `run-results/visuals/regulated-evidence-pack-spokii-i-kontrol.png` | mixed-language visible copy |
+| Technical Deck | `run-results/visuals/regulated-technical-deck-arkhitektura-iadra.png` | mixed-language + weak claim |
 
 ## Current blockers
 
 - no meaning-layer blocker is active
 - no source-packet blocker is active
-- no brief blocker is active
-- no prompt blocker is active for the current mandatory pass
-- human visual review is pending for the three PDF artifacts
-- later visual rerun is pending for the three infographic artifacts because of visible-language / visual-copy drift
+- all six visual artifacts require rerun before release
+- root cause: NotebookLM generated English diagram labels despite Ukrainian-only instruction
+- reference fix available: Why Us deck p5 has correct Ukrainian ERP contour wording
 
 ## Exact next action
 
-Review these three PDFs first:
+Rerun visual generation for all three slide-deck PDFs with stricter Ukrainian-only enforcement.
 
-1. `run-results/visuals/regulated-executive-deck-genu-mark-yak-sylne-iadro.pdf`
-2. `run-results/visuals/regulated-why-us-bezpechnishe-vprovadzhennia.pdf`
-3. `run-results/visuals/regulated-one-job-kerovana-liniia.pdf`
+Priority order (least work first):
 
-Review them against:
+1. **One Job** — only 2 pages need fixing (p1 doc-ref, p4 contour labels)
+2. **Why Us** — 5 pages, p10 stamp is the most visible failure; p5 contour wording is correct (preserve it)
+3. **Executive Deck** — 5 pages, p6 is worst (fully English diagram labels)
 
-- `regulated-final-bundle/07-visual-release-status.md`
-- `notebooklm-source/04-visual-output-rules.md`
+For each rerun:
 
-After that:
+- add to the generation prompt: `All visible copy must be in Ukrainian only. Do not generate English headings, labels, parentheticals, metadata, or stamps. Use this exact wording for ERP contour labels: ERP -> джерело виробничого завдання / ERP / внутрішні системи <- обмін результатами та статусами / еАкциз (окремий зовнішній державний контур).`
+- do not reopen meaning layer or source packets
+- full QA findings: `regulated-final-bundle/13-visual-review-protocol.md`
 
-- decide which of the three PDFs are release-ready as-is
+After slide-deck reruns pass:
+
 - prepare the next quality-improvement loop for:
   - Edge Cases visual
   - Evidence Pack visual
@@ -108,5 +110,7 @@ When resuming after interruption:
   - `regulated-final-bundle/06-reviewer-pass-log.md`
 - visual release state:
   - `regulated-final-bundle/07-visual-release-status.md`
+- visual review protocol:
+  - `regulated-final-bundle/13-visual-review-protocol.md`
 - local next-step queue:
   - `local-backlog.md`

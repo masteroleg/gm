@@ -66,14 +66,14 @@ last_updated: 2026-03-22
 
 ## Artifact Inventory
 
-| Artifact title | Artifact id | Type | Local saved output path | Current quality state | Classification | Purpose | Use status |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| `REGULATED / Executive Deck / genu.mark як сильне ядро` | `82eafbb2-b335-4e5b-a925-a847ffd31c40` | slide_deck | `run-results/visuals/regulated-executive-deck-genu-mark-yak-sylne-iadro.pdf` | review pending | canonical candidate | Executive buyer-facing deck | use |
-| `REGULATED / Why Us / Безпечніше впровадження` | `3a604c9e-ce6b-46c9-b517-31442d61d695` | slide_deck | `run-results/visuals/regulated-why-us-bezpechnishe-vprovadzhennia.pdf` | review pending | canonical candidate | Why Us buyer-facing deck | use |
-| `REGULATED / One Job / Керована лінія` | `1e043704-33c6-4867-b169-1bd237e5491b` | slide_deck | `run-results/visuals/regulated-one-job-kerovana-liniia.pdf` | review pending | canonical candidate | One Job buyer-facing deck | use |
-| `REGULATED / Edge Cases / Зрілість впровадження` | `9d7b789e-dbd0-403e-a1a5-13ecb0785010` | infographic | `run-results/visuals/regulated-edge-cases-zrilist-vprovadzhennia.png` | English visible copy | experimental | Visual fallback for Edge Cases | use with caution |
-| `REGULATED / Evidence Pack / Спокій і контроль` | `6cf10629-ab59-42e4-91d5-29e25201a4fb` | infographic | `run-results/visuals/regulated-evidence-pack-spokii-i-kontrol.png` | mixed-language copy | experimental | Visual fallback for Evidence Pack | use with caution |
-| `REGULATED / Technical Deck / Архітектура ядра` | `b15739a6-4403-4742-abf3-0d4dbb0e944a` | infographic | `run-results/visuals/regulated-technical-deck-arkhitektura-iadra.png` | mixed-language + weak claim | experimental | Visual fallback for Technical Deck | use with caution |
+| Artifact title | Artifact id | Type | NotebookLM artifact URL | Local saved output path | Current quality state | Classification | Purpose | Use status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `REGULATED / Executive Deck / genu.mark як сильне ядро` | `82eafbb2-b335-4e5b-a925-a847ffd31c40` | slide_deck | available in `13-visual-review-protocol.md` | `run-results/visuals/regulated-executive-deck-genu-mark-yak-sylne-iadro.pdf` | visual QA fail — English copy on p4 p5 p6 p7 p9 | canonical candidate | Executive buyer-facing deck | rerun visual |
+| `REGULATED / Why Us / Безпечніше впровадження` | `3a604c9e-ce6b-46c9-b517-31442d61d695` | slide_deck | available in `13-visual-review-protocol.md` | `run-results/visuals/regulated-why-us-bezpechnishe-vprovadzhennia.pdf` | visual QA fail — English copy on p5 p6 p7 p9 p10 | canonical candidate | Why Us buyer-facing deck | rerun visual |
+| `REGULATED / One Job / Керована лінія` | `1e043704-33c6-4867-b169-1bd237e5491b` | slide_deck | available in `13-visual-review-protocol.md` | `run-results/visuals/regulated-one-job-kerovana-liniia.pdf` | visual QA fail — English copy on p1 p4 | canonical candidate | One Job buyer-facing deck | rerun visual |
+| `REGULATED / Edge Cases / Зрілість впровадження` | `9d7b789e-dbd0-403e-a1a5-13ecb0785010` | infographic | stored in NotebookLM visual notebook | `run-results/visuals/regulated-edge-cases-zrilist-vprovadzhennia.png` | English visible copy | experimental | Visual fallback for Edge Cases | use with caution |
+| `REGULATED / Evidence Pack / Спокій і контроль` | `6cf10629-ab59-42e4-91d5-29e25201a4fb` | infographic | stored in NotebookLM visual notebook | `run-results/visuals/regulated-evidence-pack-spokii-i-kontrol.png` | mixed-language copy | experimental | Visual fallback for Evidence Pack | use with caution |
+| `REGULATED / Technical Deck / Архітектура ядра` | `b15739a6-4403-4742-abf3-0d4dbb0e944a` | infographic | stored in NotebookLM visual notebook | `run-results/visuals/regulated-technical-deck-arkhitektura-iadra.png` | mixed-language + weak claim | experimental | Visual fallback for Technical Deck | use with caution |
 
 ## Prompt Library
 
@@ -90,9 +90,9 @@ last_updated: 2026-03-22
 
 | Asset | Text status | Visual status | Open issues | Next action |
 | --- | --- | --- | --- | --- |
-| Executive Deck | passed | review pending | needs human visual review | review PDF |
-| Why Us | passed | review pending | needs human visual review | review PDF |
-| One Job | passed | review pending | needs human visual review | review PDF |
+| Executive Deck | passed | visual QA fail | English copy on pages 4, 5, 6, 7, 9 — diagram labels and placeholder text | rerun visual generation with Ukrainian-only enforcement |
+| Why Us | passed | visual QA fail | English copy on pages 5, 6, 7, 9, 10 — labels and APPROVED FOR AUDIT stamp | rerun visual generation with Ukrainian-only enforcement |
+| One Job | passed | visual QA fail | English copy on pages 1, 4 — doc-ref metadata and ERP contour labels | rerun visual generation with Ukrainian-only enforcement |
 | Edge Cases | passed | generated but non-final | English visible copy | rerun visual later |
 | Evidence Pack | passed | generated but non-final | mixed-language visible copy | rerun visual later |
 | Technical Deck | passed | generated but non-final | mixed-language visible copy, `Risk-Free`, paraphrased contours | rerun visual later |
@@ -112,9 +112,9 @@ last_updated: 2026-03-22
 
 | Asset | What is current now | What the next agent should know |
 | --- | --- | --- |
-| Executive Deck | PDF candidate exists | review before any rerun |
-| Why Us | PDF candidate exists | review before any rerun |
-| One Job | PDF candidate exists | review before any rerun |
+| Executive Deck | visual QA fail — English labels on 5 pages | rerun visual generation; reference Why Us p5 for approved Ukrainian contour wording |
+| Why Us | visual QA fail — English labels on 5 pages; p5 contour wording is correctly Ukrainian (use as reference) | rerun visual generation; p10 APPROVED FOR AUDIT stamp is the most visible failure |
+| One Job | visual QA fail — English on 2 pages only, cleanest deck | rerun visual generation; reference Why Us p5 for contour wording; remove cover doc-ref metadata |
 | Edge Cases | text is good, visual is fallback only | do not treat PNG as final |
 | Evidence Pack | text is good, visual is fallback only | do not treat PNG as final |
 | Technical Deck | text is good, visual is fallback only | rerun later with stricter visual-language and claim controls |

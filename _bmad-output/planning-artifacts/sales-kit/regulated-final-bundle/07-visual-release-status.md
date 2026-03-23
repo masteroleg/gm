@@ -2,7 +2,7 @@
 title: Visual Release Status - Regulated Mandatory Pack
 status: Active
 owner: Sales enablement / QA
-last_updated: 2026-03-22
+last_updated: 2026-03-23
 ---
 
 # Visual Release Status / Regulated Mandatory Pack
@@ -26,9 +26,66 @@ The slide-deck quota in free NotebookLM was exhausted after the first three visu
 
 ## Release-ready artifacts
 
+None at this time. All three slide-deck PDFs reviewed 2026-03-23 and failed language QA gate.
+
+## Reviewed and requiring visual rerun
+
+### Executive Deck
+
+Artifact:
+
 - `run-results/visuals/regulated-executive-deck-genu-mark-yak-sylne-iadro.pdf`
+
+Reason:
+
+- English visible copy on pages 4, 5, 6, 7, 9 — diagram labels, UI chrome, placeholder text
+- Worst page: p6 (seam/risk slide — nearly all diagram labels in English)
+- Meaning layer: intact, do not reopen
+
+Recommended rerun condition:
+
+- rerun visual generation only
+- enforce Ukrainian-only visible copy
+- use Why Us deck p5 as reference for correct ERP contour wording
+
+### Why Us
+
+Artifact:
+
 - `run-results/visuals/regulated-why-us-bezpechnishe-vprovadzhennia.pdf`
+
+Reason:
+
+- English visible copy on pages 5, 6, 7, 9, 10
+- Most visible failure: `APPROVED FOR AUDIT` English stamp on p10 CTA slide
+- Note: p5 contour wording is correctly Ukrainian — use as reference prompt template
+- Meaning layer: intact, do not reopen
+
+Recommended rerun condition:
+
+- rerun visual generation only
+- enforce Ukrainian-only visible copy
+- retain p5 contour wording as reference: `ERP -> джерело виробничого завдання` etc.
+
+### One Job
+
+Artifact:
+
 - `run-results/visuals/regulated-one-job-kerovana-liniia.pdf`
+
+Reason:
+
+- English visible copy on pages 1 and 4 only — fewest failures of the three decks
+- p1: `DOC.REF : GENU.MARK // REGULATORY COMPLIANCE` metadata on cover
+- p4: English ERP contour labels (same pattern as Executive Deck p4)
+- Meaning layer: intact, do not reopen
+
+Recommended rerun condition:
+
+- rerun visual generation only
+- enforce Ukrainian-only visible copy
+- remove doc-ref metadata from cover or translate
+- use Why Us deck p5 for correct ERP contour wording
 
 ## Generated but requiring later rerun
 

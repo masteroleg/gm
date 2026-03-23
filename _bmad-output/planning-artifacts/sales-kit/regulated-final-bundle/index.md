@@ -5,6 +5,7 @@
 - **[00-continue-here.md](./00-continue-here.md)** - Single entry point for resuming work
 - **[11-claude-handoff-main.md](./11-claude-handoff-main.md)** - Main onboarding handoff for Claude
 - **[12-claude-handoff-appendix.md](./12-claude-handoff-appendix.md)** - Factual appendix and inventory for Claude
+- **[13-visual-review-protocol.md](./13-visual-review-protocol.md)** - Correct workflow for reviewing visual artifacts
 - **[01-control-packet.md](./01-control-packet.md)** - Locked control rules for regulated runs
 - **[02-approved-regulated-source-packet.md](./02-approved-regulated-source-packet.md)** - Compact approved source packet for generation
 - **[03-run-paths.md](./03-run-paths.md)** - Standardized NotebookLM run order by asset
