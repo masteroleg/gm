@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'site/**'
+      - '.github/workflows/ci.yml'
       - 'tests/**'
       - 'playwright.config.ts'
       - 'package.json'
