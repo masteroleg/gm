@@ -2,7 +2,7 @@
 
 set -eu
 
-PATTERN='^(site/index\.html|site/assets/|tests/|playwright\.config\.ts$|package\.json$|package-lock\.json$|tsconfig\.json$|\.github/workflows/ci\.yml$|\.husky/)'
+PATTERN='^(site/|tests/|playwright\.config\.ts$|package\.json$|package-lock\.json$|tsconfig\.json$|\.github/workflows/ci\.yml$|\.github/workflows/full-regression\.yml$|\.husky/)'
 
 case "${1:-}" in
 	--range)

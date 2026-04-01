@@ -5,8 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'site/index.html'
-      - 'site/assets/**'
+      - 'site/**'
       - 'tests/**'
       - 'playwright.config.ts'
       - 'package.json'
