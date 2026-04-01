@@ -6,11 +6,13 @@ on:
     paths:
       - "**/*.md"
       - "scripts/ci_no_absolute_paths_in_md.py"
+      - ".github/workflows/ci-no-absolute-paths-in-md.yml"
   pull_request:
     branches: [ main ]
     paths:
       - "**/*.md"
       - "scripts/ci_no_absolute_paths_in_md.py"
+      - ".github/workflows/ci-no-absolute-paths-in-md.yml"
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -20,13 +22,47 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
-      - name: Run audit for absolute paths in MD files
-        run: python scripts/ci_no_absolute_paths_in_md.py
+      - name: Collect changed markdown files
+        id: changed_md
+        shell: bash
+        run: |
+          set -euo pipefail
 
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+            HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+          else
+            BASE_SHA="${{ github.event.before }}"
+            HEAD_SHA="${{ github.sha }}"
+          fi
 
+          if [[ -z "$BASE_SHA" || "$BASE_SHA" == "0000000000000000000000000000000000000000" ]]; then
+            git ls-files '*.md' > changed_md.txt
+          else
+            git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- '*.md' > changed_md.txt
+          fi
+
+          if [[ ! -s changed_md.txt ]]; then
+            echo "has_md=false" >> "$GITHUB_OUTPUT"
+            echo "No changed markdown files to audit."
+            exit 0
+          fi
+
+          echo "Changed markdown files:"
+          cat changed_md.txt
+          echo "has_md=true" >> "$GITHUB_OUTPUT"
+
+      - name: Run audit for absolute paths in changed MD files
+        if: steps.changed_md.outputs.has_md == 'true'
+        shell: bash
+        run: |
+          mapfile -t changed_md < changed_md.txt
+          python scripts/ci_no_absolute_paths_in_md.py "${changed_md[@]}"

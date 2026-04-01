@@ -12,6 +12,9 @@ Rules:
 - DO NOT fail on:
   - http:// or https:// URLs (including localhost)
   - mentions inside markdown code spans: `file:///...`
+
+If file paths are passed as CLI arguments, only those markdown files are scanned.
+Otherwise all repo markdown files are scanned.
 """
 
 import re
@@ -24,16 +27,24 @@ def strip_code_spans(line: str) -> str:
     return re.sub(r"`[^`]*`", "", line)
 
 
+def iter_md_files(repo: Path) -> list[Path]:
+    if len(sys.argv) > 1:
+        files = []
+        for arg in sys.argv[1:]:
+            p = (repo / arg).resolve() if not Path(arg).is_absolute() else Path(arg).resolve()
+            if p.suffix.lower() == ".md" and p.exists():
+                files.append(p)
+        return sorted(set(files))
+    return sorted(repo.rglob("*.md"))
+
+
 def main() -> int:
     repo = Path(__file__).resolve().parents[1]
-    md_files = sorted(repo.rglob("*.md"))
+    md_files = iter_md_files(repo)
     violations = []  # (path, line_no, line)
 
-    # C:\path
     pat_win_backslash = re.compile(r"\b[A-Za-z]:\\")
-    # C:/path (avoid matching https:// which contains s:/)
     pat_win_slash = re.compile(r"\b[A-Za-z]:/(?=/)")
-    # file://...
     pat_fileuri = re.compile(r"\bfile://", re.IGNORECASE)
 
     for md in md_files:
@@ -49,23 +60,17 @@ def main() -> int:
                 for i, raw in enumerate(f, start=1):
                     line = raw.rstrip("\n")
 
-                    # Ignore fenced code blocks
                     if line.strip().startswith("```"):
                         in_fenced = not in_fenced
                         continue
                     if in_fenced:
                         continue
 
-                    # Ignore inline code spans like `file:///...`
                     scan = strip_code_spans(line)
 
-                    # Allow normal web URLs explicitly
                     if "http://" in scan or "https://" in scan:
-                        # still scan for real Windows paths (rare but possible in same line)
                         if pat_win_backslash.search(scan) or pat_win_slash.search(scan):
                             violations.append((md.relative_to(repo), i, line))
-                        # do NOT flag file:// if it's part of an http(s) URL (it won't be)
-                        # and we already removed inline code spans
                         if pat_fileuri.search(scan):
                             violations.append((md.relative_to(repo), i, line))
                         continue
