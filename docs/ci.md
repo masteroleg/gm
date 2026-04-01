@@ -37,7 +37,7 @@
 
 Используются два отдельных workflow:
 
-- `.github/workflows/ci.yml` - только для сайта и его тестовой инфраструктуры
+- `.github/workflows/ci.yml` - только для сайта и его deploy-контура
 - `.github/workflows/full-regression.yml` - полный cross-browser regression для PR/manual/nightly
 - `.github/workflows/infra.yml` - только для CI/hook-инфраструктуры
 
@@ -46,11 +46,14 @@
 `Site CI` слушает такие пути:
 
 - `site/**`
+- `.github/workflows/ci.yml`
 - `tests/**`
 - `playwright.config.ts`
 - `package.json`
 - `package-lock.json`
 - `tsconfig.json`
+
+`Site CI` является push-only deploy workflow для `main`.
 
 `Infra Checks` слушает только такие пути:
 
@@ -67,7 +70,7 @@
 - `npm test`
 - `npm run build:css`
 - `git diff --exit-code -- site/assets/css/output.css`
-- upload Pages artifact
+- upload Pages artifact from `./site`
 
 ### `Site CI -> smoke-e2e`
 
@@ -103,7 +106,12 @@
 - выполняется только после успеха `quick-checks` и `smoke-e2e` на `main`
 - запускается только если менялся публикуемый сайт: любой файл внутри `site/**`
 - использует уже подготовленный artifact
+- публикует именно содержимое `./site`
 - не делает повторный `npm ci` или повторную сборку сайта
+
+### `Custom domain source of truth`
+
+Для GitHub Pages источником истины считается `site/CNAME`, потому что в Pages уходит artifact из `./site`.
 
 ### `Infra Checks -> infra-checks`
 
