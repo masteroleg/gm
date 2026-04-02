@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/sh
 
 MSG_FILE="$1"
 COMMIT_SOURCE="$2"
@@ -8,19 +8,14 @@ COMMIT_SOURCE="$2"
 
 # If the message already has meaningful content (ignoring comments), keep it.
 if [ -s "$MSG_FILE" ]; then
-    # Remove comment lines and check if anything remains
     NON_COMMENT=$(grep -v "^#" "$MSG_FILE" | grep -v "^$")
     [ -n "$NON_COMMENT" ] && exit 0
 fi
 
-# Check if there are staged files
 DIFF=$(git diff --cached)
 [ -z "$DIFF" ] && exit 0
 
-# Use Node.js script to generate bilingual commit message
-# Falls back to intelligent heuristic generator when AI is unavailable
-# Get the repo root directory
 REPO_ROOT="$(git rev-parse --show-toplevel)"
-node "$REPO_ROOT/scripts/generate-commit-msg.cjs" "$MSG_FILE"
+node "$REPO_ROOT/scripts/generate-commit-msg-opencode.cjs" "$MSG_FILE"
 
 exit 0
