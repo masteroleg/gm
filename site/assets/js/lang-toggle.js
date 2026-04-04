@@ -1,6 +1,6 @@
 const translations = {
 	en: {
-		"controls.lang.toggle": "Language: EN. Click to switch.",
+		"controls.lang.toggle": "Language: EN - Click to switch.",
 		"controls.menu.open": "Open menu",
 		"controls.menu.close": "Close menu",
 		"controls.theme.switchToDark": "Switch to dark mode",
@@ -13,7 +13,7 @@ const translations = {
 		"hero.eyebrow": "Public proof for marked products",
 		"hero.titleLine1": "Every marked product",
 		"hero.titleLine2": "should come with",
-		"hero.titleLine3": "verifiable proof.",
+		"hero.titleLine3": "verifiable proof",
 		"hero.description":
 			"Brands publish product proof through genu.mark. Official state verification happens separately in Diia.",
 		"hero.strategic": "Others promise. We prove.",
@@ -436,9 +436,9 @@ const translations = {
 		"hero.eyebrow": "Публічний доказ для маркованих товарів",
 		"hero.titleLine1": "Кожен маркований товар",
 		"hero.titleLine2": "має супроводжуватися",
-		"hero.titleLine3": "перевірюваним доказом.",
+		"hero.titleLine3": "перевірюваним доказом",
 		"hero.description":
-			"Бренд або виробник публікує доказ через genu.mark. Офіційну державну перевірку виконують у Дії.",
+			"Бренд або виробник публікує доказ через genu.mark - Офіційну державну перевірку виконують у Дії.",
 		"hero.strategic": "Інші обіцяють. Ми доводимо.",
 		"hero.meta": "Захист бренду. еАкциз. Довіра до товару.",
 		"hero.ctaPrimary": "Переглянути приклад доказу",
@@ -446,7 +446,7 @@ const translations = {
 		"hero.proofValue": "25M+",
 		"hero.proofLabel": "промислове впровадження в Україні",
 		"hero.proofNoteAria": "Кейс під NDA. Масштаб — наяву.",
-		"hero.proofNoteLine1": "Кейс під NDA.",
+		"hero.proofNoteLine1": "Кейс під NDA",
 		"hero.proofNoteLine2": "Масштаб — наяву.",
 		"hero.signalVerified": "Підтверджений запис",
 		"hero.signalRealtime": "Миттєвий перегляд доказу",
