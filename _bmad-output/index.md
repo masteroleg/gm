@@ -1,118 +1,224 @@
-# Directory Index: _bmad-output
+Directory Index: _bmad-output
 
-BMAD artifacts for genu.im — planning, knowledge, audits, implementation, distillate.
+BMAD artifacts (deduplicated) for genu.im.
+---
+## Files
+### _archive/
+- **[workflow-setup-complete.md](_archive/docs/workflow-setup-complete.md)** - Workflow Setup Complete ✅
+- **[1-1-clarify-the-homepage-first-screen.md](_archive/implementation-artifacts/1-1-clarify-the-homepage-first-screen.md)** - Story 1.1: Прояснить первый экран главной страницы
+- **[1-2-show-the-two-main-visitor-needs.md](_archive/implementation-artifacts/1-2-show-the-two-main-visitor-needs.md)** - Story 1.2: Show the Two Main Visitor Needs
+- **[1-3-remember-the-chosen-language-and-theme.md](_archive/implementation-artifacts/1-3-remember-the-chosen-language-and-theme.md)** - Story 1.3: Remember the Chosen Language and Theme
+- **[1-4-open-the-main-site-information-pages.md](_archive/implementation-artifacts/1-4-open-the-main-site-information-pages.md)** - Story 1.4: Open the Main Site Information Pages
+- **[1-5-show-the-knowledge-section-in-site-navigation.md](_archive/implementation-artifacts/1-5-show-the-knowledge-section-in-site-navigation.md)** - Story 1.5: Show the Knowledge Section in Site Navigation
+- **[2-1-show-the-main-verification-example.md](_archive/implementation-artifacts/2-1-show-the-main-verification-example.md)** - Story 2.1: Show the Main Verification Example
+- **[2-2-show-a-clear-no-data-result.md](_archive/implementation-artifacts/2-2-show-a-clear-no-data-result.md)** - Story 2.2: Show a Clear No-Data Result
+- **[2-3-use-the-demo-input-and-example-code-action.md](_archive/implementation-artifacts/2-3-use-the-demo-input-and-example-code-action.md)** - Dev Agent Record
+- **[2-4-show-only-supported-proof-content.md](_archive/implementation-artifacts/2-4-show-only-supported-proof-content.md)** - Story 2.4: Show Only Supported Proof Content
+- **[3-1-guide-official-checks-to-diia.md](_archive/implementation-artifacts/3-1-guide-official-checks-to-diia.md)** - Story 3.1: Guide Official Checks to `Дія`
+- **[3-2-show-the-right-business-next-step.md](_archive/implementation-artifacts/3-2-show-the-right-business-next-step.md)** - Story 3.2: Show the Right Business Next Step
+- **[3-3-send-a-qualified-request.md](_archive/implementation-artifacts/3-3-send-a-qualified-request.md)** - Story 3.3: Send a Qualified Request
+- **[3-4-attach-scenario-and-source-details.md](_archive/implementation-artifacts/3-4-attach-scenario-and-source-details.md)** - Story 3.4: Attach Scenario and Source Details
+- **[4-1-track-movement-from-homepage-to-proof.md](_archive/implementation-artifacts/4-1-track-movement-from-homepage-to-proof.md)** - Story 4.1: Track Movement from Homepage to Proof
+- **[4-2-track-requests-by-scenario-and-source.md](_archive/implementation-artifacts/4-2-track-requests-by-scenario-and-source.md)** - Story 4.2: Track Requests by Scenario and Source
+- **[4-3-review-the-proof-first-funnel.md](_archive/implementation-artifacts/4-3-review-the-proof-first-funnel.md)** - Story 4.3: Review the Proof-First Funnel
+- **[epic-1-dev-handoff.md](_archive/implementation-artifacts/epic-1-dev-handoff.md)** - Epic 1 Dev Handoff
+- **[epic-2-retrospective.md](_archive/implementation-artifacts/epic-2-retrospective.md)** - Epic 2 Retrospective: Public Proof Experience
+- **[epic-3-retro-2026-03-14.md](_archive/implementation-artifacts/epic-3-retro-2026-03-14.md)** - Ретроспектива Epic 3: Audience Routing and Qualified Conversion
+- **[epic-4-retro-2026-03-15.md](_archive/implementation-artifacts/epic-4-retro-2026-03-15.md)** - Ретроспектива Epic 4: Funnel Visibility and Review
+- **[tech-spec-fix-ambiguous-diia-locator.md](_archive/implementation-artifacts/tech-spec-fix-ambiguous-diia-locator.md)** - ---
+- **[tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md](_archive/implementation-artifacts/tech-spec-migraciya-dannykh-iz-claude-sessions-v-bmad-fragments.md)** - ---
+- **[tech-spec-p1-remediation-nav-trust-pills.md](_archive/implementation-artifacts/tech-spec-p1-remediation-nav-trust-pills.md)** - ---
+- **[tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md](_archive/implementation-artifacts/tech-spec-shipping-ready-migraciya-claude-sessions-v-bmad-output.md)** - ---
+- **[open-questions.md](_archive/knowledge/open-questions.md)** - Open Questions and Validation Items
+- **[implementation-readiness-report-2026-03-11-2.md](_archive/planning-artifacts/implementation-readiness-report-2026-03-11-2.md)** - ---
+- **[implementation-readiness-report-2026-03-11.md](_archive/planning-artifacts/implementation-readiness-report-2026-03-11.md)** - ---
+- **[product-brief-gm-2026-02-23.md](_archive/planning-artifacts/product-brief-gm-2026-02-23.md)** - ---
+- **[product-brief-gm-2026-03-05.md](_archive/planning-artifacts/product-brief-gm-2026-03-05.md)** - ---
+### _bmad-output/
+- **[missing-pieces.md](_bmad-output/analysis/missing-pieces.md)** - Missing Pieces — genu.im
+- **[normalized-context.md](_bmad-output/analysis/normalized-context.md)** - Normalized Context — genu.im
+- **[css-var-refactor-analysis.md](_bmad-output/css-var-refactor-analysis.md)** - CSS Variable Refactor Analysis
+- **[css-var-refactor-implementation-notes.md](_bmad-output/css-var-refactor-implementation-notes.md)** - CSS Variable Refactor Implementation Notes
+- **[css-var-refactor-qa.md](_bmad-output/css-var-refactor-qa.md)** - CSS Variable Refactor QA
+- **[css-var-refactor-review.md](_bmad-output/css-var-refactor-review.md)** - CSS Variable Refactor Review
+- **[design-thinking-2026-02-23.md](_bmad-output/design-thinking-2026-02-23.md)** - Design Thinking Session: gm
+- **[01-product-strategy-requirements.md](_bmad-output/gm-distillate/01-product-strategy-requirements.md)** - This section covers product model, business model/pricing, user personas, journeys, functional requirements, non-functional requirements, epic structure, funnel analytics, and SEO architecture. Part 1 of 4.
+- **[02-architecture-tech-implementation.md](_bmad-output/gm-distillate/02-architecture-tech-implementation.md)** - This section covers tech stack, ADRs, file layout, design system, component specs, and mandatory implementation patterns. Part 2 of 4.
+- **[03-audit-remediation-current-state.md](_bmad-output/gm-distillate/03-audit-remediation-current-state.md)** - This section covers findings register v3, open/fixed defects, Epic 5 remediation stories, anti-drift corrections, open drift items, and document authority. Part 3 of 4.
+- **[04-cicd-docs-governance-contracts.md](_bmad-output/gm-distillate/04-cicd-docs-governance-contracts.md)** - This section covers CI/CD pipeline architecture, project contract rules, documentation authority map, homepage master plan staged execution, and key file locations. Part 4 of 4.
+- **[_index.md](_bmad-output/gm-distillate/_index.md)** - ---
+- **[5-1-remove-perevir-produkt-legacy-route.md](_bmad-output/implementation-artifacts/5-1-remove-perevir-produkt-legacy-route.md)** - Story 5-1: Remove `site/perevir-produkt/` from the public surface
+- **[5-2-verify-homepage-cta-routes-to-request.md](_bmad-output/implementation-artifacts/5-2-verify-homepage-cta-routes-to-request.md)** - Story 5-2: Verify homepage CTA routes to `/request/` — close or fix
+- **[5-3-reword-homepage-copy-trust-boundary.md](_bmad-output/implementation-artifacts/5-3-reword-homepage-copy-trust-boundary.md)** - Story 5-3: Reword homepage/runtime copy implying live lookup or real-time verification
+- **[5-4-narrow-faq-verification-claims.md](_bmad-output/implementation-artifacts/5-4-narrow-faq-verification-claims.md)** - Story 5-4: Narrow FAQ verification claims
+- **[5-5-soften-contact-response-time-language.md](_bmad-output/implementation-artifacts/5-5-soften-contact-response-time-language.md)** - Story 5-5: Confirm response-time language does not imply an SLA
+- **[README.md](_bmad-output/implementation-artifacts/genu-im-baseline/README.md)** - genu.im baseline capture
+- **[index.md](_bmad-output/implementation-artifacts/index.md)** - Directory Index: _bmad-output/implementation-artifacts
+- **[index.md](_bmad-output/index.md)** - Directory Index: _bmad-output
+- **[20260217_2241_command-messageinitcommand-message-8536d10d.md](_bmad-output/knowledge/fragments/20260217_2241_command-messageinitcommand-message-8536d10d.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
+- **[20260218_2004_command-messagebmad-agent-bmm-pmcommand-message-2f51eaac.md](_bmad-output/knowledge/fragments/20260218_2004_command-messagebmad-agent-bmm-pmcommand-message-2f51eaac.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
+- **[20260218_2234_command-messagebmad-helpcommand-message-b6459d42.md](_bmad-output/knowledge/fragments/20260218_2234_command-messagebmad-helpcommand-message-b6459d42.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
+- **[20260218_2236_command-messagebmad-helpcommand-message-eafcb008.md](_bmad-output/knowledge/fragments/20260218_2236_command-messagebmad-helpcommand-message-eafcb008.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
+- **[20260218_2312_command-messagebmad-agent-bmm-pmcommand-message-5f88e7e1.md](_bmad-output/knowledge/fragments/20260218_2312_command-messagebmad-agent-bmm-pmcommand-message-5f88e7e1.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
+- **[20260219_1422_command-messagebmad-helpcommand-message-c90726ce.md](_bmad-output/knowledge/fragments/20260219_1422_command-messagebmad-helpcommand-message-c90726ce.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
+- **[20260219_1653_command-messagefrontend-designfrontend-designcommand-message-64f3ea9f.md](_bmad-output/knowledge/fragments/20260219_1653_command-messagefrontend-designfrontend-designcommand-message-64f3ea9f.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
+- **[20260219_1726_local-command-caveatcaveat-the-messages-below-were-generated-88168501.md](_bmad-output/knowledge/fragments/20260219_1726_local-command-caveatcaveat-the-messages-below-were-generated-88168501.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
+- **[20260220_1928_session-6f11c211-41c9-4d73-b607-62c0f0cb86be-2edb66b8.md](_bmad-output/knowledge/fragments/20260220_1928_session-6f11c211-41c9-4d73-b607-62c0f0cb86be-2edb66b8.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
+- **[ci-value-static-sites.md](_bmad-output/knowledge/fragments/ci-value-static-sites.md)** - CI/CD Value for Static Sites
+- **[e2e-testing-visual-regression.md](_bmad-output/knowledge/fragments/e2e-testing-visual-regression.md)** - E2E Testing: Visual Regression Gap
+- **[genuim-business-model.md](_bmad-output/knowledge/fragments/genuim-business-model.md)** - genu.im Business Model: Real Pricing
+- **[husky-v9-migration.md](_bmad-output/knowledge/fragments/husky-v9-migration.md)** - Husky v9 Migration Notes
+- **[index.md](_bmad-output/knowledge/fragments/index.md)** - Directory Index: _bmad-output/knowledge/fragments
+- **[index.md](_bmad-output/knowledge/index.md)** - Directory Index: _bmad-output/knowledge
+- **[migration-converter-detailed-findings.md](_bmad-output/knowledge/migration-converter-detailed-findings.md)** - Detailed Code Review Findings with Specific Examples
+- **[migration-converter-final-review.md](_bmad-output/knowledge/migration-converter-final-review.md)** - BMAD Code Review Summary - Migration Converter and Generation Results
+- **[migration-converter-findings.md](_bmad-output/knowledge/migration-converter-findings.md)** - 🔴 CRITICAL ISSUES
+- **[migration-converter-review.md](_bmad-output/knowledge/migration-converter-review.md)** - Senior Developer Review (AI)
+- **[migration-converter-summary.md](_bmad-output/knowledge/migration-converter-summary.md)** - 🔥 CODE REVIEW FINDINGS, GenuIm!
+- **[migration-report.md](_bmad-output/knowledge/migration-report.md)** - <!-- AUTO-GENERATED: scripts/migrate_sessions.py -->
+- **[architecture.md](_bmad-output/planning-artifacts/architecture.md)** - ---
+- **[consistency-alignment-plan.md](_bmad-output/planning-artifacts/consistency-alignment-plan.md)** - Consistency Alignment Plan
+- **[consistency-todo.md](_bmad-output/planning-artifacts/consistency-todo.md)** - BMAD Document Consistency ToDo
+- **[doc-inconsistency-report.md](_bmad-output/planning-artifacts/doc-inconsistency-report.md)** - BMAD Documentation Inconsistency Report
+- **[epics.md](_bmad-output/planning-artifacts/epics.md)** - ---
+- **[implementation-readiness-report.md](_bmad-output/planning-artifacts/implementation-readiness-report.md)** - ---
+- **[index.md](_bmad-output/planning-artifacts/index.md)** - Directory Index: _bmad-output/planning-artifacts
+- **[prd.md](_bmad-output/planning-artifacts/prd.md)** - ---
+- **[00-sales-kit-architecture.md](_bmad-output/planning-artifacts/sales-kit/00-sales-kit-architecture.md)** - Sales-Kit Architecture - regulated / еАкциз
+- **[01-master-pack-decomposition.md](_bmad-output/planning-artifacts/sales-kit/01-master-pack-decomposition.md)** - Master Pack Decomposition - current model
+- **[02-sales-kit-asset-map.md](_bmad-output/planning-artifacts/sales-kit/02-sales-kit-asset-map.md)** - Sales-Kit Asset Map - mandatory regulated motion
+- **[03-sales-kit-usage-guide.md](_bmad-output/planning-artifacts/sales-kit/03-sales-kit-usage-guide.md)** - Sales-Kit Usage Guide
+- **[README.md](_bmad-output/planning-artifacts/sales-kit/README.md)** - Sales-Kit README
+- **[01-executive-deck-regulated.md](_bmad-output/planning-artifacts/sales-kit/buyer-facing/regulated/01-executive-deck-regulated.md)** - ---
+- **[02-why-us-regulated.md](_bmad-output/planning-artifacts/sales-kit/buyer-facing/regulated/02-why-us-regulated.md)** - ---
+- **[03-one-job-unified-line.md](_bmad-output/planning-artifacts/sales-kit/buyer-facing/regulated/03-one-job-unified-line.md)** - ---
+- **[04-edge-cases-exceptions.md](_bmad-output/planning-artifacts/sales-kit/buyer-facing/regulated/04-edge-cases-exceptions.md)** - ---
+- **[05-evidence-pack-audit-ready.md](_bmad-output/planning-artifacts/sales-kit/buyer-facing/regulated/05-evidence-pack-audit-ready.md)** - ---
+- **[06-technical-presale-deck.md](_bmad-output/planning-artifacts/sales-kit/buyer-facing/regulated/06-technical-presale-deck.md)** - ---
+- **[01-product-map.md](_bmad-output/planning-artifacts/sales-kit/buyer-facing/shared/01-product-map.md)** - ---
+- **[02-packages.md](_bmad-output/planning-artifacts/sales-kit/buyer-facing/shared/02-packages.md)** - ---
+- **[03-roi.md](_bmad-output/planning-artifacts/sales-kit/buyer-facing/shared/03-roi.md)** - ---
+- **[01-one-pager-voluntary.md](_bmad-output/planning-artifacts/sales-kit/buyer-facing/voluntary-later/01-one-pager-voluntary.md)** - ---
+- **[02-executive-deck-voluntary.md](_bmad-output/planning-artifacts/sales-kit/buyer-facing/voluntary-later/02-executive-deck-voluntary.md)** - ---
+- **[03-proof-and-brand-value.md](_bmad-output/planning-artifacts/sales-kit/buyer-facing/voluntary-later/03-proof-and-brand-value.md)** - ---
+- **[01-ready-solution-presentation.md](_bmad-output/planning-artifacts/sales-kit/dominanta-sales/01-ready-solution-presentation.md)** - ---
+- **[02-one-job-solution-infographic.md](_bmad-output/planning-artifacts/sales-kit/dominanta-sales/02-one-job-solution-infographic.md)** - ---
+- **[03-system-map-visual.md](_bmad-output/planning-artifacts/sales-kit/dominanta-sales/03-system-map-visual.md)** - ---
+- **[04-objection-cheat-sheet.md](_bmad-output/planning-artifacts/sales-kit/dominanta-sales/04-objection-cheat-sheet.md)** - ---
+- **[05-ready-solution-visual-production-spec.md](_bmad-output/planning-artifacts/sales-kit/dominanta-sales/05-ready-solution-visual-production-spec.md)** - ---
+- **[06-nemiroff-gorobina-source-intake.md](_bmad-output/planning-artifacts/sales-kit/dominanta-sales/06-nemiroff-gorobina-source-intake.md)** - ---
+- **[07-gorobina-account-note.md](_bmad-output/planning-artifacts/sales-kit/dominanta-sales/07-gorobina-account-note.md)** - ---
+- **[01-awesome-notebooklm-prompts-distillate.md](_bmad-output/planning-artifacts/sales-kit/external-references/01-awesome-notebooklm-prompts-distillate.md)** - ---
+- **[02-notebooklm-mcp-cli-distillate.md](_bmad-output/planning-artifacts/sales-kit/external-references/02-notebooklm-mcp-cli-distillate.md)** - ---
+- **[index.md](_bmad-output/planning-artifacts/sales-kit/external-references/index.md)** - External References Index
+- **[01-dominanta-ready-solution-deck-brief.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-briefs/01-dominanta-ready-solution-deck-brief.md)** - ---
+- **[02-dominanta-one-job-infographic-brief.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-briefs/02-dominanta-one-job-infographic-brief.md)** - ---
+- **[03-dominanta-system-map-brief.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-briefs/03-dominanta-system-map-brief.md)** - ---
+- **[04-dominanta-objection-card-brief.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-briefs/04-dominanta-objection-card-brief.md)** - ---
+- **[11-regulated-executive-deck-brief.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-briefs/11-regulated-executive-deck-brief.md)** - ---
+- **[12-regulated-why-us-brief.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-briefs/12-regulated-why-us-brief.md)** - ---
+- **[13-regulated-one-job-brief.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-briefs/13-regulated-one-job-brief.md)** - ---
+- **[14-regulated-edge-cases-brief.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-briefs/14-regulated-edge-cases-brief.md)** - ---
+- **[15-regulated-evidence-pack-brief.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-briefs/15-regulated-evidence-pack-brief.md)** - ---
+- **[16-regulated-technical-deck-brief.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-briefs/16-regulated-technical-deck-brief.md)** - ---
+- **[01-generate-deck-task.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-prompts/01-generate-deck-task.md)** - ---
+- **[02-generate-infographic-task.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-prompts/02-generate-infographic-task.md)** - ---
+- **[03-generate-one-pager-task.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-prompts/03-generate-one-pager-task.md)** - ---
+- **[04-generate-talk-track-card-task.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-prompts/04-generate-talk-track-card-task.md)** - ---
+- **[05-adapt-for-dominanta-salesman-task.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-prompts/05-adapt-for-dominanta-salesman-task.md)** - ---
+- **[11-generate-regulated-executive-deck.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-prompts/11-generate-regulated-executive-deck.md)** - Generate Executive Deck / Regulated
+- **[12-generate-regulated-why-us.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-prompts/12-generate-regulated-why-us.md)** - Generate Why Us / Regulated
+- **[13-generate-regulated-one-job.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-prompts/13-generate-regulated-one-job.md)** - Generate One Job / Regulated
+- **[14-generate-regulated-edge-cases.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-prompts/14-generate-regulated-edge-cases.md)** - Generate Edge Cases / Regulated
+- **[15-generate-regulated-evidence-pack.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-prompts/15-generate-regulated-evidence-pack.md)** - Generate Evidence Pack / Regulated
+- **[16-generate-regulated-technical-deck.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-prompts/16-generate-regulated-technical-deck.md)** - Generate Technical Deck / Regulated
+- **[01-output-checklist.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-qa/01-output-checklist.md)** - ---
+- **[02-failure-patterns.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-qa/02-failure-patterns.md)** - ---
+- **[03-acceptance-criteria-by-artifact.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-qa/03-acceptance-criteria-by-artifact.md)** - ---
+- **[11-regulated-executive-deck-qa.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-qa/11-regulated-executive-deck-qa.md)** - ---
+- **[12-regulated-why-us-qa.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-qa/12-regulated-why-us-qa.md)** - ---
+- **[13-regulated-one-job-qa.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-qa/13-regulated-one-job-qa.md)** - ---
+- **[14-regulated-edge-cases-qa.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-qa/14-regulated-edge-cases-qa.md)** - ---
+- **[15-regulated-evidence-pack-qa.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-qa/15-regulated-evidence-pack-qa.md)** - ---
+- **[16-regulated-technical-deck-qa.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-qa/16-regulated-technical-deck-qa.md)** - ---
+- **[00-first-launch-copy-paste-checklist.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-runs/00-first-launch-copy-paste-checklist.md)** - ---
+- **[01-dominanta-ready-solution-deck-run.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-runs/01-dominanta-ready-solution-deck-run.md)** - ---
+- **[02-dominanta-one-job-infographic-run.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-runs/02-dominanta-one-job-infographic-run.md)** - ---
+- **[03-review-and-fix-loop.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-runs/03-review-and-fix-loop.md)** - ---
+- **[04-preflight-before-first-run.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-runs/04-preflight-before-first-run.md)** - Preflight Before First Run
+- **[11-run-regulated-executive-deck.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-runs/11-run-regulated-executive-deck.md)** - ---
+- **[12-run-regulated-why-us.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-runs/12-run-regulated-why-us.md)** - ---
+- **[13-run-regulated-one-job.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-runs/13-run-regulated-one-job.md)** - ---
+- **[14-run-regulated-edge-cases.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-runs/14-run-regulated-edge-cases.md)** - ---
+- **[15-run-regulated-evidence-pack.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-runs/15-run-regulated-evidence-pack.md)** - ---
+- **[16-run-regulated-technical-deck.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-runs/16-run-regulated-technical-deck.md)** - ---
+- **[00-operating-brief.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-source/00-operating-brief.md)** - ---
+- **[01-role-and-ownership-map.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-source/01-role-and-ownership-map.md)** - ---
+- **[02-dominanta-sales-context.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-source/02-dominanta-sales-context.md)** - ---
+- **[03-message-and-claim-rules.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-source/03-message-and-claim-rules.md)** - ---
+- **[04-visual-output-rules.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-source/04-visual-output-rules.md)** - ---
+- **[05-regulated-master-pack-sync.md](_bmad-output/planning-artifacts/sales-kit/notebooklm-source/05-regulated-master-pack-sync.md)** - ---
+- **[00-continue-here.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/00-continue-here.md)** - ---
+- **[01-control-packet.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/01-control-packet.md)** - ---
+- **[02-approved-regulated-source-packet.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/02-approved-regulated-source-packet.md)** - ---
+- **[03-run-paths.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/03-run-paths.md)** - ---
+- **[04-acceptance-gate.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/04-acceptance-gate.md)** - ---
+- **[05-regulated-sales-kit-definition-of-done.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/05-regulated-sales-kit-definition-of-done.md)** - ---
+- **[06-reviewer-pass-log.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/06-reviewer-pass-log.md)** - ---
+- **[07-visual-release-status.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/07-visual-release-status.md)** - ---
+- **[08-notebooklm-registry.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/08-notebooklm-registry.md)** - ---
+- **[09-asset-state-board.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/09-asset-state-board.md)** - ---
+- **[10-run-ledger.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/10-run-ledger.md)** - ---
+- **[11-claude-handoff-main.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/11-claude-handoff-main.md)** - ---
+- **[12-claude-handoff-appendix.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/12-claude-handoff-appendix.md)** - ---
+- **[13-visual-review-protocol.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/13-visual-review-protocol.md)** - ---
+- **[14-package-convergence-plan.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/14-package-convergence-plan.md)** - ---
+- **[index.md](_bmad-output/planning-artifacts/sales-kit/regulated-final-bundle/index.md)** - Directory Index
+- **[2026-03-22-edge-cases-notebooklm-clean.md](_bmad-output/planning-artifacts/sales-kit/run-results/2026-03-22-edge-cases-notebooklm-clean.md)** - title: Edge Cases NotebookLM Run - Clean Output
+- **[2026-03-22-edge-cases-notebooklm-revise.md](_bmad-output/planning-artifacts/sales-kit/run-results/2026-03-22-edge-cases-notebooklm-revise.md)** - title: Edge Cases NotebookLM Run - Revise Candidate
+- **[2026-03-22-evidence-pack-notebooklm-clean.md](_bmad-output/planning-artifacts/sales-kit/run-results/2026-03-22-evidence-pack-notebooklm-clean.md)** - title: Evidence Pack NotebookLM Run - Clean Output
+- **[2026-03-22-evidence-pack-notebooklm-revise.md](_bmad-output/planning-artifacts/sales-kit/run-results/2026-03-22-evidence-pack-notebooklm-revise.md)** - title: Evidence Pack NotebookLM Run - Revise Candidate
+- **[2026-03-22-executive-deck-notebooklm-baseline.md](_bmad-output/planning-artifacts/sales-kit/run-results/2026-03-22-executive-deck-notebooklm-baseline.md)** - ---
+- **[2026-03-22-executive-deck-notebooklm-rerun-2.md](_bmad-output/planning-artifacts/sales-kit/run-results/2026-03-22-executive-deck-notebooklm-rerun-2.md)** - ---
+- **[2026-03-22-executive-deck-notebooklm-rerun-v2-clean.md](_bmad-output/planning-artifacts/sales-kit/run-results/2026-03-22-executive-deck-notebooklm-rerun-v2-clean.md)** - title: Executive Deck NotebookLM Rerun - Clean 10 Slide Output
+- **[2026-03-22-executive-deck-notebooklm-rerun-valid.md](_bmad-output/planning-artifacts/sales-kit/run-results/2026-03-22-executive-deck-notebooklm-rerun-valid.md)** - title: Executive Deck NotebookLM Rerun - Valid Notebook State
+- **[2026-03-22-one-job-notebooklm-clean.md](_bmad-output/planning-artifacts/sales-kit/run-results/2026-03-22-one-job-notebooklm-clean.md)** - title: One Job NotebookLM Run - Clean Output
+- **[2026-03-22-one-job-notebooklm-revise.md](_bmad-output/planning-artifacts/sales-kit/run-results/2026-03-22-one-job-notebooklm-revise.md)** - title: One Job NotebookLM Run - Revise Candidate
+- **[2026-03-22-technical-deck-notebooklm-clean.md](_bmad-output/planning-artifacts/sales-kit/run-results/2026-03-22-technical-deck-notebooklm-clean.md)** - title: Technical Deck NotebookLM Run - Clean Output
+- **[2026-03-22-technical-deck-notebooklm-revise.md](_bmad-output/planning-artifacts/sales-kit/run-results/2026-03-22-technical-deck-notebooklm-revise.md)** - title: Technical Deck NotebookLM Run - Revise Candidate
+- **[2026-03-22-why-us-notebooklm-clean.md](_bmad-output/planning-artifacts/sales-kit/run-results/2026-03-22-why-us-notebooklm-clean.md)** - title: Why Us NotebookLM Run - Clean Output
+- **[INFOGRAPHIC-REDESIGN-PLAN.md](_bmad-output/planning-artifacts/sales-kit/run-results/visuals/INFOGRAPHIC-REDESIGN-PLAN.md)** - Інфографіка "Одна задача" — План переробки
+- **[01-platform-core.md](_bmad-output/planning-artifacts/sales-kit/source-of-truth/01-platform-core.md)** - ---
+- **[04-regulated-buyer-model.md](_bmad-output/planning-artifacts/sales-kit/source-of-truth/04-regulated-buyer-model.md)** - ---
+- **[05-message-house.md](_bmad-output/planning-artifacts/sales-kit/source-of-truth/05-message-house.md)** - ---
+- **[06-claims-register.md](_bmad-output/planning-artifacts/sales-kit/source-of-truth/06-claims-register.md)** - ---
+- **[07-regulated-sop-distillate.md](_bmad-output/planning-artifacts/sales-kit/source-of-truth/07-regulated-sop-distillate.md)** - ---
+- **[sprint-change-proposal.md](_bmad-output/planning-artifacts/sprint-change-proposal.md)** - Sprint Change Proposal - 2026-03-11
+- **[ux-design-specification.md](_bmad-output/planning-artifacts/ux-design-specification.md)** - ---
+- **[validation-report.md](_bmad-output/planning-artifacts/validation-report.md)** - ---
+- **[adversarial-review-p1-remediation.md](_bmad-output/plans/adversarial-review-p1-remediation.md)** - Adversarial Review — tech-spec-p1-remediation-nav-trust-pills.md
+- **[p1-remediation-plan.md](_bmad-output/plans/p1-remediation-plan.md)** - P1 Remediation Plan — genu.im
+- **[problem-solution-2026-02-23.md](_bmad-output/problem-solution-2026-02-23.md)** - Problem Solving Session: Уникальный B2B-лендинг genu.im, который конвертит и запоминается
+- **[project-context.md](_bmad-output/project-context.md)** - ---
+- **[anti-drift-audit.md](_bmad-output/reviews/anti-drift-audit.md)** - Anti-Drift Audit — genu.im
+- **[anti-drift-handoff.md](_bmad-output/reviews/anti-drift-handoff.md)** - Anti-Drift Handoff — genu.im
+- **[ADR-001-output-css-tracking.md](_bmad-output/solutioning/adrs/ADR-001-output-css-tracking.md)** - ---
+- **[ADR-002-target-customer-criteria.md](_bmad-output/solutioning/adrs/ADR-002-target-customer-criteria.md)** - ---
+- **[ADR-003-architecture-decisions.md](_bmad-output/solutioning/adrs/ADR-003-architecture-decisions.md)** - ---
+- **[index.md](_bmad-output/solutioning/adrs/index.md)** - Directory Index: _bmad-output/solutioning/adrs
+- **[index.md](_bmad-output/solutioning/index.md)** - Directory Index: _bmad-output/solutioning
+- **[spec-token-component-vars-refactor.md](_bmad-output/spec-token-component-vars-refactor.md)** - Spec: Token & Component Vars Refactor
+- **[anti-drift-correction-spec.md](_bmad-output/specs/anti-drift-correction-spec.md)** - Anti-Drift Correction Spec — genu.im
+- **[ci-pipeline-progress.md](_bmad-output/test-artifacts/ci-pipeline-progress.md)** - ---
+- **[index.md](_bmad-output/test-artifacts/index.md)** - Directory Index: _bmad-output/test-artifacts
 
 ---
+### _archive/
+Archived legacy materials and migration inputs.
+- **[/_archive/docs](./_archive/docs/)**
+- **[/_archive/implementation-artifacts](./_archive/implementation-artifacts/)**
+- **[/_archive/knowledge](./_archive/knowledge/)**
+- **[/_archive/perevir-product](./_archive/perevir-product/)**
+- **[/_archive/planning-artifacts](./_archive/planning-artifacts/)**
 
-## Root Files
-
-- **[css-var-refactor-analysis.md](./css-var-refactor-analysis.md)** - CSS variable violations inventory (shorthand/state/focus gaps)
-- **[css-var-refactor-implementation-notes.md](./css-var-refactor-implementation-notes.md)** - Implementation notes for CSS var refactor
-- **[css-var-refactor-qa.md](./css-var-refactor-qa.md)** - QA results: build, lint, acceptance criteria
-- **[css-var-refactor-review.md](./css-var-refactor-review.md)** - Code review of CSS var refactor
-- **[design-thinking-2026-02-23.md](./design-thinking-2026-02-23.md)** - Design thinking session for genu.im landing
-- **[problem-solution-2026-02-23.md](./problem-solution-2026-02-23.md)** - Problem solving: unique B2B landing strategy
-- **[project-context.md](./project-context.md)** - LLM-optimized project context (195 rules)
-- **[spec-token-component-vars-refactor.md](./spec-token-component-vars-refactor.md)** - Spec for CSS token/component vars refactor
-
----
-
-## gm-distillate/
-
-Lossless distillate of ~80 project documents (~160K tokens → 9K tokens, 17.5:1 ratio).
-
-- **[_index.md](./gm-distillate/_index.md)** - Root: orientation, cross-cutting facts, section manifest
-- **[01-product-strategy-requirements.md](./gm-distillate/01-product-strategy-requirements.md)** - Product model, personas, FRs 1–31, NFRs 1–16, epic structure
-- **[02-architecture-tech-implementation.md](./gm-distillate/02-architecture-tech-implementation.md)** - Stack, ADRs, design system, 10 components, implementation patterns
-- **[03-audit-remediation-current-state.md](./gm-distillate/03-audit-remediation-current-state.md)** - Findings register v3, open/fixed defects, Epic 5, anti-drift
-- **[04-cicd-docs-governance-contracts.md](./gm-distillate/04-cicd-docs-governance-contracts.md)** - CI/CD pipeline, project contract, docs authority map
-
----
-
-## implementation-artifacts/
-
-- **[5-1-remove-perevir-produkt-legacy-route.md](./implementation-artifacts/5-1-remove-perevir-produkt-legacy-route.md)** - Story 5-1: delete legacy perevir-produkt route
-- **[5-2-verify-homepage-cta-routes-to-request.md](./implementation-artifacts/5-2-verify-homepage-cta-routes-to-request.md)** - Story 5-2: verify CTA routes to /request/
-- **[5-3-reword-homepage-copy-trust-boundary.md](./implementation-artifacts/5-3-reword-homepage-copy-trust-boundary.md)** - Story 5-3: remove live-lookup language from homepage
-- **[5-4-narrow-faq-verification-claims.md](./implementation-artifacts/5-4-narrow-faq-verification-claims.md)** - Story 5-4: narrow FAQ real-time verification claims
-- **[5-5-soften-contact-response-time-language.md](./implementation-artifacts/5-5-soften-contact-response-time-language.md)** - Story 5-5: remove SLA-implying contact language
-- **[genu-im-baseline/README.md](./implementation-artifacts/genu-im-baseline/README.md)** - genu.im site baseline capture
-
----
-
-## knowledge/
-
-- **[migration-converter-detailed-findings.md](./knowledge/migration-converter-detailed-findings.md)** - Detailed code review: migration converter issues
-- **[migration-converter-final-review.md](./knowledge/migration-converter-final-review.md)** - Final review summary of migration converter
-- **[migration-converter-findings.md](./knowledge/migration-converter-findings.md)** - Critical/medium/low migration converter findings
-- **[migration-converter-review.md](./knowledge/migration-converter-review.md)** - Senior developer review of migration converter
-- **[migration-converter-summary.md](./knowledge/migration-converter-summary.md)** - Code review findings summary
-- **[migration-report.md](./knowledge/migration-report.md)** - Migration execution report (9 sessions, 1,814 lines)
-
-### knowledge/fragments/
-
-- **[ci-value-static-sites.md](./knowledge/fragments/ci-value-static-sites.md)** - CI/CD value for static sites
-- **[e2e-testing-visual-regression.md](./knowledge/fragments/e2e-testing-visual-regression.md)** - E2E testing: visual regression gap + fix
-- **[genuim-business-model.md](./knowledge/fragments/genuim-business-model.md)** - Business model: real pricing and Ukravit revenue data
-- **[husky-v9-migration.md](./knowledge/fragments/husky-v9-migration.md)** - Husky v8→v9 breaking changes and migration steps
-- Auto-generated session fragments (9 files, 202602xx prefix) — raw session notes
-
----
-
-## planning-artifacts/
-
-- **[prd.md](./planning-artifacts/prd.md)** - Product Requirements Document (29 FRs, 16 NFRs)
-- **[architecture.md](./planning-artifacts/architecture.md)** - Technical architecture decisions and patterns
-- **[ux-design-specification.md](./planning-artifacts/ux-design-specification.md)** - UX design specification (1,156 lines, 10 components)
-- **[epics.md](./planning-artifacts/epics.md)** - Epic definitions for release 2.1 (Epics 1–4)
-- **[implementation-readiness-report.md](./planning-artifacts/implementation-readiness-report.md)** - Implementation readiness assessment (Warning status)
-- **[doc-inconsistency-report.md](./planning-artifacts/doc-inconsistency-report.md)** - Report of inconsistencies found across planning docs
-- **[consistency-alignment-plan.md](./planning-artifacts/consistency-alignment-plan.md)** - Plan to resolve cross-doc inconsistencies
-- **[consistency-todo.md](./planning-artifacts/consistency-todo.md)** - TODO list for consistency alignment
-- **[sprint-change-proposal.md](./planning-artifacts/sprint-change-proposal.md)** - Sprint change proposal
-- **[validation-report.md](./planning-artifacts/validation-report.md)** - PRD validation (final pass)
-
----
-
-## plans/
-
-- **[p1-remediation-plan.md](./plans/p1-remediation-plan.md)** - P1 remediation execution plan (COMPLETED 2026-03-17/18)
-- **[adversarial-review-p1-remediation.md](./plans/adversarial-review-p1-remediation.md)** - Adversarial review of P1 remediation plan
-
----
-
-## reviews/
-
-- **[anti-drift-audit.md](./reviews/anti-drift-audit.md)** - Anti-drift audit: drift matrix, conflict analysis
-- **[anti-drift-handoff.md](./reviews/anti-drift-handoff.md)** - Ordered patch plan for anti-drift corrections
-
----
-
-## solutioning/adrs/
-
-- **[ADR-001-output-css-tracking.md](./solutioning/adrs/ADR-001-output-css-tracking.md)** - ADR: output.css committed to git (stub)
-- **[ADR-002-target-customer-criteria.md](./solutioning/adrs/ADR-002-target-customer-criteria.md)** - ADR: target customer = B2B regulatory (stub)
-- **[ADR-003-architecture-decisions.md](./solutioning/adrs/ADR-003-architecture-decisions.md)** - ADR: static site + Azure migration path (stub)
-
----
-
-## analysis/
-
-- **[missing-pieces.md](./analysis/missing-pieces.md)** - Consolidated open items: 6 defects, drift decisions, strategic holds, migration bug
-- **[normalized-context.md](./analysis/normalized-context.md)** - Compact starter context for any new prompt or agent session (≤600 tokens)
-
----
-
-## specs/
-
-- **[anti-drift-correction-spec.md](./specs/anti-drift-correction-spec.md)** - Spec for anti-drift correction patches
-
----
-
-## test-artifacts/
-
-- **[ci-pipeline-progress.md](./test-artifacts/ci-pipeline-progress.md)** - CI pipeline setup and configuration progress
-
----
-
-*Last updated: 2026-03-21 — naming cleanup: 9 renames, 4 deletions, analysis/ added*
+Last updated: 2026-04-02
