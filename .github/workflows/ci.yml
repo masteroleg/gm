@@ -87,7 +87,7 @@ jobs:
         with:
           path: ./site
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
   required-checks:
     if: always()
     needs: [quick-checks, smoke-e2e]
