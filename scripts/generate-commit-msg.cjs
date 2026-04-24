@@ -31,7 +31,7 @@ const filterMessageFiles = (files) =>
 	files.filter((file) => !EXCLUDED_MESSAGE_FILES.has(file));
 
 const getStagedFiles = () => {
-	const output = runGit(["diff", "--cached", "--name-only"]);
+	const output = runGit(["diff", "--cached", "--no-renames", "--name-only"]);
 	const files = output ? output.split(/\r?\n/).filter(Boolean) : [];
 	return filterMessageFiles(files);
 };
@@ -47,12 +47,13 @@ const _getWorkingTreeFiles = () => {
 	return filterMessageFiles(files);
 };
 
-const getStat = () => runGit(["diff", "--cached", "--stat"]);
+const getStat = () => runGit(["diff", "--cached", "--no-renames", "--stat"]);
 const getDiff = () => {
 	// Limit diff output to prevent buffer overflow with large repositories
 	return runGit([
 		"diff",
 		"--cached",
+		"--no-renames",
 		"--stat",
 		"--",
 		"*.js",
@@ -393,7 +394,13 @@ const detectType = (files) => {
 	if (!files.length) return "chore";
 	if (
 		files.every(
-			(file) => file.startsWith("_bmad/") || file.startsWith("_bmad-output/"),
+			(file) =>
+				file.startsWith("_bmad/") ||
+				file.startsWith("_bmad-output/") ||
+				file.startsWith(".agent/") ||
+				file.startsWith(".agents/") ||
+				file.startsWith(".claude/") ||
+				file.startsWith(".opencode/"),
 		)
 	)
 		return "docs";
@@ -426,7 +433,13 @@ const detectScope = (files) => {
 	if (!files.length) return "";
 	if (
 		files.some(
-			(file) => file.startsWith("_bmad/") || file.startsWith("_bmad-output/"),
+			(file) =>
+				file.startsWith("_bmad/") ||
+				file.startsWith("_bmad-output/") ||
+				file.startsWith(".agent/") ||
+				file.startsWith(".agents/") ||
+				file.startsWith(".claude/") ||
+				file.startsWith(".opencode/"),
 		)
 	)
 		return "bmad";
@@ -451,7 +464,14 @@ const categorizeFiles = (files) => {
 	};
 
 	for (const file of files) {
-		if (file.startsWith("_bmad")) categories.bmad.push(file);
+		if (
+			file.startsWith("_bmad") ||
+			file.startsWith(".agent/") ||
+			file.startsWith(".agents/") ||
+			file.startsWith(".claude/") ||
+			file.startsWith(".opencode/")
+		)
+			categories.bmad.push(file);
 		else if (file.startsWith("tests/")) categories.tests.push(file);
 		else if (file.startsWith(".github/workflows/")) categories.ci.push(file);
 		else if (file.startsWith("docs/") || /^README/i.test(file))
@@ -537,6 +557,7 @@ const detectRefactorTheme = (files) => {
 };
 
 const GROUPED_BULLETS_THRESHOLD = 10;
+const MAX_GROUPED_FILES_PER_THEME = 6;
 
 const getThemeLabel = (theme) => {
 	if (theme === "bmad") return "BMAD docs";
@@ -556,6 +577,16 @@ const getThemeRussianLabel = (theme) => {
 	if (theme === "ci") return "CI/CD";
 	if (theme === "config") return "инструменты и конфигурация (Tooling/config)";
 	return "прочие файлы (Other files)";
+};
+
+const summarizeThemeFiles = (files, formatter) => {
+	const selected = files.slice(0, MAX_GROUPED_FILES_PER_THEME).map(formatter);
+	if (files.length > MAX_GROUPED_FILES_PER_THEME) {
+		selected.push(
+			`${files.length - MAX_GROUPED_FILES_PER_THEME} more file${files.length - MAX_GROUPED_FILES_PER_THEME === 1 ? "" : "s"}`,
+		);
+	}
+	return selected.join("; ");
 };
 
 const inferSubject = (files, type) => {
@@ -675,17 +706,17 @@ const buildGroupedBullets = (files) => {
 		const themeFiles = categories[theme];
 		if (!themeFiles.length) continue;
 
-		const englishParts = themeFiles.map((file) => {
+		const englishParts = summarizeThemeFiles(themeFiles, (file) => {
 			const note = describeFileChange(file);
 			return `\`${file}\` - ${note.english}`;
 		});
-		const russianParts = themeFiles.map((file) => {
+		const russianParts = summarizeThemeFiles(themeFiles, (file) => {
 			const note = describeFileChange(file);
 			return `\`${file}\` - ${note.russian}`;
 		});
 
 		grouped.push(
-			`- ${getThemeLabel(theme)}: ${englishParts.join("; ")}\n  RU: ${getThemeRussianLabel(theme)}: ${russianParts.join("; ")}`,
+			`- ${getThemeLabel(theme)}: ${englishParts}\n  RU: ${getThemeRussianLabel(theme)}: ${russianParts}`,
 		);
 	}
 

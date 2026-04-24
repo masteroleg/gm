@@ -8,12 +8,11 @@ COMMIT_SOURCE="$2"
 
 # If the message already has meaningful content (ignoring comments), keep it.
 if [ -s "$MSG_FILE" ]; then
-    NON_COMMENT=$(grep -v "^#" "$MSG_FILE" | grep -v "^$")
+    NON_COMMENT=$(grep -v "^#" "$MSG_FILE" | grep -v "^$" || true)
     [ -n "$NON_COMMENT" ] && exit 0
 fi
 
-DIFF=$(git diff --cached)
-[ -z "$DIFF" ] && exit 0
+git diff --cached --quiet && exit 0
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 node "$REPO_ROOT/scripts/generate-commit-msg-opencode.cjs" "$MSG_FILE"
