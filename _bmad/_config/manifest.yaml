@@ -1,26 +1,26 @@
 installation:
-  version: 6.4.0
+  version: 6.5.0
   installDate: 2026-02-17T20:20:11.285Z
-  lastUpdated: 2026-04-25T14:52:28.427Z
+  lastUpdated: 2026-04-26T15:39:42.572Z
 modules:
   - name: core
-    version: 6.4.0
+    version: 6.5.0
     installDate: 2026-02-17T20:20:09.317Z
-    lastUpdated: 2026-04-25T14:52:28.254Z
+    lastUpdated: 2026-04-26T15:39:42.206Z
     source: built-in
     npmPackage: null
     repoUrl: null
   - name: bmm
-    version: 6.4.0
+    version: 6.5.0
     installDate: 2026-02-17T20:19:56.705Z
-    lastUpdated: 2026-04-25T14:52:28.255Z
+    lastUpdated: 2026-04-26T15:39:42.207Z
     source: built-in
     npmPackage: null
     repoUrl: null
   - name: bmb
     version: v1.7.0
     installDate: 2026-03-21T22:41:44.920Z
-    lastUpdated: 2026-04-25T14:52:28.288Z
+    lastUpdated: 2026-04-26T15:39:42.281Z
     source: external
     npmPackage: bmad-builder
     repoUrl: https://github.com/bmad-code-org/bmad-builder
@@ -29,7 +29,7 @@ modules:
   - name: cis
     version: v0.2.0
     installDate: 2026-02-17T20:20:04.770Z
-    lastUpdated: 2026-04-25T14:52:28.323Z
+    lastUpdated: 2026-04-26T15:39:42.354Z
     source: external
     npmPackage: bmad-creative-intelligence-suite
     repoUrl: https://github.com/bmad-code-org/bmad-module-creative-intelligence-suite
@@ -38,20 +38,20 @@ modules:
   - name: tea
     version: v1.15.1
     installDate: 2026-02-17T20:20:02.224Z
-    lastUpdated: 2026-04-25T14:52:28.359Z
+    lastUpdated: 2026-04-26T15:39:42.429Z
     source: external
     npmPackage: bmad-method-test-architecture-enterprise
     repoUrl: https://github.com/bmad-code-org/bmad-method-test-architecture-enterprise
     channel: stable
     sha: 7c94bdc6e3d2c8c3cad09eb0a32a42fade0e9079
   - name: wds
-    version: v0.1.0
+    version: main
     installDate: 2026-03-17T18:59:26.855Z
-    lastUpdated: 2026-04-25T14:52:28.427Z
+    lastUpdated: 2026-04-26T15:39:42.572Z
     source: community
     npmPackage: bmad-method-wds-expansion
     repoUrl: https://github.com/bmad-code-org/bmad-method-wds-expansion
-    channel: stable
+    channel: next
     sha: 0c9ebf3769e1a20797893376318b595bfa64626b
     registryApprovedTag: v0.1.0
 ides:
