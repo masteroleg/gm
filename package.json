@@ -24,7 +24,9 @@
 		"test:e2e": "playwright test --config=playwright.config.ts",
 		"test:e2e:ci": "playwright test --config=playwright.config.ts",
 		"test:e2e:ui": "playwright test --config=playwright.config.ts --ui",
-		"test:e2e:headed": "playwright test --config=playwright.config.ts --headed"
+		"test:e2e:headed": "playwright test --config=playwright.config.ts --headed",
+		"impeccable:context": "node .agents/skills/impeccable/scripts/load-context.mjs",
+		"impeccable:live": "node .agents/skills/impeccable/scripts/live.mjs"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.7",

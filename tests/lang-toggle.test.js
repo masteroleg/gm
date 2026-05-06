@@ -40,7 +40,7 @@ describe("language toggle controller", () => {
 			document
 				.querySelector("[data-i18n-aria-label]")
 				.getAttribute("aria-label"),
-		).toBe("NDA case. Scale in plain sight.");
+		).toBe("Industrial deployment. Proven at scale.");
 		expect(document.getElementById("langLabel").textContent).toBe("EN");
 		expect(localStorage.getItem("lang")).toBeNull();
 	});
