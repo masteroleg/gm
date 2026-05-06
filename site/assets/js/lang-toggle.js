@@ -22,9 +22,9 @@ const translations = {
 		"hero.ctaSecondary": "See it in action",
 		"hero.proofValue": "25M+",
 		"hero.proofLabel": "industrial deployment in Ukraine",
-		"hero.proofNoteAria": "NDA case. Scale in plain sight.",
-		"hero.proofNoteLine1": "NDA case.",
-		"hero.proofNoteLine2": "Scale in plain sight.",
+		"hero.proofNoteAria": "Industrial deployment. Proven at scale.",
+		"hero.proofNoteLine1": "Industrial deployment.",
+		"hero.proofNoteLine2": "Proven at scale.",
 		"hero.signalVerified": "Verified record",
 		"hero.signalRealtime": "Instant proof view",
 		"hero.signalTransparent": "No app required",
@@ -124,7 +124,7 @@ const translations = {
 		"proof.eyebrow": "Real proof",
 		"proof.title": "Already running at production volume.",
 		"proof.intro": "Live proof, not concept slides.",
-		"proof.feature.eyebrow": "NDA case",
+		"proof.feature.eyebrow": "Live deployment",
 		"proof.feature.value": "25M+",
 		"proof.feature.title": "Used on millions of marked products in Ukraine",
 		"proof.feature.body":
@@ -203,9 +203,9 @@ const translations = {
 		"proofCases.title": "Real proof at production volume.",
 		"proofCases.lead":
 			"genu.im is already running in the field. Here\u2019s what that looks like.",
-		"proofCases.section1.heading": "25M+ units \u2014 NDA case",
+		"proofCases.section1.heading": "25M+ units \u2014 Live deployment",
 		"proofCases.section1.body":
-			"A leading crop-protection manufacturer in Ukraine serialized over 25 million product units through genu.im infrastructure. Full brand identity protection at line speed. The client operates under NDA; the scale speaks for itself.",
+			"A leading crop-protection manufacturer in Ukraine serialized over 25 million product units through genu.im infrastructure. Full brand identity protection at line speed. The deployment speaks for itself.",
 		"proofCases.section2.heading": "How a proof record works",
 		"proofCases.section2.body":
 			"Each product unit gets a unique code. That code is linked to a brand-published record in genu.im. When someone scans the code \u2014 buyer, partner, or inspector \u2014 they see the brand\u2019s proof, not a generic result.",
@@ -445,8 +445,8 @@ const translations = {
 		"hero.ctaSecondary": "Подивитися в дії",
 		"hero.proofValue": "25M+",
 		"hero.proofLabel": "промислове впровадження в Україні",
-		"hero.proofNoteAria": "Кейс під NDA. Масштаб — наяву.",
-		"hero.proofNoteLine1": "Кейс під NDA",
+		"hero.proofNoteAria": "Промислове розгортання. Доведено в масштабі.",
+		"hero.proofNoteLine1": "Промислове розгортання",
 		"hero.proofNoteLine2": "Масштаб — наяву.",
 		"hero.signalVerified": "Підтверджений запис",
 		"hero.signalRealtime": "Миттєвий перегляд доказу",
@@ -550,7 +550,7 @@ const translations = {
 		"proof.eyebrow": "Реальний доказ",
 		"proof.title": "Уже працює на промислових обсягах.",
 		"proof.intro": "Реальний доказ, а не концепт.",
-		"proof.feature.eyebrow": "NDA-кейс",
+		"proof.feature.eyebrow": "Працює",
 		"proof.feature.value": "25M+",
 		"proof.feature.title":
 			"Працює на мільйонах промаркованих товарів в Україні",
@@ -630,9 +630,9 @@ const translations = {
 		"proofCases.eyebrow": "Докази та кейси",
 		"proofCases.title": "Реальний доказ на виробничому обсязі.",
 		"proofCases.lead": "genu.im вже працює в полі. Ось як це виглядає.",
-		"proofCases.section1.heading": "25M+ одиниць \u2014 кейс під NDA",
+		"proofCases.section1.heading": "25M+ одиниць \u2014 Промислове розгортання",
 		"proofCases.section1.body":
-			"Провідний виробник засобів захисту рослин в Україні серіалізував понад 25 мільйонів одиниць продукту через інфраструктуру genu.im. Повний захист ідентичності бренду на швидкості лінії. Клієнт працює під NDA; масштаб говорить сам за себе.",
+			"Провідний виробник засобів захисту рослин в Україні серіалізував понад 25 мільйонів одиниць продукту через інфраструктуру genu.im. Повний захист ідентичності бренду на швидкості лінії. Клієнт працює Розгортання масштаб говорить сам за себе.",
 		"proofCases.section2.heading": "Як працює запис-доказ",
 		"proofCases.section2.body":
 			"Кожна одиниця товару отримує унікальний код. Цей код прив\u2019язаний до запису, опублікованого брендом у genu.im. Коли хтось сканує код \u2014 покупець, партнер або інспектор \u2014 він бачить доказ бренду, а не загальний результат.",
