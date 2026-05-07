@@ -1,0 +1,26 @@
+{
+  "id": "7bb8ce35",
+  "phase": "completed",
+  "pageUrl": "/v/genuim/",
+  "sourceFile": "site\\v\\genuim\\index.html",
+  "expectedVariants": 3,
+  "arrivedVariants": 8,
+  "visibleVariant": 1,
+  "paramValues": {},
+  "pendingEventSeq": null,
+  "pendingEvent": null,
+  "deliveryLease": null,
+  "checkpointRevision": 26,
+  "activeOwner": "9b51a7b7",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [
+    {
+      "error": "carbonize_cleanup_required",
+      "file": "site\\v\\genuim\\index.html",
+      "message": "Accepted variant still has carbonize markers that must be folded into source CSS."
+    }
+  ],
+  "updatedAt": "2026-05-07T14:45:16.031Z"
+}

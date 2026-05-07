@@ -1,0 +1,22 @@
+{
+  "id": "3dc2d1c8",
+  "phase": "discarded",
+  "pageUrl": "/v/genuim/",
+  "sourceFile": "site/v/genuim/index.html",
+  "expectedVariants": 3,
+  "arrivedVariants": 3,
+  "visibleVariant": 3,
+  "paramValues": {
+    "scale": 1.05
+  },
+  "pendingEventSeq": null,
+  "pendingEvent": null,
+  "deliveryLease": null,
+  "checkpointRevision": 12,
+  "activeOwner": "3f2e1447",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [],
+  "updatedAt": "2026-05-07T14:35:37.971Z"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "5460b4da",
+  "phase": "agent_error",
+  "pageUrl": "/",
+  "sourceFile": null,
+  "expectedVariants": 3,
+  "arrivedVariants": 0,
+  "visibleVariant": 0,
+  "paramValues": {},
+  "pendingEventSeq": null,
+  "pendingEvent": null,
+  "deliveryLease": null,
+  "checkpointRevision": 1,
+  "activeOwner": "c34a2075",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [
+    {
+      "error": "agent_error",
+      "message": "Stale session - please click Go again"
+    }
+  ],
+  "updatedAt": "2026-05-07T13:41:22.757Z"
+}

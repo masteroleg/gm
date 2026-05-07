@@ -1,0 +1,20 @@
+{
+  "id": "08df1423",
+  "phase": "variants_ready",
+  "pageUrl": "/index.html",
+  "sourceFile": "site/index.html",
+  "expectedVariants": 3,
+  "arrivedVariants": 0,
+  "visibleVariant": 0,
+  "paramValues": {},
+  "pendingEventSeq": null,
+  "pendingEvent": null,
+  "deliveryLease": null,
+  "checkpointRevision": 1,
+  "activeOwner": "9d2f2a53",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [],
+  "updatedAt": "2026-05-07T13:44:17.935Z"
+}

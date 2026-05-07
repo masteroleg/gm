@@ -1,0 +1,22 @@
+{
+  "id": "a050e7d3",
+  "phase": "variants_ready",
+  "pageUrl": "/v/genuim/",
+  "sourceFile": "site/v/genuim/index.html",
+  "expectedVariants": 3,
+  "arrivedVariants": 0,
+  "visibleVariant": 0,
+  "paramValues": {
+    "scale": 1.05
+  },
+  "pendingEventSeq": null,
+  "pendingEvent": null,
+  "deliveryLease": null,
+  "checkpointRevision": 13,
+  "activeOwner": "3f2e1447",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [],
+  "updatedAt": "2026-05-07T14:36:43.673Z"
+}

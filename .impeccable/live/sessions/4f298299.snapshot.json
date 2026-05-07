@@ -1,0 +1,20 @@
+{
+  "id": "4f298299",
+  "phase": "variants_ready",
+  "pageUrl": "/",
+  "sourceFile": "site/index.html",
+  "expectedVariants": 3,
+  "arrivedVariants": 0,
+  "visibleVariant": 0,
+  "paramValues": {},
+  "pendingEventSeq": null,
+  "pendingEvent": null,
+  "deliveryLease": null,
+  "checkpointRevision": 1,
+  "activeOwner": "6a5e5a94",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [],
+  "updatedAt": "2026-05-07T14:29:06.563Z"
+}

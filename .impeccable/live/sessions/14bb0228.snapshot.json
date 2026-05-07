@@ -1,0 +1,23 @@
+{
+  "id": "14bb0228",
+  "phase": "discard_requested",
+  "pageUrl": "/",
+  "sourceFile": "site/index.html",
+  "expectedVariants": 3,
+  "arrivedVariants": 17,
+  "visibleVariant": 14,
+  "paramValues": {},
+  "pendingEventSeq": 20,
+  "pendingEvent": {
+    "type": "discard",
+    "id": "14bb0228"
+  },
+  "deliveryLease": null,
+  "checkpointRevision": 32,
+  "activeOwner": "3c209abe",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [],
+  "updatedAt": "2026-05-07T14:46:45.137Z"
+}

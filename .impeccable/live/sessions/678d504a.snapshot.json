@@ -1,0 +1,25 @@
+{
+  "id": "678d504a",
+  "phase": "agent_error",
+  "pageUrl": "/index.html",
+  "sourceFile": null,
+  "expectedVariants": 3,
+  "arrivedVariants": 0,
+  "visibleVariant": 0,
+  "paramValues": {},
+  "pendingEventSeq": null,
+  "pendingEvent": null,
+  "deliveryLease": null,
+  "checkpointRevision": 1,
+  "activeOwner": "e5a8ecb4",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [
+    {
+      "error": "agent_error",
+      "message": "Stale session - click Go again"
+    }
+  ],
+  "updatedAt": "2026-05-07T13:41:40.555Z"
+}
