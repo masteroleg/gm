@@ -29,18 +29,18 @@
 		"impeccable:live": "node .agents/skills/impeccable/scripts/live.mjs"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.7",
-		"@playwright/test": "^1.58.2",
-		"@tailwindcss/cli": "^4.2.1",
+		"@biomejs/biome": "^2.4.16",
+		"@playwright/test": "^1.60.0",
+		"@tailwindcss/cli": "^4.3.0",
 		"chrome-launcher": "^1.2.1",
 		"http-server": "^14.1.1",
 		"husky": "^9.1.7",
-		"jest": "^30.3.0",
-		"jest-environment-jsdom": "^30.3.0",
-		"lighthouse": "^13.0.3",
-		"lint-staged": "^16.4.0",
-		"tailwindcss": "^4.2.1",
-		"typescript": "^5.9.3"
+		"jest": "^30.4.2",
+		"jest-environment-jsdom": "^30.4.1",
+		"lighthouse": "^13.3.0",
+		"lint-staged": "^17.0.7",
+		"tailwindcss": "^4.3.0",
+		"typescript": "^6.0.3"
 	},
 	"description": "This is the pre-launch landing page for [genu.im](https://genu.im), a verification and transparency tool that builds consumer trust.",
 	"main": "index.js",
