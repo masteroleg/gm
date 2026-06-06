@@ -29,7 +29,7 @@
 		"impeccable:live": "node .agents/skills/impeccable/scripts/live.mjs"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.7",
+		"@biomejs/biome": "^2.4.10",
 		"@playwright/test": "^1.58.2",
 		"@tailwindcss/cli": "^4.2.1",
 		"chrome-launcher": "^1.2.1",
