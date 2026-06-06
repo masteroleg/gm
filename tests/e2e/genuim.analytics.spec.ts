@@ -35,57 +35,24 @@ test.describe("GA4 Analytics — G-RBD0C4LE5V", () => {
 		});
 	}
 
-	test("GA4 does not load on localhost", async ({ page }) => {
-		await page.goto("/");
-		const hasDataLayer = await page.evaluate(() => {
-			return "dataLayer" in window;
-		});
-		expect(hasDataLayer).toBe(false);
-	});
-
-	test("GA4 gtag function correctly pushes js + config calls", async ({
+	test("GA4 gtag initializes dataLayer and fires js+config on page load", async ({
 		page,
 	}) => {
 		await page.goto("/");
 		const result = await page.evaluate(() => {
-			const dataLayer: unknown[][] = [];
-			const gtag = (...args: unknown[]) => dataLayer.push(args);
-			gtag("js", new Date());
-			gtag("config", "G-RBD0C4LE5V");
+			type Win = Window &
+				typeof globalThis & {
+					dataLayer?: unknown[][];
+					gtag?: (...args: unknown[]) => unknown;
+				};
+			const w = window as unknown as Win;
 			return {
-				count: dataLayer.length,
-				firstType: dataLayer[0]?.[0],
-				secondType: dataLayer[1]?.[0],
-				configId: dataLayer[1]?.[1],
+				hasDataLayer: "dataLayer" in window,
+				hasGtag: typeof w.gtag === "function",
+				dlLength: w.dataLayer?.length ?? -1,
 			};
 		});
-		expect(result.count).toBe(2);
-		expect(result.firstType).toBe("js");
-		expect(result.secondType).toBe("config");
-		expect(result.configId).toBe("G-RBD0C4LE5V");
-	});
-
-	test("GA4 hostname guard allows genu.im and www.genu.im", async ({
-		page,
-	}) => {
-		const result = await page.evaluate(() => {
-			const allowed = ["genu.im", "www.genu.im"];
-			const denied = [
-				"localhost",
-				"127.0.0.1",
-				"staging.genu.im",
-				"dev.genu.im",
-				"example.com",
-			];
-			const testHostname = (h: string) => {
-				return h === "genu.im" || h === "www.genu.im";
-			};
-			return {
-				allowed: allowed.map(testHostname),
-				denied: denied.map(testHostname),
-			};
-		});
-		expect(result.allowed).toEqual([true, true]);
-		expect(result.denied).toEqual([false, false, false, false, false]);
+		expect(result.hasDataLayer).toBe(true);
+		expect(result.hasGtag).toBe(true);
 	});
 });

@@ -43,26 +43,12 @@
 	<link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png" />
 	<link href="../assets/css/output.css?v=206" rel="stylesheet" />
 
-	<script defer>
-		if (location.hostname === 'genu.im' || location.hostname === 'www.genu.im') {
-			const loadAnalytics = () => {
-				const script = document.createElement('script');
-				script.src = 'https://www.googletagmanager.com/gtag/js?id=G-RBD0C4LE5V';
-				script.async = true;
-				document.head.appendChild(script);
-
-				window.dataLayer = window.dataLayer || [];
-				window.gtag = function gtag(...args) { dataLayer.push(args); };
-				window.gtag('js', new Date());
-				window.gtag('config', 'G-RBD0C4LE5V');
-			};
-
-			if ('requestIdleCallback' in window) {
-				window.requestIdleCallback(loadAnalytics, { timeout: 4000 });
-			} else {
-				window.addEventListener('load', loadAnalytics, { once: true });
-			}
-		}
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-RBD0C4LE5V"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-RBD0C4LE5V');
 	</script>
 </head>
 
@@ -169,9 +155,7 @@
 	<script src="../assets/js/lang-toggle.js" defer></script>
 	<script src="../assets/js/theme-toggle.js" defer></script>
 	<script src="../assets/js/menu.js" defer></script>
-<!-- impeccable-live-start -->
-<script src="http://localhost:8400/live.js"></script>
-<!-- impeccable-live-end -->
+
 </body>
 </html>
 
