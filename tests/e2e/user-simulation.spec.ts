@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { test } from "@playwright/test";
 
 const PAGES = [
 	{ path: "/", name: "homepage" },
@@ -14,7 +14,9 @@ const PAGES = [
 	{ path: "/v/genuim/", name: "verification-proof" },
 ];
 
-test("@smoke-user real user sim — visits all pages and interacts", async ({ page }) => {
+test("@smoke-user real user sim — visits all pages and interacts", async ({
+	page,
+}) => {
 	for (const { path, name } of PAGES) {
 		await page.goto(path);
 		await page.waitForTimeout(2000);
@@ -77,13 +79,17 @@ test("@smoke-user real user sim — visits all pages and interacts", async ({ pa
 				await page.waitForTimeout(300);
 				await scenario.selectOption("brand-proof");
 				await page.waitForTimeout(300);
-				await context.fill("Testing the platform for potential brand verification needs");
+				await context.fill(
+					"Testing the platform for potential brand verification needs",
+				);
 				await page.waitForTimeout(500);
 			}
 			continue;
 		}
 
-		const links = page.locator('a[href]:not([href*="#"]):not([href^="mailto"]):not([href^="tel"])');
+		const links = page.locator(
+			'a[href]:not([href*="#"]):not([href^="mailto"]):not([href^="tel"])',
+		);
 		const linkCount = await links.count();
 		for (let i = 0; i < Math.min(linkCount, 2); i++) {
 			const link = links.nth(i);
@@ -125,7 +131,6 @@ test("@smoke-user real user sim — navigation flow", async ({ page }) => {
 	for (let i = 0; i < count; i++) {
 		const link = navLinks.nth(i);
 		if (await link.isVisible()) {
-			const href = await link.getAttribute("href");
 			await link.click();
 			await page.waitForTimeout(2000);
 			await page.goBack();
