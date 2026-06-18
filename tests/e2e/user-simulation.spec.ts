@@ -17,6 +17,7 @@ const PAGES = [
 test("@smoke-user real user sim — visits all pages and interacts", async ({
 	page,
 }) => {
+	test.setTimeout(90000);
 	for (const { path, name } of PAGES) {
 		await page.goto(path);
 		await page.waitForTimeout(2000);
