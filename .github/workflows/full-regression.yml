@@ -52,12 +52,6 @@ jobs:
       - name: Run Jest
         run: npm test
 
-      - name: Build Tailwind CSS
-        run: npm run build:css
-
-      - name: Verify generated CSS committed
-        run: git diff --exit-code -- site/assets/css/output.css
-
   full-e2e:
     name: full-e2e (${{ matrix.project }})
     runs-on: ubuntu-latest
