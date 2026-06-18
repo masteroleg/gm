@@ -25,11 +25,17 @@
 		"test:e2e:ci": "playwright test --config=playwright.config.ts",
 		"test:e2e:ui": "playwright test --config=playwright.config.ts --ui",
 		"test:e2e:headed": "playwright test --config=playwright.config.ts --headed",
+		"caveman": "node scripts/caveman.mjs",
+		"caveman:prompt": "npm run caveman -- -p",
+		"caveman:plan": "npm run caveman -- --plan",
+		"caveman:goal": "npm run caveman -- --goal",
+		"caveman:resume": "npm run caveman -- -c",
 		"impeccable:context": "node .agents/skills/impeccable/scripts/load-context.mjs",
 		"impeccable:live": "node .agents/skills/impeccable/scripts/live.mjs"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.16",
+		"@juliusbrussee/caveman-code": "^0.65.2",
 		"@playwright/test": "^1.60.0",
 		"@tailwindcss/cli": "^4.3.0",
 		"chrome-launcher": "^1.2.1",

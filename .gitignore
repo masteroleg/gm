@@ -42,6 +42,7 @@ test-results/
 lighthouse-report/
 .lighthouse-tmp/
 .npm-cache/
+.caveman/
 
 # Marketingskills junctions (managed by scripts/init-marketingskills.ps1)
 .agents/skills/ab-test-setup/
